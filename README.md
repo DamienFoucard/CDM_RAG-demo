@@ -114,6 +114,8 @@ API and MCP behavior, authentication and the terminal clients. Most tests use
 fixtures or simulated model responses, so they do not need a running GPU or
 Ollama. See the [testing guide](docs/testing.md) for focused commands, optional
 prerequisites and the distinction between tests and quality evaluations.
+The [scripts guide](scripts/README.md) explains the terminal tools and the
+different evaluation and data-preparation scripts.
 
 ## Documentation
 
