@@ -85,6 +85,9 @@ The multi-hop question is an evaluation challenge, and its links should be
 checked against the cited sources. Questions and answers are saved in the
 service's query log, as with the web application.
 
+See the [API examples](examples/README.md) for these questions and example
+outputs from the GPU service.
+
 ## MCP clients
 
 CDM RAG provides a first-party Model Context Protocol server with two read-only
