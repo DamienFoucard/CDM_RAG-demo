@@ -97,6 +97,21 @@ The [MCP setup guide](docs/mcp.md) includes local and hosted client examples,
 credential handling, and tool limitations. The hosted endpoint uses an
 existing, manually provisioned API token; it does not provide OAuth discovery.
 
+## Run the tests
+
+From the repository root, install the test dependencies and run the suite:
+
+```sh
+uv sync --frozen --extra test
+uv run pytest -ra
+```
+
+The suite covers catalog retrieval, graph relationships, citations, routing,
+API and MCP behavior, authentication and the terminal clients. Most tests use
+fixtures or simulated model responses, so they do not need a running GPU or
+Ollama. See the [testing guide](docs/testing.md) for focused commands, optional
+prerequisites and the distinction between tests and quality evaluations.
+
 ## Documentation
 
 | Guide | What you will find |
@@ -105,6 +120,7 @@ existing, manually provisioned API token; it does not provide OAuth discovery.
 | [Graph visualization](docs/graph/README.md) | Navigation, graph layers and filters, layout, clustering, and data limitations. |
 | [MCP setup](docs/mcp.md) | Connect local or hosted MCP clients, authenticate, and discover the available tools. |
 | [GPU API from a terminal](docs/gpu-api.md) | Check a token, ask easy and multi-hop questions, and inspect sources and processing metadata. |
+| [Testing](docs/testing.md) | Run the suite and explore coverage of the API, retrieval, graph and access controls. |
 | [Evaluation guide](docs/benchmarking/README.md) | Answer, embedding, retrieval, and routing evaluation, metrics, saved runs, and limitations. |
 | [MacStudio handoff](docs/macstudio-handoff.md) | Reproduce the evidence-informed retrieval comparison with larger local models. |
 | [Architecture](docs/architecture.md) | Components, data flows, persistence, and API endpoints. |
