@@ -1,4 +1,4 @@
-name: Publish CDM RAG demo image
+name: Publish CDM RAG demo release
 
 on:
   workflow_run:
@@ -37,14 +37,20 @@ jobs:
         run: |
           [[ "$SOURCE_SHA" =~ ^[0-9a-f]{40}$ ]]
           test "$(git rev-parse HEAD)" = "$SOURCE_SHA"
-          repository="ghcr.io/${GITHUB_REPOSITORY_OWNER,,}/cdm-rag-demo"
+          owner=$(printf '%s' "$GITHUB_REPOSITORY_OWNER" | tr '[:upper:]' '[:lower:]')
+          repository="ghcr.io/$owner/cdm-rag-demo"
           image="$repository:sha-$SOURCE_SHA"
           docker build --platform linux/amd64 --tag "$image" \
             --label "org.opencontainers.image.source=$GITHUB_SERVER_URL/$GITHUB_REPOSITORY" \
             --label "org.opencontainers.image.revision=$SOURCE_SHA" .
           docker run --rm --entrypoint python "$image" -c 'import app.main, app.mcp_stdio'
           printf 'repository=%s\nimage=%s\n' "$repository" "$image" >> "$GITHUB_OUTPUT"
-      - name: Publish the image and record its digest
+      - name: Set up Flux CLI
+        uses: fluxcd/flux2/action@3fa784edd773d56630bb9f62645e08f70c2cff0a # v2.10.0
+        with:
+          version: 2.10.0
+      - id: publish-image
+        name: Publish the image and record its digest
         env:
           GHCR_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           IMAGE: ${{ steps.image.outputs.image }}
@@ -54,5 +60,35 @@ jobs:
           docker push "$IMAGE" | tee "$RUNNER_TEMP/cdm-rag-demo-push.log"
           digest=$(sed -nE 's/^.*digest: (sha256:[0-9a-f]{64}) size: [0-9]+$/\1/p' "$RUNNER_TEMP/cdm-rag-demo-push.log")
           [[ "$digest" =~ ^sha256:[0-9a-f]{64}$ ]]
+          printf 'digest=%s\n' "$digest" >> "$GITHUB_OUTPUT"
           printf 'Image tag: `%s`\n\nDeployment reference: `%s@%s`\n' \
             "$IMAGE" "$IMAGE_REPOSITORY" "$digest" >> "$GITHUB_STEP_SUMMARY"
+      - name: Publish digest-pinned manifests for Flux
+        env:
+          IMAGE_REPOSITORY: ${{ steps.image.outputs.repository }}
+          IMAGE_DIGEST: ${{ steps.publish-image.outputs.digest }}
+        run: |
+          manifest_dir=$(mktemp -d "$RUNNER_TEMP/cdm-rag-demo-manifests.XXXXXX")
+          mkdir "$manifest_dir/base"
+          cp -R deploy/independent-gpu/kubernetes/. "$manifest_dir/base/"
+          cat > "$manifest_dir/kustomization.yaml" <<YAML
+          apiVersion: kustomize.config.k8s.io/v1beta1
+          kind: Kustomization
+          resources: [base]
+          images:
+            - name: cdm-rag-demo
+              newName: $IMAGE_REPOSITORY
+              digest: $IMAGE_DIGEST
+          YAML
+          kubectl kustomize "$manifest_dir" > "$RUNNER_TEMP/cdm-rag-demo-rendered.yaml"
+          grep -Fq "image: $IMAGE_REPOSITORY@$IMAGE_DIGEST" "$RUNNER_TEMP/cdm-rag-demo-rendered.yaml"
+          repository="$IMAGE_REPOSITORY-deployment"
+          artifact="$repository:v0.1.$GITHUB_RUN_NUMBER"
+          result=$(flux push artifact "oci://$artifact" \
+            --path="$manifest_dir" \
+            --source="$GITHUB_SERVER_URL/$GITHUB_REPOSITORY" \
+            --revision="main@sha1:$SOURCE_SHA" \
+            --reproducible --output=json)
+          digest=$(jq -er '.digest | select(test("^sha256:[a-f0-9]{64}$"))' <<< "$result")
+          printf '\nFlux artifact: `oci://%s`\n\nFlux digest: `oci://%s@%s`\n' \
+            "$artifact" "$repository" "$digest" >> "$GITHUB_STEP_SUMMARY"
