@@ -4,7 +4,7 @@ import time
 
 import pytest
 
-from app.ollama import ModelError, Ollama
+from app.runtime.ollama import ModelError, Ollama
 
 
 def _mock_stream(monkeypatch, events):
@@ -36,7 +36,7 @@ def _mock_stream(monkeypatch, events):
         def stream(self, *_args, **_kwargs):
             return Response()
 
-    monkeypatch.setattr("app.ollama.httpx.Client", Client)
+    monkeypatch.setattr("app.runtime.ollama.httpx.Client", Client)
 
 
 def _model(first=0.3, idle=0.3):

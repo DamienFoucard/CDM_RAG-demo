@@ -16,8 +16,8 @@ from pathlib import Path
 
 root = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(root))
-from app.corpus import load_catalog, render_chunks
-from app.graph import SchemaGraph
+from app.schema.corpus import load_catalog, render_chunks
+from app.schema.graph import SchemaGraph
 
 run = root / 'data/macstudio-runs'
 out = root / 'evaluation/results' 

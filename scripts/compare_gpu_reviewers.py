@@ -120,7 +120,7 @@ def main() -> None:
               'revision': subprocess.run(['git', 'rev-parse', 'HEAD'], cwd=ROOT, capture_output=True,
                                          check=True, text=True).stdout.strip(),
               'implementation_sha256': {name: sha((ROOT / name).read_bytes()) for name in (
-                  'app/ollama.py', 'scripts/comparison_ollama.py', 'scripts/compare_gpu_reviewers.py')},
+                  'app/runtime/ollama.py', 'scripts/comparison_ollama.py', 'scripts/compare_gpu_reviewers.py')},
               'settings': {'think': args.reasoning_effort or False, 'max_output_tokens': args.max_output_tokens,
                            'context_cap': args.context_cap, 'temperature': 0},
               'method': 'Subset of five previously identified problematic drafts and four supported controls. '

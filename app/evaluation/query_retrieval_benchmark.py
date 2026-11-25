@@ -9,11 +9,11 @@ import time
 from datetime import datetime, timezone
 from typing import Any, Callable
 
-from .benchmark import available_chat_models
-from .index import SchemaIndex
-from .ollama import ModelError, Ollama
-from .rag import plan_search_timed, rerank as llm_rerank, rewrite_search_query
-from .retrieval_benchmark import (_aggregate, _slug, available_embedding_models,
+from app.evaluation.benchmark import available_chat_models
+from app.retrieval.index import SchemaIndex
+from app.runtime.ollama import ModelError, Ollama
+from app.retrieval.rag import plan_search_timed, rerank as llm_rerank, rewrite_search_query
+from app.evaluation.retrieval_benchmark import (_aggregate, _slug, available_embedding_models,
                                   score_passage_retrieval, score_retrieval)
 
 

@@ -7,7 +7,8 @@ import pytest
 from fastapi import FastAPI
 from fastapi.testclient import TestClient
 
-from app import api_tokens, main
+from app.security import api_tokens
+from app import main
 
 
 @pytest.fixture

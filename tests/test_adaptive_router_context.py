@@ -1,6 +1,6 @@
 import pytest
 
-from app.ollama import Ollama, chat_context_size
+from app.runtime.ollama import Ollama, chat_context_size
 
 
 @pytest.mark.parametrize("roles", [

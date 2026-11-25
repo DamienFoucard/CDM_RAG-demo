@@ -23,7 +23,7 @@ import httpx
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
-from app.rag import cited_answer, format_entity_citations
+from app.retrieval.rag import cited_answer, format_entity_citations
 from scripts.comparison_ollama import ComparisonOllama, add_comparison_options, comparison_settings
 
 
@@ -141,7 +141,7 @@ def main() -> None:
     with args.output.open("x", encoding="utf-8") as stream:
         os.fchmod(stream.fileno(), 0o600)
         stream.write("{}\n")
-    relevant = ("app/rag.py", "app/ollama.py", "app/query_anchor.py", "scripts/comparison_ollama.py")
+    relevant = ("app/retrieval/rag.py", "app/runtime/ollama.py", "app/retrieval/query_anchor.py", "scripts/comparison_ollama.py")
     result: dict[str, Any] = {
         "status": "running", "started_at": datetime.now(timezone.utc).isoformat(),
         "method": "Saved question, source labels and passage text held fixed; regenerate each arm per model; no judge.",

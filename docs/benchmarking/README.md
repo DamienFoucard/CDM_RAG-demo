@@ -75,7 +75,7 @@ Trainable GCN variants use one, two, or three normalized adjacency layers and a 
 
 **MRR** is the mean reciprocal rank of the expected link: a correct first result contributes 1, a second result contributes 1/2, and so on. **Hits@K** is the proportion of predictions in the top K; lower mean rank is better. The published test snapshot has 128 held-out links and 256 head/tail predictions. BoxE has the highest filtered MRR in that snapshot, not necessarily the best latency or a universal advantage on other graphs. Fit times and feature preparation should be considered together when estimating the cost of a new index.
 
-See [`app/link_prediction_benchmark.py`](../../app/link_prediction_benchmark.py) and [`app/graph_retrieval_benchmark.py`](../../app/graph_retrieval_benchmark.py) for splitting, training, and scoring.
+See [`app/evaluation/link_prediction_benchmark.py`](../../app/evaluation/link_prediction_benchmark.py) and [`app/evaluation/graph_retrieval_benchmark.py`](../../app/evaluation/graph_retrieval_benchmark.py) for splitting, training, and scoring.
 
 ## Retrieval evaluation
 

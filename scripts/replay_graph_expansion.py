@@ -17,8 +17,8 @@ import time
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
-from app.corpus import load_catalog, render_chunks
-from app.graph import SchemaGraph
+from app.schema.corpus import load_catalog, render_chunks
+from app.schema.graph import SchemaGraph
 
 STOP = set('a an and are as at be both by can does for from how in is it its of on or that the their them these this to what where which with would identify find schema model links link relationship relationships references evidence relevant specific something need needs associated involved bank banks'.split())
 

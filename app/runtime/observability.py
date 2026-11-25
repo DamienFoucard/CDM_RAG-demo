@@ -13,7 +13,7 @@ from typing import Any
 
 
 logger = logging.getLogger("cdm_rag.query")
-DATA_DIR = Path(os.getenv("CDM_RAG_DATA_DIR", str(Path(__file__).resolve().parents[1] / "data")))
+DATA_DIR = Path(os.getenv("CDM_RAG_DATA_DIR", str(Path(__file__).resolve().parents[2] / "data")))
 QUERY_LOG_PATH = DATA_DIR / "query_logs.jsonl"
 _LOG_LOCK = threading.Lock()
 

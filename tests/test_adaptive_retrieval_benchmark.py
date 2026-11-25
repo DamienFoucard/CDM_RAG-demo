@@ -5,9 +5,9 @@ from types import SimpleNamespace
 
 import pytest
 
-from app import adaptive_retrieval_benchmark as adaptive
-from app.ollama import ModelError
-from app.corpus import load_catalog, render_chunks
+from app.evaluation import adaptive_retrieval_benchmark as adaptive
+from app.runtime.ollama import ModelError
+from app.schema.corpus import load_catalog, render_chunks
 
 
 class Router:

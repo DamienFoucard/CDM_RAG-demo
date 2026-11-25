@@ -3,9 +3,9 @@ from types import SimpleNamespace
 
 import pytest
 
-from app.corpus import load_catalog, render_chunks
-from app.graph import SchemaGraph
-from app.rag import _answer_from_query, answer_question, prepare_passages, selected_entity_definition_response
+from app.schema.corpus import load_catalog, render_chunks
+from app.schema.graph import SchemaGraph
+from app.retrieval.rag import _answer_from_query, answer_question, prepare_passages, selected_entity_definition_response
 
 
 @pytest.fixture
@@ -21,7 +21,7 @@ def test_overdraft_definition_uses_exact_selected_source_without_extra_claims(ca
                   catalog_index.by_id[f"{eid}:attributes:4"],
                   catalog_index.by_id[f"{eid}:attributes:3"]]
     catalog_index.search = lambda *args, **kwargs: candidates
-    monkeypatch.setattr("app.rag.cited_answer", lambda *args, **kwargs: pytest.fail("unexpected model call"))
+    monkeypatch.setattr("app.retrieval.rag.cited_answer", lambda *args, **kwargs: pytest.fail("unexpected model call"))
     result = _answer_from_query("What is an overdraft in the retail banking model?", "query", catalog_index,
                                 SimpleNamespace(), rerank_enabled=False, limit=6, mode="hybrid", generation_limit=4)
     description = catalog_index.graph.entities[eid]["description"]
@@ -79,9 +79,9 @@ def test_verified_definition_skips_optional_model_judge(catalog_index, monkeypat
     catalog_index.semantic_probe = lambda question: 1.0
     catalog_index.index_revision = "fixture"
     catalog_index.catalog = {"source_commit": "fixture"}
-    monkeypatch.setattr("app.rag.assess_scope", lambda *args: "schema")
-    monkeypatch.setattr("app.rag.plan_routed_search", lambda *args: (True, "overdraft", {}))
-    monkeypatch.setattr("app.rag.review_answer", lambda *args: pytest.fail("unexpected model judge call"))
+    monkeypatch.setattr("app.retrieval.rag.assess_scope", lambda *args: "schema")
+    monkeypatch.setattr("app.retrieval.rag.plan_routed_search", lambda *args: (True, "overdraft", {}))
+    monkeypatch.setattr("app.retrieval.rag.review_answer", lambda *args: pytest.fail("unexpected model judge call"))
     result = answer_question("What is an overdraft in the retail banking model?", catalog_index,
                              SimpleNamespace(), judge_enabled=True)
     assert result["answer_quality"]["status"] == "verified_catalog_definition"

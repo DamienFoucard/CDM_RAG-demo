@@ -9,7 +9,7 @@ import pytest
 from scripts.benchmark_relationships import GraphExplorer, evaluate_edges, neighborhood_suffix, source_key, train_transe
 from scripts.build_relationship_challenge import words
 from scripts.judge_relationships import judge_batch, ndcg_at_5
-from app.graph import SchemaGraph
+from app.schema.graph import SchemaGraph
 
 ROOT = Path(__file__).resolve().parents[1]
 

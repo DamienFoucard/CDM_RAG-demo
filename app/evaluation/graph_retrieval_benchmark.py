@@ -13,10 +13,10 @@ from typing import Any, Callable
 import numpy as np
 from rank_bm25 import BM25Okapi
 
-from .corpus import load_catalog
-from .graph import SchemaGraph
-from .index import tokens
-from .ollama import ModelError, Ollama
+from app.schema.corpus import load_catalog
+from app.schema.graph import SchemaGraph
+from app.retrieval.index import tokens
+from app.runtime.ollama import ModelError, Ollama
 
 GRAPH_METHODS = ("text_hybrid", "gcn_1", "gcn_2", "gcn_3", "transe", "transh", "boxe")
 GRAPH_METHOD_LABELS = {
@@ -28,8 +28,8 @@ GRAPH_METHOD_LABELS = {
     "transh": "TransH",
     "boxe": "BoxE",
 }
-GRAPH_DATASET_PATH = Path(__file__).resolve().parents[1] / "evaluation" / "relationship-questions-v1.json"
-GRAPH_CHALLENGE_PATH = Path(__file__).resolve().parents[1] / "evaluation" / "relationship-challenge-v1.json"
+GRAPH_DATASET_PATH = Path(__file__).resolve().parents[2] / "evaluation" / "relationship-questions-v1.json"
+GRAPH_CHALLENGE_PATH = Path(__file__).resolve().parents[2] / "evaluation" / "relationship-challenge-v1.json"
 SEED = 20261122
 DIMENSIONS = 32
 EPOCHS = 80
@@ -585,7 +585,7 @@ def run_relationship_retrieval_benchmark(catalog_path: Path, data_dir: Path, con
     if (not model_names or len(model_names) > 6 or len(set(model_names)) != len(model_names)
             or not question_ids or len(question_ids) > 42 or len(set(question_ids)) != len(question_ids)):
         raise ValueError("Select one to six distinct embedding models and between one and 42 questions.")
-    from .retrieval_benchmark import available_embedding_models
+    from app.evaluation.retrieval_benchmark import available_embedding_models
     installed = {item["name"] for item in available_embedding_models(configured_models.base_url)}
     if not set(model_names).issubset(installed):
         raise ValueError("Select only installed embedding models with supported query formats.")

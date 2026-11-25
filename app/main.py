@@ -17,32 +17,32 @@ from fastapi.openapi.docs import get_swagger_ui_html
 from fastapi.responses import FileResponse, HTMLResponse, RedirectResponse, StreamingResponse
 from pydantic import BaseModel, ConfigDict, Field, field_validator
 
-from .index import SchemaIndex, tokens
-from .benchmark import (BENCHMARK_LOG_PATH, available_chat_models, load_benchmark_questions,
+from app.retrieval.index import SchemaIndex, tokens
+from app.evaluation.benchmark import (BENCHMARK_LOG_PATH, available_chat_models, load_benchmark_questions,
                         benchmark_model_defaults, list_saved_benchmark_runs, load_saved_benchmark_run,
                         max_model_size_bytes, run_answer_benchmark)
-from .retrieval_benchmark import (RETRIEVAL_BENCHMARK_LOG_PATH, available_embedding_models,
+from app.evaluation.retrieval_benchmark import (RETRIEVAL_BENCHMARK_LOG_PATH, available_embedding_models,
                                   append_retrieval_benchmark_run, load_catalog_object_dataset,
                                   load_contextual_retrieval_dataset, load_retrieval_dataset,
                                   list_saved_retrieval_runs,
                                   load_saved_retrieval_run, run_retrieval_benchmark)
-from .query_retrieval_benchmark import reranker_options, run_query_retrieval_benchmark
-from .adaptive_retrieval_benchmark import CHALLENGE_DATASET_PATH, load_adaptive_retrieval_dataset, run_adaptive_retrieval_benchmark
-from .graph_retrieval_benchmark import (GRAPH_METHODS, load_relationship_datasets,
+from app.evaluation.query_retrieval_benchmark import reranker_options, run_query_retrieval_benchmark
+from app.evaluation.adaptive_retrieval_benchmark import CHALLENGE_DATASET_PATH, load_adaptive_retrieval_dataset, run_adaptive_retrieval_benchmark
+from app.evaluation.graph_retrieval_benchmark import (GRAPH_METHODS, load_relationship_datasets,
                                         run_relationship_retrieval_benchmark)
-from .link_prediction_benchmark import (LINK_PREDICTION_METHODS,
+from app.evaluation.link_prediction_benchmark import (LINK_PREDICTION_METHODS,
                                         LINK_PREDICTION_METHOD_LABELS,
                                         link_prediction_graph_summary,
                                         run_link_prediction_benchmark)
-from .graph_analysis import analyze_graph
-from .observability import QUERY_LOG_PATH, QueryRecorder, new_query_id
-from .ollama import ModelError, Ollama
-from .rag import answer_question, generation_passage_limit
-from .router import JevRouter
-from .decision_router import LocalDecisionRouter
-from .api_tokens import APIAuthMiddleware, TokenRegistry, run_query_worker
-from .query_trace import TracedModels, active_trace
-from .mcp_server import AppBackend, create_server
+from app.schema.graph_analysis import analyze_graph
+from app.runtime.observability import QUERY_LOG_PATH, QueryRecorder, new_query_id
+from app.runtime.ollama import ModelError, Ollama
+from app.retrieval.rag import answer_question, generation_passage_limit
+from app.retrieval.router import JevRouter
+from app.retrieval.decision_router import LocalDecisionRouter
+from app.security.api_tokens import APIAuthMiddleware, TokenRegistry, run_query_worker
+from app.runtime.query_trace import TracedModels, active_trace
+from app.mcp_server import AppBackend, create_server
 
 
 ROOT = Path(__file__).resolve().parents[1]

@@ -1,9 +1,9 @@
 from types import SimpleNamespace
 from pathlib import Path
 
-from app.corpus import load_catalog, render_chunks
-from app.graph import SchemaGraph
-from app.rag import (_answer_from_query, prepare_passages, select_relationship_attribute_evidence,
+from app.schema.corpus import load_catalog, render_chunks
+from app.schema.graph import SchemaGraph
+from app.retrieval.rag import (_answer_from_query, prepare_passages, select_relationship_attribute_evidence,
                      shared_target_relationship_response)
 
 
@@ -125,7 +125,7 @@ def test_serving_path_passes_reserved_evidence_to_answer_model(monkeypatch):
         seen.extend(contexts)
         return "answer", "fake"
 
-    monkeypatch.setattr("app.rag.cited_answer", fake_answer)
+    monkeypatch.setattr("app.retrieval.rag.cited_answer", fake_answer)
     result = _answer_from_query(
         "What can the cardholder refer to?", "search", index, SimpleNamespace(),
         rerank_enabled=False, limit=6, mode="hybrid", generation_limit=4,
@@ -155,7 +155,7 @@ def test_serving_shared_target_response_cites_all_three_edges_without_equating_r
                 "to the customer linked to a financial holding?")
     def must_not_generate(*args, **kwargs):
         raise AssertionError("The shared-target answer must not ask the model to infer an identity")
-    monkeypatch.setattr("app.rag.cited_answer", must_not_generate)
+    monkeypatch.setattr("app.retrieval.rag.cited_answer", must_not_generate)
     result = _answer_from_query(question, "search", index, SimpleNamespace(),
                                 rerank_enabled=False, limit=6, mode="hybrid", generation_limit=4)
     assert result["generator"] == "verified-graph-response"

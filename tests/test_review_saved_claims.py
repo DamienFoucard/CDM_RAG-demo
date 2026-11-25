@@ -1,3 +1,4 @@
+import hashlib
 import subprocess
 
 from scripts import review_saved_claims as replay
@@ -36,11 +37,11 @@ def test_review_errors_are_counted_as_errors_not_rejections():
 def test_can_load_committed_baseline_and_current_logic(tmp_path, monkeypatch):
     # A clean distribution need not contain the original repository's history.
     # Create a real isolated revision so the git-backed loader is still tested.
-    source = (replay.ROOT / "app/rag.py").read_bytes()
-    (tmp_path / "app").mkdir()
-    (tmp_path / "app/rag.py").write_bytes(source)
+    source = (replay.ROOT / "app/retrieval/rag.py").read_bytes()
+    (tmp_path / "app/retrieval").mkdir(parents=True)
+    (tmp_path / "app/retrieval/rag.py").write_bytes(source)
     subprocess.run(["git", "init", "-q", str(tmp_path)], check=True)
-    subprocess.run(["git", "add", "app/rag.py"], cwd=tmp_path, check=True)
+    subprocess.run(["git", "add", "app/retrieval/rag.py"], cwd=tmp_path, check=True)
     subprocess.run(["git", "-c", "user.name=Test", "-c", "user.email=test@example.test",
                     "commit", "-qm", "fixture"], cwd=tmp_path, check=True)
     monkeypatch.setattr(replay, "ROOT", tmp_path)
@@ -48,3 +49,17 @@ def test_can_load_committed_baseline_and_current_logic(tmp_path, monkeypatch):
     current, current_hash = replay.load_review_function(None)
     assert callable(baseline) and callable(current)
     assert baseline_hash == current_hash and len(baseline_hash) == 64
+
+
+def test_can_load_pre_restructure_baseline(tmp_path, monkeypatch):
+    (tmp_path / "app").mkdir()
+    legacy = b"from .ollama import ModelError\ndef review_answer(*args):\n    return ModelError.__name__\n"
+    (tmp_path / "app/rag.py").write_bytes(legacy)
+    subprocess.run(["git", "init", "-q", str(tmp_path)], check=True)
+    subprocess.run(["git", "add", "app/rag.py"], cwd=tmp_path, check=True)
+    subprocess.run(["git", "-c", "user.name=Test", "-c", "user.email=test@example.test",
+                    "commit", "-qm", "legacy fixture"], cwd=tmp_path, check=True)
+    monkeypatch.setattr(replay, "ROOT", tmp_path)
+    baseline, digest = replay.load_review_function("HEAD")
+    assert baseline() == "ModelError"
+    assert digest == hashlib.sha256(legacy).hexdigest()

@@ -5,9 +5,9 @@ import argparse, hashlib, json, os, statistics, sys, time
 from pathlib import Path
 ROOT = Path(os.getenv('CDM_RAG_REPO_ROOT', Path(__file__).resolve().parents[1]))
 sys.path.insert(0, str(ROOT))
-from app.index import SchemaIndex
-from app.ollama import Ollama
-from app.rag import rerank
+from app.retrieval.index import SchemaIndex
+from app.runtime.ollama import Ollama
+from app.retrieval.rag import rerank
 
 DEFAULT_DATASET = ROOT / 'evaluation/cdm-schema-evaluation-v2.json'
 
@@ -74,7 +74,7 @@ def main():
             'index_revision':snapshot['index_revision'],'embedding_model':snapshot['embedding_model'],
             'embedding_digest':snapshot['embedding_digest'],'target_kind':snapshot.get('target_kind','entity'),'model':args.model,
             'settings':{'reasoning':args.reasoning,'max_output_tokens':args.max_output,'temperature':0},'cases':[],
-            'method':'Identical raw test questions and up to 20 hybrid candidate chunks; compare first six chunks with app.rag.rerank top six. Entity metrics deduplicate entity IDs within those chunks, so six chunks may represent fewer than six entities; passage metrics match exact passage IDs. Candidate pool is scored at 20 chunks. No routing, rewriting or answer generation. Unlisted sources are unjudged.',
+            'method':'Identical raw test questions and up to 20 hybrid candidate chunks; compare first six chunks with app.retrieval.rag.rerank top six. Entity metrics deduplicate entity IDs within those chunks, so six chunks may represent fewer than six entities; passage metrics match exact passage IDs. Candidate pool is scored at 20 chunks. No routing, rewriting or answer generation. Unlisted sources are unjudged.',
             'hardware':'NVIDIA RTX A4000 16,376 MiB; shared host', 'metrics':{}}
     for case in snapshot['cases']:
         candidates=case['candidates']; targets=case.get('targets',case.get('positive_entity_ids')); kind=snapshot.get('target_kind','entity'); initial=score(candidates[:6],targets,kind)

@@ -22,8 +22,8 @@ import httpx
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
-from app.ollama import ModelError
-from app.decision_router import ROUTES, ROUTE_PROMPT, classify_route_timed, route_messages
+from app.runtime.ollama import ModelError
+from app.retrieval.decision_router import ROUTES, ROUTE_PROMPT, classify_route_timed, route_messages
 from scripts.comparison_ollama import ComparisonOllama, add_comparison_options, comparison_settings
 
 
@@ -166,7 +166,7 @@ def main() -> None:
         "script_sha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
         "helper_sha256": hashlib.sha256((ROOT / "scripts/comparison_ollama.py").read_bytes()).hexdigest(),
         "prompt_sha256": hashlib.sha256(ROUTE_PROMPT.encode()).hexdigest(),
-        "classifier_sha256": hashlib.sha256((ROOT / "app/decision_router.py").read_bytes()).hexdigest(),
+        "classifier_sha256": hashlib.sha256((ROOT / "app/retrieval/decision_router.py").read_bytes()).hexdigest(),
         "split": args.split, "selected_case_ids": [case["id"] for case in cases],
         "model_settings": comparison_settings(args.reasoning_effort, args.max_output_tokens, 160, args.context_cap),
         "host": {"system": platform.platform(), "machine": platform.machine()},

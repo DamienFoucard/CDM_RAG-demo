@@ -6,8 +6,8 @@ from pathlib import Path
 
 import pytest
 
-from app.index import SchemaIndex
-from app.ollama import ModelError
+from app.retrieval.index import SchemaIndex
+from app.runtime.ollama import ModelError
 from scripts.benchmark_cosine_router import (choose_threshold, cosine_probe_with_passage, probe_case,
                                               score_test, scope_development_cases)
 from scripts.export_cosine_router_snapshot import catalog_fragments

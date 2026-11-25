@@ -8,7 +8,7 @@ import re
 from collections import deque
 from typing import Any
 
-from .catalog import canonical_path, entity_matches_address
+from app.schema.catalog import canonical_path, entity_matches_address
 
 
 def _source_path(uri: str) -> str:

@@ -13,9 +13,9 @@ import time
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-from app.index import SchemaIndex
-from app.ollama import Ollama
-from app.rag import rerank
+from app.retrieval.index import SchemaIndex
+from app.runtime.ollama import Ollama
+from app.retrieval.rag import rerank
 
 ROOT = Path(__file__).resolve().parents[1]
 

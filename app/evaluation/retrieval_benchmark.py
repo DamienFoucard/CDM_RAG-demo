@@ -14,12 +14,12 @@ from typing import Any, Callable
 
 import httpx
 
-from .benchmark import max_model_size_bytes
-from .index import SchemaIndex
-from .ollama import ModelError, Ollama
+from app.evaluation.benchmark import max_model_size_bytes
+from app.retrieval.index import SchemaIndex
+from app.runtime.ollama import ModelError, Ollama
 
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = Path(__file__).resolve().parents[2]
 DATASET_PATH = ROOT / "evaluation" / "cdm-schema-evaluation-v2.json"
 ANSWER_DATASET_PATH = ROOT / "evaluation" / "answer-benchmark-v1.json"
 OBJECT_DATASET_PATH = ROOT / "evaluation" / "catalog-object-retrieval-v1.json"

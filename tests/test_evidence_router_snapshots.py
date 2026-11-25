@@ -6,7 +6,7 @@ from pathlib import Path
 
 import pytest
 
-from app.decision_router import evidence_messages
+from app.retrieval.decision_router import evidence_messages
 from scripts.benchmark_router_decisions import accepted_routes, summarize
 from scripts.export_evidence_router_snapshots import catalog_index, validate_and_sanitize
 

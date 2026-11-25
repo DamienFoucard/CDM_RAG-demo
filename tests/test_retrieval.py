@@ -5,8 +5,8 @@ import json
 from pathlib import Path
 from rank_bm25 import BM25Okapi
 
-from app.index import SchemaIndex, tokens
-from app.ollama import ModelError, Ollama
+from app.retrieval.index import SchemaIndex, tokens
+from app.runtime.ollama import ModelError, Ollama
 import pytest
 
 

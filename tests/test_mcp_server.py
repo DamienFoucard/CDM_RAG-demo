@@ -13,9 +13,9 @@ from mcp import ClientSession, StdioServerParameters
 from mcp.client.stdio import stdio_client
 from mcp.shared.memory import create_connected_server_and_client_session
 
-from app.api_tokens import APIAuthMiddleware, TokenRegistry
+from app.security.api_tokens import APIAuthMiddleware, TokenRegistry
 from app.mcp_server import HTTPBackend, ServiceError, create_server, _project_answer
-from app.rag import format_entity_citations
+from app.retrieval.rag import format_entity_citations
 
 TOKEN = 't' * 40
 SECRET = 'a' * 64
@@ -134,7 +134,7 @@ def test_hosted_transport_requires_bearer_and_validates_host_and_origin(tmp_path
 
 def test_demo_mcp_tool_inherits_request_lease(tmp_path):
     from datetime import datetime, timedelta, timezone
-    from app.api_tokens import _demo_lease, run_query_worker
+    from app.security.api_tokens import _demo_lease, run_query_worker
     seen = []
 
     class DemoBackend(Backend):

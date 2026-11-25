@@ -12,9 +12,9 @@ from pathlib import Path
 
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT))
-from app.index import SchemaIndex
-from app.ollama import ModelError,Ollama
-from app.rag import plan_routed_search
+from app.retrieval.index import SchemaIndex
+from app.runtime.ollama import ModelError,Ollama
+from app.retrieval.rag import plan_routed_search
 
 
 def metrics(rows):
@@ -44,7 +44,7 @@ def main():
                   'qwen3-embedding:0.6b','qwen3:4b','qwen3:4b')
     index=SchemaIndex(ROOT/'seed/catalog.json',args.data_dir/'baseline',models)
     if args.policy=='guarded':
-        from app.scope import assess_scope, SCOPE_PROMPT
+        from app.retrieval.scope import assess_scope, SCOPE_PROMPT
     else:
         assess_scope=None
     # Warm up model paths; the warmup is not part of the cases or timing.
@@ -77,7 +77,7 @@ def main():
             'note':'Route evaluation only; synthetic labels are assistant-authored and unreviewed; warm local wall time includes the preflight.'}
     if assess_scope:
         result.update({'scope_model':models.scope_model,
-                       'scope_code_sha256':hashlib.sha256((ROOT/'app/scope.py').read_bytes()).hexdigest(),
+                       'scope_code_sha256':hashlib.sha256((ROOT/'app/retrieval/scope.py').read_bytes()).hexdigest(),
                        'scope_prompt_sha256':hashlib.sha256(SCOPE_PROMPT.encode()).hexdigest()})
     args.output.parent.mkdir(parents=True,exist_ok=True);args.output.write_text(json.dumps(result,indent=2,ensure_ascii=False)+'\n')
     print(json.dumps(result['metrics'],indent=2),flush=True)

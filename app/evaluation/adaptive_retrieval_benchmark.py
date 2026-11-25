@@ -8,10 +8,10 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Callable
 
-from .benchmark import available_chat_models
-from .index import SchemaIndex
-from .ollama import ModelError, Ollama, chat_context_size
-from .retrieval_benchmark import (_aggregate, _slug, available_embedding_models,
+from app.evaluation.benchmark import available_chat_models
+from app.retrieval.index import SchemaIndex
+from app.runtime.ollama import ModelError, Ollama, chat_context_size
+from app.evaluation.retrieval_benchmark import (_aggregate, _slug, available_embedding_models,
                                   score_passage_retrieval, score_retrieval)
 
 ROUTER_SCHEMA = {
@@ -20,8 +20,8 @@ ROUTER_SCHEMA = {
     "required": ["search_again", "query"], "additionalProperties": False,
 }
 
-ADAPTIVE_DATASET_PATH = Path(__file__).resolve().parents[1] / "evaluation" / "adaptive-retrieval-v2.json"
-CHALLENGE_DATASET_PATH = Path(__file__).resolve().parents[1] / "evaluation" / "reformulation-challenge-candidate-v1.json"
+ADAPTIVE_DATASET_PATH = Path(__file__).resolve().parents[2] / "evaluation" / "adaptive-retrieval-v2.json"
+CHALLENGE_DATASET_PATH = Path(__file__).resolve().parents[2] / "evaluation" / "reformulation-challenge-candidate-v1.json"
 ROUTER_CONTEXT_CAP_TOKENS = 8192
 ROUTER_MAX_OUTPUT_TOKENS = 160
 

@@ -9,7 +9,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
-from app.graph import SchemaGraph
+from app.schema.graph import SchemaGraph
 from scripts.build_relationship_questions import B, C
 
 CASES = [

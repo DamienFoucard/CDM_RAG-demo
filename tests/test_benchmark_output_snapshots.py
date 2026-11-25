@@ -2,8 +2,8 @@
 import json
 from pathlib import Path
 
-from app.corpus import load_catalog, render_chunks
-from app.graph import SchemaGraph
+from app.schema.corpus import load_catalog, render_chunks
+from app.schema.graph import SchemaGraph
 from scripts.export_benchmark_snapshots import clean_source
 
 ROOT = Path(__file__).resolve().parents[1]

@@ -18,10 +18,10 @@ import httpx
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
-from app.benchmark import available_chat_models
-from app.ollama import ModelError, Ollama
-from app.rag import plan_search_timed
-from app.scope import SCOPE_CATEGORIES, SCOPE_PROMPT, assess_scope_timed
+from app.evaluation.benchmark import available_chat_models
+from app.runtime.ollama import ModelError, Ollama
+from app.retrieval.rag import plan_search_timed
+from app.retrieval.scope import SCOPE_CATEGORIES, SCOPE_PROMPT, assess_scope_timed
 
 
 def percentile(values: list[float], fraction: float) -> float | None:
@@ -273,9 +273,9 @@ def main() -> None:
         "dataset_status": dataset.get("status"), "dataset_path": str(args.dataset), "split": args.split,
         "dataset_sha256": hashlib.sha256(raw).hexdigest(), "case_count": len(cases),
         "scope_prompt_sha256": hashlib.sha256(SCOPE_PROMPT.encode()).hexdigest(),
-        "scope_code_sha256": hashlib.sha256((ROOT / "app/scope.py").read_bytes()).hexdigest(),
-        "router_code_sha256": hashlib.sha256((ROOT / "app/rag.py").read_bytes()).hexdigest(),
-        "ollama_client_code_sha256": hashlib.sha256((ROOT / "app/ollama.py").read_bytes()).hexdigest(),
+        "scope_code_sha256": hashlib.sha256((ROOT / "app/retrieval/scope.py").read_bytes()).hexdigest(),
+        "router_code_sha256": hashlib.sha256((ROOT / "app/retrieval/rag.py").read_bytes()).hexdigest(),
+        "ollama_client_code_sha256": hashlib.sha256((ROOT / "app/runtime/ollama.py").read_bytes()).hexdigest(),
         "warmup_is_scored": False, "models": model_results,
         "notes": (
             "Each candidate is assigned to both the production scope classifier and local query planner. The "

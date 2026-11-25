@@ -16,11 +16,11 @@ from urllib.parse import urlparse
 
 import httpx
 
-from .ollama import ModelError, Ollama
-from .rag import cited_answer, citation_labels, format_entity_citations, prepare_passages
+from app.runtime.ollama import ModelError, Ollama
+from app.retrieval.rag import cited_answer, citation_labels, format_entity_citations, prepare_passages
 
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = Path(__file__).resolve().parents[2]
 BENCHMARK_DATASET_PATH = ROOT / "evaluation" / "answer-benchmark-v1.json"
 DATA_DIR = Path(os.getenv("CDM_RAG_DATA_DIR", str(ROOT / "data")))
 BENCHMARK_LOG_PATH = DATA_DIR / "benchmark_runs.jsonl"

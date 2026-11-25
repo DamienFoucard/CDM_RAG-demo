@@ -3,7 +3,7 @@ import json
 from pathlib import Path
 
 from scripts import benchmark_paired_answers as paired
-from app.corpus import render_chunks
+from app.schema.corpus import render_chunks
 
 
 def test_two_kinds_policy_keeps_complementary_evidence_in_rank_order():

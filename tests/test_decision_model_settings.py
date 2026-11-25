@@ -3,8 +3,8 @@ from types import SimpleNamespace
 import threading
 
 from app import main
-from app.decision_router import LocalDecisionRouter
-from app.ollama import Ollama
+from app.retrieval.decision_router import LocalDecisionRouter
+from app.runtime.ollama import Ollama
 
 
 def test_legacy_client_defaults_decision_model_to_query_model():
