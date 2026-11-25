@@ -38,7 +38,8 @@ python3 scripts/ask_cdm.py --env-file .env \
 
 The answer should describe an overdraft as credit associated with a checking
 account that can allow withdrawals after the balance reaches zero. Inspect the
-cited source; the wording and output can vary.
+cited source; the wording and output can vary. For a recorded answer and an
+assessment of its citations, see the [API examples](../examples/README.md#easy-overdraft-definition).
 
 ## Ask a multi-hop question
 
@@ -60,13 +61,17 @@ To save that JSON, append `> answer.json`; progress still appears in the
 terminal because it is written to stderr. The JSON includes the final answer,
 sources and a `processing` object. Check `processing.model_calls` for models
 actually invoked; `configured_models` alone does not mean a model was used.
-Some requests can take deterministic paths or stop before generation.
+When retrieval runs, `retrieval.reranked` and `retrieval.reranker_model` show
+whether reranking ran and which model was used. Some requests can take
+deterministic paths or stop before reranking or generation.
 
 The independent GPU Compose profile configures `qwen3-embedding:0.6b` for
 embedding, `qwen3:4b` for scope checks and query rewriting, and `qwen3.5:9b`
-for routing decisions and answers. Reranking and the optional answer reviewer
-are disabled in that profile. Persisted settings may change the non-embedding
-models, and a request need not use every configured role.
+for routing decisions, answers and reranking. Reranking is on by default; the
+optional answer reviewer is disabled. Persisted settings may change the
+non-embedding models, and a request need not use every configured role. Full
+API clients can override the reranking default with the `rerank` boolean;
+demo clients may turn it off but cannot enable it if the server default is off.
 
 ## What to expect
 

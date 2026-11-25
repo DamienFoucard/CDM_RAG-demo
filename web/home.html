@@ -40,17 +40,18 @@
     .link-card .link-label{display:inline-block;color:var(--green);font-weight:800;margin-top:15px}
     footer{border-top:1px solid var(--line);margin-top:46px;padding-top:18px;color:var(--muted);font-size:13px}
     :focus-visible{outline:3px solid #93c5aa;outline-offset:3px;border-radius:5px}
+    a[hidden]{display:none!important}
     @media(max-width:760px){.wrap{padding-top:20px}.hero{padding:48px 0 32px}.why{grid-template-columns:1fr}.steps{grid-template-columns:1fr}.links-grid{grid-template-columns:1fr}header{align-items:flex-start}nav{gap:11px;font-size:14px}}
   </style>
 </head>
 <body>
   <div class="wrap">
     <header>
-      <div class="brand">CDM RAG<small>Microsoft Common Data Model · local schema assistant</small></div>
+      <div class="brand">CDM RAG<small>Microsoft Common Data Model · schema assistant</small></div>
       <nav aria-label="Main navigation">
         <a href="/RAG">Ask a question</a>
         <a href="/graph">Explore graph</a>
-        <a href="/benchmarks">Evaluations</a>
+        <a href="/benchmarks" hidden>Evaluations</a>
         <a href="/docs">Documentation</a>
         <a id="api-tokens-nav" href="/api-tokens" hidden>API tokens</a>
       </nav>
@@ -59,7 +60,7 @@
       <section class="hero">
         <p class="eyebrow">Explore the Common Data Model</p>
         <h1>Find the schema answer, and see where it came from.</h1>
-        <p class="lead">CDM RAG is a local assistant for Microsoft Common Data Model schemas. Ask a question in everyday language, get a concise answer grounded in the catalog, and follow its citations back to the source definitions.</p>
+        <p class="lead">CDM RAG is an assistant for Microsoft Common Data Model schemas. Ask a question in everyday language, get a concise answer grounded in the catalog, and follow its citations back to the source definitions.</p>
         <div class="actions">
           <a class="button" href="/RAG">Ask a question <span aria-hidden="true">→</span></a>
           <a class="button secondary" href="/graph">Explore the graph</a>
@@ -94,16 +95,16 @@
         <div class="links-grid">
           <a class="link-card" href="/RAG"><h3>Ask about CDM</h3><p>Use the RAG assistant and inspect the source passages behind each response.</p><span class="link-label">Open the assistant →</span></a>
           <a class="link-card" href="/graph"><h3>Explore the graph</h3><p>Browse entities, attributes, traits, manifests, and relationships as a connected model.</p><span class="link-label">Open graph explorer →</span></a>
-          <a class="link-card" href="/benchmarks"><h3>Review the evaluations</h3><p>See embedding, routing, retrieval, and answer evaluations in the order used to tune the system.</p><span class="link-label">View evaluations →</span></a>
+          <a class="link-card" href="/benchmarks" hidden><h3>Review the evaluations</h3><p>See embedding, routing, retrieval, and answer evaluations in the order used to tune the system.</p><span class="link-label">View evaluations →</span></a>
           <a class="link-card" href="/docs"><h3>Read the documentation</h3><p>Learn how the request flow works and browse the API reference.</p><span class="link-label">Open documentation →</span></a>
         </div>
       </section>
     </main>
-    <footer>Local demonstration · Ollama model runtime · source-linked CDM schema subset</footer>
+    <footer>Schema demonstration · Ollama model runtime · source-linked CDM schema subset</footer>
   </div>
   <script>
     // Only the owner can manage API tokens; hide this navigation when the feature is unavailable.
-    fetch('/api/v1/status',{cache:'no-store'}).then(r=>r.ok?r.json():{}).then(s=>{if(s.demo_access)document.querySelectorAll('a[href="/benchmarks"]').forEach(a=>a.style.display='none');}).catch(()=>{});
+    fetch('/api/v1/status',{cache:'no-store'}).then(r=>{if(!r.ok)throw new Error('Status unavailable');return r.json();}).then(s=>{if(s.demo_access!==true)document.querySelectorAll('a[href="/benchmarks"]').forEach(a=>a.hidden=false);}).catch(()=>{});
     fetch('/api/v1/api-tokens',{cache:'no-store'}).then(response=>{
       if(response.ok)document.getElementById('api-tokens-nav').hidden=false;
     }).catch(()=>{});

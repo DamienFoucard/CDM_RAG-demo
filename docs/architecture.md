@@ -172,8 +172,10 @@ eligible relationship questions, the graph check can provide a deterministic,
 source-linked response. Other question types, including attribute, manifest,
 and trait questions, use the same retrieved-passage answer path. The generator receives only the
 highest-ranked passages, not expanded full entities. Reranking is off by
-default; when enabled, the answer model scores candidate passages before the
-context limit is applied.
+default in the application and local profile, and on in the independent GPU
+Compose profile. When enabled, the answer model ranks candidate passages before
+the context limit is applied. Direct graph responses and requests that do not
+search can finish without reranking.
 
 For the streaming endpoint, the API sends status events as stages change and
 token events as the model emits text. The same query UUID appears in the HTTP
