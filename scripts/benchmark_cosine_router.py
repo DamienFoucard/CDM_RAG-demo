@@ -26,10 +26,10 @@ import httpx
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
-from app.decision_router import initial_query
-from app.index import SchemaIndex
-from app.ollama import ModelError, Ollama
-from app.retrieval_benchmark import _slug
+from app.retrieval.decision_router import initial_query
+from app.retrieval.index import SchemaIndex
+from app.runtime.ollama import ModelError, Ollama
+from app.evaluation.retrieval_benchmark import _slug
 from scripts.benchmark_evidence_router import cached_index_preflight
 from scripts.benchmark_router_decisions import accepted_routes, save, summarize, validate_dataset
 from scripts.replay_reasoning_adaptive import load_completed

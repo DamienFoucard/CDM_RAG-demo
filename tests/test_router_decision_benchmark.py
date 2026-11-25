@@ -1,8 +1,8 @@
 """The isolated router must use the live classifier and never see its labels."""
 import pytest
 
-from app.decision_router import ROUTE_SCHEMA, classify_route_timed
-from app.ollama import ModelError
+from app.retrieval.decision_router import ROUTE_SCHEMA, classify_route_timed
+from app.runtime.ollama import ModelError
 from scripts.benchmark_router_decisions import decision_for, messages_for, summarize, validate_dataset
 
 

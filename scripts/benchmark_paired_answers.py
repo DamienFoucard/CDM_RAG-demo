@@ -24,10 +24,10 @@ import httpx
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
-from app.benchmark import _judge_answer, _source_overlap
-from app.index import SchemaIndex
-from app.ollama import Ollama
-from app.rag import cited_answer, format_entity_citations, prepare_passages, rewrite_search_query
+from app.evaluation.benchmark import _judge_answer, _source_overlap
+from app.retrieval.index import SchemaIndex
+from app.runtime.ollama import Ollama
+from app.retrieval.rag import cited_answer, format_entity_citations, prepare_passages, rewrite_search_query
 
 
 def select_context(candidates: list[dict[str, Any]], limit: int,
@@ -194,7 +194,7 @@ def main() -> None:
     with args.output.open("x", encoding="utf-8") as stream:
         os.fchmod(stream.fileno(), 0o600)
         stream.write("{}\n")
-    relevant_files = ["app/index.py", "app/corpus.py", "app/rag.py", "app/ollama.py", "app/benchmark.py"]
+    relevant_files = ["app/retrieval/index.py", "app/schema/corpus.py", "app/retrieval/rag.py", "app/runtime/ollama.py", "app/evaluation/benchmark.py"]
     result: dict[str, Any] = {"status": "running", "started_at": datetime.now(timezone.utc).isoformat(),
         **repository, "script_sha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
         "implementation_sha256": {name: hashlib.sha256((ROOT / name).read_bytes()).hexdigest()

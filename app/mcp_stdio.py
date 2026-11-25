@@ -4,7 +4,7 @@ from __future__ import annotations
 import os
 import sys
 
-from .mcp_server import HTTPBackend, create_server
+from app.mcp_server import HTTPBackend, create_server
 
 
 def main() -> int:

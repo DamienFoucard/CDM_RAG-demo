@@ -16,10 +16,10 @@ import sys
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
-from app.adaptive_retrieval_benchmark import fuse_passages
-from app.corpus import load_catalog, render_chunks
-from app.graph import SchemaGraph
-from app.index import EMBEDDING_FRAGMENT_CHARS
+from app.evaluation.adaptive_retrieval_benchmark import fuse_passages
+from app.schema.corpus import load_catalog, render_chunks
+from app.schema.graph import SchemaGraph
+from app.retrieval.index import EMBEDDING_FRAGMENT_CHARS
 
 RUNS = ROOT / "data/macstudio-runs"
 OUTPUT = ROOT / "evaluation/results/retrieval-historical-output-snapshot.json"

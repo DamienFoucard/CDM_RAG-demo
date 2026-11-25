@@ -12,9 +12,9 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
-from app.index import SchemaIndex
-from app.ollama import ModelError, Ollama
-from app.rag import expand_context, rerank, cited_answer
+from app.retrieval.index import SchemaIndex
+from app.runtime.ollama import ModelError, Ollama
+from app.retrieval.rag import expand_context, rerank, cited_answer
 from scripts.benchmark_relationships import (VARIANTS, GraphExplorer, NeighborhoodIndex,
     contexts_and_edges, source_key, train_transe)
 

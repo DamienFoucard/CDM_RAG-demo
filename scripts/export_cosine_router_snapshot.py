@@ -17,10 +17,10 @@ from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
-from app.corpus import load_catalog, render_chunks
-from app.decision_router import initial_query
-from app.graph import SchemaGraph
-from app.index import EMBEDDING_FRAGMENT_CHARS, _split_embedding_text
+from app.schema.corpus import load_catalog, render_chunks
+from app.retrieval.decision_router import initial_query
+from app.schema.graph import SchemaGraph
+from app.retrieval.index import EMBEDDING_FRAGMENT_CHARS, _split_embedding_text
 from scripts.benchmark_cosine_router import choose_threshold, expected_search
 from scripts.benchmark_router_decisions import accepted_routes, summarize, validate_dataset
 

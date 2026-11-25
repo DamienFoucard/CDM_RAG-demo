@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import pytest
 
-from app.ollama import ModelError
+from app.runtime.ollama import ModelError
 from scripts.benchmark_web import summarize, web_cases
 from scripts.benchmark_web_routing import classify_light
 

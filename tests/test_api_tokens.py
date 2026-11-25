@@ -9,7 +9,7 @@ import time
 from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timedelta, timezone
 
-from app.api_tokens import APIAuthMiddleware, TokenRegistry, run_query_worker
+from app.security.api_tokens import APIAuthMiddleware, TokenRegistry, run_query_worker
 
 DEMO_DEADLINE = (datetime.now(timezone.utc) + timedelta(days=7)).isoformat()
 

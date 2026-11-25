@@ -10,7 +10,7 @@ import time
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT))
-from app.ollama import ModelError,Ollama
+from app.runtime.ollama import ModelError,Ollama
 
 CATEGORIES=('schema','records','runtime','unrelated','uncertain')
 PROMPT=('Classify what the user is asking for. Only Microsoft CDM schema definitions are available. '

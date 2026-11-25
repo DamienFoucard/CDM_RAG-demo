@@ -7,7 +7,7 @@ from typing import Any
 
 import httpx
 
-from .ollama import ModelError
+from app.runtime.ollama import ModelError
 
 
 ROUTE_CHOICES = frozenset({"raw_search", "rewrite_search", "no_search"})

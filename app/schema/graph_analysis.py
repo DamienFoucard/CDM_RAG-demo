@@ -10,8 +10,8 @@ from typing import Any
 
 import numpy as np
 
-from .index import SchemaIndex
-from .ollama import ModelError, Ollama
+from app.retrieval.index import SchemaIndex
+from app.runtime.ollama import ModelError, Ollama
 
 logger = logging.getLogger(__name__)
 ANALYSIS_VERSION = "cosine-kmeans-mds-v1"

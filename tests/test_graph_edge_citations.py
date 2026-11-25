@@ -1,6 +1,6 @@
 from types import SimpleNamespace
 
-from app.rag import format_entity_citations, named_relationship_answer, no_direct_relationship_answer
+from app.retrieval.rag import format_entity_citations, named_relationship_answer, no_direct_relationship_answer
 
 
 def edge(edge_id, source, attribute, target):

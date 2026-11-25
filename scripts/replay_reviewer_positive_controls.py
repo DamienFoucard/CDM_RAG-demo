@@ -112,7 +112,7 @@ def main() -> None:
     data: dict[str, Any] = {"status": "running", "review_revision": args.revision or "working tree",
                             "review_source_sha256": code_hash, "input_sha256": hashlib.sha256(raw).hexdigest(),
                             "implementation_sha256": {name: hashlib.sha256((ROOT / name).read_bytes()).hexdigest()
-                                for name in ("app/ollama.py", "scripts/comparison_ollama.py", "scripts/replay_reviewer_positive_controls.py")},
+                                for name in ("app/runtime/ollama.py", "scripts/comparison_ollama.py", "scripts/replay_reviewer_positive_controls.py")},
                             "model_settings": comparison_settings(args.reasoning_effort, args.max_output_tokens, 600, args.context_cap),
                             "note": "Source-checked controls; contexts unavailable in saved SSE, so replay uses empty contexts. Two controls share a question and source. Expected outcome never sent to model.",
                             "judges": []}

@@ -155,9 +155,9 @@ class AppBackend:
 
     async def query(self, question: str) -> dict[str, Any]:
         # Import late to avoid a cycle with the host application's lifespan.
-        from .main import Question, _run_logged_query
-        from .api_tokens import run_query_worker
-        from .observability import new_query_id
+        from app.main import Question, _run_logged_query
+        from app.security.api_tokens import run_query_worker
+        from app.runtime.observability import new_query_id
         try:
             return await asyncio.wait_for(run_query_worker(_run_logged_query, Question(question=question), new_query_id()),
                                           timeout=TIMEOUT_SECONDS)

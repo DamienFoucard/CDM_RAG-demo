@@ -10,8 +10,8 @@ import time
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT))
-from app.ollama import ModelError, Ollama
-from app.rag import plan_search
+from app.runtime.ollama import ModelError, Ollama
+from app.retrieval.rag import plan_search
 
 
 def main():
@@ -39,7 +39,7 @@ def main():
     metrics['errors']=sum(r['decision']=='error' for r in rows)
     metrics['warm_model_call_median_ms']=statistics.median(r['latency_ms'] for r in rows if r['probe_passed'])
     out={'baseline_routing_sha256':hashlib.sha256(raw).hexdigest(),
-         'rag_code_sha256':hashlib.sha256((ROOT/'app/rag.py').read_bytes()).hexdigest(),
+         'rag_code_sha256':hashlib.sha256((ROOT/'app/retrieval/rag.py').read_bytes()).hexdigest(),
          'notes':'Prompt changed after observing web failures, so this is a diagnostic recheck, not held-out validation.',
          'metrics':metrics,'cases':rows}
     a.output.write_text(json.dumps(out,indent=2,ensure_ascii=False)+'\n')

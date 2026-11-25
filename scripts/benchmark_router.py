@@ -11,9 +11,9 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-from app.ollama import Ollama
-from app.rag import plan_routed_search
-from app.router import JevRouter
+from app.runtime.ollama import Ollama
+from app.retrieval.rag import plan_routed_search
+from app.retrieval.router import JevRouter
 
 
 def percentile(values: list[float], fraction: float) -> float | None:

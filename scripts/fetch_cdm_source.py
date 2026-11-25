@@ -12,7 +12,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
-from app.cdm_source import UPSTREAM_REPOSITORY, verify_checkout
+from app.schema.cdm_source import UPSTREAM_REPOSITORY, verify_checkout
 
 
 def git(*args: str, input_text: str | None = None) -> str:

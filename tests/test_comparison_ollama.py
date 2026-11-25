@@ -2,7 +2,7 @@ import argparse
 
 import pytest
 
-from app.ollama import Ollama
+from app.runtime.ollama import Ollama
 from scripts.comparison_ollama import ComparisonOllama, add_comparison_options, comparison_settings
 
 

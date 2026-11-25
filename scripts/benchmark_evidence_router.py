@@ -24,14 +24,14 @@ import httpx
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
-from app.corpus import load_catalog, render_chunks
-from app.decision_router import (EVIDENCE_HIT_LIMIT, EVIDENCE_SNIPPET_CHARS, ROUTES,
+from app.schema.corpus import load_catalog, render_chunks
+from app.retrieval.decision_router import (EVIDENCE_HIT_LIMIT, EVIDENCE_SNIPPET_CHARS, ROUTES,
                                  ROUTE_PROMPT, ROUTE_SCHEMA, evidence_messages,
                                  initial_hits, initial_query)
-from app.graph import SchemaGraph
-from app.index import EMBEDDING_FRAGMENT_CHARS, SchemaIndex, _split_embedding_text
-from app.ollama import ModelError
-from app.retrieval_benchmark import _slug
+from app.schema.graph import SchemaGraph
+from app.retrieval.index import EMBEDDING_FRAGMENT_CHARS, SchemaIndex, _split_embedding_text
+from app.runtime.ollama import ModelError
+from app.evaluation.retrieval_benchmark import _slug
 from scripts.benchmark_router_decisions import accepted_routes, save, summarize, validate_dataset
 from scripts.comparison_ollama import ComparisonOllama, comparison_settings
 from scripts.replay_reasoning_adaptive import load_completed
@@ -232,7 +232,7 @@ def main() -> None:
                    "max_router_weight_bytes": MAX_ROUTER_BYTES},
         "model_settings": comparison_settings(None, None, 160, None),
         "script_sha256": sha(Path(__file__).read_bytes()),
-        "classifier_sha256": sha((ROOT / "app/decision_router.py").read_bytes()),
+        "classifier_sha256": sha((ROOT / "app/retrieval/decision_router.py").read_bytes()),
         "helper_sha256": sha((ROOT / "scripts/comparison_ollama.py").read_bytes()),
         "host": {"system": platform.platform(), "machine": platform.machine()}, "rows": [], "summaries": {},
     }

@@ -1,6 +1,6 @@
 """Classify whether a question can be answered from a schema-only catalog."""
 from __future__ import annotations
-from .ollama import ModelError, Ollama
+from app.runtime.ollama import ModelError, Ollama
 
 SCOPE_CATEGORIES = ('schema', 'records', 'runtime', 'mixed', 'unrelated', 'unclear')
 SCOPE_SCHEMA = {

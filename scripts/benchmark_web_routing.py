@@ -13,9 +13,9 @@ import httpx
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
-from app.index import SchemaIndex
-from app.ollama import ModelError, Ollama
-from app.rag import plan_search
+from app.retrieval.index import SchemaIndex
+from app.runtime.ollama import ModelError, Ollama
+from app.retrieval.rag import plan_search
 from scripts.benchmark_web import web_cases
 
 

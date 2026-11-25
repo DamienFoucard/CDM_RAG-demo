@@ -12,7 +12,7 @@ from typing import Any
 
 import httpx
 
-from .query_trace import trace_embedding
+from app.runtime.query_trace import trace_embedding
 
 
 class ModelError(RuntimeError):

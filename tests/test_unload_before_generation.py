@@ -1,8 +1,8 @@
 import httpx
 import pytest
 
-from app import ollama
-from app.ollama import ModelError, Ollama
+from app.runtime import ollama
+from app.runtime.ollama import ModelError, Ollama
 
 
 def model_client():

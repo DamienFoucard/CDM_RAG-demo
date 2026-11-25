@@ -4,7 +4,7 @@ from __future__ import annotations
 import argparse
 from typing import Any
 
-from app.ollama import Ollama
+from app.runtime.ollama import Ollama
 
 
 def positive_tokens(value: str) -> int:

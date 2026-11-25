@@ -5,7 +5,7 @@ import argparse, json, os, sys, time
 from pathlib import Path
 import httpx
 ROOT=Path(os.getenv('CDM_RAG_REPO_ROOT',Path(__file__).resolve().parents[1]));sys.path.insert(0,str(ROOT))
-from app.ollama import chat_context_size
+from app.runtime.ollama import chat_context_size
 SYSTEM=('Select and rank only passages that can help answer the question about Microsoft CDM. '
         'Return only JSON with key "ranked_ids", an array of relevant candidate IDs, best first. '
         'Use an empty array if none are relevant. Do not invent IDs. '

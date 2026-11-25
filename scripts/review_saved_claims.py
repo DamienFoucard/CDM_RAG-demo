@@ -10,6 +10,7 @@ import argparse
 import hashlib
 import json
 import os
+import re
 import subprocess
 import sys
 import time
@@ -39,14 +40,33 @@ OBSERVATIONS = {
 def load_review_function(revision: str | None) -> tuple[Callable[..., dict[str, Any]], str]:
     """Load current code or the exact committed review logic for a baseline."""
     if revision is None:
-        from app import rag
-        content = (ROOT / "app/rag.py").read_bytes()
+        from app.retrieval import rag
+        content = (ROOT / "app/retrieval/rag.py").read_bytes()
         return rag.review_answer, hashlib.sha256(content).hexdigest()
-    source = subprocess.run(["git", "show", f"{revision}:app/rag.py"], cwd=ROOT,
-                            capture_output=True, check=True).stdout
+    source = None
+    legacy = False
+    for path in ("app/retrieval/rag.py", "app/rag.py"):
+        result = subprocess.run(["git", "show", f"{revision}:{path}"], cwd=ROOT,
+                                capture_output=True)
+        if result.returncode == 0:
+            source = result.stdout
+            legacy = path == "app/rag.py"
+            break
+    if source is None:
+        raise ValueError(f"No RAG source found at revision {revision!r}")
+    executable = source.decode("utf-8")
+    if legacy:
+        # Old commits used root-relative imports; only resolve those imports to
+        # their current modules. Hash the untouched source for reproducibility.
+        locations = {"decision_router": "retrieval", "index": "retrieval",
+                     "query_anchor": "retrieval", "router": "retrieval",
+                     "scope": "retrieval", "ollama": "runtime"}
+        executable = re.sub(r"(?m)^(\s*from )\.(\w+)(\s+import\b)",
+                            lambda m: m[1] + "app." + locations.get(m[2], "")
+                            + ("." if m[2] in locations else "") + m[2] + m[3], executable)
     module = types.ModuleType("app._saved_claim_review")
     module.__package__ = "app"
-    exec(compile(source, f"{revision}:app/rag.py", "exec"), module.__dict__)
+    exec(compile(executable, f"{revision}:{path}", "exec"), module.__dict__)
     return module.review_answer, hashlib.sha256(source).hexdigest()
 
 
@@ -116,7 +136,7 @@ def main() -> None:
         "status": "running", "review_revision": args.revision or "working tree",
         "review_source_sha256": code_hash, "judge": available[args.judge],
         "implementation_sha256": {name: hashlib.sha256((ROOT / name).read_bytes()).hexdigest()
-                                  for name in ("app/ollama.py", "scripts/comparison_ollama.py", "scripts/review_saved_claims.py")},
+                                  for name in ("app/runtime/ollama.py", "scripts/comparison_ollama.py", "scripts/review_saved_claims.py")},
         "model_settings": comparison_settings(args.reasoning_effort, args.max_output_tokens, 600, args.context_cap),
         "input_sha256": {str(path): hashlib.sha256(content).hexdigest() for path, content in inputs},
         "notes": "Manual issue annotations are not shown to the model. Rejection is not proof of correctness.",

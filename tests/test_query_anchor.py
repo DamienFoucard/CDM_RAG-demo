@@ -1,5 +1,5 @@
-from app.query_anchor import anchor_search_query
-from app.rag import plan_search_timed, rewrite_search_query
+from app.retrieval.query_anchor import anchor_search_query
+from app.retrieval.rag import plan_search_timed, rewrite_search_query
 
 
 def test_contextual_rewrite_keeps_user_details_and_excludes_assistant_claim():

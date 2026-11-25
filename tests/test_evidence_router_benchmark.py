@@ -4,7 +4,7 @@ from pathlib import Path
 
 import pytest
 
-from app.decision_router import ROUTE_PROMPT
+from app.retrieval.decision_router import ROUTE_PROMPT
 from scripts.benchmark_evidence_router import (
     HIT_LIMIT,
     SNIPPET_CHARS,
@@ -80,7 +80,7 @@ def test_search_precedes_classifier_and_preserves_binary_no_search():
 
 
 def test_benchmark_uses_same_prompt_and_snippet_builders_as_serving():
-    from app import decision_router
+    from app.retrieval import decision_router
     from scripts import benchmark_evidence_router
 
     assert benchmark_evidence_router.evidence_messages is decision_router.evidence_messages

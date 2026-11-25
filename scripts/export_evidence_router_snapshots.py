@@ -23,10 +23,10 @@ ROOT = Path(__file__).resolve().parents[1]
 
 import sys
 sys.path.insert(0, str(ROOT))
-from app.corpus import load_catalog, render_chunks
-from app.decision_router import ROUTE_PROMPT
-from app.graph import SchemaGraph
-from app.index import EMBEDDING_FRAGMENT_CHARS
+from app.schema.corpus import load_catalog, render_chunks
+from app.retrieval.decision_router import ROUTE_PROMPT
+from app.schema.graph import SchemaGraph
+from app.retrieval.index import EMBEDDING_FRAGMENT_CHARS
 from scripts.benchmark_evidence_router import evidence_messages, initial_query
 from scripts.benchmark_router_decisions import accepted_routes, summarize, validate_dataset
 

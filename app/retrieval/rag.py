@@ -9,13 +9,13 @@ from collections import Counter
 from collections.abc import Callable
 from typing import Any
 
-from .decision_router import (EVIDENCE_HIT_LIMIT, LocalDecisionRouter, classify_route_timed,
+from app.retrieval.decision_router import (EVIDENCE_HIT_LIMIT, LocalDecisionRouter, classify_route_timed,
                               initial_hits, initial_query)
-from .index import SchemaIndex
-from .ollama import ModelError, Ollama
-from .query_anchor import anchor_search_query
-from .router import JevRouter
-from .scope import assess_scope
+from app.retrieval.index import SchemaIndex
+from app.runtime.ollama import ModelError, Ollama
+from app.retrieval.query_anchor import anchor_search_query
+from app.retrieval.router import JevRouter
+from app.retrieval.scope import assess_scope
 
 CITATION = re.compile(r"\[(R\d+(?:\s*,\s*R\d+)*)\]")
 RELATIONSHIP_QUESTION = re.compile(r"\b(relat(?:e|es|ed|ionship|ionships)|connect(?:ed|ion|s)?|link(?:ed|s)?)\b", re.I)

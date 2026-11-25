@@ -12,9 +12,9 @@ from typing import Any, Callable
 
 import numpy as np
 
-from .corpus import load_catalog
-from .graph import SchemaGraph
-from .graph_retrieval_benchmark import (
+from app.schema.corpus import load_catalog
+from app.schema.graph import SchemaGraph
+from app.evaluation.graph_retrieval_benchmark import (
     DIMENSIONS,
     EPOCHS,
     GRAPH_METHOD_LABELS,
@@ -25,8 +25,8 @@ from .graph_retrieval_benchmark import (
     _train_transe,
     _train_transh,
 )
-from .ollama import ModelError, Ollama
-from .retrieval_benchmark import available_embedding_models
+from app.runtime.ollama import ModelError, Ollama
+from app.evaluation.retrieval_benchmark import available_embedding_models
 
 LINK_PREDICTION_METHODS = ("gcn_1", "gcn_2", "gcn_3", "transe", "transh", "boxe")
 LINK_PREDICTION_METHOD_LABELS = {key: value for key, value in GRAPH_METHOD_LABELS.items()

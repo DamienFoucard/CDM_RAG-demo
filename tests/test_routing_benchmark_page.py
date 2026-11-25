@@ -8,7 +8,7 @@ from pathlib import Path
 
 import pytest
 
-from app.decision_router import initial_query
+from app.retrieval.decision_router import initial_query
 
 
 ROOT = Path(__file__).resolve().parents[1]

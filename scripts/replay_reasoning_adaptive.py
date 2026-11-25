@@ -19,10 +19,10 @@ import httpx
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
-from app.adaptive_retrieval_benchmark import ROUTER_SCHEMA, _score, fuse_passages, load_adaptive_retrieval_dataset, routing_messages
-from app.index import SchemaIndex
-from app.ollama import ModelError, chat_context_size
-from app.retrieval_benchmark import _slug
+from app.evaluation.adaptive_retrieval_benchmark import ROUTER_SCHEMA, _score, fuse_passages, load_adaptive_retrieval_dataset, routing_messages
+from app.retrieval.index import SchemaIndex
+from app.runtime.ollama import ModelError, chat_context_size
+from app.evaluation.retrieval_benchmark import _slug
 from scripts.comparison_ollama import ComparisonOllama, add_comparison_options, comparison_settings
 
 

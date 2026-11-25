@@ -6,10 +6,10 @@ from types import SimpleNamespace
 import httpx
 import pytest
 
-from app.ollama import ModelError
-from app.decision_router import LocalDecisionRouter, evidence_messages, initial_hits
-from app.rag import answer_question, plan_routed_search
-from app.router import JevRouter, RouteDecision
+from app.runtime.ollama import ModelError
+from app.retrieval.decision_router import LocalDecisionRouter, evidence_messages, initial_hits
+from app.retrieval.rag import answer_question, plan_routed_search
+from app.retrieval.router import JevRouter, RouteDecision
 
 
 class Planner:
@@ -148,7 +148,7 @@ def test_local_decision_and_query_models_are_independent(route, expected):
 
 def test_local_decision_error_fails_closed_and_returns_retry_message(monkeypatch):
     models = SplitLocalModels(ModelError('internal details'))
-    monkeypatch.setattr('app.rag.assess_scope', lambda question, client: 'schema')
+    monkeypatch.setattr('app.retrieval.rag.assess_scope', lambda question, client: 'schema')
     index = SimpleNamespace(semantic_probe=lambda question: 1.0)
     result = answer_question('original question', index, models, router=LocalDecisionRouter('decision-4b'),
                              judge_enabled=False)
@@ -160,7 +160,7 @@ def test_local_decision_error_fails_closed_and_returns_retry_message(monkeypatch
 
 def test_local_router_does_not_bypass_existing_scope_gate(monkeypatch):
     models = SplitLocalModels('raw_search')
-    monkeypatch.setattr('app.rag.assess_scope', lambda question, client: 'records')
+    monkeypatch.setattr('app.retrieval.rag.assess_scope', lambda question, client: 'records')
     index = SimpleNamespace(semantic_probe=lambda question: 1.0)
     result = answer_question('my account balance', index, models, router=LocalDecisionRouter('decision-4b'),
                              judge_enabled=False)
@@ -201,7 +201,7 @@ def test_evidence_router_uses_identical_bounded_benchmark_prompt_without_reranki
 
 def test_evidence_presearch_failure_fails_closed_before_classifier(monkeypatch):
     models = SplitLocalModels('raw_search')
-    monkeypatch.setattr('app.rag.assess_scope', lambda question, client: 'schema')
+    monkeypatch.setattr('app.retrieval.rag.assess_scope', lambda question, client: 'schema')
     def fail(*args, **kwargs):
         raise RuntimeError('private storage details')
     index = SimpleNamespace(semantic_probe=lambda question: 1.0, search=fail)
@@ -234,7 +234,7 @@ def test_evidence_router_runs_only_after_semantic_and_scope_gates(monkeypatch):
     def scope(question, client):
         events.append('scope')
         return 'records'
-    monkeypatch.setattr('app.rag.assess_scope', scope)
+    monkeypatch.setattr('app.retrieval.rag.assess_scope', scope)
     index = SimpleNamespace(semantic_probe=lambda question: events.append('semantic') or 1.0,
                             search=lambda *a, **k: events.append('search'))
     result = answer_question('my account balance', index, models,

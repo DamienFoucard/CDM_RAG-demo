@@ -10,8 +10,8 @@ from pathlib import Path
 from typing import Any
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-from app.graph import resolve_target
-from app.cdm_source import (
+from app.schema.graph import resolve_target
+from app.schema.cdm_source import (
     UPSTREAM_REPOSITORY,
     collect_source_inputs,
     copy_source_inputs,

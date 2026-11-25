@@ -9,9 +9,9 @@ from typing import Any
 
 from rank_bm25 import BM25Okapi
 
-from .corpus import load_catalog, render_chunks
-from .graph import SchemaGraph
-from .ollama import Ollama
+from app.schema.corpus import load_catalog, render_chunks
+from app.schema.graph import SchemaGraph
+from app.runtime.ollama import Ollama
 
 
 EMBEDDING_FRAGMENT_CHARS = 3000

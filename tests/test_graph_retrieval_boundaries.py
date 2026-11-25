@@ -5,8 +5,8 @@ from types import SimpleNamespace
 import pytest
 from rank_bm25 import BM25Okapi
 
-from app.graph import SchemaGraph, resolve_target
-from app.index import SchemaIndex, _split_embedding_text, tokens
+from app.schema.graph import SchemaGraph, resolve_target
+from app.retrieval.index import SchemaIndex, _split_embedding_text, tokens
 
 
 def entity(model, name, filename, relationships=()):

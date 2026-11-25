@@ -4,9 +4,9 @@ from types import SimpleNamespace
 
 import pytest
 
-from app.corpus import render_chunks
-from app.ollama import ModelError
-from app.rag import (answer_question, cited_answer, prepare_passages,
+from app.schema.corpus import render_chunks
+from app.runtime.ollama import ModelError
+from app.retrieval.rag import (answer_question, cited_answer, prepare_passages,
                      format_entity_citations, no_direct_relationship_answer, plan_search, rerank,
                      review_answer, qualified_relationship_entities,
                      named_relationship_answer, _answer_from_query)

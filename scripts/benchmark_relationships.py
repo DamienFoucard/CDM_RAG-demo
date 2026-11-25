@@ -26,9 +26,9 @@ except ModuleNotFoundError:  # Optional research-only trainer; not needed by the
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
-from app.index import SchemaIndex, tokens
-from app.ollama import ModelError, Ollama
-from app.rag import expand_context, rerank
+from app.retrieval.index import SchemaIndex, tokens
+from app.runtime.ollama import ModelError, Ollama
+from app.retrieval.rag import expand_context, rerank
 
 GENERIC = re.compile(r"created|modified|onbehalf|regardingobject|transactioncurrency", re.I)
 VARIANTS = ("hybrid_raw", "hybrid_reranked", "neighborhood_reranked", "graph_assisted", "graph_transe")

@@ -6,8 +6,8 @@ import threading
 import pytest
 
 from app import main
-from app.query_trace import TracedModels, active_trace, trace_embedding
-from app.ollama import Ollama
+from app.runtime.query_trace import TracedModels, active_trace, trace_embedding
+from app.runtime.ollama import Ollama
 
 
 class Models:
@@ -43,7 +43,7 @@ def setup_query(monkeypatch):
     monkeypatch.setattr(main.app.state, 'query_router', None, raising=False)
     monkeypatch.setattr(main.app.state, 'judge_enabled', False, raising=False)
     monkeypatch.setattr(main.app.state, 'model_run_lock', threading.Lock(), raising=False)
-    monkeypatch.setattr('app.observability._write_event', lambda *args, **kwargs: None)
+    monkeypatch.setattr('app.runtime.observability._write_event', lambda *args, **kwargs: None)
 
 
 def test_no_search_has_only_embedding_and_queue_timing(monkeypatch):

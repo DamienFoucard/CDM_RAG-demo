@@ -5,7 +5,7 @@ from dataclasses import dataclass
 import json
 from typing import Any
 
-from .ollama import ModelError
+from app.runtime.ollama import ModelError
 
 ROUTES = ("raw_search", "rewrite_search", "no_search")
 ROUTE_SCHEMA = {"type": "object", "properties": {"route": {"type": "string", "enum": list(ROUTES)}},
