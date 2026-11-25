@@ -1,5 +1,8 @@
 # Independent GPU deployment
 
+For a Flux-managed application on a host that already runs the independent
+identity, edge and Ollama containers, see the [Kubernetes application profile](kubernetes/README.md).
+
 This deployment contains only the standalone CDM RAG app, a dedicated Ollama,
 a new Keycloak instance and PostgreSQL database, an OAuth2 proxy and a private
 Nginx router. The public TLS terminator forwards the CDM RAG host

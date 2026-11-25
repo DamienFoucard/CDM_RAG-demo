@@ -1,0 +1,109 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cdm-rag-demo
+  labels:
+    app.kubernetes.io/name: cdm-rag-demo
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  progressDeadlineSeconds: 600
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: cdm-rag-demo
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: cdm-rag-demo
+    spec:
+      hostNetwork: true
+      dnsPolicy: ClusterFirstWithHostNet
+      automountServiceAccountToken: false
+      enableServiceLinks: false
+      terminationGracePeriodSeconds: 120
+      nodeSelector:
+        kubernetes.io/os: linux
+        kubernetes.io/arch: amd64
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 10001
+        runAsGroup: 10001
+        seccompProfile:
+          type: RuntimeDefault
+      containers:
+        - name: app
+          image: cdm-rag-demo:replace-with-pinned-release
+          imagePullPolicy: IfNotPresent
+          command: [uvicorn, app.main:app, --host, '127.0.0.1', --port, '$(CDM_RAG_APP_PORT)', --no-access-log, --timeout-graceful-shutdown, '105']
+          env:
+            - {name: CDM_RAG_APP_PORT, value: '19093'}
+            - {name: CDM_RAG_DATA_DIR, value: /data}
+            - {name: CDM_RAG_API_AUTH_REQUIRED, value: 'true'}
+            - name: CDM_RAG_OWNER_EMAIL
+              valueFrom:
+                secretKeyRef: {name: cdm-rag-runtime, key: CDM_RAG_OWNER_EMAIL}
+            - name: CDM_RAG_OWNER_SUBJECT
+              valueFrom:
+                secretKeyRef: {name: cdm-rag-runtime, key: CDM_RAG_OWNER_SUBJECT}
+            - name: CDM_RAG_PUBLIC_HOST
+              valueFrom:
+                secretKeyRef: {name: cdm-rag-runtime, key: CDM_RAG_PUBLIC_HOST}
+            - name: CDM_RAG_TRUSTED_PROXY_SECRET
+              valueFrom:
+                secretKeyRef: {name: cdm-rag-runtime, key: CDM_RAG_TRUSTED_PROXY_SECRET}
+            - name: CDM_RAG_DEMO_EXPIRES_AT
+              valueFrom:
+                secretKeyRef: {name: cdm-rag-runtime, key: CDM_RAG_DEMO_EXPIRES_AT, optional: true}
+            - name: CDM_RAG_INITIAL_API_TOKEN
+              valueFrom:
+                secretKeyRef: {name: cdm-rag-runtime, key: CDM_RAG_INITIAL_API_TOKEN, optional: true}
+            - {name: OLLAMA_BASE_URL, value: 'http://127.0.0.1:19094'}
+            - {name: CDM_RAG_MANAGE_MODEL_RESIDENCY, value: 'true'}
+            - {name: EMBEDDING_MODEL, value: 'qwen3-embedding:0.6b'}
+            - {name: ROUTER_MODEL, value: 'qwen3:4b'}
+            - {name: CDM_RAG_DECISION_MODEL, value: 'qwen3.5:9b'}
+            - {name: ANSWER_MODEL, value: 'qwen3.5:9b'}
+            - {name: SCOPE_MODEL, value: 'qwen3:4b'}
+            - {name: JUDGE_MODEL, value: 'qwen2.5:0.5b'}
+            - {name: CDM_RAG_ROUTER_BACKEND, value: ollama-evidence}
+            - {name: CDM_RAG_RERANK_ENABLED, value: 'true'}
+            - {name: CDM_RAG_JUDGE_ENABLED, value: 'false'}
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop: [ALL]
+          resources:
+            requests:
+              cpu: 100m
+              memory: 256Mi
+          startupProbe:
+            exec: &health
+              command:
+                - python
+                - -c
+                - >-
+                  import os, urllib.request;
+                  urllib.request.urlopen('http://127.0.0.1:' + os.environ['CDM_RAG_APP_PORT'] + '/healthz', timeout=2)
+            periodSeconds: 5
+            timeoutSeconds: 3
+            failureThreshold: 60
+          readinessProbe:
+            exec: *health
+            periodSeconds: 5
+            timeoutSeconds: 3
+          livenessProbe:
+            exec: *health
+            periodSeconds: 15
+            timeoutSeconds: 3
+          volumeMounts:
+            - {name: data, mountPath: /data}
+            - {name: tmp, mountPath: /tmp}
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: cdm-rag-data
+        - name: tmp
+          emptyDir:
+            sizeLimit: 256Mi
