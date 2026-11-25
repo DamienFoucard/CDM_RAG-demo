@@ -65,5 +65,15 @@ The provided passages describe attributes of entities such as FHLoan, Relationsh
 
 In that run, retrieval returned attribute passages for [FHLoan](https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Fh_loan.cdm.json), [Relationship](https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Relationship.cdm.json), and [Account](https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/Account.cdm.json), but missed the relationship passages needed for the chain. The answer correctly describes that lack of supplied evidence; **this run did not solve the multi-hop question**. See the [development challenge](../evaluation/reformulation-challenge-candidate-v1.json) for its expected passage targets.
 
+A later GPU retest with Qwen3.5 9B reranking enabled also failed to establish
+the chain. It returned a `Relationship.ContactFrom` link to `Contact` and a
+`FinancialHolding.Details` link to holding types, but did not show how the
+customer connects to the holding. Both expected `CustomerFinancialHolding`
+relationship passages were absent from the initial 20 candidates, so the
+reranker could not select them. The answer's wording implied a connected
+chain that the cited passages did not establish. This is a development case,
+not an independent held-out result; see the [graph-expansion replay](../evaluation/results/macstudio-graph-expansion-replay.md)
+for an experimental approach and its limitations.
+
 For event types, authoritative final results and metadata fields, see the
 [streaming API guide](../docs/api-streaming.md).

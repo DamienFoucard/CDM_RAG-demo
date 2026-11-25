@@ -1,6 +1,6 @@
 # CDM RAG
 
-Ask questions about Microsoft's Common Data Model and explore its structure. This local demonstration retrieves source-linked schema passages from a pinned CDM catalog, generates cited answers with Ollama, and provides an interactive graph and evaluation summaries. The bundled catalog covers the Retail Banking model and common definitions; it is schema documentation, not customer or account data. See the [third-party data notice](THIRD_PARTY_NOTICES.md) for attribution and license details.
+Ask questions about Microsoft's Common Data Model and explore its structure. CDM RAG retrieves source-linked schema passages from a pinned CDM catalog, generates cited answers with Ollama, and provides an interactive graph and evaluation summaries. It can run locally or as an independent hosted service. The bundled catalog covers the Retail Banking model and common definitions; it is schema documentation, not customer or account data. See the [third-party data notice](THIRD_PARTY_NOTICES.md) for attribution and license details.
 
 ![CDM RAG walkthrough: ask a question, follow progress, review a cited answer, and compare evaluation summaries.](docs/images/cdm-rag-readme-tour.svg)
 
@@ -114,6 +114,8 @@ API and MCP behavior, authentication and the terminal clients. Most tests use
 fixtures or simulated model responses, so they do not need a running GPU or
 Ollama. See the [testing guide](docs/testing.md) for focused commands, optional
 prerequisites and the distinction between tests and quality evaluations.
+The [scripts guide](scripts/README.md) explains the terminal tools and the
+different evaluation and data-preparation scripts.
 
 ## Documentation
 

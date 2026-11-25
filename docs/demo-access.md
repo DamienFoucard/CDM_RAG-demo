@@ -34,11 +34,14 @@ channel and revoke the token and disable the user when the demo is over.
 
 Demo sessions and demo tokens have an explicit allowlist: schema questions,
 status, read-only graph operations, and a small set of pages. Demo questions
-use hybrid search with up to six results and cannot enable reranking. A bearer token is
-required for MCP. They cannot change model settings, manage tokens, access
-evaluation data or saved runs, or execute benchmark jobs. Demo status omits
-private paths and configuration. A full token retains API access to settings and
-benchmarks, but cannot administer tokens; that requires the owner session.
+use hybrid search with up to six results. They use the server's reranking
+default and can turn reranking off for a request, but cannot turn it on when
+the server default is off. The independent GPU profile enables it by default.
+A bearer token is required for MCP. Demo clients cannot change model settings,
+manage tokens, access evaluation data or saved runs, or execute benchmark jobs.
+Demo status omits private paths and configuration. A full token retains API
+access to settings and benchmarks, but cannot administer tokens; that requires
+the owner session.
 
 The independent deployment runs one app worker. It applies shared, process-local
 demo limits of 120 API requests per minute, 12 REST questions per hour, and 36

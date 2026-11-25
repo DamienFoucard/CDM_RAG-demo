@@ -116,7 +116,7 @@ services:
       JUDGE_MODEL: qwen2.5:0.5b
       CDM_RAG_ROUTER_BACKEND: ollama-evidence
       CDM_RAG_JUDGE_ENABLED: 'false'
-      CDM_RAG_RERANK_ENABLED: 'false'
+      CDM_RAG_RERANK_ENABLED: 'true'
     command: [uvicorn, 'app.main:app', --host, 127.0.0.1, --port, '19093', --no-access-log]
     read_only: true
     tmpfs: [/tmp]

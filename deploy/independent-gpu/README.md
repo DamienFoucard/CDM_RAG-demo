@@ -71,6 +71,13 @@ the imported realm, running-container configuration, database, or populated
 `.env`. The identity database and app data are independent local volumes, not
 off-host backups. Export and verify separate backups before relying on recovery.
 
+The Compose profile enables LLM reranking by default using the configured answer
+model, initially `qwen3.5:9b`. It may add latency, and no-search and certain
+direct graph-answer paths skip it. The answer reviewer remains disabled. Model
+settings persisted by the application can override configured non-embedding
+model roles. Full-token status reports the reranking default and configured
+model; query response metadata reports whether reranking actually ran.
+
 ## API access
 
 Signed-in owners can manage application tokens at `/api-tokens`. New tokens are

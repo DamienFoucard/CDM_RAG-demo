@@ -101,8 +101,11 @@ In the demo, selecting an inline citation opens its definition card and the
 card links to the original source. Try also `How does a Contact relate to an
 Organization?` or an unrelated message such as `My dog Luna loves tennis
 balls.` No schema results are returned when the gate decides not to search.
-`mode` can be `hybrid`, `semantic`, or `lexical`; `rerank` defaults to `false`.
-These switches are useful for evaluation. The endpoint does not preserve
+`mode` can be `hybrid`, `semantic`, or `lexical`. The `rerank` default follows
+`CDM_RAG_RERANK_ENABLED`: it is off in the local profile and on in the
+independent GPU Compose profile. Demo access retains its restricted search
+settings; it can use reranking when the server default enables it. These
+switches are useful for evaluation. The endpoint does not preserve
 history, so a follow-up containing only “it” has no earlier context.
 
 Each request gets a UUID and is appended to `data/query_logs.jsonl` (or the

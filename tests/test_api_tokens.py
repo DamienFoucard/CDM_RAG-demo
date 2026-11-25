@@ -274,12 +274,20 @@ def test_demo_expiration_is_fail_closed_without_affecting_full_tokens(tmp_path):
         assert client.get('/api/v1/status', headers={'Authorization': 'Bearer ' + full['token']}).status_code == 200
 
 
-def test_demo_cannot_enable_expensive_search_options():
+@pytest.mark.parametrize('rerank_default', [False, True])
+def test_demo_query_options_follow_server_reranking_default(monkeypatch, rerank_default):
+    from app import main
     from app.main import Question, check_demo_query_options
+    monkeypatch.setattr(main, 'DEFAULT_RERANK_ENABLED', rerank_default)
     demo = Request({'type': 'http', 'state': {'demo': True}})
     owner = Request({'type': 'http', 'state': {'demo': False}})
-    check_demo_query_options(demo, Question(question='q'))
-    for options in ({'rerank': True}, {'limit': 12}, {'mode': 'semantic'}):
+    check_demo_query_options(demo, Question(question='q', rerank=rerank_default))
+    check_demo_query_options(demo, Question(question='q', rerank=False))
+    if not rerank_default:
+        with pytest.raises(HTTPException) as exc:
+            check_demo_query_options(demo, Question(question='q', rerank=True))
+        assert exc.value.status_code == 403
+    for options in ({'limit': 12}, {'mode': 'semantic'}):
         body = Question(question='q', **options)
         with pytest.raises(HTTPException) as exc:
             check_demo_query_options(demo, body)

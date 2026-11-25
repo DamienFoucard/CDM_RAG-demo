@@ -876,7 +876,9 @@ def _run_logged_query(body: Question, query_id: str, *,
 
 
 def check_demo_query_options(request: Request, body: Question) -> None:
-    if getattr(request.state, 'demo', False) and (body.rerank or body.limit > 6 or body.mode != 'hybrid'):
+    if getattr(request.state, 'demo', False) and (
+        (body.rerank and not DEFAULT_RERANK_ENABLED) or body.limit > 6 or body.mode != 'hybrid'
+    ):
         raise HTTPException(status_code=403, detail='Demo questions use the default search settings.')
 
 
