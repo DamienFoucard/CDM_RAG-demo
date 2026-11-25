@@ -1,0 +1,269 @@
+{
+  "dataset_id": "cdm-catalog-object-retrieval-v1",
+  "status": "synthetic_source_checked_not_independently_reviewed",
+  "source_commit": "dd21d715e05ebf740a11356c80b5c3b4c38a89c2",
+  "provenance": "Assistant-authored questions with source-checked passage labels from the pinned RetailBankingCoreDataModel and applicationCommon catalog scope. Labels are provisional, incomplete, and not independently reviewed. Each case judges one or more exact indexed passages so non-entity objects are measured directly.",
+  "scope": ["RetailBankingCoreDataModel", "applicationCommon"],
+  "questions": [
+    {
+      "id": "object-dev-attribute-account-id",
+      "question": "Which field uniquely identifies an account record?",
+      "split": "development",
+      "category": "attribute",
+      "object_type": "Attribute definition",
+      "expected_source_type": "entity",
+      "expected_kind": "attributes",
+      "positive_passage_ids": ["RetailBankingCoreDataModel::Account:attributes:1"]
+    },
+    {
+      "id": "object-dev-relationship-cardholder",
+      "question": "In the finance model, which records can be associated with the holder of a payment card?",
+      "split": "development",
+      "category": "explicit relationship",
+      "object_type": "Relationship reference",
+      "expected_source_type": "entity",
+      "expected_kind": "relationship",
+      "positive_passage_ids": ["RetailBankingCoreDataModel::FICard:relationship:1"]
+    },
+    {
+      "id": "object-dev-trait-application-overdraft",
+      "question": "What descriptive meaning is attached to the FIOverdraft definition?",
+      "split": "development",
+      "category": "trait application",
+      "object_type": "Applied trait",
+      "expected_source_type": "entity",
+      "expected_kind": "trait_application",
+      "positive_passage_ids": ["RetailBankingCoreDataModel::FIOverdraft:trait-applications:entity"]
+    },
+    {
+      "id": "object-dev-trait-definition-described-as",
+      "question": "Which CDM trait stores language-specific descriptive text for a model object?",
+      "split": "development",
+      "category": "trait definition",
+      "object_type": "Trait definition",
+      "expected_source_type": "trait",
+      "expected_kind": "trait_definition",
+      "positive_passage_ids": ["trait:is.localized.describedAs:definition"]
+    },
+    {
+      "id": "object-dev-inheritance-phone-call",
+      "question": "What common base type does the applicationCommon PhoneCall entity extend?",
+      "split": "development",
+      "category": "inheritance",
+      "object_type": "Entity inheritance",
+      "expected_source_type": "entity",
+      "expected_kind": "inheritance",
+      "positive_passage_ids": ["applicationCommon::PhoneCall:inheritance"]
+    },
+    {
+      "id": "object-dev-inheritance-base-activity",
+      "question": "Which base entity type is shared by activity records such as PhoneCall and Task?",
+      "split": "development",
+      "category": "inheritance base",
+      "object_type": "Base type definition",
+      "expected_source_type": "inheritance",
+      "expected_kind": "inheritance_base",
+      "positive_passage_ids": ["inheritance-base:ActivityCommon"]
+    },
+    {
+      "id": "object-dev-retail-manifest-overview",
+      "question": "Which manifest describes the Retail Banking core model and how many of its declared entities are loaded here?",
+      "split": "development",
+      "category": "manifest overview",
+      "object_type": "Manifest overview",
+      "expected_source_type": "manifest",
+      "expected_kind": "manifest",
+      "positive_passage_ids": ["manifest:schemaDocuments/FinancialServices/RetailBankingCoreDataModel/RetailBankingCoreDataModel.manifest.cdm.json:overview"]
+    },
+    {
+      "id": "object-dev-retail-manifest-declarations",
+      "question": "Which financial model entities are declared in the RetailBankingCoreDataModel manifest, including FHLoan and FHInvestment?",
+      "split": "development",
+      "category": "manifest declarations",
+      "object_type": "Manifest declarations",
+      "expected_source_type": "manifest",
+      "expected_kind": "manifest_declarations",
+      "positive_passage_ids": ["manifest:schemaDocuments/FinancialServices/RetailBankingCoreDataModel/RetailBankingCoreDataModel.manifest.cdm.json:declarations:2"]
+    },
+    {
+      "id": "object-dev-common-manifest-structure",
+      "question": "Which standard submanifest sits under foundationCommon alongside crmCommon and productInsights?",
+      "split": "development",
+      "category": "manifest structure",
+      "object_type": "Manifest structure",
+      "expected_source_type": "manifest",
+      "expected_kind": "manifest_structure",
+      "positive_passage_ids": ["manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:structure:1"]
+    },
+    {
+      "id": "object-dev-manifest-relationship-business-unit",
+      "question": "In the common model manifest, which entity attribute receives an activity's owningBusinessUnit reference?",
+      "split": "development",
+      "category": "manifest relationship mapping",
+      "object_type": "Manifest relationship mapping",
+      "expected_source_type": "manifest",
+      "expected_kind": "manifest_relationship",
+      "positive_passage_ids": ["manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:1:6321bf07f0ad"]
+    },
+    {
+      "id": "object-dev-catalog-scope",
+      "question": "How many entities are in the current finance and applicationCommon catalog snapshot?",
+      "split": "development",
+      "category": "catalog overview",
+      "object_type": "Catalog overview",
+      "expected_source_type": "catalog",
+      "expected_kind": "catalog",
+      "positive_passage_ids": ["cdm-catalog:overview"]
+    },
+    {
+      "id": "object-dev-manifest-overview-comparison",
+      "question": "Compare how many entities are declared in the Retail Banking and applicationCommon manifests.",
+      "split": "development",
+      "category": "multi-manifest overview",
+      "object_type": "Manifest overviews",
+      "expected_source_type": "manifest",
+      "expected_kind": "manifest",
+      "positive_passage_ids": [
+        "manifest:schemaDocuments/FinancialServices/RetailBankingCoreDataModel/RetailBankingCoreDataModel.manifest.cdm.json:overview",
+        "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:overview"
+      ]
+    },
+    {
+      "id": "object-test-attribute-phone-number",
+      "question": "Where is the phone number stored for an applicationCommon phone call?",
+      "split": "test",
+      "category": "attribute",
+      "object_type": "Attribute definition",
+      "expected_source_type": "entity",
+      "expected_kind": "attributes",
+      "positive_passage_ids": ["applicationCommon::PhoneCall:attributes:1"]
+    },
+    {
+      "id": "object-test-relationship-primary-contact",
+      "question": "How does a common Account record refer to its main contact person?",
+      "split": "test",
+      "category": "explicit relationship",
+      "object_type": "Relationship reference",
+      "expected_source_type": "entity",
+      "expected_kind": "relationship",
+      "positive_passage_ids": ["applicationCommon::Account:relationship:1"]
+    },
+    {
+      "id": "object-test-trait-application-account-classification",
+      "question": "What metadata is applied to an Account's classification code, including its display name?",
+      "split": "test",
+      "category": "trait application",
+      "object_type": "Applied trait",
+      "expected_source_type": "entity",
+      "expected_kind": "trait_application",
+      "positive_passage_ids": ["applicationCommon::Account:trait-applications:attributes:2"]
+    },
+    {
+      "id": "object-test-trait-definition-default",
+      "question": "Which trait describes a required default value for an attribute?",
+      "split": "test",
+      "category": "trait definition",
+      "object_type": "Trait definition",
+      "expected_source_type": "trait",
+      "expected_kind": "trait_definition",
+      "positive_passage_ids": ["trait:does.haveDefault:definition"]
+    },
+    {
+      "id": "object-test-inheritance-account",
+      "question": "Which shared CDM type is the parent of the applicationCommon Account entity?",
+      "split": "test",
+      "category": "inheritance",
+      "object_type": "Entity inheritance",
+      "expected_source_type": "entity",
+      "expected_kind": "inheritance",
+      "positive_passage_ids": ["applicationCommon::Account:inheritance"]
+    },
+    {
+      "id": "object-test-inheritance-base-standard",
+      "question": "What base entity type is used by common records such as Account and Contact?",
+      "split": "test",
+      "category": "inheritance base",
+      "object_type": "Base type definition",
+      "expected_source_type": "inheritance",
+      "expected_kind": "inheritance_base",
+      "positive_passage_ids": ["inheritance-base:CdsStandard"]
+    },
+    {
+      "id": "object-test-common-manifest-overview",
+      "question": "What does the applicationCommon manifest say about its standard entities and relationship mappings?",
+      "split": "test",
+      "category": "manifest overview",
+      "object_type": "Manifest overview",
+      "expected_source_type": "manifest",
+      "expected_kind": "manifest",
+      "positive_passage_ids": ["manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:overview"]
+    },
+    {
+      "id": "object-test-foundation-manifest-declarations",
+      "question": "Which common entities, including Product and ProductRelationship, are declared in foundationCommon?",
+      "split": "test",
+      "category": "manifest declarations",
+      "object_type": "Manifest declarations",
+      "expected_source_type": "manifest",
+      "expected_kind": "manifest_declarations",
+      "positive_passage_ids": ["manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:declarations:3"]
+    },
+    {
+      "id": "object-test-manifest-structure-application-common",
+      "question": "Which entities and child manifest appear in the applicationCommon manifest structure?",
+      "split": "test",
+      "category": "manifest structure",
+      "object_type": "Manifest structure",
+      "expected_source_type": "manifest",
+      "expected_kind": "manifest_structure",
+      "positive_passage_ids": ["manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:structure:4"]
+    },
+    {
+      "id": "object-test-manifest-relationship-owner-user",
+      "question": "In the common model manifest, what User attribute is the target of the ActivityCommon owningUser mapping?",
+      "split": "test",
+      "category": "manifest relationship mapping",
+      "object_type": "Manifest relationship mapping",
+      "expected_source_type": "manifest",
+      "expected_kind": "manifest_relationship",
+      "positive_passage_ids": ["manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:2:6321bf07f0ad"]
+    },
+    {
+      "id": "object-test-catalog-coverage",
+      "question": "Which two model areas are represented in this extracted CDM catalog, and how many entities are loaded?",
+      "split": "test",
+      "category": "catalog overview",
+      "object_type": "Catalog overview",
+      "expected_source_type": "catalog",
+      "expected_kind": "catalog",
+      "positive_passage_ids": ["cdm-catalog:overview"]
+    },
+    {
+      "id": "object-test-trait-definitions-display-and-description",
+      "question": "Which traits define the human-readable description and display label for a CDM object?",
+      "split": "test",
+      "category": "multiple trait definitions",
+      "object_type": "Trait definitions",
+      "expected_source_type": "trait",
+      "expected_kind": "trait_definition",
+      "positive_passage_ids": [
+        "trait:is.localized.describedAs:definition",
+        "trait:is.localized.displayedAs:definition"
+      ]
+    },
+    {
+      "id": "object-test-inheritance-activity-family",
+      "question": "Which common activity entities explicitly inherit from ActivityCommon: Activity, PhoneCall, and Task?",
+      "split": "test",
+      "category": "multiple inheritance records",
+      "object_type": "Entity inheritance records",
+      "expected_source_type": "entity",
+      "expected_kind": "inheritance",
+      "positive_passage_ids": [
+        "applicationCommon::Activity:inheritance",
+        "applicationCommon::PhoneCall:inheritance",
+        "applicationCommon::Task:inheritance"
+      ]
+    }
+  ]
+}

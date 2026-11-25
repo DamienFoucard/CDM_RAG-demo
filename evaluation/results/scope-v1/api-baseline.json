@@ -1,0 +1,324 @@
+{
+  "dataset_id": "scope-questions-v1",
+  "dataset_sha256": "cba4dc2a3d23b0c1489c043cd81733f8144e358a1df8960a6763ac5ac0be09eb",
+  "status": {
+    "entity_count": 64,
+    "passage_count": 695,
+    "source_commit": "dd21d715e05ebf740a11356c80b5c3b4c38a89c2",
+    "index_revision": "f0e843e0c1b941593517528b7f6219c242c62ce247c0430746fea34f42ca2f66",
+    "embedding_model": "qwen3-embedding:0.6b",
+    "answer_model": "qwen3:4b",
+    "router_backend": "ollama",
+    "router_model": "qwen3:4b"
+  },
+  "note": "Real API behavior on eight selected assistant-labeled cases; no automatic semantic answer grading.",
+  "metrics": {
+    "cases": 8,
+    "errors": 0,
+    "schema_cases": 2,
+    "schema_cited_answers": 2,
+    "negative_cases": 6,
+    "negative_declined_no_sources": 1,
+    "median_ms": 19432.25
+  },
+  "cases": [
+    {
+      "id": "r01",
+      "question": "Which accounts are jointly held?",
+      "expected": "records",
+      "split": "regression",
+      "allow_schema_search": false,
+      "route": "cdm",
+      "answer": "GroupFinancialHolding entities represent financial holdings associated with a Group, which includes accounts, loans, investments, credit lines, and savings. [RetailBankingCoreDataModel::GroupFinancialHolding] FinancialHolding entities are linked to Group entities, representing familial connections of the customer at the bank. [RetailBankingCoreDataModel::GroupFinancialHolding] FinancialHoldingInstrument entities are associated with FinancialHolding entities and include instruments such as standing orders, overdrafts, cards, and direct debits. [RetailBankingCoreDataModel::FinancialHoldingInstrument]",
+      "sources": [
+        {
+          "entity_id": "RetailBankingCoreDataModel::GroupFinancialHolding",
+          "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Groupfinancialholding.cdm.json"
+        },
+        {
+          "entity_id": "RetailBankingCoreDataModel::FinancialHoldingInstrument",
+          "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Financialholdinginstrument.cdm.json"
+        }
+      ],
+      "retrieval": {
+        "router_backend": "ollama",
+        "router_model": "qwen3:4b",
+        "router_decision": "legacy_plan",
+        "router_latency_ms": 486.8,
+        "router_classification_latency_ms": 486.8,
+        "query_generation_latency_ms": null,
+        "router_fallback_used": false,
+        "query_generated": true,
+        "mode": "hybrid",
+        "reranked": true,
+        "search_query": "Which accounts are jointly held?",
+        "preflight_similarity": 0.607,
+        "threshold": 0.58,
+        "omitted_entity_ids": [],
+        "candidate_count": 20,
+        "generator": "qwen3:4b",
+        "index_revision": "f0e843e0c1b941593517528b7f6219c242c62ce247c0430746fea34f42ca2f66",
+        "source_commit": "dd21d715e05ebf740a11356c80b5c3b4c38a89c2"
+      },
+      "error": null,
+      "latency_ms": 8758.4
+    },
+    {
+      "id": "r02",
+      "question": "Does creating an account in D365 auto-create a related contact record?",
+      "expected": "runtime",
+      "split": "regression",
+      "allow_schema_search": false,
+      "route": "cdm",
+      "answer": "Creating an account in D365 does not automatically create a related contact record. [applicationCommon::Contact]",
+      "sources": [
+        {
+          "entity_id": "applicationCommon::Contact",
+          "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/Contact.cdm.json"
+        }
+      ],
+      "retrieval": {
+        "router_backend": "ollama",
+        "router_model": "qwen3:4b",
+        "router_decision": "legacy_plan",
+        "router_latency_ms": 511.7,
+        "router_classification_latency_ms": 511.7,
+        "query_generation_latency_ms": null,
+        "router_fallback_used": false,
+        "query_generated": true,
+        "mode": "hybrid",
+        "reranked": true,
+        "search_query": "Does creating an account in D365 auto-create a related contact record?",
+        "preflight_similarity": 0.6692,
+        "threshold": 0.58,
+        "omitted_entity_ids": [],
+        "candidate_count": 20,
+        "generator": "qwen3:4b",
+        "index_revision": "f0e843e0c1b941593517528b7f6219c242c62ce247c0430746fea34f42ca2f66",
+        "source_commit": "dd21d715e05ebf740a11356c80b5c3b4c38a89c2"
+      },
+      "error": null,
+      "latency_ms": 27084.9
+    },
+    {
+      "id": "t01",
+      "question": "Which entity has a field for an available account balance?",
+      "expected": "schema",
+      "split": "test",
+      "allow_schema_search": true,
+      "route": "cdm",
+      "answer": "Examples of attributes in the retrieved definitions:\n- RetailBankingCoreDataModel::FHAccount: availableBalance [RetailBankingCoreDataModel::FHAccount]\n- RetailBankingCoreDataModel::FHSaving: balance [RetailBankingCoreDataModel::FHSaving]",
+      "sources": [
+        {
+          "entity_id": "RetailBankingCoreDataModel::FHAccount",
+          "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Fh_account.cdm.json"
+        },
+        {
+          "entity_id": "RetailBankingCoreDataModel::FHSaving",
+          "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Fh_saving.cdm.json"
+        }
+      ],
+      "retrieval": {
+        "router_backend": "ollama",
+        "router_model": "qwen3:4b",
+        "router_decision": "legacy_plan",
+        "router_latency_ms": 1211.6,
+        "router_classification_latency_ms": 1211.6,
+        "query_generation_latency_ms": null,
+        "router_fallback_used": false,
+        "query_generated": true,
+        "mode": "hybrid",
+        "reranked": true,
+        "search_query": "Which entity has a field for an available account balance in the Microsoft Common Data Model for banking?",
+        "preflight_similarity": 0.7306,
+        "threshold": 0.58,
+        "omitted_entity_ids": [],
+        "candidate_count": 20,
+        "generator": "qwen3:4b:verified-attribute-selection",
+        "index_revision": "f0e843e0c1b941593517528b7f6219c242c62ce247c0430746fea34f42ca2f66",
+        "source_commit": "dd21d715e05ebf740a11356c80b5c3b4c38a89c2"
+      },
+      "error": null,
+      "latency_ms": 8056.9
+    },
+    {
+      "id": "t07",
+      "question": "Does the Contact definition refer to an Account?",
+      "expected": "schema",
+      "split": "test",
+      "allow_schema_search": true,
+      "route": "cdm",
+      "answer": "The Contact entity has a direct relationship with the Account entity through the 'primaryContact' attribute. [applicationCommon::Account]",
+      "sources": [
+        {
+          "entity_id": "applicationCommon::Account",
+          "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/Account.cdm.json"
+        }
+      ],
+      "retrieval": {
+        "router_backend": "ollama",
+        "router_model": "qwen3:4b",
+        "router_decision": "legacy_plan",
+        "router_latency_ms": 604.2,
+        "router_classification_latency_ms": 604.2,
+        "query_generation_latency_ms": null,
+        "router_fallback_used": false,
+        "query_generated": true,
+        "mode": "hybrid",
+        "reranked": true,
+        "search_query": "Does the Contact entity have a relationship with the Account entity in the Microsoft Common Data Model?",
+        "preflight_similarity": 0.7672,
+        "threshold": 0.58,
+        "omitted_entity_ids": [],
+        "candidate_count": 20,
+        "generator": "qwen3:4b",
+        "index_revision": "f0e843e0c1b941593517528b7f6219c242c62ce247c0430746fea34f42ca2f66",
+        "source_commit": "dd21d715e05ebf740a11356c80b5c3b4c38a89c2"
+      },
+      "error": null,
+      "latency_ms": 25900.8
+    },
+    {
+      "id": "t13",
+      "question": "Which customers share a bank account?",
+      "expected": "records",
+      "split": "test",
+      "allow_schema_search": false,
+      "route": "cdm",
+      "answer": "Customers who share a bank account are identified by the Account entity with a parentAccount relationship to another Account entity. [applicationCommon::Account] The Account entity has a parentAccount attribute that links to another Account entity, indicating shared bank accounts. [applicationCommon::Account] The parentAccount relationship in the Account entity allows for identifying customers that share a bank account through hierarchical account structures. [applicationCommon::Account]",
+      "sources": [
+        {
+          "entity_id": "applicationCommon::Account",
+          "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/Account.cdm.json"
+        }
+      ],
+      "retrieval": {
+        "router_backend": "ollama",
+        "router_model": "qwen3:4b",
+        "router_decision": "legacy_plan",
+        "router_latency_ms": 940.9,
+        "router_classification_latency_ms": 940.9,
+        "query_generation_latency_ms": null,
+        "router_fallback_used": false,
+        "query_generated": true,
+        "mode": "hybrid",
+        "reranked": true,
+        "search_query": "Which customers share a bank account?",
+        "preflight_similarity": 0.7278,
+        "threshold": 0.58,
+        "omitted_entity_ids": [
+          "RetailBankingCoreDataModel::Account",
+          "RetailBankingCoreDataModel::Group",
+          "RetailBankingCoreDataModel::CustomerFinancialHolding"
+        ],
+        "candidate_count": 20,
+        "generator": "qwen3:4b",
+        "index_revision": "f0e843e0c1b941593517528b7f6219c242c62ce247c0430746fea34f42ca2f66",
+        "source_commit": "dd21d715e05ebf740a11356c80b5c3b4c38a89c2"
+      },
+      "error": null,
+      "latency_ms": 18570.5
+    },
+    {
+      "id": "t21",
+      "question": "Does Dynamics automatically notify a customer when an account is opened?",
+      "expected": "runtime",
+      "split": "test",
+      "allow_schema_search": false,
+      "route": "cdm",
+      "answer": "Dynamics does not automatically notify a customer when an account is opened based on the provided CDM definitions. [applicationCommon::Account]",
+      "sources": [
+        {
+          "entity_id": "applicationCommon::Account",
+          "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/Account.cdm.json"
+        }
+      ],
+      "retrieval": {
+        "router_backend": "ollama",
+        "router_model": "qwen3:4b",
+        "router_decision": "legacy_plan",
+        "router_latency_ms": 7489.5,
+        "router_classification_latency_ms": 7489.5,
+        "query_generation_latency_ms": null,
+        "router_fallback_used": false,
+        "query_generated": true,
+        "mode": "hybrid",
+        "reranked": true,
+        "search_query": "Does Dynamics automatically notify a customer when an account is opened?",
+        "preflight_similarity": 0.6153,
+        "threshold": 0.58,
+        "omitted_entity_ids": [],
+        "candidate_count": 20,
+        "generator": "qwen3:4b",
+        "index_revision": "f0e843e0c1b941593517528b7f6219c242c62ce247c0430746fea34f42ca2f66",
+        "source_commit": "dd21d715e05ebf740a11356c80b5c3b4c38a89c2"
+      },
+      "error": null,
+      "latency_ms": 20294.0
+    },
+    {
+      "id": "t26",
+      "question": "Explain the Account schema and list the accounts that are overdrawn.",
+      "expected": "mixed",
+      "split": "test",
+      "allow_schema_search": false,
+      "route": "cdm",
+      "answer": "The Account schema in the applicationCommon model represents a business entity that tracks customer or potential customer information, including financial metrics like revenue and credit limits. [applicationCommon::Account] The Account schema in the RetailBankingCoreDataModel includes a unique identifier and is linked to financial holdings such as credit lines. [RetailBankingCoreDataModel::Account] Overdrawn accounts are identified by the balanceDisplayValue attribute in the FHLineOfCredit entity, which shows negative balances indicating overdrawn status. [RetailBankingCoreDataModel::FHLineOfCredit] The specific accounts that are overdrawn cannot be determined from the provided schema definitions, as the schema does not include actual account data or overdrawn status indicators beyond the FHLineOfCredit entity's balanceDisplayValue. [RetailBankingCoreDataModel::FHLineOfCredit]",
+      "sources": [
+        {
+          "entity_id": "applicationCommon::Account",
+          "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/Account.cdm.json"
+        },
+        {
+          "entity_id": "RetailBankingCoreDataModel::Account",
+          "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Account.cdm.json"
+        },
+        {
+          "entity_id": "RetailBankingCoreDataModel::FHLineOfCredit",
+          "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Fh_creditline.cdm.json"
+        }
+      ],
+      "retrieval": {
+        "router_backend": "ollama",
+        "router_model": "qwen3:4b",
+        "router_decision": "legacy_plan",
+        "router_latency_ms": 707.7,
+        "router_classification_latency_ms": 707.7,
+        "query_generation_latency_ms": null,
+        "router_fallback_used": false,
+        "query_generated": true,
+        "mode": "hybrid",
+        "reranked": true,
+        "search_query": "Explain the Account schema and list the accounts that are overdrawn.",
+        "preflight_similarity": 0.7061,
+        "threshold": 0.58,
+        "omitted_entity_ids": [],
+        "candidate_count": 20,
+        "generator": "qwen3:4b",
+        "index_revision": "f0e843e0c1b941593517528b7f6219c242c62ce247c0430746fea34f42ca2f66",
+        "source_commit": "dd21d715e05ebf740a11356c80b5c3b4c38a89c2"
+      },
+      "error": null,
+      "latency_ms": 20532.6
+    },
+    {
+      "id": "t29",
+      "question": "My dog Luna learned to swim yesterday.",
+      "expected": "unrelated",
+      "split": "test",
+      "allow_schema_search": false,
+      "route": "no_search",
+      "answer": "I can help with Microsoft CDM banking and common schema definitions.",
+      "sources": [],
+      "retrieval": {
+        "preflight_similarity": 0.4353,
+        "threshold": 0.58,
+        "query_generated": false,
+        "router_backend": "not_called",
+        "router_decision": "semantic_gate"
+      },
+      "error": null,
+      "latency_ms": 196.5
+    }
+  ]
+}

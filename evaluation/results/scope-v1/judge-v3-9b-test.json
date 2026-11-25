@@ -1,0 +1,718 @@
+{
+  "dataset_id": "judge-questions-v2",
+  "dataset_status": "assistant-authored source-checked examples; not independently reviewed",
+  "dataset_sha256": "e561a672ad00a7939cd5242ac34a9f7fb6c1090229f8765ed3fa8e9ffc511152",
+  "split": "test",
+  "judge_model": "qwen3.5:9b-q4_K_M",
+  "judge_model_digest": "56671c2ab9385f9cfcb404638e32cd62d88e3501d44822208363c010179a3c90",
+  "judge_prompt_sha256": "a82641a4f7a60fc9340de89a18855a3dac95e6f528598350eebb131641e1aae3",
+  "judge_code_sha256": "c34685076f7d0513b35d0d76f3b7747bd1eea71c38b95d90ed4b72227f422d90",
+  "note": "Assistant-authored/audited labels are not independent; uncertain and errors are recorded separately.",
+  "metrics": {
+    "cases": 20,
+    "acceptable_gold": 10,
+    "unacceptable_gold": 10,
+    "correct_accept": 10,
+    "incorrect_accept": 0,
+    "correct_reject": 10,
+    "incorrect_reject": 0,
+    "uncertain": 0,
+    "errors": 0,
+    "self_inconsistencies": 0,
+    "retried": 0,
+    "scorable_cases": 20,
+    "selective_accuracy": 1,
+    "strict_accuracy_uncertain_counts_wrong": 1,
+    "coverage": 1.0,
+    "median_ms": 4881.4
+  },
+  "cases": [
+    {
+      "id": "jt01",
+      "split": "test",
+      "question": "What links a user to a team?",
+      "answer": "TeamMembership has references to User and Team. [F]",
+      "evidence": [
+        "[F] applicationCommon::TeamMembership: Its User reference targets applicationCommon::User; its Team reference targets applicationCommon::Team."
+      ],
+      "expected_acceptable": true,
+      "kind": "schema",
+      "verdict": "acceptable",
+      "model_verdict": "acceptable",
+      "coverage": "answered",
+      "claim_checks": [
+        {
+          "claim": "TeamMembership has references to User and Team.",
+          "assessment": "supported"
+        }
+      ],
+      "cited_labels_in_answer": [
+        "F"
+      ],
+      "cited_labels_available_to_judge": [
+        "F"
+      ],
+      "unknown_citation_labels": [],
+      "rationale": "The answer states that 'TeamMembership has references to User and Team.' Excerpt [F] explicitly confirms this by stating: 'applicationCommon::TeamMembership: Its User reference targets applicationCommon::User; its Team reference targets applicationCommon::Team.' The claim is fully supported by the provided excerpt, and the question is completely answered.",
+      "inconsistent": false,
+      "judge_retries": 0,
+      "error": null,
+      "latency_ms": 3162.7
+    },
+    {
+      "id": "jt02",
+      "split": "test",
+      "question": "What links a user to a team?",
+      "answer": "Contact has a team membership reference to User. [F]",
+      "evidence": [
+        "[F] applicationCommon::TeamMembership: Its User reference targets applicationCommon::User; its Team reference targets applicationCommon::Team."
+      ],
+      "expected_acceptable": false,
+      "kind": "schema",
+      "verdict": "unacceptable",
+      "model_verdict": "unacceptable",
+      "coverage": "missing",
+      "claim_checks": [
+        {
+          "claim": "Contact has a team membership reference to User.",
+          "assessment": "unsupported"
+        }
+      ],
+      "cited_labels_in_answer": [
+        "F"
+      ],
+      "cited_labels_available_to_judge": [
+        "F"
+      ],
+      "unknown_citation_labels": [],
+      "rationale": "The answer claims that 'Contact' is the entity with the reference. However, the provided excerpt [F] defines an entity named 'TeamMembership' (not 'Contact') and states that its 'User' reference targets 'applicationCommon::User'. The excerpt does not mention 'Contact' at all. Therefore, the claim that 'Contact' has the reference is unsupported by the cited source.",
+      "inconsistent": false,
+      "judge_retries": 0,
+      "error": null,
+      "latency_ms": 4473.7
+    },
+    {
+      "id": "jt03",
+      "split": "test",
+      "question": "What is a financial holding?",
+      "answer": "It covers accounts, loans, investments, credit lines and savings held by a customer. [G]",
+      "evidence": [
+        "[G] RetailBankingCoreDataModel::FinancialHolding: Accounts, loans, investments, credit lines and savings accounts held by a customer."
+      ],
+      "expected_acceptable": true,
+      "kind": "schema",
+      "verdict": "acceptable",
+      "model_verdict": "acceptable",
+      "coverage": "answered",
+      "claim_checks": [
+        {
+          "claim": "A financial holding covers accounts, loans, investments, credit lines and savings held by a customer.",
+          "assessment": "supported"
+        }
+      ],
+      "cited_labels_in_answer": [
+        "G"
+      ],
+      "cited_labels_available_to_judge": [
+        "G"
+      ],
+      "unknown_citation_labels": [],
+      "rationale": "The answer cites source [G]. The text of excerpt [G] explicitly defines 'FinancialHolding' as covering 'Accounts, loans, investments, credit lines and savings accounts held by a customer.' The claim in the answer matches this definition exactly. The collection scope metadata confirms the collection is a schema snapshot without actual records, which aligns with the nature of the question (asking for a definition) rather than a request for specific data.",
+      "inconsistent": false,
+      "judge_retries": 0,
+      "error": null,
+      "latency_ms": 4953.1
+    },
+    {
+      "id": "jt04",
+      "split": "test",
+      "question": "What is a financial holding?",
+      "answer": "A financial holding is exclusively a mortgage. [G]",
+      "evidence": [
+        "[G] RetailBankingCoreDataModel::FinancialHolding: Accounts, loans, investments, credit lines and savings accounts held by a customer."
+      ],
+      "expected_acceptable": false,
+      "kind": "schema",
+      "verdict": "unacceptable",
+      "model_verdict": "unacceptable",
+      "coverage": "answered",
+      "claim_checks": [
+        {
+          "claim": "A financial holding is exclusively a mortgage.",
+          "assessment": "unsupported"
+        }
+      ],
+      "cited_labels_in_answer": [
+        "G"
+      ],
+      "cited_labels_available_to_judge": [
+        "G"
+      ],
+      "unknown_citation_labels": [],
+      "rationale": "The answer asserts that a financial holding is 'exclusively a mortgage'. The cited excerpt [G] defines FinancialHolding as including 'Accounts, loans, investments, credit lines and savings accounts', which contradicts the claim of exclusivity to mortgages. Furthermore, the excerpt does not mention mortgages at all. Therefore, the factual claim lacks support from the provided source.",
+      "inconsistent": false,
+      "judge_retries": 0,
+      "error": null,
+      "latency_ms": 4438.6
+    },
+    {
+      "id": "jt05",
+      "split": "test",
+      "question": "What is a direct debit?",
+      "answer": "A creditor is authorized to debit the customer’s account at regular intervals. [E]",
+      "evidence": [
+        "[E] RetailBankingCoreDataModel::FIDirectDebit: An automated payment system in which an account holder authorizes a creditor to debit the customer’s account at regular intervals."
+      ],
+      "expected_acceptable": true,
+      "kind": "schema",
+      "verdict": "acceptable",
+      "model_verdict": "acceptable",
+      "coverage": "answered",
+      "claim_checks": [
+        {
+          "claim": "A direct debit is a system where a creditor is authorized to debit the customer's account at regular intervals.",
+          "assessment": "supported"
+        }
+      ],
+      "cited_labels_in_answer": [
+        "E"
+      ],
+      "cited_labels_available_to_judge": [
+        "E"
+      ],
+      "unknown_citation_labels": [],
+      "rationale": "The answer states that in a direct debit, 'a creditor is authorized to debit the customer's account at regular intervals.' Excerpt E defines FIDirectDebit as 'An automated payment system in which an account holder authorizes a creditor to debit the customer's account at regular intervals.' The claim matches the definition provided in the excerpt. The answer addresses the question directly using the provided source.",
+      "inconsistent": false,
+      "judge_retries": 0,
+      "error": null,
+      "latency_ms": 4783.2
+    },
+    {
+      "id": "jt06",
+      "split": "test",
+      "question": "What is a direct debit?",
+      "answer": "The account holder orders a fixed transfer to another account. [E]",
+      "evidence": [
+        "[E] RetailBankingCoreDataModel::FIDirectDebit: An automated payment system in which an account holder authorizes a creditor to debit the customer’s account at regular intervals."
+      ],
+      "expected_acceptable": false,
+      "kind": "schema",
+      "verdict": "unacceptable",
+      "model_verdict": "unacceptable",
+      "coverage": "answered",
+      "claim_checks": [
+        {
+          "claim": "A direct debit is when an account holder orders a fixed transfer to another account.",
+          "assessment": "unsupported"
+        }
+      ],
+      "cited_labels_in_answer": [
+        "E"
+      ],
+      "cited_labels_available_to_judge": [
+        "E"
+      ],
+      "unknown_citation_labels": [],
+      "rationale": "The answer claims a direct debit involves ordering a 'fixed transfer'. The cited excerpt [E] defines a direct debit as an 'automated payment system' where an account holder 'authorizes a creditor to debit the customer's account at regular intervals'. These definitions do not match; the excerpt describes authorization for recurring debits, not a manual order for a fixed transfer. Additionally, the collection scope confirms this is a schema snapshot without actual records, but the mismatch between the claim and the provided definition makes the specific factual claim unsupported by the cited text.",
+      "inconsistent": false,
+      "judge_retries": 0,
+      "error": null,
+      "latency_ms": 5331.6
+    },
+    {
+      "id": "jt07",
+      "split": "test",
+      "question": "Which customers have mortgages?",
+      "answer": "I cannot list customers with mortgages; this source contains definitions rather than customer records.",
+      "evidence": [
+        "[G] RetailBankingCoreDataModel::FinancialHolding: Accounts, loans, investments, credit lines and savings accounts held by a customer."
+      ],
+      "expected_acceptable": true,
+      "kind": "records",
+      "verdict": "acceptable",
+      "model_verdict": "acceptable",
+      "coverage": "answered",
+      "claim_checks": [
+        {
+          "claim": "The answer states that it cannot list customers with mortgages.",
+          "assessment": "supported"
+        },
+        {
+          "claim": "The reason given is that the source contains definitions rather than customer records.",
+          "assessment": "supported"
+        }
+      ],
+      "cited_labels_in_answer": [],
+      "cited_labels_available_to_judge": [],
+      "unknown_citation_labels": [],
+      "rationale": "The answer explicitly refuses to list customers and cites the nature of the collection (schema definitions vs. actual records) as the reason. The provided 'Collection scope' metadata confirms that this collection is indeed a schema snapshot with no actual customer/account records. Therefore, the factual claims in the answer are supported by the supplied excerpts, and the limitation regarding the inability to list specific customers is correctly acknowledged.",
+      "inconsistent": false,
+      "judge_retries": 0,
+      "error": null,
+      "latency_ms": 5189.1
+    },
+    {
+      "id": "jt08",
+      "split": "test",
+      "question": "Which customers have mortgages?",
+      "answer": "Customer Alice holds a mortgage. [G]",
+      "evidence": [
+        "[G] RetailBankingCoreDataModel::FinancialHolding: Accounts, loans, investments, credit lines and savings accounts held by a customer."
+      ],
+      "expected_acceptable": false,
+      "kind": "records",
+      "verdict": "unacceptable",
+      "model_verdict": "unacceptable",
+      "coverage": "missing",
+      "claim_checks": [
+        {
+          "claim": "Customer Alice holds a mortgage.",
+          "assessment": "unsupported"
+        }
+      ],
+      "cited_labels_in_answer": [
+        "G"
+      ],
+      "cited_labels_available_to_judge": [
+        "G"
+      ],
+      "unknown_citation_labels": [],
+      "rationale": "The answer asserts that 'Customer Alice' specifically holds a mortgage. The only supplied excerpt (G) defines the entity 'FinancialHolding' as a category for accounts, loans, etc., held by a customer. It does not list any specific customers, nor does it state that Customer Alice exists or holds a mortgage. Furthermore, the collection scope explicitly states there are no actual customer records. Therefore, the claim about a specific customer cannot be supported by the provided excerpts.",
+      "inconsistent": false,
+      "judge_retries": 0,
+      "error": null,
+      "latency_ms": 4809.7
+    },
+    {
+      "id": "jt09",
+      "split": "test",
+      "question": "Will a contact be created automatically after an account is saved?",
+      "answer": "The supplied definitions do not establish the software behavior after saving an account.",
+      "evidence": [
+        "[A] applicationCommon::Contact: Person with whom a business unit has a relationship. The parentCustomer reference targets applicationCommon::Account or applicationCommon::Contact.",
+        "[B] applicationCommon::Account: Business that represents a customer or potential customer. Its attributes include accountId and accountCategoryCode. Its primaryContact reference targets applicationCommon::Contact."
+      ],
+      "expected_acceptable": true,
+      "kind": "runtime",
+      "verdict": "acceptable",
+      "model_verdict": "acceptable",
+      "coverage": "answered",
+      "claim_checks": [
+        {
+          "claim": "The supplied definitions do not establish the software behavior after saving an account.",
+          "assessment": "supported"
+        }
+      ],
+      "cited_labels_in_answer": [],
+      "cited_labels_available_to_judge": [],
+      "unknown_citation_labels": [],
+      "rationale": "The answer explicitly states that the provided schema definitions (which contain no actual records or deployed state) cannot determine runtime behavior like automatic contact creation. This aligns with the collection scope metadata stating the collection is a schema snapshot without actual records or configured application state. The answer correctly acknowledges the limitation rather than making unsupported claims about specific behaviors.",
+      "inconsistent": false,
+      "judge_retries": 0,
+      "error": null,
+      "latency_ms": 4308.8
+    },
+    {
+      "id": "jt10",
+      "split": "test",
+      "question": "Will a contact be created automatically after an account is saved?",
+      "answer": "No, saving an account will not create a contact. [A]",
+      "evidence": [
+        "[A] applicationCommon::Contact: Person with whom a business unit has a relationship. The parentCustomer reference targets applicationCommon::Account or applicationCommon::Contact.",
+        "[B] applicationCommon::Account: Business that represents a customer or potential customer. Its attributes include accountId and accountCategoryCode. Its primaryContact reference targets applicationCommon::Contact."
+      ],
+      "expected_acceptable": false,
+      "kind": "runtime",
+      "verdict": "unacceptable",
+      "model_verdict": "unacceptable",
+      "coverage": "missing",
+      "claim_checks": [
+        {
+          "claim": "Saving an account will not create a contact.",
+          "assessment": "unsupported"
+        }
+      ],
+      "cited_labels_in_answer": [
+        "A"
+      ],
+      "cited_labels_available_to_judge": [
+        "A"
+      ],
+      "unknown_citation_labels": [],
+      "rationale": "The answer asserts a specific runtime behavior ('saving an account will not create a contact'). The only supplied excerpt (A) defines the 'Contact' entity and its relationship to 'Account', but it contains no information regarding application logic, triggers, or automatic creation processes. Furthermore, the collection scope explicitly states that this is a schema snapshot with no actual records or deployed application state. Therefore, the provided excerpts cannot support a claim about what happens when an account is saved in a deployed system. The answer fails to acknowledge this limitation and presents an unsupported behavioral claim as fact.",
+      "inconsistent": false,
+      "judge_retries": 0,
+      "error": null,
+      "latency_ms": 5212.4
+    },
+    {
+      "id": "jt11",
+      "split": "test",
+      "question": "Explain CustomerFinancialHolding and list our active accounts.",
+      "answer": "CustomerFinancialHolding links customers and financial holdings. [C] I cannot list active accounts because the source contains no records.",
+      "evidence": [
+        "[C] RetailBankingCoreDataModel::CustomerFinancialHolding: Financial holdings owned by the customer. Its Customer reference targets RetailBankingCoreDataModel::Account or ::Contact; its FinancialHolding reference targets ::FinancialHolding."
+      ],
+      "expected_acceptable": true,
+      "kind": "mixed",
+      "verdict": "acceptable",
+      "model_verdict": "acceptable",
+      "coverage": "answered",
+      "claim_checks": [
+        {
+          "claim": "CustomerFinancialHolding links customers and financial holdings.",
+          "assessment": "supported"
+        },
+        {
+          "claim": "CustomerFinancialHolding's Customer reference targets RetailBankingCoreDataModel::Account or ::Contact.",
+          "assessment": "supported"
+        },
+        {
+          "claim": "CustomerFinancialHolding's FinancialHolding reference targets ::FinancialHolding.",
+          "assessment": "supported"
+        },
+        {
+          "claim": "The source contains no records, so active accounts cannot be listed.",
+          "assessment": "supported"
+        }
+      ],
+      "cited_labels_in_answer": [
+        "C"
+      ],
+      "cited_labels_available_to_judge": [
+        "C"
+      ],
+      "unknown_citation_labels": [],
+      "rationale": "All factual claims in the answer are directly supported by excerpt C. The answer correctly identifies that the collection is a schema snapshot without actual records, aligning with the provided collection scope metadata. The question's request to list active accounts is addressed by explicitly stating this is impossible due to the lack of records.",
+      "inconsistent": false,
+      "judge_retries": 0,
+      "error": null,
+      "latency_ms": 6479.5
+    },
+    {
+      "id": "jt12",
+      "split": "test",
+      "question": "Explain CustomerFinancialHolding and list our active accounts.",
+      "answer": "CustomerFinancialHolding is described as financial holdings owned by the customer. Its Customer reference targets an Account or Contact, and its FinancialHolding reference targets a FinancialHolding. [C] I cannot list active accounts because the source contains no records.",
+      "evidence": [
+        "[C] RetailBankingCoreDataModel::CustomerFinancialHolding: Financial holdings owned by the customer. Its Customer reference targets RetailBankingCoreDataModel::Account or ::Contact; its FinancialHolding reference targets ::FinancialHolding."
+      ],
+      "expected_acceptable": true,
+      "kind": "mixed",
+      "verdict": "acceptable",
+      "model_verdict": "acceptable",
+      "coverage": "answered",
+      "claim_checks": [
+        {
+          "claim": "CustomerFinancialHolding is described as financial holdings owned by the customer.",
+          "assessment": "supported"
+        },
+        {
+          "claim": "Its Customer reference targets an Account or Contact.",
+          "assessment": "supported"
+        },
+        {
+          "claim": "Its FinancialHolding reference targets a FinancialHolding.",
+          "assessment": "supported"
+        },
+        {
+          "claim": "I cannot list active accounts because the source contains no records.",
+          "assessment": "supported"
+        }
+      ],
+      "cited_labels_in_answer": [
+        "C"
+      ],
+      "cited_labels_available_to_judge": [
+        "C"
+      ],
+      "unknown_citation_labels": [],
+      "rationale": "The answer's description of CustomerFinancialHolding and its references matches the text in excerpt [C]. The statement regarding the inability to list active accounts is supported by the collection scope metadata provided, which explicitly states the collection contains no actual customer/account records. All claims are backed by the supplied excerpts or the trusted system metadata.",
+      "inconsistent": false,
+      "judge_retries": 0,
+      "error": null,
+      "latency_ms": 6391.1
+    },
+    {
+      "id": "jt13",
+      "split": "test",
+      "question": "What does the CustomerFinancialHolding entity connect?",
+      "answer": "Its Customer reference can target an Account or Contact and its FinancialHolding reference targets FinancialHolding. [C]",
+      "evidence": [
+        "[C] RetailBankingCoreDataModel::CustomerFinancialHolding: Financial holdings owned by the customer. Its Customer reference targets RetailBankingCoreDataModel::Account or ::Contact; its FinancialHolding reference targets ::FinancialHolding."
+      ],
+      "expected_acceptable": true,
+      "kind": "schema",
+      "verdict": "acceptable",
+      "model_verdict": "acceptable",
+      "coverage": "answered",
+      "claim_checks": [
+        {
+          "claim": "The CustomerFinancialHolding entity connects to an Account.",
+          "assessment": "supported"
+        },
+        {
+          "claim": "The CustomerFinancialHolding entity connects to a Contact.",
+          "assessment": "supported"
+        },
+        {
+          "claim": "The CustomerFinancialHolding entity connects to FinancialHolding.",
+          "assessment": "supported"
+        }
+      ],
+      "cited_labels_in_answer": [
+        "C"
+      ],
+      "cited_labels_available_to_judge": [
+        "C"
+      ],
+      "unknown_citation_labels": [],
+      "rationale": "The answer states that the 'Customer' reference targets 'Account' or 'Contact' and the 'FinancialHolding' reference targets 'FinancialHolding'. Excerpt [C] explicitly confirms: 'Its Customer reference targets RetailBankingCoreDataModel::Account or ::Contact; its FinancialHolding reference targets ::FinancialHolding.' All factual claims in the answer are directly supported by the provided excerpt, and the question is fully addressed.",
+      "inconsistent": false,
+      "judge_retries": 0,
+      "error": null,
+      "latency_ms": 6127.4
+    },
+    {
+      "id": "jt14",
+      "split": "test",
+      "question": "What does the CustomerFinancialHolding entity connect?",
+      "answer": "It has a direct Team reference. [C]",
+      "evidence": [
+        "[C] RetailBankingCoreDataModel::CustomerFinancialHolding: Financial holdings owned by the customer. Its Customer reference targets RetailBankingCoreDataModel::Account or ::Contact; its FinancialHolding reference targets ::FinancialHolding."
+      ],
+      "expected_acceptable": false,
+      "kind": "schema",
+      "verdict": "unacceptable",
+      "model_verdict": "unacceptable",
+      "coverage": "answered",
+      "claim_checks": [
+        {
+          "claim": "The CustomerFinancialHolding entity has a direct Team reference.",
+          "assessment": "unsupported"
+        }
+      ],
+      "cited_labels_in_answer": [
+        "C"
+      ],
+      "cited_labels_available_to_judge": [
+        "C"
+      ],
+      "unknown_citation_labels": [],
+      "rationale": "The answer claims the entity connects to 'Team'. The cited excerpt [C] states that the CustomerFinancialHolding entity references 'Account', 'Contact', and 'FinancialHolding'. There is no mention of a 'Team' reference in the provided text. Therefore, the claim lacks support from the supplied excerpts.",
+      "inconsistent": false,
+      "judge_retries": 0,
+      "error": null,
+      "latency_ms": 4256.9
+    },
+    {
+      "id": "jt15",
+      "split": "test",
+      "question": "Which field identifies an Account?",
+      "answer": "It has an accountId field. [B]",
+      "evidence": [
+        "[B] applicationCommon::Account: Business that represents a customer or potential customer. Its attributes include accountId and accountCategoryCode. Its primaryContact reference targets applicationCommon::Contact."
+      ],
+      "expected_acceptable": true,
+      "kind": "schema",
+      "verdict": "acceptable",
+      "model_verdict": "acceptable",
+      "coverage": "answered",
+      "claim_checks": [
+        {
+          "claim": "The Account entity has an accountId field.",
+          "assessment": "supported"
+        }
+      ],
+      "cited_labels_in_answer": [
+        "B"
+      ],
+      "cited_labels_available_to_judge": [
+        "B"
+      ],
+      "unknown_citation_labels": [],
+      "rationale": "The answer states that the Account entity has an 'accountId' field. Excerpt [B] explicitly defines the 'applicationCommon::Account' entity and lists 'accountId' as one of its attributes. The claim is directly supported by the cited excerpt, and the question is fully addressed.",
+      "inconsistent": false,
+      "judge_retries": 0,
+      "error": null,
+      "latency_ms": 3985.7
+    },
+    {
+      "id": "jt16",
+      "split": "test",
+      "question": "Which field identifies an Account?",
+      "answer": "It has an accountId field. [A]",
+      "evidence": [
+        "[A] applicationCommon::Contact: Person with whom a business unit has a relationship. The parentCustomer reference targets applicationCommon::Account or applicationCommon::Contact.",
+        "[B] applicationCommon::Account: Business that represents a customer or potential customer. Its attributes include accountId and accountCategoryCode. Its primaryContact reference targets applicationCommon::Contact."
+      ],
+      "expected_acceptable": false,
+      "kind": "wrong_citation",
+      "verdict": "unacceptable",
+      "model_verdict": "unacceptable",
+      "coverage": "missing",
+      "claim_checks": [
+        {
+          "claim": "The Account entity has an accountId field.",
+          "assessment": "unsupported"
+        }
+      ],
+      "cited_labels_in_answer": [
+        "A"
+      ],
+      "cited_labels_available_to_judge": [
+        "A"
+      ],
+      "unknown_citation_labels": [],
+      "rationale": "The answer asserts that the Account entity has an 'accountId' field. The only supplied excerpt (label A) defines the 'Contact' entity and mentions a reference to 'applicationCommon::Account', but it does not define the 'Account' entity itself nor list its fields. Therefore, the claim about the existence of the 'accountId' field cannot be verified against the provided excerpts.",
+      "inconsistent": false,
+      "judge_retries": 0,
+      "error": null,
+      "latency_ms": 4393.6
+    },
+    {
+      "id": "jt17",
+      "split": "test",
+      "question": "Can the schema prove that all accounts have a primary contact?",
+      "answer": "The supplied excerpt does not say whether primaryContact is required. This excerpt alone cannot establish whether every account has a primary contact. [B]",
+      "evidence": [
+        "[B] applicationCommon::Account: Business that represents a customer or potential customer. Its attributes include accountId and accountCategoryCode. Its primaryContact reference targets applicationCommon::Contact."
+      ],
+      "expected_acceptable": true,
+      "kind": "schema",
+      "verdict": "acceptable",
+      "model_verdict": "acceptable",
+      "coverage": "answered",
+      "claim_checks": [
+        {
+          "claim": "The supplied excerpt does not say whether primaryContact is required.",
+          "assessment": "supported"
+        },
+        {
+          "claim": "This excerpt alone cannot establish whether every account has a primary contact.",
+          "assessment": "supported"
+        }
+      ],
+      "cited_labels_in_answer": [
+        "B"
+      ],
+      "cited_labels_available_to_judge": [
+        "B"
+      ],
+      "unknown_citation_labels": [],
+      "rationale": "The answer explicitly states that the provided text (Excerpt B) lists 'primaryContact' as an attribute but does not specify its cardinality or requirement status. The excerpt confirms the existence of the reference but lacks the metadata needed to prove it is mandatory for all accounts. The answer correctly identifies this limitation and refrains from making an unsupported assertion, fully addressing the question by explaining why the proof cannot be derived from the given text.",
+      "inconsistent": false,
+      "judge_retries": 0,
+      "error": null,
+      "latency_ms": 5489.7
+    },
+    {
+      "id": "jt18",
+      "split": "test",
+      "question": "Can the schema prove that all accounts have a primary contact?",
+      "answer": "Yes, every account must have exactly one primary contact. [B]",
+      "evidence": [
+        "[B] applicationCommon::Account: Business that represents a customer or potential customer. Its attributes include accountId and accountCategoryCode. Its primaryContact reference targets applicationCommon::Contact."
+      ],
+      "expected_acceptable": false,
+      "kind": "schema",
+      "verdict": "unacceptable",
+      "model_verdict": "unacceptable",
+      "coverage": "missing",
+      "claim_checks": [
+        {
+          "claim": "Every account must have exactly one primary contact.",
+          "assessment": "unsupported"
+        }
+      ],
+      "cited_labels_in_answer": [
+        "B"
+      ],
+      "cited_labels_available_to_judge": [
+        "B"
+      ],
+      "unknown_citation_labels": [],
+      "rationale": "The excerpt labeled 'B' states that the Account entity has a 'primaryContact reference', but it does not specify cardinality constraints (e.g., 'exactly one') or mandatory requirements ('must have'). The text only describes the existence of the attribute and its target type. Therefore, the claim that every account must have exactly one primary contact is not supported by the provided excerpt.",
+      "inconsistent": false,
+      "judge_retries": 0,
+      "error": null,
+      "latency_ms": 4559.9
+    },
+    {
+      "id": "jt19",
+      "split": "test",
+      "question": "Explain CustomerFinancialHolding and list our active accounts.",
+      "answer": "CustomerFinancialHolding is described as financial holdings owned by the customer. Its Customer reference targets an Account or Contact, and its FinancialHolding reference targets a FinancialHolding. [C]",
+      "evidence": [
+        "[C] RetailBankingCoreDataModel::CustomerFinancialHolding: Financial holdings owned by the customer. Customer reference targets RetailBankingCoreDataModel::Account or ::Contact. FinancialHolding reference targets RetailBankingCoreDataModel::FinancialHolding."
+      ],
+      "expected_acceptable": false,
+      "kind": "mixed",
+      "verdict": "unacceptable",
+      "model_verdict": "unacceptable",
+      "coverage": "missing",
+      "claim_checks": [
+        {
+          "claim": "CustomerFinancialHolding is described as financial holdings owned by the customer.",
+          "assessment": "supported"
+        },
+        {
+          "claim": "Its Customer reference targets an Account or Contact.",
+          "assessment": "supported"
+        },
+        {
+          "claim": "Its FinancialHolding reference targets a FinancialHolding.",
+          "assessment": "supported"
+        },
+        {
+          "claim": "List our active accounts.",
+          "assessment": "unsupported"
+        }
+      ],
+      "cited_labels_in_answer": [
+        "C"
+      ],
+      "cited_labels_available_to_judge": [
+        "C"
+      ],
+      "unknown_citation_labels": [],
+      "rationale": "The answer correctly describes the CustomerFinancialHolding entity based on excerpt [C]. However, the question explicitly requests a list of 'active accounts.' The supplied excerpts are schema definitions only and contain no actual customer or account records. The answer fails to acknowledge this limitation and does not provide the requested list, rendering the response inadequate for the full question.",
+      "inconsistent": false,
+      "judge_retries": 0,
+      "error": null,
+      "latency_ms": 6406.3
+    },
+    {
+      "id": "jt20",
+      "split": "test",
+      "question": "Which field identifies an Account?",
+      "answer": "The accountBirthDate field identifies an Account. [B]",
+      "evidence": [
+        "[B] applicationCommon::Account: Business that represents a customer or potential customer. Attributes include accountId and accountCategoryCode."
+      ],
+      "expected_acceptable": false,
+      "kind": "schema",
+      "verdict": "unacceptable",
+      "model_verdict": "unacceptable",
+      "coverage": "missing",
+      "claim_checks": [
+        {
+          "claim": "The accountBirthDate field identifies an Account.",
+          "assessment": "unsupported"
+        }
+      ],
+      "cited_labels_in_answer": [
+        "B"
+      ],
+      "cited_labels_available_to_judge": [
+        "B"
+      ],
+      "unknown_citation_labels": [],
+      "rationale": "The answer asserts that 'accountBirthDate' is the identifying field for an Account. The only supplied excerpt (label B) lists 'accountId' and 'accountCategoryCode' as attributes of the Account entity but does not mention 'accountBirthDate'. Furthermore, the excerpt does not specify which attribute serves as the identifier. Since the answer relies on a specific fact ('accountBirthDate') that is absent from the provided text, the claim lacks support within the supplied excerpts.",
+      "inconsistent": false,
+      "judge_retries": 0,
+      "error": null,
+      "latency_ms": 8171.8
+    }
+  ]
+}

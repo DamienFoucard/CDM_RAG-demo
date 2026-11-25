@@ -1,0 +1,988 @@
+{
+  "track": "adaptive_retrieval",
+  "run_id": "a64557a1-3681-4db3-9efe-6e8d27ab1aa7",
+  "started_at": "2026-11-24T17:06:48.536191+00:00",
+  "elapsed_seconds": 93.35,
+  "dataset_id": "cdm-adaptive-retrieval-v1",
+  "source_commit": "dd21d715e05ebf740a11356c80b5c3b4c38a89c2",
+  "dataset_status": "synthetic_source_checked_not_independently_reviewed",
+  "dataset_provenance": "Reuses published source-checked questions and labels from the entity, catalog-object, and answer benchmarks. Split assignments preserve existing development/test labels; the two answer benchmark custom cases are assigned to development and test here. Those custom cases and other source cases are published and are not a blinded holdout. Each entity ID was checked against the pinned catalog and each exact passage ID against render_chunks output. Labels are examples, may be incomplete, and are not independently reviewed. Each comparison uses the same first-pass query, index, scoring cutoff, and question for both variants; labels must not be given to the router. This dataset is too small to establish general superiority.",
+  "split": "test",
+  "question_ids": [
+    "adaptive-test-test-01",
+    "adaptive-test-test-13",
+    "adaptive-test-object-test-attribute-phone-number",
+    "adaptive-test-object-test-trait-definition-default",
+    "adaptive-test-object-test-common-manifest-overview",
+    "adaptive-test-object-test-trait-definitions-display-and-description",
+    "adaptive-test-object-test-inheritance-activity-family",
+    "adaptive-test-complex-customer-links-01"
+  ],
+  "model_names": [
+    "nomic-embed-text:latest"
+  ],
+  "query_model": "gemma3:4b",
+  "generation": false,
+  "notes": "Both variants use the same raw initial query and first top-20 candidates. The adaptive router sees the question, prior context and up to six bounded first-pass passages. It may search once more; reciprocal-rank fusion combines candidates. Failures preserve the first pass. Gold labels are incomplete and provisional. Latencies include router unload costs.",
+  "summaries": [
+    {
+      "model": "nomic-embed-text:latest",
+      "embedding_model": "nomic-embed-text:latest",
+      "query_model": "gemma3:4b",
+      "question_count": 8,
+      "index_identity": "cd491dd029b4b4bc1e13e924ab8f1f66d1447f938fd03f70dcd4cd9a8d96775f",
+      "index_preparation_seconds": 0.624,
+      "index_reused": true,
+      "metrics": {
+        "first_pass": {
+          "cases": 8,
+          "hit_at_1": 0.5,
+          "hit_at_3": 0.75,
+          "hit_at_6": 0.75,
+          "recall_at_6": 0.7083,
+          "mrr_at_6": 0.625,
+          "mean_latency_ms": 567.88,
+          "p95_latency_ms": 932.95
+        },
+        "adaptive": {
+          "cases": 8,
+          "hit_at_1": 0.5,
+          "hit_at_3": 0.625,
+          "hit_at_6": 0.625,
+          "recall_at_6": 0.5833,
+          "mrr_at_6": 0.5625,
+          "mean_latency_ms": 11574.79,
+          "p95_latency_ms": 13384.96
+        }
+      },
+      "comparisons": {
+        "mrr_at_6": {
+          "improved": 0,
+          "unchanged": 7,
+          "worsened": 1
+        },
+        "recall_at_6": {
+          "improved": 0,
+          "unchanged": 7,
+          "worsened": 1
+        },
+        "hit_at_1": {
+          "improved": 0,
+          "unchanged": 8,
+          "worsened": 0
+        }
+      },
+      "followup_requested_count": 4,
+      "error_count": 0,
+      "mean_router_ms": 10606.06,
+      "mean_second_search_ms": 357.42
+    }
+  ],
+  "rows": [
+    {
+      "question_id": "adaptive-test-test-01",
+      "question": "Which banking concept represents a deposit account used for putting money in and taking it out?",
+      "initial_query": "Which banking concept represents a deposit account used for putting money in and taking it out?",
+      "variants": {
+        "first_pass": {
+          "ranked_entity_ids": [
+            "RetailBankingCoreDataModel::FHAccount",
+            "RetailBankingCoreDataModel::FHSaving",
+            "RetailBankingCoreDataModel::FIStandingOrder"
+          ],
+          "matched_entity_ids": [
+            "RetailBankingCoreDataModel::FHAccount"
+          ],
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_6": true,
+          "recall_at_6": 1.0,
+          "mrr_at_6": 1.0,
+          "latency_ms": 327.76,
+          "search_ms": 327.76
+        },
+        "adaptive": {
+          "ranked_entity_ids": [
+            "RetailBankingCoreDataModel::FHAccount",
+            "RetailBankingCoreDataModel::FHSaving",
+            "RetailBankingCoreDataModel::FIStandingOrder"
+          ],
+          "matched_entity_ids": [
+            "RetailBankingCoreDataModel::FHAccount"
+          ],
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_6": true,
+          "recall_at_6": 1.0,
+          "mrr_at_6": 1.0,
+          "latency_ms": 11914.83,
+          "search_ms": 327.76,
+          "router_ms": 11531.58,
+          "unload_ms": 55.49,
+          "second_search_ms": 0.0,
+          "search_again": false,
+          "followup_query": "",
+          "followup_result_count": 0,
+          "error": null
+        }
+      }
+    },
+    {
+      "question_id": "adaptive-test-test-13",
+      "question": "Which definition joins a system user with a team they belong to?",
+      "initial_query": "Which definition joins a system user with a team they belong to?",
+      "variants": {
+        "first_pass": {
+          "ranked_entity_ids": [
+            "applicationCommon::Team",
+            "applicationCommon::TeamMembership",
+            "applicationCommon::QueueItem"
+          ],
+          "matched_entity_ids": [
+            "applicationCommon::TeamMembership"
+          ],
+          "hit_at_1": false,
+          "hit_at_3": true,
+          "hit_at_6": true,
+          "recall_at_6": 1.0,
+          "mrr_at_6": 0.5,
+          "latency_ms": 663.74,
+          "search_ms": 663.74
+        },
+        "adaptive": {
+          "ranked_entity_ids": [
+            "applicationCommon::Team"
+          ],
+          "matched_entity_ids": [],
+          "hit_at_1": false,
+          "hit_at_3": false,
+          "hit_at_6": false,
+          "recall_at_6": 0.0,
+          "mrr_at_6": 0.0,
+          "latency_ms": 11125.72,
+          "search_ms": 1313.87,
+          "router_ms": 9767.53,
+          "unload_ms": 44.32,
+          "second_search_ms": 650.13,
+          "search_again": true,
+          "followup_query": "How does the Team entity relate to the User entity?",
+          "followup_result_count": 20,
+          "error": null
+        }
+      }
+    },
+    {
+      "question_id": "adaptive-test-object-test-attribute-phone-number",
+      "question": "Where is the phone number stored for an applicationCommon phone call?",
+      "initial_query": "Where is the phone number stored for an applicationCommon phone call?",
+      "variants": {
+        "first_pass": {
+          "ranked_passage_ids": [
+            "applicationCommon::PhoneCall:attributes:1",
+            "applicationCommon::PhoneCall:trait-applications:entity",
+            "applicationCommon::PhoneCall:entity",
+            "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:2:feceab19a444",
+            "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:1:feceab19a444",
+            "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:relationship-mappings:1:b0c229c954e2"
+          ],
+          "matched_passage_ids": [
+            "applicationCommon::PhoneCall:attributes:1"
+          ],
+          "ranked_passages": [
+            {
+              "id": "applicationCommon::PhoneCall:attributes:1",
+              "source_id": "applicationCommon::PhoneCall",
+              "source_type": "entity",
+              "kind": "attributes",
+              "source_label": "applicationCommon::PhoneCall",
+              "title": "PhoneCall (applicationCommon; qualified ID applicationCommon::PhoneCall) attributes"
+            },
+            {
+              "id": "applicationCommon::PhoneCall:trait-applications:entity",
+              "source_id": "applicationCommon::PhoneCall",
+              "source_type": "entity",
+              "kind": "trait_application",
+              "source_label": "applicationCommon::PhoneCall",
+              "title": "Traits applied to PhoneCall (applicationCommon; qualified ID applicationCommon::PhoneCall)"
+            },
+            {
+              "id": "applicationCommon::PhoneCall:entity",
+              "source_id": "applicationCommon::PhoneCall",
+              "source_type": "entity",
+              "kind": "entity",
+              "source_label": "applicationCommon::PhoneCall",
+              "title": "PhoneCall (applicationCommon; qualified ID applicationCommon::PhoneCall)"
+            },
+            {
+              "id": "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:2:feceab19a444",
+              "source_id": "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json",
+              "source_type": "manifest",
+              "kind": "manifest_relationship",
+              "source_label": "Relationship mappings in manifest applicationCommon (applicationCommon)",
+              "title": "Relationship mappings in manifest applicationCommon (applicationCommon)"
+            },
+            {
+              "id": "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:1:feceab19a444",
+              "source_id": "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json",
+              "source_type": "manifest",
+              "kind": "manifest_relationship",
+              "source_label": "Relationship mappings in manifest applicationCommon (applicationCommon)",
+              "title": "Relationship mappings in manifest applicationCommon (applicationCommon)"
+            },
+            {
+              "id": "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:relationship-mappings:1:b0c229c954e2",
+              "source_id": "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json",
+              "source_type": "manifest",
+              "kind": "manifest_relationship",
+              "source_label": "Relationship mappings in manifest crmCommon (applicationCommon)",
+              "title": "Relationship mappings in manifest crmCommon (applicationCommon)"
+            }
+          ],
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_6": true,
+          "recall_at_6": 1.0,
+          "mrr_at_6": 1.0,
+          "latency_ms": 356.73,
+          "search_ms": 356.73
+        },
+        "adaptive": {
+          "ranked_passage_ids": [
+            "applicationCommon::PhoneCall:attributes:1",
+            "applicationCommon::PhoneCall:trait-applications:entity",
+            "applicationCommon::PhoneCall:entity",
+            "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:2:feceab19a444",
+            "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:1:feceab19a444",
+            "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:relationship-mappings:1:b0c229c954e2"
+          ],
+          "matched_passage_ids": [
+            "applicationCommon::PhoneCall:attributes:1"
+          ],
+          "ranked_passages": [
+            {
+              "id": "applicationCommon::PhoneCall:attributes:1",
+              "source_id": "applicationCommon::PhoneCall",
+              "source_type": "entity",
+              "kind": "attributes",
+              "source_label": "applicationCommon::PhoneCall",
+              "title": "PhoneCall (applicationCommon; qualified ID applicationCommon::PhoneCall) attributes"
+            },
+            {
+              "id": "applicationCommon::PhoneCall:trait-applications:entity",
+              "source_id": "applicationCommon::PhoneCall",
+              "source_type": "entity",
+              "kind": "trait_application",
+              "source_label": "applicationCommon::PhoneCall",
+              "title": "Traits applied to PhoneCall (applicationCommon; qualified ID applicationCommon::PhoneCall)"
+            },
+            {
+              "id": "applicationCommon::PhoneCall:entity",
+              "source_id": "applicationCommon::PhoneCall",
+              "source_type": "entity",
+              "kind": "entity",
+              "source_label": "applicationCommon::PhoneCall",
+              "title": "PhoneCall (applicationCommon; qualified ID applicationCommon::PhoneCall)"
+            },
+            {
+              "id": "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:2:feceab19a444",
+              "source_id": "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json",
+              "source_type": "manifest",
+              "kind": "manifest_relationship",
+              "source_label": "Relationship mappings in manifest applicationCommon (applicationCommon)",
+              "title": "Relationship mappings in manifest applicationCommon (applicationCommon)"
+            },
+            {
+              "id": "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:1:feceab19a444",
+              "source_id": "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json",
+              "source_type": "manifest",
+              "kind": "manifest_relationship",
+              "source_label": "Relationship mappings in manifest applicationCommon (applicationCommon)",
+              "title": "Relationship mappings in manifest applicationCommon (applicationCommon)"
+            },
+            {
+              "id": "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:relationship-mappings:1:b0c229c954e2",
+              "source_id": "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json",
+              "source_type": "manifest",
+              "kind": "manifest_relationship",
+              "source_label": "Relationship mappings in manifest crmCommon (applicationCommon)",
+              "title": "Relationship mappings in manifest crmCommon (applicationCommon)"
+            }
+          ],
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_6": true,
+          "recall_at_6": 1.0,
+          "mrr_at_6": 1.0,
+          "latency_ms": 11601.56,
+          "search_ms": 356.73,
+          "router_ms": 11202.0,
+          "unload_ms": 42.83,
+          "second_search_ms": 0.0,
+          "search_again": false,
+          "followup_query": "",
+          "followup_result_count": 0,
+          "error": null
+        }
+      }
+    },
+    {
+      "question_id": "adaptive-test-object-test-trait-definition-default",
+      "question": "Which trait describes a required default value for an attribute?",
+      "initial_query": "Which trait describes a required default value for an attribute?",
+      "variants": {
+        "first_pass": {
+          "ranked_passage_ids": [
+            "trait:does.haveDefault:definition",
+            "trait:is.requiredAtLevel:definition",
+            "RetailBankingCoreDataModel::FHLineOfCredit:trait-applications:attributes:5",
+            "RetailBankingCoreDataModel::FHLoan:trait-applications:attributes:6",
+            "RetailBankingCoreDataModel::FHSaving:trait-applications:attributes:3",
+            "RetailBankingCoreDataModel::FHAccount:trait-applications:attributes:5"
+          ],
+          "matched_passage_ids": [
+            "trait:does.haveDefault:definition"
+          ],
+          "ranked_passages": [
+            {
+              "id": "trait:does.haveDefault:definition",
+              "source_id": "trait:does.haveDefault",
+              "source_type": "trait",
+              "kind": "trait_definition",
+              "source_label": "CDM trait does.haveDefault",
+              "title": "CDM trait does.haveDefault"
+            },
+            {
+              "id": "trait:is.requiredAtLevel:definition",
+              "source_id": "trait:is.requiredAtLevel",
+              "source_type": "trait",
+              "kind": "trait_definition",
+              "source_label": "CDM trait is.requiredAtLevel",
+              "title": "CDM trait is.requiredAtLevel"
+            },
+            {
+              "id": "RetailBankingCoreDataModel::FHLineOfCredit:trait-applications:attributes:5",
+              "source_id": "RetailBankingCoreDataModel::FHLineOfCredit",
+              "source_type": "entity",
+              "kind": "trait_application",
+              "source_label": "RetailBankingCoreDataModel::FHLineOfCredit",
+              "title": "Attribute traits of FHLineOfCredit (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FHLineOfCredit)"
+            },
+            {
+              "id": "RetailBankingCoreDataModel::FHLoan:trait-applications:attributes:6",
+              "source_id": "RetailBankingCoreDataModel::FHLoan",
+              "source_type": "entity",
+              "kind": "trait_application",
+              "source_label": "RetailBankingCoreDataModel::FHLoan",
+              "title": "Attribute traits of FHLoan (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FHLoan)"
+            },
+            {
+              "id": "RetailBankingCoreDataModel::FHSaving:trait-applications:attributes:3",
+              "source_id": "RetailBankingCoreDataModel::FHSaving",
+              "source_type": "entity",
+              "kind": "trait_application",
+              "source_label": "RetailBankingCoreDataModel::FHSaving",
+              "title": "Attribute traits of FHSaving (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FHSaving)"
+            },
+            {
+              "id": "RetailBankingCoreDataModel::FHAccount:trait-applications:attributes:5",
+              "source_id": "RetailBankingCoreDataModel::FHAccount",
+              "source_type": "entity",
+              "kind": "trait_application",
+              "source_label": "RetailBankingCoreDataModel::FHAccount",
+              "title": "Attribute traits of FHAccount (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FHAccount)"
+            }
+          ],
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_6": true,
+          "recall_at_6": 1.0,
+          "mrr_at_6": 1.0,
+          "latency_ms": 648.57,
+          "search_ms": 648.57
+        },
+        "adaptive": {
+          "ranked_passage_ids": [
+            "trait:does.haveDefault:definition",
+            "RetailBankingCoreDataModel::FHAccount:trait-applications:attributes:5",
+            "RetailBankingCoreDataModel::FHSaving:trait-applications:attributes:3",
+            "trait:is.requiredAtLevel:definition",
+            "RetailBankingCoreDataModel::FHLineOfCredit:trait-applications:attributes:5",
+            "applicationCommon::Account:trait-applications:attributes:1"
+          ],
+          "matched_passage_ids": [
+            "trait:does.haveDefault:definition"
+          ],
+          "ranked_passages": [
+            {
+              "id": "trait:does.haveDefault:definition",
+              "source_id": "trait:does.haveDefault",
+              "source_type": "trait",
+              "kind": "trait_definition",
+              "source_label": "CDM trait does.haveDefault",
+              "title": "CDM trait does.haveDefault"
+            },
+            {
+              "id": "RetailBankingCoreDataModel::FHAccount:trait-applications:attributes:5",
+              "source_id": "RetailBankingCoreDataModel::FHAccount",
+              "source_type": "entity",
+              "kind": "trait_application",
+              "source_label": "RetailBankingCoreDataModel::FHAccount",
+              "title": "Attribute traits of FHAccount (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FHAccount)"
+            },
+            {
+              "id": "RetailBankingCoreDataModel::FHSaving:trait-applications:attributes:3",
+              "source_id": "RetailBankingCoreDataModel::FHSaving",
+              "source_type": "entity",
+              "kind": "trait_application",
+              "source_label": "RetailBankingCoreDataModel::FHSaving",
+              "title": "Attribute traits of FHSaving (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FHSaving)"
+            },
+            {
+              "id": "trait:is.requiredAtLevel:definition",
+              "source_id": "trait:is.requiredAtLevel",
+              "source_type": "trait",
+              "kind": "trait_definition",
+              "source_label": "CDM trait is.requiredAtLevel",
+              "title": "CDM trait is.requiredAtLevel"
+            },
+            {
+              "id": "RetailBankingCoreDataModel::FHLineOfCredit:trait-applications:attributes:5",
+              "source_id": "RetailBankingCoreDataModel::FHLineOfCredit",
+              "source_type": "entity",
+              "kind": "trait_application",
+              "source_label": "RetailBankingCoreDataModel::FHLineOfCredit",
+              "title": "Attribute traits of FHLineOfCredit (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FHLineOfCredit)"
+            },
+            {
+              "id": "applicationCommon::Account:trait-applications:attributes:1",
+              "source_id": "applicationCommon::Account",
+              "source_type": "entity",
+              "kind": "trait_application",
+              "source_label": "applicationCommon::Account",
+              "title": "Attribute traits of Account (applicationCommon; qualified ID applicationCommon::Account)"
+            }
+          ],
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_6": true,
+          "recall_at_6": 1.0,
+          "mrr_at_6": 1.0,
+          "latency_ms": 12989.52,
+          "search_ms": 1555.38,
+          "router_ms": 11410.67,
+          "unload_ms": 23.47,
+          "second_search_ms": 906.81,
+          "search_again": true,
+          "followup_query": "What attributes have a required default value?",
+          "followup_result_count": 20,
+          "error": null
+        }
+      }
+    },
+    {
+      "question_id": "adaptive-test-object-test-common-manifest-overview",
+      "question": "What does the applicationCommon manifest say about its standard entities and relationship mappings?",
+      "initial_query": "What does the applicationCommon manifest say about its standard entities and relationship mappings?",
+      "variants": {
+        "first_pass": {
+          "ranked_passage_ids": [
+            "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:2:9d5654e37d04",
+            "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:2:71138b14942d",
+            "manifest-declaration:manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:projectCommon:overview",
+            "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:2:38cb9ef4b89c",
+            "manifest-declaration:manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:accelerators:overview",
+            "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:2:ad28850a22ba"
+          ],
+          "matched_passage_ids": [],
+          "ranked_passages": [
+            {
+              "id": "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:2:9d5654e37d04",
+              "source_id": "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json",
+              "source_type": "manifest",
+              "kind": "manifest_relationship",
+              "source_label": "Relationship mappings in manifest applicationCommon (applicationCommon)",
+              "title": "Relationship mappings in manifest applicationCommon (applicationCommon)"
+            },
+            {
+              "id": "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:2:71138b14942d",
+              "source_id": "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json",
+              "source_type": "manifest",
+              "kind": "manifest_relationship",
+              "source_label": "Relationship mappings in manifest applicationCommon (applicationCommon)",
+              "title": "Relationship mappings in manifest applicationCommon (applicationCommon)"
+            },
+            {
+              "id": "manifest-declaration:manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:projectCommon:overview",
+              "source_id": "manifest-declaration:manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:projectCommon",
+              "source_type": "manifest",
+              "kind": "manifest",
+              "source_label": "Manifest projectCommon (applicationCommon)",
+              "title": "Manifest projectCommon (applicationCommon)"
+            },
+            {
+              "id": "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:2:38cb9ef4b89c",
+              "source_id": "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json",
+              "source_type": "manifest",
+              "kind": "manifest_relationship",
+              "source_label": "Relationship mappings in manifest applicationCommon (applicationCommon)",
+              "title": "Relationship mappings in manifest applicationCommon (applicationCommon)"
+            },
+            {
+              "id": "manifest-declaration:manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:accelerators:overview",
+              "source_id": "manifest-declaration:manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:accelerators",
+              "source_type": "manifest",
+              "kind": "manifest",
+              "source_label": "Manifest accelerators (applicationCommon)",
+              "title": "Manifest accelerators (applicationCommon)"
+            },
+            {
+              "id": "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:2:ad28850a22ba",
+              "source_id": "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json",
+              "source_type": "manifest",
+              "kind": "manifest_relationship",
+              "source_label": "Relationship mappings in manifest applicationCommon (applicationCommon)",
+              "title": "Relationship mappings in manifest applicationCommon (applicationCommon)"
+            }
+          ],
+          "hit_at_1": false,
+          "hit_at_3": false,
+          "hit_at_6": false,
+          "recall_at_6": 0.0,
+          "mrr_at_6": 0.0,
+          "latency_ms": 351.99,
+          "search_ms": 351.99
+        },
+        "adaptive": {
+          "ranked_passage_ids": [
+            "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:2:9d5654e37d04",
+            "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:2:71138b14942d",
+            "manifest-declaration:manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:projectCommon:overview",
+            "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:2:38cb9ef4b89c",
+            "manifest-declaration:manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:accelerators:overview",
+            "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:2:ad28850a22ba"
+          ],
+          "matched_passage_ids": [],
+          "ranked_passages": [
+            {
+              "id": "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:2:9d5654e37d04",
+              "source_id": "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json",
+              "source_type": "manifest",
+              "kind": "manifest_relationship",
+              "source_label": "Relationship mappings in manifest applicationCommon (applicationCommon)",
+              "title": "Relationship mappings in manifest applicationCommon (applicationCommon)"
+            },
+            {
+              "id": "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:2:71138b14942d",
+              "source_id": "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json",
+              "source_type": "manifest",
+              "kind": "manifest_relationship",
+              "source_label": "Relationship mappings in manifest applicationCommon (applicationCommon)",
+              "title": "Relationship mappings in manifest applicationCommon (applicationCommon)"
+            },
+            {
+              "id": "manifest-declaration:manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:projectCommon:overview",
+              "source_id": "manifest-declaration:manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:projectCommon",
+              "source_type": "manifest",
+              "kind": "manifest",
+              "source_label": "Manifest projectCommon (applicationCommon)",
+              "title": "Manifest projectCommon (applicationCommon)"
+            },
+            {
+              "id": "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:2:38cb9ef4b89c",
+              "source_id": "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json",
+              "source_type": "manifest",
+              "kind": "manifest_relationship",
+              "source_label": "Relationship mappings in manifest applicationCommon (applicationCommon)",
+              "title": "Relationship mappings in manifest applicationCommon (applicationCommon)"
+            },
+            {
+              "id": "manifest-declaration:manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:accelerators:overview",
+              "source_id": "manifest-declaration:manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:accelerators",
+              "source_type": "manifest",
+              "kind": "manifest",
+              "source_label": "Manifest accelerators (applicationCommon)",
+              "title": "Manifest accelerators (applicationCommon)"
+            },
+            {
+              "id": "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:2:ad28850a22ba",
+              "source_id": "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json",
+              "source_type": "manifest",
+              "kind": "manifest_relationship",
+              "source_label": "Relationship mappings in manifest applicationCommon (applicationCommon)",
+              "title": "Relationship mappings in manifest applicationCommon (applicationCommon)"
+            }
+          ],
+          "hit_at_1": false,
+          "hit_at_3": false,
+          "hit_at_6": false,
+          "recall_at_6": 0.0,
+          "mrr_at_6": 0.0,
+          "latency_ms": 9222.01,
+          "search_ms": 351.99,
+          "router_ms": 8822.2,
+          "unload_ms": 47.82,
+          "second_search_ms": 0.0,
+          "search_again": false,
+          "followup_query": "",
+          "followup_result_count": 0,
+          "error": null
+        }
+      }
+    },
+    {
+      "question_id": "adaptive-test-object-test-trait-definitions-display-and-description",
+      "question": "Which traits define the human-readable description and display label for a CDM object?",
+      "initial_query": "Which traits define the human-readable description and display label for a CDM object?",
+      "variants": {
+        "first_pass": {
+          "ranked_passage_ids": [
+            "applicationCommon::Letter:attributes:1",
+            "trait:is.localized.displayedAs:definition",
+            "applicationCommon::Task:attributes:1",
+            "trait:is.localized.describedAs:definition",
+            "applicationCommon::Appointment:attributes:1",
+            "trait:means:definition"
+          ],
+          "matched_passage_ids": [
+            "trait:is.localized.displayedAs:definition",
+            "trait:is.localized.describedAs:definition"
+          ],
+          "ranked_passages": [
+            {
+              "id": "applicationCommon::Letter:attributes:1",
+              "source_id": "applicationCommon::Letter",
+              "source_type": "entity",
+              "kind": "attributes",
+              "source_label": "applicationCommon::Letter",
+              "title": "Letter (applicationCommon; qualified ID applicationCommon::Letter) attributes"
+            },
+            {
+              "id": "trait:is.localized.displayedAs:definition",
+              "source_id": "trait:is.localized.displayedAs",
+              "source_type": "trait",
+              "kind": "trait_definition",
+              "source_label": "CDM trait is.localized.displayedAs",
+              "title": "CDM trait is.localized.displayedAs"
+            },
+            {
+              "id": "applicationCommon::Task:attributes:1",
+              "source_id": "applicationCommon::Task",
+              "source_type": "entity",
+              "kind": "attributes",
+              "source_label": "applicationCommon::Task",
+              "title": "Task (applicationCommon; qualified ID applicationCommon::Task) attributes"
+            },
+            {
+              "id": "trait:is.localized.describedAs:definition",
+              "source_id": "trait:is.localized.describedAs",
+              "source_type": "trait",
+              "kind": "trait_definition",
+              "source_label": "CDM trait is.localized.describedAs",
+              "title": "CDM trait is.localized.describedAs"
+            },
+            {
+              "id": "applicationCommon::Appointment:attributes:1",
+              "source_id": "applicationCommon::Appointment",
+              "source_type": "entity",
+              "kind": "attributes",
+              "source_label": "applicationCommon::Appointment",
+              "title": "Appointment (applicationCommon; qualified ID applicationCommon::Appointment) attributes"
+            },
+            {
+              "id": "trait:means:definition",
+              "source_id": "trait:means",
+              "source_type": "trait",
+              "kind": "trait_definition",
+              "source_label": "CDM trait means",
+              "title": "CDM trait means"
+            }
+          ],
+          "hit_at_1": false,
+          "hit_at_3": true,
+          "hit_at_6": true,
+          "recall_at_6": 1.0,
+          "mrr_at_6": 0.5,
+          "latency_ms": 930.04,
+          "search_ms": 930.04
+        },
+        "adaptive": {
+          "ranked_passage_ids": [
+            "applicationCommon::Letter:attributes:1",
+            "trait:is.localized.displayedAs:definition",
+            "applicationCommon::Activity:attributes:1",
+            "applicationCommon::Task:attributes:1",
+            "applicationCommon::SLA:attributes:2",
+            "trait:is.localized.describedAs:definition"
+          ],
+          "matched_passage_ids": [
+            "trait:is.localized.displayedAs:definition",
+            "trait:is.localized.describedAs:definition"
+          ],
+          "ranked_passages": [
+            {
+              "id": "applicationCommon::Letter:attributes:1",
+              "source_id": "applicationCommon::Letter",
+              "source_type": "entity",
+              "kind": "attributes",
+              "source_label": "applicationCommon::Letter",
+              "title": "Letter (applicationCommon; qualified ID applicationCommon::Letter) attributes"
+            },
+            {
+              "id": "trait:is.localized.displayedAs:definition",
+              "source_id": "trait:is.localized.displayedAs",
+              "source_type": "trait",
+              "kind": "trait_definition",
+              "source_label": "CDM trait is.localized.displayedAs",
+              "title": "CDM trait is.localized.displayedAs"
+            },
+            {
+              "id": "applicationCommon::Activity:attributes:1",
+              "source_id": "applicationCommon::Activity",
+              "source_type": "entity",
+              "kind": "attributes",
+              "source_label": "applicationCommon::Activity",
+              "title": "Activity (applicationCommon; qualified ID applicationCommon::Activity) attributes"
+            },
+            {
+              "id": "applicationCommon::Task:attributes:1",
+              "source_id": "applicationCommon::Task",
+              "source_type": "entity",
+              "kind": "attributes",
+              "source_label": "applicationCommon::Task",
+              "title": "Task (applicationCommon; qualified ID applicationCommon::Task) attributes"
+            },
+            {
+              "id": "applicationCommon::SLA:attributes:2",
+              "source_id": "applicationCommon::SLA",
+              "source_type": "entity",
+              "kind": "attributes",
+              "source_label": "applicationCommon::SLA",
+              "title": "SLA (applicationCommon; qualified ID applicationCommon::SLA) attributes"
+            },
+            {
+              "id": "trait:is.localized.describedAs:definition",
+              "source_id": "trait:is.localized.describedAs",
+              "source_type": "trait",
+              "kind": "trait_definition",
+              "source_label": "CDM trait is.localized.describedAs",
+              "title": "CDM trait is.localized.describedAs"
+            }
+          ],
+          "hit_at_1": false,
+          "hit_at_3": true,
+          "hit_at_6": true,
+          "recall_at_6": 1.0,
+          "mrr_at_6": 0.5,
+          "latency_ms": 11719.26,
+          "search_ms": 1575.68,
+          "router_ms": 10099.93,
+          "unload_ms": 43.65,
+          "second_search_ms": 645.64,
+          "search_again": true,
+          "followup_query": "What traits define the display name and description for a CDM object?",
+          "followup_result_count": 20,
+          "error": null
+        }
+      }
+    },
+    {
+      "question_id": "adaptive-test-object-test-inheritance-activity-family",
+      "question": "Which common activity entities explicitly inherit from ActivityCommon: Activity, PhoneCall, and Task?",
+      "initial_query": "Which common activity entities explicitly inherit from ActivityCommon: Activity, PhoneCall, and Task?",
+      "variants": {
+        "first_pass": {
+          "ranked_passage_ids": [
+            "applicationCommon::ActivityParty:relationship:1",
+            "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:2:da90f1fae5dc",
+            "applicationCommon::SLAKPIInstance:relationship:2",
+            "applicationCommon::QueueItem:relationship:2",
+            "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:relationship-mappings:1:027810455a54",
+            "applicationCommon::Connection:relationship:4"
+          ],
+          "matched_passage_ids": [],
+          "ranked_passages": [
+            {
+              "id": "applicationCommon::ActivityParty:relationship:1",
+              "source_id": "applicationCommon::ActivityParty",
+              "source_type": "entity",
+              "kind": "relationship",
+              "source_label": "applicationCommon::ActivityParty",
+              "title": "ActivityParty (applicationCommon; qualified ID applicationCommon::ActivityParty).activity relationship"
+            },
+            {
+              "id": "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:2:da90f1fae5dc",
+              "source_id": "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json",
+              "source_type": "manifest",
+              "kind": "manifest_relationship",
+              "source_label": "Relationship mappings in manifest applicationCommon (applicationCommon)",
+              "title": "Relationship mappings in manifest applicationCommon (applicationCommon)"
+            },
+            {
+              "id": "applicationCommon::SLAKPIInstance:relationship:2",
+              "source_id": "applicationCommon::SLAKPIInstance",
+              "source_type": "entity",
+              "kind": "relationship",
+              "source_label": "applicationCommon::SLAKPIInstance",
+              "title": "SLAKPIInstance (applicationCommon; qualified ID applicationCommon::SLAKPIInstance).Activity_regarding relationship"
+            },
+            {
+              "id": "applicationCommon::QueueItem:relationship:2",
+              "source_id": "applicationCommon::QueueItem",
+              "source_type": "entity",
+              "kind": "relationship",
+              "source_label": "applicationCommon::QueueItem",
+              "title": "QueueItem (applicationCommon; qualified ID applicationCommon::QueueItem).object relationship"
+            },
+            {
+              "id": "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:relationship-mappings:1:027810455a54",
+              "source_id": "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json",
+              "source_type": "manifest",
+              "kind": "manifest_relationship",
+              "source_label": "Relationship mappings in manifest crmCommon (applicationCommon)",
+              "title": "Relationship mappings in manifest crmCommon (applicationCommon)"
+            },
+            {
+              "id": "applicationCommon::Connection:relationship:4",
+              "source_id": "applicationCommon::Connection",
+              "source_type": "entity",
+              "kind": "relationship",
+              "source_label": "applicationCommon::Connection",
+              "title": "Connection (applicationCommon; qualified ID applicationCommon::Connection).record2 relationship"
+            }
+          ],
+          "hit_at_1": false,
+          "hit_at_3": false,
+          "hit_at_6": false,
+          "recall_at_6": 0.0,
+          "mrr_at_6": 0.0,
+          "latency_ms": 331.27,
+          "search_ms": 331.27
+        },
+        "adaptive": {
+          "ranked_passage_ids": [
+            "applicationCommon::ActivityParty:relationship:1",
+            "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:2:da90f1fae5dc",
+            "applicationCommon::SLAKPIInstance:relationship:2",
+            "applicationCommon::QueueItem:relationship:2",
+            "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:relationship-mappings:1:027810455a54",
+            "applicationCommon::Connection:relationship:4"
+          ],
+          "matched_passage_ids": [],
+          "ranked_passages": [
+            {
+              "id": "applicationCommon::ActivityParty:relationship:1",
+              "source_id": "applicationCommon::ActivityParty",
+              "source_type": "entity",
+              "kind": "relationship",
+              "source_label": "applicationCommon::ActivityParty",
+              "title": "ActivityParty (applicationCommon; qualified ID applicationCommon::ActivityParty).activity relationship"
+            },
+            {
+              "id": "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:2:da90f1fae5dc",
+              "source_id": "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json",
+              "source_type": "manifest",
+              "kind": "manifest_relationship",
+              "source_label": "Relationship mappings in manifest applicationCommon (applicationCommon)",
+              "title": "Relationship mappings in manifest applicationCommon (applicationCommon)"
+            },
+            {
+              "id": "applicationCommon::SLAKPIInstance:relationship:2",
+              "source_id": "applicationCommon::SLAKPIInstance",
+              "source_type": "entity",
+              "kind": "relationship",
+              "source_label": "applicationCommon::SLAKPIInstance",
+              "title": "SLAKPIInstance (applicationCommon; qualified ID applicationCommon::SLAKPIInstance).Activity_regarding relationship"
+            },
+            {
+              "id": "applicationCommon::QueueItem:relationship:2",
+              "source_id": "applicationCommon::QueueItem",
+              "source_type": "entity",
+              "kind": "relationship",
+              "source_label": "applicationCommon::QueueItem",
+              "title": "QueueItem (applicationCommon; qualified ID applicationCommon::QueueItem).object relationship"
+            },
+            {
+              "id": "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:relationship-mappings:1:027810455a54",
+              "source_id": "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json",
+              "source_type": "manifest",
+              "kind": "manifest_relationship",
+              "source_label": "Relationship mappings in manifest crmCommon (applicationCommon)",
+              "title": "Relationship mappings in manifest crmCommon (applicationCommon)"
+            },
+            {
+              "id": "applicationCommon::Connection:relationship:4",
+              "source_id": "applicationCommon::Connection",
+              "source_type": "entity",
+              "kind": "relationship",
+              "source_label": "applicationCommon::Connection",
+              "title": "Connection (applicationCommon; qualified ID applicationCommon::Connection).record2 relationship"
+            }
+          ],
+          "hit_at_1": false,
+          "hit_at_3": false,
+          "hit_at_6": false,
+          "recall_at_6": 0.0,
+          "mrr_at_6": 0.0,
+          "latency_ms": 10640.45,
+          "search_ms": 331.27,
+          "router_ms": 10265.13,
+          "unload_ms": 44.05,
+          "second_search_ms": 0.0,
+          "search_again": false,
+          "followup_query": "",
+          "followup_result_count": 0,
+          "error": null
+        }
+      }
+    },
+    {
+      "question_id": "adaptive-test-complex-customer-links-01",
+      "question": "How do the common Account, Contact, and CustomerRelationship entities describe a customer relationship? Identify what Account and Contact represent, explain what CustomerRelationship represents, and name the field that connects it to an Account or Contact.",
+      "initial_query": "How do the common Account, Contact, and CustomerRelationship entities describe a customer relationship? Identify what Account and Contact represent, explain what CustomerRelationship represents, and name the field that connects it to an Account or Contact.",
+      "variants": {
+        "first_pass": {
+          "ranked_entity_ids": [
+            "applicationCommon::CustomerRelationship",
+            "applicationCommon::Contact"
+          ],
+          "matched_entity_ids": [
+            "applicationCommon::CustomerRelationship",
+            "applicationCommon::Contact"
+          ],
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_6": true,
+          "recall_at_6": 0.6666666666666666,
+          "mrr_at_6": 1.0,
+          "latency_ms": 932.95,
+          "search_ms": 932.95
+        },
+        "adaptive": {
+          "ranked_entity_ids": [
+            "applicationCommon::CustomerRelationship",
+            "applicationCommon::Account"
+          ],
+          "matched_entity_ids": [
+            "applicationCommon::CustomerRelationship",
+            "applicationCommon::Account"
+          ],
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_6": true,
+          "recall_at_6": 0.6666666666666666,
+          "mrr_at_6": 1.0,
+          "latency_ms": 13384.96,
+          "search_ms": 1589.75,
+          "router_ms": 11749.43,
+          "unload_ms": 45.78,
+          "second_search_ms": 656.8,
+          "search_again": true,
+          "followup_query": "What attributes connect CustomerRelationship to Account or Contact?",
+          "followup_result_count": 20,
+          "error": null
+        }
+      }
+    }
+  ],
+  "log_persisted": true
+}

@@ -1,0 +1,109 @@
+{
+  "dataset_id": "cdm-contextual-retrieval-v1",
+  "status": "synthetic_source_checked_not_independently_reviewed",
+  "source_commit": "dd21d715e05ebf740a11356c80b5c3b4c38a89c2",
+  "provenance": "Assistant-authored multi-turn follow-up cases with source-checked labels from the pinned finance and applicationCommon catalog scope. Labels are provisional, incomplete, and not independently reviewed. Each run gives raw search, planner, and rewrite the same prior messages and current user question.",
+  "scope": ["RetailBankingCoreDataModel", "applicationCommon"],
+  "questions": [
+    {
+      "id": "context-dev-overdraft-entity",
+      "split": "development",
+      "category": "contextual entity lookup",
+      "context_messages": [
+        {"role": "user", "content": "In the finance schema, I need the concept for a checking account that can go below zero."},
+        {"role": "assistant", "content": "We are looking for the financial model entity that describes this credit facility."}
+      ],
+      "question": "What is that concept called?",
+      "positive_entity_ids": ["RetailBankingCoreDataModel::FIOverdraft"]
+    },
+    {
+      "id": "context-dev-account-identifier",
+      "split": "development",
+      "category": "contextual attribute lookup",
+      "context_messages": [
+        {"role": "user", "content": "We need the finance schema record for a bank account."},
+        {"role": "assistant", "content": "The record we are discussing is RetailBankingCoreDataModel Account."}
+      ],
+      "question": "Which field gives it a unique identifier?",
+      "object_type": "Attribute definition",
+      "expected_source_type": "entity",
+      "expected_kind": "attributes",
+      "positive_passage_ids": ["RetailBankingCoreDataModel::Account:attributes:1"]
+    },
+    {
+      "id": "context-dev-localized-description-trait",
+      "split": "development",
+      "category": "contextual trait lookup",
+      "context_messages": [
+        {"role": "user", "content": "I need localized metadata for a model object's human-readable summary."},
+        {"role": "assistant", "content": "The CDM represents that kind of metadata with a trait."}
+      ],
+      "question": "Which trait definition provides it?",
+      "object_type": "Trait definition",
+      "expected_source_type": "trait",
+      "expected_kind": "trait_definition",
+      "positive_passage_ids": ["trait:is.localized.describedAs:definition"]
+    },
+    {
+      "id": "context-dev-loan-entity",
+      "split": "development",
+      "category": "contextual entity lookup",
+      "context_messages": [
+        {"role": "user", "content": "A customer holds a loan with a financial institution."},
+        {"role": "assistant", "content": "Let's identify the matching entity in the Retail Banking model."}
+      ],
+      "question": "What is it called?",
+      "positive_entity_ids": ["RetailBankingCoreDataModel::FHLoan"]
+    },
+    {
+      "id": "context-test-contact-entity",
+      "split": "test",
+      "category": "contextual entity lookup",
+      "context_messages": [
+        {"role": "user", "content": "A business unit has a relationship with an individual, such as a customer, supplier, or colleague."},
+        {"role": "assistant", "content": "We are looking for the person record in applicationCommon."}
+      ],
+      "question": "Which entity models that person?",
+      "positive_entity_ids": ["applicationCommon::Contact"]
+    },
+    {
+      "id": "context-test-phone-call-number",
+      "split": "test",
+      "category": "contextual attribute lookup",
+      "context_messages": [
+        {"role": "user", "content": "We are reviewing how an applicationCommon phone call is represented."},
+        {"role": "assistant", "content": "The schema object in question is the PhoneCall entity."}
+      ],
+      "question": "Which field stores the phone number?",
+      "object_type": "Attribute definition",
+      "expected_source_type": "entity",
+      "expected_kind": "attributes",
+      "positive_passage_ids": ["applicationCommon::PhoneCall:attributes:1"]
+    },
+    {
+      "id": "context-test-account-inheritance",
+      "split": "test",
+      "category": "contextual inheritance lookup",
+      "context_messages": [
+        {"role": "user", "content": "I am comparing the common Account record with shared CDM entity types."},
+        {"role": "assistant", "content": "The child entity in this comparison is applicationCommon Account."}
+      ],
+      "question": "Which base type does it extend?",
+      "object_type": "Entity inheritance",
+      "expected_source_type": "entity",
+      "expected_kind": "inheritance",
+      "positive_passage_ids": ["applicationCommon::Account:inheritance"]
+    },
+    {
+      "id": "context-test-deposit-account",
+      "split": "test",
+      "category": "contextual entity lookup",
+      "context_messages": [
+        {"role": "user", "content": "A customer uses this kind of bank product to deposit and withdraw money."},
+        {"role": "assistant", "content": "We are discussing the deposit-account concept in the finance model."}
+      ],
+      "question": "Which entity defines it?",
+      "positive_entity_ids": ["RetailBankingCoreDataModel::FHAccount"]
+    }
+  ]
+}

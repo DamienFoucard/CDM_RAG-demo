@@ -1,0 +1,40 @@
+name: cdm_rag_interview
+
+services:
+  cdm-rag:
+    build: .
+    image: cdm_rag_interview:local
+    environment:
+      OLLAMA_BASE_URL: ${OLLAMA_BASE_URL:-http://host.docker.internal:11434}
+      CDM_RAG_MANAGE_MODEL_RESIDENCY: ${CDM_RAG_MANAGE_MODEL_RESIDENCY:-true}
+      EMBEDDING_MODEL: ${EMBEDDING_MODEL:-qwen3-embedding:0.6b}
+      ROUTER_MODEL: ${ROUTER_MODEL:-qwen3:4b}
+      CDM_RAG_DECISION_MODEL: ${CDM_RAG_DECISION_MODEL:-qwen3:4b}
+      ANSWER_MODEL: ${ANSWER_MODEL:-qwen3:4b}
+      SCOPE_MODEL: ${SCOPE_MODEL:-qwen3:4b}
+      JUDGE_MODEL: ${JUDGE_MODEL:-qwen3:4b}
+      CDM_RAG_JUDGE_ENABLED: ${CDM_RAG_JUDGE_ENABLED:-false}
+      CDM_RAG_ROUTER_BACKEND: ${CDM_RAG_ROUTER_BACKEND:-ollama}
+      CDM_RAG_ROUTER_MIN_CONFIDENCE: ${CDM_RAG_ROUTER_MIN_CONFIDENCE:-0.70}
+      JEV_API_KEY: ${JEV_API_KEY:-}
+      JEV_MODEL: ${JEV_MODEL:-jev-latest}
+      JEV_BASE_URL: ${JEV_BASE_URL:-https://api.typesafe.ai}
+      CDM_RAG_MIN_SIMILARITY: ${CDM_RAG_MIN_SIMILARITY:-}
+      CDM_RAG_GENERATION_PASSAGE_LIMIT: ${CDM_RAG_GENERATION_PASSAGE_LIMIT:-4}
+      CDM_RAG_BENCHMARK_MODEL_MAX_GB: ${CDM_RAG_BENCHMARK_MODEL_MAX_GB:-5}
+      CDM_RAG_RERANK_ENABLED: ${CDM_RAG_RERANK_ENABLED:-false}
+      CDM_RAG_DATA_DIR: /data
+      OLLAMA_REQUEST_TIMEOUT_SECONDS: ${OLLAMA_REQUEST_TIMEOUT_SECONDS:-300}
+      OLLAMA_FIRST_TOKEN_TIMEOUT_SECONDS: ${OLLAMA_FIRST_TOKEN_TIMEOUT_SECONDS:-300}
+      OLLAMA_STREAM_IDLE_TIMEOUT_SECONDS: ${OLLAMA_STREAM_IDLE_TIMEOUT_SECONDS:-30}
+      OLLAMA_QUERY_EMBEDDING_KEEP_ALIVE: ${OLLAMA_QUERY_EMBEDDING_KEEP_ALIVE:-0}
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    ports:
+      - "127.0.0.1:8124:8000"
+    volumes:
+      - cdm-rag-index:/data
+    restart: unless-stopped
+
+volumes:
+  cdm-rag-index:

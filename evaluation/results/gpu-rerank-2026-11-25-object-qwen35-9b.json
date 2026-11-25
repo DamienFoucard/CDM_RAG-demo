@@ -1,0 +1,1262 @@
+{
+  "dataset": "cdm-catalog-object-retrieval-v1",
+  "dataset_sha256": "97eeb16d7dfdb1d1625649bcfd8436330ce76f3adb4a4d7af1f98de0224d9d38",
+  "snapshot_sha256": "961de9a335efe52b55a7a96c755620c7e7736dca8f5fede8fab0c00522098388",
+  "source_commit": "dd21d715e05ebf740a11356c80b5c3b4c38a89c2",
+  "index_revision": "ca10c6cc8be785e41583af6f7d576fc2f778a326da756b4cbb32fdb03dda09f3",
+  "embedding_model": "qwen3-embedding:0.6b",
+  "embedding_digest": "ac6da0dfba84a81fdbfbaf330198c33cd77c4cdfc53e8bc50eb581914a15621d",
+  "target_kind": "passage",
+  "model": "qwen3.5:9b",
+  "cases": [
+    {
+      "id": "object-test-attribute-phone-number",
+      "question": "Where is the phone number stored for an applicationCommon phone call?",
+      "targets": [
+        "applicationCommon::PhoneCall:attributes:1"
+      ],
+      "candidate_ids": [
+        "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:1:a82473fd35a7",
+        "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:2:feceab19a444",
+        "applicationCommon::PhoneCall:attributes:1",
+        "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:1:feceab19a444",
+        "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:1:22aec8bf5c60",
+        "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:3:feceab19a444",
+        "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:relationship-mappings:1:feceab19a444",
+        "applicationCommon::PhoneCall:trait-applications:entity",
+        "applicationCommon::PhoneCall:entity",
+        "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:1:b0c229c954e2",
+        "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:relationship-mappings:1:b0c229c954e2",
+        "applicationCommon::Account:attributes:6",
+        "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:relationship-mappings:3:feceab19a444",
+        "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:1:16974dab85f1",
+        "applicationCommon::PhoneCall:relationship:1",
+        "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:1:c22fc1dba68d",
+        "applicationCommon::Contact:attributes:7",
+        "applicationCommon::PhoneCall:relationship:4",
+        "applicationCommon::PhoneCall:relationship:2",
+        "applicationCommon::PhoneCall:relationship:3"
+      ],
+      "candidate_pool": {
+        "entities": [
+          "applicationCommon::PhoneCall",
+          "applicationCommon::Account",
+          "applicationCommon::Contact"
+        ],
+        "passage_ids": [
+          "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:1:a82473fd35a7",
+          "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:2:feceab19a444",
+          "applicationCommon::PhoneCall:attributes:1",
+          "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:1:feceab19a444",
+          "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:1:22aec8bf5c60",
+          "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:3:feceab19a444",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:relationship-mappings:1:feceab19a444",
+          "applicationCommon::PhoneCall:trait-applications:entity",
+          "applicationCommon::PhoneCall:entity",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:1:b0c229c954e2",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:relationship-mappings:1:b0c229c954e2",
+          "applicationCommon::Account:attributes:6",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:relationship-mappings:3:feceab19a444",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:1:16974dab85f1",
+          "applicationCommon::PhoneCall:relationship:1",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:1:c22fc1dba68d",
+          "applicationCommon::Contact:attributes:7",
+          "applicationCommon::PhoneCall:relationship:4",
+          "applicationCommon::PhoneCall:relationship:2",
+          "applicationCommon::PhoneCall:relationship:3"
+        ],
+        "hit": true,
+        "reciprocal_rank": 0.3333333333333333,
+        "recall": 1.0
+      },
+      "raw": {
+        "entities": [
+          "applicationCommon::PhoneCall"
+        ],
+        "passage_ids": [
+          "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:1:a82473fd35a7",
+          "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:2:feceab19a444",
+          "applicationCommon::PhoneCall:attributes:1",
+          "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:1:feceab19a444",
+          "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:1:22aec8bf5c60",
+          "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:3:feceab19a444"
+        ],
+        "hit": true,
+        "reciprocal_rank": 0.3333333333333333,
+        "recall": 1.0
+      },
+      "reranked": {
+        "entities": [
+          "applicationCommon::PhoneCall"
+        ],
+        "passage_ids": [
+          "applicationCommon::PhoneCall:attributes:1",
+          "applicationCommon::PhoneCall:entity"
+        ],
+        "hit": true,
+        "reciprocal_rank": 1.0,
+        "recall": 1.0
+      },
+      "rerank_ms": 8239.4,
+      "error": null
+    },
+    {
+      "id": "object-test-relationship-primary-contact",
+      "question": "How does a common Account record refer to its main contact person?",
+      "targets": [
+        "applicationCommon::Account:relationship:1"
+      ],
+      "candidate_ids": [
+        "applicationCommon::Contact:entity",
+        "applicationCommon::Account:relationship:1",
+        "manifest:schemaDocuments/core/applicationCommon/foundationCommon/financialCommon/financialCommon.manifest.cdm.json:relationship-mappings:1:0f14b02f3c7c",
+        "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:relationship-mappings:1:10f0ed32eb19",
+        "manifest:schemaDocuments/core/applicationCommon/foundationCommon/financialCommon/financialCommon.manifest.cdm.json:relationship-mappings:1:8681a691ff11",
+        "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:1:e4c4e104cc14",
+        "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:2:75cf2ab13bcf",
+        "applicationCommon::SocialActivity:attributes:4",
+        "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:1:81ece2515bad",
+        "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:relationship-mappings:1:240bbc83faab",
+        "manifest:schemaDocuments/core/applicationCommon/foundationCommon/financialCommon/financialCommon.manifest.cdm.json:declarations:1",
+        "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:2:b8d05484da99",
+        "applicationCommon::Contact:attributes:16",
+        "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:relationship-mappings:1:69fe4ed9aac0",
+        "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:1:741c2e9d565c",
+        "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:relationship-mappings:1:81ece2515bad",
+        "applicationCommon::Contact:relationship:3",
+        "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:1:4350934d41c3",
+        "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:1:86d294246f8a",
+        "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:1:240bbc83faab"
+      ],
+      "candidate_pool": {
+        "entities": [
+          "applicationCommon::Contact",
+          "applicationCommon::Account",
+          "RetailBankingCoreDataModel::Account",
+          "applicationCommon::SocialActivity",
+          "RetailBankingCoreDataModel::Contact",
+          "applicationCommon::Fax",
+          "applicationCommon::Activity"
+        ],
+        "passage_ids": [
+          "applicationCommon::Contact:entity",
+          "applicationCommon::Account:relationship:1",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/financialCommon/financialCommon.manifest.cdm.json:relationship-mappings:1:0f14b02f3c7c",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:relationship-mappings:1:10f0ed32eb19",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/financialCommon/financialCommon.manifest.cdm.json:relationship-mappings:1:8681a691ff11",
+          "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:1:e4c4e104cc14",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:2:75cf2ab13bcf",
+          "applicationCommon::SocialActivity:attributes:4",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:1:81ece2515bad",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:relationship-mappings:1:240bbc83faab",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/financialCommon/financialCommon.manifest.cdm.json:declarations:1",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:2:b8d05484da99",
+          "applicationCommon::Contact:attributes:16",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:relationship-mappings:1:69fe4ed9aac0",
+          "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:1:741c2e9d565c",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:relationship-mappings:1:81ece2515bad",
+          "applicationCommon::Contact:relationship:3",
+          "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:1:4350934d41c3",
+          "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:1:86d294246f8a",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:1:240bbc83faab"
+        ],
+        "hit": true,
+        "reciprocal_rank": 0.5,
+        "recall": 1.0
+      },
+      "raw": {
+        "entities": [
+          "applicationCommon::Contact",
+          "applicationCommon::Account"
+        ],
+        "passage_ids": [
+          "applicationCommon::Contact:entity",
+          "applicationCommon::Account:relationship:1",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/financialCommon/financialCommon.manifest.cdm.json:relationship-mappings:1:0f14b02f3c7c",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:relationship-mappings:1:10f0ed32eb19",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/financialCommon/financialCommon.manifest.cdm.json:relationship-mappings:1:8681a691ff11",
+          "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:1:e4c4e104cc14"
+        ],
+        "hit": true,
+        "reciprocal_rank": 0.5,
+        "recall": 1.0
+      },
+      "reranked": {
+        "entities": [
+          "applicationCommon::Account",
+          "RetailBankingCoreDataModel::Account"
+        ],
+        "passage_ids": [
+          "applicationCommon::Account:relationship:1",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:relationship-mappings:1:10f0ed32eb19",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:2:75cf2ab13bcf",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:relationship-mappings:1:240bbc83faab",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:1:240bbc83faab"
+        ],
+        "hit": true,
+        "reciprocal_rank": 1.0,
+        "recall": 1.0
+      },
+      "rerank_ms": 2733.8,
+      "error": null
+    },
+    {
+      "id": "object-test-trait-application-account-classification",
+      "question": "What metadata is applied to an Account's classification code, including its display name?",
+      "targets": [
+        "applicationCommon::Account:trait-applications:attributes:2"
+      ],
+      "candidate_ids": [
+        "applicationCommon::Account:attributes:2",
+        "applicationCommon::Account:trait-applications:attributes:2",
+        "applicationCommon::Account:attributes:3",
+        "applicationCommon::Account:trait-applications:attributes:1",
+        "applicationCommon::Account:attributes:4",
+        "applicationCommon::Account:trait-applications:attributes:3",
+        "applicationCommon::Account:attributes:8",
+        "RetailBankingCoreDataModel::FHAccount:attributes:2",
+        "applicationCommon::Account:trait-applications:attributes:7",
+        "RetailBankingCoreDataModel::FHSaving:attributes:2",
+        "applicationCommon::Account:attributes:1",
+        "applicationCommon::Account:entity",
+        "applicationCommon::Appointment:attributes:1",
+        "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:1:c02ae57b2d11",
+        "RetailBankingCoreDataModel::FinancialHolding:trait-applications:attributes:2",
+        "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:1:75cf2ab13bcf",
+        "applicationCommon::PhoneCall:attributes:1",
+        "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:2:75cf2ab13bcf",
+        "applicationCommon::QueueItem:attributes:5",
+        "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:2:46e65878c4d6"
+      ],
+      "candidate_pool": {
+        "entities": [
+          "applicationCommon::Account",
+          "RetailBankingCoreDataModel::FHAccount",
+          "RetailBankingCoreDataModel::FHSaving",
+          "applicationCommon::Appointment",
+          "RetailBankingCoreDataModel::FinancialHolding",
+          "RetailBankingCoreDataModel::Account",
+          "applicationCommon::PhoneCall",
+          "applicationCommon::QueueItem"
+        ],
+        "passage_ids": [
+          "applicationCommon::Account:attributes:2",
+          "applicationCommon::Account:trait-applications:attributes:2",
+          "applicationCommon::Account:attributes:3",
+          "applicationCommon::Account:trait-applications:attributes:1",
+          "applicationCommon::Account:attributes:4",
+          "applicationCommon::Account:trait-applications:attributes:3",
+          "applicationCommon::Account:attributes:8",
+          "RetailBankingCoreDataModel::FHAccount:attributes:2",
+          "applicationCommon::Account:trait-applications:attributes:7",
+          "RetailBankingCoreDataModel::FHSaving:attributes:2",
+          "applicationCommon::Account:attributes:1",
+          "applicationCommon::Account:entity",
+          "applicationCommon::Appointment:attributes:1",
+          "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:1:c02ae57b2d11",
+          "RetailBankingCoreDataModel::FinancialHolding:trait-applications:attributes:2",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:1:75cf2ab13bcf",
+          "applicationCommon::PhoneCall:attributes:1",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:2:75cf2ab13bcf",
+          "applicationCommon::QueueItem:attributes:5",
+          "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:2:46e65878c4d6"
+        ],
+        "hit": true,
+        "reciprocal_rank": 0.5,
+        "recall": 1.0
+      },
+      "raw": {
+        "entities": [
+          "applicationCommon::Account"
+        ],
+        "passage_ids": [
+          "applicationCommon::Account:attributes:2",
+          "applicationCommon::Account:trait-applications:attributes:2",
+          "applicationCommon::Account:attributes:3",
+          "applicationCommon::Account:trait-applications:attributes:1",
+          "applicationCommon::Account:attributes:4",
+          "applicationCommon::Account:trait-applications:attributes:3"
+        ],
+        "hit": true,
+        "reciprocal_rank": 0.5,
+        "recall": 1.0
+      },
+      "reranked": {
+        "entities": [
+          "applicationCommon::Account"
+        ],
+        "passage_ids": [
+          "applicationCommon::Account:trait-applications:attributes:2",
+          "applicationCommon::Account:trait-applications:attributes:1"
+        ],
+        "hit": true,
+        "reciprocal_rank": 1.0,
+        "recall": 1.0
+      },
+      "rerank_ms": 12386.4,
+      "error": null
+    },
+    {
+      "id": "object-test-trait-definition-default",
+      "question": "Which trait describes a required default value for an attribute?",
+      "targets": [
+        "trait:does.haveDefault:definition"
+      ],
+      "candidate_ids": [
+        "trait:does.haveDefault:definition",
+        "trait:is.requiredAtLevel:definition",
+        "trait:is.correlatedWith:definition",
+        "applicationCommon::Organization:trait-applications:attributes:18",
+        "applicationCommon::Organization:trait-applications:attributes:19",
+        "applicationCommon::Account:trait-applications:attributes:1",
+        "applicationCommon::SLA:trait-applications:attributes:1",
+        "applicationCommon::Contact:trait-applications:attributes:1",
+        "trait:is.constrained:definition",
+        "applicationCommon::Account:trait-applications:attributes:2",
+        "trait:means.reference.description:definition",
+        "trait:means.reference:definition",
+        "trait:means.measurement:definition",
+        "applicationCommon::Contact:trait-applications:attributes:4",
+        "trait:means.measurement.version:definition",
+        "trait:means.reference.phonetic:definition",
+        "applicationCommon::Email:trait-applications:attributes:5",
+        "trait:means.measurement.duration:definition",
+        "RetailBankingCoreDataModel::FHLoan:trait-applications:attributes:6",
+        "trait:is.calculationOf:definition"
+      ],
+      "candidate_pool": {
+        "entities": [
+          "applicationCommon::Organization",
+          "applicationCommon::Account",
+          "applicationCommon::SLA",
+          "applicationCommon::Contact",
+          "applicationCommon::Email",
+          "RetailBankingCoreDataModel::FHLoan"
+        ],
+        "passage_ids": [
+          "trait:does.haveDefault:definition",
+          "trait:is.requiredAtLevel:definition",
+          "trait:is.correlatedWith:definition",
+          "applicationCommon::Organization:trait-applications:attributes:18",
+          "applicationCommon::Organization:trait-applications:attributes:19",
+          "applicationCommon::Account:trait-applications:attributes:1",
+          "applicationCommon::SLA:trait-applications:attributes:1",
+          "applicationCommon::Contact:trait-applications:attributes:1",
+          "trait:is.constrained:definition",
+          "applicationCommon::Account:trait-applications:attributes:2",
+          "trait:means.reference.description:definition",
+          "trait:means.reference:definition",
+          "trait:means.measurement:definition",
+          "applicationCommon::Contact:trait-applications:attributes:4",
+          "trait:means.measurement.version:definition",
+          "trait:means.reference.phonetic:definition",
+          "applicationCommon::Email:trait-applications:attributes:5",
+          "trait:means.measurement.duration:definition",
+          "RetailBankingCoreDataModel::FHLoan:trait-applications:attributes:6",
+          "trait:is.calculationOf:definition"
+        ],
+        "hit": true,
+        "reciprocal_rank": 1.0,
+        "recall": 1.0
+      },
+      "raw": {
+        "entities": [
+          "applicationCommon::Organization",
+          "applicationCommon::Account"
+        ],
+        "passage_ids": [
+          "trait:does.haveDefault:definition",
+          "trait:is.requiredAtLevel:definition",
+          "trait:is.correlatedWith:definition",
+          "applicationCommon::Organization:trait-applications:attributes:18",
+          "applicationCommon::Organization:trait-applications:attributes:19",
+          "applicationCommon::Account:trait-applications:attributes:1"
+        ],
+        "hit": true,
+        "reciprocal_rank": 1.0,
+        "recall": 1.0
+      },
+      "reranked": {
+        "entities": [
+          "applicationCommon::Organization",
+          "applicationCommon::Account",
+          "applicationCommon::SLA",
+          "applicationCommon::Contact"
+        ],
+        "passage_ids": [
+          "trait:does.haveDefault:definition",
+          "applicationCommon::Organization:trait-applications:attributes:18",
+          "applicationCommon::Organization:trait-applications:attributes:19",
+          "applicationCommon::Account:trait-applications:attributes:1",
+          "applicationCommon::SLA:trait-applications:attributes:1",
+          "applicationCommon::Contact:trait-applications:attributes:1"
+        ],
+        "hit": true,
+        "reciprocal_rank": 1.0,
+        "recall": 1.0
+      },
+      "rerank_ms": 15026.4,
+      "error": null
+    },
+    {
+      "id": "object-test-inheritance-account",
+      "question": "Which shared CDM type is the parent of the applicationCommon Account entity?",
+      "targets": [
+        "applicationCommon::Account:inheritance"
+      ],
+      "candidate_ids": [
+        "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:1:ef308040712b",
+        "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:1:240bbc83faab",
+        "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:relationship-mappings:1:240bbc83faab",
+        "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:relationship-mappings:1:10f0ed32eb19",
+        "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:1:81ece2515bad",
+        "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:relationship-mappings:1:ef308040712b",
+        "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:relationship-mappings:1:81ece2515bad",
+        "applicationCommon::Account:inheritance",
+        "applicationCommon::Address:attributes:1",
+        "applicationCommon::Email:attributes:4",
+        "applicationCommon::Account:attributes:5",
+        "applicationCommon::Account:relationship:4",
+        "applicationCommon::Account:relationship:2",
+        "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:declarations:1",
+        "applicationCommon::Contact:attributes:2",
+        "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:structure:1",
+        "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:2:75cf2ab13bcf",
+        "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:2:197ee88ec706",
+        "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:relationship-mappings:1:69fe4ed9aac0",
+        "applicationCommon::Note:attributes:1"
+      ],
+      "candidate_pool": {
+        "entities": [
+          "applicationCommon::Account",
+          "applicationCommon::Address",
+          "applicationCommon::Email",
+          "applicationCommon::Contact",
+          "RetailBankingCoreDataModel::Account",
+          "applicationCommon::Note"
+        ],
+        "passage_ids": [
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:1:ef308040712b",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:1:240bbc83faab",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:relationship-mappings:1:240bbc83faab",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:relationship-mappings:1:10f0ed32eb19",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:1:81ece2515bad",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:relationship-mappings:1:ef308040712b",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:relationship-mappings:1:81ece2515bad",
+          "applicationCommon::Account:inheritance",
+          "applicationCommon::Address:attributes:1",
+          "applicationCommon::Email:attributes:4",
+          "applicationCommon::Account:attributes:5",
+          "applicationCommon::Account:relationship:4",
+          "applicationCommon::Account:relationship:2",
+          "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:declarations:1",
+          "applicationCommon::Contact:attributes:2",
+          "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:structure:1",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:2:75cf2ab13bcf",
+          "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:2:197ee88ec706",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:relationship-mappings:1:69fe4ed9aac0",
+          "applicationCommon::Note:attributes:1"
+        ],
+        "hit": true,
+        "reciprocal_rank": 0.125,
+        "recall": 1.0
+      },
+      "raw": {
+        "entities": [],
+        "passage_ids": [
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:1:ef308040712b",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:1:240bbc83faab",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:relationship-mappings:1:240bbc83faab",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:relationship-mappings:1:10f0ed32eb19",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:1:81ece2515bad",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:relationship-mappings:1:ef308040712b"
+        ],
+        "hit": false,
+        "reciprocal_rank": 0.0,
+        "recall": 0.0
+      },
+      "reranked": {
+        "entities": [
+          "applicationCommon::Account"
+        ],
+        "passage_ids": [
+          "applicationCommon::Account:relationship:4",
+          "applicationCommon::Account:relationship:2"
+        ],
+        "hit": false,
+        "reciprocal_rank": 0.0,
+        "recall": 0.0
+      },
+      "rerank_ms": 9064.4,
+      "error": null
+    },
+    {
+      "id": "object-test-inheritance-base-standard",
+      "question": "What base entity type is used by common records such as Account and Contact?",
+      "targets": [
+        "inheritance-base:CdsStandard"
+      ],
+      "candidate_ids": [
+        "applicationCommon::Contact:entity",
+        "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:1:81ece2515bad",
+        "applicationCommon::Account:attributes:4",
+        "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:2:75cf2ab13bcf",
+        "applicationCommon::Contact:attributes:3",
+        "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:1:240bbc83faab",
+        "applicationCommon::Account:trait-applications:attributes:3",
+        "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:1:ef308040712b",
+        "applicationCommon::Contact:attributes:2",
+        "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:1:2f6731b4b00f",
+        "applicationCommon::Goal:attributes:4",
+        "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:2:b8d05484da99",
+        "applicationCommon::Address:trait-applications:entity",
+        "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:1:75cf2ab13bcf",
+        "applicationCommon::Account:attributes:10",
+        "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:1:a1c5f1a6942c",
+        "applicationCommon::Contact:trait-applications:entity",
+        "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:1:b8d05484da99",
+        "applicationCommon::Contact:trait-applications:attributes:3",
+        "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:relationship-mappings:1:10f0ed32eb19"
+      ],
+      "candidate_pool": {
+        "entities": [
+          "applicationCommon::Contact",
+          "applicationCommon::Account",
+          "RetailBankingCoreDataModel::Account",
+          "applicationCommon::Goal",
+          "RetailBankingCoreDataModel::Contact",
+          "applicationCommon::Address"
+        ],
+        "passage_ids": [
+          "applicationCommon::Contact:entity",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:1:81ece2515bad",
+          "applicationCommon::Account:attributes:4",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:2:75cf2ab13bcf",
+          "applicationCommon::Contact:attributes:3",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:1:240bbc83faab",
+          "applicationCommon::Account:trait-applications:attributes:3",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:1:ef308040712b",
+          "applicationCommon::Contact:attributes:2",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:1:2f6731b4b00f",
+          "applicationCommon::Goal:attributes:4",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:2:b8d05484da99",
+          "applicationCommon::Address:trait-applications:entity",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:1:75cf2ab13bcf",
+          "applicationCommon::Account:attributes:10",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:1:a1c5f1a6942c",
+          "applicationCommon::Contact:trait-applications:entity",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:1:b8d05484da99",
+          "applicationCommon::Contact:trait-applications:attributes:3",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:relationship-mappings:1:10f0ed32eb19"
+        ],
+        "hit": false,
+        "reciprocal_rank": 0.0,
+        "recall": 0.0
+      },
+      "raw": {
+        "entities": [
+          "applicationCommon::Contact",
+          "applicationCommon::Account",
+          "RetailBankingCoreDataModel::Account"
+        ],
+        "passage_ids": [
+          "applicationCommon::Contact:entity",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:1:81ece2515bad",
+          "applicationCommon::Account:attributes:4",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:2:75cf2ab13bcf",
+          "applicationCommon::Contact:attributes:3",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:1:240bbc83faab"
+        ],
+        "hit": false,
+        "reciprocal_rank": 0.0,
+        "recall": 0.0
+      },
+      "reranked": {
+        "entities": [
+          "applicationCommon::Contact",
+          "RetailBankingCoreDataModel::Account"
+        ],
+        "passage_ids": [
+          "applicationCommon::Contact:entity",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:1:81ece2515bad",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:2:75cf2ab13bcf",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:1:240bbc83faab",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:1:ef308040712b",
+          "applicationCommon::Contact:attributes:2"
+        ],
+        "hit": false,
+        "reciprocal_rank": 0.0,
+        "recall": 0.0
+      },
+      "rerank_ms": 11114.3,
+      "error": null
+    },
+    {
+      "id": "object-test-common-manifest-overview",
+      "question": "What does the applicationCommon manifest say about its standard entities and relationship mappings?",
+      "targets": [
+        "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:overview"
+      ],
+      "candidate_ids": [
+        "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:overview",
+        "manifest:schemaDocuments/core/applicationCommon/foundationCommon/financialCommon/financialCommon.manifest.cdm.json:overview",
+        "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:overview",
+        "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:2:0bcefe679b8f",
+        "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:2:9d5654e37d04",
+        "manifest-declaration:manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:projectCommon:overview",
+        "manifest-declaration:manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:accelerators:overview",
+        "manifest-declaration:manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:sales:overview",
+        "manifest-declaration:manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:service:overview",
+        "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:1:d4b8f7a81036",
+        "manifest-declaration:manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:solutions:overview",
+        "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:declarations:2",
+        "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:2:b39b06d4966b",
+        "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:1:240bbc83faab",
+        "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:1:b6b97eaad9b1",
+        "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:overview",
+        "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:1:be2124312592",
+        "cdm-catalog:overview",
+        "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:1:71b24cb282f1",
+        "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:1:19951958d520"
+      ],
+      "candidate_pool": {
+        "entities": [],
+        "passage_ids": [
+          "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:overview",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/financialCommon/financialCommon.manifest.cdm.json:overview",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:overview",
+          "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:2:0bcefe679b8f",
+          "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:2:9d5654e37d04",
+          "manifest-declaration:manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:projectCommon:overview",
+          "manifest-declaration:manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:accelerators:overview",
+          "manifest-declaration:manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:sales:overview",
+          "manifest-declaration:manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:service:overview",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:1:d4b8f7a81036",
+          "manifest-declaration:manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:solutions:overview",
+          "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:declarations:2",
+          "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:2:b39b06d4966b",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:1:240bbc83faab",
+          "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:1:b6b97eaad9b1",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:overview",
+          "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:1:be2124312592",
+          "cdm-catalog:overview",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:1:71b24cb282f1",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:1:19951958d520"
+        ],
+        "hit": true,
+        "reciprocal_rank": 1.0,
+        "recall": 1.0
+      },
+      "raw": {
+        "entities": [],
+        "passage_ids": [
+          "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:overview",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/financialCommon/financialCommon.manifest.cdm.json:overview",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:overview",
+          "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:2:0bcefe679b8f",
+          "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:2:9d5654e37d04",
+          "manifest-declaration:manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:projectCommon:overview"
+        ],
+        "hit": true,
+        "reciprocal_rank": 1.0,
+        "recall": 1.0
+      },
+      "reranked": {
+        "entities": [],
+        "passage_ids": [
+          "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:overview",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/financialCommon/financialCommon.manifest.cdm.json:overview",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:overview",
+          "manifest-declaration:manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:projectCommon:overview",
+          "manifest-declaration:manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:accelerators:overview",
+          "manifest-declaration:manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:sales:overview"
+        ],
+        "hit": true,
+        "reciprocal_rank": 1.0,
+        "recall": 1.0
+      },
+      "rerank_ms": 9804.6,
+      "error": null
+    },
+    {
+      "id": "object-test-foundation-manifest-declarations",
+      "question": "Which common entities, including Product and ProductRelationship, are declared in foundationCommon?",
+      "targets": [
+        "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:declarations:3"
+      ],
+      "candidate_ids": [
+        "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:declarations:3",
+        "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:1:ea61e90c8d4b",
+        "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:1:90ae9ba6e926",
+        "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:1:76799d672a25",
+        "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:1:6cae54b7f67c",
+        "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:1:a8eb7b112875",
+        "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:1:065fe55076d6",
+        "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:1:1611f4ce3ec2",
+        "manifest:schemaDocuments/core/applicationCommon/foundationCommon/productInsights/productInsights.manifest.cdm.json:overview",
+        "manifest-declaration:manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:projectCommon:overview",
+        "manifest-declaration:manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:accelerators:overview",
+        "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:1:23f8a0518795",
+        "manifest-declaration:manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:sales:overview",
+        "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:1:64e93e737737",
+        "manifest-declaration:manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:service:overview",
+        "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:1:5ec8a2610679",
+        "manifest-declaration:manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:solutions:overview",
+        "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:1:ecdbe806fde8",
+        "manifest:schemaDocuments/core/applicationCommon/foundationCommon/productInsights/productInsights.manifest.cdm.json:declarations:1",
+        "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:overview"
+      ],
+      "candidate_pool": {
+        "entities": [],
+        "passage_ids": [
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:declarations:3",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:1:ea61e90c8d4b",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:1:90ae9ba6e926",
+          "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:1:76799d672a25",
+          "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:1:6cae54b7f67c",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:1:a8eb7b112875",
+          "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:1:065fe55076d6",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:1:1611f4ce3ec2",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/productInsights/productInsights.manifest.cdm.json:overview",
+          "manifest-declaration:manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:projectCommon:overview",
+          "manifest-declaration:manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:accelerators:overview",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:1:23f8a0518795",
+          "manifest-declaration:manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:sales:overview",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:1:64e93e737737",
+          "manifest-declaration:manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:service:overview",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:1:5ec8a2610679",
+          "manifest-declaration:manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:solutions:overview",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:1:ecdbe806fde8",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/productInsights/productInsights.manifest.cdm.json:declarations:1",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:overview"
+        ],
+        "hit": true,
+        "reciprocal_rank": 1.0,
+        "recall": 1.0
+      },
+      "raw": {
+        "entities": [],
+        "passage_ids": [
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:declarations:3",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:1:ea61e90c8d4b",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:1:90ae9ba6e926",
+          "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:1:76799d672a25",
+          "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:1:6cae54b7f67c",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:1:a8eb7b112875"
+        ],
+        "hit": true,
+        "reciprocal_rank": 1.0,
+        "recall": 1.0
+      },
+      "reranked": {
+        "entities": [],
+        "passage_ids": [
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:declarations:3",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:overview"
+        ],
+        "hit": true,
+        "reciprocal_rank": 1.0,
+        "recall": 1.0
+      },
+      "rerank_ms": 9105.6,
+      "error": null
+    },
+    {
+      "id": "object-test-manifest-structure-application-common",
+      "question": "Which entities and child manifest appear in the applicationCommon manifest structure?",
+      "targets": [
+        "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:structure:4"
+      ],
+      "candidate_ids": [
+        "manifest-declaration:manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:projectCommon:overview",
+        "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:overview",
+        "manifest-declaration:manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:service:overview",
+        "manifest:schemaDocuments/core/applicationCommon/foundationCommon/financialCommon/financialCommon.manifest.cdm.json:overview",
+        "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:overview",
+        "manifest-declaration:manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:solutions:overview",
+        "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:overview",
+        "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:structure:4",
+        "manifest-declaration:manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:sales:overview",
+        "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:structure:1",
+        "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:structure:3",
+        "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:structure:2",
+        "manifest-declaration:manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:accelerators:overview",
+        "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:declarations:6",
+        "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:structure:1",
+        "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:structure:1",
+        "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:2:b39b06d4966b",
+        "manifest:schemaDocuments/core/applicationCommon/foundationCommon/productInsights/productInsights.manifest.cdm.json:overview",
+        "manifest:schemaDocuments/FinancialServices/RetailBankingCoreDataModel/RetailBankingCoreDataModel.manifest.cdm.json:overview",
+        "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:1:be2124312592"
+      ],
+      "candidate_pool": {
+        "entities": [],
+        "passage_ids": [
+          "manifest-declaration:manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:projectCommon:overview",
+          "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:overview",
+          "manifest-declaration:manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:service:overview",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/financialCommon/financialCommon.manifest.cdm.json:overview",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:overview",
+          "manifest-declaration:manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:solutions:overview",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:overview",
+          "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:structure:4",
+          "manifest-declaration:manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:sales:overview",
+          "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:structure:1",
+          "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:structure:3",
+          "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:structure:2",
+          "manifest-declaration:manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:accelerators:overview",
+          "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:declarations:6",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:structure:1",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:structure:1",
+          "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:2:b39b06d4966b",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/productInsights/productInsights.manifest.cdm.json:overview",
+          "manifest:schemaDocuments/FinancialServices/RetailBankingCoreDataModel/RetailBankingCoreDataModel.manifest.cdm.json:overview",
+          "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:1:be2124312592"
+        ],
+        "hit": true,
+        "reciprocal_rank": 0.125,
+        "recall": 1.0
+      },
+      "raw": {
+        "entities": [],
+        "passage_ids": [
+          "manifest-declaration:manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:projectCommon:overview",
+          "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:overview",
+          "manifest-declaration:manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:service:overview",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/financialCommon/financialCommon.manifest.cdm.json:overview",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:overview",
+          "manifest-declaration:manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:solutions:overview"
+        ],
+        "hit": false,
+        "reciprocal_rank": 0.0,
+        "recall": 0.0
+      },
+      "reranked": {
+        "entities": [],
+        "passage_ids": [
+          "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:overview",
+          "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:structure:4",
+          "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:structure:1",
+          "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:structure:3",
+          "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:structure:2",
+          "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:declarations:6"
+        ],
+        "hit": true,
+        "reciprocal_rank": 0.5,
+        "recall": 1.0
+      },
+      "rerank_ms": 9182.7,
+      "error": null
+    },
+    {
+      "id": "object-test-manifest-relationship-owner-user",
+      "question": "In the common model manifest, what User attribute is the target of the ActivityCommon owningUser mapping?",
+      "targets": [
+        "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:2:6321bf07f0ad"
+      ],
+      "candidate_ids": [
+        "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:relationship-mappings:3:86d294246f8a",
+        "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:3:86d294246f8a",
+        "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:2:6321bf07f0ad",
+        "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:2:87ce0ae057f1",
+        "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:2:60ae2f19c1c1",
+        "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:2:6d83e55a5c0d",
+        "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:2:bfef5b565139",
+        "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:2:86d294246f8a",
+        "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:2:a275562e5da8",
+        "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:2:6b324cbcc0f6",
+        "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:2:dee9a5e2a7c9",
+        "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:3:fd49c716d22f",
+        "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:2:83c730bb26bf",
+        "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:2:4e4d3847c327",
+        "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:2:57698a5e18cc",
+        "applicationCommon::Activity:relationship:2",
+        "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:2:386597d696b4",
+        "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:2:4152190867d4",
+        "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:relationship-mappings:3:fd49c716d22f",
+        "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:relationship-mappings:2:86d294246f8a"
+      ],
+      "candidate_pool": {
+        "entities": [
+          "applicationCommon::Activity",
+          "applicationCommon::SocialActivity"
+        ],
+        "passage_ids": [
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:relationship-mappings:3:86d294246f8a",
+          "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:3:86d294246f8a",
+          "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:2:6321bf07f0ad",
+          "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:2:87ce0ae057f1",
+          "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:2:60ae2f19c1c1",
+          "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:2:6d83e55a5c0d",
+          "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:2:bfef5b565139",
+          "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:2:86d294246f8a",
+          "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:2:a275562e5da8",
+          "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:2:6b324cbcc0f6",
+          "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:2:dee9a5e2a7c9",
+          "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:3:fd49c716d22f",
+          "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:2:83c730bb26bf",
+          "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:2:4e4d3847c327",
+          "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:2:57698a5e18cc",
+          "applicationCommon::Activity:relationship:2",
+          "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:2:386597d696b4",
+          "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:2:4152190867d4",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:relationship-mappings:3:fd49c716d22f",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:relationship-mappings:2:86d294246f8a"
+        ],
+        "hit": true,
+        "reciprocal_rank": 0.3333333333333333,
+        "recall": 1.0
+      },
+      "raw": {
+        "entities": [
+          "applicationCommon::Activity"
+        ],
+        "passage_ids": [
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:relationship-mappings:3:86d294246f8a",
+          "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:3:86d294246f8a",
+          "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:2:6321bf07f0ad",
+          "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:2:87ce0ae057f1",
+          "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:2:60ae2f19c1c1",
+          "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:2:6d83e55a5c0d"
+        ],
+        "hit": true,
+        "reciprocal_rank": 0.3333333333333333,
+        "recall": 1.0
+      },
+      "reranked": {
+        "entities": [
+          "applicationCommon::Activity"
+        ],
+        "passage_ids": [
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:relationship-mappings:3:86d294246f8a",
+          "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:3:86d294246f8a",
+          "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:2:6321bf07f0ad",
+          "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:2:86d294246f8a"
+        ],
+        "hit": true,
+        "reciprocal_rank": 0.3333333333333333,
+        "recall": 1.0
+      },
+      "rerank_ms": 9083.7,
+      "error": null
+    },
+    {
+      "id": "object-test-catalog-coverage",
+      "question": "Which two model areas are represented in this extracted CDM catalog, and how many entities are loaded?",
+      "targets": [
+        "cdm-catalog:overview"
+      ],
+      "candidate_ids": [
+        "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:overview",
+        "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:overview",
+        "cdm-catalog:overview",
+        "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:declarations:1",
+        "manifest:schemaDocuments/FinancialServices/RetailBankingCoreDataModel/RetailBankingCoreDataModel.manifest.cdm.json:overview",
+        "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:declarations:2",
+        "manifest-declaration:manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:accelerators:overview",
+        "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:declarations:3",
+        "manifest-declaration:manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:sales:overview",
+        "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:declarations:6",
+        "manifest-declaration:manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:service:overview",
+        "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:declarations:3",
+        "manifest-declaration:manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:solutions:overview",
+        "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:declarations:4",
+        "inheritance-base:CdmEntity",
+        "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:overview",
+        "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:1:decd2caff2d7",
+        "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:declarations:2",
+        "manifest:schemaDocuments/core/applicationCommon/foundationCommon/financialCommon/financialCommon.manifest.cdm.json:overview",
+        "manifest-declaration:manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:projectCommon:overview"
+      ],
+      "candidate_pool": {
+        "entities": [],
+        "passage_ids": [
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:overview",
+          "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:overview",
+          "cdm-catalog:overview",
+          "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:declarations:1",
+          "manifest:schemaDocuments/FinancialServices/RetailBankingCoreDataModel/RetailBankingCoreDataModel.manifest.cdm.json:overview",
+          "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:declarations:2",
+          "manifest-declaration:manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:accelerators:overview",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:declarations:3",
+          "manifest-declaration:manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:sales:overview",
+          "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:declarations:6",
+          "manifest-declaration:manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:service:overview",
+          "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:declarations:3",
+          "manifest-declaration:manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:solutions:overview",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:declarations:4",
+          "inheritance-base:CdmEntity",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:overview",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:1:decd2caff2d7",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:declarations:2",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/financialCommon/financialCommon.manifest.cdm.json:overview",
+          "manifest-declaration:manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:projectCommon:overview"
+        ],
+        "hit": true,
+        "reciprocal_rank": 0.3333333333333333,
+        "recall": 1.0
+      },
+      "raw": {
+        "entities": [],
+        "passage_ids": [
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:overview",
+          "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:overview",
+          "cdm-catalog:overview",
+          "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:declarations:1",
+          "manifest:schemaDocuments/FinancialServices/RetailBankingCoreDataModel/RetailBankingCoreDataModel.manifest.cdm.json:overview",
+          "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:declarations:2"
+        ],
+        "hit": true,
+        "reciprocal_rank": 0.3333333333333333,
+        "recall": 1.0
+      },
+      "reranked": {
+        "entities": [],
+        "passage_ids": [
+          "cdm-catalog:overview",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:overview"
+        ],
+        "hit": true,
+        "reciprocal_rank": 1.0,
+        "recall": 1.0
+      },
+      "rerank_ms": 8881.0,
+      "error": null
+    },
+    {
+      "id": "object-test-trait-definitions-display-and-description",
+      "question": "Which traits define the human-readable description and display label for a CDM object?",
+      "targets": [
+        "trait:is.localized.describedAs:definition",
+        "trait:is.localized.displayedAs:definition"
+      ],
+      "candidate_ids": [
+        "applicationCommon::Letter:attributes:1",
+        "trait:is.CDM:definition",
+        "applicationCommon::Task:attributes:1",
+        "trait:is.localized.displayedAs:definition",
+        "applicationCommon::Appointment:attributes:1",
+        "trait:is.localized.describedAs:definition",
+        "applicationCommon::Activity:attributes:1",
+        "trait:means.reference.description:definition",
+        "applicationCommon::SLA:attributes:2",
+        "trait:means.reference:definition",
+        "applicationCommon::PhoneCall:attributes:1",
+        "trait:means.reference.phonetic:definition",
+        "applicationCommon::Fax:attributes:1",
+        "trait:means.measurement.version:definition",
+        "applicationCommon::ConnectionRole:attributes:2",
+        "trait:means.measurement:definition",
+        "applicationCommon::RecurringAppointment:attributes:6",
+        "trait:is.CDS.sourceNamed:definition",
+        "applicationCommon::Contact:attributes:5",
+        "trait:is.localized:definition"
+      ],
+      "candidate_pool": {
+        "entities": [
+          "applicationCommon::Letter",
+          "applicationCommon::Task",
+          "applicationCommon::Appointment",
+          "applicationCommon::Activity",
+          "applicationCommon::SLA",
+          "applicationCommon::PhoneCall",
+          "applicationCommon::Fax",
+          "applicationCommon::ConnectionRole",
+          "applicationCommon::RecurringAppointment",
+          "applicationCommon::Contact"
+        ],
+        "passage_ids": [
+          "applicationCommon::Letter:attributes:1",
+          "trait:is.CDM:definition",
+          "applicationCommon::Task:attributes:1",
+          "trait:is.localized.displayedAs:definition",
+          "applicationCommon::Appointment:attributes:1",
+          "trait:is.localized.describedAs:definition",
+          "applicationCommon::Activity:attributes:1",
+          "trait:means.reference.description:definition",
+          "applicationCommon::SLA:attributes:2",
+          "trait:means.reference:definition",
+          "applicationCommon::PhoneCall:attributes:1",
+          "trait:means.reference.phonetic:definition",
+          "applicationCommon::Fax:attributes:1",
+          "trait:means.measurement.version:definition",
+          "applicationCommon::ConnectionRole:attributes:2",
+          "trait:means.measurement:definition",
+          "applicationCommon::RecurringAppointment:attributes:6",
+          "trait:is.CDS.sourceNamed:definition",
+          "applicationCommon::Contact:attributes:5",
+          "trait:is.localized:definition"
+        ],
+        "hit": true,
+        "reciprocal_rank": 0.25,
+        "recall": 1.0
+      },
+      "raw": {
+        "entities": [
+          "applicationCommon::Letter",
+          "applicationCommon::Task",
+          "applicationCommon::Appointment"
+        ],
+        "passage_ids": [
+          "applicationCommon::Letter:attributes:1",
+          "trait:is.CDM:definition",
+          "applicationCommon::Task:attributes:1",
+          "trait:is.localized.displayedAs:definition",
+          "applicationCommon::Appointment:attributes:1",
+          "trait:is.localized.describedAs:definition"
+        ],
+        "hit": true,
+        "reciprocal_rank": 0.25,
+        "recall": 1.0
+      },
+      "reranked": {
+        "entities": [],
+        "passage_ids": [
+          "trait:is.localized.displayedAs:definition",
+          "trait:is.localized.describedAs:definition",
+          "trait:is.localized:definition"
+        ],
+        "hit": true,
+        "reciprocal_rank": 1.0,
+        "recall": 1.0
+      },
+      "rerank_ms": 9472.4,
+      "error": null
+    },
+    {
+      "id": "object-test-inheritance-activity-family",
+      "question": "Which common activity entities explicitly inherit from ActivityCommon: Activity, PhoneCall, and Task?",
+      "targets": [
+        "applicationCommon::Activity:inheritance",
+        "applicationCommon::PhoneCall:inheritance",
+        "applicationCommon::Task:inheritance"
+      ],
+      "candidate_ids": [
+        "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:2:da90f1fae5dc",
+        "applicationCommon::ActivityParty:relationship:1",
+        "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:relationship-mappings:1:027810455a54",
+        "applicationCommon::QueueItem:relationship:2",
+        "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:relationship-mappings:1:e934375c2fb5",
+        "applicationCommon::SLAKPIInstance:relationship:2",
+        "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:2:796b248e54ee",
+        "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:relationship-mappings:2:42a99b9c5baf",
+        "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:relationship-mappings:1:179b2927665d",
+        "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:relationship-mappings:1:560f90401a2c",
+        "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:declarations:3",
+        "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:relationship-mappings:2:84d6cf9bc2b1",
+        "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:relationship-mappings:1:6aaa9f35906e",
+        "applicationCommon::PhoneCall:inheritance",
+        "applicationCommon::Task:inheritance",
+        "applicationCommon::Activity:inheritance",
+        "applicationCommon::PhoneCall:trait-applications:entity",
+        "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:2:32a2272a0643",
+        "applicationCommon::PhoneCall:entity",
+        "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:2:fb814a158b5e"
+      ],
+      "candidate_pool": {
+        "entities": [
+          "applicationCommon::ActivityParty",
+          "applicationCommon::QueueItem",
+          "applicationCommon::SLAKPIInstance",
+          "applicationCommon::PhoneCall",
+          "applicationCommon::Task",
+          "applicationCommon::Activity",
+          "applicationCommon::Note"
+        ],
+        "passage_ids": [
+          "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:2:da90f1fae5dc",
+          "applicationCommon::ActivityParty:relationship:1",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:relationship-mappings:1:027810455a54",
+          "applicationCommon::QueueItem:relationship:2",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:relationship-mappings:1:e934375c2fb5",
+          "applicationCommon::SLAKPIInstance:relationship:2",
+          "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:2:796b248e54ee",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:relationship-mappings:2:42a99b9c5baf",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:relationship-mappings:1:179b2927665d",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:relationship-mappings:1:560f90401a2c",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:declarations:3",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:relationship-mappings:2:84d6cf9bc2b1",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:relationship-mappings:1:6aaa9f35906e",
+          "applicationCommon::PhoneCall:inheritance",
+          "applicationCommon::Task:inheritance",
+          "applicationCommon::Activity:inheritance",
+          "applicationCommon::PhoneCall:trait-applications:entity",
+          "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:2:32a2272a0643",
+          "applicationCommon::PhoneCall:entity",
+          "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:2:fb814a158b5e"
+        ],
+        "hit": true,
+        "reciprocal_rank": 0.07142857142857142,
+        "recall": 1.0
+      },
+      "raw": {
+        "entities": [
+          "applicationCommon::ActivityParty",
+          "applicationCommon::QueueItem",
+          "applicationCommon::SLAKPIInstance"
+        ],
+        "passage_ids": [
+          "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:2:da90f1fae5dc",
+          "applicationCommon::ActivityParty:relationship:1",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:relationship-mappings:1:027810455a54",
+          "applicationCommon::QueueItem:relationship:2",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:relationship-mappings:1:e934375c2fb5",
+          "applicationCommon::SLAKPIInstance:relationship:2"
+        ],
+        "hit": false,
+        "reciprocal_rank": 0.0,
+        "recall": 0.0
+      },
+      "reranked": {
+        "entities": [
+          "applicationCommon::PhoneCall",
+          "applicationCommon::Task",
+          "applicationCommon::Activity"
+        ],
+        "passage_ids": [
+          "applicationCommon::PhoneCall:inheritance",
+          "applicationCommon::Task:inheritance",
+          "applicationCommon::Activity:inheritance"
+        ],
+        "hit": true,
+        "reciprocal_rank": 1.0,
+        "recall": 1.0
+      },
+      "rerank_ms": 2613.0,
+      "error": null
+    }
+  ],
+  "method": "Identical raw test questions and up to 20 hybrid candidate chunks; compare first six chunks with app.rag.rerank top six. Entity metrics deduplicate entity IDs within those chunks, so six chunks may represent fewer than six entities; passage metrics match exact passage IDs. Candidate pool is scored at 20 chunks. No routing, rewriting or answer generation. Unlisted sources are unjudged.",
+  "hardware": "NVIDIA RTX A4000 16,376 MiB; shared host",
+  "metrics": {
+    "candidate_pool": {
+      "scored_cases": 13,
+      "total_cases": 13,
+      "chunk_depth": 20,
+      "hit_at_20": 0.9231,
+      "mrr_at_20": 0.4286,
+      "recall_at_20": 0.9231
+    },
+    "raw": {
+      "scored_cases": 13,
+      "total_cases": 13,
+      "chunk_depth": 6,
+      "hit_at_6": 0.6923,
+      "mrr_at_6": 0.4038,
+      "recall_at_6": 0.6923
+    },
+    "reranked": {
+      "scored_cases": 13,
+      "total_cases": 13,
+      "chunk_depth": 6,
+      "hit_at_6": 0.8462,
+      "mrr_at_6": 0.7564,
+      "recall_at_6": 0.8462
+    }
+  },
+  "timing": {
+    "first_case_ms": 8239.4,
+    "mean_after_first_ms": 9039.0
+  },
+  "errors": 0
+}

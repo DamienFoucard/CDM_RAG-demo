@@ -1,0 +1,101 @@
+"""Small local model client; failures are explicit and never fabricate evidence."""
+from __future__ import annotations
+
+import json
+import math
+from typing import Any
+
+import httpx
+
+
+class ModelError(RuntimeError):
+    pass
+
+
+class Ollama:
+    def __init__(self, base_url: str, embedding_model: str, router_model: str, answer_model: str):
+        self.base_url = base_url.rstrip("/")
+        self.embedding_model = embedding_model
+        self.router_model = router_model
+        self.answer_model = answer_model
+
+    def _post(self, path: str, payload: dict[str, Any], timeout: float = 120) -> dict[str, Any]:
+        try:
+            with httpx.Client(timeout=timeout, trust_env=False) as client:
+                response = client.post(self.base_url + path, json=payload)
+                response.raise_for_status()
+                result = response.json()
+        except (httpx.HTTPError, ValueError) as exc:
+            raise ModelError("The local model service could not complete the request.") from exc
+        if not isinstance(result, dict):
+            raise ModelError("The local model service returned an invalid response.")
+        return result
+
+    def embedding_digest(self) -> str:
+        try:
+            with httpx.Client(timeout=10, trust_env=False) as client:
+                response = client.get(self.base_url + "/api/tags")
+                response.raise_for_status()
+                models = response.json()["models"]
+            requested = self.embedding_model.removesuffix(":latest")
+            matches = [model for model in models
+                       if str(model.get("name", "")).removesuffix(":latest") == requested]
+            digest = matches[0].get("digest") if len(matches) == 1 else None
+            if not isinstance(digest, str) or not digest:
+                raise ValueError("embedding model is not installed")
+            return digest
+        except (httpx.HTTPError, ValueError, KeyError, TypeError, IndexError) as exc:
+            raise ModelError(f"Embedding model {self.embedding_model!r} is not available in Ollama.") from exc
+
+    def embedding_format(self) -> str:
+        family = self.embedding_model.split(":", 1)[0]
+        if family == "nomic-embed-text":
+            return "nomic-search-v1"
+        if family == "qwen3-embedding":
+            return "qwen3-cdm-retrieval-v1"
+        raise ModelError("The embedding model has no configured query/document format.")
+
+    def embed(self, texts: list[str], *, query: bool) -> list[list[float]]:
+        encoding = self.embedding_format()
+        if encoding == "nomic-search-v1":
+            prefix = "search_query: " if query else "search_document: "
+        else:
+            prefix = ("Instruct: Retrieve CDM schema passages that answer the user's question.\nQuery: "
+                      if query else "")
+        result = self._post("/api/embed", {"model": self.embedding_model,
+                            "input": [prefix + text for text in texts], "truncate": False})
+        vectors = result.get("embeddings")
+        if (not isinstance(vectors, list) or len(vectors) != len(texts)
+                or any(not isinstance(vector, list) or not vector
+                       or any(not isinstance(value, (int, float)) or not math.isfinite(value)
+                              for value in vector) for vector in vectors)):
+            raise ModelError("The embedding model returned incomplete or invalid vectors.")
+        if len({len(vector) for vector in vectors}) != 1:
+            raise ModelError("The embedding model returned inconsistent vector dimensions.")
+        return vectors
+
+    def chat(self, model: str, messages: list[dict[str, str]], *, as_json: bool = False,
+             max_tokens: int = 600, schema: dict[str, Any] | None = None) -> str:
+        payload: dict[str, Any] = {"model": model, "messages": messages, "stream": False,
+                                   "think": False, "options": {"temperature": 0, "num_predict": max_tokens,
+                                                                 "num_ctx": 32768 if model == self.answer_model else 4096}}
+        if as_json:
+            payload["format"] = schema or "json"
+        result = self._post("/api/chat", payload)
+        try:
+            content = result["message"]["content"].strip()
+        except (KeyError, AttributeError, TypeError) as exc:
+            raise ModelError("The local model returned an invalid answer.") from exc
+        if not content or len(content) > 20000:
+            raise ModelError("The local model returned an empty or oversized answer.")
+        return content
+
+    def chat_json(self, model: str, messages: list[dict[str, str]], *,
+                  schema: dict[str, Any] | None = None, max_tokens: int = 300) -> dict[str, Any]:
+        try:
+            value = json.loads(self.chat(model, messages, as_json=True, max_tokens=max_tokens, schema=schema))
+        except json.JSONDecodeError as exc:
+            raise ModelError("The local model returned invalid JSON.") from exc
+        if not isinstance(value, dict):
+            raise ModelError("The local model returned invalid JSON.")
+        return value

@@ -1,0 +1,338 @@
+{
+  "dataset_id": "cdm-schema-evaluation-v2",
+  "dataset_sha256": "e449e91dff169a01b8deaabde2bedcd69132cedb1403c64bc3e4921e1cac00f0",
+  "dataset_status": "synthetic_source_checked_not_independently_reviewed",
+  "split": "test",
+  "embedding_model": "qwen3-embedding:0.6b",
+  "model_digest": "ac6da0dfba84a81fdbfbaf330198c33cd77c4cdfc53e8bc50eb581914a15621d",
+  "router_model": "qwen3:4b",
+  "probe_threshold": 0.58,
+  "metrics": {
+    "in_scope_search_rate": 1,
+    "off_topic_search_rate": 0,
+    "unsupported_fact_search_rate": 0.5
+  },
+  "notes": "Synthetic, unreviewed examples; this scores routing decisions only, not query quality, retrieval or answers. Probe scores were measured separately.",
+  "cases": [
+    {
+      "id": "test-01",
+      "question": "Which banking concept represents a deposit account used for putting money in and taking it out?",
+      "category": "concept",
+      "in_scope": true,
+      "probe_passed": true,
+      "search": true,
+      "generated_query": "Which banking concept represents a deposit account used for putting money in and taking it out?",
+      "router_latency_ms": 4748.2
+    },
+    {
+      "id": "test-02",
+      "question": "Where would a bank model a customer getting married or retiring?",
+      "category": "concept",
+      "in_scope": true,
+      "probe_passed": true,
+      "search": true,
+      "generated_query": "Where would a bank model a customer getting married or retiring?",
+      "router_latency_ms": 428.7
+    },
+    {
+      "id": "test-03",
+      "question": "Which definition connects a household or other customer group to a financial holding?",
+      "category": "relationship",
+      "in_scope": true,
+      "probe_passed": true,
+      "search": true,
+      "generated_query": "Which definition connects a household or other customer group to a financial holding?",
+      "router_latency_ms": 440.2
+    },
+    {
+      "id": "test-04",
+      "question": "How is a personal connection, such as a spouse, between two contacts represented?",
+      "category": "relationship",
+      "in_scope": true,
+      "probe_passed": true,
+      "search": true,
+      "generated_query": "How is a personal connection, such as a spouse, between two contacts represented in a Microsoft Common Data Model schema?",
+      "router_latency_ms": 544.8
+    },
+    {
+      "id": "test-05",
+      "question": "Which banking object identifies the person or company that holds a payment card?",
+      "category": "relationship",
+      "in_scope": true,
+      "probe_passed": true,
+      "search": true,
+      "generated_query": "Which banking object identifies the person or company that holds a payment card?",
+      "router_latency_ms": 453.7
+    },
+    {
+      "id": "test-06",
+      "question": "Which definition connects a financial instrument to the financial holding it belongs to?",
+      "category": "relationship",
+      "in_scope": true,
+      "probe_passed": true,
+      "search": true,
+      "generated_query": "Which definition connects a financial instrument to the financial holding it belongs to?",
+      "router_latency_ms": 423.8
+    },
+    {
+      "id": "test-07",
+      "question": "What is the general banking concept encompassing loans, investments, and savings held by a customer?",
+      "category": "concept",
+      "in_scope": true,
+      "probe_passed": true,
+      "search": true,
+      "generated_query": "general banking concept encompassing loans, investments, and savings held by a customer",
+      "router_latency_ms": 445.6
+    },
+    {
+      "id": "test-08",
+      "question": "What represents a fixed sum automatically sent from one account to another at intervals?",
+      "category": "concept",
+      "in_scope": true,
+      "probe_passed": true,
+      "search": true,
+      "generated_query": "What represents a fixed sum automatically sent from one account to another at intervals?",
+      "router_latency_ms": 428.3
+    },
+    {
+      "id": "test-09",
+      "question": "Which attributes describe a business customer in the common Account definition?",
+      "category": "attribute",
+      "in_scope": true,
+      "probe_passed": true,
+      "search": true,
+      "generated_query": "Which attributes describe a business customer in the common Account definition?",
+      "router_latency_ms": 390.9
+    },
+    {
+      "id": "test-10",
+      "question": "Where can I find first and last name fields for an individual contact?",
+      "category": "attribute",
+      "in_scope": true,
+      "probe_passed": true,
+      "search": true,
+      "generated_query": "Where can I find first and last name fields for an individual contact in the Microsoft Common Data Model schema?",
+      "router_latency_ms": 483.6
+    },
+    {
+      "id": "test-11",
+      "question": "Which common definition contains the parent account of a business customer?",
+      "category": "relationship",
+      "in_scope": true,
+      "probe_passed": true,
+      "search": true,
+      "generated_query": "Which common definition contains the parent account of a business customer?",
+      "router_latency_ms": 382.1
+    },
+    {
+      "id": "test-12",
+      "question": "Where is a contact linked to its parent customer account?",
+      "category": "relationship",
+      "in_scope": true,
+      "probe_passed": true,
+      "search": true,
+      "generated_query": "Where is a contact linked to its parent customer account in the Microsoft Common Data Model schema?",
+      "router_latency_ms": 449.9
+    },
+    {
+      "id": "test-13",
+      "question": "Which definition joins a system user with a team they belong to?",
+      "category": "relationship",
+      "in_scope": true,
+      "probe_passed": true,
+      "search": true,
+      "generated_query": "Which definition joins a system user with a team they belong to?",
+      "router_latency_ms": 388.2
+    },
+    {
+      "id": "test-14",
+      "question": "Where are extra postal or delivery addresses for customers and contacts kept?",
+      "category": "concept",
+      "in_scope": true,
+      "probe_passed": true,
+      "search": true,
+      "generated_query": "Where are extra postal or delivery addresses for customers and contacts kept in the Microsoft Common Data Model schema?",
+      "router_latency_ms": 474.5
+    },
+    {
+      "id": "test-15",
+      "question": "What represents a work item placed in a queue and links it back to that queue?",
+      "category": "relationship",
+      "in_scope": true,
+      "probe_passed": true,
+      "search": true,
+      "generated_query": "What represents a work item placed in a queue and links it back to that queue in Microsoft Common Data Model?",
+      "router_latency_ms": 491.2
+    },
+    {
+      "id": "test-16",
+      "question": "What represents a service-level KPI being tracked for an individual support case?",
+      "category": "concept",
+      "in_scope": true,
+      "probe_passed": true,
+      "search": true,
+      "generated_query": "What represents a service-level KPI being tracked for an individual support case?",
+      "router_latency_ms": 438.4
+    },
+    {
+      "id": "test-17",
+      "question": "Where is the type of measurement, such as a count or amount, for a goal described?",
+      "category": "concept",
+      "in_scope": true,
+      "probe_passed": true,
+      "search": true,
+      "generated_query": "What is the type of measurement for a goal in the Common Data Model schema?",
+      "router_latency_ms": 463.6
+    },
+    {
+      "id": "test-18",
+      "question": "Which definition counts how often a knowledge article was viewed on a day?",
+      "category": "concept",
+      "in_scope": true,
+      "probe_passed": true,
+      "search": true,
+      "generated_query": "Which entity in the Common Data Model has an attribute that counts the number of views for a knowledge article on a specific day?",
+      "router_latency_ms": 643.9
+    },
+    {
+      "id": "test-19",
+      "question": "What represents a comment linked to a knowledge-base article?",
+      "category": "relationship",
+      "in_scope": true,
+      "probe_passed": true,
+      "search": true,
+      "generated_query": "What represents a comment linked to a knowledge-base article in the Microsoft Common Data Model schema?",
+      "router_latency_ms": 476.9
+    },
+    {
+      "id": "test-20",
+      "question": "Which object holds an email signature and its body?",
+      "category": "concept",
+      "in_scope": true,
+      "probe_passed": true,
+      "search": true,
+      "generated_query": "Which object holds an email signature and its body in a Microsoft Common Data Model schema?",
+      "router_latency_ms": 475.9
+    },
+    {
+      "id": "test-21",
+      "question": "Where is the parent of a business unit specified in the organization hierarchy?",
+      "category": "relationship",
+      "in_scope": true,
+      "probe_passed": true,
+      "search": true,
+      "generated_query": "Where is the parent of a business unit specified in the organization hierarchy in Microsoft Common Data Model",
+      "router_latency_ms": 487.4
+    },
+    {
+      "id": "test-22",
+      "question": "Which common definition contains a system user’s first and last names?",
+      "category": "attribute",
+      "in_scope": true,
+      "probe_passed": true,
+      "search": true,
+      "generated_query": "Which common definition contains a system user’s first and last names?",
+      "router_latency_ms": 426.7
+    },
+    {
+      "id": "test-23",
+      "question": "What common object represents a geographic sales region?",
+      "category": "concept",
+      "in_scope": true,
+      "probe_passed": true,
+      "search": true,
+      "generated_query": "What common object represents a geographic sales region in the Microsoft Common Data Model?",
+      "router_latency_ms": 503.6
+    },
+    {
+      "id": "test-24",
+      "question": "Which definition links an appointment to the master recurring series it belongs to?",
+      "category": "relationship",
+      "in_scope": true,
+      "probe_passed": true,
+      "search": true,
+      "generated_query": "Which definition links an appointment to the master recurring series it belongs to?",
+      "router_latency_ms": 431.6
+    },
+    {
+      "id": "negative-09",
+      "question": "Good morning, how are you doing?",
+      "category": "off_topic",
+      "in_scope": false,
+      "probe_passed": false,
+      "search": false,
+      "generated_query": "",
+      "router_latency_ms": 0.0
+    },
+    {
+      "id": "negative-10",
+      "question": "Tell me a joke about a cat.",
+      "category": "off_topic",
+      "in_scope": false,
+      "probe_passed": false,
+      "search": false,
+      "generated_query": "",
+      "router_latency_ms": 0.0
+    },
+    {
+      "id": "negative-11",
+      "question": "Who won the football match last night?",
+      "category": "off_topic",
+      "in_scope": false,
+      "probe_passed": false,
+      "search": false,
+      "generated_query": "",
+      "router_latency_ms": 0.0
+    },
+    {
+      "id": "negative-12",
+      "question": "How do I grow tomatoes on my balcony?",
+      "category": "off_topic",
+      "in_scope": false,
+      "probe_passed": false,
+      "search": false,
+      "generated_query": "",
+      "router_latency_ms": 0.0
+    },
+    {
+      "id": "negative-13",
+      "question": "What was the total value of this customer’s deposits last month?",
+      "category": "unsupported_fact",
+      "in_scope": false,
+      "probe_passed": true,
+      "search": false,
+      "generated_query": "",
+      "router_latency_ms": 260.2
+    },
+    {
+      "id": "negative-14",
+      "question": "Show me Jane Smith’s credit-card transactions.",
+      "category": "unsupported_fact",
+      "in_scope": false,
+      "probe_passed": true,
+      "search": false,
+      "generated_query": "",
+      "router_latency_ms": 230.6
+    },
+    {
+      "id": "negative-15",
+      "question": "What interest rate is the bank charging on mortgages this week?",
+      "category": "unsupported_fact",
+      "in_scope": false,
+      "probe_passed": true,
+      "search": true,
+      "generated_query": "What interest rate is the bank charging on mortgages this week?",
+      "router_latency_ms": 435.7
+    },
+    {
+      "id": "negative-16",
+      "question": "Has this specific loan been repaid yet?",
+      "category": "unsupported_fact",
+      "in_scope": false,
+      "probe_passed": true,
+      "search": true,
+      "generated_query": "Has this specific loan been repaid yet?",
+      "router_latency_ms": 340.2
+    }
+  ]
+}

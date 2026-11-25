@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CDM RAG · Home</title>
+  <style>
+    :root{color-scheme:light;--ink:#17231e;--muted:#607067;--green:#1d7653;--line:#d9e5dc;--soft:#f0f6f1}
+    *{box-sizing:border-box}
+    body{margin:0;background:#f4f7f4;color:var(--ink);font:16px/1.58 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+    a{color:var(--green)}
+    .wrap{max-width:1160px;margin:0 auto;padding:28px clamp(18px,4vw,46px) 72px}
+    header{display:flex;justify-content:space-between;align-items:center;gap:18px;border-bottom:1px solid var(--line);padding-bottom:18px}
+    .brand{font-weight:800;font-size:18px}.brand small{display:block;color:var(--muted);font-size:13px;font-weight:600}
+    nav{display:flex;gap:20px;align-items:center;flex-wrap:wrap}nav a{font-weight:700;text-decoration:none}nav a:hover{text-decoration:underline}
+    .hero{padding:72px 0 52px;max-width:850px}
+    .eyebrow{margin:0 0 12px;color:var(--green);font-size:12px;font-weight:850;letter-spacing:.12em;text-transform:uppercase}
+    h1{font:500 clamp(42px,7vw,76px)/1.02 Georgia,"Times New Roman",serif;letter-spacing:-.045em;margin:0 0 20px}
+    .lead{max-width:760px;font-size:21px;line-height:1.48;color:#415249;margin:0}
+    .actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+    .button{display:inline-flex;align-items:center;gap:9px;padding:12px 17px;border-radius:11px;background:var(--green);color:white;text-decoration:none;font-weight:800}
+    .button.secondary{background:#fff;border:1px solid var(--line);color:var(--green)}
+    .button:hover{filter:brightness(.96)}
+    .scope{font-size:13px;color:var(--muted);margin:18px 0 0}
+    section{margin-top:30px}
+    h2{font-size:27px;letter-spacing:-.025em;line-height:1.2;margin:0 0 12px}
+    .section-intro{max-width:800px;color:var(--muted);margin:0 0 20px}
+    .why{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(260px,.8fr);gap:24px;background:#fff;border:1px solid var(--line);border-radius:20px;padding:26px}
+    .why p{margin:0;color:var(--muted)}
+    .why p+p{margin-top:12px}
+    .callout{align-self:stretch;background:var(--soft);border-radius:14px;padding:18px;color:#355341;font-weight:650}
+    .steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+    .step,.link-card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:21px}
+    .step-number{display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--soft);color:var(--green);font-weight:850;margin-bottom:12px}
+    .step h3,.link-card h3{font-size:18px;margin:0 0 7px}
+    .step p,.link-card p{color:var(--muted);font-size:14px;margin:0}
+    .links-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+    .link-card{text-decoration:none;color:inherit;transition:transform .15s ease,border-color .15s ease}
+    .link-card:hover{transform:translateY(-2px);border-color:#9ebba8}
+    .link-card .link-label{display:inline-block;color:var(--green);font-weight:800;margin-top:15px}
+    footer{border-top:1px solid var(--line);margin-top:46px;padding-top:18px;color:var(--muted);font-size:13px}
+    :focus-visible{outline:3px solid #93c5aa;outline-offset:3px;border-radius:5px}
+    @media(max-width:760px){.wrap{padding-top:20px}.hero{padding:48px 0 32px}.why{grid-template-columns:1fr}.steps{grid-template-columns:1fr}.links-grid{grid-template-columns:1fr}header{align-items:flex-start}nav{gap:11px;font-size:14px}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="brand">CDM RAG<small>Microsoft Common Data Model · local schema assistant</small></div>
+      <nav aria-label="Main navigation">
+        <a href="/RAG">Ask a question</a>
+        <a href="/graph">Explore graph</a>
+        <a href="/benchmarks">Evaluations</a>
+        <a href="/docs">Documentation</a>
+        <a id="api-tokens-nav" href="/api-tokens" hidden>API tokens</a>
+      </nav>
+    </header>
+    <main>
+      <section class="hero">
+        <p class="eyebrow">Explore the Common Data Model</p>
+        <h1>Find the schema answer, and see where it came from.</h1>
+        <p class="lead">CDM RAG is a local assistant for Microsoft Common Data Model schemas. Ask a question in everyday language, get a concise answer grounded in the catalog, and follow its citations back to the source definitions.</p>
+        <div class="actions">
+          <a class="button" href="/RAG">Ask a question <span aria-hidden="true">→</span></a>
+          <a class="button secondary" href="/graph">Explore the graph</a>
+        </div>
+        <p class="scope">This demo includes a pinned Retail Banking and applicationCommon subset of CDM; it is not the complete Microsoft CDM catalog.</p>
+      </section>
+
+      <section class="why" aria-labelledby="why-heading">
+        <div>
+          <p class="eyebrow">Why it helps</p>
+          <h2 id="why-heading">Schemas are connected, not just lists of fields.</h2>
+          <p>Finding a field is only part of understanding a data model. The useful context may be in the entity that owns it, a relationship that points elsewhere, or a trait that describes how the schema should be interpreted.</p>
+          <p>CDM RAG brings those definitions into a question-and-answer flow and keeps the source evidence close, so people can explore unfamiliar schema areas and check the answer instead of taking it on trust.</p>
+        </div>
+        <aside class="callout">Useful when you need to understand an unfamiliar CDM object, trace a relationship, compare schema concepts, or check which definition supports an answer.</aside>
+      </section>
+
+      <section aria-labelledby="flow-heading">
+        <p class="eyebrow">How it works</p>
+        <h2 id="flow-heading">A short path from question to evidence</h2>
+        <p class="section-intro">The app searches a local index built from the pinned catalog, then presents the selected source passages with the answer.</p>
+        <div class="steps">
+          <article class="step"><div class="step-number">1</div><h3>Ask naturally</h3><p>Describe the schema concept or connection you need, without first knowing its exact CDM name.</p></article>
+          <article class="step"><div class="step-number">2</div><h3>Retrieve relevant definitions</h3><p>Search across indexed entities, attributes, relationships, manifests, traits, and inheritance.</p></article>
+          <article class="step"><div class="step-number">3</div><h3>Inspect the evidence</h3><p>Read the cited answer, open its passages, and follow the source links to Microsoft’s schema files.</p></article>
+        </div>
+      </section>
+
+      <section aria-labelledby="links-heading">
+        <p class="eyebrow">Explore the project</p>
+        <h2 id="links-heading">Choose where to go next</h2>
+        <div class="links-grid">
+          <a class="link-card" href="/RAG"><h3>Ask about CDM</h3><p>Use the RAG assistant and inspect the source passages behind each response.</p><span class="link-label">Open the assistant →</span></a>
+          <a class="link-card" href="/graph"><h3>Explore the graph</h3><p>Browse entities, attributes, traits, manifests, and relationships as a connected model.</p><span class="link-label">Open graph explorer →</span></a>
+          <a class="link-card" href="/benchmarks"><h3>Review the evaluations</h3><p>See embedding, routing, retrieval, and answer evaluations in the order used to tune the system.</p><span class="link-label">View evaluations →</span></a>
+          <a class="link-card" href="/docs"><h3>Read the documentation</h3><p>Learn how the request flow works and browse the API reference.</p><span class="link-label">Open documentation →</span></a>
+        </div>
+      </section>
+    </main>
+    <footer>Local demonstration · Ollama model runtime · source-linked CDM schema subset</footer>
+  </div>
+  <script>
+    // Only the owner can manage API tokens; hide this navigation when the feature is unavailable.
+    fetch('/api/v1/status',{cache:'no-store'}).then(r=>r.ok?r.json():{}).then(s=>{if(s.demo_access)document.querySelectorAll('a[href="/benchmarks"]').forEach(a=>a.style.display='none');}).catch(()=>{});
+    fetch('/api/v1/api-tokens',{cache:'no-store'}).then(response=>{
+      if(response.ok)document.getElementById('api-tokens-nav').hidden=false;
+    }).catch(()=>{});
+  </script>
+</body>
+</html>

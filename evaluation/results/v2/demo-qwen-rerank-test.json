@@ -1,0 +1,1674 @@
+{
+  "dataset_id": "cdm-schema-evaluation-v2",
+  "dataset_status": "synthetic_source_checked_not_independently_reviewed",
+  "dataset_provenance": "Assistant-authored questions and source-checked example positive labels; not independently authored, reviewed, exhaustive, or representative. The original pilot is development data. Test questions and out-of-scope examples were written before the v2 comparison. Unlisted entities remain unjudged.",
+  "dataset_sha256": "e449e91dff169a01b8deaabde2bedcd69132cedb1403c64bc3e4921e1cac00f0",
+  "source_commit": "dd21d715e05ebf740a11356c80b5c3b4c38a89c2",
+  "index_revision": "f0e843e0c1b941593517528b7f6219c242c62ce247c0430746fea34f42ca2f66",
+  "model_digest": "ac6da0dfba84a81fdbfbaf330198c33cd77c4cdfc53e8bc50eb581914a15621d",
+  "embedding_model": "qwen3-embedding:0.6b",
+  "embedding_format": "qwen3-cdm-retrieval-v1",
+  "split": "test",
+  "reranker_model": "qwen3:4b",
+  "chunk_count": 695,
+  "candidate_limit": 20,
+  "top_k_chunks": 6,
+  "index_preparation_seconds": 1.12,
+  "gate": {
+    "threshold": 0.58,
+    "in_scope_pass_rate": 1,
+    "off_topic_pass_rate": 0,
+    "unsupported_fact_pass_rate": 1
+  },
+  "notes": "Labels are incomplete and unreviewed; other entities are unjudged. Ranking metrics deduplicate the first six chunks by entity. Timings are warm local search calls, not API or end-to-end answer latency. The probe is only the preliminary similarity gate, not the LLM router. Index preparation may reuse a prior index.",
+  "metrics": {
+    "lexical": {
+      "cases": 24,
+      "hit_at_1": 0.6667,
+      "hit_at_3": 0.8333,
+      "hit_at_6": 0.875,
+      "recall_at_6": 0.875,
+      "mrr_at_6": 0.7396,
+      "mean_latency_ms": 7.67,
+      "p95_latency_ms": 15.14
+    },
+    "semantic": {
+      "cases": 24,
+      "hit_at_1": 0.8333,
+      "hit_at_3": 0.9583,
+      "hit_at_6": 1,
+      "recall_at_6": 1.0,
+      "mrr_at_6": 0.8972,
+      "mean_latency_ms": 64.0,
+      "p95_latency_ms": 113.33
+    },
+    "hybrid": {
+      "cases": 24,
+      "hit_at_1": 0.8333,
+      "hit_at_3": 0.9583,
+      "hit_at_6": 1,
+      "recall_at_6": 1.0,
+      "mrr_at_6": 0.8993,
+      "mean_latency_ms": 36.2,
+      "p95_latency_ms": 53.47
+    },
+    "hybrid_reranked": {
+      "cases": 24,
+      "hit_at_1": 0.875,
+      "hit_at_3": 1,
+      "hit_at_6": 1,
+      "recall_at_6": 1.0,
+      "mrr_at_6": 0.9375,
+      "mean_latency_ms": 4113.45,
+      "p95_latency_ms": 5052.1
+    }
+  },
+  "cases": [
+    {
+      "id": "test-01",
+      "question": "Which banking concept represents a deposit account used for putting money in and taking it out?",
+      "split": "test",
+      "category": "concept",
+      "positive_entity_ids": [
+        "RetailBankingCoreDataModel::FHAccount"
+      ],
+      "label_source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Fh_account.cdm.json",
+      "probe_similarity": 0.661174,
+      "variants": {
+        "lexical": {
+          "ranked_entity_ids": [
+            "RetailBankingCoreDataModel::Account",
+            "RetailBankingCoreDataModel::FHSaving",
+            "RetailBankingCoreDataModel::FHAccount",
+            "applicationCommon::Currency",
+            "applicationCommon::Contact",
+            "applicationCommon::Account"
+          ],
+          "hit_at_1": false,
+          "hit_at_3": true,
+          "hit_at_6": true,
+          "recall_at_6": 1.0,
+          "mrr_at_6": 0.3333333333333333,
+          "latency_ms": 3.19
+        },
+        "semantic": {
+          "ranked_entity_ids": [
+            "RetailBankingCoreDataModel::FHAccount",
+            "RetailBankingCoreDataModel::FHSaving"
+          ],
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_6": true,
+          "recall_at_6": 1.0,
+          "mrr_at_6": 1.0,
+          "latency_ms": 31.05
+        },
+        "hybrid": {
+          "ranked_entity_ids": [
+            "RetailBankingCoreDataModel::FHAccount",
+            "RetailBankingCoreDataModel::FHSaving",
+            "RetailBankingCoreDataModel::Account"
+          ],
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_6": true,
+          "recall_at_6": 1.0,
+          "mrr_at_6": 1.0,
+          "latency_ms": 32.05
+        },
+        "hybrid_reranked": {
+          "ranked_entity_ids": [
+            "RetailBankingCoreDataModel::FHAccount",
+            "RetailBankingCoreDataModel::FHSaving"
+          ],
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_6": true,
+          "recall_at_6": 1.0,
+          "mrr_at_6": 1.0,
+          "latency_ms": 3638.66
+        }
+      }
+    },
+    {
+      "id": "test-02",
+      "question": "Where would a bank model a customer getting married or retiring?",
+      "split": "test",
+      "category": "concept",
+      "positive_entity_ids": [
+        "RetailBankingCoreDataModel::LifeEvent"
+      ],
+      "label_source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Lifemoment.cdm.json",
+      "probe_similarity": 0.665935,
+      "variants": {
+        "lexical": {
+          "ranked_entity_ids": [
+            "RetailBankingCoreDataModel::Branch",
+            "RetailBankingCoreDataModel::FICard",
+            "RetailBankingCoreDataModel::Account",
+            "RetailBankingCoreDataModel::Relationship",
+            "RetailBankingCoreDataModel::GroupMember",
+            "RetailBankingCoreDataModel::FIDirectDebit"
+          ],
+          "hit_at_1": false,
+          "hit_at_3": false,
+          "hit_at_6": false,
+          "recall_at_6": 0.0,
+          "mrr_at_6": 0.0,
+          "latency_ms": 6.6
+        },
+        "semantic": {
+          "ranked_entity_ids": [
+            "RetailBankingCoreDataModel::LifeEvent",
+            "RetailBankingCoreDataModel::CustomerFinancialHolding",
+            "RetailBankingCoreDataModel::Relationship",
+            "RetailBankingCoreDataModel::FHSaving",
+            "RetailBankingCoreDataModel::GroupFinancialHolding"
+          ],
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_6": true,
+          "recall_at_6": 1.0,
+          "mrr_at_6": 1.0,
+          "latency_ms": 73.9
+        },
+        "hybrid": {
+          "ranked_entity_ids": [
+            "RetailBankingCoreDataModel::Account",
+            "RetailBankingCoreDataModel::GroupFinancialHolding",
+            "RetailBankingCoreDataModel::Branch",
+            "RetailBankingCoreDataModel::LifeEvent",
+            "RetailBankingCoreDataModel::CustomerFinancialHolding",
+            "RetailBankingCoreDataModel::FICard"
+          ],
+          "hit_at_1": false,
+          "hit_at_3": false,
+          "hit_at_6": true,
+          "recall_at_6": 1.0,
+          "mrr_at_6": 0.25,
+          "latency_ms": 27.8
+        },
+        "hybrid_reranked": {
+          "ranked_entity_ids": [
+            "RetailBankingCoreDataModel::LifeEvent",
+            "RetailBankingCoreDataModel::GroupFinancialHolding",
+            "RetailBankingCoreDataModel::Relationship"
+          ],
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_6": true,
+          "recall_at_6": 1.0,
+          "mrr_at_6": 1.0,
+          "latency_ms": 2541.03
+        }
+      }
+    },
+    {
+      "id": "test-03",
+      "question": "Which definition connects a household or other customer group to a financial holding?",
+      "split": "test",
+      "category": "relationship",
+      "positive_entity_ids": [
+        "RetailBankingCoreDataModel::GroupFinancialHolding"
+      ],
+      "label_source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Groupfinancialholding.cdm.json",
+      "probe_similarity": 0.694386,
+      "variants": {
+        "lexical": {
+          "ranked_entity_ids": [
+            "RetailBankingCoreDataModel::GroupFinancialHolding",
+            "RetailBankingCoreDataModel::FHAccount",
+            "RetailBankingCoreDataModel::FHLineOfCredit"
+          ],
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_6": true,
+          "recall_at_6": 1.0,
+          "mrr_at_6": 1.0,
+          "latency_ms": 5.47
+        },
+        "semantic": {
+          "ranked_entity_ids": [
+            "RetailBankingCoreDataModel::CustomerFinancialHolding",
+            "RetailBankingCoreDataModel::GroupFinancialHolding"
+          ],
+          "hit_at_1": false,
+          "hit_at_3": true,
+          "hit_at_6": true,
+          "recall_at_6": 1.0,
+          "mrr_at_6": 0.5,
+          "latency_ms": 28.47
+        },
+        "hybrid": {
+          "ranked_entity_ids": [
+            "RetailBankingCoreDataModel::GroupFinancialHolding",
+            "RetailBankingCoreDataModel::CustomerFinancialHolding",
+            "RetailBankingCoreDataModel::FHAccount"
+          ],
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_6": true,
+          "recall_at_6": 1.0,
+          "mrr_at_6": 1.0,
+          "latency_ms": 25.53
+        },
+        "hybrid_reranked": {
+          "ranked_entity_ids": [
+            "RetailBankingCoreDataModel::CustomerFinancialHolding",
+            "RetailBankingCoreDataModel::GroupFinancialHolding"
+          ],
+          "hit_at_1": false,
+          "hit_at_3": true,
+          "hit_at_6": true,
+          "recall_at_6": 1.0,
+          "mrr_at_6": 0.5,
+          "latency_ms": 3419.47
+        }
+      }
+    },
+    {
+      "id": "test-04",
+      "question": "How is a personal connection, such as a spouse, between two contacts represented?",
+      "split": "test",
+      "category": "relationship",
+      "positive_entity_ids": [
+        "RetailBankingCoreDataModel::Relationship"
+      ],
+      "label_source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Relationship.cdm.json",
+      "probe_similarity": 0.73868,
+      "variants": {
+        "lexical": {
+          "ranked_entity_ids": [
+            "applicationCommon::ConnectionRole",
+            "applicationCommon::Connection",
+            "RetailBankingCoreDataModel::Relationship",
+            "RetailBankingCoreDataModel::LifeEvent",
+            "applicationCommon::Contact",
+            "RetailBankingCoreDataModel::FHAccount"
+          ],
+          "hit_at_1": false,
+          "hit_at_3": true,
+          "hit_at_6": true,
+          "recall_at_6": 1.0,
+          "mrr_at_6": 0.3333333333333333,
+          "latency_ms": 5.91
+        },
+        "semantic": {
+          "ranked_entity_ids": [
+            "RetailBankingCoreDataModel::Relationship",
+            "applicationCommon::Contact",
+            "RetailBankingCoreDataModel::Contact",
+            "RetailBankingCoreDataModel::LifeEvent"
+          ],
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_6": true,
+          "recall_at_6": 1.0,
+          "mrr_at_6": 1.0,
+          "latency_ms": 66.11
+        },
+        "hybrid": {
+          "ranked_entity_ids": [
+            "RetailBankingCoreDataModel::Relationship",
+            "RetailBankingCoreDataModel::Contact",
+            "applicationCommon::Contact",
+            "applicationCommon::Connection",
+            "applicationCommon::ConnectionRole"
+          ],
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_6": true,
+          "recall_at_6": 1.0,
+          "mrr_at_6": 1.0,
+          "latency_ms": 39.25
+        },
+        "hybrid_reranked": {
+          "ranked_entity_ids": [
+            "RetailBankingCoreDataModel::Relationship",
+            "applicationCommon::Contact"
+          ],
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_6": true,
+          "recall_at_6": 1.0,
+          "mrr_at_6": 1.0,
+          "latency_ms": 3331.03
+        }
+      }
+    },
+    {
+      "id": "test-05",
+      "question": "Which banking object identifies the person or company that holds a payment card?",
+      "split": "test",
+      "category": "relationship",
+      "positive_entity_ids": [
+        "RetailBankingCoreDataModel::FICard"
+      ],
+      "label_source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Fi_card.cdm.json",
+      "probe_similarity": 0.765644,
+      "variants": {
+        "lexical": {
+          "ranked_entity_ids": [
+            "RetailBankingCoreDataModel::FHLineOfCredit",
+            "RetailBankingCoreDataModel::FHLoan",
+            "RetailBankingCoreDataModel::FIStandingOrder",
+            "RetailBankingCoreDataModel::FICard"
+          ],
+          "hit_at_1": false,
+          "hit_at_3": false,
+          "hit_at_6": true,
+          "recall_at_6": 1.0,
+          "mrr_at_6": 0.25,
+          "latency_ms": 4.79
+        },
+        "semantic": {
+          "ranked_entity_ids": [
+            "RetailBankingCoreDataModel::FICard"
+          ],
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_6": true,
+          "recall_at_6": 1.0,
+          "mrr_at_6": 1.0,
+          "latency_ms": 34.59
+        },
+        "hybrid": {
+          "ranked_entity_ids": [
+            "RetailBankingCoreDataModel::FICard",
+            "RetailBankingCoreDataModel::FHLineOfCredit"
+          ],
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_6": true,
+          "recall_at_6": 1.0,
+          "mrr_at_6": 1.0,
+          "latency_ms": 31.35
+        },
+        "hybrid_reranked": {
+          "ranked_entity_ids": [
+            "RetailBankingCoreDataModel::FICard",
+            "RetailBankingCoreDataModel::CustomerFinancialHolding"
+          ],
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_6": true,
+          "recall_at_6": 1.0,
+          "mrr_at_6": 1.0,
+          "latency_ms": 3257.83
+        }
+      }
+    },
+    {
+      "id": "test-06",
+      "question": "Which definition connects a financial instrument to the financial holding it belongs to?",
+      "split": "test",
+      "category": "relationship",
+      "positive_entity_ids": [
+        "RetailBankingCoreDataModel::FinancialHoldingInstrument"
+      ],
+      "label_source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Financialholdinginstrument.cdm.json",
+      "probe_similarity": 0.679624,
+      "variants": {
+        "lexical": {
+          "ranked_entity_ids": [
+            "RetailBankingCoreDataModel::FinancialHoldingInstrument",
+            "RetailBankingCoreDataModel::FHSaving",
+            "RetailBankingCoreDataModel::CustomerFinancialHolding",
+            "RetailBankingCoreDataModel::FHAccount"
+          ],
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_6": true,
+          "recall_at_6": 1.0,
+          "mrr_at_6": 1.0,
+          "latency_ms": 2.67
+        },
+        "semantic": {
+          "ranked_entity_ids": [
+            "RetailBankingCoreDataModel::FinancialHoldingInstrument",
+            "RetailBankingCoreDataModel::GroupFinancialHolding",
+            "RetailBankingCoreDataModel::CustomerFinancialHolding"
+          ],
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_6": true,
+          "recall_at_6": 1.0,
+          "mrr_at_6": 1.0,
+          "latency_ms": 38.64
+        },
+        "hybrid": {
+          "ranked_entity_ids": [
+            "RetailBankingCoreDataModel::FinancialHoldingInstrument",
+            "RetailBankingCoreDataModel::CustomerFinancialHolding"
+          ],
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_6": true,
+          "recall_at_6": 1.0,
+          "mrr_at_6": 1.0,
+          "latency_ms": 30.21
+        },
+        "hybrid_reranked": {
+          "ranked_entity_ids": [
+            "RetailBankingCoreDataModel::FinancialHoldingInstrument",
+            "RetailBankingCoreDataModel::CustomerFinancialHolding",
+            "RetailBankingCoreDataModel::FinancialHolding"
+          ],
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_6": true,
+          "recall_at_6": 1.0,
+          "mrr_at_6": 1.0,
+          "latency_ms": 4802.45
+        }
+      }
+    },
+    {
+      "id": "test-07",
+      "question": "What is the general banking concept encompassing loans, investments, and savings held by a customer?",
+      "split": "test",
+      "category": "concept",
+      "positive_entity_ids": [
+        "RetailBankingCoreDataModel::FinancialHolding"
+      ],
+      "label_source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Financialholding.cdm.json",
+      "probe_similarity": 0.671113,
+      "variants": {
+        "lexical": {
+          "ranked_entity_ids": [
+            "RetailBankingCoreDataModel::FinancialHolding",
+            "RetailBankingCoreDataModel::FHAccount",
+            "RetailBankingCoreDataModel::FHSaving",
+            "RetailBankingCoreDataModel::FHInvestment",
+            "RetailBankingCoreDataModel::FHLineOfCredit"
+          ],
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_6": true,
+          "recall_at_6": 1.0,
+          "mrr_at_6": 1.0,
+          "latency_ms": 8.42
+        },
+        "semantic": {
+          "ranked_entity_ids": [
+            "RetailBankingCoreDataModel::FHSaving",
+            "RetailBankingCoreDataModel::FinancialHolding",
+            "RetailBankingCoreDataModel::CustomerFinancialHolding",
+            "RetailBankingCoreDataModel::FHInvestment"
+          ],
+          "hit_at_1": false,
+          "hit_at_3": true,
+          "hit_at_6": true,
+          "recall_at_6": 1.0,
+          "mrr_at_6": 0.5,
+          "latency_ms": 73.74
+        },
+        "hybrid": {
+          "ranked_entity_ids": [
+            "RetailBankingCoreDataModel::FHSaving",
+            "RetailBankingCoreDataModel::FinancialHolding",
+            "RetailBankingCoreDataModel::FHInvestment",
+            "RetailBankingCoreDataModel::FHAccount"
+          ],
+          "hit_at_1": false,
+          "hit_at_3": true,
+          "hit_at_6": true,
+          "recall_at_6": 1.0,
+          "mrr_at_6": 0.5,
+          "latency_ms": 38.34
+        },
+        "hybrid_reranked": {
+          "ranked_entity_ids": [
+            "RetailBankingCoreDataModel::FinancialHolding",
+            "RetailBankingCoreDataModel::FHSaving",
+            "RetailBankingCoreDataModel::FHInvestment",
+            "RetailBankingCoreDataModel::FHAccount",
+            "RetailBankingCoreDataModel::FHLoan"
+          ],
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_6": true,
+          "recall_at_6": 1.0,
+          "mrr_at_6": 1.0,
+          "latency_ms": 5052.1
+        }
+      }
+    },
+    {
+      "id": "test-08",
+      "question": "What represents a fixed sum automatically sent from one account to another at intervals?",
+      "split": "test",
+      "category": "concept",
+      "positive_entity_ids": [
+        "RetailBankingCoreDataModel::FIStandingOrder"
+      ],
+      "label_source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Fi_standingorder.cdm.json",
+      "probe_similarity": 0.603336,
+      "variants": {
+        "lexical": {
+          "ranked_entity_ids": [
+            "RetailBankingCoreDataModel::FIStandingOrder",
+            "RetailBankingCoreDataModel::FIDirectDebit",
+            "RetailBankingCoreDataModel::Relationship",
+            "applicationCommon::Account",
+            "RetailBankingCoreDataModel::Account"
+          ],
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_6": true,
+          "recall_at_6": 1.0,
+          "mrr_at_6": 1.0,
+          "latency_ms": 8.29
+        },
+        "semantic": {
+          "ranked_entity_ids": [
+            "RetailBankingCoreDataModel::FIDirectDebit",
+            "RetailBankingCoreDataModel::FHAccount",
+            "RetailBankingCoreDataModel::FinancialHoldingInstrument",
+            "RetailBankingCoreDataModel::FHLoan",
+            "RetailBankingCoreDataModel::FIStandingOrder"
+          ],
+          "hit_at_1": false,
+          "hit_at_3": false,
+          "hit_at_6": true,
+          "recall_at_6": 1.0,
+          "mrr_at_6": 0.2,
+          "latency_ms": 66.67
+        },
+        "hybrid": {
+          "ranked_entity_ids": [
+            "RetailBankingCoreDataModel::FIStandingOrder",
+            "RetailBankingCoreDataModel::FHSaving",
+            "RetailBankingCoreDataModel::FHAccount",
+            "RetailBankingCoreDataModel::FIDirectDebit"
+          ],
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_6": true,
+          "recall_at_6": 1.0,
+          "mrr_at_6": 1.0,
+          "latency_ms": 53.47
+        },
+        "hybrid_reranked": {
+          "ranked_entity_ids": [
+            "RetailBankingCoreDataModel::FIDirectDebit",
+            "RetailBankingCoreDataModel::FIStandingOrder"
+          ],
+          "hit_at_1": false,
+          "hit_at_3": true,
+          "hit_at_6": true,
+          "recall_at_6": 1.0,
+          "mrr_at_6": 0.5,
+          "latency_ms": 3282.75
+        }
+      }
+    },
+    {
+      "id": "test-09",
+      "question": "Which attributes describe a business customer in the common Account definition?",
+      "split": "test",
+      "category": "attribute",
+      "positive_entity_ids": [
+        "applicationCommon::Account"
+      ],
+      "label_source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/Account.cdm.json",
+      "probe_similarity": 0.747945,
+      "variants": {
+        "lexical": {
+          "ranked_entity_ids": [
+            "applicationCommon::Account",
+            "applicationCommon::CustomerRelationship",
+            "RetailBankingCoreDataModel::Account",
+            "applicationCommon::BusinessUnit"
+          ],
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_6": true,
+          "recall_at_6": 1.0,
+          "mrr_at_6": 1.0,
+          "latency_ms": 2.86
+        },
+        "semantic": {
+          "ranked_entity_ids": [
+            "applicationCommon::Account",
+            "RetailBankingCoreDataModel::Account",
+            "applicationCommon::Contact",
+            "applicationCommon::CustomerRelationship"
+          ],
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_6": true,
+          "recall_at_6": 1.0,
+          "mrr_at_6": 1.0,
+          "latency_ms": 38.07
+        },
+        "hybrid": {
+          "ranked_entity_ids": [
+            "applicationCommon::Account",
+            "RetailBankingCoreDataModel::Account",
+            "applicationCommon::CustomerRelationship",
+            "applicationCommon::Contact"
+          ],
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_6": true,
+          "recall_at_6": 1.0,
+          "mrr_at_6": 1.0,
+          "latency_ms": 27.48
+        },
+        "hybrid_reranked": {
+          "ranked_entity_ids": [
+            "applicationCommon::Account"
+          ],
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_6": true,
+          "recall_at_6": 1.0,
+          "mrr_at_6": 1.0,
+          "latency_ms": 4905.57
+        }
+      }
+    },
+    {
+      "id": "test-10",
+      "question": "Where can I find first and last name fields for an individual contact?",
+      "split": "test",
+      "category": "attribute",
+      "positive_entity_ids": [
+        "applicationCommon::Contact"
+      ],
+      "label_source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/Contact.cdm.json",
+      "probe_similarity": 0.713475,
+      "variants": {
+        "lexical": {
+          "ranked_entity_ids": [
+            "applicationCommon::Contact",
+            "applicationCommon::User",
+            "applicationCommon::Appointment"
+          ],
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_6": true,
+          "recall_at_6": 1.0,
+          "mrr_at_6": 1.0,
+          "latency_ms": 7.99
+        },
+        "semantic": {
+          "ranked_entity_ids": [
+            "applicationCommon::Contact"
+          ],
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_6": true,
+          "recall_at_6": 1.0,
+          "mrr_at_6": 1.0,
+          "latency_ms": 72.51
+        },
+        "hybrid": {
+          "ranked_entity_ids": [
+            "applicationCommon::Contact"
+          ],
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_6": true,
+          "recall_at_6": 1.0,
+          "mrr_at_6": 1.0,
+          "latency_ms": 28.83
+        },
+        "hybrid_reranked": {
+          "ranked_entity_ids": [
+            "applicationCommon::Contact"
+          ],
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_6": true,
+          "recall_at_6": 1.0,
+          "mrr_at_6": 1.0,
+          "latency_ms": 4982.97
+        }
+      }
+    },
+    {
+      "id": "test-11",
+      "question": "Which common definition contains the parent account of a business customer?",
+      "split": "test",
+      "category": "relationship",
+      "positive_entity_ids": [
+        "applicationCommon::Account"
+      ],
+      "label_source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/Account.cdm.json",
+      "probe_similarity": 0.703416,
+      "variants": {
+        "lexical": {
+          "ranked_entity_ids": [
+            "applicationCommon::Address",
+            "applicationCommon::Account",
+            "applicationCommon::CustomerRelationship",
+            "applicationCommon::BusinessUnit"
+          ],
+          "hit_at_1": false,
+          "hit_at_3": true,
+          "hit_at_6": true,
+          "recall_at_6": 1.0,
+          "mrr_at_6": 0.5,
+          "latency_ms": 5.53
+        },
+        "semantic": {
+          "ranked_entity_ids": [
+            "applicationCommon::Account",
+            "applicationCommon::Contact",
+            "RetailBankingCoreDataModel::Account"
+          ],
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_6": true,
+          "recall_at_6": 1.0,
+          "mrr_at_6": 1.0,
+          "latency_ms": 32.15
+        },
+        "hybrid": {
+          "ranked_entity_ids": [
+            "applicationCommon::Account",
+            "RetailBankingCoreDataModel::Account",
+            "applicationCommon::Contact"
+          ],
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_6": true,
+          "recall_at_6": 1.0,
+          "mrr_at_6": 1.0,
+          "latency_ms": 28.28
+        },
+        "hybrid_reranked": {
+          "ranked_entity_ids": [
+            "applicationCommon::Account",
+            "applicationCommon::Contact",
+            "applicationCommon::Address",
+            "applicationCommon::CustomerRelationship"
+          ],
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_6": true,
+          "recall_at_6": 1.0,
+          "mrr_at_6": 1.0,
+          "latency_ms": 2727.75
+        }
+      }
+    },
+    {
+      "id": "test-12",
+      "question": "Where is a contact linked to its parent customer account?",
+      "split": "test",
+      "category": "relationship",
+      "positive_entity_ids": [
+        "applicationCommon::Contact"
+      ],
+      "label_source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/Contact.cdm.json",
+      "probe_similarity": 0.864455,
+      "variants": {
+        "lexical": {
+          "ranked_entity_ids": [
+            "applicationCommon::Contact",
+            "applicationCommon::Address",
+            "applicationCommon::Account"
+          ],
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_6": true,
+          "recall_at_6": 1.0,
+          "mrr_at_6": 1.0,
+          "latency_ms": 4.33
+        },
+        "semantic": {
+          "ranked_entity_ids": [
+            "applicationCommon::Contact",
+            "applicationCommon::Address",
+            "applicationCommon::CustomerRelationship",
+            "applicationCommon::Account"
+          ],
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_6": true,
+          "recall_at_6": 1.0,
+          "mrr_at_6": 1.0,
+          "latency_ms": 31.58
+        },
+        "hybrid": {
+          "ranked_entity_ids": [
+            "applicationCommon::Contact",
+            "applicationCommon::Address",
+            "applicationCommon::CustomerRelationship",
+            "RetailBankingCoreDataModel::Relationship"
+          ],
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_6": true,
+          "recall_at_6": 1.0,
+          "mrr_at_6": 1.0,
+          "latency_ms": 27.57
+        },
+        "hybrid_reranked": {
+          "ranked_entity_ids": [
+            "applicationCommon::Contact",
+            "applicationCommon::Account"
+          ],
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_6": true,
+          "recall_at_6": 1.0,
+          "mrr_at_6": 1.0,
+          "latency_ms": 3480.35
+        }
+      }
+    },
+    {
+      "id": "test-13",
+      "question": "Which definition joins a system user with a team they belong to?",
+      "split": "test",
+      "category": "relationship",
+      "positive_entity_ids": [
+        "applicationCommon::TeamMembership"
+      ],
+      "label_source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/TeamMembership.cdm.json",
+      "probe_similarity": 0.747535,
+      "variants": {
+        "lexical": {
+          "ranked_entity_ids": [
+            "applicationCommon::Team",
+            "applicationCommon::SLA",
+            "applicationCommon::Account",
+            "RetailBankingCoreDataModel::FHLineOfCredit",
+            "RetailBankingCoreDataModel::FHLoan"
+          ],
+          "hit_at_1": false,
+          "hit_at_3": false,
+          "hit_at_6": false,
+          "recall_at_6": 0.0,
+          "mrr_at_6": 0.0,
+          "latency_ms": 9.52
+        },
+        "semantic": {
+          "ranked_entity_ids": [
+            "applicationCommon::TeamMembership",
+            "applicationCommon::Team",
+            "applicationCommon::QueueItem"
+          ],
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_6": true,
+          "recall_at_6": 1.0,
+          "mrr_at_6": 1.0,
+          "latency_ms": 76.1
+        },
+        "hybrid": {
+          "ranked_entity_ids": [
+            "applicationCommon::Team",
+            "applicationCommon::User",
+            "applicationCommon::TeamMembership",
+            "applicationCommon::SLA"
+          ],
+          "hit_at_1": false,
+          "hit_at_3": true,
+          "hit_at_6": true,
+          "recall_at_6": 1.0,
+          "mrr_at_6": 0.3333333333333333,
+          "latency_ms": 45.16
+        },
+        "hybrid_reranked": {
+          "ranked_entity_ids": [
+            "applicationCommon::TeamMembership",
+            "applicationCommon::Team"
+          ],
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_6": true,
+          "recall_at_6": 1.0,
+          "mrr_at_6": 1.0,
+          "latency_ms": 4082.68
+        }
+      }
+    },
+    {
+      "id": "test-14",
+      "question": "Where are extra postal or delivery addresses for customers and contacts kept?",
+      "split": "test",
+      "category": "concept",
+      "positive_entity_ids": [
+        "applicationCommon::Address"
+      ],
+      "label_source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/Address.cdm.json",
+      "probe_similarity": 0.71261,
+      "variants": {
+        "lexical": {
+          "ranked_entity_ids": [
+            "applicationCommon::Contact",
+            "applicationCommon::Email",
+            "applicationCommon::Address",
+            "applicationCommon::Appointment",
+            "applicationCommon::User"
+          ],
+          "hit_at_1": false,
+          "hit_at_3": true,
+          "hit_at_6": true,
+          "recall_at_6": 1.0,
+          "mrr_at_6": 0.3333333333333333,
+          "latency_ms": 3.81
+        },
+        "semantic": {
+          "ranked_entity_ids": [
+            "applicationCommon::Address",
+            "applicationCommon::Contact"
+          ],
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_6": true,
+          "recall_at_6": 1.0,
+          "mrr_at_6": 1.0,
+          "latency_ms": 92.41
+        },
+        "hybrid": {
+          "ranked_entity_ids": [
+            "applicationCommon::Address",
+            "applicationCommon::Contact"
+          ],
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_6": true,
+          "recall_at_6": 1.0,
+          "mrr_at_6": 1.0,
+          "latency_ms": 30.0
+        },
+        "hybrid_reranked": {
+          "ranked_entity_ids": [
+            "applicationCommon::Address",
+            "applicationCommon::User"
+          ],
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_6": true,
+          "recall_at_6": 1.0,
+          "mrr_at_6": 1.0,
+          "latency_ms": 4916.52
+        }
+      }
+    },
+    {
+      "id": "test-15",
+      "question": "What represents a work item placed in a queue and links it back to that queue?",
+      "split": "test",
+      "category": "relationship",
+      "positive_entity_ids": [
+        "applicationCommon::QueueItem"
+      ],
+      "label_source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/QueueItem.cdm.json",
+      "probe_similarity": 0.766859,
+      "variants": {
+        "lexical": {
+          "ranked_entity_ids": [
+            "applicationCommon::QueueItem",
+            "applicationCommon::Queue"
+          ],
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_6": true,
+          "recall_at_6": 1.0,
+          "mrr_at_6": 1.0,
+          "latency_ms": 12.14
+        },
+        "semantic": {
+          "ranked_entity_ids": [
+            "applicationCommon::QueueItem",
+            "applicationCommon::Queue"
+          ],
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_6": true,
+          "recall_at_6": 1.0,
+          "mrr_at_6": 1.0,
+          "latency_ms": 79.59
+        },
+        "hybrid": {
+          "ranked_entity_ids": [
+            "applicationCommon::QueueItem",
+            "applicationCommon::Queue"
+          ],
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_6": true,
+          "recall_at_6": 1.0,
+          "mrr_at_6": 1.0,
+          "latency_ms": 44.3
+        },
+        "hybrid_reranked": {
+          "ranked_entity_ids": [
+            "applicationCommon::QueueItem"
+          ],
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_6": true,
+          "recall_at_6": 1.0,
+          "mrr_at_6": 1.0,
+          "latency_ms": 4126.64
+        }
+      }
+    },
+    {
+      "id": "test-16",
+      "question": "What represents a service-level KPI being tracked for an individual support case?",
+      "split": "test",
+      "category": "concept",
+      "positive_entity_ids": [
+        "applicationCommon::SLAKPIInstance"
+      ],
+      "label_source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/SLAKPIInstance.cdm.json",
+      "probe_similarity": 0.726972,
+      "variants": {
+        "lexical": {
+          "ranked_entity_ids": [
+            "applicationCommon::SLAKPIInstance",
+            "applicationCommon::SLAItem",
+            "applicationCommon::SLA"
+          ],
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_6": true,
+          "recall_at_6": 1.0,
+          "mrr_at_6": 1.0,
+          "latency_ms": 8.49
+        },
+        "semantic": {
+          "ranked_entity_ids": [
+            "applicationCommon::SLA",
+            "applicationCommon::SLAItem",
+            "applicationCommon::SLAKPIInstance"
+          ],
+          "hit_at_1": false,
+          "hit_at_3": true,
+          "hit_at_6": true,
+          "recall_at_6": 1.0,
+          "mrr_at_6": 0.3333333333333333,
+          "latency_ms": 99.44
+        },
+        "hybrid": {
+          "ranked_entity_ids": [
+            "applicationCommon::SLAKPIInstance",
+            "applicationCommon::SLAItem",
+            "applicationCommon::SLA"
+          ],
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_6": true,
+          "recall_at_6": 1.0,
+          "mrr_at_6": 1.0,
+          "latency_ms": 36.66
+        },
+        "hybrid_reranked": {
+          "ranked_entity_ids": [
+            "applicationCommon::SLAKPIInstance"
+          ],
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_6": true,
+          "recall_at_6": 1.0,
+          "mrr_at_6": 1.0,
+          "latency_ms": 4318.23
+        }
+      }
+    },
+    {
+      "id": "test-17",
+      "question": "Where is the type of measurement, such as a count or amount, for a goal described?",
+      "split": "test",
+      "category": "concept",
+      "positive_entity_ids": [
+        "applicationCommon::GoalMetric"
+      ],
+      "label_source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/GoalMetric.cdm.json",
+      "probe_similarity": 0.816082,
+      "variants": {
+        "lexical": {
+          "ranked_entity_ids": [
+            "applicationCommon::GoalMetric",
+            "applicationCommon::Goal"
+          ],
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_6": true,
+          "recall_at_6": 1.0,
+          "mrr_at_6": 1.0,
+          "latency_ms": 7.85
+        },
+        "semantic": {
+          "ranked_entity_ids": [
+            "applicationCommon::GoalMetric",
+            "applicationCommon::Goal"
+          ],
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_6": true,
+          "recall_at_6": 1.0,
+          "mrr_at_6": 1.0,
+          "latency_ms": 91.09
+        },
+        "hybrid": {
+          "ranked_entity_ids": [
+            "applicationCommon::GoalMetric",
+            "applicationCommon::Goal"
+          ],
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_6": true,
+          "recall_at_6": 1.0,
+          "mrr_at_6": 1.0,
+          "latency_ms": 40.87
+        },
+        "hybrid_reranked": {
+          "ranked_entity_ids": [
+            "applicationCommon::GoalMetric",
+            "applicationCommon::Goal"
+          ],
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_6": true,
+          "recall_at_6": 1.0,
+          "mrr_at_6": 1.0,
+          "latency_ms": 7101.35
+        }
+      }
+    },
+    {
+      "id": "test-18",
+      "question": "Which definition counts how often a knowledge article was viewed on a day?",
+      "split": "test",
+      "category": "concept",
+      "positive_entity_ids": [
+        "applicationCommon::KnowledgeArticleViews"
+      ],
+      "label_source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/KnowledgeArticleViews.cdm.json",
+      "probe_similarity": 0.799416,
+      "variants": {
+        "lexical": {
+          "ranked_entity_ids": [
+            "applicationCommon::KnowledgeArticleViews",
+            "applicationCommon::KnowledgeArticleCategory",
+            "applicationCommon::KnowledgeArticle"
+          ],
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_6": true,
+          "recall_at_6": 1.0,
+          "mrr_at_6": 1.0,
+          "latency_ms": 7.21
+        },
+        "semantic": {
+          "ranked_entity_ids": [
+            "applicationCommon::KnowledgeArticleViews"
+          ],
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_6": true,
+          "recall_at_6": 1.0,
+          "mrr_at_6": 1.0,
+          "latency_ms": 51.97
+        },
+        "hybrid": {
+          "ranked_entity_ids": [
+            "applicationCommon::KnowledgeArticleViews",
+            "applicationCommon::KnowledgeArticle",
+            "applicationCommon::KnowledgeArticleCategory"
+          ],
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_6": true,
+          "recall_at_6": 1.0,
+          "mrr_at_6": 1.0,
+          "latency_ms": 33.28
+        },
+        "hybrid_reranked": {
+          "ranked_entity_ids": [
+            "applicationCommon::KnowledgeArticle",
+            "applicationCommon::KnowledgeArticleViews"
+          ],
+          "hit_at_1": false,
+          "hit_at_3": true,
+          "hit_at_6": true,
+          "recall_at_6": 1.0,
+          "mrr_at_6": 0.5,
+          "latency_ms": 2545.48
+        }
+      }
+    },
+    {
+      "id": "test-19",
+      "question": "What represents a comment linked to a knowledge-base article?",
+      "split": "test",
+      "category": "relationship",
+      "positive_entity_ids": [
+        "applicationCommon::ArticleComment"
+      ],
+      "label_source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/ArticleComment.cdm.json",
+      "probe_similarity": 0.803463,
+      "variants": {
+        "lexical": {
+          "ranked_entity_ids": [
+            "applicationCommon::ArticleComment",
+            "applicationCommon::KnowledgeBaseRecord",
+            "applicationCommon::KnowledgeArticle",
+            "applicationCommon::KnowledgeArticleCategory"
+          ],
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_6": true,
+          "recall_at_6": 1.0,
+          "mrr_at_6": 1.0,
+          "latency_ms": 13.92
+        },
+        "semantic": {
+          "ranked_entity_ids": [
+            "applicationCommon::ArticleComment",
+            "applicationCommon::Article",
+            "applicationCommon::KnowledgeArticleViews"
+          ],
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_6": true,
+          "recall_at_6": 1.0,
+          "mrr_at_6": 1.0,
+          "latency_ms": 43.75
+        },
+        "hybrid": {
+          "ranked_entity_ids": [
+            "applicationCommon::ArticleComment",
+            "applicationCommon::Article",
+            "applicationCommon::KnowledgeBaseRecord"
+          ],
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_6": true,
+          "recall_at_6": 1.0,
+          "mrr_at_6": 1.0,
+          "latency_ms": 35.56
+        },
+        "hybrid_reranked": {
+          "ranked_entity_ids": [
+            "applicationCommon::ArticleComment",
+            "applicationCommon::Article",
+            "applicationCommon::KnowledgeBaseRecord"
+          ],
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_6": true,
+          "recall_at_6": 1.0,
+          "mrr_at_6": 1.0,
+          "latency_ms": 4696.21
+        }
+      }
+    },
+    {
+      "id": "test-20",
+      "question": "Which object holds an email signature and its body?",
+      "split": "test",
+      "category": "concept",
+      "positive_entity_ids": [
+        "applicationCommon::EmailSignature"
+      ],
+      "label_source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/EmailSignature.cdm.json",
+      "probe_similarity": 0.842015,
+      "variants": {
+        "lexical": {
+          "ranked_entity_ids": [
+            "applicationCommon::EmailSignature"
+          ],
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_6": true,
+          "recall_at_6": 1.0,
+          "mrr_at_6": 1.0,
+          "latency_ms": 15.14
+        },
+        "semantic": {
+          "ranked_entity_ids": [
+            "applicationCommon::EmailSignature"
+          ],
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_6": true,
+          "recall_at_6": 1.0,
+          "mrr_at_6": 1.0,
+          "latency_ms": 125.3
+        },
+        "hybrid": {
+          "ranked_entity_ids": [
+            "applicationCommon::EmailSignature"
+          ],
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_6": true,
+          "recall_at_6": 1.0,
+          "mrr_at_6": 1.0,
+          "latency_ms": 42.89
+        },
+        "hybrid_reranked": {
+          "ranked_entity_ids": [
+            "applicationCommon::EmailSignature",
+            "applicationCommon::Email"
+          ],
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_6": true,
+          "recall_at_6": 1.0,
+          "mrr_at_6": 1.0,
+          "latency_ms": 4154.08
+        }
+      }
+    },
+    {
+      "id": "test-21",
+      "question": "Where is the parent of a business unit specified in the organization hierarchy?",
+      "split": "test",
+      "category": "relationship",
+      "positive_entity_ids": [
+        "applicationCommon::BusinessUnit"
+      ],
+      "label_source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/BusinessUnit.cdm.json",
+      "probe_similarity": 0.729486,
+      "variants": {
+        "lexical": {
+          "ranked_entity_ids": [
+            "applicationCommon::BusinessUnit",
+            "applicationCommon::Organization",
+            "applicationCommon::User",
+            "applicationCommon::Contact"
+          ],
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_6": true,
+          "recall_at_6": 1.0,
+          "mrr_at_6": 1.0,
+          "latency_ms": 15.26
+        },
+        "semantic": {
+          "ranked_entity_ids": [
+            "applicationCommon::BusinessUnit"
+          ],
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_6": true,
+          "recall_at_6": 1.0,
+          "mrr_at_6": 1.0,
+          "latency_ms": 86.36
+        },
+        "hybrid": {
+          "ranked_entity_ids": [
+            "applicationCommon::BusinessUnit"
+          ],
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_6": true,
+          "recall_at_6": 1.0,
+          "mrr_at_6": 1.0,
+          "latency_ms": 54.98
+        },
+        "hybrid_reranked": {
+          "ranked_entity_ids": [
+            "applicationCommon::BusinessUnit",
+            "applicationCommon::CustomerRelationship"
+          ],
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_6": true,
+          "recall_at_6": 1.0,
+          "mrr_at_6": 1.0,
+          "latency_ms": 4959.44
+        }
+      }
+    },
+    {
+      "id": "test-22",
+      "question": "Which common definition contains a system user’s first and last names?",
+      "split": "test",
+      "category": "attribute",
+      "positive_entity_ids": [
+        "applicationCommon::User"
+      ],
+      "label_source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/User.cdm.json",
+      "probe_similarity": 0.736217,
+      "variants": {
+        "lexical": {
+          "ranked_entity_ids": [
+            "applicationCommon::User",
+            "applicationCommon::Contact",
+            "applicationCommon::Fax",
+            "applicationCommon::SocialActivity"
+          ],
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_6": true,
+          "recall_at_6": 1.0,
+          "mrr_at_6": 1.0,
+          "latency_ms": 10.5
+        },
+        "semantic": {
+          "ranked_entity_ids": [
+            "applicationCommon::User",
+            "applicationCommon::Account"
+          ],
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_6": true,
+          "recall_at_6": 1.0,
+          "mrr_at_6": 1.0,
+          "latency_ms": 40.21
+        },
+        "hybrid": {
+          "ranked_entity_ids": [
+            "applicationCommon::User",
+            "applicationCommon::Contact",
+            "applicationCommon::Fax"
+          ],
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_6": true,
+          "recall_at_6": 1.0,
+          "mrr_at_6": 1.0,
+          "latency_ms": 34.14
+        },
+        "hybrid_reranked": {
+          "ranked_entity_ids": [
+            "applicationCommon::User"
+          ],
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_6": true,
+          "recall_at_6": 1.0,
+          "mrr_at_6": 1.0,
+          "latency_ms": 4046.33
+        }
+      }
+    },
+    {
+      "id": "test-23",
+      "question": "What common object represents a geographic sales region?",
+      "split": "test",
+      "category": "concept",
+      "positive_entity_ids": [
+        "applicationCommon::Territory"
+      ],
+      "label_source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/Territory.cdm.json",
+      "probe_similarity": 0.687521,
+      "variants": {
+        "lexical": {
+          "ranked_entity_ids": [
+            "applicationCommon::Territory",
+            "applicationCommon::Account",
+            "RetailBankingCoreDataModel::Account",
+            "applicationCommon::QueueItem",
+            "applicationCommon::Appointment"
+          ],
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_6": true,
+          "recall_at_6": 1.0,
+          "mrr_at_6": 1.0,
+          "latency_ms": 7.49
+        },
+        "semantic": {
+          "ranked_entity_ids": [
+            "applicationCommon::Territory"
+          ],
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_6": true,
+          "recall_at_6": 1.0,
+          "mrr_at_6": 1.0,
+          "latency_ms": 113.33
+        },
+        "hybrid": {
+          "ranked_entity_ids": [
+            "applicationCommon::Territory",
+            "applicationCommon::Account",
+            "applicationCommon::Contact",
+            "RetailBankingCoreDataModel::Account"
+          ],
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_6": true,
+          "recall_at_6": 1.0,
+          "mrr_at_6": 1.0,
+          "latency_ms": 45.8
+        },
+        "hybrid_reranked": {
+          "ranked_entity_ids": [
+            "applicationCommon::Territory",
+            "applicationCommon::Account",
+            "applicationCommon::Contact"
+          ],
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_6": true,
+          "recall_at_6": 1.0,
+          "mrr_at_6": 1.0,
+          "latency_ms": 4064.12
+        }
+      }
+    },
+    {
+      "id": "test-24",
+      "question": "Which definition links an appointment to the master recurring series it belongs to?",
+      "split": "test",
+      "category": "relationship",
+      "positive_entity_ids": [
+        "applicationCommon::Appointment"
+      ],
+      "label_source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/Appointment.cdm.json",
+      "probe_similarity": 0.799069,
+      "variants": {
+        "lexical": {
+          "ranked_entity_ids": [
+            "applicationCommon::RecurringAppointment"
+          ],
+          "hit_at_1": false,
+          "hit_at_3": false,
+          "hit_at_6": false,
+          "recall_at_6": 0.0,
+          "mrr_at_6": 0.0,
+          "latency_ms": 6.7
+        },
+        "semantic": {
+          "ranked_entity_ids": [
+            "applicationCommon::Appointment",
+            "applicationCommon::RecurringAppointment"
+          ],
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_6": true,
+          "recall_at_6": 1.0,
+          "mrr_at_6": 1.0,
+          "latency_ms": 48.93
+        },
+        "hybrid": {
+          "ranked_entity_ids": [
+            "applicationCommon::RecurringAppointment",
+            "applicationCommon::Appointment"
+          ],
+          "hit_at_1": false,
+          "hit_at_3": true,
+          "hit_at_6": true,
+          "recall_at_6": 1.0,
+          "mrr_at_6": 0.5,
+          "latency_ms": 35.09
+        },
+        "hybrid_reranked": {
+          "ranked_entity_ids": [
+            "applicationCommon::Appointment",
+            "applicationCommon::ActivityParty"
+          ],
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_6": true,
+          "recall_at_6": 1.0,
+          "mrr_at_6": 1.0,
+          "latency_ms": 4289.75
+        }
+      }
+    }
+  ],
+  "out_of_scope": [
+    {
+      "id": "negative-09",
+      "split": "test",
+      "category": "off_topic",
+      "question": "Good morning, how are you doing?",
+      "probe_similarity": 0.563379
+    },
+    {
+      "id": "negative-10",
+      "split": "test",
+      "category": "off_topic",
+      "question": "Tell me a joke about a cat.",
+      "probe_similarity": 0.407821
+    },
+    {
+      "id": "negative-11",
+      "split": "test",
+      "category": "off_topic",
+      "question": "Who won the football match last night?",
+      "probe_similarity": 0.463805
+    },
+    {
+      "id": "negative-12",
+      "split": "test",
+      "category": "off_topic",
+      "question": "How do I grow tomatoes on my balcony?",
+      "probe_similarity": 0.284985
+    },
+    {
+      "id": "negative-13",
+      "split": "test",
+      "category": "unsupported_fact",
+      "question": "What was the total value of this customer’s deposits last month?",
+      "probe_similarity": 0.607162
+    },
+    {
+      "id": "negative-14",
+      "split": "test",
+      "category": "unsupported_fact",
+      "question": "Show me Jane Smith’s credit-card transactions.",
+      "probe_similarity": 0.609155
+    },
+    {
+      "id": "negative-15",
+      "split": "test",
+      "category": "unsupported_fact",
+      "question": "What interest rate is the bank charging on mortgages this week?",
+      "probe_similarity": 0.592365
+    },
+    {
+      "id": "negative-16",
+      "split": "test",
+      "category": "unsupported_fact",
+      "question": "Has this specific loan been repaid yet?",
+      "probe_similarity": 0.756627
+    }
+  ]
+}

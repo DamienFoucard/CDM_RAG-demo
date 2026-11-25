@@ -1,0 +1,605 @@
+{
+  "dataset_id": "cdm-relationships-synthetic-v1",
+  "source_commit": "dd21d715e05ebf740a11356c80b5c3b4c38a89c2",
+  "status": "synthetic pilot; not independently authored or human-reviewed",
+  "provenance": "Questions were authored from the pinned extracted CDM graph and each labeled directed edge was checked against that graph and its source URI. Test questions were not independently authored. Labels are examples, not exhaustive judgments; unlabeled edges may also be relevant.",
+  "split_policy": "Development and test have disjoint (source entity, relationship attribute) pairs; the graph and its observed edges remain available to all retrieval methods. This is not a held-out link-prediction benchmark.",
+  "cases": [
+    {
+      "id": "dev-01",
+      "split": "development",
+      "question": "Which field on a common Account points to its primary Contact?",
+      "type": "direct",
+      "gold_edges": [
+        {
+          "id": "edge:de13c8230535d5b7bf10",
+          "source_id": "applicationCommon::Account",
+          "attribute": "primaryContact",
+          "target_id": "applicationCommon::Contact",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/Account.cdm.json"
+        }
+      ]
+    },
+    {
+      "id": "dev-02",
+      "split": "development",
+      "question": "How can a Contact refer to its parent customer when the customer is a business Account?",
+      "type": "direct",
+      "gold_edges": [
+        {
+          "id": "edge:6cc23022b1d3e66083aa",
+          "source_id": "applicationCommon::Contact",
+          "attribute": "parentCustomer",
+          "target_id": "applicationCommon::Account",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/Contact.cdm.json"
+        }
+      ]
+    },
+    {
+      "id": "dev-03",
+      "split": "development",
+      "question": "Which relationship on CustomerFinancialHolding identifies an individual customer?",
+      "type": "direct",
+      "gold_edges": [
+        {
+          "id": "edge:6924d7d85d1178077f91",
+          "source_id": "RetailBankingCoreDataModel::CustomerFinancialHolding",
+          "attribute": "Customer",
+          "target_id": "RetailBankingCoreDataModel::Contact",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Customerfinancialholding.cdm.json"
+        }
+      ]
+    },
+    {
+      "id": "dev-04",
+      "split": "development",
+      "question": "How does a FinancialHoldingInstrument reference the financial holding it belongs to?",
+      "type": "direct",
+      "gold_edges": [
+        {
+          "id": "edge:77302e1dfd39632d841b",
+          "source_id": "RetailBankingCoreDataModel::FinancialHoldingInstrument",
+          "attribute": "FinancialHolding",
+          "target_id": "RetailBankingCoreDataModel::FinancialHolding",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Financialholdinginstrument.cdm.json"
+        }
+      ]
+    },
+    {
+      "id": "dev-05",
+      "split": "development",
+      "question": "Which relationship places a BusinessUnit under a parent business unit?",
+      "type": "direct",
+      "gold_edges": [
+        {
+          "id": "edge:7eb23dd1b3b3aa80d8cf",
+          "source_id": "applicationCommon::BusinessUnit",
+          "attribute": "parentBusinessUnit",
+          "target_id": "applicationCommon::BusinessUnit",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/BusinessUnit.cdm.json"
+        }
+      ]
+    },
+    {
+      "id": "dev-06",
+      "split": "development",
+      "question": "Where does a TeamMembership record identify its User?",
+      "type": "direct",
+      "gold_edges": [
+        {
+          "id": "edge:754ff76fdd3110d7201d",
+          "source_id": "applicationCommon::TeamMembership",
+          "attribute": "User",
+          "target_id": "applicationCommon::User",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/TeamMembership.cdm.json"
+        }
+      ]
+    },
+    {
+      "id": "dev-07",
+      "split": "development",
+      "question": "How does an Appointment point to the recurring appointment series it belongs to?",
+      "type": "direct",
+      "gold_edges": [
+        {
+          "id": "edge:1935cc17510f41ab3873",
+          "source_id": "applicationCommon::Appointment",
+          "attribute": "series",
+          "target_id": "applicationCommon::RecurringAppointment",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/Appointment.cdm.json"
+        }
+      ]
+    },
+    {
+      "id": "dev-08",
+      "split": "development",
+      "question": "Which relationship on an Article refers to an Organization?",
+      "type": "direct",
+      "gold_edges": [
+        {
+          "id": "edge:eea8f0e44dd5dc3c6cf9",
+          "source_id": "applicationCommon::Article",
+          "attribute": "organization",
+          "target_id": "applicationCommon::Organization",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/Article.cdm.json"
+        }
+      ]
+    },
+    {
+      "id": "dev-09",
+      "split": "development",
+      "question": "Which FICard relationship identifies an individual cardholder?",
+      "type": "direct",
+      "gold_edges": [
+        {
+          "id": "edge:0827dbde55234fac26d0",
+          "source_id": "RetailBankingCoreDataModel::FICard",
+          "attribute": "Cardholder",
+          "target_id": "RetailBankingCoreDataModel::Contact",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Fi_card.cdm.json"
+        }
+      ]
+    },
+    {
+      "id": "dev-10",
+      "split": "development",
+      "question": "How does a QueueItem reference its Queue?",
+      "type": "direct",
+      "gold_edges": [
+        {
+          "id": "edge:f3da5f91ca822662faba",
+          "source_id": "applicationCommon::QueueItem",
+          "attribute": "queue",
+          "target_id": "applicationCommon::Queue",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/QueueItem.cdm.json"
+        }
+      ]
+    },
+    {
+      "id": "dev-11",
+      "split": "development",
+      "question": "Trace a SocialActivity to its posting SocialProfile and from that profile to its Currency.",
+      "type": "two_hop",
+      "gold_edges": [
+        {
+          "id": "edge:b8f9cebe7a0216856730",
+          "source_id": "applicationCommon::SocialActivity",
+          "attribute": "postFromProfile",
+          "target_id": "applicationCommon::SocialProfile",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/SocialActivity.cdm.json"
+        },
+        {
+          "id": "edge:a678aaca4adc21a97fa7",
+          "source_id": "applicationCommon::SocialProfile",
+          "attribute": "transactionCurrency",
+          "target_id": "applicationCommon::Currency",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/SocialProfile.cdm.json"
+        }
+      ]
+    },
+    {
+      "id": "dev-12",
+      "split": "development",
+      "question": "Trace an SLAItem to its SLA and from that agreement to its owning Team.",
+      "type": "two_hop",
+      "gold_edges": [
+        {
+          "id": "edge:19848eabfb5e734568f6",
+          "source_id": "applicationCommon::SLAItem",
+          "attribute": "SLA",
+          "target_id": "applicationCommon::SLA",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/SLAItem.cdm.json"
+        },
+        {
+          "id": "edge:73a558e998e2c081f446",
+          "source_id": "applicationCommon::SLA",
+          "attribute": "Team_owningTeam",
+          "target_id": "applicationCommon::Team",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/SLA.cdm.json"
+        }
+      ]
+    },
+    {
+      "id": "tes-01",
+      "split": "test",
+      "question": "Which relationship associates a business Account with its parent Account?",
+      "type": "direct",
+      "gold_edges": [
+        {
+          "id": "edge:9cfe0f2d3170893ca00c",
+          "source_id": "applicationCommon::Account",
+          "attribute": "parentAccount",
+          "target_id": "applicationCommon::Account",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/Account.cdm.json"
+        }
+      ]
+    },
+    {
+      "id": "tes-02",
+      "split": "test",
+      "question": "What link identifies the preferred system User for a Contact?",
+      "type": "direct",
+      "gold_edges": [
+        {
+          "id": "edge:b4c753d97c047baead98",
+          "source_id": "applicationCommon::Contact",
+          "attribute": "preferredSystemUser",
+          "target_id": "applicationCommon::User",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/Contact.cdm.json"
+        }
+      ]
+    },
+    {
+      "id": "tes-03",
+      "split": "test",
+      "question": "How does CustomerFinancialHolding identify the associated FinancialHolding?",
+      "type": "direct",
+      "gold_edges": [
+        {
+          "id": "edge:1c442ea8763ca81b3e69",
+          "source_id": "RetailBankingCoreDataModel::CustomerFinancialHolding",
+          "attribute": "FinancialHolding",
+          "target_id": "RetailBankingCoreDataModel::FinancialHolding",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Customerfinancialholding.cdm.json"
+        }
+      ]
+    },
+    {
+      "id": "tes-04",
+      "split": "test",
+      "question": "What connects GroupFinancialHolding to the family Group?",
+      "type": "direct",
+      "gold_edges": [
+        {
+          "id": "edge:2e26e324bf8d4ee771ce",
+          "source_id": "RetailBankingCoreDataModel::GroupFinancialHolding",
+          "attribute": "Group",
+          "target_id": "RetailBankingCoreDataModel::Group",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Groupfinancialholding.cdm.json"
+        }
+      ]
+    },
+    {
+      "id": "tes-05",
+      "split": "test",
+      "question": "How does GroupFinancialHolding reference a FinancialHolding?",
+      "type": "direct",
+      "gold_edges": [
+        {
+          "id": "edge:edd0048ca9e408f967d5",
+          "source_id": "RetailBankingCoreDataModel::GroupFinancialHolding",
+          "attribute": "FinancialHolding",
+          "target_id": "RetailBankingCoreDataModel::FinancialHolding",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Groupfinancialholding.cdm.json"
+        }
+      ]
+    },
+    {
+      "id": "tes-06",
+      "split": "test",
+      "question": "In the banking Relationship definition, which reference identifies the Contact who owns the relationship?",
+      "type": "direct",
+      "gold_edges": [
+        {
+          "id": "edge:74ecc0cb654146604b9e",
+          "source_id": "RetailBankingCoreDataModel::Relationship",
+          "attribute": "ContactFrom",
+          "target_id": "RetailBankingCoreDataModel::Contact",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Relationship.cdm.json"
+        }
+      ]
+    },
+    {
+      "id": "tes-07",
+      "split": "test",
+      "question": "Which Contact is the other endpoint of a banking Relationship?",
+      "type": "direct",
+      "gold_edges": [
+        {
+          "id": "edge:6a01c18622fcb99d4504",
+          "source_id": "RetailBankingCoreDataModel::Relationship",
+          "attribute": "ContactTo",
+          "target_id": "RetailBankingCoreDataModel::Contact",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Relationship.cdm.json"
+        }
+      ]
+    },
+    {
+      "id": "tes-08",
+      "split": "test",
+      "question": "Where does a LifeEvent refer to the person associated with it?",
+      "type": "direct",
+      "gold_edges": [
+        {
+          "id": "edge:e9eb0bc05af886d92ebc",
+          "source_id": "RetailBankingCoreDataModel::LifeEvent",
+          "attribute": "Contact",
+          "target_id": "RetailBankingCoreDataModel::Contact",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Lifemoment.cdm.json"
+        }
+      ]
+    },
+    {
+      "id": "tes-09",
+      "split": "test",
+      "question": "Which Team does a TeamMembership record refer to?",
+      "type": "direct",
+      "gold_edges": [
+        {
+          "id": "edge:d70dcda20181bb215f29",
+          "source_id": "applicationCommon::TeamMembership",
+          "attribute": "Team",
+          "target_id": "applicationCommon::Team",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/TeamMembership.cdm.json"
+        }
+      ]
+    },
+    {
+      "id": "tes-10",
+      "split": "test",
+      "question": "How is the administrator User linked to a Team?",
+      "type": "direct",
+      "gold_edges": [
+        {
+          "id": "edge:a92ab49e82e2aa41617a",
+          "source_id": "applicationCommon::Team",
+          "attribute": "administrator",
+          "target_id": "applicationCommon::User",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/Team.cdm.json"
+        }
+      ]
+    },
+    {
+      "id": "tes-11",
+      "split": "test",
+      "question": "Which BusinessUnit is associated with a Team?",
+      "type": "direct",
+      "gold_edges": [
+        {
+          "id": "edge:86494b10a001179b81f2",
+          "source_id": "applicationCommon::Team",
+          "attribute": "businessUnit",
+          "target_id": "applicationCommon::BusinessUnit",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/Team.cdm.json"
+        }
+      ]
+    },
+    {
+      "id": "tes-12",
+      "split": "test",
+      "question": "How does a User record refer to its parent system User?",
+      "type": "direct",
+      "gold_edges": [
+        {
+          "id": "edge:dd1468e4f2dff940b175",
+          "source_id": "applicationCommon::User",
+          "attribute": "parentSystemUser",
+          "target_id": "applicationCommon::User",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/User.cdm.json"
+        }
+      ]
+    },
+    {
+      "id": "tes-13",
+      "split": "test",
+      "question": "Which relationship on User points to the user's Position?",
+      "type": "direct",
+      "gold_edges": [
+        {
+          "id": "edge:e90881d02eca05deabdf",
+          "source_id": "applicationCommon::User",
+          "attribute": "position",
+          "target_id": "applicationCommon::Position",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/User.cdm.json"
+        }
+      ]
+    },
+    {
+      "id": "tes-14",
+      "split": "test",
+      "question": "How is a Position connected to its parent Position?",
+      "type": "direct",
+      "gold_edges": [
+        {
+          "id": "edge:35c8c8661b7a73416f1c",
+          "source_id": "applicationCommon::Position",
+          "attribute": "parentPosition",
+          "target_id": "applicationCommon::Position",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/Position.cdm.json"
+        }
+      ]
+    },
+    {
+      "id": "tes-15",
+      "split": "test",
+      "question": "Which Organization does a BusinessUnit reference?",
+      "type": "direct",
+      "gold_edges": [
+        {
+          "id": "edge:10cac7f55d644f6519cd",
+          "source_id": "applicationCommon::BusinessUnit",
+          "attribute": "organization",
+          "target_id": "applicationCommon::Organization",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/BusinessUnit.cdm.json"
+        }
+      ]
+    },
+    {
+      "id": "tes-16",
+      "split": "test",
+      "question": "How does an ArticleComment refer to its Article?",
+      "type": "direct",
+      "gold_edges": [
+        {
+          "id": "edge:f45b8d36cc164efc6694",
+          "source_id": "applicationCommon::ArticleComment",
+          "attribute": "kbArticle",
+          "target_id": "applicationCommon::Article",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/ArticleComment.cdm.json"
+        }
+      ]
+    },
+    {
+      "id": "tes-17",
+      "split": "test",
+      "question": "Where does a KnowledgeArticle identify its primary author User?",
+      "type": "direct",
+      "gold_edges": [
+        {
+          "id": "edge:ea70267aabf0f6554204",
+          "source_id": "applicationCommon::KnowledgeArticle",
+          "attribute": "primaryAuthor",
+          "target_id": "applicationCommon::User",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/KnowledgeArticle.cdm.json"
+        }
+      ]
+    },
+    {
+      "id": "tes-18",
+      "split": "test",
+      "question": "Which reference links a KnowledgeArticle to its previous article content?",
+      "type": "direct",
+      "gold_edges": [
+        {
+          "id": "edge:d0d5fb5c0e2782357021",
+          "source_id": "applicationCommon::KnowledgeArticle",
+          "attribute": "previousArticleContent",
+          "target_id": "applicationCommon::KnowledgeArticle",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/KnowledgeArticle.cdm.json"
+        }
+      ]
+    },
+    {
+      "id": "tes-19",
+      "split": "test",
+      "question": "Trace a common Account's transaction Currency to the Organization that the Currency references.",
+      "type": "two_hop",
+      "gold_edges": [
+        {
+          "id": "edge:6ee72eff8dcd9deee508",
+          "source_id": "applicationCommon::Account",
+          "attribute": "transactionCurrency",
+          "target_id": "applicationCommon::Currency",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/Account.cdm.json"
+        },
+        {
+          "id": "edge:8f885cb529a6e7853a49",
+          "source_id": "applicationCommon::Currency",
+          "attribute": "organization",
+          "target_id": "applicationCommon::Organization",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/Currency.cdm.json"
+        }
+      ]
+    },
+    {
+      "id": "tes-20",
+      "split": "test",
+      "question": "Trace a KnowledgeArticleCategory through its KnowledgeArticle to the article's primary author User.",
+      "type": "two_hop",
+      "gold_edges": [
+        {
+          "id": "edge:c7cfa8048ef33b0e4d5e",
+          "source_id": "applicationCommon::KnowledgeArticleCategory",
+          "attribute": "knowledgeArticle",
+          "target_id": "applicationCommon::KnowledgeArticle",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/KnowledgeArticleCategory.cdm.json"
+        },
+        {
+          "id": "edge:ea70267aabf0f6554204",
+          "source_id": "applicationCommon::KnowledgeArticle",
+          "attribute": "primaryAuthor",
+          "target_id": "applicationCommon::User",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/KnowledgeArticle.cdm.json"
+        }
+      ]
+    },
+    {
+      "id": "tes-21",
+      "split": "test",
+      "question": "Trace a QueueItem's worker User to that User's Territory.",
+      "type": "two_hop",
+      "gold_edges": [
+        {
+          "id": "edge:edddc3a93de70a066052",
+          "source_id": "applicationCommon::QueueItem",
+          "attribute": "worker",
+          "target_id": "applicationCommon::User",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/QueueItem.cdm.json"
+        },
+        {
+          "id": "edge:4b37ac85ea58190806ec",
+          "source_id": "applicationCommon::User",
+          "attribute": "territory",
+          "target_id": "applicationCommon::Territory",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/User.cdm.json"
+        }
+      ]
+    },
+    {
+      "id": "tes-22",
+      "split": "test",
+      "question": "Trace a TeamMembership through its Team to the Team's Organization.",
+      "type": "two_hop",
+      "gold_edges": [
+        {
+          "id": "edge:d70dcda20181bb215f29",
+          "source_id": "applicationCommon::TeamMembership",
+          "attribute": "Team",
+          "target_id": "applicationCommon::Team",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/TeamMembership.cdm.json"
+        },
+        {
+          "id": "edge:7cca35b18a166710ceec",
+          "source_id": "applicationCommon::Team",
+          "attribute": "organization",
+          "target_id": "applicationCommon::Organization",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/Team.cdm.json"
+        }
+      ]
+    },
+    {
+      "id": "tes-23",
+      "split": "test",
+      "question": "Trace a Contact through its preferred system User to that User's Queue.",
+      "type": "two_hop",
+      "gold_edges": [
+        {
+          "id": "edge:b4c753d97c047baead98",
+          "source_id": "applicationCommon::Contact",
+          "attribute": "preferredSystemUser",
+          "target_id": "applicationCommon::User",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/Contact.cdm.json"
+        },
+        {
+          "id": "edge:d46c207b2a9f780f4cdb",
+          "source_id": "applicationCommon::User",
+          "attribute": "queue",
+          "target_id": "applicationCommon::Queue",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/User.cdm.json"
+        }
+      ]
+    },
+    {
+      "id": "tes-24",
+      "split": "test",
+      "question": "Trace from GroupFinancialHolding to a FinancialHolding and back to CustomerFinancialHolding that references that same holding.",
+      "type": "two_hop",
+      "gold_edges": [
+        {
+          "id": "edge:edd0048ca9e408f967d5",
+          "source_id": "RetailBankingCoreDataModel::GroupFinancialHolding",
+          "attribute": "FinancialHolding",
+          "target_id": "RetailBankingCoreDataModel::FinancialHolding",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Groupfinancialholding.cdm.json"
+        },
+        {
+          "id": "edge:1c442ea8763ca81b3e69",
+          "source_id": "RetailBankingCoreDataModel::CustomerFinancialHolding",
+          "attribute": "FinancialHolding",
+          "target_id": "RetailBankingCoreDataModel::FinancialHolding",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Customerfinancialholding.cdm.json"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,120 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="1080" viewBox="0 0 1440 1080" role="img" aria-labelledby="title description">
+  <title id="title">CDM RAG question flow and evaluation summaries</title>
+  <desc id="description">Three panels show a user typing a CDM question, live retrieval and generation progress, and a cited answer. A fourth panel presents three static summary tables for answer, embedding, and retrieval evaluation.</desc>
+  <defs>
+    <filter id="shadow" x="-15%" y="-15%" width="130%" height="140%">
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#173723" flood-opacity=".08"/>
+    </filter>
+    <style>
+      .sans{font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+      .ink{fill:#17231d}.muted{fill:#65736a}.green{fill:#1f754f}.tiny{font-size:13px}.small{font-size:15px}.body{font-size:17px}.label{font-size:14px;font-weight:700;letter-spacing:.06em}.heading{font-size:27px;font-weight:700;letter-spacing:-.03em}.mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+    </style>
+  </defs>
+  <rect width="1440" height="1080" rx="28" fill="#f5f8f5"/>
+  <text x="56" y="72" class="sans ink" font-size="17" font-weight="800">CDM RAG</text>
+  <text x="56" y="112" class="sans ink" font-size="36" font-weight="700" letter-spacing="-1.2">Ask a question. Follow the work. Check the evidence.</text>
+  <text x="58" y="145" class="sans muted body">A quick look at the question flow and three fixed evaluation summaries.</text>
+
+  <!-- The three query moments -->
+  <g filter="url(#shadow)">
+    <rect x="56" y="176" width="416" height="464" rx="20" fill="#fff" stroke="#dce5dd"/>
+    <rect x="512" y="176" width="416" height="464" rx="20" fill="#fff" stroke="#dce5dd"/>
+    <rect x="968" y="176" width="416" height="464" rx="20" fill="#fff" stroke="#dce5dd"/>
+  </g>
+
+  <!-- Step 1 -->
+  <text x="82" y="216" class="sans green label">01 · ASK</text>
+  <text x="82" y="254" class="sans ink heading">Type a schema question</text>
+  <text x="82" y="284" class="sans muted small">Edit the prefilled prompt or type your own.</text>
+  <rect x="82" y="308" width="364" height="162" rx="12" fill="#fff" stroke="#cdd9cf" stroke-width="1.5"/>
+  <text x="102" y="345" class="sans muted tiny" font-weight="700">YOUR QUESTION</text>
+  <text x="102" y="383" class="sans ink body">How is a loan held by a customer</text>
+  <text x="102" y="410" class="sans ink body">at a financial institution</text>
+  <text x="102" y="437" class="sans ink body">represented?</text>
+  <rect x="82" y="492" width="180" height="52" rx="11" fill="#1f754f"/>
+  <text x="110" y="525" class="sans" font-size="17" font-weight="700" fill="#fff">Ask the model</text>
+  <text x="82" y="582" class="sans muted small">One click starts retrieval and generation.</text>
+
+  <!-- Step 2 -->
+  <text x="538" y="216" class="sans green label">02 · LIVE PROGRESS</text>
+  <text x="538" y="254" class="sans ink heading">See what it is doing</text>
+  <text x="538" y="284" class="sans muted small">Example timings; live seconds update per request.</text>
+  <rect x="538" y="308" width="364" height="110" rx="12" fill="#f8faf8" stroke="#dce5dd"/>
+  <circle cx="560" cy="339" r="6" fill="#1f754f"/>
+  <text x="578" y="344" class="sans ink small" font-weight="650">Searching the CDM catalog</text>
+  <text x="878" y="344" text-anchor="end" class="sans green small" font-weight="700">2s</text>
+  <circle cx="560" cy="375" r="6" fill="#1f754f"/>
+  <text x="578" y="380" class="sans ink small" font-weight="650">Writing the cited answer</text>
+  <text x="878" y="380" text-anchor="end" class="sans green small" font-weight="700">8s</text>
+  <text x="538" y="455" class="sans muted tiny" font-weight="700">LIVE TOKEN OUTPUT</text>
+  <text x="538" y="486" class="sans ink small">A loan held by a customer is represented</text>
+  <text x="538" y="511" class="sans ink small">by the FHLoan entity in the Retail Banking</text>
+  <text x="538" y="536" class="sans ink small">model <tspan class="green" font-weight="700">[RetailBankingCoreDataModel::FHLoan]</tspan>.</text>
+  <rect x="538" y="566" width="156" height="38" rx="9" fill="#fff" stroke="#dce5dd"/>
+  <text x="561" y="591" class="sans green small" font-weight="700">Show full log</text>
+  <text x="708" y="590" class="sans muted tiny">Read-only stage history</text>
+
+  <!-- Step 3 -->
+  <text x="994" y="216" class="sans green label">03 · CITED RESULT</text>
+  <text x="994" y="254" class="sans ink heading">Review the answer</text>
+  <text x="994" y="284" class="sans muted small">Evidence links point to the source definitions.</text>
+  <rect x="994" y="308" width="364" height="250" rx="12" fill="#f8faf8" stroke="#dce5dd"/>
+  <text x="1016" y="345" class="sans muted tiny" font-weight="700">ANSWER</text>
+  <text x="1016" y="381" class="sans ink small">A loan held by a customer at a</text>
+  <text x="1016" y="407" class="sans ink small">financial institution is represented by</text>
+  <text x="1016" y="433" class="sans ink small">the FHLoan entity.</text>
+  <rect x="1016" y="454" width="306" height="34" rx="8" fill="#e8f3ec"/>
+  <text x="1028" y="476" class="sans green tiny" font-weight="700">RetailBankingCoreDataModel::FHLoan</text>
+  <line x1="1016" y1="510" x2="1336" y2="510" stroke="#dce5dd"/>
+  <text x="1016" y="537" class="sans ink tiny" font-weight="650">Source passage · FHLoan definition ↗</text>
+  <text x="994" y="592" class="sans muted small">Answer, citations, and retrieved evidence.</text>
+
+  <!-- Evaluation summary panel -->
+  <rect x="56" y="670" width="1328" height="354" rx="20" fill="#fff" stroke="#dce5dd" filter="url(#shadow)"/>
+  <text x="82" y="714" class="sans green label">STATIC EVALUATIONS</text>
+  <text x="82" y="752" class="sans ink heading">Three read-only summary tables</text>
+  <rect x="1114" y="692" width="238" height="36" rx="18" fill="#e8f3ec"/>
+  <text x="1233" y="716" text-anchor="middle" class="sans green tiny" font-weight="700">SNAPSHOT RESULTS</text>
+
+  <line x1="496" y1="778" x2="496" y2="992" stroke="#e5ebe5"/>
+  <line x1="940" y1="778" x2="940" y2="992" stroke="#e5ebe5"/>
+
+  <!-- Answer summary -->
+  <text x="82" y="796" class="sans ink small" font-weight="700">ANSWER GENERATION</text>
+  <text x="82" y="819" class="sans muted tiny">Paired questions · judge + cosine + citations</text>
+  <rect x="82" y="836" width="388" height="35" rx="7" fill="#dbeafe"/>
+  <text x="94" y="859" class="sans ink tiny" font-weight="750">★ qwen3.5:2b</text>
+  <text x="275" y="859" class="sans ink tiny" font-weight="750">90.8 / 100</text>
+  <text x="389" y="859" text-anchor="end" class="sans ink tiny" font-weight="750">4.01 s</text>
+  <text x="94" y="896" class="sans ink tiny">qwen3.5:4b</text>
+  <text x="275" y="896" class="sans ink tiny">89.9 / 100</text>
+  <text x="389" y="896" text-anchor="end" class="sans ink tiny">7.64 s</text>
+  <text x="82" y="951" class="sans muted tiny">Best overall aggregate · 6 cases</text>
+
+  <!-- Embedding summary -->
+  <text x="524" y="796" class="sans ink small" font-weight="700">GRAPH EMBEDDING</text>
+  <text x="524" y="819" class="sans muted tiny">Held-out typed-link prediction</text>
+  <rect x="524" y="836" width="388" height="35" rx="7" fill="#dbeafe"/>
+  <text x="536" y="859" class="sans ink tiny" font-weight="750">★ BoxE</text>
+  <text x="710" y="859" class="sans ink tiny" font-weight="750">MRR 0.6623</text>
+  <text x="892" y="859" text-anchor="end" class="sans ink tiny" font-weight="750">6.09 s</text>
+  <text x="536" y="896" class="sans ink tiny">TransE</text>
+  <text x="710" y="896" class="sans ink tiny">MRR 0.6155</text>
+  <text x="892" y="896" text-anchor="end" class="sans ink tiny">1.01 s</text>
+  <text x="536" y="925" class="sans ink tiny">GCN · 3 layers</text>
+  <text x="710" y="925" class="sans ink tiny">MRR 0.5507</text>
+  <text x="892" y="925" text-anchor="end" class="sans ink tiny">2.69 s</text>
+  <text x="524" y="967" class="sans muted tiny">Fit time · Nomic features for GCN</text>
+
+  <!-- Retrieval summary -->
+  <text x="968" y="796" class="sans ink small" font-weight="700">QUERY RETRIEVAL</text>
+  <text x="968" y="819" class="sans muted tiny">Nomic fixed · paired test cases</text>
+  <rect x="968" y="836" width="386" height="35" rx="7" fill="#dbeafe"/>
+  <text x="980" y="859" class="sans ink tiny" font-weight="750">★ First search</text>
+  <text x="1211" y="859" class="sans ink tiny" font-weight="750">R@20 0.792</text>
+  <text x="980" y="896" class="sans ink tiny">Adaptive · Gemma 3 4B</text>
+  <text x="1211" y="896" class="sans ink tiny">R@20 0.688</text>
+  <text x="980" y="925" class="sans ink tiny">Follow-up searches</text>
+  <text x="1211" y="925" class="sans ink tiny">6 / 8</text>
+  <text x="968" y="967" class="sans muted tiny">Hybrid search · no reranking · 8 cases</text>
+</svg>

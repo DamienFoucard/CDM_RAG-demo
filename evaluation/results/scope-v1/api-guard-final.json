@@ -1,0 +1,240 @@
+{
+  "dataset_id": "scope-questions-v1",
+  "dataset_sha256": "cba4dc2a3d23b0c1489c043cd81733f8144e358a1df8960a6763ac5ac0be09eb",
+  "status": {
+    "entity_count": 64,
+    "passage_count": 695,
+    "source_commit": "dd21d715e05ebf740a11356c80b5c3b4c38a89c2",
+    "index_revision": "f0e843e0c1b941593517528b7f6219c242c62ce247c0430746fea34f42ca2f66",
+    "embedding_model": "qwen3-embedding:0.6b",
+    "answer_model": "qwen3:4b",
+    "scope_model": "qwen3:4b",
+    "router_backend": "ollama",
+    "router_model": "qwen3:4b"
+  },
+  "note": "Real API behavior on eight selected assistant-labeled cases; no automatic semantic answer grading.",
+  "metrics": {
+    "cases": 8,
+    "errors": 0,
+    "schema_cases": 2,
+    "schema_cited_answers": 2,
+    "negative_cases": 6,
+    "negative_declined_no_sources": 6,
+    "median_ms": 1363.85
+  },
+  "cases": [
+    {
+      "id": "r01",
+      "question": "Which accounts are jointly held?",
+      "expected": "records",
+      "split": "regression",
+      "allow_schema_search": false,
+      "route": "no_search",
+      "answer": "I can explain CDM schema definitions, but I don't have actual customer or account records or current bank data.",
+      "sources": [],
+      "retrieval": {
+        "preflight_similarity": 0.607,
+        "threshold": 0.58,
+        "query_generated": false,
+        "router_backend": "not_called",
+        "router_decision": "scope_records",
+        "scope_category": "records",
+        "scope_model": "qwen3:4b",
+        "scope_latency_ms": 694.9
+      },
+      "error": null,
+      "latency_ms": 903.9
+    },
+    {
+      "id": "r02",
+      "question": "Does creating an account in D365 auto-create a related contact record?",
+      "expected": "runtime",
+      "split": "regression",
+      "allow_schema_search": false,
+      "route": "no_search",
+      "answer": "The CDM definitions don't establish how a deployed application or workflow behaves. I can explain the schema instead.",
+      "sources": [],
+      "retrieval": {
+        "preflight_similarity": 0.6692,
+        "threshold": 0.58,
+        "query_generated": false,
+        "router_backend": "not_called",
+        "router_decision": "scope_runtime",
+        "scope_category": "runtime",
+        "scope_model": "qwen3:4b",
+        "scope_latency_ms": 524.6
+      },
+      "error": null,
+      "latency_ms": 587.4
+    },
+    {
+      "id": "t01",
+      "question": "Which entity has a field for an available account balance?",
+      "expected": "schema",
+      "split": "test",
+      "allow_schema_search": true,
+      "route": "cdm",
+      "answer": "Examples of attributes in the retrieved definitions:\n- RetailBankingCoreDataModel::FHAccount: availableBalance [RetailBankingCoreDataModel::FHAccount]\n- RetailBankingCoreDataModel::FHSaving: balance [RetailBankingCoreDataModel::FHSaving]",
+      "sources": [
+        {
+          "entity_id": "RetailBankingCoreDataModel::FHAccount",
+          "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Fh_account.cdm.json"
+        },
+        {
+          "entity_id": "RetailBankingCoreDataModel::FHSaving",
+          "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Fh_saving.cdm.json"
+        }
+      ],
+      "retrieval": {
+        "preflight_similarity": 0.7306,
+        "threshold": 0.58,
+        "query_generated": true,
+        "router_backend": "ollama",
+        "router_decision": "legacy_plan",
+        "scope_category": "schema",
+        "scope_model": "qwen3:4b",
+        "scope_latency_ms": 1660.6,
+        "router_model": "qwen3:4b",
+        "router_latency_ms": 1571.7,
+        "router_classification_latency_ms": 1571.7,
+        "query_generation_latency_ms": null,
+        "router_fallback_used": false,
+        "mode": "hybrid",
+        "reranked": true,
+        "search_query": "Which entity has a field for an available account balance in the Microsoft Common Data Model for banking?",
+        "omitted_entity_ids": [],
+        "candidate_count": 20,
+        "generator": "qwen3:4b:verified-attribute-selection",
+        "index_revision": "f0e843e0c1b941593517528b7f6219c242c62ce247c0430746fea34f42ca2f66",
+        "source_commit": "dd21d715e05ebf740a11356c80b5c3b4c38a89c2"
+      },
+      "error": null,
+      "latency_ms": 18187.4
+    },
+    {
+      "id": "t07",
+      "question": "Does the Contact definition refer to an Account?",
+      "expected": "schema",
+      "split": "test",
+      "allow_schema_search": true,
+      "route": "cdm",
+      "answer": "The Contact entity has an attribute named 'accountId' that references an Account entity. [applicationCommon::Contact]",
+      "sources": [
+        {
+          "entity_id": "applicationCommon::Contact",
+          "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/Contact.cdm.json"
+        }
+      ],
+      "retrieval": {
+        "preflight_similarity": 0.7672,
+        "threshold": 0.58,
+        "query_generated": true,
+        "router_backend": "ollama",
+        "router_decision": "legacy_plan",
+        "scope_category": "schema",
+        "scope_model": "qwen3:4b",
+        "scope_latency_ms": 688.2,
+        "router_model": "qwen3:4b",
+        "router_latency_ms": 613.7,
+        "router_classification_latency_ms": 613.7,
+        "query_generation_latency_ms": null,
+        "router_fallback_used": false,
+        "mode": "hybrid",
+        "reranked": true,
+        "search_query": "Does the Contact entity have a relationship with the Account entity in the Microsoft Common Data Model?",
+        "omitted_entity_ids": [],
+        "candidate_count": 20,
+        "generator": "qwen3:4b",
+        "index_revision": "f0e843e0c1b941593517528b7f6219c242c62ce247c0430746fea34f42ca2f66",
+        "source_commit": "dd21d715e05ebf740a11356c80b5c3b4c38a89c2"
+      },
+      "error": null,
+      "latency_ms": 34963.4
+    },
+    {
+      "id": "t13",
+      "question": "Which customers share a bank account?",
+      "expected": "records",
+      "split": "test",
+      "allow_schema_search": false,
+      "route": "no_search",
+      "answer": "I can explain CDM schema definitions, but I don't have actual customer or account records or current bank data.",
+      "sources": [],
+      "retrieval": {
+        "preflight_similarity": 0.7278,
+        "threshold": 0.58,
+        "query_generated": false,
+        "router_backend": "not_called",
+        "router_decision": "scope_records",
+        "scope_category": "records",
+        "scope_model": "qwen3:4b",
+        "scope_latency_ms": 1414.0
+      },
+      "error": null,
+      "latency_ms": 1649.0
+    },
+    {
+      "id": "t21",
+      "question": "Does Dynamics automatically notify a customer when an account is opened?",
+      "expected": "runtime",
+      "split": "test",
+      "allow_schema_search": false,
+      "route": "no_search",
+      "answer": "The CDM definitions don't establish how a deployed application or workflow behaves. I can explain the schema instead.",
+      "sources": [],
+      "retrieval": {
+        "preflight_similarity": 0.6153,
+        "threshold": 0.58,
+        "query_generated": false,
+        "router_backend": "not_called",
+        "router_decision": "scope_runtime",
+        "scope_category": "runtime",
+        "scope_model": "qwen3:4b",
+        "scope_latency_ms": 2163.5
+      },
+      "error": null,
+      "latency_ms": 2272.8
+    },
+    {
+      "id": "t26",
+      "question": "Explain the Account schema and list the accounts that are overdrawn.",
+      "expected": "mixed",
+      "split": "test",
+      "allow_schema_search": false,
+      "route": "no_search",
+      "answer": "I can explain the CDM schema, but I don't have the records or application behavior needed for the rest. Please ask the schema question separately.",
+      "sources": [],
+      "retrieval": {
+        "preflight_similarity": 0.7061,
+        "threshold": 0.58,
+        "query_generated": false,
+        "router_backend": "not_called",
+        "router_decision": "scope_mixed",
+        "scope_category": "mixed",
+        "scope_model": "qwen3:4b",
+        "scope_latency_ms": 880.8
+      },
+      "error": null,
+      "latency_ms": 1078.7
+    },
+    {
+      "id": "t29",
+      "question": "My dog Luna learned to swim yesterday.",
+      "expected": "unrelated",
+      "split": "test",
+      "allow_schema_search": false,
+      "route": "no_search",
+      "answer": "I can help with Microsoft CDM banking and common schema definitions.",
+      "sources": [],
+      "retrieval": {
+        "preflight_similarity": 0.4353,
+        "threshold": 0.58,
+        "query_generated": false,
+        "router_backend": "not_called",
+        "router_decision": "semantic_gate"
+      },
+      "error": null,
+      "latency_ms": 88.9
+    }
+  ]
+}

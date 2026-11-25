@@ -1,0 +1,21 @@
+name: Validate CDM RAG
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          python-version: '3.12'
+      - run: uv sync --frozen --extra test
+      - run: uv run pytest
+      - run: docker build --tag cdm-rag-standalone:validation .

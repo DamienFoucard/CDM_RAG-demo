@@ -1,0 +1,1002 @@
+{
+  "track": "adaptive_retrieval",
+  "run_id": "d5610719-bd2e-4c40-b42a-db67e6a4effb",
+  "started_at": "2026-11-24T17:04:45.451530+00:00",
+  "elapsed_seconds": 103.73,
+  "dataset_id": "cdm-adaptive-retrieval-v1",
+  "source_commit": "dd21d715e05ebf740a11356c80b5c3b4c38a89c2",
+  "dataset_status": "synthetic_source_checked_not_independently_reviewed",
+  "dataset_provenance": "Reuses published source-checked questions and labels from the entity, catalog-object, and answer benchmarks. Split assignments preserve existing development/test labels; the two answer benchmark custom cases are assigned to development and test here. Those custom cases and other source cases are published and are not a blinded holdout. Each entity ID was checked against the pinned catalog and each exact passage ID against render_chunks output. Labels are examples, may be incomplete, and are not independently reviewed. Each comparison uses the same first-pass query, index, scoring cutoff, and question for both variants; labels must not be given to the router. This dataset is too small to establish general superiority.",
+  "split": "development",
+  "question_ids": [
+    "adaptive-development-bank-01",
+    "adaptive-development-bank-03",
+    "adaptive-development-object-dev-attribute-account-id",
+    "adaptive-development-object-dev-relationship-cardholder",
+    "adaptive-development-object-dev-trait-definition-described-as",
+    "adaptive-development-object-dev-inheritance-base-activity",
+    "adaptive-development-object-dev-manifest-overview-comparison",
+    "adaptive-development-complex-funds-01"
+  ],
+  "model_names": [
+    "nomic-embed-text:latest"
+  ],
+  "query_model": "gemma3:4b",
+  "generation": false,
+  "notes": "Both variants use the same raw initial query and first top-20 candidates. The adaptive router sees the question, prior context and up to six bounded first-pass passages. It may search once more; reciprocal-rank fusion combines candidates. Failures preserve the first pass. Gold labels are incomplete and provisional. Latencies include router unload costs.",
+  "summaries": [
+    {
+      "model": "nomic-embed-text:latest",
+      "embedding_model": "nomic-embed-text:latest",
+      "query_model": "gemma3:4b",
+      "question_count": 8,
+      "index_identity": "cd491dd029b4b4bc1e13e924ab8f1f66d1447f938fd03f70dcd4cd9a8d96775f",
+      "index_preparation_seconds": 0.66,
+      "index_reused": true,
+      "metrics": {
+        "first_pass": {
+          "cases": 8,
+          "hit_at_1": 0.625,
+          "hit_at_3": 0.625,
+          "hit_at_6": 0.875,
+          "recall_at_6": 0.8333,
+          "mrr_at_6": 0.6667,
+          "mean_latency_ms": 560.93,
+          "p95_latency_ms": 910.99
+        },
+        "adaptive": {
+          "cases": 8,
+          "hit_at_1": 0.75,
+          "hit_at_3": 0.75,
+          "hit_at_6": 0.875,
+          "recall_at_6": 0.875,
+          "mrr_at_6": 0.7708,
+          "mean_latency_ms": 12866.67,
+          "p95_latency_ms": 18456.68
+        }
+      },
+      "comparisons": {
+        "mrr_at_6": {
+          "improved": 1,
+          "unchanged": 7,
+          "worsened": 0
+        },
+        "recall_at_6": {
+          "improved": 1,
+          "unchanged": 7,
+          "worsened": 0
+        },
+        "hit_at_1": {
+          "improved": 1,
+          "unchanged": 7,
+          "worsened": 0
+        }
+      },
+      "followup_requested_count": 4,
+      "error_count": 0,
+      "mean_router_ms": 11815.07,
+      "mean_second_search_ms": 441.55
+    }
+  ],
+  "rows": [
+    {
+      "question_id": "adaptive-development-bank-01",
+      "question": "Where is credit that lets an account holder withdraw money past a zero balance described?",
+      "initial_query": "Where is credit that lets an account holder withdraw money past a zero balance described?",
+      "variants": {
+        "first_pass": {
+          "ranked_entity_ids": [
+            "RetailBankingCoreDataModel::FIOverdraft",
+            "RetailBankingCoreDataModel::FHLineOfCredit",
+            "RetailBankingCoreDataModel::FHAccount",
+            "RetailBankingCoreDataModel::FHSaving"
+          ],
+          "matched_entity_ids": [
+            "RetailBankingCoreDataModel::FIOverdraft"
+          ],
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_6": true,
+          "recall_at_6": 1.0,
+          "mrr_at_6": 1.0,
+          "latency_ms": 598.92,
+          "search_ms": 598.92
+        },
+        "adaptive": {
+          "ranked_entity_ids": [
+            "RetailBankingCoreDataModel::FIOverdraft",
+            "RetailBankingCoreDataModel::FHAccount",
+            "RetailBankingCoreDataModel::FHLineOfCredit"
+          ],
+          "matched_entity_ids": [
+            "RetailBankingCoreDataModel::FIOverdraft"
+          ],
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_6": true,
+          "recall_at_6": 1.0,
+          "mrr_at_6": 1.0,
+          "latency_ms": 18456.68,
+          "search_ms": 1378.78,
+          "router_ms": 17020.74,
+          "unload_ms": 57.16,
+          "second_search_ms": 779.86,
+          "search_again": true,
+          "followup_query": "What relationships exist between FHLineOfCredit, FIOverdraft, and FHAccount that describe how a credit lets an account holder withdraw money past a zero balance?",
+          "followup_result_count": 20,
+          "error": null
+        }
+      }
+    },
+    {
+      "question_id": "adaptive-development-bank-03",
+      "question": "How is a loan held by a customer at a financial institution represented?",
+      "initial_query": "How is a loan held by a customer at a financial institution represented?",
+      "variants": {
+        "first_pass": {
+          "ranked_entity_ids": [
+            "RetailBankingCoreDataModel::FHLoan",
+            "RetailBankingCoreDataModel::FHSaving",
+            "RetailBankingCoreDataModel::FinancialHolding",
+            "RetailBankingCoreDataModel::FHAccount"
+          ],
+          "matched_entity_ids": [
+            "RetailBankingCoreDataModel::FHLoan"
+          ],
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_6": true,
+          "recall_at_6": 1.0,
+          "mrr_at_6": 1.0,
+          "latency_ms": 322.01,
+          "search_ms": 322.01
+        },
+        "adaptive": {
+          "ranked_entity_ids": [
+            "RetailBankingCoreDataModel::FHLoan",
+            "RetailBankingCoreDataModel::FHSaving",
+            "RetailBankingCoreDataModel::FinancialHolding",
+            "RetailBankingCoreDataModel::FHAccount"
+          ],
+          "matched_entity_ids": [
+            "RetailBankingCoreDataModel::FHLoan"
+          ],
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_6": true,
+          "recall_at_6": 1.0,
+          "mrr_at_6": 1.0,
+          "latency_ms": 12296.07,
+          "search_ms": 322.01,
+          "router_ms": 11933.12,
+          "unload_ms": 40.94,
+          "second_search_ms": 0.0,
+          "search_again": false,
+          "followup_query": "",
+          "followup_result_count": 0,
+          "error": null
+        }
+      }
+    },
+    {
+      "question_id": "adaptive-development-object-dev-attribute-account-id",
+      "question": "Which field uniquely identifies an account record?",
+      "initial_query": "Which field uniquely identifies an account record?",
+      "variants": {
+        "first_pass": {
+          "ranked_passage_ids": [
+            "RetailBankingCoreDataModel::FHAccount:attributes:2",
+            "RetailBankingCoreDataModel::FHAccount:attributes:5",
+            "applicationCommon::Account:attributes:5",
+            "RetailBankingCoreDataModel::FHSaving:attributes:5",
+            "RetailBankingCoreDataModel::FHInvestment:attributes:4",
+            "RetailBankingCoreDataModel::Account:attributes:1"
+          ],
+          "matched_passage_ids": [
+            "RetailBankingCoreDataModel::Account:attributes:1"
+          ],
+          "ranked_passages": [
+            {
+              "id": "RetailBankingCoreDataModel::FHAccount:attributes:2",
+              "source_id": "RetailBankingCoreDataModel::FHAccount",
+              "source_type": "entity",
+              "kind": "attributes",
+              "source_label": "RetailBankingCoreDataModel::FHAccount",
+              "title": "FHAccount (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FHAccount) attributes"
+            },
+            {
+              "id": "RetailBankingCoreDataModel::FHAccount:attributes:5",
+              "source_id": "RetailBankingCoreDataModel::FHAccount",
+              "source_type": "entity",
+              "kind": "attributes",
+              "source_label": "RetailBankingCoreDataModel::FHAccount",
+              "title": "FHAccount (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FHAccount) attributes"
+            },
+            {
+              "id": "applicationCommon::Account:attributes:5",
+              "source_id": "applicationCommon::Account",
+              "source_type": "entity",
+              "kind": "attributes",
+              "source_label": "applicationCommon::Account",
+              "title": "Account (applicationCommon; qualified ID applicationCommon::Account) attributes"
+            },
+            {
+              "id": "RetailBankingCoreDataModel::FHSaving:attributes:5",
+              "source_id": "RetailBankingCoreDataModel::FHSaving",
+              "source_type": "entity",
+              "kind": "attributes",
+              "source_label": "RetailBankingCoreDataModel::FHSaving",
+              "title": "FHSaving (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FHSaving) attributes"
+            },
+            {
+              "id": "RetailBankingCoreDataModel::FHInvestment:attributes:4",
+              "source_id": "RetailBankingCoreDataModel::FHInvestment",
+              "source_type": "entity",
+              "kind": "attributes",
+              "source_label": "RetailBankingCoreDataModel::FHInvestment",
+              "title": "FHInvestment (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FHInvestment) attributes"
+            },
+            {
+              "id": "RetailBankingCoreDataModel::Account:attributes:1",
+              "source_id": "RetailBankingCoreDataModel::Account",
+              "source_type": "entity",
+              "kind": "attributes",
+              "source_label": "RetailBankingCoreDataModel::Account",
+              "title": "Account (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::Account) attributes"
+            }
+          ],
+          "hit_at_1": false,
+          "hit_at_3": false,
+          "hit_at_6": true,
+          "recall_at_6": 1.0,
+          "mrr_at_6": 0.16666666666666666,
+          "latency_ms": 637.38,
+          "search_ms": 637.38
+        },
+        "adaptive": {
+          "ranked_passage_ids": [
+            "RetailBankingCoreDataModel::Account:attributes:1",
+            "RetailBankingCoreDataModel::Account:entity",
+            "RetailBankingCoreDataModel::FHInvestment:attributes:4",
+            "RetailBankingCoreDataModel::FIDirectDebit:attributes:3",
+            "RetailBankingCoreDataModel::FIOverdraft:attributes:2",
+            "RetailBankingCoreDataModel::FHAccount:attributes:2"
+          ],
+          "matched_passage_ids": [
+            "RetailBankingCoreDataModel::Account:attributes:1"
+          ],
+          "ranked_passages": [
+            {
+              "id": "RetailBankingCoreDataModel::Account:attributes:1",
+              "source_id": "RetailBankingCoreDataModel::Account",
+              "source_type": "entity",
+              "kind": "attributes",
+              "source_label": "RetailBankingCoreDataModel::Account",
+              "title": "Account (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::Account) attributes"
+            },
+            {
+              "id": "RetailBankingCoreDataModel::Account:entity",
+              "source_id": "RetailBankingCoreDataModel::Account",
+              "source_type": "entity",
+              "kind": "entity",
+              "source_label": "RetailBankingCoreDataModel::Account",
+              "title": "Account (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::Account)"
+            },
+            {
+              "id": "RetailBankingCoreDataModel::FHInvestment:attributes:4",
+              "source_id": "RetailBankingCoreDataModel::FHInvestment",
+              "source_type": "entity",
+              "kind": "attributes",
+              "source_label": "RetailBankingCoreDataModel::FHInvestment",
+              "title": "FHInvestment (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FHInvestment) attributes"
+            },
+            {
+              "id": "RetailBankingCoreDataModel::FIDirectDebit:attributes:3",
+              "source_id": "RetailBankingCoreDataModel::FIDirectDebit",
+              "source_type": "entity",
+              "kind": "attributes",
+              "source_label": "RetailBankingCoreDataModel::FIDirectDebit",
+              "title": "FIDirectDebit (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FIDirectDebit) attributes"
+            },
+            {
+              "id": "RetailBankingCoreDataModel::FIOverdraft:attributes:2",
+              "source_id": "RetailBankingCoreDataModel::FIOverdraft",
+              "source_type": "entity",
+              "kind": "attributes",
+              "source_label": "RetailBankingCoreDataModel::FIOverdraft",
+              "title": "FIOverdraft (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FIOverdraft) attributes"
+            },
+            {
+              "id": "RetailBankingCoreDataModel::FHAccount:attributes:2",
+              "source_id": "RetailBankingCoreDataModel::FHAccount",
+              "source_type": "entity",
+              "kind": "attributes",
+              "source_label": "RetailBankingCoreDataModel::FHAccount",
+              "title": "FHAccount (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FHAccount) attributes"
+            }
+          ],
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_6": true,
+          "recall_at_6": 1.0,
+          "mrr_at_6": 1.0,
+          "latency_ms": 13582.86,
+          "search_ms": 1555.21,
+          "router_ms": 11967.54,
+          "unload_ms": 60.11,
+          "second_search_ms": 917.83,
+          "search_again": true,
+          "followup_query": "What attributes uniquely identify an account record in the RetailBankingCoreDataModel?",
+          "followup_result_count": 20,
+          "error": null
+        }
+      }
+    },
+    {
+      "question_id": "adaptive-development-object-dev-relationship-cardholder",
+      "question": "In the finance model, which records can be associated with the holder of a payment card?",
+      "initial_query": "In the finance model, which records can be associated with the holder of a payment card?",
+      "variants": {
+        "first_pass": {
+          "ranked_passage_ids": [
+            "RetailBankingCoreDataModel::FICard:entity",
+            "RetailBankingCoreDataModel::FHLineOfCredit:attributes:6",
+            "RetailBankingCoreDataModel::FICard:trait-applications:entity",
+            "RetailBankingCoreDataModel::FHAccount:attributes:7",
+            "RetailBankingCoreDataModel::FHLineOfCredit:attributes:5",
+            "RetailBankingCoreDataModel::FHLoan:attributes:9"
+          ],
+          "matched_passage_ids": [],
+          "ranked_passages": [
+            {
+              "id": "RetailBankingCoreDataModel::FICard:entity",
+              "source_id": "RetailBankingCoreDataModel::FICard",
+              "source_type": "entity",
+              "kind": "entity",
+              "source_label": "RetailBankingCoreDataModel::FICard",
+              "title": "FICard (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FICard)"
+            },
+            {
+              "id": "RetailBankingCoreDataModel::FHLineOfCredit:attributes:6",
+              "source_id": "RetailBankingCoreDataModel::FHLineOfCredit",
+              "source_type": "entity",
+              "kind": "attributes",
+              "source_label": "RetailBankingCoreDataModel::FHLineOfCredit",
+              "title": "FHLineOfCredit (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FHLineOfCredit) attributes"
+            },
+            {
+              "id": "RetailBankingCoreDataModel::FICard:trait-applications:entity",
+              "source_id": "RetailBankingCoreDataModel::FICard",
+              "source_type": "entity",
+              "kind": "trait_application",
+              "source_label": "RetailBankingCoreDataModel::FICard",
+              "title": "Traits applied to FICard (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FICard)"
+            },
+            {
+              "id": "RetailBankingCoreDataModel::FHAccount:attributes:7",
+              "source_id": "RetailBankingCoreDataModel::FHAccount",
+              "source_type": "entity",
+              "kind": "attributes",
+              "source_label": "RetailBankingCoreDataModel::FHAccount",
+              "title": "FHAccount (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FHAccount) attributes"
+            },
+            {
+              "id": "RetailBankingCoreDataModel::FHLineOfCredit:attributes:5",
+              "source_id": "RetailBankingCoreDataModel::FHLineOfCredit",
+              "source_type": "entity",
+              "kind": "attributes",
+              "source_label": "RetailBankingCoreDataModel::FHLineOfCredit",
+              "title": "FHLineOfCredit (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FHLineOfCredit) attributes"
+            },
+            {
+              "id": "RetailBankingCoreDataModel::FHLoan:attributes:9",
+              "source_id": "RetailBankingCoreDataModel::FHLoan",
+              "source_type": "entity",
+              "kind": "attributes",
+              "source_label": "RetailBankingCoreDataModel::FHLoan",
+              "title": "FHLoan (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FHLoan) attributes"
+            }
+          ],
+          "hit_at_1": false,
+          "hit_at_3": false,
+          "hit_at_6": false,
+          "recall_at_6": 0.0,
+          "mrr_at_6": 0.0,
+          "latency_ms": 318.1,
+          "search_ms": 318.1
+        },
+        "adaptive": {
+          "ranked_passage_ids": [
+            "RetailBankingCoreDataModel::FICard:trait-applications:entity",
+            "RetailBankingCoreDataModel::FHLineOfCredit:attributes:6",
+            "RetailBankingCoreDataModel::FICard:entity",
+            "RetailBankingCoreDataModel::FHAccount:attributes:7",
+            "RetailBankingCoreDataModel::FHAccount:trait-applications:entity",
+            "RetailBankingCoreDataModel::FHLineOfCredit:attributes:5"
+          ],
+          "matched_passage_ids": [],
+          "ranked_passages": [
+            {
+              "id": "RetailBankingCoreDataModel::FICard:trait-applications:entity",
+              "source_id": "RetailBankingCoreDataModel::FICard",
+              "source_type": "entity",
+              "kind": "trait_application",
+              "source_label": "RetailBankingCoreDataModel::FICard",
+              "title": "Traits applied to FICard (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FICard)"
+            },
+            {
+              "id": "RetailBankingCoreDataModel::FHLineOfCredit:attributes:6",
+              "source_id": "RetailBankingCoreDataModel::FHLineOfCredit",
+              "source_type": "entity",
+              "kind": "attributes",
+              "source_label": "RetailBankingCoreDataModel::FHLineOfCredit",
+              "title": "FHLineOfCredit (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FHLineOfCredit) attributes"
+            },
+            {
+              "id": "RetailBankingCoreDataModel::FICard:entity",
+              "source_id": "RetailBankingCoreDataModel::FICard",
+              "source_type": "entity",
+              "kind": "entity",
+              "source_label": "RetailBankingCoreDataModel::FICard",
+              "title": "FICard (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FICard)"
+            },
+            {
+              "id": "RetailBankingCoreDataModel::FHAccount:attributes:7",
+              "source_id": "RetailBankingCoreDataModel::FHAccount",
+              "source_type": "entity",
+              "kind": "attributes",
+              "source_label": "RetailBankingCoreDataModel::FHAccount",
+              "title": "FHAccount (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FHAccount) attributes"
+            },
+            {
+              "id": "RetailBankingCoreDataModel::FHAccount:trait-applications:entity",
+              "source_id": "RetailBankingCoreDataModel::FHAccount",
+              "source_type": "entity",
+              "kind": "trait_application",
+              "source_label": "RetailBankingCoreDataModel::FHAccount",
+              "title": "Traits applied to FHAccount (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FHAccount)"
+            },
+            {
+              "id": "RetailBankingCoreDataModel::FHLineOfCredit:attributes:5",
+              "source_id": "RetailBankingCoreDataModel::FHLineOfCredit",
+              "source_type": "entity",
+              "kind": "attributes",
+              "source_label": "RetailBankingCoreDataModel::FHLineOfCredit",
+              "title": "FHLineOfCredit (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FHLineOfCredit) attributes"
+            }
+          ],
+          "hit_at_1": false,
+          "hit_at_3": false,
+          "hit_at_6": false,
+          "recall_at_6": 0.0,
+          "mrr_at_6": 0.0,
+          "latency_ms": 14131.94,
+          "search_ms": 1235.72,
+          "router_ms": 12845.95,
+          "unload_ms": 50.27,
+          "second_search_ms": 917.62,
+          "search_again": true,
+          "followup_query": "Are there any attributes or entities in the RetailBankingCoreDataModel that link a payment card to a holder, such as an account?",
+          "followup_result_count": 20,
+          "error": null
+        }
+      }
+    },
+    {
+      "question_id": "adaptive-development-object-dev-trait-definition-described-as",
+      "question": "Which CDM trait stores language-specific descriptive text for a model object?",
+      "initial_query": "Which CDM trait stores language-specific descriptive text for a model object?",
+      "variants": {
+        "first_pass": {
+          "ranked_passage_ids": [
+            "trait:is.localized.describedAs:definition",
+            "trait:is.localized.displayedAs:definition",
+            "trait:is.localized:definition",
+            "trait:is.CDS:definition",
+            "trait:is.CDS.sourceNamed:definition",
+            "trait:means:definition"
+          ],
+          "matched_passage_ids": [
+            "trait:is.localized.describedAs:definition"
+          ],
+          "ranked_passages": [
+            {
+              "id": "trait:is.localized.describedAs:definition",
+              "source_id": "trait:is.localized.describedAs",
+              "source_type": "trait",
+              "kind": "trait_definition",
+              "source_label": "CDM trait is.localized.describedAs",
+              "title": "CDM trait is.localized.describedAs"
+            },
+            {
+              "id": "trait:is.localized.displayedAs:definition",
+              "source_id": "trait:is.localized.displayedAs",
+              "source_type": "trait",
+              "kind": "trait_definition",
+              "source_label": "CDM trait is.localized.displayedAs",
+              "title": "CDM trait is.localized.displayedAs"
+            },
+            {
+              "id": "trait:is.localized:definition",
+              "source_id": "trait:is.localized",
+              "source_type": "trait",
+              "kind": "trait_definition",
+              "source_label": "CDM trait is.localized",
+              "title": "CDM trait is.localized"
+            },
+            {
+              "id": "trait:is.CDS:definition",
+              "source_id": "trait:is.CDS",
+              "source_type": "trait",
+              "kind": "trait_definition",
+              "source_label": "CDM trait is.CDS",
+              "title": "CDM trait is.CDS"
+            },
+            {
+              "id": "trait:is.CDS.sourceNamed:definition",
+              "source_id": "trait:is.CDS.sourceNamed",
+              "source_type": "trait",
+              "kind": "trait_definition",
+              "source_label": "CDM trait is.CDS.sourceNamed",
+              "title": "CDM trait is.CDS.sourceNamed"
+            },
+            {
+              "id": "trait:means:definition",
+              "source_id": "trait:means",
+              "source_type": "trait",
+              "kind": "trait_definition",
+              "source_label": "CDM trait means",
+              "title": "CDM trait means"
+            }
+          ],
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_6": true,
+          "recall_at_6": 1.0,
+          "mrr_at_6": 1.0,
+          "latency_ms": 347.05,
+          "search_ms": 347.05
+        },
+        "adaptive": {
+          "ranked_passage_ids": [
+            "trait:is.localized.describedAs:definition",
+            "trait:is.localized.displayedAs:definition",
+            "trait:is.localized:definition",
+            "trait:is.CDS:definition",
+            "trait:is.CDS.sourceNamed:definition",
+            "trait:means:definition"
+          ],
+          "matched_passage_ids": [
+            "trait:is.localized.describedAs:definition"
+          ],
+          "ranked_passages": [
+            {
+              "id": "trait:is.localized.describedAs:definition",
+              "source_id": "trait:is.localized.describedAs",
+              "source_type": "trait",
+              "kind": "trait_definition",
+              "source_label": "CDM trait is.localized.describedAs",
+              "title": "CDM trait is.localized.describedAs"
+            },
+            {
+              "id": "trait:is.localized.displayedAs:definition",
+              "source_id": "trait:is.localized.displayedAs",
+              "source_type": "trait",
+              "kind": "trait_definition",
+              "source_label": "CDM trait is.localized.displayedAs",
+              "title": "CDM trait is.localized.displayedAs"
+            },
+            {
+              "id": "trait:is.localized:definition",
+              "source_id": "trait:is.localized",
+              "source_type": "trait",
+              "kind": "trait_definition",
+              "source_label": "CDM trait is.localized",
+              "title": "CDM trait is.localized"
+            },
+            {
+              "id": "trait:is.CDS:definition",
+              "source_id": "trait:is.CDS",
+              "source_type": "trait",
+              "kind": "trait_definition",
+              "source_label": "CDM trait is.CDS",
+              "title": "CDM trait is.CDS"
+            },
+            {
+              "id": "trait:is.CDS.sourceNamed:definition",
+              "source_id": "trait:is.CDS.sourceNamed",
+              "source_type": "trait",
+              "kind": "trait_definition",
+              "source_label": "CDM trait is.CDS.sourceNamed",
+              "title": "CDM trait is.CDS.sourceNamed"
+            },
+            {
+              "id": "trait:means:definition",
+              "source_id": "trait:means",
+              "source_type": "trait",
+              "kind": "trait_definition",
+              "source_label": "CDM trait means",
+              "title": "CDM trait means"
+            }
+          ],
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_6": true,
+          "recall_at_6": 1.0,
+          "mrr_at_6": 1.0,
+          "latency_ms": 8124.49,
+          "search_ms": 347.05,
+          "router_ms": 7740.4,
+          "unload_ms": 37.04,
+          "second_search_ms": 0.0,
+          "search_again": false,
+          "followup_query": "",
+          "followup_result_count": 0,
+          "error": null
+        }
+      }
+    },
+    {
+      "question_id": "adaptive-development-object-dev-inheritance-base-activity",
+      "question": "Which base entity type is shared by activity records such as PhoneCall and Task?",
+      "initial_query": "Which base entity type is shared by activity records such as PhoneCall and Task?",
+      "variants": {
+        "first_pass": {
+          "ranked_passage_ids": [
+            "applicationCommon::PhoneCall:trait-applications:entity",
+            "applicationCommon::PhoneCall:attributes:1",
+            "applicationCommon::ActivityParty:attributes:1",
+            "applicationCommon::ActivityParty:relationship:1",
+            "applicationCommon::PhoneCall:trait-applications:attributes:1",
+            "inheritance-base:ActivityCommon"
+          ],
+          "matched_passage_ids": [
+            "inheritance-base:ActivityCommon"
+          ],
+          "ranked_passages": [
+            {
+              "id": "applicationCommon::PhoneCall:trait-applications:entity",
+              "source_id": "applicationCommon::PhoneCall",
+              "source_type": "entity",
+              "kind": "trait_application",
+              "source_label": "applicationCommon::PhoneCall",
+              "title": "Traits applied to PhoneCall (applicationCommon; qualified ID applicationCommon::PhoneCall)"
+            },
+            {
+              "id": "applicationCommon::PhoneCall:attributes:1",
+              "source_id": "applicationCommon::PhoneCall",
+              "source_type": "entity",
+              "kind": "attributes",
+              "source_label": "applicationCommon::PhoneCall",
+              "title": "PhoneCall (applicationCommon; qualified ID applicationCommon::PhoneCall) attributes"
+            },
+            {
+              "id": "applicationCommon::ActivityParty:attributes:1",
+              "source_id": "applicationCommon::ActivityParty",
+              "source_type": "entity",
+              "kind": "attributes",
+              "source_label": "applicationCommon::ActivityParty",
+              "title": "ActivityParty (applicationCommon; qualified ID applicationCommon::ActivityParty) attributes"
+            },
+            {
+              "id": "applicationCommon::ActivityParty:relationship:1",
+              "source_id": "applicationCommon::ActivityParty",
+              "source_type": "entity",
+              "kind": "relationship",
+              "source_label": "applicationCommon::ActivityParty",
+              "title": "ActivityParty (applicationCommon; qualified ID applicationCommon::ActivityParty).activity relationship"
+            },
+            {
+              "id": "applicationCommon::PhoneCall:trait-applications:attributes:1",
+              "source_id": "applicationCommon::PhoneCall",
+              "source_type": "entity",
+              "kind": "trait_application",
+              "source_label": "applicationCommon::PhoneCall",
+              "title": "Attribute traits of PhoneCall (applicationCommon; qualified ID applicationCommon::PhoneCall)"
+            },
+            {
+              "id": "inheritance-base:ActivityCommon",
+              "source_id": "inheritance-base:ActivityCommon",
+              "source_type": "inheritance",
+              "kind": "inheritance_base",
+              "source_label": "CDM base type ActivityCommon",
+              "title": "CDM base type ActivityCommon"
+            }
+          ],
+          "hit_at_1": false,
+          "hit_at_3": false,
+          "hit_at_6": true,
+          "recall_at_6": 1.0,
+          "mrr_at_6": 0.16666666666666666,
+          "latency_ms": 648.13,
+          "search_ms": 648.13
+        },
+        "adaptive": {
+          "ranked_passage_ids": [
+            "applicationCommon::PhoneCall:trait-applications:entity",
+            "applicationCommon::PhoneCall:attributes:1",
+            "applicationCommon::ActivityParty:attributes:1",
+            "applicationCommon::ActivityParty:relationship:1",
+            "applicationCommon::PhoneCall:trait-applications:attributes:1",
+            "inheritance-base:ActivityCommon"
+          ],
+          "matched_passage_ids": [
+            "inheritance-base:ActivityCommon"
+          ],
+          "ranked_passages": [
+            {
+              "id": "applicationCommon::PhoneCall:trait-applications:entity",
+              "source_id": "applicationCommon::PhoneCall",
+              "source_type": "entity",
+              "kind": "trait_application",
+              "source_label": "applicationCommon::PhoneCall",
+              "title": "Traits applied to PhoneCall (applicationCommon; qualified ID applicationCommon::PhoneCall)"
+            },
+            {
+              "id": "applicationCommon::PhoneCall:attributes:1",
+              "source_id": "applicationCommon::PhoneCall",
+              "source_type": "entity",
+              "kind": "attributes",
+              "source_label": "applicationCommon::PhoneCall",
+              "title": "PhoneCall (applicationCommon; qualified ID applicationCommon::PhoneCall) attributes"
+            },
+            {
+              "id": "applicationCommon::ActivityParty:attributes:1",
+              "source_id": "applicationCommon::ActivityParty",
+              "source_type": "entity",
+              "kind": "attributes",
+              "source_label": "applicationCommon::ActivityParty",
+              "title": "ActivityParty (applicationCommon; qualified ID applicationCommon::ActivityParty) attributes"
+            },
+            {
+              "id": "applicationCommon::ActivityParty:relationship:1",
+              "source_id": "applicationCommon::ActivityParty",
+              "source_type": "entity",
+              "kind": "relationship",
+              "source_label": "applicationCommon::ActivityParty",
+              "title": "ActivityParty (applicationCommon; qualified ID applicationCommon::ActivityParty).activity relationship"
+            },
+            {
+              "id": "applicationCommon::PhoneCall:trait-applications:attributes:1",
+              "source_id": "applicationCommon::PhoneCall",
+              "source_type": "entity",
+              "kind": "trait_application",
+              "source_label": "applicationCommon::PhoneCall",
+              "title": "Attribute traits of PhoneCall (applicationCommon; qualified ID applicationCommon::PhoneCall)"
+            },
+            {
+              "id": "inheritance-base:ActivityCommon",
+              "source_id": "inheritance-base:ActivityCommon",
+              "source_type": "inheritance",
+              "kind": "inheritance_base",
+              "source_label": "CDM base type ActivityCommon",
+              "title": "CDM base type ActivityCommon"
+            }
+          ],
+          "hit_at_1": false,
+          "hit_at_3": false,
+          "hit_at_6": true,
+          "recall_at_6": 1.0,
+          "mrr_at_6": 0.16666666666666666,
+          "latency_ms": 10866.95,
+          "search_ms": 648.13,
+          "router_ms": 10165.35,
+          "unload_ms": 53.47,
+          "second_search_ms": 0.0,
+          "search_again": false,
+          "followup_query": "",
+          "followup_result_count": 0,
+          "error": null
+        }
+      }
+    },
+    {
+      "question_id": "adaptive-development-object-dev-manifest-overview-comparison",
+      "question": "Compare how many entities are declared in the Retail Banking and applicationCommon manifests.",
+      "initial_query": "Compare how many entities are declared in the Retail Banking and applicationCommon manifests.",
+      "variants": {
+        "first_pass": {
+          "ranked_passage_ids": [
+            "manifest:schemaDocuments/FinancialServices/RetailBankingCoreDataModel/RetailBankingCoreDataModel.manifest.cdm.json:overview",
+            "manifest:schemaDocuments/core/applicationCommon/foundationCommon/financialCommon/financialCommon.manifest.cdm.json:overview",
+            "manifest:schemaDocuments/FinancialServices/RetailBankingCoreDataModel/RetailBankingCoreDataModel.manifest.cdm.json:declarations:3",
+            "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:overview",
+            "manifest:schemaDocuments/FinancialServices/RetailBankingCoreDataModel/RetailBankingCoreDataModel.manifest.cdm.json:declarations:1",
+            "cdm-catalog:overview"
+          ],
+          "matched_passage_ids": [
+            "manifest:schemaDocuments/FinancialServices/RetailBankingCoreDataModel/RetailBankingCoreDataModel.manifest.cdm.json:overview",
+            "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:overview"
+          ],
+          "ranked_passages": [
+            {
+              "id": "manifest:schemaDocuments/FinancialServices/RetailBankingCoreDataModel/RetailBankingCoreDataModel.manifest.cdm.json:overview",
+              "source_id": "manifest:schemaDocuments/FinancialServices/RetailBankingCoreDataModel/RetailBankingCoreDataModel.manifest.cdm.json",
+              "source_type": "manifest",
+              "kind": "manifest",
+              "source_label": "Manifest RetailBankingCoreDataModel (RetailBankingCoreDataModel)",
+              "title": "Manifest RetailBankingCoreDataModel (RetailBankingCoreDataModel)"
+            },
+            {
+              "id": "manifest:schemaDocuments/core/applicationCommon/foundationCommon/financialCommon/financialCommon.manifest.cdm.json:overview",
+              "source_id": "manifest:schemaDocuments/core/applicationCommon/foundationCommon/financialCommon/financialCommon.manifest.cdm.json",
+              "source_type": "manifest",
+              "kind": "manifest",
+              "source_label": "Manifest financialCommon (applicationCommon)",
+              "title": "Manifest financialCommon (applicationCommon)"
+            },
+            {
+              "id": "manifest:schemaDocuments/FinancialServices/RetailBankingCoreDataModel/RetailBankingCoreDataModel.manifest.cdm.json:declarations:3",
+              "source_id": "manifest:schemaDocuments/FinancialServices/RetailBankingCoreDataModel/RetailBankingCoreDataModel.manifest.cdm.json",
+              "source_type": "manifest",
+              "kind": "manifest_declarations",
+              "source_label": "Entities declared by manifest RetailBankingCoreDataModel (RetailBankingCoreDataModel)",
+              "title": "Entities declared by manifest RetailBankingCoreDataModel (RetailBankingCoreDataModel)"
+            },
+            {
+              "id": "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:overview",
+              "source_id": "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json",
+              "source_type": "manifest",
+              "kind": "manifest",
+              "source_label": "Manifest applicationCommon (applicationCommon)",
+              "title": "Manifest applicationCommon (applicationCommon)"
+            },
+            {
+              "id": "manifest:schemaDocuments/FinancialServices/RetailBankingCoreDataModel/RetailBankingCoreDataModel.manifest.cdm.json:declarations:1",
+              "source_id": "manifest:schemaDocuments/FinancialServices/RetailBankingCoreDataModel/RetailBankingCoreDataModel.manifest.cdm.json",
+              "source_type": "manifest",
+              "kind": "manifest_declarations",
+              "source_label": "Entities declared by manifest RetailBankingCoreDataModel (RetailBankingCoreDataModel)",
+              "title": "Entities declared by manifest RetailBankingCoreDataModel (RetailBankingCoreDataModel)"
+            },
+            {
+              "id": "cdm-catalog:overview",
+              "source_id": "cdm-catalog",
+              "source_type": "catalog",
+              "kind": "catalog",
+              "source_label": "CDM catalog",
+              "title": "CDM catalog scope"
+            }
+          ],
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_6": true,
+          "recall_at_6": 1.0,
+          "mrr_at_6": 1.0,
+          "latency_ms": 704.86,
+          "search_ms": 704.86
+        },
+        "adaptive": {
+          "ranked_passage_ids": [
+            "manifest:schemaDocuments/FinancialServices/RetailBankingCoreDataModel/RetailBankingCoreDataModel.manifest.cdm.json:overview",
+            "manifest:schemaDocuments/core/applicationCommon/foundationCommon/financialCommon/financialCommon.manifest.cdm.json:overview",
+            "manifest:schemaDocuments/FinancialServices/RetailBankingCoreDataModel/RetailBankingCoreDataModel.manifest.cdm.json:declarations:3",
+            "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:overview",
+            "manifest:schemaDocuments/FinancialServices/RetailBankingCoreDataModel/RetailBankingCoreDataModel.manifest.cdm.json:declarations:1",
+            "cdm-catalog:overview"
+          ],
+          "matched_passage_ids": [
+            "manifest:schemaDocuments/FinancialServices/RetailBankingCoreDataModel/RetailBankingCoreDataModel.manifest.cdm.json:overview",
+            "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:overview"
+          ],
+          "ranked_passages": [
+            {
+              "id": "manifest:schemaDocuments/FinancialServices/RetailBankingCoreDataModel/RetailBankingCoreDataModel.manifest.cdm.json:overview",
+              "source_id": "manifest:schemaDocuments/FinancialServices/RetailBankingCoreDataModel/RetailBankingCoreDataModel.manifest.cdm.json",
+              "source_type": "manifest",
+              "kind": "manifest",
+              "source_label": "Manifest RetailBankingCoreDataModel (RetailBankingCoreDataModel)",
+              "title": "Manifest RetailBankingCoreDataModel (RetailBankingCoreDataModel)"
+            },
+            {
+              "id": "manifest:schemaDocuments/core/applicationCommon/foundationCommon/financialCommon/financialCommon.manifest.cdm.json:overview",
+              "source_id": "manifest:schemaDocuments/core/applicationCommon/foundationCommon/financialCommon/financialCommon.manifest.cdm.json",
+              "source_type": "manifest",
+              "kind": "manifest",
+              "source_label": "Manifest financialCommon (applicationCommon)",
+              "title": "Manifest financialCommon (applicationCommon)"
+            },
+            {
+              "id": "manifest:schemaDocuments/FinancialServices/RetailBankingCoreDataModel/RetailBankingCoreDataModel.manifest.cdm.json:declarations:3",
+              "source_id": "manifest:schemaDocuments/FinancialServices/RetailBankingCoreDataModel/RetailBankingCoreDataModel.manifest.cdm.json",
+              "source_type": "manifest",
+              "kind": "manifest_declarations",
+              "source_label": "Entities declared by manifest RetailBankingCoreDataModel (RetailBankingCoreDataModel)",
+              "title": "Entities declared by manifest RetailBankingCoreDataModel (RetailBankingCoreDataModel)"
+            },
+            {
+              "id": "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:overview",
+              "source_id": "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json",
+              "source_type": "manifest",
+              "kind": "manifest",
+              "source_label": "Manifest applicationCommon (applicationCommon)",
+              "title": "Manifest applicationCommon (applicationCommon)"
+            },
+            {
+              "id": "manifest:schemaDocuments/FinancialServices/RetailBankingCoreDataModel/RetailBankingCoreDataModel.manifest.cdm.json:declarations:1",
+              "source_id": "manifest:schemaDocuments/FinancialServices/RetailBankingCoreDataModel/RetailBankingCoreDataModel.manifest.cdm.json",
+              "source_type": "manifest",
+              "kind": "manifest_declarations",
+              "source_label": "Entities declared by manifest RetailBankingCoreDataModel (RetailBankingCoreDataModel)",
+              "title": "Entities declared by manifest RetailBankingCoreDataModel (RetailBankingCoreDataModel)"
+            },
+            {
+              "id": "cdm-catalog:overview",
+              "source_id": "cdm-catalog",
+              "source_type": "catalog",
+              "kind": "catalog",
+              "source_label": "CDM catalog",
+              "title": "CDM catalog scope"
+            }
+          ],
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_6": true,
+          "recall_at_6": 1.0,
+          "mrr_at_6": 1.0,
+          "latency_ms": 10755.97,
+          "search_ms": 704.86,
+          "router_ms": 10002.07,
+          "unload_ms": 49.04,
+          "second_search_ms": 0.0,
+          "search_again": false,
+          "followup_query": "",
+          "followup_result_count": 0,
+          "error": null
+        }
+      }
+    },
+    {
+      "question_id": "adaptive-development-complex-funds-01",
+      "question": "Compare how an overdraft, standing order, and direct debit move money: which provides credit after a checking account reaches zero, which transfers a fixed amount at regular intervals, and which collects payments with the customer's authorization?",
+      "initial_query": "Compare how an overdraft, standing order, and direct debit move money: which provides credit after a checking account reaches zero, which transfers a fixed amount at regular intervals, and which collects payments with the customer's authorization?",
+      "variants": {
+        "first_pass": {
+          "ranked_entity_ids": [
+            "RetailBankingCoreDataModel::FIDirectDebit",
+            "RetailBankingCoreDataModel::FIOverdraft",
+            "RetailBankingCoreDataModel::FHLineOfCredit"
+          ],
+          "matched_entity_ids": [
+            "RetailBankingCoreDataModel::FIDirectDebit",
+            "RetailBankingCoreDataModel::FIOverdraft"
+          ],
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_6": true,
+          "recall_at_6": 0.6666666666666666,
+          "mrr_at_6": 1.0,
+          "latency_ms": 910.99,
+          "search_ms": 910.99
+        },
+        "adaptive": {
+          "ranked_entity_ids": [
+            "RetailBankingCoreDataModel::FIDirectDebit",
+            "RetailBankingCoreDataModel::FIStandingOrder",
+            "RetailBankingCoreDataModel::FIOverdraft"
+          ],
+          "matched_entity_ids": [
+            "RetailBankingCoreDataModel::FIDirectDebit",
+            "RetailBankingCoreDataModel::FIStandingOrder",
+            "RetailBankingCoreDataModel::FIOverdraft"
+          ],
+          "hit_at_1": true,
+          "hit_at_3": true,
+          "hit_at_6": true,
+          "recall_at_6": 1.0,
+          "mrr_at_6": 1.0,
+          "latency_ms": 14718.43,
+          "search_ms": 1828.05,
+          "router_ms": 12845.4,
+          "unload_ms": 44.98,
+          "second_search_ms": 917.06,
+          "search_again": true,
+          "followup_query": "Can you provide more details on the attributes related to standing orders within the RetailBankingCoreDataModel, specifically how they relate to regular, fixed-amount transfers?",
+          "followup_result_count": 20,
+          "error": null
+        }
+      }
+    }
+  ],
+  "log_persisted": true
+}

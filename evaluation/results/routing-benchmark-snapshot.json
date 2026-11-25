@@ -1,0 +1,1622 @@
+{
+  "status": "completed",
+  "dataset_id": "cdm-routing-decision-v1",
+  "dataset_sha256": "5c5de7f4091199172022ed61d24dbed6adb454082abc6c789067dbbff40d0bef",
+  "split": "test",
+  "models": {
+    "qwen3:0.6b": {
+      "name": "qwen3:0.6b",
+      "digest": "7df6b6e09427a769808717c0a93cadc4ae99ed4eb8bf5ca557c90846becea435",
+      "size": 522653767
+    },
+    "qwen3:4b": {
+      "name": "qwen3:4b",
+      "digest": "359d7dd4bcdab3d86b87d73ac27966f4dbb9f5efdfcc75d34a8764a09474fae7",
+      "size": 2497293931
+    },
+    "qwen3.5:9b-q4_K_M": {
+      "name": "qwen3.5:9b-q4_K_M",
+      "digest": "56671c2ab9385f9cfcb404638e32cd62d88e3501d44822208363c010179a3c90",
+      "size": 6550825550
+    },
+    "gemma4:12b": {
+      "name": "gemma4:12b",
+      "digest": "c7597fc90b86aff6965317f37dd5465402284e26382d9b4bf2dfe3ef1491f4b6",
+      "size": 7714091504
+    },
+    "qwen3.5:27b-q4_K_M": {
+      "name": "qwen3.5:27b-q4_K_M",
+      "digest": "64ae5b1d651fb2709d5928ccb8dcfb4bb2cc9c2c8001ac34497e36a6cf905b59",
+      "size": 17478556591
+    }
+  },
+  "summaries": {
+    "qwen3:0.6b": {
+      "attempted": 18,
+      "scored": 18,
+      "errors": 0,
+      "correct": 11,
+      "accuracy": 0.6111111111111112,
+      "search_gate_correct": 14,
+      "search_gate_accuracy": 0.7777777777777778,
+      "false_search": 4,
+      "false_no_search": 0,
+      "macro_f1": 0.5952380952380952,
+      "mean_seconds": 0.13677777777777778,
+      "classes": {
+        "raw_search": {
+          "expected": 6,
+          "predicted": 8,
+          "correct": 5,
+          "precision": 0.625,
+          "recall": 0.8333333333333334,
+          "f1": 0.7142857142857143
+        },
+        "rewrite_search": {
+          "expected": 6,
+          "predicted": 8,
+          "correct": 4,
+          "precision": 0.5,
+          "recall": 0.6666666666666666,
+          "f1": 0.5714285714285715
+        },
+        "no_search": {
+          "expected": 6,
+          "predicted": 2,
+          "correct": 2,
+          "precision": 1.0,
+          "recall": 0.3333333333333333,
+          "f1": 0.5
+        }
+      }
+    },
+    "qwen3:4b": {
+      "attempted": 18,
+      "scored": 18,
+      "errors": 0,
+      "correct": 11,
+      "accuracy": 0.6111111111111112,
+      "search_gate_correct": 18,
+      "search_gate_accuracy": 1.0,
+      "false_search": 0,
+      "false_no_search": 0,
+      "macro_f1": 0.5294117647058824,
+      "mean_seconds": 0.3565,
+      "classes": {
+        "raw_search": {
+          "expected": 6,
+          "predicted": 11,
+          "correct": 5,
+          "precision": 0.45454545454545453,
+          "recall": 0.8333333333333334,
+          "f1": 0.5882352941176471
+        },
+        "rewrite_search": {
+          "expected": 6,
+          "predicted": 1,
+          "correct": 0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "no_search": {
+          "expected": 6,
+          "predicted": 6,
+          "correct": 6,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        }
+      }
+    },
+    "qwen3.5:9b-q4_K_M": {
+      "attempted": 18,
+      "scored": 18,
+      "errors": 0,
+      "correct": 14,
+      "accuracy": 0.7777777777777778,
+      "search_gate_correct": 18,
+      "search_gate_accuracy": 1.0,
+      "false_search": 0,
+      "false_no_search": 0,
+      "macro_f1": 0.75,
+      "mean_seconds": 1.0847777777777778,
+      "classes": {
+        "raw_search": {
+          "expected": 6,
+          "predicted": 10,
+          "correct": 6,
+          "precision": 0.6,
+          "recall": 1.0,
+          "f1": 0.7499999999999999
+        },
+        "rewrite_search": {
+          "expected": 6,
+          "predicted": 2,
+          "correct": 2,
+          "precision": 1.0,
+          "recall": 0.3333333333333333,
+          "f1": 0.5
+        },
+        "no_search": {
+          "expected": 6,
+          "predicted": 6,
+          "correct": 6,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        }
+      }
+    },
+    "gemma4:12b": {
+      "attempted": 18,
+      "scored": 18,
+      "errors": 0,
+      "correct": 12,
+      "accuracy": 0.6666666666666666,
+      "search_gate_correct": 18,
+      "search_gate_accuracy": 1.0,
+      "false_search": 0,
+      "false_no_search": 0,
+      "macro_f1": 0.5555555555555555,
+      "mean_seconds": 0.7379444444444444,
+      "classes": {
+        "raw_search": {
+          "expected": 6,
+          "predicted": 12,
+          "correct": 6,
+          "precision": 0.5,
+          "recall": 1.0,
+          "f1": 0.6666666666666666
+        },
+        "rewrite_search": {
+          "expected": 6,
+          "predicted": 0,
+          "correct": 0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "no_search": {
+          "expected": 6,
+          "predicted": 6,
+          "correct": 6,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        }
+      }
+    },
+    "qwen3.5:27b-q4_K_M": {
+      "attempted": 18,
+      "scored": 18,
+      "errors": 0,
+      "correct": 14,
+      "accuracy": 0.7777777777777778,
+      "search_gate_correct": 18,
+      "search_gate_accuracy": 1.0,
+      "false_search": 0,
+      "false_no_search": 0,
+      "macro_f1": 0.75,
+      "mean_seconds": 3.902111111111111,
+      "classes": {
+        "raw_search": {
+          "expected": 6,
+          "predicted": 10,
+          "correct": 6,
+          "precision": 0.6,
+          "recall": 1.0,
+          "f1": 0.7499999999999999
+        },
+        "rewrite_search": {
+          "expected": 6,
+          "predicted": 2,
+          "correct": 2,
+          "precision": 1.0,
+          "recall": 0.3333333333333333,
+          "f1": 0.5
+        },
+        "no_search": {
+          "expected": 6,
+          "predicted": 6,
+          "correct": 6,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        }
+      }
+    }
+  },
+  "rows": [
+    {
+      "model": "qwen3:0.6b",
+      "case_id": "route-test-raw-overdraft",
+      "question": "In the RetailBankingCoreDataModel CDM schema, how is FIOverdraft described?",
+      "context_messages": [],
+      "expected_route": "raw_search",
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": true,
+      "elapsed_seconds": 0.932
+    },
+    {
+      "model": "qwen3:0.6b",
+      "case_id": "route-test-raw-contact-parent",
+      "question": "Which applicationCommon CDM entities can Contact.parentCustomer reference?",
+      "context_messages": [],
+      "expected_route": "raw_search",
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": true,
+      "elapsed_seconds": 0.09
+    },
+    {
+      "model": "qwen3:0.6b",
+      "case_id": "route-test-raw-holding-role",
+      "question": "In RetailBankingCoreDataModel CustomerFinancialHolding, which attribute describes the customer's role in a holding?",
+      "context_messages": [],
+      "expected_route": "raw_search",
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": true,
+      "elapsed_seconds": 0.089
+    },
+    {
+      "model": "qwen3:0.6b",
+      "case_id": "route-test-raw-group",
+      "question": "Which GroupFinancialHolding relationships reference the group and the holding in RetailBankingCoreDataModel?",
+      "context_messages": [],
+      "expected_route": "raw_search",
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": true,
+      "elapsed_seconds": 0.087
+    },
+    {
+      "model": "qwen3:0.6b",
+      "case_id": "route-test-raw-partner",
+      "question": "In applicationCommon CustomerRelationship, what does the partner field reference?",
+      "context_messages": [
+        {
+          "role": "user",
+          "content": "Earlier I was examining RetailBankingCoreDataModel FIStandingOrder."
+        },
+        {
+          "role": "assistant",
+          "content": "We can switch to a different schema object."
+        }
+      ],
+      "expected_route": "raw_search",
+      "status": "scored",
+      "predicted_route": "rewrite_search",
+      "correct": false,
+      "elapsed_seconds": 0.097
+    },
+    {
+      "model": "qwen3:0.6b",
+      "case_id": "route-test-raw-phone",
+      "question": "Which applicationCommon PhoneCall attribute stores the phone number?",
+      "context_messages": [],
+      "expected_route": "raw_search",
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": true,
+      "elapsed_seconds": 0.099
+    },
+    {
+      "model": "qwen3:0.6b",
+      "case_id": "route-test-rewrite-customer",
+      "question": "Which entity models that person?",
+      "context_messages": [
+        {
+          "role": "user",
+          "content": "A business unit has a relationship with an individual, such as a customer, supplier, or colleague."
+        },
+        {
+          "role": "assistant",
+          "content": "We are looking for the person record in applicationCommon."
+        }
+      ],
+      "expected_route": "rewrite_search",
+      "status": "scored",
+      "predicted_route": "rewrite_search",
+      "correct": true,
+      "elapsed_seconds": 0.113
+    },
+    {
+      "model": "qwen3:0.6b",
+      "case_id": "route-test-rewrite-phone",
+      "question": "Which field stores the phone number?",
+      "context_messages": [
+        {
+          "role": "user",
+          "content": "We are reviewing how an applicationCommon phone call is represented."
+        },
+        {
+          "role": "assistant",
+          "content": "The schema object in question is the PhoneCall entity."
+        }
+      ],
+      "expected_route": "rewrite_search",
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": false,
+      "elapsed_seconds": 0.095
+    },
+    {
+      "model": "qwen3:0.6b",
+      "case_id": "route-test-rewrite-ownership",
+      "question": "Which field distinguishes an owner from a beneficiary?",
+      "context_messages": [
+        {
+          "role": "user",
+          "content": "I am reviewing CustomerFinancialHolding in the Retail Banking CDM model."
+        },
+        {
+          "role": "assistant",
+          "content": "The entity associates a customer with a financial holding."
+        }
+      ],
+      "expected_route": "rewrite_search",
+      "status": "scored",
+      "predicted_route": "rewrite_search",
+      "correct": true,
+      "elapsed_seconds": 0.089
+    },
+    {
+      "model": "qwen3:0.6b",
+      "case_id": "route-test-rewrite-card",
+      "question": "What does that customer reference point to?",
+      "context_messages": [
+        {
+          "role": "user",
+          "content": "Consider the Cardholder relationship on RetailBankingCoreDataModel FICard."
+        },
+        {
+          "role": "assistant",
+          "content": "We need the allowed referenced customer types."
+        }
+      ],
+      "expected_route": "rewrite_search",
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": false,
+      "elapsed_seconds": 0.087
+    },
+    {
+      "model": "qwen3:0.6b",
+      "case_id": "route-test-rewrite-investment",
+      "question": "What does the second one represent?",
+      "context_messages": [
+        {
+          "role": "user",
+          "content": "In RetailBankingCoreDataModel, compare the FHLoan and FHInvestment entities, in that order."
+        },
+        {
+          "role": "assistant",
+          "content": "We can examine the two entity definitions separately."
+        }
+      ],
+      "expected_route": "rewrite_search",
+      "status": "scored",
+      "predicted_route": "rewrite_search",
+      "correct": true,
+      "elapsed_seconds": 0.087
+    },
+    {
+      "model": "qwen3:0.6b",
+      "case_id": "route-test-rewrite-payment",
+      "question": "Which of those two authorizes the creditor to collect payments?",
+      "context_messages": [
+        {
+          "role": "user",
+          "content": "I am comparing FIDirectDebit with FIStandingOrder in RetailBankingCoreDataModel."
+        },
+        {
+          "role": "assistant",
+          "content": "Both are recurring payment concepts in the catalog."
+        }
+      ],
+      "expected_route": "rewrite_search",
+      "status": "scored",
+      "predicted_route": "rewrite_search",
+      "correct": true,
+      "elapsed_seconds": 0.092
+    },
+    {
+      "model": "qwen3:0.6b",
+      "case_id": "route-test-no-personal-card",
+      "question": "Who is the actual cardholder on my Visa card?",
+      "context_messages": [
+        {
+          "role": "user",
+          "content": "Earlier we were reading the FICard definition in the Retail Banking model."
+        }
+      ],
+      "expected_route": "no_search",
+      "status": "scored",
+      "predicted_route": "rewrite_search",
+      "correct": false,
+      "elapsed_seconds": 0.086
+    },
+    {
+      "model": "qwen3:0.6b",
+      "case_id": "route-test-no-current-loan",
+      "question": "How much do I still owe on my personal loan today?",
+      "context_messages": [],
+      "expected_route": "no_search",
+      "status": "scored",
+      "predicted_route": "rewrite_search",
+      "correct": false,
+      "elapsed_seconds": 0.083
+    },
+    {
+      "model": "qwen3:0.6b",
+      "case_id": "route-test-no-live-status",
+      "question": "Is the production CDM RAG deployment healthy right now?",
+      "context_messages": [],
+      "expected_route": "no_search",
+      "status": "scored",
+      "predicted_route": "rewrite_search",
+      "correct": false,
+      "elapsed_seconds": 0.085
+    },
+    {
+      "model": "qwen3:0.6b",
+      "case_id": "route-test-no-mixed",
+      "question": "Explain the applicationCommon Contact schema, and tell me the current balance of my personal bank account.",
+      "context_messages": [],
+      "expected_route": "no_search",
+      "status": "scored",
+      "predicted_route": "no_search",
+      "correct": true,
+      "elapsed_seconds": 0.087
+    },
+    {
+      "model": "qwen3:0.6b",
+      "case_id": "route-test-no-interest",
+      "question": "What is today's mortgage interest rate at my bank?",
+      "context_messages": [
+        {
+          "role": "user",
+          "content": "We were discussing loan entities in CDM."
+        }
+      ],
+      "expected_route": "no_search",
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": false,
+      "elapsed_seconds": 0.09
+    },
+    {
+      "model": "qwen3:0.6b",
+      "case_id": "route-test-no-weather",
+      "question": "Will it rain in Berlin tomorrow?",
+      "context_messages": [],
+      "expected_route": "no_search",
+      "status": "scored",
+      "predicted_route": "no_search",
+      "correct": true,
+      "elapsed_seconds": 0.074
+    },
+    {
+      "model": "qwen3:4b",
+      "case_id": "route-test-raw-overdraft",
+      "question": "In the RetailBankingCoreDataModel CDM schema, how is FIOverdraft described?",
+      "context_messages": [],
+      "expected_route": "raw_search",
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": true,
+      "elapsed_seconds": 2.175
+    },
+    {
+      "model": "qwen3:4b",
+      "case_id": "route-test-raw-contact-parent",
+      "question": "Which applicationCommon CDM entities can Contact.parentCustomer reference?",
+      "context_messages": [],
+      "expected_route": "raw_search",
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": true,
+      "elapsed_seconds": 0.246
+    },
+    {
+      "model": "qwen3:4b",
+      "case_id": "route-test-raw-holding-role",
+      "question": "In RetailBankingCoreDataModel CustomerFinancialHolding, which attribute describes the customer's role in a holding?",
+      "context_messages": [],
+      "expected_route": "raw_search",
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": true,
+      "elapsed_seconds": 0.238
+    },
+    {
+      "model": "qwen3:4b",
+      "case_id": "route-test-raw-group",
+      "question": "Which GroupFinancialHolding relationships reference the group and the holding in RetailBankingCoreDataModel?",
+      "context_messages": [],
+      "expected_route": "raw_search",
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": true,
+      "elapsed_seconds": 0.239
+    },
+    {
+      "model": "qwen3:4b",
+      "case_id": "route-test-raw-partner",
+      "question": "In applicationCommon CustomerRelationship, what does the partner field reference?",
+      "context_messages": [
+        {
+          "role": "user",
+          "content": "Earlier I was examining RetailBankingCoreDataModel FIStandingOrder."
+        },
+        {
+          "role": "assistant",
+          "content": "We can switch to a different schema object."
+        }
+      ],
+      "expected_route": "raw_search",
+      "status": "scored",
+      "predicted_route": "rewrite_search",
+      "correct": false,
+      "elapsed_seconds": 0.275
+    },
+    {
+      "model": "qwen3:4b",
+      "case_id": "route-test-raw-phone",
+      "question": "Which applicationCommon PhoneCall attribute stores the phone number?",
+      "context_messages": [],
+      "expected_route": "raw_search",
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": true,
+      "elapsed_seconds": 0.241
+    },
+    {
+      "model": "qwen3:4b",
+      "case_id": "route-test-rewrite-customer",
+      "question": "Which entity models that person?",
+      "context_messages": [
+        {
+          "role": "user",
+          "content": "A business unit has a relationship with an individual, such as a customer, supplier, or colleague."
+        },
+        {
+          "role": "assistant",
+          "content": "We are looking for the person record in applicationCommon."
+        }
+      ],
+      "expected_route": "rewrite_search",
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": false,
+      "elapsed_seconds": 0.249
+    },
+    {
+      "model": "qwen3:4b",
+      "case_id": "route-test-rewrite-phone",
+      "question": "Which field stores the phone number?",
+      "context_messages": [
+        {
+          "role": "user",
+          "content": "We are reviewing how an applicationCommon phone call is represented."
+        },
+        {
+          "role": "assistant",
+          "content": "The schema object in question is the PhoneCall entity."
+        }
+      ],
+      "expected_route": "rewrite_search",
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": false,
+      "elapsed_seconds": 0.251
+    },
+    {
+      "model": "qwen3:4b",
+      "case_id": "route-test-rewrite-ownership",
+      "question": "Which field distinguishes an owner from a beneficiary?",
+      "context_messages": [
+        {
+          "role": "user",
+          "content": "I am reviewing CustomerFinancialHolding in the Retail Banking CDM model."
+        },
+        {
+          "role": "assistant",
+          "content": "The entity associates a customer with a financial holding."
+        }
+      ],
+      "expected_route": "rewrite_search",
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": false,
+      "elapsed_seconds": 0.253
+    },
+    {
+      "model": "qwen3:4b",
+      "case_id": "route-test-rewrite-card",
+      "question": "What does that customer reference point to?",
+      "context_messages": [
+        {
+          "role": "user",
+          "content": "Consider the Cardholder relationship on RetailBankingCoreDataModel FICard."
+        },
+        {
+          "role": "assistant",
+          "content": "We need the allowed referenced customer types."
+        }
+      ],
+      "expected_route": "rewrite_search",
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": false,
+      "elapsed_seconds": 0.256
+    },
+    {
+      "model": "qwen3:4b",
+      "case_id": "route-test-rewrite-investment",
+      "question": "What does the second one represent?",
+      "context_messages": [
+        {
+          "role": "user",
+          "content": "In RetailBankingCoreDataModel, compare the FHLoan and FHInvestment entities, in that order."
+        },
+        {
+          "role": "assistant",
+          "content": "We can examine the two entity definitions separately."
+        }
+      ],
+      "expected_route": "rewrite_search",
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": false,
+      "elapsed_seconds": 0.254
+    },
+    {
+      "model": "qwen3:4b",
+      "case_id": "route-test-rewrite-payment",
+      "question": "Which of those two authorizes the creditor to collect payments?",
+      "context_messages": [
+        {
+          "role": "user",
+          "content": "I am comparing FIDirectDebit with FIStandingOrder in RetailBankingCoreDataModel."
+        },
+        {
+          "role": "assistant",
+          "content": "Both are recurring payment concepts in the catalog."
+        }
+      ],
+      "expected_route": "rewrite_search",
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": false,
+      "elapsed_seconds": 0.263
+    },
+    {
+      "model": "qwen3:4b",
+      "case_id": "route-test-no-personal-card",
+      "question": "Who is the actual cardholder on my Visa card?",
+      "context_messages": [
+        {
+          "role": "user",
+          "content": "Earlier we were reading the FICard definition in the Retail Banking model."
+        }
+      ],
+      "expected_route": "no_search",
+      "status": "scored",
+      "predicted_route": "no_search",
+      "correct": true,
+      "elapsed_seconds": 0.252
+    },
+    {
+      "model": "qwen3:4b",
+      "case_id": "route-test-no-current-loan",
+      "question": "How much do I still owe on my personal loan today?",
+      "context_messages": [],
+      "expected_route": "no_search",
+      "status": "scored",
+      "predicted_route": "no_search",
+      "correct": true,
+      "elapsed_seconds": 0.231
+    },
+    {
+      "model": "qwen3:4b",
+      "case_id": "route-test-no-live-status",
+      "question": "Is the production CDM RAG deployment healthy right now?",
+      "context_messages": [],
+      "expected_route": "no_search",
+      "status": "scored",
+      "predicted_route": "no_search",
+      "correct": true,
+      "elapsed_seconds": 0.233
+    },
+    {
+      "model": "qwen3:4b",
+      "case_id": "route-test-no-mixed",
+      "question": "Explain the applicationCommon Contact schema, and tell me the current balance of my personal bank account.",
+      "context_messages": [],
+      "expected_route": "no_search",
+      "status": "scored",
+      "predicted_route": "no_search",
+      "correct": true,
+      "elapsed_seconds": 0.231
+    },
+    {
+      "model": "qwen3:4b",
+      "case_id": "route-test-no-interest",
+      "question": "What is today's mortgage interest rate at my bank?",
+      "context_messages": [
+        {
+          "role": "user",
+          "content": "We were discussing loan entities in CDM."
+        }
+      ],
+      "expected_route": "no_search",
+      "status": "scored",
+      "predicted_route": "no_search",
+      "correct": true,
+      "elapsed_seconds": 0.322
+    },
+    {
+      "model": "qwen3:4b",
+      "case_id": "route-test-no-weather",
+      "question": "Will it rain in Berlin tomorrow?",
+      "context_messages": [],
+      "expected_route": "no_search",
+      "status": "scored",
+      "predicted_route": "no_search",
+      "correct": true,
+      "elapsed_seconds": 0.208
+    },
+    {
+      "model": "qwen3.5:9b-q4_K_M",
+      "case_id": "route-test-raw-overdraft",
+      "question": "In the RetailBankingCoreDataModel CDM schema, how is FIOverdraft described?",
+      "context_messages": [],
+      "expected_route": "raw_search",
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": true,
+      "elapsed_seconds": 6.845
+    },
+    {
+      "model": "qwen3.5:9b-q4_K_M",
+      "case_id": "route-test-raw-contact-parent",
+      "question": "Which applicationCommon CDM entities can Contact.parentCustomer reference?",
+      "context_messages": [],
+      "expected_route": "raw_search",
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": true,
+      "elapsed_seconds": 0.746
+    },
+    {
+      "model": "qwen3.5:9b-q4_K_M",
+      "case_id": "route-test-raw-holding-role",
+      "question": "In RetailBankingCoreDataModel CustomerFinancialHolding, which attribute describes the customer's role in a holding?",
+      "context_messages": [],
+      "expected_route": "raw_search",
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": true,
+      "elapsed_seconds": 0.738
+    },
+    {
+      "model": "qwen3.5:9b-q4_K_M",
+      "case_id": "route-test-raw-group",
+      "question": "Which GroupFinancialHolding relationships reference the group and the holding in RetailBankingCoreDataModel?",
+      "context_messages": [],
+      "expected_route": "raw_search",
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": true,
+      "elapsed_seconds": 0.741
+    },
+    {
+      "model": "qwen3.5:9b-q4_K_M",
+      "case_id": "route-test-raw-partner",
+      "question": "In applicationCommon CustomerRelationship, what does the partner field reference?",
+      "context_messages": [
+        {
+          "role": "user",
+          "content": "Earlier I was examining RetailBankingCoreDataModel FIStandingOrder."
+        },
+        {
+          "role": "assistant",
+          "content": "We can switch to a different schema object."
+        }
+      ],
+      "expected_route": "raw_search",
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": true,
+      "elapsed_seconds": 0.8
+    },
+    {
+      "model": "qwen3.5:9b-q4_K_M",
+      "case_id": "route-test-raw-phone",
+      "question": "Which applicationCommon PhoneCall attribute stores the phone number?",
+      "context_messages": [],
+      "expected_route": "raw_search",
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": true,
+      "elapsed_seconds": 0.732
+    },
+    {
+      "model": "qwen3.5:9b-q4_K_M",
+      "case_id": "route-test-rewrite-customer",
+      "question": "Which entity models that person?",
+      "context_messages": [
+        {
+          "role": "user",
+          "content": "A business unit has a relationship with an individual, such as a customer, supplier, or colleague."
+        },
+        {
+          "role": "assistant",
+          "content": "We are looking for the person record in applicationCommon."
+        }
+      ],
+      "expected_route": "rewrite_search",
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": false,
+      "elapsed_seconds": 0.804
+    },
+    {
+      "model": "qwen3.5:9b-q4_K_M",
+      "case_id": "route-test-rewrite-phone",
+      "question": "Which field stores the phone number?",
+      "context_messages": [
+        {
+          "role": "user",
+          "content": "We are reviewing how an applicationCommon phone call is represented."
+        },
+        {
+          "role": "assistant",
+          "content": "The schema object in question is the PhoneCall entity."
+        }
+      ],
+      "expected_route": "rewrite_search",
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": false,
+      "elapsed_seconds": 0.806
+    },
+    {
+      "model": "qwen3.5:9b-q4_K_M",
+      "case_id": "route-test-rewrite-ownership",
+      "question": "Which field distinguishes an owner from a beneficiary?",
+      "context_messages": [
+        {
+          "role": "user",
+          "content": "I am reviewing CustomerFinancialHolding in the Retail Banking CDM model."
+        },
+        {
+          "role": "assistant",
+          "content": "The entity associates a customer with a financial holding."
+        }
+      ],
+      "expected_route": "rewrite_search",
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": false,
+      "elapsed_seconds": 0.815
+    },
+    {
+      "model": "qwen3.5:9b-q4_K_M",
+      "case_id": "route-test-rewrite-card",
+      "question": "What does that customer reference point to?",
+      "context_messages": [
+        {
+          "role": "user",
+          "content": "Consider the Cardholder relationship on RetailBankingCoreDataModel FICard."
+        },
+        {
+          "role": "assistant",
+          "content": "We need the allowed referenced customer types."
+        }
+      ],
+      "expected_route": "rewrite_search",
+      "status": "scored",
+      "predicted_route": "rewrite_search",
+      "correct": true,
+      "elapsed_seconds": 0.801
+    },
+    {
+      "model": "qwen3.5:9b-q4_K_M",
+      "case_id": "route-test-rewrite-investment",
+      "question": "What does the second one represent?",
+      "context_messages": [
+        {
+          "role": "user",
+          "content": "In RetailBankingCoreDataModel, compare the FHLoan and FHInvestment entities, in that order."
+        },
+        {
+          "role": "assistant",
+          "content": "We can examine the two entity definitions separately."
+        }
+      ],
+      "expected_route": "rewrite_search",
+      "status": "scored",
+      "predicted_route": "rewrite_search",
+      "correct": true,
+      "elapsed_seconds": 0.789
+    },
+    {
+      "model": "qwen3.5:9b-q4_K_M",
+      "case_id": "route-test-rewrite-payment",
+      "question": "Which of those two authorizes the creditor to collect payments?",
+      "context_messages": [
+        {
+          "role": "user",
+          "content": "I am comparing FIDirectDebit with FIStandingOrder in RetailBankingCoreDataModel."
+        },
+        {
+          "role": "assistant",
+          "content": "Both are recurring payment concepts in the catalog."
+        }
+      ],
+      "expected_route": "rewrite_search",
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": false,
+      "elapsed_seconds": 0.697
+    },
+    {
+      "model": "qwen3.5:9b-q4_K_M",
+      "case_id": "route-test-no-personal-card",
+      "question": "Who is the actual cardholder on my Visa card?",
+      "context_messages": [
+        {
+          "role": "user",
+          "content": "Earlier we were reading the FICard definition in the Retail Banking model."
+        }
+      ],
+      "expected_route": "no_search",
+      "status": "scored",
+      "predicted_route": "no_search",
+      "correct": true,
+      "elapsed_seconds": 0.789
+    },
+    {
+      "model": "qwen3.5:9b-q4_K_M",
+      "case_id": "route-test-no-current-loan",
+      "question": "How much do I still owe on my personal loan today?",
+      "context_messages": [],
+      "expected_route": "no_search",
+      "status": "scored",
+      "predicted_route": "no_search",
+      "correct": true,
+      "elapsed_seconds": 0.63
+    },
+    {
+      "model": "qwen3.5:9b-q4_K_M",
+      "case_id": "route-test-no-live-status",
+      "question": "Is the production CDM RAG deployment healthy right now?",
+      "context_messages": [],
+      "expected_route": "no_search",
+      "status": "scored",
+      "predicted_route": "no_search",
+      "correct": true,
+      "elapsed_seconds": 0.74
+    },
+    {
+      "model": "qwen3.5:9b-q4_K_M",
+      "case_id": "route-test-no-mixed",
+      "question": "Explain the applicationCommon Contact schema, and tell me the current balance of my personal bank account.",
+      "context_messages": [],
+      "expected_route": "no_search",
+      "status": "scored",
+      "predicted_route": "no_search",
+      "correct": true,
+      "elapsed_seconds": 0.736
+    },
+    {
+      "model": "qwen3.5:9b-q4_K_M",
+      "case_id": "route-test-no-interest",
+      "question": "What is today's mortgage interest rate at my bank?",
+      "context_messages": [
+        {
+          "role": "user",
+          "content": "We were discussing loan entities in CDM."
+        }
+      ],
+      "expected_route": "no_search",
+      "status": "scored",
+      "predicted_route": "no_search",
+      "correct": true,
+      "elapsed_seconds": 0.691
+    },
+    {
+      "model": "qwen3.5:9b-q4_K_M",
+      "case_id": "route-test-no-weather",
+      "question": "Will it rain in Berlin tomorrow?",
+      "context_messages": [],
+      "expected_route": "no_search",
+      "status": "scored",
+      "predicted_route": "no_search",
+      "correct": true,
+      "elapsed_seconds": 0.626
+    },
+    {
+      "model": "gemma4:12b",
+      "case_id": "route-test-raw-overdraft",
+      "question": "In the RetailBankingCoreDataModel CDM schema, how is FIOverdraft described?",
+      "context_messages": [],
+      "expected_route": "raw_search",
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": true,
+      "elapsed_seconds": 5.582
+    },
+    {
+      "model": "gemma4:12b",
+      "case_id": "route-test-raw-contact-parent",
+      "question": "Which applicationCommon CDM entities can Contact.parentCustomer reference?",
+      "context_messages": [],
+      "expected_route": "raw_search",
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": true,
+      "elapsed_seconds": 0.39
+    },
+    {
+      "model": "gemma4:12b",
+      "case_id": "route-test-raw-holding-role",
+      "question": "In RetailBankingCoreDataModel CustomerFinancialHolding, which attribute describes the customer's role in a holding?",
+      "context_messages": [],
+      "expected_route": "raw_search",
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": true,
+      "elapsed_seconds": 0.398
+    },
+    {
+      "model": "gemma4:12b",
+      "case_id": "route-test-raw-group",
+      "question": "Which GroupFinancialHolding relationships reference the group and the holding in RetailBankingCoreDataModel?",
+      "context_messages": [],
+      "expected_route": "raw_search",
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": true,
+      "elapsed_seconds": 0.424
+    },
+    {
+      "model": "gemma4:12b",
+      "case_id": "route-test-raw-partner",
+      "question": "In applicationCommon CustomerRelationship, what does the partner field reference?",
+      "context_messages": [
+        {
+          "role": "user",
+          "content": "Earlier I was examining RetailBankingCoreDataModel FIStandingOrder."
+        },
+        {
+          "role": "assistant",
+          "content": "We can switch to a different schema object."
+        }
+      ],
+      "expected_route": "raw_search",
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": true,
+      "elapsed_seconds": 0.479
+    },
+    {
+      "model": "gemma4:12b",
+      "case_id": "route-test-raw-phone",
+      "question": "Which applicationCommon PhoneCall attribute stores the phone number?",
+      "context_messages": [],
+      "expected_route": "raw_search",
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": true,
+      "elapsed_seconds": 0.38
+    },
+    {
+      "model": "gemma4:12b",
+      "case_id": "route-test-rewrite-customer",
+      "question": "Which entity models that person?",
+      "context_messages": [
+        {
+          "role": "user",
+          "content": "A business unit has a relationship with an individual, such as a customer, supplier, or colleague."
+        },
+        {
+          "role": "assistant",
+          "content": "We are looking for the person record in applicationCommon."
+        }
+      ],
+      "expected_route": "rewrite_search",
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": false,
+      "elapsed_seconds": 0.505
+    },
+    {
+      "model": "gemma4:12b",
+      "case_id": "route-test-rewrite-phone",
+      "question": "Which field stores the phone number?",
+      "context_messages": [
+        {
+          "role": "user",
+          "content": "We are reviewing how an applicationCommon phone call is represented."
+        },
+        {
+          "role": "assistant",
+          "content": "The schema object in question is the PhoneCall entity."
+        }
+      ],
+      "expected_route": "rewrite_search",
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": false,
+      "elapsed_seconds": 0.493
+    },
+    {
+      "model": "gemma4:12b",
+      "case_id": "route-test-rewrite-ownership",
+      "question": "Which field distinguishes an owner from a beneficiary?",
+      "context_messages": [
+        {
+          "role": "user",
+          "content": "I am reviewing CustomerFinancialHolding in the Retail Banking CDM model."
+        },
+        {
+          "role": "assistant",
+          "content": "The entity associates a customer with a financial holding."
+        }
+      ],
+      "expected_route": "rewrite_search",
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": false,
+      "elapsed_seconds": 0.507
+    },
+    {
+      "model": "gemma4:12b",
+      "case_id": "route-test-rewrite-card",
+      "question": "What does that customer reference point to?",
+      "context_messages": [
+        {
+          "role": "user",
+          "content": "Consider the Cardholder relationship on RetailBankingCoreDataModel FICard."
+        },
+        {
+          "role": "assistant",
+          "content": "We need the allowed referenced customer types."
+        }
+      ],
+      "expected_route": "rewrite_search",
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": false,
+      "elapsed_seconds": 0.484
+    },
+    {
+      "model": "gemma4:12b",
+      "case_id": "route-test-rewrite-investment",
+      "question": "What does the second one represent?",
+      "context_messages": [
+        {
+          "role": "user",
+          "content": "In RetailBankingCoreDataModel, compare the FHLoan and FHInvestment entities, in that order."
+        },
+        {
+          "role": "assistant",
+          "content": "We can examine the two entity definitions separately."
+        }
+      ],
+      "expected_route": "rewrite_search",
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": false,
+      "elapsed_seconds": 0.494
+    },
+    {
+      "model": "gemma4:12b",
+      "case_id": "route-test-rewrite-payment",
+      "question": "Which of those two authorizes the creditor to collect payments?",
+      "context_messages": [
+        {
+          "role": "user",
+          "content": "I am comparing FIDirectDebit with FIStandingOrder in RetailBankingCoreDataModel."
+        },
+        {
+          "role": "assistant",
+          "content": "Both are recurring payment concepts in the catalog."
+        }
+      ],
+      "expected_route": "rewrite_search",
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": false,
+      "elapsed_seconds": 0.487
+    },
+    {
+      "model": "gemma4:12b",
+      "case_id": "route-test-no-personal-card",
+      "question": "Who is the actual cardholder on my Visa card?",
+      "context_messages": [
+        {
+          "role": "user",
+          "content": "Earlier we were reading the FICard definition in the Retail Banking model."
+        }
+      ],
+      "expected_route": "no_search",
+      "status": "scored",
+      "predicted_route": "no_search",
+      "correct": true,
+      "elapsed_seconds": 0.526
+    },
+    {
+      "model": "gemma4:12b",
+      "case_id": "route-test-no-current-loan",
+      "question": "How much do I still owe on my personal loan today?",
+      "context_messages": [],
+      "expected_route": "no_search",
+      "status": "scored",
+      "predicted_route": "no_search",
+      "correct": true,
+      "elapsed_seconds": 0.42
+    },
+    {
+      "model": "gemma4:12b",
+      "case_id": "route-test-no-live-status",
+      "question": "Is the production CDM RAG deployment healthy right now?",
+      "context_messages": [],
+      "expected_route": "no_search",
+      "status": "scored",
+      "predicted_route": "no_search",
+      "correct": true,
+      "elapsed_seconds": 0.441
+    },
+    {
+      "model": "gemma4:12b",
+      "case_id": "route-test-no-mixed",
+      "question": "Explain the applicationCommon Contact schema, and tell me the current balance of my personal bank account.",
+      "context_messages": [],
+      "expected_route": "no_search",
+      "status": "scored",
+      "predicted_route": "no_search",
+      "correct": true,
+      "elapsed_seconds": 0.441
+    },
+    {
+      "model": "gemma4:12b",
+      "case_id": "route-test-no-interest",
+      "question": "What is today's mortgage interest rate at my bank?",
+      "context_messages": [
+        {
+          "role": "user",
+          "content": "We were discussing loan entities in CDM."
+        }
+      ],
+      "expected_route": "no_search",
+      "status": "scored",
+      "predicted_route": "no_search",
+      "correct": true,
+      "elapsed_seconds": 0.442
+    },
+    {
+      "model": "gemma4:12b",
+      "case_id": "route-test-no-weather",
+      "question": "Will it rain in Berlin tomorrow?",
+      "context_messages": [],
+      "expected_route": "no_search",
+      "status": "scored",
+      "predicted_route": "no_search",
+      "correct": true,
+      "elapsed_seconds": 0.39
+    },
+    {
+      "model": "qwen3.5:27b-q4_K_M",
+      "case_id": "route-test-raw-overdraft",
+      "question": "In the RetailBankingCoreDataModel CDM schema, how is FIOverdraft described?",
+      "context_messages": [],
+      "expected_route": "raw_search",
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": true,
+      "elapsed_seconds": 32.511
+    },
+    {
+      "model": "qwen3.5:27b-q4_K_M",
+      "case_id": "route-test-raw-contact-parent",
+      "question": "Which applicationCommon CDM entities can Contact.parentCustomer reference?",
+      "context_messages": [],
+      "expected_route": "raw_search",
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": true,
+      "elapsed_seconds": 2.396
+    },
+    {
+      "model": "qwen3.5:27b-q4_K_M",
+      "case_id": "route-test-raw-holding-role",
+      "question": "In RetailBankingCoreDataModel CustomerFinancialHolding, which attribute describes the customer's role in a holding?",
+      "context_messages": [],
+      "expected_route": "raw_search",
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": true,
+      "elapsed_seconds": 2.364
+    },
+    {
+      "model": "qwen3.5:27b-q4_K_M",
+      "case_id": "route-test-raw-group",
+      "question": "Which GroupFinancialHolding relationships reference the group and the holding in RetailBankingCoreDataModel?",
+      "context_messages": [],
+      "expected_route": "raw_search",
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": true,
+      "elapsed_seconds": 2.175
+    },
+    {
+      "model": "qwen3.5:27b-q4_K_M",
+      "case_id": "route-test-raw-partner",
+      "question": "In applicationCommon CustomerRelationship, what does the partner field reference?",
+      "context_messages": [
+        {
+          "role": "user",
+          "content": "Earlier I was examining RetailBankingCoreDataModel FIStandingOrder."
+        },
+        {
+          "role": "assistant",
+          "content": "We can switch to a different schema object."
+        }
+      ],
+      "expected_route": "raw_search",
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": true,
+      "elapsed_seconds": 2.562
+    },
+    {
+      "model": "qwen3.5:27b-q4_K_M",
+      "case_id": "route-test-raw-phone",
+      "question": "Which applicationCommon PhoneCall attribute stores the phone number?",
+      "context_messages": [],
+      "expected_route": "raw_search",
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": true,
+      "elapsed_seconds": 2.169
+    },
+    {
+      "model": "qwen3.5:27b-q4_K_M",
+      "case_id": "route-test-rewrite-customer",
+      "question": "Which entity models that person?",
+      "context_messages": [
+        {
+          "role": "user",
+          "content": "A business unit has a relationship with an individual, such as a customer, supplier, or colleague."
+        },
+        {
+          "role": "assistant",
+          "content": "We are looking for the person record in applicationCommon."
+        }
+      ],
+      "expected_route": "rewrite_search",
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": false,
+      "elapsed_seconds": 2.261
+    },
+    {
+      "model": "qwen3.5:27b-q4_K_M",
+      "case_id": "route-test-rewrite-phone",
+      "question": "Which field stores the phone number?",
+      "context_messages": [
+        {
+          "role": "user",
+          "content": "We are reviewing how an applicationCommon phone call is represented."
+        },
+        {
+          "role": "assistant",
+          "content": "The schema object in question is the PhoneCall entity."
+        }
+      ],
+      "expected_route": "rewrite_search",
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": false,
+      "elapsed_seconds": 2.16
+    },
+    {
+      "model": "qwen3.5:27b-q4_K_M",
+      "case_id": "route-test-rewrite-ownership",
+      "question": "Which field distinguishes an owner from a beneficiary?",
+      "context_messages": [
+        {
+          "role": "user",
+          "content": "I am reviewing CustomerFinancialHolding in the Retail Banking CDM model."
+        },
+        {
+          "role": "assistant",
+          "content": "The entity associates a customer with a financial holding."
+        }
+      ],
+      "expected_route": "rewrite_search",
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": false,
+      "elapsed_seconds": 2.234
+    },
+    {
+      "model": "qwen3.5:27b-q4_K_M",
+      "case_id": "route-test-rewrite-card",
+      "question": "What does that customer reference point to?",
+      "context_messages": [
+        {
+          "role": "user",
+          "content": "Consider the Cardholder relationship on RetailBankingCoreDataModel FICard."
+        },
+        {
+          "role": "assistant",
+          "content": "We need the allowed referenced customer types."
+        }
+      ],
+      "expected_route": "rewrite_search",
+      "status": "scored",
+      "predicted_route": "rewrite_search",
+      "correct": true,
+      "elapsed_seconds": 2.224
+    },
+    {
+      "model": "qwen3.5:27b-q4_K_M",
+      "case_id": "route-test-rewrite-investment",
+      "question": "What does the second one represent?",
+      "context_messages": [
+        {
+          "role": "user",
+          "content": "In RetailBankingCoreDataModel, compare the FHLoan and FHInvestment entities, in that order."
+        },
+        {
+          "role": "assistant",
+          "content": "We can examine the two entity definitions separately."
+        }
+      ],
+      "expected_route": "rewrite_search",
+      "status": "scored",
+      "predicted_route": "rewrite_search",
+      "correct": true,
+      "elapsed_seconds": 2.235
+    },
+    {
+      "model": "qwen3.5:27b-q4_K_M",
+      "case_id": "route-test-rewrite-payment",
+      "question": "Which of those two authorizes the creditor to collect payments?",
+      "context_messages": [
+        {
+          "role": "user",
+          "content": "I am comparing FIDirectDebit with FIStandingOrder in RetailBankingCoreDataModel."
+        },
+        {
+          "role": "assistant",
+          "content": "Both are recurring payment concepts in the catalog."
+        }
+      ],
+      "expected_route": "rewrite_search",
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": false,
+      "elapsed_seconds": 2.254
+    },
+    {
+      "model": "qwen3.5:27b-q4_K_M",
+      "case_id": "route-test-no-personal-card",
+      "question": "Who is the actual cardholder on my Visa card?",
+      "context_messages": [
+        {
+          "role": "user",
+          "content": "Earlier we were reading the FICard definition in the Retail Banking model."
+        }
+      ],
+      "expected_route": "no_search",
+      "status": "scored",
+      "predicted_route": "no_search",
+      "correct": true,
+      "elapsed_seconds": 2.211
+    },
+    {
+      "model": "qwen3.5:27b-q4_K_M",
+      "case_id": "route-test-no-current-loan",
+      "question": "How much do I still owe on my personal loan today?",
+      "context_messages": [],
+      "expected_route": "no_search",
+      "status": "scored",
+      "predicted_route": "no_search",
+      "correct": true,
+      "elapsed_seconds": 2.074
+    },
+    {
+      "model": "qwen3.5:27b-q4_K_M",
+      "case_id": "route-test-no-live-status",
+      "question": "Is the production CDM RAG deployment healthy right now?",
+      "context_messages": [],
+      "expected_route": "no_search",
+      "status": "scored",
+      "predicted_route": "no_search",
+      "correct": true,
+      "elapsed_seconds": 2.064
+    },
+    {
+      "model": "qwen3.5:27b-q4_K_M",
+      "case_id": "route-test-no-mixed",
+      "question": "Explain the applicationCommon Contact schema, and tell me the current balance of my personal bank account.",
+      "context_messages": [],
+      "expected_route": "no_search",
+      "status": "scored",
+      "predicted_route": "no_search",
+      "correct": true,
+      "elapsed_seconds": 2.061
+    },
+    {
+      "model": "qwen3.5:27b-q4_K_M",
+      "case_id": "route-test-no-interest",
+      "question": "What is today's mortgage interest rate at my bank?",
+      "context_messages": [
+        {
+          "role": "user",
+          "content": "We were discussing loan entities in CDM."
+        }
+      ],
+      "expected_route": "no_search",
+      "status": "scored",
+      "predicted_route": "no_search",
+      "correct": true,
+      "elapsed_seconds": 2.242
+    },
+    {
+      "model": "qwen3.5:27b-q4_K_M",
+      "case_id": "route-test-no-weather",
+      "question": "Will it rain in Berlin tomorrow?",
+      "context_messages": [],
+      "expected_route": "no_search",
+      "status": "scored",
+      "predicted_route": "no_search",
+      "correct": true,
+      "elapsed_seconds": 2.041
+    }
+  ],
+  "provenance": [
+    {
+      "artifact": "routing-decisions-test-small.json",
+      "sha256": "ed9f03306c8d821b108c9198621f936bf2dea0361632ee3cb30a2d642eeaf60b",
+      "script_sha256": "ede8e7f8a244f8594fec45a3ac21a471848f0d1a335d278fe05cc76d787723f9",
+      "prompt_sha256": "a096c2cdd8495b73b823e61bd634edcc5ff78d80f1cb7fa765b8c926da879284",
+      "classifier_sha256": "b3f020e34f83692fef8e3adea948bc4bf2fa4f6a5aa19f64632b6233c5186388",
+      "model_settings": {
+        "think": false,
+        "max_output_tokens": 160,
+        "max_output_tokens_override": null,
+        "context_cap_override": null,
+        "temperature": 0,
+        "context_policy": "app role-based cap and input-size estimate, using effective output token budget"
+      }
+    },
+    {
+      "artifact": "routing-decisions-test-27b.json",
+      "sha256": "c2501d05e5bfd105c66015f06072a81d7e8126b63b0f28b8f9465be33f85d409",
+      "script_sha256": "0c7e7567f4598c2d5426d851fb11247f98473d953f451c9f945a731b3f2fa8af",
+      "prompt_sha256": "a096c2cdd8495b73b823e61bd634edcc5ff78d80f1cb7fa765b8c926da879284",
+      "classifier_sha256": "b3f020e34f83692fef8e3adea948bc4bf2fa4f6a5aa19f64632b6233c5186388",
+      "model_settings": {
+        "think": false,
+        "max_output_tokens": 160,
+        "max_output_tokens_override": null,
+        "context_cap_override": null,
+        "temperature": 0,
+        "context_policy": "app role-based cap and input-size estimate, using effective output token budget"
+      }
+    }
+  ],
+  "method": "LLM decision only; no rewrite, retrieval or answer generation.",
+  "caveat": "assistant-authored provisional routing labels; not independently reviewed",
+  "classifier_revision_note": "One revision adds an unused optional model argument and live adapter; recorded benchmark prompt, schema, messages, and model selection are unchanged."
+}

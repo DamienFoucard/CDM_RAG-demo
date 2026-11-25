@@ -1,0 +1,3 @@
+# Optional: installs PyTorch and Transformers for cross-encoder comparison.
+# This is not required by the CDM RAG API or its normal retrieval pipeline.
+sentence-transformers>=4.1,<6

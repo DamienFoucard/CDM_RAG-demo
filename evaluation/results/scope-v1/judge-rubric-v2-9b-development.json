@@ -1,0 +1,330 @@
+{
+  "dataset_id": "judge-questions-v2",
+  "dataset_status": "assistant-authored source-checked examples; not independently reviewed",
+  "dataset_sha256": "3303e4395cbcb6492c7ddd248b3d00799d45a6fb525febbe7d84063e95697986",
+  "split": "development",
+  "judge_model": "qwen3.5:9b-q4_K_M",
+  "judge_model_digest": "56671c2ab9385f9cfcb404638e32cd62d88e3501d44822208363c010179a3c90",
+  "judge_prompt_sha256": "2eaf46555f12293b6af57409dadbc61ba9cb53a162892a7f59433c91a2d18843",
+  "judge_code_sha256": "406c44e7d77b77478912585dad5fa7ef9a24e18b1011aa9b0e57b9bab1b5195a",
+  "note": "Assistant-authored/audited labels are not independent; uncertain and errors are recorded separately.",
+  "metrics": {
+    "cases": 12,
+    "acceptable_gold": 6,
+    "unacceptable_gold": 6,
+    "correct_accept": 5,
+    "incorrect_accept": 0,
+    "correct_reject": 6,
+    "incorrect_reject": 0,
+    "uncertain": 1,
+    "errors": 0,
+    "self_inconsistencies": 1,
+    "median_ms": 4301.15
+  },
+  "cases": [
+    {
+      "id": "jd01",
+      "split": "development",
+      "question": "What can a Contact reference as parent customer?",
+      "answer": "The parentCustomer reference can target an Account or another Contact. [A]",
+      "evidence": [
+        "[A] applicationCommon::Contact: Person with whom a business unit has a relationship. The parentCustomer reference targets applicationCommon::Account or applicationCommon::Contact."
+      ],
+      "expected_acceptable": true,
+      "kind": "schema",
+      "verdict": "acceptable",
+      "model_verdict": "acceptable",
+      "coverage": "answered",
+      "claim_checks": [
+        {
+          "claim": "The parentCustomer reference can target an Account.",
+          "assessment": "supported"
+        },
+        {
+          "claim": "The parentCustomer reference can target another Contact.",
+          "assessment": "supported"
+        }
+      ],
+      "rationale": "The supplied excerpt [A] explicitly states that 'The parentCustomer reference targets applicationCommon::Account or applicationCommon::Contact.' This directly supports both factual claims in the answer. The answer addresses the entire question without missing information.",
+      "inconsistent": false,
+      "error": null,
+      "latency_ms": 3220.1
+    },
+    {
+      "id": "jd02",
+      "split": "development",
+      "question": "What can a Contact reference as parent customer?",
+      "answer": "The parentCustomer reference targets only a User. [A]",
+      "evidence": [
+        "[A] applicationCommon::Contact: Person with whom a business unit has a relationship. The parentCustomer reference targets applicationCommon::Account or applicationCommon::Contact."
+      ],
+      "expected_acceptable": false,
+      "kind": "schema",
+      "verdict": "unacceptable",
+      "model_verdict": "unacceptable",
+      "coverage": "missing",
+      "claim_checks": [
+        {
+          "claim": "The parentCustomer reference targets only a User.",
+          "assessment": "unsupported"
+        }
+      ],
+      "rationale": "The answer asserts that the 'parentCustomer' reference targets 'only a User'. However, Excerpt [A] explicitly states that the 'parentCustomer' reference targets 'applicationCommon::Account or applicationCommon::Contact'. The excerpt does not mention 'User' as a target. Therefore, the claim in the answer is directly contradicted by the provided evidence and lacks support. Additionally, the question asks what a Contact can reference as a parent customer; the answer provides an incorrect statement rather than addressing the schema definition found in the excerpt.",
+      "inconsistent": false,
+      "error": null,
+      "latency_ms": 4721.5
+    },
+    {
+      "id": "jd03",
+      "split": "development",
+      "question": "Name an Account attribute.",
+      "answer": "The Account definition contains accountId. [B]",
+      "evidence": [
+        "[B] applicationCommon::Account: Business that represents a customer or potential customer. Its attributes include accountId and accountCategoryCode. Its primaryContact reference targets applicationCommon::Contact."
+      ],
+      "expected_acceptable": true,
+      "kind": "schema",
+      "verdict": "acceptable",
+      "model_verdict": "acceptable",
+      "coverage": "answered",
+      "claim_checks": [
+        {
+          "claim": "The Account definition contains the attribute 'accountId'.",
+          "assessment": "supported"
+        }
+      ],
+      "rationale": "The answer claims that 'accountId' is an attribute of the Account definition. Excerpt [B] explicitly states: 'Its attributes include accountId...'. The citation directly supports the claim. The question asks to name an attribute, and the answer provides one supported by the text.",
+      "inconsistent": false,
+      "error": null,
+      "latency_ms": 3612.7
+    },
+    {
+      "id": "jd04",
+      "split": "development",
+      "question": "Name an Account attribute.",
+      "answer": "The Account definition contains accountBirthDate. [B]",
+      "evidence": [
+        "[B] applicationCommon::Account: Business that represents a customer or potential customer. Its attributes include accountId and accountCategoryCode. Its primaryContact reference targets applicationCommon::Contact."
+      ],
+      "expected_acceptable": false,
+      "kind": "schema",
+      "verdict": "unacceptable",
+      "model_verdict": "unacceptable",
+      "coverage": "missing",
+      "claim_checks": [
+        {
+          "claim": "The Account definition contains an attribute named accountBirthDate.",
+          "assessment": "unsupported"
+        }
+      ],
+      "rationale": "The answer asserts the existence of 'accountBirthDate' as an attribute. However, the provided excerpt [B] explicitly lists only 'accountId' and 'accountCategoryCode' as attributes for the Account entity. The excerpt does not mention 'accountBirthDate'. Therefore, the claim is not supported by the cited evidence.",
+      "inconsistent": false,
+      "error": null,
+      "latency_ms": 3829.6
+    },
+    {
+      "id": "jd05",
+      "split": "development",
+      "question": "Which loans are overdue?",
+      "answer": "I cannot identify overdue loans from schema definitions; that would require loan records.",
+      "evidence": [
+        "[G] RetailBankingCoreDataModel::FinancialHolding: Accounts, loans, investments, credit lines and savings accounts held by a customer."
+      ],
+      "expected_acceptable": true,
+      "kind": "records",
+      "verdict": "acceptable",
+      "model_verdict": "acceptable",
+      "coverage": "answered",
+      "claim_checks": [
+        {
+          "claim": "The answer states that overdue loans cannot be identified from schema definitions.",
+          "assessment": "supported"
+        },
+        {
+          "claim": "Identifying overdue loans requires loan records rather than schema definitions.",
+          "assessment": "supported"
+        }
+      ],
+      "rationale": "The answer explicitly states the limitation (schema vs. records) and correctly identifies that the provided excerpt only defines the entity 'FinancialHolding' without containing actual loan status data or overdue indicators. The answer does not make unsupported factual claims about specific loans.",
+      "inconsistent": false,
+      "error": null,
+      "latency_ms": 4268.6
+    },
+    {
+      "id": "jd06",
+      "split": "development",
+      "question": "Which loans are overdue?",
+      "answer": "Loan 123 is overdue. [G]",
+      "evidence": [
+        "[G] RetailBankingCoreDataModel::FinancialHolding: Accounts, loans, investments, credit lines and savings accounts held by a customer."
+      ],
+      "expected_acceptable": false,
+      "kind": "records",
+      "verdict": "unacceptable",
+      "model_verdict": "unacceptable",
+      "coverage": "missing",
+      "claim_checks": [
+        {
+          "claim": "Loan 123 is overdue.",
+          "assessment": "unsupported"
+        }
+      ],
+      "rationale": "The supplied excerpt [G] only defines the entity 'FinancialHolding' as a container for accounts, loans, etc. It contains no data regarding specific loan IDs (like 123) or their status (overdue). The answer asserts a specific fact about Loan 123 without any supporting evidence in the provided text. Additionally, the answer fails to acknowledge that the schema excerpts do not contain actual runtime records or status information.",
+      "inconsistent": false,
+      "error": null,
+      "latency_ms": 4291.3
+    },
+    {
+      "id": "jd07",
+      "split": "development",
+      "question": "Does the CRM delete customer records when a user is removed?",
+      "answer": "The schema does not establish what the deployed CRM does when a user is removed.",
+      "evidence": [
+        "[A] applicationCommon::Contact: Person with whom a business unit has a relationship. The parentCustomer reference targets applicationCommon::Account or applicationCommon::Contact."
+      ],
+      "expected_acceptable": true,
+      "kind": "runtime",
+      "verdict": "uncertain",
+      "model_verdict": "acceptable",
+      "coverage": "uncertain",
+      "claim_checks": [
+        {
+          "claim": "The schema does not establish what the deployed CRM does when a user is removed.",
+          "assessment": "supported"
+        }
+      ],
+      "rationale": "The answer correctly identifies that the provided excerpts (which define entity relationships for 'Contact' and 'Account') do not contain information regarding application behavior, specifically deletion logic triggered by user removal. The answer explicitly acknowledges this limitation rather than making unsupported claims about runtime behavior. However, the coverage is marked as 'uncertain' because the question asks a specific factual question ('Does...?'), and while the answer correctly states the evidence is missing to determine the fact, it does not provide an alternative source or definitive conclusion beyond the lack of schema definition, leaving the actual operational status unknown based strictly on the provided text.",
+      "inconsistent": true,
+      "error": null,
+      "latency_ms": 5307.2
+    },
+    {
+      "id": "jd08",
+      "split": "development",
+      "question": "Does the CRM delete customer records when a user is removed?",
+      "answer": "No, the CRM never deletes customer records when a user is removed. [A]",
+      "evidence": [
+        "[A] applicationCommon::Contact: Person with whom a business unit has a relationship. The parentCustomer reference targets applicationCommon::Account or applicationCommon::Contact."
+      ],
+      "expected_acceptable": false,
+      "kind": "runtime",
+      "verdict": "unacceptable",
+      "model_verdict": "unacceptable",
+      "coverage": "missing",
+      "claim_checks": [
+        {
+          "claim": "The CRM never deletes customer records when a user is removed.",
+          "assessment": "unsupported"
+        }
+      ],
+      "rationale": "The supplied excerpt [A] defines the 'applicationCommon::Contact' entity and its relationship to accounts. It contains no information regarding user removal processes, data retention policies, or deletion behaviors. The answer makes a definitive factual claim about system behavior that is not supported by the provided schema definition.",
+      "inconsistent": false,
+      "error": null,
+      "latency_ms": 3683.1
+    },
+    {
+      "id": "jd09",
+      "split": "development",
+      "question": "Describe a standing order.",
+      "answer": "A standing order transfers a set amount at regular intervals. [D]",
+      "evidence": [
+        "[D] RetailBankingCoreDataModel::FIStandingOrder: An instruction for a set amount to be removed from an account at regular intervals and paid or transferred to another account."
+      ],
+      "expected_acceptable": true,
+      "kind": "schema",
+      "verdict": "acceptable",
+      "model_verdict": "acceptable",
+      "coverage": "answered",
+      "claim_checks": [
+        {
+          "claim": "A standing order transfers a set amount at regular intervals.",
+          "assessment": "supported"
+        }
+      ],
+      "rationale": "The answer states that a standing order 'transfers a set amount at regular intervals.' The cited excerpt [D] defines FIStandingOrder as 'An instruction for a set amount to be removed from an account at regular intervals and paid or transferred to another account.' The claim is fully supported by the definition provided in the excerpt, which includes both the 'set amount' and 'regular intervals' elements. The answer addresses the entire question.",
+      "inconsistent": false,
+      "error": null,
+      "latency_ms": 4311.0
+    },
+    {
+      "id": "jd10",
+      "split": "development",
+      "question": "Describe a standing order.",
+      "answer": "A standing order is a recurring fixed transfer. [E]",
+      "evidence": [
+        "[E] RetailBankingCoreDataModel::FIDirectDebit: An automated payment system in which an account holder authorizes a creditor to debit the customer’s account at regular intervals."
+      ],
+      "expected_acceptable": false,
+      "kind": "schema",
+      "verdict": "unacceptable",
+      "model_verdict": "unacceptable",
+      "coverage": "missing",
+      "claim_checks": [
+        {
+          "claim": "A standing order is a recurring fixed transfer.",
+          "assessment": "unsupported"
+        }
+      ],
+      "rationale": "The answer asserts that a standing order is a 'recurring fixed transfer' and cites excerpt [E]. However, excerpt [E] defines 'FIDirectDebit', not 'standing order'. The text of the excerpt does not mention standing orders at all. Therefore, the citation does not support the claim. Furthermore, the answer fails to acknowledge that the provided excerpts do not contain information about standing orders, only direct debits.",
+      "inconsistent": false,
+      "error": null,
+      "latency_ms": 4340.5
+    },
+    {
+      "id": "jd11",
+      "split": "development",
+      "question": "List our customers and describe the CDM customer entity.",
+      "answer": "The source only contains definitions, so I cannot list your customers. It describes Contact as a person related to a business unit. [A]",
+      "evidence": [
+        "[A] applicationCommon::Contact: Person with whom a business unit has a relationship. The parentCustomer reference targets applicationCommon::Account or applicationCommon::Contact."
+      ],
+      "expected_acceptable": true,
+      "kind": "mixed",
+      "verdict": "acceptable",
+      "model_verdict": "acceptable",
+      "coverage": "answered",
+      "claim_checks": [
+        {
+          "claim": "The source only contains definitions, so I cannot list your customers.",
+          "assessment": "supported"
+        },
+        {
+          "claim": "It describes Contact as a person related to a business unit.",
+          "assessment": "supported"
+        }
+      ],
+      "rationale": "The answer explicitly states the limitation regarding listing customers due to the nature of the source (definitions only), which is supported by the provided excerpt [A] containing schema definitions rather than data records. The description of 'Contact' matches the text in excerpt [A]. No unsupported facts or missing information were ignored.",
+      "inconsistent": false,
+      "error": null,
+      "latency_ms": 4577.3
+    },
+    {
+      "id": "jd12",
+      "split": "development",
+      "question": "List our customers and describe the CDM customer entity.",
+      "answer": "Contact describes a person related to a business unit. [A]",
+      "evidence": [
+        "[A] applicationCommon::Contact: Person with whom a business unit has a relationship. The parentCustomer reference targets applicationCommon::Account or applicationCommon::Contact."
+      ],
+      "expected_acceptable": false,
+      "kind": "mixed",
+      "verdict": "unacceptable",
+      "model_verdict": "unacceptable",
+      "coverage": "missing",
+      "claim_checks": [
+        {
+          "claim": "The CDM customer entity is described as 'applicationCommon::Contact'.",
+          "assessment": "unsupported"
+        },
+        {
+          "claim": "The Contact entity represents a person with whom a business unit has a relationship.",
+          "assessment": "supported"
+        }
+      ],
+      "rationale": "The answer identifies 'applicationCommon::Contact' as the customer entity and describes it using excerpt [A]. While the description of Contact is supported by excerpt [A], the schema provided does not define a specific entity named 'customer'. The excerpt defines 'Contact', which may or may not be the intended 'customer' entity in this context; however, the answer presents this identification as fact without acknowledging that the schema might contain a different entity for customers or that 'Contact' is merely one type of relationship holder. Furthermore, the question asks to 'List our customers,' but the provided excerpts are a schema snapshot containing only entity definitions, not actual customer records. The answer fails to acknowledge that it cannot list specific customers from the supplied text.",
+      "inconsistent": false,
+      "error": null,
+      "latency_ms": 6622.0
+    }
+  ]
+}

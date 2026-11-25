@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>CDM RAG · MCP integration</title>
+  <style>
+    :root{color-scheme:light;--ink:#17231e;--muted:#627168;--green:#1d7653;--line:#d9e5dc}
+    *{box-sizing:border-box}body{margin:0;background:#f4f7f4;color:var(--ink);font:16px/1.6 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+    .wrap{max-width:1040px;margin:auto;padding:30px 28px 64px}header{display:flex;justify-content:space-between;align-items:center;gap:18px;border-bottom:1px solid var(--line);padding-bottom:20px}
+    .brand{font-weight:800;font-size:18px}.brand small{display:block;color:var(--muted);font-size:13px;font-weight:600}nav{display:flex;gap:18px;align-items:center;flex-wrap:wrap}a{color:var(--green)}nav a{font-weight:700}
+    h1{font:500 clamp(40px,6vw,62px)/1.05 Georgia,"Times New Roman",serif;letter-spacing:-.035em;margin:42px 0 12px}.intro{max-width:850px;color:var(--muted);font-size:18px;margin:0 0 25px}
+    section{background:#fff;border:1px solid var(--line);border-radius:20px;padding:24px;margin:18px 0;box-shadow:0 8px 28px #17231e08}h2{font-size:23px;margin:0 0 12px;letter-spacing:-.02em}p{margin:10px 0}p:last-child{margin-bottom:0}
+    .status{display:inline-block;color:#14583d;background:#e2f4e9;border-radius:999px;padding:4px 10px;font-size:13px;font-weight:800}.links{display:flex;gap:12px;flex-wrap:wrap;margin-top:18px}.button{display:inline-block;padding:9px 13px;border:1px solid var(--line);border-radius:10px;font-weight:750;text-decoration:none}.button:hover{background:#f3f7f3}
+    pre{overflow:auto;max-width:100%;padding:16px;border-radius:10px;background:#17231e;color:#f0f8f2;font:13px/1.6 ui-monospace,SFMono-Regular,Menlo,monospace}code{overflow-wrap:anywhere}pre code{overflow-wrap:normal}nav a:focus-visible,.button:focus-visible{outline:3px solid #93c5aa;outline-offset:3px}
+    @media(max-width:760px){.wrap{padding:22px 16px 48px}header{align-items:flex-start}nav{gap:10px;font-size:14px}h1{margin-top:32px}section{padding:18px}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="brand">CDM RAG<small>Microsoft Common Data Model · integration</small></div>
+      <nav aria-label="Documentation navigation"><a href="/docs">Documentation</a><a href="/docs/api">API reference</a><a href="/home">Home</a><a href="/RAG">Ask a question</a><a id="api-tokens-link" href="/api-tokens" hidden>API tokens</a></nav>
+    </header>
+    <main>
+      <h1>MCP integration.</h1>
+      <p class="intro">Connect an MCP client to CDM RAG’s first-party tools, locally or on the GPU service.</p>
+      <section aria-labelledby="status-heading">
+        <span class="status">First-party MCP server</span>
+        <h2 id="status-heading">Available tools</h2>
+        <p><code>ask_schema_question</code> accepts a schema question and returns a bounded answer with source pointers. <code>service_status</code> reports a bounded service and catalog summary. Both tools use existing CDM RAG behavior.</p>
+        <p>The tools do not expose token administration or private runtime settings. Questions are logged like HTTP API requests. Citations identify evidence; check the sources rather than treating them as a correctness guarantee.</p>
+      </section>
+      <section aria-labelledby="api-heading">
+        <h2 id="api-heading">Connect to the GPU service</h2>
+        <p>In your MCP client, choose <strong>Streamable HTTP</strong> and use your service endpoint, for example:</p>
+        <pre><code>https://cdm-rag.example.com/api/v1/mcp/</code></pre>
+        <p>Sign in and create an API token for your client. Supply it through your client’s protected credentials as <code>Authorization: Bearer &lt;API token&gt;</code>. The hosted endpoint uses a manually provisioned token; it does not provide OAuth discovery. Do not put a token in a URL or commit it to a repository.</p>
+        <div class="links"><a class="button" href="/docs/api">Open API reference</a><a id="token-button" class="button" href="/api-tokens" hidden>Manage API tokens</a></div>
+      </section>
+      <section aria-labelledby="local-heading">
+        <h2 id="local-heading">Connect from a local client</h2>
+        <p>With the local service running, a client can use Streamable HTTP at <code>http://127.0.0.1:8124/api/v1/mcp/</code>, or launch the stdio server from the installed project environment:</p>
+        <pre><code>uv run python -m app.mcp_stdio</code></pre>
+        <p>The stdio launcher defaults to the local service. For the GPU service, set <code>CDM_RAG_MCP_BASE_URL</code> to your service origin, for example <code>https://cdm-rag.example.com</code>, and supply <code>CDM_RAG_API_TOKEN</code> through the client’s protected environment. A secured local service also requires a token. Remote backend origins must use HTTPS.</p>
+        <p>For a client that accepts an <code>mcpServers</code> JSON configuration, replace the example checkout path below with your own. Run <code>uv sync</code> first to install the server dependencies.</p>
+        <pre><code>{
+  "mcpServers": {
+    "cdm-rag": {
+      "command": "/absolute/path/to/CDM_RAG/.venv/bin/python",
+      "args": ["-m", "app.mcp_stdio"],
+      "env": {
+        "PYTHONPATH": "/absolute/path/to/CDM_RAG",
+        "CDM_RAG_MCP_BASE_URL": "http://127.0.0.1:8124"
+      }
+    }
+  }
+}</code></pre>
+        <p>A schema query can take several minutes while models load and run; allow up to 600 seconds for the backend. A timed-out request can continue running until the model worker finishes. Invalid input, unavailable services, timeouts and insufficient evidence are reported to the client. If an answer or its evidence exceeds the MCP response limits, the tool withholds it and reports <code>result_limit_exceeded</code>; use the HTTP API to request the complete result.</p>
+      </section>
+      <section aria-labelledby="protocol-heading">
+        <h2 id="protocol-heading">About MCP</h2>
+        <p>The Model Context Protocol defines how applications share capabilities such as tools and resources with clients. For the protocol and client integration details, see the <a href="https://modelcontextprotocol.io/" target="_blank" rel="noopener noreferrer">official MCP documentation ↗</a>.</p>
+      </section>
+    </main>
+  </div>
+  <script>fetch('/api/v1/api-tokens',{cache:'no-store'}).then(r=>{if(r.ok){document.getElementById('api-tokens-link').hidden=false;document.getElementById('token-button').hidden=false;}}).catch(()=>{});</script>
+</body>
+</html>

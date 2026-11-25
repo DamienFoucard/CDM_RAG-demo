@@ -1,0 +1,363 @@
+{
+  "dataset_id": "judge-questions-v2",
+  "status": "assistant-authored source-checked examples; not independently reviewed",
+  "provenance": "Constructed after the previous judge failures; paired positive/negative examples use short source-checked CDM facts. Test labels and wording are not independent expert judgments.",
+  "policy": "A response is acceptable only when its factual claims are supported by the cited supplied excerpts and it answers the request or clearly acknowledges missing information.",
+  "cases": [
+    {
+      "id": "jd01",
+      "split": "development",
+      "question": "What can a Contact reference as parent customer?",
+      "answer": "The parentCustomer reference can target an Account or another Contact. [A]",
+      "evidence": [
+        "[A] applicationCommon::Contact: Person with whom a business unit has a relationship. The parentCustomer reference targets applicationCommon::Account or applicationCommon::Contact."
+      ],
+      "expected_acceptable": true,
+      "kind": "schema"
+    },
+    {
+      "id": "jd02",
+      "split": "development",
+      "question": "What can a Contact reference as parent customer?",
+      "answer": "The parentCustomer reference targets only a User. [A]",
+      "evidence": [
+        "[A] applicationCommon::Contact: Person with whom a business unit has a relationship. The parentCustomer reference targets applicationCommon::Account or applicationCommon::Contact."
+      ],
+      "expected_acceptable": false,
+      "kind": "schema"
+    },
+    {
+      "id": "jd03",
+      "split": "development",
+      "question": "Name an Account attribute.",
+      "answer": "The Account definition contains accountId. [B]",
+      "evidence": [
+        "[B] applicationCommon::Account: Business that represents a customer or potential customer. Its attributes include accountId and accountCategoryCode. Its primaryContact reference targets applicationCommon::Contact."
+      ],
+      "expected_acceptable": true,
+      "kind": "schema"
+    },
+    {
+      "id": "jd04",
+      "split": "development",
+      "question": "Name an Account attribute.",
+      "answer": "The Account definition contains accountBirthDate. [B]",
+      "evidence": [
+        "[B] applicationCommon::Account: Business that represents a customer or potential customer. Its attributes include accountId and accountCategoryCode. Its primaryContact reference targets applicationCommon::Contact."
+      ],
+      "expected_acceptable": false,
+      "kind": "schema"
+    },
+    {
+      "id": "jd05",
+      "split": "development",
+      "question": "Which loans are overdue?",
+      "answer": "I cannot identify overdue loans from schema definitions; that would require loan records.",
+      "evidence": [
+        "[G] RetailBankingCoreDataModel::FinancialHolding: Accounts, loans, investments, credit lines and savings accounts held by a customer."
+      ],
+      "expected_acceptable": true,
+      "kind": "records"
+    },
+    {
+      "id": "jd06",
+      "split": "development",
+      "question": "Which loans are overdue?",
+      "answer": "Loan 123 is overdue. [G]",
+      "evidence": [
+        "[G] RetailBankingCoreDataModel::FinancialHolding: Accounts, loans, investments, credit lines and savings accounts held by a customer."
+      ],
+      "expected_acceptable": false,
+      "kind": "records"
+    },
+    {
+      "id": "jd07",
+      "split": "development",
+      "question": "Does the CRM delete customer records when a user is removed?",
+      "answer": "The schema does not establish what the deployed CRM does when a user is removed.",
+      "evidence": [
+        "[A] applicationCommon::Contact: Person with whom a business unit has a relationship. The parentCustomer reference targets applicationCommon::Account or applicationCommon::Contact."
+      ],
+      "expected_acceptable": true,
+      "kind": "runtime"
+    },
+    {
+      "id": "jd08",
+      "split": "development",
+      "question": "Does the CRM delete customer records when a user is removed?",
+      "answer": "No, the CRM never deletes customer records when a user is removed. [A]",
+      "evidence": [
+        "[A] applicationCommon::Contact: Person with whom a business unit has a relationship. The parentCustomer reference targets applicationCommon::Account or applicationCommon::Contact."
+      ],
+      "expected_acceptable": false,
+      "kind": "runtime"
+    },
+    {
+      "id": "jd09",
+      "split": "development",
+      "question": "Describe a standing order.",
+      "answer": "A standing order transfers a set amount at regular intervals. [D]",
+      "evidence": [
+        "[D] RetailBankingCoreDataModel::FIStandingOrder: An instruction for a set amount to be removed from an account at regular intervals and paid or transferred to another account."
+      ],
+      "expected_acceptable": true,
+      "kind": "schema"
+    },
+    {
+      "id": "jd10",
+      "split": "development",
+      "question": "Describe a standing order.",
+      "answer": "A standing order is a recurring fixed transfer. [E]",
+      "evidence": [
+        "[E] RetailBankingCoreDataModel::FIDirectDebit: An automated payment system in which an account holder authorizes a creditor to debit the customer’s account at regular intervals."
+      ],
+      "expected_acceptable": false,
+      "kind": "schema"
+    },
+    {
+      "id": "jd11",
+      "split": "development",
+      "question": "List our customers and describe the CDM customer entity.",
+      "answer": "The source only contains definitions, so I cannot list your customers. It describes Contact as a person related to a business unit. [A]",
+      "evidence": [
+        "[A] applicationCommon::Contact: Person with whom a business unit has a relationship. The parentCustomer reference targets applicationCommon::Account or applicationCommon::Contact."
+      ],
+      "expected_acceptable": true,
+      "kind": "mixed"
+    },
+    {
+      "id": "jd12",
+      "split": "development",
+      "question": "List our customers and describe the CDM customer entity.",
+      "answer": "Contact describes a person related to a business unit. [A]",
+      "evidence": [
+        "[A] applicationCommon::Contact: Person with whom a business unit has a relationship. The parentCustomer reference targets applicationCommon::Account or applicationCommon::Contact."
+      ],
+      "expected_acceptable": false,
+      "kind": "mixed"
+    },
+    {
+      "id": "jt01",
+      "split": "test",
+      "question": "What links a user to a team?",
+      "answer": "TeamMembership has references to User and Team. [F]",
+      "evidence": [
+        "[F] applicationCommon::TeamMembership: Its User reference targets applicationCommon::User; its Team reference targets applicationCommon::Team."
+      ],
+      "expected_acceptable": true,
+      "kind": "schema"
+    },
+    {
+      "id": "jt02",
+      "split": "test",
+      "question": "What links a user to a team?",
+      "answer": "Contact has a team membership reference to User. [F]",
+      "evidence": [
+        "[F] applicationCommon::TeamMembership: Its User reference targets applicationCommon::User; its Team reference targets applicationCommon::Team."
+      ],
+      "expected_acceptable": false,
+      "kind": "schema"
+    },
+    {
+      "id": "jt03",
+      "split": "test",
+      "question": "What is a financial holding?",
+      "answer": "It covers accounts, loans, investments, credit lines and savings held by a customer. [G]",
+      "evidence": [
+        "[G] RetailBankingCoreDataModel::FinancialHolding: Accounts, loans, investments, credit lines and savings accounts held by a customer."
+      ],
+      "expected_acceptable": true,
+      "kind": "schema"
+    },
+    {
+      "id": "jt04",
+      "split": "test",
+      "question": "What is a financial holding?",
+      "answer": "A financial holding is exclusively a mortgage. [G]",
+      "evidence": [
+        "[G] RetailBankingCoreDataModel::FinancialHolding: Accounts, loans, investments, credit lines and savings accounts held by a customer."
+      ],
+      "expected_acceptable": false,
+      "kind": "schema"
+    },
+    {
+      "id": "jt05",
+      "split": "test",
+      "question": "What is a direct debit?",
+      "answer": "A creditor is authorized to debit the customer’s account at regular intervals. [E]",
+      "evidence": [
+        "[E] RetailBankingCoreDataModel::FIDirectDebit: An automated payment system in which an account holder authorizes a creditor to debit the customer’s account at regular intervals."
+      ],
+      "expected_acceptable": true,
+      "kind": "schema"
+    },
+    {
+      "id": "jt06",
+      "split": "test",
+      "question": "What is a direct debit?",
+      "answer": "The account holder orders a fixed transfer to another account. [E]",
+      "evidence": [
+        "[E] RetailBankingCoreDataModel::FIDirectDebit: An automated payment system in which an account holder authorizes a creditor to debit the customer’s account at regular intervals."
+      ],
+      "expected_acceptable": false,
+      "kind": "schema"
+    },
+    {
+      "id": "jt07",
+      "split": "test",
+      "question": "Which customers have mortgages?",
+      "answer": "I cannot list customers with mortgages; this source contains definitions rather than customer records.",
+      "evidence": [
+        "[G] RetailBankingCoreDataModel::FinancialHolding: Accounts, loans, investments, credit lines and savings accounts held by a customer."
+      ],
+      "expected_acceptable": true,
+      "kind": "records"
+    },
+    {
+      "id": "jt08",
+      "split": "test",
+      "question": "Which customers have mortgages?",
+      "answer": "Customer Alice holds a mortgage. [G]",
+      "evidence": [
+        "[G] RetailBankingCoreDataModel::FinancialHolding: Accounts, loans, investments, credit lines and savings accounts held by a customer."
+      ],
+      "expected_acceptable": false,
+      "kind": "records"
+    },
+    {
+      "id": "jt09",
+      "split": "test",
+      "question": "Will a contact be created automatically after an account is saved?",
+      "answer": "The supplied definitions do not establish the software behavior after saving an account.",
+      "evidence": [
+        "[A] applicationCommon::Contact: Person with whom a business unit has a relationship. The parentCustomer reference targets applicationCommon::Account or applicationCommon::Contact.",
+        "[B] applicationCommon::Account: Business that represents a customer or potential customer. Its attributes include accountId and accountCategoryCode. Its primaryContact reference targets applicationCommon::Contact."
+      ],
+      "expected_acceptable": true,
+      "kind": "runtime"
+    },
+    {
+      "id": "jt10",
+      "split": "test",
+      "question": "Will a contact be created automatically after an account is saved?",
+      "answer": "No, saving an account will not create a contact. [A]",
+      "evidence": [
+        "[A] applicationCommon::Contact: Person with whom a business unit has a relationship. The parentCustomer reference targets applicationCommon::Account or applicationCommon::Contact.",
+        "[B] applicationCommon::Account: Business that represents a customer or potential customer. Its attributes include accountId and accountCategoryCode. Its primaryContact reference targets applicationCommon::Contact."
+      ],
+      "expected_acceptable": false,
+      "kind": "runtime"
+    },
+    {
+      "id": "jt11",
+      "split": "test",
+      "question": "Explain CustomerFinancialHolding and list our active accounts.",
+      "answer": "CustomerFinancialHolding links customers and financial holdings. [C] I cannot list active accounts because the source contains no records.",
+      "evidence": [
+        "[C] RetailBankingCoreDataModel::CustomerFinancialHolding: Financial holdings owned by the customer. Its Customer reference targets RetailBankingCoreDataModel::Account or ::Contact; its FinancialHolding reference targets ::FinancialHolding."
+      ],
+      "expected_acceptable": true,
+      "kind": "mixed"
+    },
+    {
+      "id": "jt12",
+      "split": "test",
+      "question": "Explain CustomerFinancialHolding and list our active accounts.",
+      "answer": "CustomerFinancialHolding is described as financial holdings owned by the customer. Its Customer reference targets an Account or Contact, and its FinancialHolding reference targets a FinancialHolding. [C] I cannot list active accounts because the source contains no records.",
+      "evidence": [
+        "[C] RetailBankingCoreDataModel::CustomerFinancialHolding: Financial holdings owned by the customer. Its Customer reference targets RetailBankingCoreDataModel::Account or ::Contact; its FinancialHolding reference targets ::FinancialHolding."
+      ],
+      "expected_acceptable": true,
+      "kind": "mixed"
+    },
+    {
+      "id": "jt13",
+      "split": "test",
+      "question": "What does the CustomerFinancialHolding entity connect?",
+      "answer": "Its Customer reference can target an Account or Contact and its FinancialHolding reference targets FinancialHolding. [C]",
+      "evidence": [
+        "[C] RetailBankingCoreDataModel::CustomerFinancialHolding: Financial holdings owned by the customer. Its Customer reference targets RetailBankingCoreDataModel::Account or ::Contact; its FinancialHolding reference targets ::FinancialHolding."
+      ],
+      "expected_acceptable": true,
+      "kind": "schema"
+    },
+    {
+      "id": "jt14",
+      "split": "test",
+      "question": "What does the CustomerFinancialHolding entity connect?",
+      "answer": "It has a direct Team reference. [C]",
+      "evidence": [
+        "[C] RetailBankingCoreDataModel::CustomerFinancialHolding: Financial holdings owned by the customer. Its Customer reference targets RetailBankingCoreDataModel::Account or ::Contact; its FinancialHolding reference targets ::FinancialHolding."
+      ],
+      "expected_acceptable": false,
+      "kind": "schema"
+    },
+    {
+      "id": "jt15",
+      "split": "test",
+      "question": "Which field identifies an Account?",
+      "answer": "It has an accountId field. [B]",
+      "evidence": [
+        "[B] applicationCommon::Account: Business that represents a customer or potential customer. Its attributes include accountId and accountCategoryCode. Its primaryContact reference targets applicationCommon::Contact."
+      ],
+      "expected_acceptable": true,
+      "kind": "schema"
+    },
+    {
+      "id": "jt16",
+      "split": "test",
+      "question": "Which field identifies an Account?",
+      "answer": "It has an accountId field. [A]",
+      "evidence": [
+        "[A] applicationCommon::Contact: Person with whom a business unit has a relationship. The parentCustomer reference targets applicationCommon::Account or applicationCommon::Contact.",
+        "[B] applicationCommon::Account: Business that represents a customer or potential customer. Its attributes include accountId and accountCategoryCode. Its primaryContact reference targets applicationCommon::Contact."
+      ],
+      "expected_acceptable": false,
+      "kind": "wrong_citation"
+    },
+    {
+      "id": "jt17",
+      "split": "test",
+      "question": "Can the schema prove that all accounts have a primary contact?",
+      "answer": "The supplied excerpt does not say whether primaryContact is required. This excerpt alone cannot establish whether every account has a primary contact. [B]",
+      "evidence": [
+        "[B] applicationCommon::Account: Business that represents a customer or potential customer. Its attributes include accountId and accountCategoryCode. Its primaryContact reference targets applicationCommon::Contact."
+      ],
+      "expected_acceptable": true,
+      "kind": "schema"
+    },
+    {
+      "id": "jt18",
+      "split": "test",
+      "question": "Can the schema prove that all accounts have a primary contact?",
+      "answer": "Yes, every account must have exactly one primary contact. [B]",
+      "evidence": [
+        "[B] applicationCommon::Account: Business that represents a customer or potential customer. Its attributes include accountId and accountCategoryCode. Its primaryContact reference targets applicationCommon::Contact."
+      ],
+      "expected_acceptable": false,
+      "kind": "schema"
+    },
+    {
+      "id": "jt19",
+      "split": "test",
+      "question": "Explain CustomerFinancialHolding and list our active accounts.",
+      "answer": "CustomerFinancialHolding is described as financial holdings owned by the customer. Its Customer reference targets an Account or Contact, and its FinancialHolding reference targets a FinancialHolding. [C]",
+      "evidence": [
+        "[C] RetailBankingCoreDataModel::CustomerFinancialHolding: Financial holdings owned by the customer. Customer reference targets RetailBankingCoreDataModel::Account or ::Contact. FinancialHolding reference targets RetailBankingCoreDataModel::FinancialHolding."
+      ],
+      "expected_acceptable": false,
+      "kind": "mixed"
+    },
+    {
+      "id": "jt20",
+      "split": "test",
+      "question": "Which field identifies an Account?",
+      "answer": "The accountBirthDate field identifies an Account. [B]",
+      "evidence": [
+        "[B] applicationCommon::Account: Business that represents a customer or potential customer. Attributes include accountId and accountCategoryCode."
+      ],
+      "expected_acceptable": false,
+      "kind": "schema"
+    }
+  ]
+}

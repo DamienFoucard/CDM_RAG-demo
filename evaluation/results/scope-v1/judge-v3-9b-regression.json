@@ -1,0 +1,640 @@
+{
+  "dataset_id": "judge-regression-v3",
+  "dataset_status": "assistant-audited real model outputs; not independently reviewed",
+  "dataset_sha256": "df45b5c952fa7799e0f3e999a87c6395d4b05294bc2fd793d95adb0f1d37389a",
+  "split": "regression",
+  "judge_model": "qwen3.5:9b-q4_K_M",
+  "judge_model_digest": "56671c2ab9385f9cfcb404638e32cd62d88e3501d44822208363c010179a3c90",
+  "judge_prompt_sha256": "a82641a4f7a60fc9340de89a18855a3dac95e6f528598350eebb131641e1aae3",
+  "judge_code_sha256": "c34685076f7d0513b35d0d76f3b7747bd1eea71c38b95d90ed4b72227f422d90",
+  "note": "Assistant-authored/audited labels are not independent; uncertain and errors are recorded separately.",
+  "metrics": {
+    "cases": 15,
+    "acceptable_gold": 2,
+    "unacceptable_gold": 13,
+    "correct_accept": 2,
+    "incorrect_accept": 0,
+    "correct_reject": 13,
+    "incorrect_reject": 0,
+    "uncertain": 0,
+    "errors": 0,
+    "self_inconsistencies": 0,
+    "retried": 0,
+    "scorable_cases": 15,
+    "selective_accuracy": 1,
+    "strict_accuracy_uncertain_counts_wrong": 1,
+    "coverage": 1.0,
+    "median_ms": 12645.6
+  },
+  "cases": [
+    {
+      "id": "web-08-source-hybrid_raw",
+      "split": "regression",
+      "question": "Which accounts are jointly held?",
+      "answer": "Jointly held accounts are represented by the FinancialHolding entity in the RetailBankingCoreDataModel. [R1] The GroupFinancialHolding entity in RetailBankingCoreDataModel contains financial holdings associated with a group for inclusion in total assets and liabilities. [R4] CustomerFinancialHolding links a customer to their financial holdings, including accounts that may be jointly held. [R2]",
+      "evidence": [
+        "[R1] FinancialHolding (RetailBankingCoreDataModel): Accounts, loans, investments, credit lines and savings accounts held by a customer.",
+        "[R2] RetailBankingCoreDataModel::CustomerFinancialHolding has relationship FinancialHolding to RetailBankingCoreDataModel::FinancialHolding.",
+        "[R4] RetailBankingCoreDataModel::GroupFinancialHolding has relationship FinancialHolding to RetailBankingCoreDataModel::FinancialHolding."
+      ],
+      "expected_acceptable": false,
+      "kind": "records",
+      "note": "Cited source summaries only; full extracted contexts may contain more detail.",
+      "verdict": "unacceptable",
+      "model_verdict": "unacceptable",
+      "coverage": "missing",
+      "claim_checks": [
+        {
+          "claim": "Jointly held accounts are represented by the FinancialHolding entity in the RetailBankingCoreDataModel.",
+          "assessment": "unsupported"
+        },
+        {
+          "claim": "The GroupFinancialHolding entity in RetailBankingCoreDataModel contains financial holdings associated with a group for inclusion in total assets and liabilities.",
+          "assessment": "unsupported"
+        },
+        {
+          "claim": "CustomerFinancialHolding links a customer to their financial holdings, including accounts that may be jointly held.",
+          "assessment": "unsupported"
+        }
+      ],
+      "cited_labels_in_answer": [
+        "R1",
+        "R2",
+        "R4"
+      ],
+      "cited_labels_available_to_judge": [
+        "R1",
+        "R2",
+        "R4"
+      ],
+      "unknown_citation_labels": [],
+      "rationale": "The answer makes specific factual claims about the definition of 'jointly held' accounts and the roles of FinancialHolding, GroupFinancialHolding, and CustomerFinancialHolding. However, the supplied excerpts (R1, R2, R4) only define general relationships between these entities and do not mention 'jointly held' accounts, nor do they describe the specific attributes or logic required to identify joint holdings. The answer cites sources [R1], [R4], and [R2] but none of those excerpts contain the text supporting the claim that an account is 'jointly held'. Furthermore, the collection scope explicitly states there are no actual records; the answer fails to acknowledge this limitation and instead attempts to define schema behavior regarding joint holdings which cannot be verified from the provided metadata alone.",
+      "inconsistent": false,
+      "judge_retries": 0,
+      "error": null,
+      "latency_ms": 12645.6
+    },
+    {
+      "id": "web-08-source-hybrid_reranked",
+      "split": "regression",
+      "question": "Which accounts are jointly held?",
+      "answer": "GroupFinancialHolding entities represent financial holdings associated with a Group, which includes accounts, loans, investments, credit lines, and savings. [R1] FinancialHolding entities are linked to Group entities, representing familial connections of the customer at the bank. [R1] FinancialHoldingInstrument entities are associated with FinancialHolding entities and include instruments such as standing orders, overdrafts, cards, and direct debits. [R2]",
+      "evidence": [
+        "[R1] GroupFinancialHolding (RetailBankingCoreDataModel): Financial holdings associated with a Group, to be included in the group's total assets and liabilities.",
+        "[R2] FinancialHoldingInstrument (RetailBankingCoreDataModel): Financial tools associated with financial holdings; a monetary contract between parties which has intrinsic monetary value or transfers value. Provides an efficient flow and transfer of capital."
+      ],
+      "expected_acceptable": false,
+      "kind": "records",
+      "note": "Cited source summaries only; full extracted contexts may contain more detail.",
+      "verdict": "unacceptable",
+      "model_verdict": "unacceptable",
+      "coverage": "missing",
+      "claim_checks": [
+        {
+          "claim": "GroupFinancialHolding entities represent financial holdings associated with a Group, which includes accounts.",
+          "assessment": "unsupported"
+        },
+        {
+          "claim": "FinancialHolding entities are linked to Group entities, representing familial connections of the customer at the bank.",
+          "assessment": "unsupported"
+        },
+        {
+          "claim": "FinancialHoldingInstrument entities are associated with FinancialHolding entities and include instruments such as standing orders, overdrafts, cards, and direct debits.",
+          "assessment": "unsupported"
+        }
+      ],
+      "cited_labels_in_answer": [
+        "R1",
+        "R2"
+      ],
+      "cited_labels_available_to_judge": [
+        "R1",
+        "R2"
+      ],
+      "unknown_citation_labels": [],
+      "rationale": "The answer makes three substantive factual claims about the nature of GroupFinancialHolding (that it includes accounts), the relationship between FinancialHolding and Group (familial connections), and the contents of FinancialHoldingInstrument (standing orders, overdrafts, etc.). The supplied excerpts [R1] and [R2] define GroupFinancialHolding only as 'financial holdings associated with a Group' without mentioning 'accounts'. Excerpt [R1] does not mention 'Group entities' or 'familial connections'. Excerpt [R2] defines FinancialHoldingInstrument generally but does not list specific instruments like 'standing orders, overdrafts, cards, and direct debits'. Therefore, none of the claims are supported by the provided text. Furthermore, the question asks 'Which accounts are jointly held?', which requires identifying specific records or a mechanism to filter them. The collection scope explicitly states there are no actual customer/account records. The answer fails to acknowledge this limitation and instead attempts to describe schema concepts as if they answer the specific query about 'which' accounts, making the response inadequate.",
+      "inconsistent": false,
+      "judge_retries": 0,
+      "error": null,
+      "latency_ms": 19262.7
+    },
+    {
+      "id": "web-08-source-neighborhood_reranked",
+      "split": "regression",
+      "question": "Which accounts are jointly held?",
+      "answer": "Jointly held accounts are represented by the GroupFinancialHolding entity, which aggregates financial holdings associated with a group of customers. [R4] The GroupFinancialHolding entity includes financial holdings such as accounts, loans, investments, credit lines, and savings that are collectively managed under a group. [R4] CustomerFinancialHolding entities link individual customer financial holdings to specific customers and may include roles like owner or beneficiary. [R2]",
+      "evidence": [
+        "[R2] RetailBankingCoreDataModel::CustomerFinancialHolding has relationship FinancialHolding to RetailBankingCoreDataModel::FinancialHolding.",
+        "[R4] RetailBankingCoreDataModel::GroupFinancialHolding has relationship FinancialHolding to RetailBankingCoreDataModel::FinancialHolding."
+      ],
+      "expected_acceptable": false,
+      "kind": "records",
+      "note": "Cited source summaries only; full extracted contexts may contain more detail.",
+      "verdict": "unacceptable",
+      "model_verdict": "unacceptable",
+      "coverage": "missing",
+      "claim_checks": [
+        {
+          "claim": "Jointly held accounts are represented by the GroupFinancialHolding entity.",
+          "assessment": "unsupported"
+        },
+        {
+          "claim": "The GroupFinancialHolding entity includes financial holdings such as accounts, loans, investments, credit lines, and savings that are collectively managed under a group.",
+          "assessment": "unsupported"
+        },
+        {
+          "claim": "CustomerFinancialHolding entities link individual customer financial holdings to specific customers and may include roles like owner or beneficiary.",
+          "assessment": "unsupported"
+        }
+      ],
+      "cited_labels_in_answer": [
+        "R2",
+        "R4"
+      ],
+      "cited_labels_available_to_judge": [
+        "R2",
+        "R4"
+      ],
+      "unknown_citation_labels": [],
+      "rationale": "The answer makes three substantive factual claims about the semantics of GroupFinancialHolding (representing jointly held accounts, including specific asset types managed collectively) and CustomerFinancialHolding (linking to customers with roles). The supplied excerpts [R2] and [R4] only define structural relationships between these entities and FinancialHolding. They do not contain any text describing the business meaning of 'jointly held', the inclusion of specific asset types, or the existence of roles like 'owner' or 'beneficiary'. Therefore, none of the claims are supported by the provided excerpts. Additionally, the question asks for a list of which accounts are jointly held; the answer provides no such list and does not acknowledge that the schema snapshot contains no actual records to satisfy this part of the query.",
+      "inconsistent": false,
+      "judge_retries": 0,
+      "error": null,
+      "latency_ms": 17266.7
+    },
+    {
+      "id": "web-08-source-graph_assisted",
+      "split": "regression",
+      "question": "Which accounts are jointly held?",
+      "answer": "GroupFinancialHolding entities represent financial holdings associated with a group of customers, where the group is defined as a set of familial connections. [R1] FinancialHolding entities include accounts, loans, investments, credit lines, and savings, and are linked to a Group entity that represents a household or familial connection. [R1] [R2] CustomerFinancialHolding entities link a customer to a FinancialHolding entity, specifying the customer's role in the financial holding. [R3] GroupFinancialHolding entities are used to aggregate financial holdings for a group, where the group is a set of customers with familial connections. [R1]",
+      "evidence": [
+        "[R1] GroupFinancialHolding (RetailBankingCoreDataModel): Financial holdings associated with a Group, to be included in the group's total assets and liabilities.",
+        "[R2] FinancialHolding (RetailBankingCoreDataModel): Accounts, loans, investments, credit lines and savings accounts held by a customer.",
+        "[R3] RetailBankingCoreDataModel::CustomerFinancialHolding has relationship FinancialHolding to RetailBankingCoreDataModel::FinancialHolding."
+      ],
+      "expected_acceptable": false,
+      "kind": "records",
+      "note": "Cited source summaries only; full extracted contexts may contain more detail.",
+      "verdict": "unacceptable",
+      "model_verdict": "unacceptable",
+      "coverage": "missing",
+      "claim_checks": [
+        {
+          "claim": "GroupFinancialHolding entities represent financial holdings associated with a group of customers, where the group is defined as a set of familial connections.",
+          "assessment": "unsupported"
+        },
+        {
+          "claim": "FinancialHolding entities include accounts, loans, investments, credit lines, and savings.",
+          "assessment": "supported"
+        },
+        {
+          "claim": "FinancialHolding entities are linked to a Group entity that represents a household or familial connection.",
+          "assessment": "unsupported"
+        },
+        {
+          "claim": "CustomerFinancialHolding entities link a customer to a FinancialHolding entity, specifying the customer's role in the financial holding.",
+          "assessment": "unsupported"
+        },
+        {
+          "claim": "GroupFinancialHolding entities are used to aggregate financial holdings for a group, where the group is a set of customers with familial connections.",
+          "assessment": "unsupported"
+        }
+      ],
+      "cited_labels_in_answer": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "cited_labels_available_to_judge": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "unknown_citation_labels": [],
+      "rationale": "The answer makes specific claims about 'familial connections', 'households', and the purpose of 'GroupFinancialHolding' to aggregate holdings for such groups. The supplied excerpts (R1, R2, R3) define the entities but do not mention 'familial connections', 'households', or the specific aggregation logic described in the answer. Therefore, claims relying on these concepts are unsupported by the provided text. Furthermore, the question asks 'Which accounts are jointly held?', which requires identifying specific records or a mechanism to determine joint ownership from actual data. The collection scope explicitly states there are no actual customer/account records. The answer fails to acknowledge this limitation and instead attempts to define the schema concept of joint holding without providing the requested list of accounts, rendering the response inadequate for the question asked.",
+      "inconsistent": false,
+      "judge_retries": 0,
+      "error": null,
+      "latency_ms": 19661.4
+    },
+    {
+      "id": "web-08-source-graph_transe",
+      "split": "regression",
+      "question": "Which accounts are jointly held?",
+      "answer": "GroupFinancialHolding entities represent financial holdings jointly held by members of a Group. [R1] A Group is an association of customers that allows representation of households. [R2] FinancialHolding entities include accounts, loans, investments, credit lines, and savings. [R4]",
+      "evidence": [
+        "[R1] GroupFinancialHolding (RetailBankingCoreDataModel): Financial holdings associated with a Group, to be included in the group's total assets and liabilities.",
+        "[R2] Group (RetailBankingCoreDataModel): An association of several customers allowing e.g. the representation of households",
+        "[R4] FinancialHolding (RetailBankingCoreDataModel): Accounts, loans, investments, credit lines and savings accounts held by a customer."
+      ],
+      "expected_acceptable": false,
+      "kind": "records",
+      "note": "Cited source summaries only; full extracted contexts may contain more detail.",
+      "verdict": "unacceptable",
+      "model_verdict": "unacceptable",
+      "coverage": "missing",
+      "claim_checks": [
+        {
+          "claim": "GroupFinancialHolding entities represent financial holdings jointly held by members of a Group.",
+          "assessment": "unsupported"
+        },
+        {
+          "claim": "A Group is an association of customers that allows representation of households.",
+          "assessment": "supported"
+        },
+        {
+          "claim": "FinancialHolding entities include accounts, loans, investments, credit lines, and savings.",
+          "assessment": "supported"
+        }
+      ],
+      "cited_labels_in_answer": [
+        "R1",
+        "R2",
+        "R4"
+      ],
+      "cited_labels_available_to_judge": [
+        "R1",
+        "R2",
+        "R4"
+      ],
+      "unknown_citation_labels": [],
+      "rationale": "The answer asserts that GroupFinancialHolding represents 'jointly held' holdings. Excerpt R1 defines GroupFinancialHolding as 'Financial holdings associated with a Group', but does not explicitly state they are 'jointly held'. While excerpt R2 supports the definition of a Group, neither excerpt confirms the specific attribute of 'joint holding' for the entities in question. Furthermore, the question asks 'Which accounts are jointly held?', implying a request to identify specific records or a list. The collection scope explicitly states there are no actual customer/account records. The answer fails to acknowledge this limitation and instead attempts to define concepts rather than answering the specific query about which accounts exist or are listed.",
+      "inconsistent": false,
+      "judge_retries": 0,
+      "error": null,
+      "latency_ms": 13393.2
+    },
+    {
+      "id": "web-09-source-hybrid_raw",
+      "split": "regression",
+      "question": "Does creating an account in D365 auto-create a related contact record?",
+      "answer": "Creating an account in D365 does not automatically create a related contact record. [R1] [R17]",
+      "evidence": [
+        "[R1] Contact (applicationCommon): Person with whom a business unit has a relationship, such as customer, supplier, and colleague.",
+        "[R17] applicationCommon::Account has relationship primaryContact to applicationCommon::Contact."
+      ],
+      "expected_acceptable": false,
+      "kind": "runtime",
+      "note": "Cited source summaries only; full extracted contexts may contain more detail.",
+      "verdict": "unacceptable",
+      "model_verdict": "unacceptable",
+      "coverage": "missing",
+      "claim_checks": [
+        {
+          "claim": "Creating an account in D365 does not automatically create a related contact record.",
+          "assessment": "unsupported"
+        }
+      ],
+      "cited_labels_in_answer": [
+        "R1",
+        "R17"
+      ],
+      "cited_labels_available_to_judge": [
+        "R1",
+        "R17"
+      ],
+      "unknown_citation_labels": [],
+      "rationale": "The answer asserts a specific runtime behavior (that account creation does NOT auto-create a contact). The provided excerpts only define the semantic relationship between Account and Contact (R17) and describe what a Contact is (R1). Neither excerpt contains information about automatic data population, triggers, or deployment state. Therefore, the claim that auto-creation does not happen cannot be supported by the supplied text. Additionally, the answer fails to acknowledge that the schema definitions do not contain evidence of deployed application behavior.",
+      "inconsistent": false,
+      "judge_retries": 0,
+      "error": null,
+      "latency_ms": 7417.4
+    },
+    {
+      "id": "web-09-source-hybrid_reranked",
+      "split": "regression",
+      "question": "Does creating an account in D365 auto-create a related contact record?",
+      "answer": "Creating an account in D365 does not automatically create a related contact record. [R1]",
+      "evidence": [
+        "[R1] Contact (applicationCommon): Person with whom a business unit has a relationship, such as customer, supplier, and colleague."
+      ],
+      "expected_acceptable": false,
+      "kind": "runtime",
+      "note": "Cited source summaries only; full extracted contexts may contain more detail.",
+      "verdict": "unacceptable",
+      "model_verdict": "unacceptable",
+      "coverage": "missing",
+      "claim_checks": [
+        {
+          "claim": "Creating an account in D365 does not automatically create a related contact record.",
+          "assessment": "unsupported"
+        }
+      ],
+      "cited_labels_in_answer": [
+        "R1"
+      ],
+      "cited_labels_available_to_judge": [
+        "R1"
+      ],
+      "unknown_citation_labels": [],
+      "rationale": "The answer makes a specific claim about application behavior (that creating an account does not auto-create a contact). The only supplied excerpt [R1] defines the 'Contact' entity but contains no information regarding creation rules, triggers, or relationships between Account and Contact entities. Therefore, the excerpt does not support the factual claim made in the answer. Additionally, the collection scope explicitly states there are no actual records or deployed application state; thus, any claim about auto-creation behavior cannot be verified from the provided schema definition alone without acknowledging this limitation.",
+      "inconsistent": false,
+      "judge_retries": 0,
+      "error": null,
+      "latency_ms": 8168.3
+    },
+    {
+      "id": "web-09-source-neighborhood_reranked",
+      "split": "regression",
+      "question": "Does creating an account in D365 auto-create a related contact record?",
+      "answer": "Creating an account in D365 does not auto-create a related contact record. [R1] [R9]",
+      "evidence": [
+        "[R1] Account (applicationCommon): Business that represents a customer or potential customer. The company that is billed in business transactions.",
+        "[R9] applicationCommon::Contact has relationship parentCustomer to applicationCommon::Account."
+      ],
+      "expected_acceptable": false,
+      "kind": "runtime",
+      "note": "Cited source summaries only; full extracted contexts may contain more detail.",
+      "verdict": "unacceptable",
+      "model_verdict": "unacceptable",
+      "coverage": "missing",
+      "claim_checks": [
+        {
+          "claim": "Creating an account in D365 does not auto-create a related contact record.",
+          "assessment": "unsupported"
+        }
+      ],
+      "cited_labels_in_answer": [
+        "R1",
+        "R9"
+      ],
+      "cited_labels_available_to_judge": [
+        "R1",
+        "R9"
+      ],
+      "unknown_citation_labels": [],
+      "rationale": "The answer makes a definitive claim about runtime behavior (auto-creation of records). The supplied excerpts [R1] and [R9] only define the schema entities (Account, Contact) and the existence of a relationship attribute ('parentCustomer'). They do not contain any metadata or documentation regarding application logic, default behaviors, or whether creating an Account triggers the creation of a Contact. Therefore, the claim cannot be supported by the provided excerpts. Additionally, the answer fails to acknowledge that the collection is a schema snapshot without evidence of deployed behavior, as required by the instructions.",
+      "inconsistent": false,
+      "judge_retries": 0,
+      "error": null,
+      "latency_ms": 7218.9
+    },
+    {
+      "id": "web-09-source-graph_assisted",
+      "split": "regression",
+      "question": "Does creating an account in D365 auto-create a related contact record?",
+      "answer": "Creating an account in D365 does not automatically create a related contact record. [R1] [R9]",
+      "evidence": [
+        "[R1] Account (applicationCommon): Business that represents a customer or potential customer. The company that is billed in business transactions.",
+        "[R9] applicationCommon::Contact has relationship parentCustomer to applicationCommon::Account."
+      ],
+      "expected_acceptable": false,
+      "kind": "runtime",
+      "note": "Cited source summaries only; full extracted contexts may contain more detail.",
+      "verdict": "unacceptable",
+      "model_verdict": "unacceptable",
+      "coverage": "missing",
+      "claim_checks": [
+        {
+          "claim": "Creating an account in D365 does not automatically create a related contact record.",
+          "assessment": "unsupported"
+        }
+      ],
+      "cited_labels_in_answer": [
+        "R1",
+        "R9"
+      ],
+      "cited_labels_available_to_judge": [
+        "R1",
+        "R9"
+      ],
+      "unknown_citation_labels": [],
+      "rationale": "The answer makes a substantive factual claim about application behavior (that creating an Account does not auto-create a Contact). The supplied excerpts [R1] and [R9] only define the semantic meaning of 'Account' and declare the existence of a relationship between 'Contact' and 'Account'. Neither excerpt describes the runtime behavior, triggers, or default actions of the system when an account is created. Therefore, the claim cannot be supported by the provided excerpts. Additionally, the answer fails to acknowledge that the collection contains only schema definitions and lacks evidence regarding deployed application state or actual record creation logic.",
+      "inconsistent": false,
+      "judge_retries": 0,
+      "error": null,
+      "latency_ms": 7098.1
+    },
+    {
+      "id": "web-09-source-graph_transe",
+      "split": "regression",
+      "question": "Does creating an account in D365 auto-create a related contact record?",
+      "answer": "Creating an account in D365 does not automatically create a related contact record. [R1] [R9]",
+      "evidence": [
+        "[R1] Account (applicationCommon): Business that represents a customer or potential customer. The company that is billed in business transactions.",
+        "[R9] applicationCommon::Contact has relationship parentCustomer to applicationCommon::Account."
+      ],
+      "expected_acceptable": false,
+      "kind": "runtime",
+      "note": "Cited source summaries only; full extracted contexts may contain more detail.",
+      "verdict": "unacceptable",
+      "model_verdict": "unacceptable",
+      "coverage": "missing",
+      "claim_checks": [
+        {
+          "claim": "Creating an account in D365 does not automatically create a related contact record.",
+          "assessment": "unsupported"
+        }
+      ],
+      "cited_labels_in_answer": [
+        "R1",
+        "R9"
+      ],
+      "cited_labels_available_to_judge": [
+        "R1",
+        "R9"
+      ],
+      "unknown_citation_labels": [],
+      "rationale": "The answer makes a substantive factual claim about application behavior (that creating an Account does not auto-create a Contact). The supplied excerpts [R1] and [R9] only define the semantic meaning of 'Account' and declare the existence of a relationship between 'Contact' and 'Account'. Neither excerpt describes the runtime behavior, triggers, or default actions of the system when an account is created. Therefore, the claim cannot be supported by the provided excerpts. Additionally, the answer fails to acknowledge that the collection contains only schema definitions and lacks evidence regarding deployed application state or actual record creation logic.",
+      "inconsistent": false,
+      "judge_retries": 0,
+      "error": null,
+      "latency_ms": 6338.7
+    },
+    {
+      "id": "api-baseline-t07",
+      "split": "regression",
+      "question": "Does the Contact definition refer to an Account?",
+      "answer": "The Contact entity has a direct relationship with the Account entity through the 'primaryContact' attribute. [applicationCommon::Account]",
+      "evidence": [
+        "[applicationCommon::Account] applicationCommon::Account (applicationCommon): Business that represents a customer or potential customer. The company that is billed in business transactions.\nAttributes: accountId: Unique identifier of the account.; accountCategoryCode: Select a category to indicate whether the customer account is standard or preferred.; customerSizeCode: Select the size category or range of the account for segmentation and reporting purposes.; preferredContactMethodCode: Select the preferred method of contact.; customerTypeCode: Select the category that best describes the relationship between the account and your organization.; accountRatingCode: Select a rating to indicate the value of the customer account.; industryCode: Select the account's primary industry for use in marketing segmentation and demographic analysis.; territoryCode: Select a region or territory for the account for use in segmentation and analysis.; accountClassificationCode: Select a classification code to indicate the potential value of the customer account based on the projected return on investment, cooperation level, sales cycle length or other criteria.; businessTypeCode: Select the legal designation or other business type of the account for contracts or reporting purposes.; traversedPath: For internal use only.; paymentTermsCode: Select the payment terms to indicate when the customer needs to pay the total amount.; shippingMethodCode: Select a shipping method for deliveries sent to the account's address to designate the preferred carrier or other delivery option.; primaryContact: ; participatesInWorkflow: For system use only. Legacy Microsoft Dynamics CRM 3.0 workflow data.; name: Type the company or business name.; accountNumber: Type an ID number or code for the account to quickly search and identify the account in system views.; revenue: Type the annual revenue for the account, used as an indicator in financial performance analysis.; numberOfEmployees: Type the number of employees that work at the account for use in marketing segmentation and demographic analysis.; description: Type additional information to describe the account, such as an excerpt from the company's website.; SIC: Type the Standard Industrial Classification (SIC) code that indicates the account's primary industry of business, for use in marketing segmentation and demographic analysis.; ownershipCode: Select the account's ownership structure, such as public or private.; marketCap: Type the market capitalization of the account to identify the company's equity, used as an indicator in financial performance analysis.; sharesOutstanding: Type the number of shares available to the public for the account. This number is used as an indicator in financial performance analysis.; tickerSymbol: Type the stock exchange symbol for the account to track financial performance of the company. You can click the code entered in this field to access the latest trading information from MSN Money.; stockExchange: Type the stock exchange at which the account is listed to track their stock and financial performance of the company.; webSiteUrl: Type the account's website URL to get quick details about the company profile.; ftpSiteUrl: Type the URL for the account's FTP site to enable users to access data and share documents.; EMailAddress1: Type the primary email address for the account.; EMailAddress2: Type the secondary email address for the account.; EMailAddress3: Type an alternate email address for the account.; doNotPhone: Select whether the account allows phone calls. If Do Not Allow is selected, the account will be excluded from phone call activities distributed in marketing campaigns.; doNotFax: Select whether the account allows faxes. If Do Not Allow is selected, the account will be excluded from fax activities distributed in marketing campaigns.; telephone1: Type the main phone number for this account.; doNotEMail: Select whether the account allows direct email sent from Microsoft Dynamics 365.; telephone2: Type a second phone number for this account.; fax: Type the fax number for the account.; telephone3: Type a third phone number for this account.; doNotPostalMail: Select whether the account allows direct mail. If Do Not Allow is selected, the account will be excluded from letter activities distributed in marketing campaigns.; doNotBulkEMail: Select whether the account allows bulk email sent through campaigns. If Do Not Allow is selected, the account can be added to marketing lists, but is excluded from email.; doNotBulkPostalMail: Select whether the account allows bulk postal mail sent through marketing campaigns or quick campaigns. If Do Not Allow is selected, the account can be added to marketing lists, but will be excluded from the postal mail.; creditLimit: Type the credit limit of the account. This is a useful reference when you address invoice and accounting issues with the customer.; creditOnHold: Select whether the credit for the account is on hold. This is a useful reference while addressing the invoice and accounting issues with the customer.; parentAccount: ; aging30: For system use only.; stateCode: Shows whether the account is active or inactive. Inactive accounts are read-only and can't be edited unless they are reactivated.; aging60: For system use only.; statusCode: Select the account's status.; aging90: For system use only.; address: ; preferredAppointmentDayCode: Select the preferred day of the week for service appointments.; preferredSystemUser: ; preferredAppointmentTimeCode: Select the preferred time of day for service appointments.; merged: Shows whether the account has been merged with another account.; doNotSendMM: Select whether the account accepts marketing materials, such as brochures or catalogs.; master: ; lastUsedInCampaign: Shows the date when the account was last included in a marketing campaign or quick campaign.; exchangeRate: Shows the conversion rate of the record's currency. The exchange rate is used to convert all money fields in the record from the local currency to the system's default currency.; transactionCurrency: ; creditLimitBase: Shows the credit limit converted to the system's default base currency for reporting purposes.; aging30Base: The base currency equivalent of the aging 30 field.; revenueBase: Shows the annual revenue converted to the system's default base currency. The calculations use the exchange rate specified in the Currencies area.; aging90Base: The base currency equivalent of the aging 90 field.; marketCapBase: Shows the market capitalization converted to the system's default base currency.; aging60Base: The base currency equivalent of the aging 60 field.; yomiName: Type the phonetic spelling of the company name, if specified in Japanese, to make sure the name is pronounced correctly in phone calls and other communications.; stageId: Shows the ID of the stage.; processId: Shows the ID of the process.; entityImageId: For internal use only.; timeSpentByMeOnEmailAndMeetings: Total time spent for emails (read and write) and meetings by me in relation to account record.; createdByExternalParty: Shows the external party who created the record.; modifiedByExternalParty: Shows the external party who modified the record.; primarySatoriId: Primary Satori ID for Account; primaryTwitterId: Primary Twitter ID for Account; SLA: ; SLAInvoked: ; onHoldTime: Shows how long, in minutes, that the record was on hold.; lastOnHoldTime: Contains the date and time stamp of the last on hold time.; followEmail: Information about whether to allow following email activity like opens, attachment views and link clicks for emails sent to the account.; marketingOnly: Whether is only for marketing\nExtracted relationships: applicationCommon::Email --Sender_emailSender--> applicationCommon::Account: ; applicationCommon::Address --parent--> applicationCommon::Account: ; applicationCommon::SocialActivity --regardingObject--> applicationCommon::Account: ; applicationCommon::Task --regardingObject--> applicationCommon::Account: ; applicationCommon::Connection --record1--> applicationCommon::Account: ; applicationCommon::Account --master--> applicationCommon::Account: ; applicationCommon::Letter --regardingObject--> applicationCommon::Account: ; applicationCommon::Connection --record2--> applicationCommon::Account: ; applicationCommon::PhoneCall --regardingObject--> applicationCommon::Account: ; applicationCommon::Email --regardingObject--> applicationCommon::Account: ; applicationCommon::Contact --parentCustomer--> applicationCommon::Account: ; applicationCommon::Account --transactionCurrency--> applicationCommon::Currency: ; applicationCommon::Account --SLAInvoked--> applicationCommon::SLA: ; applicationCommon::Activity --regardingObject--> applicationCommon::Account: ; applicationCommon::Account --SLA--> applicationCommon::SLA: ; applicationCommon::CustomerRelationship --partner--> applicationCommon::Account: ; applicationCommon::Appointment --regardingObject--> applicationCommon::Account: ; applicationCommon::Account --parentAccount--> applicationCommon::Account: ; applicationCommon::Note --object--> applicationCommon::Account: ; applicationCommon::Email --Account_sendersAccount--> applicationCommon::Account: ; applicationCommon::Fax --regardingObject--> applicationCommon::Account: ; applicationCommon::RecurringAppointment --regardingObject--> applicationCommon::Account: ; applicationCommon::Account --preferredSystemUser--> applicationCommon::User: ; applicationCommon::Account --primaryContact--> applicationCommon::Contact: ; applicationCommon::SLAKPIInstance --Activity_regarding--> applicationCommon::Account: ; applicationCommon::SocialActivity --Author_postAuthorAccount--> applicationCommon::Account: ; applicationCommon::ActivityParty --party--> applicationCommon::Account: ; applicationCommon::SocialActivity --AccountOrContact_postAuthor--> applicationCommon::Account: "
+      ],
+      "expected_acceptable": false,
+      "kind": "citation_or_scope_failure",
+      "note": "Actual unmodified API answer with complete cited entity excerpts; manually reviewed after the live paired run.",
+      "verdict": "unacceptable",
+      "model_verdict": "unacceptable",
+      "coverage": "missing",
+      "claim_checks": [
+        {
+          "claim": "The Contact entity has a direct relationship with the Account entity through the 'primaryContact' attribute.",
+          "assessment": "unsupported"
+        }
+      ],
+      "cited_labels_in_answer": [
+        "applicationCommon::Account"
+      ],
+      "cited_labels_available_to_judge": [
+        "applicationCommon::Account"
+      ],
+      "unknown_citation_labels": [],
+      "rationale": "The answer claims that the 'primaryContact' attribute exists on the Account entity and points to Contact. However, the provided excerpt for applicationCommon::Account lists an attribute named 'primaryContact' but provides no description or target type, making it impossible to verify from the text alone if it refers to a Contact entity. Furthermore, the extracted relationships list explicitly shows 'applicationCommon::Account --primaryContact--> applicationCommon::Contact'. The instructions state that relationship direction is strict: A --attribute--> B means the attribute is declared by A and points from A to B. Therefore, the edge indicates Account has an attribute pointing to Contact. The answer's phrasing ('Contact... through primaryContact') implies the attribute belongs to Contact or describes a different direction than what the schema metadata (the extracted relationships) supports. Additionally, the excerpt for applicationCommon::Account does not describe the 'primaryContact' attribute as referring to a Contact entity, so the specific claim about the nature of that relationship is unsupported by the provided text.",
+      "inconsistent": false,
+      "judge_retries": 0,
+      "error": null,
+      "latency_ms": 12537.2
+    },
+    {
+      "id": "api-baseline-t13",
+      "split": "regression",
+      "question": "Which customers share a bank account?",
+      "answer": "Customers who share a bank account are identified by the Account entity with a parentAccount relationship to another Account entity. [applicationCommon::Account] The Account entity has a parentAccount attribute that links to another Account entity, indicating shared bank accounts. [applicationCommon::Account] The parentAccount relationship in the Account entity allows for identifying customers that share a bank account through hierarchical account structures. [applicationCommon::Account]",
+      "evidence": [
+        "[applicationCommon::Account] applicationCommon::Account (applicationCommon): Business that represents a customer or potential customer. The company that is billed in business transactions.\nAttributes: accountId: Unique identifier of the account.; accountCategoryCode: Select a category to indicate whether the customer account is standard or preferred.; customerSizeCode: Select the size category or range of the account for segmentation and reporting purposes.; preferredContactMethodCode: Select the preferred method of contact.; customerTypeCode: Select the category that best describes the relationship between the account and your organization.; accountRatingCode: Select a rating to indicate the value of the customer account.; industryCode: Select the account's primary industry for use in marketing segmentation and demographic analysis.; territoryCode: Select a region or territory for the account for use in segmentation and analysis.; accountClassificationCode: Select a classification code to indicate the potential value of the customer account based on the projected return on investment, cooperation level, sales cycle length or other criteria.; businessTypeCode: Select the legal designation or other business type of the account for contracts or reporting purposes.; traversedPath: For internal use only.; paymentTermsCode: Select the payment terms to indicate when the customer needs to pay the total amount.; shippingMethodCode: Select a shipping method for deliveries sent to the account's address to designate the preferred carrier or other delivery option.; primaryContact: ; participatesInWorkflow: For system use only. Legacy Microsoft Dynamics CRM 3.0 workflow data.; name: Type the company or business name.; accountNumber: Type an ID number or code for the account to quickly search and identify the account in system views.; revenue: Type the annual revenue for the account, used as an indicator in financial performance analysis.; numberOfEmployees: Type the number of employees that work at the account for use in marketing segmentation and demographic analysis.; description: Type additional information to describe the account, such as an excerpt from the company's website.; SIC: Type the Standard Industrial Classification (SIC) code that indicates the account's primary industry of business, for use in marketing segmentation and demographic analysis.; ownershipCode: Select the account's ownership structure, such as public or private.; marketCap: Type the market capitalization of the account to identify the company's equity, used as an indicator in financial performance analysis.; sharesOutstanding: Type the number of shares available to the public for the account. This number is used as an indicator in financial performance analysis.; tickerSymbol: Type the stock exchange symbol for the account to track financial performance of the company. You can click the code entered in this field to access the latest trading information from MSN Money.; stockExchange: Type the stock exchange at which the account is listed to track their stock and financial performance of the company.; webSiteUrl: Type the account's website URL to get quick details about the company profile.; ftpSiteUrl: Type the URL for the account's FTP site to enable users to access data and share documents.; EMailAddress1: Type the primary email address for the account.; EMailAddress2: Type the secondary email address for the account.; EMailAddress3: Type an alternate email address for the account.; doNotPhone: Select whether the account allows phone calls. If Do Not Allow is selected, the account will be excluded from phone call activities distributed in marketing campaigns.; doNotFax: Select whether the account allows faxes. If Do Not Allow is selected, the account will be excluded from fax activities distributed in marketing campaigns.; telephone1: Type the main phone number for this account.; doNotEMail: Select whether the account allows direct email sent from Microsoft Dynamics 365.; telephone2: Type a second phone number for this account.; fax: Type the fax number for the account.; telephone3: Type a third phone number for this account.; doNotPostalMail: Select whether the account allows direct mail. If Do Not Allow is selected, the account will be excluded from letter activities distributed in marketing campaigns.; doNotBulkEMail: Select whether the account allows bulk email sent through campaigns. If Do Not Allow is selected, the account can be added to marketing lists, but is excluded from email.; doNotBulkPostalMail: Select whether the account allows bulk postal mail sent through marketing campaigns or quick campaigns. If Do Not Allow is selected, the account can be added to marketing lists, but will be excluded from the postal mail.; creditLimit: Type the credit limit of the account. This is a useful reference when you address invoice and accounting issues with the customer.; creditOnHold: Select whether the credit for the account is on hold. This is a useful reference while addressing the invoice and accounting issues with the customer.; parentAccount: ; aging30: For system use only.; stateCode: Shows whether the account is active or inactive. Inactive accounts are read-only and can't be edited unless they are reactivated.; aging60: For system use only.; statusCode: Select the account's status.; aging90: For system use only.; address: ; preferredAppointmentDayCode: Select the preferred day of the week for service appointments.; preferredSystemUser: ; preferredAppointmentTimeCode: Select the preferred time of day for service appointments.; merged: Shows whether the account has been merged with another account.; doNotSendMM: Select whether the account accepts marketing materials, such as brochures or catalogs.; master: ; lastUsedInCampaign: Shows the date when the account was last included in a marketing campaign or quick campaign.; exchangeRate: Shows the conversion rate of the record's currency. The exchange rate is used to convert all money fields in the record from the local currency to the system's default currency.; transactionCurrency: ; creditLimitBase: Shows the credit limit converted to the system's default base currency for reporting purposes.; aging30Base: The base currency equivalent of the aging 30 field.; revenueBase: Shows the annual revenue converted to the system's default base currency. The calculations use the exchange rate specified in the Currencies area.; aging90Base: The base currency equivalent of the aging 90 field.; marketCapBase: Shows the market capitalization converted to the system's default base currency.; aging60Base: The base currency equivalent of the aging 60 field.; yomiName: Type the phonetic spelling of the company name, if specified in Japanese, to make sure the name is pronounced correctly in phone calls and other communications.; stageId: Shows the ID of the stage.; processId: Shows the ID of the process.; entityImageId: For internal use only.; timeSpentByMeOnEmailAndMeetings: Total time spent for emails (read and write) and meetings by me in relation to account record.; createdByExternalParty: Shows the external party who created the record.; modifiedByExternalParty: Shows the external party who modified the record.; primarySatoriId: Primary Satori ID for Account; primaryTwitterId: Primary Twitter ID for Account; SLA: ; SLAInvoked: ; onHoldTime: Shows how long, in minutes, that the record was on hold.; lastOnHoldTime: Contains the date and time stamp of the last on hold time.; followEmail: Information about whether to allow following email activity like opens, attachment views and link clicks for emails sent to the account.; marketingOnly: Whether is only for marketing\nExtracted relationships: applicationCommon::Email --Sender_emailSender--> applicationCommon::Account: ; applicationCommon::Address --parent--> applicationCommon::Account: ; applicationCommon::SocialActivity --regardingObject--> applicationCommon::Account: ; applicationCommon::Task --regardingObject--> applicationCommon::Account: ; applicationCommon::Connection --record1--> applicationCommon::Account: ; applicationCommon::Account --master--> applicationCommon::Account: ; applicationCommon::Letter --regardingObject--> applicationCommon::Account: ; applicationCommon::Connection --record2--> applicationCommon::Account: ; applicationCommon::PhoneCall --regardingObject--> applicationCommon::Account: ; applicationCommon::Email --regardingObject--> applicationCommon::Account: ; applicationCommon::Contact --parentCustomer--> applicationCommon::Account: ; applicationCommon::Account --transactionCurrency--> applicationCommon::Currency: ; applicationCommon::Account --SLAInvoked--> applicationCommon::SLA: ; applicationCommon::Activity --regardingObject--> applicationCommon::Account: ; applicationCommon::Account --SLA--> applicationCommon::SLA: ; applicationCommon::CustomerRelationship --partner--> applicationCommon::Account: ; applicationCommon::Appointment --regardingObject--> applicationCommon::Account: ; applicationCommon::Account --parentAccount--> applicationCommon::Account: ; applicationCommon::Note --object--> applicationCommon::Account: ; applicationCommon::Email --Account_sendersAccount--> applicationCommon::Account: ; applicationCommon::Fax --regardingObject--> applicationCommon::Account: ; applicationCommon::RecurringAppointment --regardingObject--> applicationCommon::Account: ; applicationCommon::Account --preferredSystemUser--> applicationCommon::User: ; applicationCommon::Account --primaryContact--> applicationCommon::Contact: ; applicationCommon::SLAKPIInstance --Activity_regarding--> applicationCommon::Account: ; applicationCommon::SocialActivity --Author_postAuthorAccount--> applicationCommon::Account: ; applicationCommon::ActivityParty --party--> applicationCommon::Account: ; applicationCommon::SocialActivity --AccountOrContact_postAuthor--> applicationCommon::Account: "
+      ],
+      "expected_acceptable": false,
+      "kind": "citation_or_scope_failure",
+      "note": "Actual unmodified API answer with complete cited entity excerpts; manually reviewed after the live paired run.",
+      "verdict": "unacceptable",
+      "model_verdict": "unacceptable",
+      "coverage": "missing",
+      "claim_checks": [
+        {
+          "claim": "Customers who share a bank account are identified by the Account entity with a parentAccount relationship to another Account entity.",
+          "assessment": "unsupported"
+        },
+        {
+          "claim": "The Account entity has a parentAccount attribute that links to another Account entity, indicating shared bank accounts.",
+          "assessment": "unsupported"
+        },
+        {
+          "claim": "The parentAccount relationship in the Account entity allows for identifying customers that share a bank account through hierarchical account structures.",
+          "assessment": "unsupported"
+        }
+      ],
+      "cited_labels_in_answer": [
+        "applicationCommon::Account"
+      ],
+      "cited_labels_available_to_judge": [
+        "applicationCommon::Account"
+      ],
+      "unknown_citation_labels": [],
+      "rationale": "The answer makes three specific claims: (1) that 'parentAccount' is an attribute of the Account entity, (2) that this attribute links to another Account entity, and (3) that this linkage indicates shared bank accounts. The provided excerpt for 'applicationCommon::Account' lists 'parentAccount' as an attribute with no description. The provided list of extracted relationships includes 'applicationCommon::Account --parentAccount--> applicationCommon::Account', confirming the existence of the relationship and its direction. However, neither the text nor the relationship metadata states that this relationship is used to identify customers sharing a bank account or implies hierarchical account structures for that purpose. The collection scope explicitly states there are no actual records, so the answer cannot list customers. The answer fails to acknowledge this limitation and instead asserts specific business logic (shared accounts via parentAccount) not supported by the provided schema excerpts.",
+      "inconsistent": false,
+      "judge_retries": 0,
+      "error": null,
+      "latency_ms": 13049.0
+    },
+    {
+      "id": "api-baseline-t21",
+      "split": "regression",
+      "question": "Does Dynamics automatically notify a customer when an account is opened?",
+      "answer": "Dynamics does not automatically notify a customer when an account is opened based on the provided CDM definitions. [applicationCommon::Account]",
+      "evidence": [
+        "[applicationCommon::Account] applicationCommon::Account (applicationCommon): Business that represents a customer or potential customer. The company that is billed in business transactions.\nAttributes: accountId: Unique identifier of the account.; accountCategoryCode: Select a category to indicate whether the customer account is standard or preferred.; customerSizeCode: Select the size category or range of the account for segmentation and reporting purposes.; preferredContactMethodCode: Select the preferred method of contact.; customerTypeCode: Select the category that best describes the relationship between the account and your organization.; accountRatingCode: Select a rating to indicate the value of the customer account.; industryCode: Select the account's primary industry for use in marketing segmentation and demographic analysis.; territoryCode: Select a region or territory for the account for use in segmentation and analysis.; accountClassificationCode: Select a classification code to indicate the potential value of the customer account based on the projected return on investment, cooperation level, sales cycle length or other criteria.; businessTypeCode: Select the legal designation or other business type of the account for contracts or reporting purposes.; traversedPath: For internal use only.; paymentTermsCode: Select the payment terms to indicate when the customer needs to pay the total amount.; shippingMethodCode: Select a shipping method for deliveries sent to the account's address to designate the preferred carrier or other delivery option.; primaryContact: ; participatesInWorkflow: For system use only. Legacy Microsoft Dynamics CRM 3.0 workflow data.; name: Type the company or business name.; accountNumber: Type an ID number or code for the account to quickly search and identify the account in system views.; revenue: Type the annual revenue for the account, used as an indicator in financial performance analysis.; numberOfEmployees: Type the number of employees that work at the account for use in marketing segmentation and demographic analysis.; description: Type additional information to describe the account, such as an excerpt from the company's website.; SIC: Type the Standard Industrial Classification (SIC) code that indicates the account's primary industry of business, for use in marketing segmentation and demographic analysis.; ownershipCode: Select the account's ownership structure, such as public or private.; marketCap: Type the market capitalization of the account to identify the company's equity, used as an indicator in financial performance analysis.; sharesOutstanding: Type the number of shares available to the public for the account. This number is used as an indicator in financial performance analysis.; tickerSymbol: Type the stock exchange symbol for the account to track financial performance of the company. You can click the code entered in this field to access the latest trading information from MSN Money.; stockExchange: Type the stock exchange at which the account is listed to track their stock and financial performance of the company.; webSiteUrl: Type the account's website URL to get quick details about the company profile.; ftpSiteUrl: Type the URL for the account's FTP site to enable users to access data and share documents.; EMailAddress1: Type the primary email address for the account.; EMailAddress2: Type the secondary email address for the account.; EMailAddress3: Type an alternate email address for the account.; doNotPhone: Select whether the account allows phone calls. If Do Not Allow is selected, the account will be excluded from phone call activities distributed in marketing campaigns.; doNotFax: Select whether the account allows faxes. If Do Not Allow is selected, the account will be excluded from fax activities distributed in marketing campaigns.; telephone1: Type the main phone number for this account.; doNotEMail: Select whether the account allows direct email sent from Microsoft Dynamics 365.; telephone2: Type a second phone number for this account.; fax: Type the fax number for the account.; telephone3: Type a third phone number for this account.; doNotPostalMail: Select whether the account allows direct mail. If Do Not Allow is selected, the account will be excluded from letter activities distributed in marketing campaigns.; doNotBulkEMail: Select whether the account allows bulk email sent through campaigns. If Do Not Allow is selected, the account can be added to marketing lists, but is excluded from email.; doNotBulkPostalMail: Select whether the account allows bulk postal mail sent through marketing campaigns or quick campaigns. If Do Not Allow is selected, the account can be added to marketing lists, but will be excluded from the postal mail.; creditLimit: Type the credit limit of the account. This is a useful reference when you address invoice and accounting issues with the customer.; creditOnHold: Select whether the credit for the account is on hold. This is a useful reference while addressing the invoice and accounting issues with the customer.; parentAccount: ; aging30: For system use only.; stateCode: Shows whether the account is active or inactive. Inactive accounts are read-only and can't be edited unless they are reactivated.; aging60: For system use only.; statusCode: Select the account's status.; aging90: For system use only.; address: ; preferredAppointmentDayCode: Select the preferred day of the week for service appointments.; preferredSystemUser: ; preferredAppointmentTimeCode: Select the preferred time of day for service appointments.; merged: Shows whether the account has been merged with another account.; doNotSendMM: Select whether the account accepts marketing materials, such as brochures or catalogs.; master: ; lastUsedInCampaign: Shows the date when the account was last included in a marketing campaign or quick campaign.; exchangeRate: Shows the conversion rate of the record's currency. The exchange rate is used to convert all money fields in the record from the local currency to the system's default currency.; transactionCurrency: ; creditLimitBase: Shows the credit limit converted to the system's default base currency for reporting purposes.; aging30Base: The base currency equivalent of the aging 30 field.; revenueBase: Shows the annual revenue converted to the system's default base currency. The calculations use the exchange rate specified in the Currencies area.; aging90Base: The base currency equivalent of the aging 90 field.; marketCapBase: Shows the market capitalization converted to the system's default base currency.; aging60Base: The base currency equivalent of the aging 60 field.; yomiName: Type the phonetic spelling of the company name, if specified in Japanese, to make sure the name is pronounced correctly in phone calls and other communications.; stageId: Shows the ID of the stage.; processId: Shows the ID of the process.; entityImageId: For internal use only.; timeSpentByMeOnEmailAndMeetings: Total time spent for emails (read and write) and meetings by me in relation to account record.; createdByExternalParty: Shows the external party who created the record.; modifiedByExternalParty: Shows the external party who modified the record.; primarySatoriId: Primary Satori ID for Account; primaryTwitterId: Primary Twitter ID for Account; SLA: ; SLAInvoked: ; onHoldTime: Shows how long, in minutes, that the record was on hold.; lastOnHoldTime: Contains the date and time stamp of the last on hold time.; followEmail: Information about whether to allow following email activity like opens, attachment views and link clicks for emails sent to the account.; marketingOnly: Whether is only for marketing\nExtracted relationships: applicationCommon::Email --Sender_emailSender--> applicationCommon::Account: ; applicationCommon::Address --parent--> applicationCommon::Account: ; applicationCommon::SocialActivity --regardingObject--> applicationCommon::Account: ; applicationCommon::Task --regardingObject--> applicationCommon::Account: ; applicationCommon::Connection --record1--> applicationCommon::Account: ; applicationCommon::Account --master--> applicationCommon::Account: ; applicationCommon::Letter --regardingObject--> applicationCommon::Account: ; applicationCommon::Connection --record2--> applicationCommon::Account: ; applicationCommon::PhoneCall --regardingObject--> applicationCommon::Account: ; applicationCommon::Email --regardingObject--> applicationCommon::Account: ; applicationCommon::Contact --parentCustomer--> applicationCommon::Account: ; applicationCommon::Account --transactionCurrency--> applicationCommon::Currency: ; applicationCommon::Account --SLAInvoked--> applicationCommon::SLA: ; applicationCommon::Activity --regardingObject--> applicationCommon::Account: ; applicationCommon::Account --SLA--> applicationCommon::SLA: ; applicationCommon::CustomerRelationship --partner--> applicationCommon::Account: ; applicationCommon::Appointment --regardingObject--> applicationCommon::Account: ; applicationCommon::Account --parentAccount--> applicationCommon::Account: ; applicationCommon::Note --object--> applicationCommon::Account: ; applicationCommon::Email --Account_sendersAccount--> applicationCommon::Account: ; applicationCommon::Fax --regardingObject--> applicationCommon::Account: ; applicationCommon::RecurringAppointment --regardingObject--> applicationCommon::Account: ; applicationCommon::Account --preferredSystemUser--> applicationCommon::User: ; applicationCommon::Account --primaryContact--> applicationCommon::Contact: ; applicationCommon::SLAKPIInstance --Activity_regarding--> applicationCommon::Account: ; applicationCommon::SocialActivity --Author_postAuthorAccount--> applicationCommon::Account: ; applicationCommon::ActivityParty --party--> applicationCommon::Account: ; applicationCommon::SocialActivity --AccountOrContact_postAuthor--> applicationCommon::Account: "
+      ],
+      "expected_acceptable": false,
+      "kind": "citation_or_scope_failure",
+      "note": "Actual unmodified API answer with complete cited entity excerpts; manually reviewed after the live paired run.",
+      "verdict": "unacceptable",
+      "model_verdict": "unacceptable",
+      "coverage": "missing",
+      "claim_checks": [
+        {
+          "claim": "Dynamics does not automatically notify a customer when an account is opened.",
+          "assessment": "unsupported"
+        }
+      ],
+      "cited_labels_in_answer": [
+        "applicationCommon::Account"
+      ],
+      "cited_labels_available_to_judge": [
+        "applicationCommon::Account"
+      ],
+      "unknown_citation_labels": [],
+      "rationale": "The answer asserts a specific runtime behavior (automatic notification upon account opening). The provided excerpt for 'applicationCommon::Account' lists schema attributes and relationship definitions but contains no information regarding system workflows, automated notifications, or application logic triggered by record creation. The collection scope explicitly states the data is a schema snapshot without actual records or deployed application state. Therefore, the cited excerpt cannot support the claim about notification behavior, and the answer fails to acknowledge that the provided evidence is insufficient to determine this runtime behavior.",
+      "inconsistent": false,
+      "judge_retries": 0,
+      "error": null,
+      "latency_ms": 11716.0
+    },
+    {
+      "id": "api-baseline-t26",
+      "split": "regression",
+      "question": "Explain the Account schema and list the accounts that are overdrawn.",
+      "answer": "The Account schema in the applicationCommon model represents a business entity that tracks customer or potential customer information, including financial metrics like revenue and credit limits. [applicationCommon::Account] The Account schema in the RetailBankingCoreDataModel includes a unique identifier and is linked to financial holdings such as credit lines. [RetailBankingCoreDataModel::Account] Overdrawn accounts are identified by the balanceDisplayValue attribute in the FHLineOfCredit entity, which shows negative balances indicating overdrawn status. [RetailBankingCoreDataModel::FHLineOfCredit] The specific accounts that are overdrawn cannot be determined from the provided schema definitions, as the schema does not include actual account data or overdrawn status indicators beyond the FHLineOfCredit entity's balanceDisplayValue. [RetailBankingCoreDataModel::FHLineOfCredit]",
+      "evidence": [
+        "[applicationCommon::Account] applicationCommon::Account (applicationCommon): Business that represents a customer or potential customer. The company that is billed in business transactions.\nAttributes: accountId: Unique identifier of the account.; accountCategoryCode: Select a category to indicate whether the customer account is standard or preferred.; customerSizeCode: Select the size category or range of the account for segmentation and reporting purposes.; preferredContactMethodCode: Select the preferred method of contact.; customerTypeCode: Select the category that best describes the relationship between the account and your organization.; accountRatingCode: Select a rating to indicate the value of the customer account.; industryCode: Select the account's primary industry for use in marketing segmentation and demographic analysis.; territoryCode: Select a region or territory for the account for use in segmentation and analysis.; accountClassificationCode: Select a classification code to indicate the potential value of the customer account based on the projected return on investment, cooperation level, sales cycle length or other criteria.; businessTypeCode: Select the legal designation or other business type of the account for contracts or reporting purposes.; traversedPath: For internal use only.; paymentTermsCode: Select the payment terms to indicate when the customer needs to pay the total amount.; shippingMethodCode: Select a shipping method for deliveries sent to the account's address to designate the preferred carrier or other delivery option.; primaryContact: ; participatesInWorkflow: For system use only. Legacy Microsoft Dynamics CRM 3.0 workflow data.; name: Type the company or business name.; accountNumber: Type an ID number or code for the account to quickly search and identify the account in system views.; revenue: Type the annual revenue for the account, used as an indicator in financial performance analysis.; numberOfEmployees: Type the number of employees that work at the account for use in marketing segmentation and demographic analysis.; description: Type additional information to describe the account, such as an excerpt from the company's website.; SIC: Type the Standard Industrial Classification (SIC) code that indicates the account's primary industry of business, for use in marketing segmentation and demographic analysis.; ownershipCode: Select the account's ownership structure, such as public or private.; marketCap: Type the market capitalization of the account to identify the company's equity, used as an indicator in financial performance analysis.; sharesOutstanding: Type the number of shares available to the public for the account. This number is used as an indicator in financial performance analysis.; tickerSymbol: Type the stock exchange symbol for the account to track financial performance of the company. You can click the code entered in this field to access the latest trading information from MSN Money.; stockExchange: Type the stock exchange at which the account is listed to track their stock and financial performance of the company.; webSiteUrl: Type the account's website URL to get quick details about the company profile.; ftpSiteUrl: Type the URL for the account's FTP site to enable users to access data and share documents.; EMailAddress1: Type the primary email address for the account.; EMailAddress2: Type the secondary email address for the account.; EMailAddress3: Type an alternate email address for the account.; doNotPhone: Select whether the account allows phone calls. If Do Not Allow is selected, the account will be excluded from phone call activities distributed in marketing campaigns.; doNotFax: Select whether the account allows faxes. If Do Not Allow is selected, the account will be excluded from fax activities distributed in marketing campaigns.; telephone1: Type the main phone number for this account.; doNotEMail: Select whether the account allows direct email sent from Microsoft Dynamics 365.; telephone2: Type a second phone number for this account.; fax: Type the fax number for the account.; telephone3: Type a third phone number for this account.; doNotPostalMail: Select whether the account allows direct mail. If Do Not Allow is selected, the account will be excluded from letter activities distributed in marketing campaigns.; doNotBulkEMail: Select whether the account allows bulk email sent through campaigns. If Do Not Allow is selected, the account can be added to marketing lists, but is excluded from email.; doNotBulkPostalMail: Select whether the account allows bulk postal mail sent through marketing campaigns or quick campaigns. If Do Not Allow is selected, the account can be added to marketing lists, but will be excluded from the postal mail.; creditLimit: Type the credit limit of the account. This is a useful reference when you address invoice and accounting issues with the customer.; creditOnHold: Select whether the credit for the account is on hold. This is a useful reference while addressing the invoice and accounting issues with the customer.; parentAccount: ; aging30: For system use only.; stateCode: Shows whether the account is active or inactive. Inactive accounts are read-only and can't be edited unless they are reactivated.; aging60: For system use only.; statusCode: Select the account's status.; aging90: For system use only.; address: ; preferredAppointmentDayCode: Select the preferred day of the week for service appointments.; preferredSystemUser: ; preferredAppointmentTimeCode: Select the preferred time of day for service appointments.; merged: Shows whether the account has been merged with another account.; doNotSendMM: Select whether the account accepts marketing materials, such as brochures or catalogs.; master: ; lastUsedInCampaign: Shows the date when the account was last included in a marketing campaign or quick campaign.; exchangeRate: Shows the conversion rate of the record's currency. The exchange rate is used to convert all money fields in the record from the local currency to the system's default currency.; transactionCurrency: ; creditLimitBase: Shows the credit limit converted to the system's default base currency for reporting purposes.; aging30Base: The base currency equivalent of the aging 30 field.; revenueBase: Shows the annual revenue converted to the system's default base currency. The calculations use the exchange rate specified in the Currencies area.; aging90Base: The base currency equivalent of the aging 90 field.; marketCapBase: Shows the market capitalization converted to the system's default base currency.; aging60Base: The base currency equivalent of the aging 60 field.; yomiName: Type the phonetic spelling of the company name, if specified in Japanese, to make sure the name is pronounced correctly in phone calls and other communications.; stageId: Shows the ID of the stage.; processId: Shows the ID of the process.; entityImageId: For internal use only.; timeSpentByMeOnEmailAndMeetings: Total time spent for emails (read and write) and meetings by me in relation to account record.; createdByExternalParty: Shows the external party who created the record.; modifiedByExternalParty: Shows the external party who modified the record.; primarySatoriId: Primary Satori ID for Account; primaryTwitterId: Primary Twitter ID for Account; SLA: ; SLAInvoked: ; onHoldTime: Shows how long, in minutes, that the record was on hold.; lastOnHoldTime: Contains the date and time stamp of the last on hold time.; followEmail: Information about whether to allow following email activity like opens, attachment views and link clicks for emails sent to the account.; marketingOnly: Whether is only for marketing\nExtracted relationships: applicationCommon::Email --Sender_emailSender--> applicationCommon::Account: ; applicationCommon::Address --parent--> applicationCommon::Account: ; applicationCommon::SocialActivity --regardingObject--> applicationCommon::Account: ; applicationCommon::Task --regardingObject--> applicationCommon::Account: ; applicationCommon::Connection --record1--> applicationCommon::Account: ; applicationCommon::Account --master--> applicationCommon::Account: ; applicationCommon::Letter --regardingObject--> applicationCommon::Account: ; applicationCommon::Connection --record2--> applicationCommon::Account: ; applicationCommon::PhoneCall --regardingObject--> applicationCommon::Account: ; applicationCommon::Email --regardingObject--> applicationCommon::Account: ; applicationCommon::Contact --parentCustomer--> applicationCommon::Account: ; applicationCommon::Account --transactionCurrency--> applicationCommon::Currency: ; applicationCommon::Account --SLAInvoked--> applicationCommon::SLA: ; applicationCommon::Activity --regardingObject--> applicationCommon::Account: ; applicationCommon::Account --SLA--> applicationCommon::SLA: ; applicationCommon::CustomerRelationship --partner--> applicationCommon::Account: ; applicationCommon::Appointment --regardingObject--> applicationCommon::Account: ; applicationCommon::Account --parentAccount--> applicationCommon::Account: ; applicationCommon::Note --object--> applicationCommon::Account: ; applicationCommon::Email --Account_sendersAccount--> applicationCommon::Account: ; applicationCommon::Fax --regardingObject--> applicationCommon::Account: ; applicationCommon::RecurringAppointment --regardingObject--> applicationCommon::Account: ; applicationCommon::Account --preferredSystemUser--> applicationCommon::User: ; applicationCommon::Account --primaryContact--> applicationCommon::Contact: ; applicationCommon::SLAKPIInstance --Activity_regarding--> applicationCommon::Account: ; applicationCommon::SocialActivity --Author_postAuthorAccount--> applicationCommon::Account: ; applicationCommon::ActivityParty --party--> applicationCommon::Account: ; applicationCommon::SocialActivity --AccountOrContact_postAuthor--> applicationCommon::Account: ",
+        "[RetailBankingCoreDataModel::Account] RetailBankingCoreDataModel::Account (RetailBankingCoreDataModel): Business that represents a customer or potential customer. The company that is billed in business transactions.\nAttributes: accountId: Unique identifier of the account.\nExtracted relationships: RetailBankingCoreDataModel::FICard --Cardholder--> RetailBankingCoreDataModel::Account: The customer associated with the card.; RetailBankingCoreDataModel::CustomerFinancialHolding --Customer--> RetailBankingCoreDataModel::Account: The unique identifier of the customer connected to this holding.",
+        "[RetailBankingCoreDataModel::FHLineOfCredit] RetailBankingCoreDataModel::FHLineOfCredit (RetailBankingCoreDataModel): A preset borrowing limit associated with a credit or charge card.\nAttributes: FH_CreditlineId: Unique identifier for entity instances.; createdOn: Date and time when the record was created.; modifiedOn: Date and time when the record was modified.; statecode: Status of the FH Creditline.; statuscode: Reason for the status of the FH Creditline.; importSequenceNumber: Sequence number of the import that created this record.; overriddenCreatedOn: Date and time that the record was migrated.; timeZoneRuleVersionNumber: For internal use only.; UTCConversionTimeZoneCode: Time zone code that was in use when the record was created.; name: Required name field.; accountingClassification: Indicates whether the financial holding is an asset or a liability.; balance: The balance or value of the financial holding in the original currency of the financial holding.; balance_Base: Value of the balance in base currency.; balanceDefault: Balance converted to default currency of the system.; balanceExchangerate: Exchange rate between the transaction currency of the financial holding and the default currency (1 unit of transaction currency = X units of default currency).; creditLimit: The total credit limit available to the customer on the credit card.; creditlimit_Base: Value of the credit limit in base currency.; creditLimit_default: Credit limit converted to default currency of the system.; delinquencyStatus: Indication of whether the customer's loan is delinquent or not (i.e. whether any payments are overdue or not).; financialHoldingCategory: The category of the financial holding (Accounts, Long-term savings, Investments, Loans and Lines or credit).; financialHoldingType: Subtypes under Financial Category.; integrationKey: Used by the system integrator to uniquely define the data record .; interestrate: The rate of interest associated with the line of credit, to be charged to the customer during a defined period/term. ; lastPaymentDueDate: The date on which the last payment was due on the credit balance.; lastStatementBalance: The total amount due on the card per the last statement.; laststatementbalance_Base: Value of the last statement balance in base currency.; lastStatementBalance_default: Last statement balance converted to default currency of the system.; lastStatementDate: The date on which the last statement was issued on the card.; minimumPaymentDue: The minimum amount that is required for payment towards the card based on the monthly payment percentage of the outstanding balance.; minimumpaymentdue_Base: Value of the minimum payment due in base currency.; minimumPaymentDue_default: Minimum payment due converted to default currency of the system.; monthlyPaymentPercentage: The percentage of the outstanding balance that must be paid by the customer as the 'minimum payment' by the next payment date.; nextPaymentDate: The date on which the next payment towards the financial holding is due. This can be applied to lines of credit and loans.; nextStatementDate: The date on which the next statement is expected to issue on the card.; balanceDefaultDisplayValue: ; balanceDisplayValue: Display value shows the balance of a financial holding in accordance with the type of the financial holding. Financial holdings that are typically defined as a customer's liabilities (such as lines of credit and loans) are presented as positive when the customer owes money to the financial institution (that is, a loan with an accounting value of -500 will appear as 500). In the inverse case: the display value will be negative for debit balances on a credit financial holding (such as overpayment of a credit card), or overdrawn account.; balancedisplayvalue_Base: Value of the balance display value in base currency.\nExtracted relationships: RetailBankingCoreDataModel::FinancialHolding --Details--> RetailBankingCoreDataModel::FHLineOfCredit: Details."
+      ],
+      "expected_acceptable": true,
+      "kind": "citation_or_scope_failure",
+      "note": "Actual unmodified API answer with complete cited entity excerpts. Manually reviewed after the live paired run; the mixed-scope answer accurately describes the schema and states that specific records cannot be determined.",
+      "verdict": "acceptable",
+      "model_verdict": "acceptable",
+      "coverage": "answered",
+      "claim_checks": [
+        {
+          "claim": "The Account schema in the applicationCommon model represents a business entity that tracks customer or potential customer information, including financial metrics like revenue and credit limits.",
+          "assessment": "supported"
+        },
+        {
+          "claim": "The Account schema in the RetailBankingCoreDataModel includes a unique identifier and is linked to financial holdings such as credit lines.",
+          "assessment": "supported"
+        },
+        {
+          "claim": "Overdrawn accounts are identified by the balanceDisplayValue attribute in the FHLineOfCredit entity, which shows negative balances indicating overdrawn status.",
+          "assessment": "supported"
+        },
+        {
+          "claim": "The specific accounts that are overdrawn cannot be determined from the provided schema definitions, as the schema does not include actual account data or overdrawn status indicators beyond the FHLineOfCredit entity's balanceDisplayValue.",
+          "assessment": "supported"
+        }
+      ],
+      "cited_labels_in_answer": [
+        "RetailBankingCoreDataModel::Account",
+        "RetailBankingCoreDataModel::FHLineOfCredit",
+        "applicationCommon::Account"
+      ],
+      "cited_labels_available_to_judge": [
+        "RetailBankingCoreDataModel::Account",
+        "RetailBankingCoreDataModel::FHLineOfCredit",
+        "applicationCommon::Account"
+      ],
+      "unknown_citation_labels": [],
+      "rationale": "All factual claims in the answer are directly supported by the supplied excerpts. The first two claims regarding the Account schema definitions and attributes (revenue, credit limits, unique identifier) match the text in 'applicationCommon::Account' and 'RetailBankingCoreDataModel::Account'. The third claim regarding overdrawn status matching the 'balanceDisplayValue' attribute in 'FHLineOfCredit' is explicitly supported by the definition of that attribute in the 'RetailBankingCoreDataModel::FHLineOfCredit' excerpt. The final claim correctly identifies that specific overdrawn accounts cannot be listed because the collection contains only schema definitions, not actual records, which aligns with the provided collection scope metadata.",
+      "inconsistent": false,
+      "judge_retries": 0,
+      "error": null,
+      "latency_ms": 24968.2
+    },
+    {
+      "id": "api-guard-t07",
+      "split": "regression",
+      "question": "Does the Contact definition refer to an Account?",
+      "answer": "The Contact entity has an attribute named 'accountId' that references an Account entity. [applicationCommon::Contact]",
+      "evidence": [
+        "[applicationCommon::Contact] applicationCommon::Contact (applicationCommon): Person with whom a business unit has a relationship, such as customer, supplier, and colleague.\nAttributes: contactId: Unique identifier of the contact.; customerSizeCode: Select the size of the contact's company for segmentation and reporting purposes.; customerTypeCode: Select the category that best describes the relationship between the contact and your organization.; preferredContactMethodCode: Select the preferred method of contact.; leadSourceCode: Select the primary marketing source that directed the contact to your organization.; paymentTermsCode: Select the payment terms to indicate when the customer needs to pay the total amount.; shippingMethodCode: Select a shipping method for deliveries sent to this address.; accountId: Unique identifier of the account with which the contact is associated.; participatesInWorkflow: Shows whether the contact participates in workflow rules.; isBackofficeCustomer: Select whether the contact exists in a separate accounting or other system, such as Microsoft Dynamics GP or another ERP database, for use in integration processes.; salutation: Type the salutation of the contact to make sure the contact is addressed correctly in sales calls, email messages, and marketing campaigns.; jobTitle: Type the job title of the contact to make sure the contact is addressed correctly in sales calls, email, and marketing campaigns.; firstName: Type the contact's first name to make sure the contact is addressed correctly in sales calls, email, and marketing campaigns.; department: Type the department or business unit where the contact works in the parent company or business.; nickName: Type the contact's nickname.; middleName: Type the contact's middle name or initial to make sure the contact is addressed correctly.; lastName: Type the contact's last name to make sure the contact is addressed correctly in sales calls, email, and marketing campaigns.; suffix: Type the suffix used in the contact's name, such as Jr. or Sr. to make sure the contact is addressed correctly in sales calls, email, and marketing campaigns.; yomiFirstName: Type the phonetic spelling of the contact's first name, if the name is specified in Japanese, to make sure the name is pronounced correctly in phone calls with the contact.; fullName: Combines and shows the contact's first and last names so that the full name can be displayed in views and reports.; yomiMiddleName: Type the phonetic spelling of the contact's middle name, if the name is specified in Japanese, to make sure the name is pronounced correctly in phone calls with the contact.; yomiLastName: Type the phonetic spelling of the contact's last name, if the name is specified in Japanese, to make sure the name is pronounced correctly in phone calls with the contact.; anniversary: Enter the date of the contact's wedding or service anniversary for use in customer gift programs or other communications.; birthDate: Enter the contact's birthday for use in customer gift programs or other communications.; governmentId: Type the passport number or other government ID for the contact for use in documents or reports.; yomiFullName: Shows the combined Yomi first and last names of the contact so that the full phonetic name can be displayed in views and reports.; description: Type additional information to describe the contact, such as an excerpt from the company's website.; employeeId: Type the employee ID or number for the contact for reference in orders, service cases, or other communications with the contact's organization.; genderCode: Select the contact's gender to make sure the contact is addressed correctly in sales calls, email, and marketing campaigns.; annualIncome: Type the contact's annual income for use in profiling and financial analysis.; hasChildrenCode: Select whether the contact has any children for reference in follow-up phone calls and other communications.; educationCode: Select the contact's highest level of education for use in segmentation and analysis.; webSiteUrl: Type the contact's professional or personal website or blog URL.; familyStatusCode: Select the marital status of the contact for reference in follow-up phone calls and other communications.; ftpSiteUrl: Type the URL for the contact's FTP site to enable users to access data and share documents.; EMailAddress1: Type the primary email address for the contact.; spousesName: Type the name of the contact's spouse or partner for reference during calls, events, or other communications with the contact.; assistantName: Type the name of the contact's assistant.; EMailAddress2: Type the secondary email address for the contact.; assistantPhone: Type the phone number for the contact's assistant.; EMailAddress3: Type an alternate email address for the contact.; doNotPhone: Select whether the contact accepts phone calls. If Do Not Allow is selected, the contact will be excluded from any phone call activities distributed in marketing campaigns.; managerName: Type the name of the contact's manager for use in escalating issues or other follow-up communications with the contact.; managerPhone: Type the phone number for the contact's manager.; doNotFax: Select whether the contact allows faxes. If Do Not Allow is selected, the contact will be excluded from any fax activities distributed in marketing campaigns.; doNotEMail: Select whether the contact allows direct email sent from Microsoft Dynamics 365. If Do Not Allow is selected, Microsoft Dynamics 365 will not send the email.; doNotPostalMail: Select whether the contact allows direct mail. If Do Not Allow is selected, the contact will be excluded from letter activities distributed in marketing campaigns.; doNotBulkEMail: Select whether the contact accepts bulk email sent through marketing campaigns or quick campaigns. If Do Not Allow is selected, the contact can be added to marketing lists, but will be excluded from the email.; doNotBulkPostalMail: Select whether the contact accepts bulk postal mail sent through marketing campaigns or quick campaigns. If Do Not Allow is selected, the contact can be added to marketing lists, but will be excluded from the letters.; accountRoleCode: Select the contact's role within the company or sales process, such as decision maker, employee, or influencer.; territoryCode: Select a region or territory for the contact for use in segmentation and analysis.; creditLimit: Type the credit limit of the contact for reference when you address invoice and accounting issues with the customer.; creditOnHold: Select whether the contact is on a credit hold, for reference when addressing invoice and accounting issues.; numberOfChildren: Type the number of children the contact has for reference in follow-up phone calls and other communications.; childrensNames: Type the names of the contact's children for reference in communications and client programs.; mobilePhone: Type the mobile phone number for the contact.; pager: Type the pager number for the contact.; telephone1: Type the main phone number for this contact.; telephone2: Type a second phone number for this contact.; telephone3: Type a third phone number for this contact.; fax: Type the fax number for the contact.; aging30: For system use only.; stateCode: Shows whether the contact is active or inactive. Inactive contacts are read-only and can't be edited unless they are reactivated.; aging60: For system use only.; statusCode: Select the contact's status.; aging90: For system use only.; parentContactId: Unique identifier of the parent contact.; address: ; preferredSystemUser: ; master: ; preferredAppointmentDayCode: Select the preferred day of the week for service appointments.; preferredAppointmentTimeCode: Select the preferred time of day for service appointments.; doNotSendMM: Select whether the contact accepts marketing materials, such as brochures or catalogs. Contacts that opt out can be excluded from marketing initiatives.; parentCustomer: ; merged: Shows whether the account has been merged with a master contact.; externalUserIdentifier: Identifier for an external user.; lastUsedInCampaign: Shows the date when the contact was last included in a marketing campaign or quick campaign.; transactionCurrency: ; exchangeRate: Shows the conversion rate of the record's currency. The exchange rate is used to convert all money fields in the record from the local currency to the system's default currency.; annualIncomeBase: Shows the Annual Income field converted to the system's default base currency. The calculations use the exchange rate specified in the Currencies area.; creditLimitBase: Shows the Credit Limit field converted to the system's default base currency for reporting purposes. The calculations use the exchange rate specified in the Currencies area.; aging60Base: Shows the Aging 60 field converted to the system's default base currency. The calculations use the exchange rate specified in the Currencies area.; aging90Base: Shows the Aging 90 field converted to the system's default base currency. The calculations use the exchange rate specified in the Currencies area.; aging30Base: Shows the Aging 30 field converted to the system's default base currency. The calculations use the exchange rate specified in the Currencies area.; stageId: Shows the ID of the stage.; processId: Shows the ID of the process.; entityImageId: For internal use only.; traversedPath: For internal use only.; SLA: ; SLAInvoked: ; onHoldTime: Shows how long, in minutes, that the record was on hold.; lastOnHoldTime: Contains the date and time stamp of the last on hold time.; followEmail: Information about whether to allow following email activity like opens, attachment views and link clicks for emails sent to the contact.; timeSpentByMeOnEmailAndMeetings: Total time spent for emails (read and write) and meetings by me in relation to the contact record.; business2: Type a second business phone number for this contact.; callback: Type a callback phone number for this contact.; company: Type the company phone of the contact.; home2: Type a second home phone number for this contact.; createdByExternalParty: Shows the external party who created the record.; modifiedByExternalParty: Shows the external party who modified the record.; marketingOnly: Whether is only for marketing\nExtracted relationships: applicationCommon::Contact --parentCustomer--> applicationCommon::Contact: ; applicationCommon::Letter --regardingObject--> applicationCommon::Contact: ; applicationCommon::Feedback --Contact_createdOnBehalfByContact--> applicationCommon::Contact: ; applicationCommon::Contact --master--> applicationCommon::Contact: ; applicationCommon::PhoneCall --regardingObject--> applicationCommon::Contact: ; applicationCommon::SLAKPIInstance --Activity_regarding--> applicationCommon::Contact: ; applicationCommon::Appointment --regardingObject--> applicationCommon::Contact: ; applicationCommon::ActivityParty --party--> applicationCommon::Contact: ; applicationCommon::Feedback --Contact_createdByContact--> applicationCommon::Contact: ; applicationCommon::Activity --regardingObject--> applicationCommon::Contact: ; applicationCommon::Email --regardingObject--> applicationCommon::Contact: ; applicationCommon::SocialActivity --regardingObject--> applicationCommon::Contact: ; applicationCommon::Contact --parentCustomer--> applicationCommon::Account: ; applicationCommon::Contact --SLAInvoked--> applicationCommon::SLA: ; applicationCommon::SocialActivity --Author_postAuthorAccount--> applicationCommon::Contact: ; applicationCommon::RecurringAppointment --regardingObject--> applicationCommon::Contact: ; applicationCommon::Task --regardingObject--> applicationCommon::Contact: ; applicationCommon::Feedback --regardingObject--> applicationCommon::Contact: ; applicationCommon::Address --parent--> applicationCommon::Contact: ; applicationCommon::Note --object--> applicationCommon::Contact: ; applicationCommon::SocialActivity --AccountOrContact_postAuthor--> applicationCommon::Contact: ; applicationCommon::Connection --record1--> applicationCommon::Contact: ; applicationCommon::Contact --preferredSystemUser--> applicationCommon::User: ; applicationCommon::Email --Sender_emailSender--> applicationCommon::Contact: ; applicationCommon::CustomerRelationship --partner--> applicationCommon::Contact: ; applicationCommon::Contact --transactionCurrency--> applicationCommon::Currency: ; applicationCommon::Account --primaryContact--> applicationCommon::Contact: ; applicationCommon::Contact --SLA--> applicationCommon::SLA: ; applicationCommon::Connection --record2--> applicationCommon::Contact: ; applicationCommon::Fax --regardingObject--> applicationCommon::Contact: "
+      ],
+      "expected_acceptable": true,
+      "kind": "current_api_answer",
+      "note": "Actual final guarded API answer; checked against its full cited entity definition and relationship direction.",
+      "verdict": "acceptable",
+      "model_verdict": "acceptable",
+      "coverage": "answered",
+      "claim_checks": [
+        {
+          "claim": "The Contact entity has an attribute named 'accountId'.",
+          "assessment": "supported"
+        },
+        {
+          "claim": "The 'accountId' attribute references an Account entity.",
+          "assessment": "supported"
+        }
+      ],
+      "cited_labels_in_answer": [
+        "applicationCommon::Contact"
+      ],
+      "cited_labels_available_to_judge": [
+        "applicationCommon::Contact"
+      ],
+      "unknown_citation_labels": [],
+      "rationale": "The excerpt for 'applicationCommon::Contact' explicitly lists 'accountId: Unique identifier of the account with which the contact is associated.' This substantiates both the existence of the attribute and its reference to an Account entity. The answer cites '[applicationCommon::Contact]', which matches the provided excerpt label.",
+      "inconsistent": false,
+      "judge_retries": 0,
+      "error": null,
+      "latency_ms": 13300.9
+    }
+  ]
+}

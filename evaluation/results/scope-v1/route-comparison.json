@@ -1,0 +1,452 @@
+{
+  "comparison_id": "scope-routing-comparison-v1",
+  "label_status": "Assistant-authored and unreviewed; web labels are policy interpretations of public examples.",
+  "metrics": {
+    "synthetic_baseline_accuracy": 0.625,
+    "synthetic_guard_accuracy": 1.0,
+    "synthetic_baseline_non_schema_false_search_rate": 0.6,
+    "synthetic_guard_non_schema_false_search_rate": 0.0,
+    "web_baseline_accuracy": 0.6,
+    "web_guard_accuracy": 1.0,
+    "web_baseline_non_schema_false_search_rate": 1.0,
+    "web_guard_non_schema_false_search_rate": 0.0
+  },
+  "datasets": {
+    "synthetic_dataset_sha256": "cba4dc2a3d23b0c1489c043cd81733f8144e358a1df8960a6763ac5ac0be09eb",
+    "web_dataset_sha256": "46955e2358b1ca7e56241bc376d91c50f98f4cdcf9366519a50a66710e60241b"
+  },
+  "comparisons": {
+    "held_out_synthetic_test": {
+      "baseline": {
+        "cases": 32,
+        "correct_routes": 20,
+        "accuracy": 0.625,
+        "schema_cases": 12,
+        "schema_searches": 12,
+        "schema_recall": 1.0,
+        "non_schema_cases": 20,
+        "non_schema_searches": 12,
+        "non_schema_false_search_rate": 0.6,
+        "errors": 0
+      },
+      "guarded": {
+        "cases": 32,
+        "correct_routes": 32,
+        "accuracy": 1.0,
+        "schema_cases": 12,
+        "schema_searches": 12,
+        "schema_recall": 1.0,
+        "non_schema_cases": 20,
+        "non_schema_searches": 0,
+        "non_schema_false_search_rate": 0.0,
+        "errors": 0
+      },
+      "cases": [
+        {
+          "id": "t01",
+          "question": "Which entity has a field for an available account balance?",
+          "expected": "schema",
+          "baseline_search": true,
+          "guard_search": true,
+          "scope": "schema"
+        },
+        {
+          "id": "t02",
+          "question": "Which definitions link people to their financial holdings?",
+          "expected": "schema",
+          "baseline_search": true,
+          "guard_search": true,
+          "scope": "schema"
+        },
+        {
+          "id": "t03",
+          "question": "What attributes can describe a business account?",
+          "expected": "schema",
+          "baseline_search": true,
+          "guard_search": true,
+          "scope": "schema"
+        },
+        {
+          "id": "t04",
+          "question": "How are group memberships represented in Microsoft CDM?",
+          "expected": "schema",
+          "baseline_search": true,
+          "guard_search": true,
+          "scope": "schema"
+        },
+        {
+          "id": "t05",
+          "question": "Can you explain the relationship between a loan and a financial holding?",
+          "expected": "schema",
+          "baseline_search": true,
+          "guard_search": true,
+          "scope": "schema"
+        },
+        {
+          "id": "t06",
+          "question": "Which schema type represents a scheduled payment instruction?",
+          "expected": "schema",
+          "baseline_search": true,
+          "guard_search": true,
+          "scope": "schema"
+        },
+        {
+          "id": "t07",
+          "question": "Does the Contact definition refer to an Account?",
+          "expected": "schema",
+          "baseline_search": true,
+          "guard_search": true,
+          "scope": "schema"
+        },
+        {
+          "id": "t08",
+          "question": "Where in the model can I find a link between a user and a team?",
+          "expected": "schema",
+          "baseline_search": true,
+          "guard_search": true,
+          "scope": "schema"
+        },
+        {
+          "id": "t09",
+          "question": "Is there a CDM entity for a credit line?",
+          "expected": "schema",
+          "baseline_search": true,
+          "guard_search": true,
+          "scope": "schema"
+        },
+        {
+          "id": "t10",
+          "question": "In the banking model, what is the purpose of CustomerFinancialHolding?",
+          "expected": "schema",
+          "baseline_search": true,
+          "guard_search": true,
+          "scope": "schema"
+        },
+        {
+          "id": "t11",
+          "question": "What is the distinction between the availableBalance and balance attributes?",
+          "expected": "schema",
+          "baseline_search": true,
+          "guard_search": true,
+          "scope": "schema"
+        },
+        {
+          "id": "t12",
+          "question": "Which entities and references could represent an account with two owners?",
+          "expected": "schema",
+          "baseline_search": true,
+          "guard_search": true,
+          "scope": "schema"
+        },
+        {
+          "id": "t13",
+          "question": "Which customers share a bank account?",
+          "expected": "records",
+          "baseline_search": true,
+          "guard_search": false,
+          "scope": "records"
+        },
+        {
+          "id": "t14",
+          "question": "Find the account numbers for the Smith household.",
+          "expected": "records",
+          "baseline_search": true,
+          "guard_search": false,
+          "scope": "records"
+        },
+        {
+          "id": "t15",
+          "question": "What was our total deposit amount in March?",
+          "expected": "records",
+          "baseline_search": false,
+          "guard_search": false,
+          "scope": null
+        },
+        {
+          "id": "t16",
+          "question": "Has loan 843 already been paid off?",
+          "expected": "records",
+          "baseline_search": true,
+          "guard_search": false,
+          "scope": "records"
+        },
+        {
+          "id": "t17",
+          "question": "Give me the names of all customers with a mortgage.",
+          "expected": "records",
+          "baseline_search": false,
+          "guard_search": false,
+          "scope": null
+        },
+        {
+          "id": "t18",
+          "question": "Which branches currently offer free overdrafts?",
+          "expected": "records",
+          "baseline_search": true,
+          "guard_search": false,
+          "scope": "records"
+        },
+        {
+          "id": "t19",
+          "question": "Is account 172 owned by two people?",
+          "expected": "records",
+          "baseline_search": true,
+          "guard_search": false,
+          "scope": "records"
+        },
+        {
+          "id": "t20",
+          "question": "What is the balance on John Smith’s checking account?",
+          "expected": "records",
+          "baseline_search": false,
+          "guard_search": false,
+          "scope": "records"
+        },
+        {
+          "id": "t21",
+          "question": "Does Dynamics automatically notify a customer when an account is opened?",
+          "expected": "runtime",
+          "baseline_search": true,
+          "guard_search": false,
+          "scope": "runtime"
+        },
+        {
+          "id": "t22",
+          "question": "What happens in the app when I delete a customer?",
+          "expected": "runtime",
+          "baseline_search": false,
+          "guard_search": false,
+          "scope": null
+        },
+        {
+          "id": "t23",
+          "question": "How can I configure Dynamics to display subaccounts?",
+          "expected": "runtime",
+          "baseline_search": true,
+          "guard_search": false,
+          "scope": "runtime"
+        },
+        {
+          "id": "t24",
+          "question": "Will an account be created when a contact is saved in CRM?",
+          "expected": "runtime",
+          "baseline_search": true,
+          "guard_search": false,
+          "scope": "runtime"
+        },
+        {
+          "id": "t25",
+          "question": "Does the system validate account numbers before saving?",
+          "expected": "runtime",
+          "baseline_search": true,
+          "guard_search": false,
+          "scope": "runtime"
+        },
+        {
+          "id": "t26",
+          "question": "Explain the Account schema and list the accounts that are overdrawn.",
+          "expected": "mixed",
+          "baseline_search": true,
+          "guard_search": false,
+          "scope": "mixed"
+        },
+        {
+          "id": "t27",
+          "question": "How are users modeled, and will deleting one remove their team?",
+          "expected": "mixed",
+          "baseline_search": true,
+          "guard_search": false,
+          "scope": "mixed"
+        },
+        {
+          "id": "t28",
+          "question": "Show our joint accounts and explain their CDM relationship.",
+          "expected": "mixed",
+          "baseline_search": true,
+          "guard_search": false,
+          "scope": "mixed"
+        },
+        {
+          "id": "t29",
+          "question": "My dog Luna learned to swim yesterday.",
+          "expected": "unrelated",
+          "baseline_search": false,
+          "guard_search": false,
+          "scope": null
+        },
+        {
+          "id": "t30",
+          "question": "Good morning!",
+          "expected": "unrelated",
+          "baseline_search": false,
+          "guard_search": false,
+          "scope": "unrelated"
+        },
+        {
+          "id": "t31",
+          "question": "What is the weather in Berlin?",
+          "expected": "unrelated",
+          "baseline_search": false,
+          "guard_search": false,
+          "scope": null
+        },
+        {
+          "id": "t32",
+          "question": "Tell me a joke about astronomy.",
+          "expected": "unrelated",
+          "baseline_search": false,
+          "guard_search": false,
+          "scope": null
+        }
+      ]
+    },
+    "web_question_pilot": {
+      "baseline": {
+        "cases": 15,
+        "correct_routes": 9,
+        "accuracy": 0.6,
+        "schema_cases": 9,
+        "schema_searches": 9,
+        "schema_recall": 1.0,
+        "non_schema_cases": 6,
+        "non_schema_searches": 6,
+        "non_schema_false_search_rate": 1.0,
+        "errors": 0
+      },
+      "guarded": {
+        "cases": 15,
+        "correct_routes": 15,
+        "accuracy": 1.0,
+        "schema_cases": 9,
+        "schema_searches": 9,
+        "schema_recall": 1.0,
+        "non_schema_cases": 6,
+        "non_schema_searches": 0,
+        "non_schema_false_search_rate": 0.0,
+        "errors": 0
+      },
+      "cases": [
+        {
+          "id": "web-01-source",
+          "question": "What is the difference between a standing order and a direct debit?",
+          "expected": "schema",
+          "baseline_search": true,
+          "guard_search": true,
+          "scope": "schema"
+        },
+        {
+          "id": "web-02-source",
+          "question": "What is the difference between Available and Current balance?",
+          "expected": "schema",
+          "baseline_search": true,
+          "guard_search": true,
+          "scope": "schema"
+        },
+        {
+          "id": "web-03-source",
+          "question": "How do I apply a contact to an account?",
+          "expected": "runtime",
+          "baseline_search": true,
+          "guard_search": false,
+          "scope": "runtime"
+        },
+        {
+          "id": "web-03-adapted",
+          "question": "Which CDM reference connects a contact to an account?",
+          "expected": "schema",
+          "baseline_search": true,
+          "guard_search": true,
+          "scope": "schema"
+        },
+        {
+          "id": "web-04-source",
+          "question": "How should a bank database represent customers with multiple accounts and accounts shared by multiple people?",
+          "expected": "schema",
+          "baseline_search": true,
+          "guard_search": true,
+          "scope": "schema"
+        },
+        {
+          "id": "web-04-adapted",
+          "question": "Which CDM definitions connect a bank customer to a financial holding, and do they describe joint ownership?",
+          "expected": "schema",
+          "baseline_search": true,
+          "guard_search": true,
+          "scope": "schema"
+        },
+        {
+          "id": "web-05-source",
+          "question": "How can contacts for an account and its child accounts be displayed?",
+          "expected": "runtime",
+          "baseline_search": true,
+          "guard_search": false,
+          "scope": "runtime"
+        },
+        {
+          "id": "web-05-adapted",
+          "question": "Which CDM references connect accounts to parent accounts and contacts to accounts?",
+          "expected": "schema",
+          "baseline_search": true,
+          "guard_search": true,
+          "scope": "schema"
+        },
+        {
+          "id": "web-06-source",
+          "question": "How can a workflow check the parent team of the current user's team?",
+          "expected": "runtime",
+          "baseline_search": true,
+          "guard_search": false,
+          "scope": "runtime"
+        },
+        {
+          "id": "web-06-adapted",
+          "question": "Which CDM definitions associate users with teams, and does the extracted schema show a parent-team link?",
+          "expected": "schema",
+          "baseline_search": true,
+          "guard_search": true,
+          "scope": "schema"
+        },
+        {
+          "id": "web-07-source",
+          "question": "How can a contact be associated with multiple accounts and used to filter items across those connections?",
+          "expected": "runtime",
+          "baseline_search": true,
+          "guard_search": false,
+          "scope": "runtime"
+        },
+        {
+          "id": "web-07-adapted",
+          "question": "Which CDM definitions can describe connections between a contact and business accounts?",
+          "expected": "schema",
+          "baseline_search": true,
+          "guard_search": true,
+          "scope": "schema"
+        },
+        {
+          "id": "web-08-source",
+          "question": "Which accounts are jointly held?",
+          "expected": "records",
+          "baseline_search": true,
+          "guard_search": false,
+          "scope": "records"
+        },
+        {
+          "id": "web-09-source",
+          "question": "Does creating an account in D365 auto-create a related contact record?",
+          "expected": "runtime",
+          "baseline_search": true,
+          "guard_search": false,
+          "scope": "runtime"
+        },
+        {
+          "id": "web-10-source",
+          "question": "What is the difference between an overdraft loan and a personal loan?",
+          "expected": "schema",
+          "baseline_search": true,
+          "guard_search": true,
+          "scope": "schema"
+        }
+      ]
+    }
+  }
+}

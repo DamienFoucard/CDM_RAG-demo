@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CDM RAG · Routing evaluation</title>
+  <style>
+    :root{color-scheme:light;--ink:#17231e;--muted:#5c6d63;--green:#1d7653;--line:#d9e5dc;--soft:#f0f6f1;--gold:#966b08}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#f4f7f4;color:var(--ink);font:16px/1.55 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}a{color:var(--green);font-weight:650}header{padding:22px clamp(20px,4vw,58px);background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:18px}.brand{font-weight:800;font-size:18px}.brand small{display:block;color:var(--muted);font-size:13px;font-weight:600}.header-links{display:flex;gap:22px;flex-wrap:wrap}.layout{max-width:1600px;margin:auto;display:grid;grid-template-columns:205px minmax(0,1fr);gap:30px;padding:38px clamp(20px,4vw,58px) 80px}.sidebar{position:sticky;top:24px;align-self:start;max-height:calc(100vh - 48px);overflow:auto}.sidebar p{font-size:11px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);font-weight:800;margin:0 0 9px}.sidebar p:not(:first-child){margin-top:24px}.sidebar a{display:block;font-size:14px;text-decoration:none;padding:6px 0;color:#344e40}.sidebar a:hover{text-decoration:underline}.sidebar .sub{padding-left:12px;font-weight:500;color:var(--muted);font-size:13px}.sidebar .side-output{background:none;border:0;border-radius:0;margin:7px 0}.sidebar .side-output summary{padding:3px 0;color:#344e40;font-size:13px}.sidebar .side-output a{font-size:12px;padding:4px 0 4px 12px}
+    h1{font:500 clamp(38px,5vw,62px)/1.08 Georgia,"Times New Roman",serif;letter-spacing:-.035em;margin:0 0 14px}.intro{max-width:980px;color:var(--muted);font-size:19px;margin:0 0 14px}.note,.legend{color:var(--muted);font-size:13px}.note{max-width:1000px}.callout{background:#e9f3ec;border-left:3px solid var(--green);padding:13px 18px;border-radius:0 9px 9px 0;font-size:14px;margin:22px 0 30px}.callout p{margin:0}.callout p+p{margin-top:7px}section{scroll-margin-top:24px}section+section{margin-top:46px}h2{font-size:25px;line-height:1.2;margin:0 0 12px;letter-spacing:-.02em}h3{font-size:19px;margin:25px 0 8px}p{max-width:1050px}.eyebrow{font-weight:800;font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:var(--green);margin:0 0 9px}.recommendation{background:#fff9e9;border-left:3px solid #bf8c12;padding:12px 16px;border-radius:0 8px 8px 0;font-size:14px;margin:18px 0}.overall-star{color:var(--gold);font-size:16px;margin-left:5px}
+    .table-wrap{overflow:auto;border:1px solid var(--line);border-radius:12px;background:white;margin:15px 0 10px}table{border-collapse:collapse;width:100%;min-width:850px}th,td{text-align:left;padding:10px 9px;border-bottom:1px solid var(--line);font-variant-numeric:tabular-nums}thead th{background:var(--soft);font-size:12px;line-height:1.35}tbody th{font-size:13px;min-width:180px}tbody tr:last-child td,tbody tr:last-child th{border-bottom:0}.num{text-align:right;white-space:nowrap}.metric-best{background:#e2f3e8;color:#145a39;font-weight:750}.metric-second{background:#eef4fc;color:#264e80;font-weight:700}.legend{max-width:1100px;margin:10px 0}.scroll-hint{color:var(--muted);font-size:12px;margin:10px 0 0}
+    details{background:white;border:1px solid var(--line);border-radius:12px;margin:12px 0;scroll-margin-top:24px}summary{cursor:pointer;padding:14px 17px;font-weight:700;color:#274a37}.case-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,360px),1fr));gap:12px;padding:0 16px 16px}.case{background:#f8faf8;border:1px solid var(--line);border-radius:10px;padding:14px 16px}.case p{margin:0}.case-id{font-size:11px;color:var(--muted);font-weight:700;overflow-wrap:anywhere}.case .question{font-weight:650;margin:9px 0 12px}.conversation{font-size:13px;margin:10px 0;padding-left:18px;color:#506358}.conversation li+li{margin-top:5px}.target-label{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:800}.target{font-size:14px;margin:5px 0 10px!important}.case-reason{font-size:13px;color:var(--muted);margin-top:10px!important}.output-body{padding:0 16px 16px}.output-case{border-top:1px solid var(--line);padding:12px 0}.output-case h4{margin:0 0 8px;font-size:14px}.output-case p{margin:6px 0;font-size:14px;overflow-wrap:anywhere}.status{font-size:13px;color:var(--muted)}.error{color:#9c3434}
+    @media(max-width:900px){.layout{grid-template-columns:1fr;gap:24px}.sidebar{position:static;max-height:none;overflow:visible;border-bottom:1px solid var(--line);padding-bottom:14px;display:flex;gap:22px;flex-wrap:wrap}.sidebar p{margin:0 0 4px}.sidebar p:not(:first-child){margin-top:0}.sidebar .sub{padding-left:0}.sidebar a{font-size:13px}.header-links{gap:12px;font-size:14px}header{align-items:flex-start}}
+  </style>
+</head>
+<body>
+<header><div class="brand">CDM RAG<small>Microsoft Common Data Model · routing evaluation</small></div><nav class="header-links" aria-label="Main navigation"><a href="/home">Home</a><a href="/RAG">Ask a question</a><a href="/benchmarks">Evaluations ↗</a><a href="/retrieval-benchmark">Retrieval evaluation</a><a href="/benchmark">Answer evaluation</a><a href="/docs">Documentation</a><a id="api-tokens-nav" href="/api-tokens" hidden>API tokens</a></nav></header>
+<div class="layout">
+  <aside class="sidebar" aria-label="On this page">
+    <div><p>Test results</p><a href="#routing-results">Question-only routing</a><a href="#evidence-results">Evidence-aware routing</a><a href="#scope-results">Search or no search</a><a id="evidence-scope-nav" href="#evidence-scope-results" hidden>Evidence-aware scope</a></div>
+    <div><p>Evaluation questions</p><a href="#routing-test">Three-way · test</a><a class="sub" href="#routing-development">Three-way · development</a><a href="#scope-test">Scope · test</a><a class="sub" href="#scope-development">Scope · development</a></div>
+    <div><p>Model outputs</p><details class="side-output"><summary>Question-only decisions</summary><div id="output-navigation"><span class="status">Loading saved runs…</span></div></details><details class="side-output"><summary>Evidence-aware decisions</summary><div id="evidence-output-navigation"><span class="status">Loading saved runs…</span></div></details><details class="side-output"><summary>Search-scope decisions</summary><div id="scope-output-navigation"><span class="status">Loading saved runs…</span></div></details><details class="side-output" id="evidence-scope-output-nav" hidden><summary>Evidence-aware scope decisions</summary><div id="evidence-scope-output-navigation"></div></details></div>
+  </aside>
+  <main>
+    <h1>Routing evaluation.</h1>
+    <p class="intro">Compare models on the decision to search with the original wording, rewrite the query, or avoid catalog search.</p>
+    <p class="note">Routing is tested on its own. A separate query model can be chosen when a rewrite is needed.</p>
+    <div class="callout"><p><strong>Reading these results.</strong> Only the test split is scored here. Green marks the best observed value and blue the second distinct value in a column; ties share a highlight. Lower time and fewer errors are better. Counts use attempted test questions; a run may cover a subset.</p><p>The labels are a provisional routing policy, not a measurement of downstream retrieval quality. The questions are source-derived or assistant-authored, not independently reviewed or a blind holdout. The three-way questions were authored in the same session as this evaluation. Development is used for tuning, not model training.</p></div>
+    <section id="routing-results"><p class="eyebrow">Test results · three-way decisions</p><h2>Which routing model performs best?</h2><p>Each model makes a routing decision for the same saved questions. The expected decisions are used for scoring and are not supplied to the model. An unsuccessful or invalid response is not counted as correct.</p><div id="recommendation" class="recommendation" hidden></div><p class="scroll-hint">Scroll the table horizontally to see all columns.</p><div class="table-wrap" role="region" aria-label="Routing-model test results; scroll horizontally for all columns" tabindex="0"><table data-low="8,9"><thead><tr><th scope="col">Decision model or baseline</th><th scope="col" class="num">Correct / attempted</th><th scope="col" class="num">3-way accuracy</th><th scope="col" class="num">Macro F1</th><th scope="col" class="num">Search / no-search accuracy</th><th scope="col" class="num">Raw-search recall</th><th scope="col" class="num">Rewrite recall</th><th scope="col" class="num">No-search recall</th><th scope="col" class="num">Errors</th><th scope="col" class="num">Mean time (s)</th></tr></thead><tbody id="result-rows"><tr><td colspan="10">Loading saved test results…</td></tr></tbody></table></div><p class="legend">Search / no-search accuracy combines the two search routes; choosing between raw and rewritten search is a separate policy judgment. Recall for a route is the fraction of questions labeled with that route on which the model made that decision. Mean time is per attempted decision and depends on model loading, context and host conditions. The LLM rows do not perform query generation or retrieval.</p><p class="legend" id="cosine-method">Loading the cosine baseline…</p><p class="legend" id="cosine-calibration">Loading the threshold-calibration cohort…</p><p class="legend" id="run-provenance"></p></section>
+    <section id="evidence-results"><p class="eyebrow">Test results · upfront search</p><h2>Routing after an initial search</h2><p>On the same three-way questions, this separate experiment gives the decision model the top three hybrid-search results (with excerpts of up to 700 characters) before it chooses a route. It uses no LLM reranker. It is a different workflow from question-only routing.</p><div id="evidence-recommendation" class="recommendation" hidden></div><p class="scroll-hint">Scroll the table horizontally to see all columns.</p><div class="table-wrap" role="region" aria-label="Evidence-aware routing test results; scroll horizontally for all columns" tabindex="0"><table data-low="8,9"><thead><tr><th scope="col">Decision model</th><th scope="col" class="num">Correct / attempted</th><th scope="col" class="num">3-way accuracy</th><th scope="col" class="num">Macro F1</th><th scope="col" class="num">Search / no-search accuracy</th><th scope="col" class="num">Raw-search recall</th><th scope="col" class="num">Rewrite recall</th><th scope="col" class="num">No-search recall</th><th scope="col" class="num">Errors</th><th scope="col" class="num">Mean total time (s)</th></tr></thead><tbody id="evidence-result-rows"><tr><td colspan="10">Loading saved test results…</td></tr></tbody></table></div><p class="legend">Total time includes the initial search and routing decision; no query reformulation, LLM reranking or answer generation is included. An initial search itself may be inappropriate for out-of-scope requests; this table measures the experiment and does not imply it should be enabled for all requests.</p></section>
+    <section id="scope-results"><p class="eyebrow">Test results · binary search scope</p><h2>Should the catalog be searched?</h2><p>This separate test checks whether the request is suitable for schema search. For an in-scope question, either search route is accepted; it does not measure whether rewriting was the better choice.</p><p class="scroll-hint">Scroll the table horizontally to see all columns.</p><div class="table-wrap" role="region" aria-label="Search-scope test results; scroll horizontally for all columns" tabindex="0"><table data-low="3,4,5,6"><thead><tr><th scope="col">Decision model</th><th scope="col" class="num">Correct / attempted</th><th scope="col" class="num">Scope accuracy</th><th scope="col" class="num">False searches</th><th scope="col" class="num">Missed searches</th><th scope="col" class="num">Errors</th><th scope="col" class="num">Mean time (s)</th></tr></thead><tbody id="scope-result-rows"><tr><td colspan="7">Loading saved test results…</td></tr></tbody></table></div><p class="legend">A false search uses the catalog when the question is outside its scope. A missed search declines a question that this evaluation marks as in scope. Errors count as incorrect attempts and are listed separately.</p></section>
+    <section id="evidence-scope-results" hidden><p class="eyebrow">Test results · upfront search · binary scope</p><h2>Search scope after an initial search</h2><p>The same binary scope questions, with initial search results shown to the decision model and no LLM reranker. This experiment always performs an initial search, including on out-of-scope requests.</p><p class="scroll-hint">Scroll the table horizontally to see all columns.</p><div class="table-wrap" role="region" aria-label="Evidence-aware search-scope test results; scroll horizontally for all columns" tabindex="0"><table data-low="3,4,5,6"><thead><tr><th scope="col">Decision model</th><th scope="col" class="num">Correct / attempted</th><th scope="col" class="num">Scope accuracy</th><th scope="col" class="num">False-search decisions</th><th scope="col" class="num">Missed-search decisions</th><th scope="col" class="num">Errors</th><th scope="col" class="num">Mean total time (s)</th></tr></thead><tbody id="evidence-scope-result-rows"><tr><td colspan="7">Loading saved test results…</td></tr></tbody></table></div><p class="legend">Mean total time includes initial search and the routing decision, with initial model loads and residency effects. False-search and missed-search counts describe the subsequent decision: the initial catalog search has already happened for every question, including out-of-scope requests. Compare this with the question-only scope time above, which does not include a search.</p></section>
+    <section id="dataset"><p class="eyebrow">Evaluation dataset</p><h2>Questions and expected decisions</h2><p class="note">These labels specify the evaluation's chosen policy. Inspect the prior messages and rationale when deciding whether a judgment is appropriate. The scope development questions are shown from the original scope source; the derived binary dataset contains the 32 test questions.</p><details id="routing-test"><summary>Three-way · test questions</summary><div class="case-grid" id="test-cases"><p class="status">Loading questions…</p></div></details><details id="routing-development"><summary>Three-way · development questions</summary><div class="case-grid" id="development-cases"><p class="status">Loading questions…</p></div></details><details id="scope-test"><summary>Scope · test questions</summary><div class="case-grid" id="scope-test-cases"><p class="status">Loading questions…</p></div></details><details id="scope-development"><summary>Scope · development questions</summary><div class="case-grid" id="scope-development-cases"><p class="status">Loading questions…</p></div></details></section>
+    <section id="routing-outputs"><p class="eyebrow">Detailed results</p><h2>Saved routing decisions</h2><p>Open a model below, then inspect the test questions, expected choices, actual decisions, errors and per-question runtimes. These are the saved routing outputs; they do not include generated search queries. For evidence-aware runs, the initial passages show the bounded excerpts used in that routing prompt; passage identifiers are source metadata.</p><h3>Question-only test</h3><div id="model-outputs"><p class="status">Loading saved outputs…</p></div><h3>Evidence-aware test</h3><div id="evidence-model-outputs"><p class="status">Loading saved outputs…</p></div><h3>Search-scope test</h3><div id="scope-model-outputs"><p class="status">Loading saved outputs…</p></div><div id="evidence-scope-output-section" hidden><h3>Evidence-aware search-scope test</h3><div id="evidence-scope-model-outputs"></div></div></section>
+  </main>
+</div>
+<script>
+(function () {
+  const SNAPSHOT = '/evaluation/results/routing-benchmark-snapshot.json';
+  const DATASET = '/evaluation/routing-decision-v1.json';
+  const SCOPE_SNAPSHOT = '/evaluation/results/routing-scope-binary-snapshot.json';
+  const SCOPE_DATASET = '/evaluation/routing-scope-binary-v1.json';
+  const SCOPE_SOURCE = '/evaluation/scope-questions-v1.json';
+  const COSINE_SNAPSHOT = '/evaluation/results/routing-cosine-snapshot.json';
+  const EVIDENCE_SNAPSHOT = '/evaluation/results/routing-evidence-aware-snapshot.json';
+  const EVIDENCE_SCOPE_SNAPSHOT = '/evaluation/results/routing-scope-evidence-aware-snapshot.json';
+  const labels = {raw_search:'Search as written', rewrite_search:'Rewrite then search', no_search:'Do not search the catalog'};
+  const e = (tag, text, className) => { const node = document.createElement(tag); if (text !== undefined && text !== null) node.textContent = String(text); if (className) node.className = className; return node; };
+  function label(value) { return labels[value] || value || 'Not available'; }
+  function expectedLabel(record) {
+    const routes=record && record.accepted_routes;
+    if(Array.isArray(routes) && routes.length) return routes.map(label).join(' or ');
+    return label(record && (record.expected_route || record.expected));
+  }
+  function addContext(parent, messages) {
+    if (!Array.isArray(messages) || !messages.length) return;
+    const list=e('ul',undefined,'conversation');
+    messages.forEach(m => { const li=e('li');li.append(e('strong',(m.role || 'message') + ': '),document.createTextNode(m.content || ''));list.append(li); });
+    parent.append(list);
+  }
+  function value(obj, ...keys) { for (const key of keys) if (obj[key] !== undefined && obj[key] !== null) return obj[key]; return null; }
+  function displaySeconds(v) { return Number.isFinite(Number(v)) && v !== null && v !== '' ? Number(v).toFixed(2) : '—'; }
+  function displayRatio(v) { if (v === null || v === '' || !Number.isFinite(Number(v))) return '—'; const n=Number(v); return (n > 1 ? n/100 : n).toFixed(3); }
+  function displayRow(model, index, recommendation, evidence) {
+    const name=value(model,'name','model') || ('Model ' + (index+1));
+    const outputId=(evidence?'evidence-output-':'routing-output-') + (index+1);
+    const link=e('a',name);link.href='#'+outputId;
+    const th=e('th');th.scope='row';th.append(link);
+    if (recommendation && recommendation === name) { const star=e('span','★','overall-star');star.setAttribute('aria-label','provisional routing candidate');th.append(star); }
+    const tr=e('tr');tr.append(th);
+    const correct=value(model,'correct'), total=value(model,'total');
+    const recalls=model.recall_by_route || model.class_recall || {};
+    const columns=[correct !== null && total !== null ? correct + ' / ' + total : '—', displayRatio(value(model,'accuracy')), displayRatio(value(model,'macro_f1')), displayRatio(value(model,'search_gate_accuracy')), displayRatio(recalls.raw_search), displayRatio(recalls.rewrite_search), displayRatio(recalls.no_search), value(model,'errors','error_count'), displaySeconds(value(model,'mean_seconds','mean_time_seconds'))];
+    columns.forEach((v,i)=>{const td=e('td',v===null?'—':v,'num');if(v!==null && v!=='—')td.dataset.metric=String(i);tr.append(td);});
+    return {tr,name,outputId};
+  }
+  function highlight(table) {
+    const lows=new Set((table.dataset.low || '').split(',').filter(Boolean).map(Number));
+    function numeric(cell){const text=cell.textContent.trim(), fraction=text.match(/^(\d+)\s*\/\s*(\d+)$/);if(fraction)return Number(fraction[2])?Number(fraction[1])/Number(fraction[2]):null;return text!==''&&Number.isFinite(Number(text))?Number(text):null;}
+    for(let column=1;column<table.querySelectorAll('thead th').length;column++){
+      const entries=Array.from(table.querySelectorAll('tbody tr')).map(row=>{const cell=row.children[column];return {cell:cell,value:cell&&cell.dataset.metric!==undefined?numeric(cell):null};}).filter(item=>item.value!==null);
+      const distinct=Array.from(new Set(entries.map(item=>item.value))).sort((a,b)=>lows.has(column)?a-b:b-a);
+      entries.forEach(item=>{const n=item.value;if(n===distinct[0] || (distinct.length>1 && n===distinct[1])) {const best=n===distinct[0];item.cell.classList.add(best?'metric-best':'metric-second');item.cell.title=best?'Best observed in this column':'Second distinct value in this column';}});
+    }
+  }
+  function showCases(dataset, scope) {
+    const cases=dataset.cases || dataset.questions || [];
+    for (const split of ['test','development']) {
+      const target=document.getElementById((scope?'scope-':'')+split+'-cases');target.replaceChildren();
+      const selected=cases.filter(c=>c.split===split);
+      const details=document.getElementById((scope?'scope-':'routing-')+split);details.querySelector('summary').textContent=(scope?'Scope':'Three-way')+' · '+(split==='test'?'test':'development (used for tuning)')+' · '+selected.length+' questions';
+      if(!selected.length){target.append(e('p','No '+split+' questions were saved.','status'));continue;}
+      selected.forEach(c=>{const card=e('article',undefined,'case');card.append(e('p',c.id,'case-id'));addContext(card,c.context_messages);card.append(e('p',c.question,'question'));card.append(e('div','Expected decision','target-label'));card.append(e('p',expectedLabel(c),'target'));if(c.rationale)card.append(e('p',c.rationale,'case-reason'));target.append(card);});
+    }
+  }
+  function showOutput(model,name,outputId,casesById,mode) {
+    const panel=e('details');panel.id=outputId;const summary=e('summary',name);panel.append(summary);
+    const body=e('div',undefined,'output-body');
+    const outcomes=model.cases || model.rows || [];
+    if(!outcomes.length)body.append(e('p','No per-question outputs were saved.','status'));
+    outcomes.forEach(row=>{const source=casesById.get(row.id || row.case_id || row.question_id);if(source && source.split!=='test')return;const item=e('article',undefined,'output-case');item.append(e('h4',row.id || row.case_id || row.question_id || 'Question'));if(source && source.question)item.append(e('p',source.question));item.append(e('p','Expected: '+expectedLabel(source || row)));const decision=row.decision || row.route || row.actual_route || row.predicted_route;item.append(e('p','Saved decision: '+(decision?label(decision):'No decision returned')));if(mode.startsWith('evidence')&&row.initial_query)item.append(e('p','Initial query: '+row.initial_query,'status'));if(mode.includes('cosine')){if(row.query)item.append(e('p','Cosine input: '+row.query,'status'));if(Number.isFinite(row.similarity))item.append(e('p','Nearest-fragment cosine: '+row.similarity.toFixed(4)+' · threshold: '+Number(model.threshold).toFixed(4),'status'));if(row.nearest_fragment_id){const hit=e('details');hit.append(e('summary','Nearest indexed fragment: '+row.nearest_fragment_id));hit.append(e('p',row.nearest_fragment_text || 'Fragment text unavailable.'));item.append(hit);}}const stat=e('p','Status: '+(row.status || (decision?'recorded':'unavailable'))+(row.error?' · '+row.error:''),row.error?'status error':'status');item.append(stat);const timed=mode.startsWith('evidence')?value(row,'end_to_end_seconds'):value(row,'elapsed_seconds','seconds','router_seconds');item.append(e('p',(mode.startsWith('evidence')?'Total time: ':'Time: ')+displaySeconds(timed)+' s','status'));if(mode.startsWith('evidence') && Array.isArray(row.initial_hits)){const hits=e('details'),summary=e('summary','Initial search passages ('+row.initial_hits.length+')');hits.append(summary);const list=e('ol');row.initial_hits.forEach(hit=>{const li=e('li');li.append(e('strong',hit.title || hit.id || 'Passage'));if(hit.id)li.append(e('p',hit.id,'status'));if(hit.text)li.append(e('p',hit.text));list.append(li);});hits.append(list);item.append(hits);}body.append(item);});
+    const output=(mode==='scope'||mode==='scope-cosine')?'scope-model-outputs':mode==='evidence'?'evidence-model-outputs':mode==='evidence-scope'?'evidence-scope-model-outputs':'model-outputs';
+    const nav=(mode==='scope'||mode==='scope-cosine')?'scope-output-navigation':mode==='evidence'?'evidence-output-navigation':mode==='evidence-scope'?'evidence-scope-output-navigation':'output-navigation';
+    panel.append(body);document.getElementById(output).append(panel);
+    const link=e('a',name,'sub');link.href='#'+outputId;document.getElementById(nav).append(link);
+  }
+  function displayScopeRow(model,index,evidence) {
+    const name=value(model,'name','model') || ('Model '+(index+1)), outputId=(evidence?'evidence-scope-output-':'scope-output-')+(index+1);
+    const link=e('a',name);link.href='#'+outputId;const th=e('th');th.scope='row';th.append(link);const tr=e('tr');tr.append(th);
+    const correct=value(model,'correct'),total=value(model,'total');
+    const columns=[correct!==null&&total!==null?correct+' / '+total:'—',displayRatio(value(model,'accuracy')),value(model,'false_search'),value(model,'false_no_search'),value(model,'errors'),displaySeconds(value(model,'mean_seconds'))];
+    columns.forEach((v,i)=>{const td=e('td',v===null?'—':v,'num');if(v!==null&&v!=='—')td.dataset.metric=String(i);tr.append(td);});
+    return {tr,name,outputId};
+  }
+  function revealFragment() {let id;try{id=decodeURIComponent(location.hash.slice(1));}catch(_){return;}const target=document.getElementById(id);if(!target)return;if(target.tagName==='DETAILS')target.open=true;for(let parent=target.parentElement;parent;parent=parent.parentElement)if(parent.tagName==='DETAILS')parent.open=true;requestAnimationFrame(()=>target.scrollIntoView());}
+  window.addEventListener('hashchange',revealFragment);
+  function modelsFrom(run,data,evidence) {
+    if(data && Array.isArray(data.models))return data.models;
+    if(!run || !run.summaries)return [];
+    return Object.entries(run.summaries).map(([name,s])=>({name:name,correct:s.correct,total:s.attempted,accuracy:s.accuracy,macro_f1:s.macro_f1,search_gate_accuracy:s.search_gate_accuracy,false_search:s.false_search,false_no_search:s.false_no_search,errors:s.errors,mean_seconds:evidence?s.mean_end_to_end_seconds:s.mean_seconds,recall_by_route:Object.fromEntries(Object.entries(s.classes || {}).map(([route,c])=>[route,c.recall])),cases:(run.rows || []).filter(row=>row.model===name)}));
+  }
+  function cosineModel(snapshot,dataset) {
+    if(!snapshot || !snapshot.calibration || !Number.isFinite(snapshot.calibration.threshold))return null;
+    const group=(snapshot.datasets || {})[dataset.dataset_id],cases=(dataset.questions || []).filter(c=>c.split==='test');
+    if(!group || group.split!=='test' || !Array.isArray(group.rows) || !group.summary || group.rows.length!==cases.length)return null;
+    const expected=new Set(cases.map(c=>c.id));if(group.rows.some(row=>!expected.has(row.case_id)) || new Set(group.rows.map(row=>row.case_id)).size!==cases.length)return null;
+    const s=group.summary;
+    return {name:'Nomic cosine gate (no LLM)',cosine:true,threshold:snapshot.calibration.threshold,correct:s.correct,total:s.attempted,accuracy:s.accuracy,macro_f1:s.macro_f1,search_gate_accuracy:s.search_gate_accuracy,false_search:s.false_search,false_no_search:s.false_no_search,errors:s.errors,mean_seconds:s.mean_seconds,recall_by_route:Object.fromEntries(Object.entries(s.classes || {}).map(([route,c])=>[route,c.recall])),cases:group.rows};
+  }
+  function sameCaseCohort(models) {
+    if(!models.length)return false;
+    const ids=models.map(model=>{const rows=model.cases || model.rows || [];return rows.map(row=>row.case_id || row.id || row.question_id).filter(Boolean).sort().join('\n');});
+    return ids.every(id=>id && id===ids[0]);
+  }
+  const cosineSnapshot=fetch(COSINE_SNAPSHOT).then(response=>response.ok?response.json():null).catch(()=>null);
+  const scopeSource=fetch(SCOPE_SOURCE).then(response=>response.ok?response.json():null).catch(()=>null);
+  function scopeDevelopment(dataset, source) {
+    if(!source || source.dataset_id!==dataset.source_dataset || !Array.isArray(source.cases))return null;
+    const cases=source.cases.filter(c=>c.split==='development');
+    if(cases.some(c=>typeof c.allow_schema_search!=='boolean' || !c.id || !c.question))return null;
+    return cases.map(c=>({id:c.id,split:'development',question:c.question,context_messages:c.context_messages || [],accepted_routes:c.allow_schema_search?['raw_search','rewrite_search']:['no_search'],rationale:'Original scope category: '+(c.expected || 'unspecified')+'. '+(c.allow_schema_search?'The binary scope policy accepts either search route.':'The binary scope policy declines catalog search.')}));
+  }
+  Promise.all([fetch(DATASET).then(r=>r.ok?r.json():null),fetch(SCOPE_DATASET).then(r=>r.ok?r.json():null),scopeSource,cosineSnapshot]).then(([routing,scope,source,cosine])=>{
+    const target=document.getElementById('cosine-calibration'), dev=scope && scopeDevelopment(scope,source), calibration=cosine && cosine.calibration;
+    if(!routing || !dev || !calibration || !cosine.dataset_sha256 || cosine.dataset_sha256.scope_source!==scope.source_sha256)throw new Error('Calibration sources unavailable');
+    const three=(routing.questions || routing.cases || []).filter(c=>c.split==='development');
+    const search=three.filter(c=>c.expected_route!=='no_search').length+dev.filter(c=>!c.accepted_routes.includes('no_search')).length;
+    const total=three.length+dev.length, noSearch=total-search;
+    if(total!==calibration.development_cases || search!==calibration.search_cases || noSearch!==calibration.no_search_cases)throw new Error('Calibration cohort does not match the saved run');
+    target.textContent='The threshold was selected using '+total+' development questions: '+three.length+' three-way and '+dev.length+' original scope questions ('+search+' search and '+noSearch+' no-search). Selection maximized balanced search/no-search accuracy; ties chose the highest threshold. Test questions were not used to select it.';
+  }).catch(()=>{document.getElementById('cosine-calibration').textContent='The saved threshold-calibration cohort could not be loaded.';});
+  Promise.all([fetch(DATASET).then(response=>{if(!response.ok)throw new Error('Dataset HTTP '+response.status);return response.json();}),fetch(SNAPSHOT).then(response=>response.ok?response.json():null).catch(()=>null),cosineSnapshot]).then(([dataset,data,cosine])=>{
+    const cases=dataset.cases || dataset.questions || [];if(!Array.isArray(cases))throw new Error('Invalid routing dataset');showCases(dataset,false);
+    const run=data && (data.run || data);if(run && run.dataset_id && run.dataset_id!==dataset.dataset_id)throw new Error('Saved run does not match the routing dataset');if(run && run.split && run.split!=='test')throw new Error('Saved routing run is not the test split');
+    const models=modelsFrom(run,data),cosineBaseline=cosineModel(cosine,dataset);if(cosineBaseline)models.unshift(cosineBaseline);
+    document.getElementById('cosine-method').textContent=cosineBaseline?'The no-LLM baseline embeds the full raw conversation and uses the nearest indexed fragment’s raw cosine similarity (not the hybrid top result). It searches as written at or above '+cosineBaseline.threshold.toFixed(4)+' and otherwise declines; it never rewrites. The threshold was selected on development questions only. Its mean includes embedding and the nearest-neighbor probe, whereas LLM rows are decision time only. Every case incurs the probe, including out-of-scope requests.':'No saved cosine-gate test results are available.';
+    const tbody=document.getElementById('result-rows');tbody.replaceChildren();document.getElementById('model-outputs').replaceChildren();document.getElementById('output-navigation').replaceChildren();
+    const rec=data && data.recommendation;const recommended=typeof rec==='string'?rec:(rec && (rec.model || rec.name));
+    if(rec && recommended){const text=typeof rec==='object'?(rec.criteria || rec.rationale || rec.reason || ''):'';const note=document.getElementById('recommendation');note.hidden=false;note.append(e('strong','Provisional routing candidate: '+recommended+'. '),document.createTextNode(text));}
+    if(!models.length){const tr=e('tr'),td=e('td','No completed routing runs have been saved.','status');td.colSpan=10;tr.append(td);tbody.append(tr);document.getElementById('model-outputs').append(e('p','No model decisions have been saved.','status'));document.getElementById('output-navigation').append(e('span','No saved runs.','status'));}
+    const byId=new Map(cases.map(c=>[c.id,c]));models.forEach((model,index)=>{const row=displayRow(model,index,recommended,false);tbody.append(row.tr);showOutput(model,row.name,row.outputId,byId,model.cosine?'cosine':'routing');});
+    if(sameCaseCohort(models))highlight(document.querySelector('#routing-results table'));
+    const prov=data && value(data,'provenance','note');if(typeof prov==='string')document.getElementById('run-provenance').textContent=prov;
+    if(location.hash)revealFragment();
+  }).catch(error=>{const message='Saved routing results are unavailable: '+error.message;for(const id of ['test-cases','development-cases','model-outputs','output-navigation'])document.getElementById(id).replaceChildren(e('p',message,'status'));const tr=e('tr'),td=e('td',message,'status');td.colSpan=10;tr.append(td);document.getElementById('result-rows').replaceChildren(tr);});
+  Promise.all([fetch(SCOPE_DATASET).then(response=>{if(!response.ok)throw new Error('Dataset HTTP '+response.status);return response.json();}),fetch(SCOPE_SNAPSHOT).then(response=>response.ok?response.json():null).catch(()=>null),cosineSnapshot,scopeSource]).then(([dataset,data,cosine,source])=>{
+    const cases=dataset.cases || dataset.questions || [];if(!Array.isArray(cases))throw new Error('Invalid scope dataset');const dev=scopeDevelopment(dataset,source);showCases({questions:cases.concat(dev || [])},true);
+    if(!dev){document.getElementById('scope-development').querySelector('summary').textContent='Scope · development questions unavailable';document.getElementById('scope-development-cases').replaceChildren(e('p','Original scope development questions could not be loaded.','status'));}
+    const run=data && (data.run || data);if(run && run.dataset_id && run.dataset_id!==dataset.dataset_id)throw new Error('Saved run does not match the scope dataset');if(run && run.split && run.split!=='test')throw new Error('Saved scope run is not the test split');
+    const models=modelsFrom(run,data),cosineBaseline=cosineModel(cosine,dataset),tbody=document.getElementById('scope-result-rows');if(cosineBaseline)models.unshift(cosineBaseline);tbody.replaceChildren();document.getElementById('scope-model-outputs').replaceChildren();document.getElementById('scope-output-navigation').replaceChildren();
+    if(!models.length){const tr=e('tr'),td=e('td','No completed scope runs have been saved.','status');td.colSpan=7;tr.append(td);tbody.append(tr);document.getElementById('scope-model-outputs').append(e('p','No model decisions have been saved.','status'));document.getElementById('scope-output-navigation').append(e('span','No saved runs.','status'));}
+    const byId=new Map(cases.map(c=>[c.id,c]));models.forEach((model,index)=>{const row=displayScopeRow(model,index,false);tbody.append(row.tr);showOutput(model,row.name,row.outputId,byId,model.cosine?'scope-cosine':'scope');});
+    if(sameCaseCohort(models))highlight(document.querySelector('#scope-results table'));if(location.hash)revealFragment();
+  }).catch(error=>{const message='Saved scope results are unavailable: '+error.message;for(const id of ['scope-test-cases','scope-development-cases','scope-model-outputs','scope-output-navigation'])document.getElementById(id).replaceChildren(e('p',message,'status'));const tr=e('tr'),td=e('td',message,'status');td.colSpan=7;tr.append(td);document.getElementById('scope-result-rows').replaceChildren(tr);});
+  function loadEvidence(datasetURL,snapshotURL,scope) {
+    const tbodyId=scope?'evidence-scope-result-rows':'evidence-result-rows',outId=scope?'evidence-scope-model-outputs':'evidence-model-outputs',navId=scope?'evidence-scope-output-navigation':'evidence-output-navigation';
+    Promise.all([fetch(datasetURL).then(response=>{if(!response.ok)throw new Error('Dataset HTTP '+response.status);return response.json();}),fetch(snapshotURL).then(response=>response.ok?response.json():null).catch(()=>null)]).then(([dataset,data])=>{
+      const run=data && (data.run || data);if(run && run.dataset_id && run.dataset_id!==dataset.dataset_id)throw new Error('Saved run does not match this dataset');if(run && run.split && run.split!=='test')throw new Error('Saved run is not the test split');
+      const models=modelsFrom(run,data,true);if(scope&&!models.length)return;
+      if(scope){document.getElementById('evidence-scope-results').hidden=false;document.getElementById('evidence-scope-nav').hidden=false;document.getElementById('evidence-scope-output-nav').hidden=false;document.getElementById('evidence-scope-output-section').hidden=false;}
+      const tbody=document.getElementById(tbodyId);tbody.replaceChildren();document.getElementById(outId).replaceChildren();document.getElementById(navId).replaceChildren();
+      if(!models.length){const tr=e('tr'),td=e('td','No completed evidence-aware runs have been saved.','status');td.colSpan=scope?7:10;tr.append(td);tbody.append(tr);document.getElementById(outId).append(e('p','No model decisions have been saved.','status'));document.getElementById(navId).append(e('span','No saved runs.','status'));return;}
+      const rec=!scope && data && data.recommendation;const recommended=typeof rec==='string'?rec:(rec && (rec.model || rec.name));
+      if(rec && recommended){const text=typeof rec==='object'?(rec.criteria || rec.rationale || rec.reason || ''):'';const note=document.getElementById('evidence-recommendation');note.hidden=false;note.append(e('strong','Provisional routing candidate: '+recommended+'. '),document.createTextNode(text));}
+      const byId=new Map((dataset.cases || dataset.questions || []).map(c=>[c.id,c]));models.forEach((model,index)=>{const row=scope?displayScopeRow(model,index,true):displayRow(model,index,recommended,true);tbody.append(row.tr);showOutput(model,row.name,row.outputId,byId,scope?'evidence-scope':'evidence');});
+      if(sameCaseCohort(models))highlight(document.querySelector(scope?'#evidence-scope-results table':'#evidence-results table'));if(location.hash)revealFragment();
+    }).catch(error=>{if(scope)return;const message='Saved evidence-aware results are unavailable: '+error.message;document.getElementById(outId).replaceChildren(e('p',message,'status'));document.getElementById(navId).replaceChildren(e('p',message,'status'));const tr=e('tr'),td=e('td',message,'status');td.colSpan=10;tr.append(td);document.getElementById(tbodyId).replaceChildren(tr);});
+  }
+  loadEvidence(DATASET,EVIDENCE_SNAPSHOT,false);
+  loadEvidence(SCOPE_DATASET,EVIDENCE_SCOPE_SNAPSHOT,true);
+})();
+</script>
+<script>
+fetch('/api/v1/api-tokens',{cache:'no-store'}).then(response=>{
+  if(response.ok)document.getElementById('api-tokens-nav').hidden=false;
+}).catch(()=>{});
+</script>
+</body>
+</html>

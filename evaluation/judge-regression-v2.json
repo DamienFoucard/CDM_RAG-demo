@@ -1,0 +1,140 @@
+{
+  "dataset_id": "judge-regression-v2",
+  "status": "assistant-audited real model outputs; not independently reviewed",
+  "provenance": "Reconstructed citation summaries for the ten previously audited forced-retrieval answers.",
+  "source_result_sha256": "9e7f5bc5ce3a145f91eb0944f32e64a7901a523fceab016563147ff02dba5fb5",
+  "cases": [
+    {
+      "id": "web-08-source-hybrid_raw",
+      "split": "regression",
+      "question": "Which accounts are jointly held?",
+      "answer": "Jointly held accounts are represented by the FinancialHolding entity in the RetailBankingCoreDataModel. [R1] The GroupFinancialHolding entity in RetailBankingCoreDataModel contains financial holdings associated with a group for inclusion in total assets and liabilities. [R4] CustomerFinancialHolding links a customer to their financial holdings, including accounts that may be jointly held. [R2]",
+      "evidence": [
+        "[R1] FinancialHolding (RetailBankingCoreDataModel): Accounts, loans, investments, credit lines and savings accounts held by a customer.",
+        "[R2] RetailBankingCoreDataModel::CustomerFinancialHolding has relationship FinancialHolding to RetailBankingCoreDataModel::FinancialHolding.",
+        "[R4] RetailBankingCoreDataModel::GroupFinancialHolding has relationship FinancialHolding to RetailBankingCoreDataModel::FinancialHolding."
+      ],
+      "expected_acceptable": false,
+      "kind": "records",
+      "note": "Cited source summaries only; full extracted contexts may contain more detail."
+    },
+    {
+      "id": "web-08-source-hybrid_reranked",
+      "split": "regression",
+      "question": "Which accounts are jointly held?",
+      "answer": "GroupFinancialHolding entities represent financial holdings associated with a Group, which includes accounts, loans, investments, credit lines, and savings. [R1] FinancialHolding entities are linked to Group entities, representing familial connections of the customer at the bank. [R1] FinancialHoldingInstrument entities are associated with FinancialHolding entities and include instruments such as standing orders, overdrafts, cards, and direct debits. [R2]",
+      "evidence": [
+        "[R1] GroupFinancialHolding (RetailBankingCoreDataModel): Financial holdings associated with a Group, to be included in the group's total assets and liabilities.",
+        "[R2] FinancialHoldingInstrument (RetailBankingCoreDataModel): Financial tools associated with financial holdings; a monetary contract between parties which has intrinsic monetary value or transfers value. Provides an efficient flow and transfer of capital."
+      ],
+      "expected_acceptable": false,
+      "kind": "records",
+      "note": "Cited source summaries only; full extracted contexts may contain more detail."
+    },
+    {
+      "id": "web-08-source-neighborhood_reranked",
+      "split": "regression",
+      "question": "Which accounts are jointly held?",
+      "answer": "Jointly held accounts are represented by the GroupFinancialHolding entity, which aggregates financial holdings associated with a group of customers. [R4] The GroupFinancialHolding entity includes financial holdings such as accounts, loans, investments, credit lines, and savings that are collectively managed under a group. [R4] CustomerFinancialHolding entities link individual customer financial holdings to specific customers and may include roles like owner or beneficiary. [R2]",
+      "evidence": [
+        "[R2] RetailBankingCoreDataModel::CustomerFinancialHolding has relationship FinancialHolding to RetailBankingCoreDataModel::FinancialHolding.",
+        "[R4] RetailBankingCoreDataModel::GroupFinancialHolding has relationship FinancialHolding to RetailBankingCoreDataModel::FinancialHolding."
+      ],
+      "expected_acceptable": false,
+      "kind": "records",
+      "note": "Cited source summaries only; full extracted contexts may contain more detail."
+    },
+    {
+      "id": "web-08-source-graph_assisted",
+      "split": "regression",
+      "question": "Which accounts are jointly held?",
+      "answer": "GroupFinancialHolding entities represent financial holdings associated with a group of customers, where the group is defined as a set of familial connections. [R1] FinancialHolding entities include accounts, loans, investments, credit lines, and savings, and are linked to a Group entity that represents a household or familial connection. [R1] [R2] CustomerFinancialHolding entities link a customer to a FinancialHolding entity, specifying the customer's role in the financial holding. [R3] GroupFinancialHolding entities are used to aggregate financial holdings for a group, where the group is a set of customers with familial connections. [R1]",
+      "evidence": [
+        "[R1] GroupFinancialHolding (RetailBankingCoreDataModel): Financial holdings associated with a Group, to be included in the group's total assets and liabilities.",
+        "[R2] FinancialHolding (RetailBankingCoreDataModel): Accounts, loans, investments, credit lines and savings accounts held by a customer.",
+        "[R3] RetailBankingCoreDataModel::CustomerFinancialHolding has relationship FinancialHolding to RetailBankingCoreDataModel::FinancialHolding."
+      ],
+      "expected_acceptable": false,
+      "kind": "records",
+      "note": "Cited source summaries only; full extracted contexts may contain more detail."
+    },
+    {
+      "id": "web-08-source-graph_transe",
+      "split": "regression",
+      "question": "Which accounts are jointly held?",
+      "answer": "GroupFinancialHolding entities represent financial holdings jointly held by members of a Group. [R1] A Group is an association of customers that allows representation of households. [R2] FinancialHolding entities include accounts, loans, investments, credit lines, and savings. [R4]",
+      "evidence": [
+        "[R1] GroupFinancialHolding (RetailBankingCoreDataModel): Financial holdings associated with a Group, to be included in the group's total assets and liabilities.",
+        "[R2] Group (RetailBankingCoreDataModel): An association of several customers allowing e.g. the representation of households",
+        "[R4] FinancialHolding (RetailBankingCoreDataModel): Accounts, loans, investments, credit lines and savings accounts held by a customer."
+      ],
+      "expected_acceptable": false,
+      "kind": "records",
+      "note": "Cited source summaries only; full extracted contexts may contain more detail."
+    },
+    {
+      "id": "web-09-source-hybrid_raw",
+      "split": "regression",
+      "question": "Does creating an account in D365 auto-create a related contact record?",
+      "answer": "Creating an account in D365 does not automatically create a related contact record. [R1] [R17]",
+      "evidence": [
+        "[R1] Contact (applicationCommon): Person with whom a business unit has a relationship, such as customer, supplier, and colleague.",
+        "[R17] applicationCommon::Account has relationship primaryContact to applicationCommon::Contact."
+      ],
+      "expected_acceptable": false,
+      "kind": "runtime",
+      "note": "Cited source summaries only; full extracted contexts may contain more detail."
+    },
+    {
+      "id": "web-09-source-hybrid_reranked",
+      "split": "regression",
+      "question": "Does creating an account in D365 auto-create a related contact record?",
+      "answer": "Creating an account in D365 does not automatically create a related contact record. [R1]",
+      "evidence": [
+        "[R1] Contact (applicationCommon): Person with whom a business unit has a relationship, such as customer, supplier, and colleague."
+      ],
+      "expected_acceptable": false,
+      "kind": "runtime",
+      "note": "Cited source summaries only; full extracted contexts may contain more detail."
+    },
+    {
+      "id": "web-09-source-neighborhood_reranked",
+      "split": "regression",
+      "question": "Does creating an account in D365 auto-create a related contact record?",
+      "answer": "Creating an account in D365 does not auto-create a related contact record. [R1] [R9]",
+      "evidence": [
+        "[R1] Account (applicationCommon): Business that represents a customer or potential customer. The company that is billed in business transactions.",
+        "[R9] applicationCommon::Contact has relationship parentCustomer to applicationCommon::Account."
+      ],
+      "expected_acceptable": false,
+      "kind": "runtime",
+      "note": "Cited source summaries only; full extracted contexts may contain more detail."
+    },
+    {
+      "id": "web-09-source-graph_assisted",
+      "split": "regression",
+      "question": "Does creating an account in D365 auto-create a related contact record?",
+      "answer": "Creating an account in D365 does not automatically create a related contact record. [R1] [R9]",
+      "evidence": [
+        "[R1] Account (applicationCommon): Business that represents a customer or potential customer. The company that is billed in business transactions.",
+        "[R9] applicationCommon::Contact has relationship parentCustomer to applicationCommon::Account."
+      ],
+      "expected_acceptable": false,
+      "kind": "runtime",
+      "note": "Cited source summaries only; full extracted contexts may contain more detail."
+    },
+    {
+      "id": "web-09-source-graph_transe",
+      "split": "regression",
+      "question": "Does creating an account in D365 auto-create a related contact record?",
+      "answer": "Creating an account in D365 does not automatically create a related contact record. [R1] [R9]",
+      "evidence": [
+        "[R1] Account (applicationCommon): Business that represents a customer or potential customer. The company that is billed in business transactions.",
+        "[R9] applicationCommon::Contact has relationship parentCustomer to applicationCommon::Account."
+      ],
+      "expected_acceptable": false,
+      "kind": "runtime",
+      "note": "Cited source summaries only; full extracted contexts may contain more detail."
+    }
+  ]
+}

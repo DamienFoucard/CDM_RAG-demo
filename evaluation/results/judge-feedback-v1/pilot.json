@@ -1,0 +1,152 @@
+{
+  "experiment": "CDM judge feedback and bounded retry pilot v1",
+  "dataset_status": "small assistant-authored live smoke set; not independently reviewed or gold-labeled",
+  "service": "CDM_RAG interview API on the local Mac",
+  "index_revision": "f0e843e0c1b941593517528b7f6219c242c62ce247c0430746fea34f42ca2f66",
+  "answer_model": "qwen3:4b",
+  "runtime_judge_enabled_by_default": false,
+  "runtime_judge_model_when_enabled": "qwen3:4b",
+  "cases": [
+    {
+      "id": "account_definition_baseline",
+      "question": "What is the Account entity in Microsoft CDM?",
+      "judge_enabled": false,
+      "judge_model": null,
+      "latency_ms": 24384.4,
+      "route": "cdm",
+      "generator": "qwen3:4b",
+      "answer_quality": "not available in baseline",
+      "note": "Baseline captured before this change; model warm-up differed from later runs."
+    },
+    {
+      "id": "account_definition_judge_9b",
+      "question": "What is the Account entity in Microsoft CDM?",
+      "judge_enabled": true,
+      "judge_model": "qwen3.5:9b-q4_K_M",
+      "latency_ms": 17100.0,
+      "judge_latency_ms": 8472.5,
+      "answer_attempts": 1,
+      "judge_decision": "accept",
+      "route": "cdm",
+      "note": "Accepted on first review. Timing is observational, not a controlled latency comparison."
+    },
+    {
+      "id": "account_core_attributes_baseline",
+      "question": "What are the core attributes of the Account entity?",
+      "judge_enabled": false,
+      "judge_model": null,
+      "latency_ms": 14478.6,
+      "route": "cdm",
+      "generator": "qwen3:4b:verified-attribute-selection",
+      "answer_quality": "not available in baseline"
+    },
+    {
+      "id": "account_core_attributes_judge_9b",
+      "question": "What are the core attributes of the Account entity?",
+      "judge_enabled": true,
+      "judge_model": "qwen3.5:9b-q4_K_M",
+      "latency_ms": 30400.0,
+      "judge_latency_ms": 16252.6,
+      "answer_attempts": 1,
+      "judge_decision": "accept",
+      "route": "cdm",
+      "generator": "qwen3:4b:verified-attribute-selection",
+      "note": "The judge accepted the attribute answer. This run added about 16.3 seconds for review."
+    },
+    {
+      "id": "account_core_attributes_judge_4b",
+      "question": "What are the core attributes of the Account entity?",
+      "judge_enabled": true,
+      "judge_model": "qwen3:4b",
+      "latency_ms": 10900.0,
+      "judge_latency_ms": 5485.1,
+      "answer_attempts": 1,
+      "judge_decision": "accept",
+      "route": "cdm",
+      "generator": "qwen3:4b:verified-attribute-selection",
+      "note": "Same answer model; faster in this run, but not an independent judge."
+    },
+    {
+      "id": "account_core_attributes_judge_off_live",
+      "question": "What are the core attributes of the Account entity?",
+      "judge_enabled": false,
+      "judge_model": null,
+      "latency_ms": 17629.1,
+      "answer_attempts": 1,
+      "judge_calls": 0,
+      "route": "cdm",
+      "generator": "qwen3:4b:verified-attribute-selection",
+      "answer": "Examples of attributes in the retrieved definitions: The snapshot does not identify a definitive set of core attributes.\n- RetailBankingCoreDataModel::Account: accountId [RetailBankingCoreDataModel::Account]\n- applicationCommon::Account: accountId, accountCategoryCode, customerSizeCode, preferredContactMethodCode, customerTypeCode, accountRatingCode [applicationCommon::Account]",
+      "status": "passed",
+      "note": "Live API check after switching the stable default off. Timing is not comparable with the judge-enabled sample because model warm-up and request latency were uncontrolled."
+    },
+    {
+      "id": "account_relationships_llm_judge_failure",
+      "question": "List the direct relationships declared by applicationCommon::Account. Include field names and direction, especially any connections to Contact, Email, and ActivityParty.",
+      "judge_enabled": true,
+      "judge_model": "qwen3.5:9b-q4_K_M",
+      "judge_latency_ms": 12100.0,
+      "answer_attempts": 1,
+      "judge_decision": "accept",
+      "judge_detected_wrong_edge_direction": false,
+      "status": "caught by code review",
+      "note": "The generated draft reversed the Email→Account and Activity→Account edges. The LLM judge marked those claims supported. Relationship direction cannot rely on this judge alone."
+    },
+    {
+      "id": "account_relationships_graph_answer",
+      "question": "List the direct relationships declared by applicationCommon::Account. Include field names and direction, especially any connections to Contact, Email, and ActivityParty.",
+      "judge_enabled": true,
+      "judge_model": "qwen3:4b",
+      "latency_ms": 6000.0,
+      "answer_attempts": 1,
+      "judge_calls": 0,
+      "generator": "verified-graph-response",
+      "route": "cdm",
+      "directed_edge_count": 6,
+      "status": "passed",
+      "note": "After the fix, the graph returns the Account→Contact edge and labels incoming Contact, Email, and ActivityParty edges by direction. The answer cites full entity IDs."
+    },
+    {
+      "id": "qualified_contact_account_graph_answer",
+      "question": "How does applicationCommon::Contact relate to applicationCommon::Account?",
+      "judge_model": "qwen3:4b",
+      "latency_ms": 2200.0,
+      "judge_calls": 0,
+      "generator": "verified-graph-response",
+      "route": "cdm",
+      "status": "passed",
+      "note": "Both Contact→Account and Account→Contact edges were reported with their own source entity citations."
+    },
+    {
+      "id": "current_balance_out_of_scope",
+      "question": "What is the current balance of my account?",
+      "judge_model": "qwen3:4b",
+      "latency_ms": 600.0,
+      "judge_calls": 0,
+      "route": "no_search",
+      "status": "passed"
+    },
+    {
+      "id": "dog_story_out_of_scope",
+      "question": "My dog Luna chewed a slipper. What should I do?",
+      "judge_model": "qwen3:4b",
+      "latency_ms": 100.0,
+      "judge_calls": 0,
+      "route": "no_search",
+      "status": "passed"
+    }
+  ],
+  "automated_tests": {
+    "focused_rag_tests_passed": 39,
+    "repository_tests_passed_excluding_optional_graph_modules": 59,
+    "retry_paths_covered": ["answer-only retry accepted", "retrieval retry accepted", "retry rejected and abstained", "judge error preserves initial answer"],
+    "optional_graph_modules_skipped": ["tests/test_relationship_benchmark.py", "tests/test_web_benchmark.py"],
+    "skip_reason": "The local test environment does not have the optional torch dependency."
+  },
+  "conclusion": "The bounded retry mechanism and fallback are implemented and unit-tested. Runtime review remains opt-in: this small pilot did not establish a quality gain, and the 4B reviewer is the same model as the answer generator. The graph produced the reliable relationship answer after a real LLM-judge miss.",
+  "limitations": [
+    "Small hand-authored question set; no independent human quality labels.",
+    "Latency samples were not randomized or run under controlled model warm-up.",
+    "The live judge did not successfully request a retrieval retry during this pilot; retrieval retry behavior is covered by deterministic unit tests."
+  ]
+}

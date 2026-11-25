@@ -1,0 +1,2 @@
+# Optional: the serving application does not need these benchmark packages.
+torch>=2.5,<3

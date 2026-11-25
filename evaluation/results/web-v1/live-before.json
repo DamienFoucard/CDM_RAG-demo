@@ -1,0 +1,21 @@
+[
+  {
+    "question": "Which accounts are jointly held?",
+    "route": "cdm",
+    "answer": "GroupFinancialHolding entities represent financial holdings associated with a Group, which includes accounts, loans, investments, credit lines, and savings. [RetailBankingCoreDataModel::GroupFinancialHolding] FinancialHolding entities are linked to Group entities, representing familial connections of the customer at the bank. [RetailBankingCoreDataModel::GroupFinancialHolding] FinancialHoldingInstrument entities are associated with FinancialHolding entities and include instruments such as standing orders, overdrafts, cards, and direct debits. [RetailBankingCoreDataModel::FinancialHoldingInstrument]",
+    "search_query": "Which accounts are jointly held?",
+    "sources": [
+      "RetailBankingCoreDataModel::GroupFinancialHolding",
+      "RetailBankingCoreDataModel::FinancialHoldingInstrument"
+    ]
+  },
+  {
+    "question": "Does creating an account in D365 auto-create a related contact record?",
+    "route": "cdm",
+    "answer": "Creating an account in D365 does not automatically create a related contact record. [applicationCommon::Contact]",
+    "search_query": "Does creating an account in D365 auto-create a related contact record?",
+    "sources": [
+      "applicationCommon::Contact"
+    ]
+  }
+]

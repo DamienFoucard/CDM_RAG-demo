@@ -1,0 +1,202 @@
+{
+  "dataset_id": "cdm-schema-pilot-v1",
+  "dataset_status": "synthetic_unreviewed_pilot",
+  "dataset_provenance": "Assistant-authored questions and example positive labels derived from the CDM catalog; not independent, human-reviewed, exhaustive, or representative.",
+  "dataset_sha256": "64aafc27ab681be185f73d50142ef5240e9b4a91d3c76b3ec37b0e84e30c0db2",
+  "source_commit": "dd21d715e05ebf740a11356c80b5c3b4c38a89c2",
+  "index_revision": "84ed65f5eadfe37ea807317072df49c8327ef72c8623249099613da1c3b28a90",
+  "embedding_model": "nomic-embed-text",
+  "reranker_model": "qwen3:4b",
+  "notes": "The same raw question and candidates are used for both variants; routing, query rewriting, and answer generation are not measured. Unlisted entities are unjudged.",
+  "metrics": {
+    "initial": {
+      "cases": 6,
+      "hit_at_6": 1,
+      "recall_at_6": 1.0,
+      "mrr_at_6": 0.8056
+    },
+    "reranked": {
+      "cases": 6,
+      "hit_at_6": 1,
+      "recall_at_6": 1.0,
+      "mrr_at_6": 1.0
+    }
+  },
+  "cases": [
+    {
+      "id": "bank-01",
+      "question": "Where is credit that lets an account holder withdraw money past a zero balance described?",
+      "positive_entity_ids": [
+        "RetailBankingCoreDataModel::FIOverdraft"
+      ],
+      "initial": {
+        "ranked_entity_ids": [
+          "RetailBankingCoreDataModel::FIOverdraft",
+          "RetailBankingCoreDataModel::FHLineOfCredit",
+          "RetailBankingCoreDataModel::FHAccount",
+          "RetailBankingCoreDataModel::FHSaving"
+        ],
+        "hit": true,
+        "recall": 1.0,
+        "reciprocal_rank": 1.0
+      },
+      "reranked": {
+        "ranked_entity_ids": [
+          "RetailBankingCoreDataModel::FIOverdraft",
+          "RetailBankingCoreDataModel::FICard",
+          "RetailBankingCoreDataModel::FHLineOfCredit",
+          "RetailBankingCoreDataModel::FHInvestment",
+          "applicationCommon::Account"
+        ],
+        "hit": true,
+        "recall": 1.0,
+        "reciprocal_rank": 1.0
+      },
+      "elapsed_ms": 7182.0
+    },
+    {
+      "id": "bank-02",
+      "question": "Which concept represents a customer's portfolio of securities or other assets held for investment?",
+      "positive_entity_ids": [
+        "RetailBankingCoreDataModel::FHInvestment"
+      ],
+      "initial": {
+        "ranked_entity_ids": [
+          "RetailBankingCoreDataModel::FHInvestment",
+          "RetailBankingCoreDataModel::FHAccount",
+          "RetailBankingCoreDataModel::FHLineOfCredit",
+          "RetailBankingCoreDataModel::FHSaving"
+        ],
+        "hit": true,
+        "recall": 1.0,
+        "reciprocal_rank": 1.0
+      },
+      "reranked": {
+        "ranked_entity_ids": [
+          "RetailBankingCoreDataModel::FHInvestment",
+          "RetailBankingCoreDataModel::FinancialHolding"
+        ],
+        "hit": true,
+        "recall": 1.0,
+        "reciprocal_rank": 1.0
+      },
+      "elapsed_ms": 19496.7
+    },
+    {
+      "id": "bank-03",
+      "question": "How is a loan held by a customer at a financial institution represented?",
+      "positive_entity_ids": [
+        "RetailBankingCoreDataModel::FHLoan"
+      ],
+      "initial": {
+        "ranked_entity_ids": [
+          "RetailBankingCoreDataModel::FHLoan",
+          "RetailBankingCoreDataModel::FHSaving",
+          "RetailBankingCoreDataModel::FinancialHolding",
+          "RetailBankingCoreDataModel::FHAccount",
+          "RetailBankingCoreDataModel::FHLineOfCredit"
+        ],
+        "hit": true,
+        "recall": 1.0,
+        "reciprocal_rank": 1.0
+      },
+      "reranked": {
+        "ranked_entity_ids": [
+          "RetailBankingCoreDataModel::FHLoan",
+          "RetailBankingCoreDataModel::FinancialHolding",
+          "RetailBankingCoreDataModel::FHAccount",
+          "RetailBankingCoreDataModel::GroupFinancialHolding",
+          "RetailBankingCoreDataModel::CustomerFinancialHolding"
+        ],
+        "hit": true,
+        "recall": 1.0,
+        "reciprocal_rank": 1.0
+      },
+      "elapsed_ms": 4475.5
+    },
+    {
+      "id": "bank-04",
+      "question": "Which definition covers an approved borrowing limit associated with a payment card?",
+      "positive_entity_ids": [
+        "RetailBankingCoreDataModel::FHLineOfCredit"
+      ],
+      "initial": {
+        "ranked_entity_ids": [
+          "RetailBankingCoreDataModel::FHLineOfCredit",
+          "RetailBankingCoreDataModel::FICard"
+        ],
+        "hit": true,
+        "recall": 1.0,
+        "reciprocal_rank": 1.0
+      },
+      "reranked": {
+        "ranked_entity_ids": [
+          "RetailBankingCoreDataModel::FHLineOfCredit",
+          "RetailBankingCoreDataModel::FICard",
+          "RetailBankingCoreDataModel::FIOverdraft"
+        ],
+        "hit": true,
+        "recall": 1.0,
+        "reciprocal_rank": 1.0
+      },
+      "elapsed_ms": 6410.1
+    },
+    {
+      "id": "bank-05",
+      "question": "Where is a recurring instruction to transfer a fixed amount from one account to another modeled?",
+      "positive_entity_ids": [
+        "RetailBankingCoreDataModel::FIStandingOrder"
+      ],
+      "initial": {
+        "ranked_entity_ids": [
+          "RetailBankingCoreDataModel::FHSaving",
+          "applicationCommon::RecurringAppointment",
+          "RetailBankingCoreDataModel::FIStandingOrder",
+          "RetailBankingCoreDataModel::FHAccount"
+        ],
+        "hit": true,
+        "recall": 1.0,
+        "reciprocal_rank": 0.3333333333333333
+      },
+      "reranked": {
+        "ranked_entity_ids": [
+          "RetailBankingCoreDataModel::FIStandingOrder",
+          "RetailBankingCoreDataModel::FIDirectDebit"
+        ],
+        "hit": true,
+        "recall": 1.0,
+        "reciprocal_rank": 1.0
+      },
+      "elapsed_ms": 45845.5
+    },
+    {
+      "id": "bank-06",
+      "question": "How can a creditor collect regular payments from a customer's bank account with their authorization?",
+      "positive_entity_ids": [
+        "RetailBankingCoreDataModel::FIDirectDebit"
+      ],
+      "initial": {
+        "ranked_entity_ids": [
+          "applicationCommon::Account",
+          "RetailBankingCoreDataModel::FIDirectDebit",
+          "RetailBankingCoreDataModel::FIStandingOrder",
+          "RetailBankingCoreDataModel::FHLoan",
+          "RetailBankingCoreDataModel::FICard"
+        ],
+        "hit": true,
+        "recall": 1.0,
+        "reciprocal_rank": 0.5
+      },
+      "reranked": {
+        "ranked_entity_ids": [
+          "RetailBankingCoreDataModel::FIDirectDebit",
+          "RetailBankingCoreDataModel::FIStandingOrder"
+        ],
+        "hit": true,
+        "recall": 1.0,
+        "reciprocal_rank": 1.0
+      },
+      "elapsed_ms": 3528.7
+    }
+  ]
+}

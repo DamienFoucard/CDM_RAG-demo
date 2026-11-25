@@ -1,0 +1,123 @@
+[
+  {
+    "case_id": "object-test-relationship-primary-contact",
+    "setting": {
+      "name": "app_300_think_false",
+      "think": false,
+      "max_tokens": 300
+    },
+    "num_ctx": 7168,
+    "content": "",
+    "content_chars": 0,
+    "reasoning_chars": 1439,
+    "done_reason": "length",
+    "eval_count": 300,
+    "prompt_eval_count": 3737,
+    "valid_ranked_ids": false,
+    "elapsed_ms": 5741.5
+  },
+  {
+    "case_id": "object-test-relationship-primary-contact",
+    "setting": {
+      "name": "low_reasoning_2048",
+      "think": "low",
+      "max_tokens": 2048
+    },
+    "num_ctx": 9216,
+    "content": "{\"ranked_ids\":[\"C4\",\"C2\",\"C7\",\"C10\",\"C20\"]}",
+    "content_chars": 43,
+    "reasoning_chars": 139,
+    "done_reason": "stop",
+    "eval_count": 81,
+    "prompt_eval_count": 3742,
+    "valid_ranked_ids": true,
+    "selected_passage_ids": [
+      "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:relationship-mappings:1:10f0ed32eb19",
+      "applicationCommon::Account:relationship:1",
+      "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:2:75cf2ab13bcf",
+      "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:relationship-mappings:1:240bbc83faab",
+      "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:1:240bbc83faab"
+    ],
+    "target_recall": 1.0,
+    "elapsed_ms": 13235.0
+  },
+  {
+    "case_id": "object-test-trait-application-account-classification",
+    "setting": {
+      "name": "app_300_think_false",
+      "think": false,
+      "max_tokens": 300
+    },
+    "num_ctx": 17408,
+    "content": "",
+    "content_chars": 0,
+    "reasoning_chars": 1502,
+    "done_reason": "length",
+    "eval_count": 300,
+    "prompt_eval_count": 10765,
+    "valid_ranked_ids": false,
+    "elapsed_ms": 19581.9
+  },
+  {
+    "case_id": "object-test-trait-application-account-classification",
+    "setting": {
+      "name": "low_reasoning_2048",
+      "think": "low",
+      "max_tokens": 2048
+    },
+    "num_ctx": 19456,
+    "content": "{\"ranked_ids\":[\"C2\",\"C1\"]}",
+    "content_chars": 26,
+    "reasoning_chars": 226,
+    "done_reason": "stop",
+    "eval_count": 71,
+    "prompt_eval_count": 10770,
+    "valid_ranked_ids": true,
+    "selected_passage_ids": [
+      "applicationCommon::Account:trait-applications:attributes:2",
+      "applicationCommon::Account:attributes:2"
+    ],
+    "target_recall": 1.0,
+    "elapsed_ms": 18003.4
+  },
+  {
+    "case_id": "object-test-inheritance-activity-family",
+    "setting": {
+      "name": "app_300_think_false",
+      "think": false,
+      "max_tokens": 300
+    },
+    "num_ctx": 7168,
+    "content": "",
+    "content_chars": 0,
+    "reasoning_chars": 1427,
+    "done_reason": "length",
+    "eval_count": 300,
+    "prompt_eval_count": 3982,
+    "valid_ranked_ids": false,
+    "elapsed_ms": 16198.5
+  },
+  {
+    "case_id": "object-test-inheritance-activity-family",
+    "setting": {
+      "name": "low_reasoning_2048",
+      "think": "low",
+      "max_tokens": 2048
+    },
+    "num_ctx": 9216,
+    "content": "{\"ranked_ids\":[\"C16\",\"C14\",\"C15\"]}",
+    "content_chars": 34,
+    "reasoning_chars": 204,
+    "done_reason": "stop",
+    "eval_count": 86,
+    "prompt_eval_count": 3987,
+    "valid_ranked_ids": true,
+    "selected_passage_ids": [
+      "applicationCommon::Activity:inheritance",
+      "applicationCommon::PhoneCall:inheritance",
+      "applicationCommon::Task:inheritance"
+    ],
+    "target_recall": 1.0,
+    "elapsed_ms": 13500.1
+  }
+]

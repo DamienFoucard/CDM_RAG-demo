@@ -1,0 +1,30 @@
+{
+  "realm": "cdm-rag",
+  "enabled": true,
+  "registrationAllowed": false,
+  "resetPasswordAllowed": false,
+  "clients": [
+    {
+      "clientId": "cdm-rag",
+      "enabled": true,
+      "publicClient": false,
+      "clientAuthenticatorType": "client-secret",
+      "secret": "${CDM_RAG_OIDC_CLIENT_SECRET}",
+      "standardFlowEnabled": true,
+      "directAccessGrantsEnabled": false,
+      "redirectUris": ["https://${CDM_RAG_PUBLIC_HOST}/oauth2/callback"],
+      "webOrigins": ["https://${CDM_RAG_PUBLIC_HOST}"]
+    }
+  ],
+  "users": [
+    {
+      "username": "${CDM_RAG_OWNER_USERNAME}",
+      "email": "${CDM_RAG_OWNER_EMAIL}",
+      "firstName": "${CDM_RAG_OWNER_FIRST_NAME}",
+      "lastName": "${CDM_RAG_OWNER_LAST_NAME}",
+      "emailVerified": true,
+      "enabled": true,
+      "credentials": [{"type": "password", "value": "${CDM_RAG_OWNER_PASSWORD}", "temporary": false}]
+    }
+  ]
+}

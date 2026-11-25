@@ -1,0 +1,159 @@
+{
+  "dataset_id": "web-scope-policy-v1",
+  "status": "assistant policy labels after observing prior web results; not independent review",
+  "provenance": "Existing convenience-sample source wordings and adaptations, labeled under the schema-only product policy. Some conceptual and operational questions could be partly answered, so labels are judgments rather than objective facts.",
+  "source_dataset_sha256": "8ef525af15aaf72512f0189a1d69069f821806af59fcd2b43ac310a8c8d7149a",
+  "policy": "schema questions are allowed; requests to operate software or inspect actual records are declined or clarified.",
+  "cases": [
+    {
+      "id": "web-01-source",
+      "question": "What is the difference between a standing order and a direct debit?",
+      "expected": "schema",
+      "split": "regression",
+      "allow_schema_search": true,
+      "source_url": "https://www.natwest.com/support-centre/general-banking-information/general/what-is-the-difference-between-a-standing-order-and-a-direct-debit.html",
+      "source_wording": "verbatim question",
+      "fit": "conceptual; partial"
+    },
+    {
+      "id": "web-02-source",
+      "question": "What is the difference between Available and Current balance?",
+      "expected": "schema",
+      "split": "regression",
+      "allow_schema_search": true,
+      "source_url": "https://easysupport.republicbank.com/en/support/solutions/articles/48000969732-what-is-the-difference-between-available-and-current-balance-",
+      "source_wording": "verbatim question",
+      "fit": "attribute interpretation; partial"
+    },
+    {
+      "id": "web-03-source",
+      "question": "How do I apply a contact to an account?",
+      "expected": "runtime",
+      "split": "regression",
+      "allow_schema_search": false,
+      "source_url": "https://stackoverflow.com/questions/5178910/account-contact-relationship-in-ms-dynamics-crm",
+      "source_wording": "verbatim question",
+      "fit": "relationship; adapted from an operational question"
+    },
+    {
+      "id": "web-03-adapted",
+      "question": "Which CDM reference connects a contact to an account?",
+      "expected": "schema",
+      "split": "regression",
+      "allow_schema_search": true,
+      "source_url": "https://stackoverflow.com/questions/5178910/account-contact-relationship-in-ms-dynamics-crm",
+      "source_wording": "verbatim question",
+      "fit": "relationship; adapted from an operational question"
+    },
+    {
+      "id": "web-04-source",
+      "question": "How should a bank database represent customers with multiple accounts and accounts shared by multiple people?",
+      "expected": "schema",
+      "split": "regression",
+      "allow_schema_search": true,
+      "source_url": "https://stackoverflow.com/questions/23811912/database-of-bank-accounts",
+      "source_wording": "paraphrase of the user's scenario",
+      "fit": "banking relationship; adapted and potentially incomplete"
+    },
+    {
+      "id": "web-04-adapted",
+      "question": "Which CDM definitions connect a bank customer to a financial holding, and do they describe joint ownership?",
+      "expected": "schema",
+      "split": "regression",
+      "allow_schema_search": true,
+      "source_url": "https://stackoverflow.com/questions/23811912/database-of-bank-accounts",
+      "source_wording": "paraphrase of the user's scenario",
+      "fit": "banking relationship; adapted and potentially incomplete"
+    },
+    {
+      "id": "web-05-source",
+      "question": "How can contacts for an account and its child accounts be displayed?",
+      "expected": "runtime",
+      "split": "regression",
+      "allow_schema_search": false,
+      "source_url": "https://stackoverflow.com/questions/34867988/how-to-display-contacts-for-account-and-sub-account-in-dynamics-crm",
+      "source_wording": "paraphrase of the user's scenario",
+      "fit": "two relationships; adapted from a display and record-retrieval task"
+    },
+    {
+      "id": "web-05-adapted",
+      "question": "Which CDM references connect accounts to parent accounts and contacts to accounts?",
+      "expected": "schema",
+      "split": "regression",
+      "allow_schema_search": true,
+      "source_url": "https://stackoverflow.com/questions/34867988/how-to-display-contacts-for-account-and-sub-account-in-dynamics-crm",
+      "source_wording": "paraphrase of the user's scenario",
+      "fit": "two relationships; adapted from a display and record-retrieval task"
+    },
+    {
+      "id": "web-06-source",
+      "question": "How can a workflow check the parent team of the current user's team?",
+      "expected": "runtime",
+      "split": "regression",
+      "allow_schema_search": false,
+      "source_url": "https://community.dynamics.com/forums/thread/details/?threadid=11a42c36-8eaf-4523-88df-1be55a5e55b3",
+      "source_wording": "paraphrase of the user's question",
+      "fit": "team membership; adapted from an operational workflow question"
+    },
+    {
+      "id": "web-06-adapted",
+      "question": "Which CDM definitions associate users with teams, and does the extracted schema show a parent-team link?",
+      "expected": "schema",
+      "split": "regression",
+      "allow_schema_search": true,
+      "source_url": "https://community.dynamics.com/forums/thread/details/?threadid=11a42c36-8eaf-4523-88df-1be55a5e55b3",
+      "source_wording": "paraphrase of the user's question",
+      "fit": "team membership; adapted from an operational workflow question"
+    },
+    {
+      "id": "web-07-source",
+      "question": "How can a contact be associated with multiple accounts and used to filter items across those connections?",
+      "expected": "runtime",
+      "split": "regression",
+      "allow_schema_search": false,
+      "source_url": "https://stackoverflow.com/questions/79454766/filter-built-in-list-based-on-contacts-account-and-related-connections",
+      "source_wording": "paraphrase of the user's scenario",
+      "fit": "relationship; adapted from an operational filtering task"
+    },
+    {
+      "id": "web-07-adapted",
+      "question": "Which CDM definitions can describe connections between a contact and business accounts?",
+      "expected": "schema",
+      "split": "regression",
+      "allow_schema_search": true,
+      "source_url": "https://stackoverflow.com/questions/79454766/filter-built-in-list-based-on-contacts-account-and-related-connections",
+      "source_wording": "paraphrase of the user's scenario",
+      "fit": "relationship; adapted from an operational filtering task"
+    },
+    {
+      "id": "web-08-source",
+      "question": "Which accounts are jointly held?",
+      "expected": "records",
+      "split": "regression",
+      "allow_schema_search": false,
+      "source_url": "https://github.com/black-panther-is-mpondo/data-modelling-for-data-engineering/blob/main/banking-capstone/01-business-requirements.md",
+      "source_wording": "verbatim question",
+      "fit": "data-required negative candidate"
+    },
+    {
+      "id": "web-09-source",
+      "question": "Does creating an account in D365 auto-create a related contact record?",
+      "expected": "runtime",
+      "split": "regression",
+      "allow_schema_search": false,
+      "source_url": "https://community.dynamics.com/forums/thread/details/?threadid=ab9ec3b0-98f0-4e29-b1f0-3e3d8398b8dc",
+      "source_wording": "verbatim question",
+      "fit": "runtime-behavior negative candidate"
+    },
+    {
+      "id": "web-10-source",
+      "question": "What is the difference between an overdraft loan and a personal loan?",
+      "expected": "schema",
+      "split": "regression",
+      "allow_schema_search": true,
+      "source_url": "https://www.mfsa.mt/consumers/banking/loans/",
+      "source_wording": "verbatim question",
+      "fit": "conceptual; partial"
+    }
+  ]
+}

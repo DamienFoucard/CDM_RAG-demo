@@ -1,0 +1,1605 @@
+{
+  "schema_version": 1,
+  "description": "Saved no-LLM nearest-fragment cosine gate on the test splits.",
+  "method": "One raw-conversation embedding and nearest-fragment cosine gate; search as written or no_search. This is not the hybrid top result. No LLM, rewrite or reranker.",
+  "caveat": "All cases incur the preliminary embedding/probe, including out-of-scope cases. One threshold is selected only on the combined development examples. Similarity is not proof a request is safe or answerable.",
+  "artifact_sha256": "49f83791501714e007ea93f24b33f990b7af00faf66b05b54e43193dcd9abf81",
+  "dataset_sha256": {
+    "routing": "5c5de7f4091199172022ed61d24dbed6adb454082abc6c789067dbbff40d0bef",
+    "scope": "091c81e547d45757fdfcf8159735d45067fa0ee17484cdbd479d8e7846552f7b",
+    "scope_source": "cba4dc2a3d23b0c1489c043cd81733f8144e358a1df8960a6763ac5ac0be09eb"
+  },
+  "source_commit": "dd21d715e05ebf740a11356c80b5c3b4c38a89c2",
+  "index_identity": "cd491dd029b4b4bc1e13e924ab8f1f66d1447f938fd03f70dcd4cd9a8d96775f",
+  "embedding": {
+    "name": "nomic-embed-text:latest",
+    "digest": "0a109f422b47e3a30ba2b10eca18548e944e8a23073ee3f3e947efcf3c45e59f"
+  },
+  "calibration": {
+    "threshold": 0.7112449407577515,
+    "balanced_accuracy": 0.8697478991596639,
+    "search_recall": 0.8571428571428571,
+    "no_search_recall": 0.8823529411764706,
+    "development_cases": 31,
+    "search_cases": 14,
+    "no_search_cases": 17,
+    "rule": "Search if nearest-passage cosine >= threshold. Maximize mean search and no-search recall on development; on ties choose the highest threshold."
+  },
+  "datasets": {
+    "cdm-routing-decision-v1": {
+      "split": "test",
+      "rows": [
+        {
+          "case_id": "route-test-raw-overdraft",
+          "split": "test",
+          "question": "In the RetailBankingCoreDataModel CDM schema, how is FIOverdraft described?",
+          "context_messages": [],
+          "expected_route": "raw_search",
+          "accepted_routes": [
+            "raw_search"
+          ],
+          "expected_search": true,
+          "query": "In the RetailBankingCoreDataModel CDM schema, how is FIOverdraft described?",
+          "status": "scored",
+          "similarity": 0.8733549118041992,
+          "nearest_fragment_id": "RetailBankingCoreDataModel::FIOverdraft:entity",
+          "nearest_passage_id": "RetailBankingCoreDataModel::FIOverdraft:entity",
+          "nearest_fragment_text": "CDM entity: FIOverdraft (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FIOverdraft). Source file: schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Fi_overdraft.cdm.json. An extension of credit associated with a checking account allowing the account holder to continue withdrawing funds when an account reaches zero. Selected attribute names: fi_OverdraftId, createdOn, modifiedOn, statecode, statuscode, importSequenceNumber, overriddenCreatedOn, timeZoneRuleVersionNumber, UTCConversionTimeZoneCode, name, financialinstrumenttype, integrationKey.",
+          "nearest_passage": {
+            "id": "RetailBankingCoreDataModel::FIOverdraft:entity",
+            "title": "FIOverdraft (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FIOverdraft)",
+            "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Fi_overdraft.cdm.json",
+            "source_id": "RetailBankingCoreDataModel::FIOverdraft",
+            "source_label": "RetailBankingCoreDataModel::FIOverdraft",
+            "kind": "entity"
+          },
+          "predicted_route": "raw_search",
+          "correct": true,
+          "elapsed_seconds": 0.039
+        },
+        {
+          "case_id": "route-test-raw-contact-parent",
+          "split": "test",
+          "question": "Which applicationCommon CDM entities can Contact.parentCustomer reference?",
+          "context_messages": [],
+          "expected_route": "raw_search",
+          "accepted_routes": [
+            "raw_search"
+          ],
+          "expected_search": true,
+          "query": "Which applicationCommon CDM entities can Contact.parentCustomer reference?",
+          "status": "scored",
+          "similarity": 0.837550938129425,
+          "nearest_fragment_id": "applicationCommon::Contact:relationship:3",
+          "nearest_passage_id": "applicationCommon::Contact:relationship:3",
+          "nearest_fragment_text": "CDM entity Contact (applicationCommon; qualified ID applicationCommon::Contact) has an explicitly referenced relationship through attribute parentCustomer to applicationCommon::Account, applicationCommon::Contact.",
+          "nearest_passage": {
+            "id": "applicationCommon::Contact:relationship:3",
+            "title": "Contact (applicationCommon; qualified ID applicationCommon::Contact).parentCustomer relationship",
+            "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/Contact.cdm.json",
+            "source_id": "applicationCommon::Contact",
+            "source_label": "applicationCommon::Contact",
+            "kind": "relationship"
+          },
+          "predicted_route": "raw_search",
+          "correct": true,
+          "elapsed_seconds": 0.036
+        },
+        {
+          "case_id": "route-test-raw-holding-role",
+          "split": "test",
+          "question": "In RetailBankingCoreDataModel CustomerFinancialHolding, which attribute describes the customer's role in a holding?",
+          "context_messages": [],
+          "expected_route": "raw_search",
+          "accepted_routes": [
+            "raw_search"
+          ],
+          "expected_search": true,
+          "query": "In RetailBankingCoreDataModel CustomerFinancialHolding, which attribute describes the customer's role in a holding?",
+          "status": "scored",
+          "similarity": 0.8745312690734863,
+          "nearest_fragment_id": "RetailBankingCoreDataModel::CustomerFinancialHolding:attributes:3",
+          "nearest_passage_id": "RetailBankingCoreDataModel::CustomerFinancialHolding:attributes:3",
+          "nearest_fragment_text": "Attributes of CDM entity CustomerFinancialHolding (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::CustomerFinancialHolding) at : financialHoldingRole (listLookup); display name Financial holding role; The role of the customer with respect to the financial holding such as owner, beneficiary, etc.; nullable: True; purpose: hasA; source name: msfsi_financialholdingrole; source ordering: 37",
+          "nearest_passage": {
+            "id": "RetailBankingCoreDataModel::CustomerFinancialHolding:attributes:3",
+            "title": "CustomerFinancialHolding (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::CustomerFinancialHolding) attributes",
+            "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Customerfinancialholding.cdm.json",
+            "source_id": "RetailBankingCoreDataModel::CustomerFinancialHolding",
+            "source_label": "RetailBankingCoreDataModel::CustomerFinancialHolding",
+            "kind": "attributes"
+          },
+          "predicted_route": "raw_search",
+          "correct": true,
+          "elapsed_seconds": 0.039
+        },
+        {
+          "case_id": "route-test-raw-group",
+          "split": "test",
+          "question": "Which GroupFinancialHolding relationships reference the group and the holding in RetailBankingCoreDataModel?",
+          "context_messages": [],
+          "expected_route": "raw_search",
+          "accepted_routes": [
+            "raw_search"
+          ],
+          "expected_search": true,
+          "query": "Which GroupFinancialHolding relationships reference the group and the holding in RetailBankingCoreDataModel?",
+          "status": "scored",
+          "similarity": 0.8456552028656006,
+          "nearest_fragment_id": "RetailBankingCoreDataModel::GroupFinancialHolding:relationship:1",
+          "nearest_passage_id": "RetailBankingCoreDataModel::GroupFinancialHolding:relationship:1",
+          "nearest_fragment_text": "CDM entity GroupFinancialHolding (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::GroupFinancialHolding) has an explicitly referenced relationship through attribute FinancialHolding to RetailBankingCoreDataModel::FinancialHolding. Financial holding shows accounts, loans, investment, credit lines and savings.",
+          "nearest_passage": {
+            "id": "RetailBankingCoreDataModel::GroupFinancialHolding:relationship:1",
+            "title": "GroupFinancialHolding (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::GroupFinancialHolding).FinancialHolding relationship",
+            "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Groupfinancialholding.cdm.json",
+            "source_id": "RetailBankingCoreDataModel::GroupFinancialHolding",
+            "source_label": "RetailBankingCoreDataModel::GroupFinancialHolding",
+            "kind": "relationship"
+          },
+          "predicted_route": "raw_search",
+          "correct": true,
+          "elapsed_seconds": 0.052
+        },
+        {
+          "case_id": "route-test-raw-partner",
+          "split": "test",
+          "question": "In applicationCommon CustomerRelationship, what does the partner field reference?",
+          "context_messages": [
+            {
+              "role": "user",
+              "content": "Earlier I was examining RetailBankingCoreDataModel FIStandingOrder."
+            },
+            {
+              "role": "assistant",
+              "content": "We can switch to a different schema object."
+            }
+          ],
+          "expected_route": "raw_search",
+          "accepted_routes": [
+            "raw_search"
+          ],
+          "expected_search": true,
+          "query": "User: Earlier I was examining RetailBankingCoreDataModel FIStandingOrder.\nAssistant: We can switch to a different schema object.\nUser: In applicationCommon CustomerRelationship, what does the partner field reference?",
+          "status": "scored",
+          "similarity": 0.7885764837265015,
+          "nearest_fragment_id": "applicationCommon::CustomerRelationship:attributes:2",
+          "nearest_passage_id": "applicationCommon::CustomerRelationship:attributes:2",
+          "nearest_fragment_text": "Attributes of CDM entity CustomerRelationship (applicationCommon; qualified ID applicationCommon::CustomerRelationship) at : partner (unspecified); purpose: referencesCustomer. BusinessUnit_owningBusinessUnit (unspecified). converseRelationship (unspecified). partnerRoleId (entityId); display name Role 2; Choose the secondary party's role or nature of the relationship the customer has with the primary party. The field is read-only until both parties have been selected. Administrators can configure role values under Business Management in the Settings area.; nullable: True; purpose: hasA; source name: partnerroleid; source ordering: 12. customerRoleDescription (string); display name Description 1; Type additional information about the primary party's role in the customer relationship, such as the length or quality of the relationship.; nullable: True; purpose: hasA; source name: customerroledescription; source ordering: 13. User_modifiedBy (unspecified)",
+          "nearest_passage": {
+            "id": "applicationCommon::CustomerRelationship:attributes:2",
+            "title": "CustomerRelationship (applicationCommon; qualified ID applicationCommon::CustomerRelationship) attributes",
+            "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/CustomerRelationship.cdm.json",
+            "source_id": "applicationCommon::CustomerRelationship",
+            "source_label": "applicationCommon::CustomerRelationship",
+            "kind": "attributes"
+          },
+          "predicted_route": "raw_search",
+          "correct": true,
+          "elapsed_seconds": 0.051
+        },
+        {
+          "case_id": "route-test-raw-phone",
+          "split": "test",
+          "question": "Which applicationCommon PhoneCall attribute stores the phone number?",
+          "context_messages": [],
+          "expected_route": "raw_search",
+          "accepted_routes": [
+            "raw_search"
+          ],
+          "expected_search": true,
+          "query": "Which applicationCommon PhoneCall attribute stores the phone number?",
+          "status": "scored",
+          "similarity": 0.8114869594573975,
+          "nearest_fragment_id": "applicationCommon::PhoneCall:entity",
+          "nearest_passage_id": "applicationCommon::PhoneCall:entity",
+          "nearest_fragment_text": "CDM entity: PhoneCall (applicationCommon; qualified ID applicationCommon::PhoneCall). Source file: schemaDocuments/core/applicationCommon/PhoneCall.cdm.json. Activity to track a telephone call. Selected attribute names: to, phoneNumber, regardingObject, description, stateCode, statusCode, transactionCurrency, exchangeRate, processId, stageId, traversedPath, SLAInvoked.",
+          "nearest_passage": {
+            "id": "applicationCommon::PhoneCall:entity",
+            "title": "PhoneCall (applicationCommon; qualified ID applicationCommon::PhoneCall)",
+            "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/PhoneCall.cdm.json",
+            "source_id": "applicationCommon::PhoneCall",
+            "source_label": "applicationCommon::PhoneCall",
+            "kind": "entity"
+          },
+          "predicted_route": "raw_search",
+          "correct": true,
+          "elapsed_seconds": 0.037
+        },
+        {
+          "case_id": "route-test-rewrite-customer",
+          "split": "test",
+          "question": "Which entity models that person?",
+          "context_messages": [
+            {
+              "role": "user",
+              "content": "A business unit has a relationship with an individual, such as a customer, supplier, or colleague."
+            },
+            {
+              "role": "assistant",
+              "content": "We are looking for the person record in applicationCommon."
+            }
+          ],
+          "expected_route": "rewrite_search",
+          "accepted_routes": [
+            "rewrite_search"
+          ],
+          "expected_search": true,
+          "query": "User: A business unit has a relationship with an individual, such as a customer, supplier, or colleague.\nAssistant: We are looking for the person record in applicationCommon.\nUser: Which entity models that person?",
+          "status": "scored",
+          "similarity": 0.8320913314819336,
+          "nearest_fragment_id": "applicationCommon::User:relationship:2",
+          "nearest_passage_id": "applicationCommon::User:relationship:2",
+          "nearest_fragment_text": "CDM entity User (applicationCommon; qualified ID applicationCommon::User) has an explicitly referenced relationship through attribute businessUnit to applicationCommon::BusinessUnit.",
+          "nearest_passage": {
+            "id": "applicationCommon::User:relationship:2",
+            "title": "User (applicationCommon; qualified ID applicationCommon::User).businessUnit relationship",
+            "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/User.cdm.json",
+            "source_id": "applicationCommon::User",
+            "source_label": "applicationCommon::User",
+            "kind": "relationship"
+          },
+          "predicted_route": "raw_search",
+          "correct": false,
+          "elapsed_seconds": 0.047
+        },
+        {
+          "case_id": "route-test-rewrite-phone",
+          "split": "test",
+          "question": "Which field stores the phone number?",
+          "context_messages": [
+            {
+              "role": "user",
+              "content": "We are reviewing how an applicationCommon phone call is represented."
+            },
+            {
+              "role": "assistant",
+              "content": "The schema object in question is the PhoneCall entity."
+            }
+          ],
+          "expected_route": "rewrite_search",
+          "accepted_routes": [
+            "rewrite_search"
+          ],
+          "expected_search": true,
+          "query": "User: We are reviewing how an applicationCommon phone call is represented.\nAssistant: The schema object in question is the PhoneCall entity.\nUser: Which field stores the phone number?",
+          "status": "scored",
+          "similarity": 0.7856090664863586,
+          "nearest_fragment_id": "applicationCommon::PhoneCall:entity",
+          "nearest_passage_id": "applicationCommon::PhoneCall:entity",
+          "nearest_fragment_text": "CDM entity: PhoneCall (applicationCommon; qualified ID applicationCommon::PhoneCall). Source file: schemaDocuments/core/applicationCommon/PhoneCall.cdm.json. Activity to track a telephone call. Selected attribute names: to, phoneNumber, regardingObject, description, stateCode, statusCode, transactionCurrency, exchangeRate, processId, stageId, traversedPath, SLAInvoked.",
+          "nearest_passage": {
+            "id": "applicationCommon::PhoneCall:entity",
+            "title": "PhoneCall (applicationCommon; qualified ID applicationCommon::PhoneCall)",
+            "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/PhoneCall.cdm.json",
+            "source_id": "applicationCommon::PhoneCall",
+            "source_label": "applicationCommon::PhoneCall",
+            "kind": "entity"
+          },
+          "predicted_route": "raw_search",
+          "correct": false,
+          "elapsed_seconds": 0.038
+        },
+        {
+          "case_id": "route-test-rewrite-ownership",
+          "split": "test",
+          "question": "Which field distinguishes an owner from a beneficiary?",
+          "context_messages": [
+            {
+              "role": "user",
+              "content": "I am reviewing CustomerFinancialHolding in the Retail Banking CDM model."
+            },
+            {
+              "role": "assistant",
+              "content": "The entity associates a customer with a financial holding."
+            }
+          ],
+          "expected_route": "rewrite_search",
+          "accepted_routes": [
+            "rewrite_search"
+          ],
+          "expected_search": true,
+          "query": "User: I am reviewing CustomerFinancialHolding in the Retail Banking CDM model.\nAssistant: The entity associates a customer with a financial holding.\nUser: Which field distinguishes an owner from a beneficiary?",
+          "status": "scored",
+          "similarity": 0.8109170794487,
+          "nearest_fragment_id": "RetailBankingCoreDataModel::CustomerFinancialHolding:attributes:3",
+          "nearest_passage_id": "RetailBankingCoreDataModel::CustomerFinancialHolding:attributes:3",
+          "nearest_fragment_text": "Attributes of CDM entity CustomerFinancialHolding (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::CustomerFinancialHolding) at : financialHoldingRole (listLookup); display name Financial holding role; The role of the customer with respect to the financial holding such as owner, beneficiary, etc.; nullable: True; purpose: hasA; source name: msfsi_financialholdingrole; source ordering: 37",
+          "nearest_passage": {
+            "id": "RetailBankingCoreDataModel::CustomerFinancialHolding:attributes:3",
+            "title": "CustomerFinancialHolding (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::CustomerFinancialHolding) attributes",
+            "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Customerfinancialholding.cdm.json",
+            "source_id": "RetailBankingCoreDataModel::CustomerFinancialHolding",
+            "source_label": "RetailBankingCoreDataModel::CustomerFinancialHolding",
+            "kind": "attributes"
+          },
+          "predicted_route": "raw_search",
+          "correct": false,
+          "elapsed_seconds": 0.046
+        },
+        {
+          "case_id": "route-test-rewrite-card",
+          "split": "test",
+          "question": "What does that customer reference point to?",
+          "context_messages": [
+            {
+              "role": "user",
+              "content": "Consider the Cardholder relationship on RetailBankingCoreDataModel FICard."
+            },
+            {
+              "role": "assistant",
+              "content": "We need the allowed referenced customer types."
+            }
+          ],
+          "expected_route": "rewrite_search",
+          "accepted_routes": [
+            "rewrite_search"
+          ],
+          "expected_search": true,
+          "query": "User: Consider the Cardholder relationship on RetailBankingCoreDataModel FICard.\nAssistant: We need the allowed referenced customer types.\nUser: What does that customer reference point to?",
+          "status": "scored",
+          "similarity": 0.8171473741531372,
+          "nearest_fragment_id": "RetailBankingCoreDataModel::FICard:relationship:1",
+          "nearest_passage_id": "RetailBankingCoreDataModel::FICard:relationship:1",
+          "nearest_fragment_text": "CDM entity FICard (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FICard) has an explicitly referenced relationship through attribute Cardholder to RetailBankingCoreDataModel::Account, RetailBankingCoreDataModel::Contact. The customer associated with the card.",
+          "nearest_passage": {
+            "id": "RetailBankingCoreDataModel::FICard:relationship:1",
+            "title": "FICard (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FICard).Cardholder relationship",
+            "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Fi_card.cdm.json",
+            "source_id": "RetailBankingCoreDataModel::FICard",
+            "source_label": "RetailBankingCoreDataModel::FICard",
+            "kind": "relationship"
+          },
+          "predicted_route": "raw_search",
+          "correct": false,
+          "elapsed_seconds": 0.051
+        },
+        {
+          "case_id": "route-test-rewrite-investment",
+          "split": "test",
+          "question": "What does the second one represent?",
+          "context_messages": [
+            {
+              "role": "user",
+              "content": "In RetailBankingCoreDataModel, compare the FHLoan and FHInvestment entities, in that order."
+            },
+            {
+              "role": "assistant",
+              "content": "We can examine the two entity definitions separately."
+            }
+          ],
+          "expected_route": "rewrite_search",
+          "accepted_routes": [
+            "rewrite_search"
+          ],
+          "expected_search": true,
+          "query": "User: In RetailBankingCoreDataModel, compare the FHLoan and FHInvestment entities, in that order.\nAssistant: We can examine the two entity definitions separately.\nUser: What does the second one represent?",
+          "status": "scored",
+          "similarity": 0.8326906561851501,
+          "nearest_fragment_id": "RetailBankingCoreDataModel::FHLoan:trait-applications:entity",
+          "nearest_passage_id": "RetailBankingCoreDataModel::FHLoan:trait-applications:entity",
+          "nearest_fragment_text": "CDM entity FHLoan (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FHLoan) exhibits these traits: is.localized.describedAs with arguments [{\"name\":\"argument 1\",\"value\":{\"constantValues\":[[\"en\",\"Loans held by the customer with the financial institution.\"]],\"entityShape\":\"localizedTable\"}}], is.localized.displayedAs with arguments [{\"name\":\"argument 1\",\"value\":{\"constantValues\":[[\"en\",\"FH loan\"]],\"entityShape\":\"localizedTable\"}}], is.CDM.entityVersion with arguments [{\"name\":\"versionNumber\",\"value\":\"1.1\"}].",
+          "nearest_passage": {
+            "id": "RetailBankingCoreDataModel::FHLoan:trait-applications:entity",
+            "title": "Traits applied to FHLoan (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FHLoan)",
+            "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Fh_loan.cdm.json",
+            "source_id": "RetailBankingCoreDataModel::FHLoan",
+            "source_label": "RetailBankingCoreDataModel::FHLoan",
+            "kind": "trait_application"
+          },
+          "predicted_route": "raw_search",
+          "correct": false,
+          "elapsed_seconds": 0.042
+        },
+        {
+          "case_id": "route-test-rewrite-payment",
+          "split": "test",
+          "question": "Which of those two authorizes the creditor to collect payments?",
+          "context_messages": [
+            {
+              "role": "user",
+              "content": "I am comparing FIDirectDebit with FIStandingOrder in RetailBankingCoreDataModel."
+            },
+            {
+              "role": "assistant",
+              "content": "Both are recurring payment concepts in the catalog."
+            }
+          ],
+          "expected_route": "rewrite_search",
+          "accepted_routes": [
+            "rewrite_search"
+          ],
+          "expected_search": true,
+          "query": "User: I am comparing FIDirectDebit with FIStandingOrder in RetailBankingCoreDataModel.\nAssistant: Both are recurring payment concepts in the catalog.\nUser: Which of those two authorizes the creditor to collect payments?",
+          "status": "scored",
+          "similarity": 0.7534574270248413,
+          "nearest_fragment_id": "RetailBankingCoreDataModel::FIStandingOrder:entity",
+          "nearest_passage_id": "RetailBankingCoreDataModel::FIStandingOrder:entity",
+          "nearest_fragment_text": "CDM entity: FIStandingOrder (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FIStandingOrder). Source file: schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Fi_standingorder.cdm.json. An instruction order from an account holder for a set amount of money to be removed from an account at regular intervals and paid to or transferred to another account. Selected attribute names: fi_StandingOrderId, createdOn, modifiedOn, statecode, statuscode, importSequenceNumber, overriddenCreatedOn, timeZoneRuleVersionNumber, UTCConversionTimeZoneCode, name, creditoraccount, creditorname.",
+          "nearest_passage": {
+            "id": "RetailBankingCoreDataModel::FIStandingOrder:entity",
+            "title": "FIStandingOrder (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FIStandingOrder)",
+            "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Fi_standingorder.cdm.json",
+            "source_id": "RetailBankingCoreDataModel::FIStandingOrder",
+            "source_label": "RetailBankingCoreDataModel::FIStandingOrder",
+            "kind": "entity"
+          },
+          "predicted_route": "raw_search",
+          "correct": false,
+          "elapsed_seconds": 0.041
+        },
+        {
+          "case_id": "route-test-no-personal-card",
+          "split": "test",
+          "question": "Who is the actual cardholder on my Visa card?",
+          "context_messages": [
+            {
+              "role": "user",
+              "content": "Earlier we were reading the FICard definition in the Retail Banking model."
+            }
+          ],
+          "expected_route": "no_search",
+          "accepted_routes": [
+            "no_search"
+          ],
+          "expected_search": false,
+          "query": "User: Earlier we were reading the FICard definition in the Retail Banking model.\nUser: Who is the actual cardholder on my Visa card?",
+          "status": "scored",
+          "similarity": 0.7577322721481323,
+          "nearest_fragment_id": "RetailBankingCoreDataModel::FICard:entity",
+          "nearest_passage_id": "RetailBankingCoreDataModel::FICard:entity",
+          "nearest_fragment_text": "CDM entity: FICard (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FICard). Source file: schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Fi_card.cdm.json. A payment card issued by a bank to an account holder enabling the account holder to make payments or purchases, paying back the balance to the issuing bank, plus interest. Selected attribute names: fi_CardId, createdOn, modifiedOn, statecode, statuscode, importSequenceNumber, overriddenCreatedOn, timeZoneRuleVersionNumber, UTCConversionTimeZoneCode, name, activationDate, Cardholder.",
+          "nearest_passage": {
+            "id": "RetailBankingCoreDataModel::FICard:entity",
+            "title": "FICard (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FICard)",
+            "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Fi_card.cdm.json",
+            "source_id": "RetailBankingCoreDataModel::FICard",
+            "source_label": "RetailBankingCoreDataModel::FICard",
+            "kind": "entity"
+          },
+          "predicted_route": "raw_search",
+          "correct": false,
+          "elapsed_seconds": 0.038
+        },
+        {
+          "case_id": "route-test-no-current-loan",
+          "split": "test",
+          "question": "How much do I still owe on my personal loan today?",
+          "context_messages": [],
+          "expected_route": "no_search",
+          "accepted_routes": [
+            "no_search"
+          ],
+          "expected_search": false,
+          "query": "How much do I still owe on my personal loan today?",
+          "status": "scored",
+          "similarity": 0.57846999168396,
+          "nearest_fragment_id": "RetailBankingCoreDataModel::FHLoan:attributes:9",
+          "nearest_passage_id": "RetailBankingCoreDataModel::FHLoan:attributes:9",
+          "nearest_fragment_text": "Attributes of CDM entity FHLoan (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FHLoan) at : nextpaymentamount_Base (currency); display name Next payment amount (base); Value of the next payment amount in base currency.; nullable: True; purpose: hasA; source name: msfsi_nextpaymentamount_base; source ordering: 83. nextPaymentAmount_default (decimal); display name Next payment amount (default); Next payment amount converted to default currency of the system.; nullable: True; purpose: hasA; source name: msfsi_nextpaymentamount_default; source ordering: 84. nextPaymentDate (dateTime); display name Next payment date; The date on which the next payment towards the financial holding is due. This can be applied to credits and loans.; nullable: True; purpose: hasA; source name: msfsi_nextpaymentdate; source ordering: 85. numberofDeferralsMade (integer); display name Number of deferrals made; Total number of installment deferrals made by the customer (i.e. number of times customer has taken a loan repayment holiday from the bank).; nullable: True; purpose: hasA; source name: msfsi_numberofdeferralsmade; source ordering: 86. numberofInstallmentsPaid (integer); display name Number of installments paid; Total number of installments that have been paid back by the customer so far.; nullable: True; purpose: hasA; source name: msfsi_numberofinstallmentspaid; source ordering: 87. overdueDate (dateTime); display name Overdue date; The date on which the repayment was missed and the loan became overdue.; nullable: True; purpose: hasA; source name: msfsi_overduedate; source ordering: 88",
+          "nearest_passage": {
+            "id": "RetailBankingCoreDataModel::FHLoan:attributes:9",
+            "title": "FHLoan (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FHLoan) attributes",
+            "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Fh_loan.cdm.json",
+            "source_id": "RetailBankingCoreDataModel::FHLoan",
+            "source_label": "RetailBankingCoreDataModel::FHLoan",
+            "kind": "attributes"
+          },
+          "predicted_route": "no_search",
+          "correct": true,
+          "elapsed_seconds": 0.038
+        },
+        {
+          "case_id": "route-test-no-live-status",
+          "split": "test",
+          "question": "Is the production CDM RAG deployment healthy right now?",
+          "context_messages": [],
+          "expected_route": "no_search",
+          "accepted_routes": [
+            "no_search"
+          ],
+          "expected_search": false,
+          "query": "Is the production CDM RAG deployment healthy right now?",
+          "status": "scored",
+          "similarity": 0.6033446788787842,
+          "nearest_fragment_id": "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:1:a8eb7b112875",
+          "nearest_passage_id": "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:1:a8eb7b112875",
+          "nearest_fragment_text": "The CDM manifest foundationCommon (applicationCommon) records these relationship mappings from crmCommon/sales/LeadProduct.cdm.json/LeadProduct: crmCommon/sales/LeadProduct.cdm.json/LeadProduct.productId maps to Product.cdm.json/Product attribute productId (target Product.cdm.json/Product).",
+          "nearest_passage": {
+            "id": "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:1:a8eb7b112875",
+            "title": "Relationship mappings in manifest foundationCommon (applicationCommon)",
+            "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json",
+            "source_id": "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json",
+            "source_label": "Relationship mappings in manifest foundationCommon (applicationCommon)",
+            "kind": "manifest_relationship"
+          },
+          "predicted_route": "no_search",
+          "correct": true,
+          "elapsed_seconds": 0.039
+        },
+        {
+          "case_id": "route-test-no-mixed",
+          "split": "test",
+          "question": "Explain the applicationCommon Contact schema, and tell me the current balance of my personal bank account.",
+          "context_messages": [],
+          "expected_route": "no_search",
+          "accepted_routes": [
+            "no_search"
+          ],
+          "expected_search": false,
+          "query": "Explain the applicationCommon Contact schema, and tell me the current balance of my personal bank account.",
+          "status": "scored",
+          "similarity": 0.797724187374115,
+          "nearest_fragment_id": "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:2:8614dc0feeb1",
+          "nearest_passage_id": "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:2:8614dc0feeb1",
+          "nearest_fragment_text": "The CDM manifest applicationCommon (applicationCommon) records these relationship mappings from foundationCommon/crmCommon/accelerators/financialServices/banking/Contact.cdm.json/Contact: foundationCommon/crmCommon/accelerators/financialServices/banking/Contact.cdm.json/Contact.modifiedBy maps to User.cdm.json/User attribute systemUserId (target User (applicationCommon)). foundationCommon/crmCommon/accelerators/financialServices/banking/Contact.cdm.json/Contact.modifiedOnBehalfBy maps to User.cdm.json/User attribute systemUserId (target User (applicationCommon)). foundationCommon/crmCommon/accelerators/financialServices/banking/Contact.cdm.json/Contact.ownerId maps to User.cdm.json/User attribute systemUserId (target User (applicationCommon)). foundationCommon/crmCommon/accelerators/financialServices/banking/Contact.cdm.json/Contact.owningUser maps to User.cdm.json/User attribute systemUserId (target User (applicationCommon)). foundationCommon/crmCommon/accelerators/financialServices/banking/Contact.cdm.json/Contact.preferredSystemUserId maps to User.cdm.json/User attribute systemUserId (target User (applicationCommon)).",
+          "nearest_passage": {
+            "id": "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:2:8614dc0feeb1",
+            "title": "Relationship mappings in manifest applicationCommon (applicationCommon)",
+            "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json",
+            "source_id": "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json",
+            "source_label": "Relationship mappings in manifest applicationCommon (applicationCommon)",
+            "kind": "manifest_relationship"
+          },
+          "predicted_route": "raw_search",
+          "correct": false,
+          "elapsed_seconds": 0.155
+        },
+        {
+          "case_id": "route-test-no-interest",
+          "split": "test",
+          "question": "What is today's mortgage interest rate at my bank?",
+          "context_messages": [
+            {
+              "role": "user",
+              "content": "We were discussing loan entities in CDM."
+            }
+          ],
+          "expected_route": "no_search",
+          "accepted_routes": [
+            "no_search"
+          ],
+          "expected_search": false,
+          "query": "User: We were discussing loan entities in CDM.\nUser: What is today's mortgage interest rate at my bank?",
+          "status": "scored",
+          "similarity": 0.7597262263298035,
+          "nearest_fragment_id": "RetailBankingCoreDataModel::FHLoan:attributes:7",
+          "nearest_passage_id": "RetailBankingCoreDataModel::FHLoan:attributes:7",
+          "nearest_fragment_text": "Attributes of CDM entity FHLoan (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FHLoan) at : interestrate (decimal); display name Interest rate; The rate of interest charged to the loan borrower during a defined period or term during the course of a loan.; nullable: True; purpose: hasA; source name: msfsi_interestrate; source ordering: 69. interestReviewPeriod (string); display name Interest review period; The time period that defines the periodic interest rate timeframe.; nullable: True; purpose: hasA; source name: msfsi_interestreviewperiod; source ordering: 70. interestType (listLookup); display name Interest type; The type of interest charged on the loan: fixed, periodical, floating, etc.; nullable: True; purpose: hasA; source name: msfsi_interesttype; source ordering: 71. lastPaymentAmount (currency); display name Last payment amount; The amount that was paid by the customer towards the loan in the last loan payment.; nullable: True; purpose: hasA; source name: msfsi_lastpaymentamount; source ordering: 73. lastpaymentamount_Base (currency); display name Last payment amount (base); Value of the last payment amount in base currency.; nullable: True; purpose: hasA; source name: msfsi_lastpaymentamount_base; source ordering: 74. lastPaymentAmount_default (decimal); display name Last payment amount (default); Last payment amount converted to default currency of the system.; nullable: True; purpose: hasA; source name: msfsi_lastpaymentamount_default; source ordering: 75",
+          "nearest_passage": {
+            "id": "RetailBankingCoreDataModel::FHLoan:attributes:7",
+            "title": "FHLoan (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FHLoan) attributes",
+            "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Fh_loan.cdm.json",
+            "source_id": "RetailBankingCoreDataModel::FHLoan",
+            "source_label": "RetailBankingCoreDataModel::FHLoan",
+            "kind": "attributes"
+          },
+          "predicted_route": "raw_search",
+          "correct": false,
+          "elapsed_seconds": 0.097
+        },
+        {
+          "case_id": "route-test-no-weather",
+          "split": "test",
+          "question": "Will it rain in Berlin tomorrow?",
+          "context_messages": [],
+          "expected_route": "no_search",
+          "accepted_routes": [
+            "no_search"
+          ],
+          "expected_search": false,
+          "query": "Will it rain in Berlin tomorrow?",
+          "status": "scored",
+          "similarity": 0.4634939432144165,
+          "nearest_fragment_id": "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:1:9ea1ee00c2cd",
+          "nearest_passage_id": "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:1:9ea1ee00c2cd",
+          "nearest_fragment_text": "The CDM manifest foundationCommon (applicationCommon) records these relationship mappings from crmCommon/accelerators/financialServices/banking/Opportunity.cdm.json/Opportunity: crmCommon/accelerators/financialServices/banking/Opportunity.cdm.json/Opportunity.priceLevelId maps to PriceList.cdm.json/PriceList attribute priceLevelId (target PriceList.cdm.json/PriceList).",
+          "nearest_passage": {
+            "id": "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:1:9ea1ee00c2cd",
+            "title": "Relationship mappings in manifest foundationCommon (applicationCommon)",
+            "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json",
+            "source_id": "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json",
+            "source_label": "Relationship mappings in manifest foundationCommon (applicationCommon)",
+            "kind": "manifest_relationship"
+          },
+          "predicted_route": "no_search",
+          "correct": true,
+          "elapsed_seconds": 0.048
+        }
+      ],
+      "summary": {
+        "attempted": 18,
+        "scored": 18,
+        "errors": 0,
+        "correct": 9,
+        "accuracy": 0.5,
+        "search_gate_correct": 15,
+        "search_gate_accuracy": 0.8333333333333334,
+        "false_search": 3,
+        "false_no_search": 0,
+        "three_way_evaluable": 18,
+        "macro_f1": 0.41269841269841273,
+        "mean_seconds": 0.05188888888888889,
+        "classes": {
+          "raw_search": {
+            "expected": 6,
+            "predicted": 15,
+            "correct": 6,
+            "precision": 0.4,
+            "recall": 1.0,
+            "f1": 0.5714285714285715
+          },
+          "rewrite_search": {
+            "expected": 6,
+            "predicted": 0,
+            "correct": 0,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          },
+          "no_search": {
+            "expected": 6,
+            "predicted": 3,
+            "correct": 3,
+            "precision": 1.0,
+            "recall": 0.5,
+            "f1": 0.6666666666666666
+          }
+        }
+      }
+    },
+    "cdm-routing-scope-binary-v1": {
+      "split": "test",
+      "rows": [
+        {
+          "case_id": "t01",
+          "split": "test",
+          "question": "Which entity has a field for an available account balance?",
+          "context_messages": [],
+          "expected_route": null,
+          "accepted_routes": [
+            "raw_search",
+            "rewrite_search"
+          ],
+          "expected_search": true,
+          "query": "Which entity has a field for an available account balance?",
+          "status": "scored",
+          "similarity": 0.7322252988815308,
+          "nearest_fragment_id": "RetailBankingCoreDataModel::FHAccount:attributes:3",
+          "nearest_passage_id": "RetailBankingCoreDataModel::FHAccount:attributes:3",
+          "nearest_fragment_text": "Attributes of CDM entity FHAccount (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FHAccount) at : availablebalance_Base (currency); display name Available balance (base); Value of the available balance in base currency.; nullable: True; purpose: hasA; source name: msfsi_availablebalance_base; source ordering: 41. availableBalance_default (decimal); display name Available balance (default); Available balance converted to default currency of the system.; nullable: True; purpose: hasA; source name: msfsi_availablebalance_default; source ordering: 42. averageBalance (currency); display name Average balance; The average balance in the account calculated over a chosen period of time by the bank.; nullable: True; purpose: hasA; source name: msfsi_averagebalance; source ordering: 43. averagebalance_Base (currency); display name Average balance (base); Value of the average balance in base currency.; nullable: True; purpose: hasA; source name: msfsi_averagebalance_base; source ordering: 44. averageBalance_default (decimal); display name Average balance (default); Average balance converted to default currency of the system.; nullable: True; purpose: hasA; source name: msfsi_averagebalance_default; source ordering: 45. balance (currency); display name Balance; The balance or value of the financial holding in the original currency of the financial holding.; nullable: True; purpose: hasA; source name: msfsi_balance; source ordering: 46",
+          "nearest_passage": {
+            "id": "RetailBankingCoreDataModel::FHAccount:attributes:3",
+            "title": "FHAccount (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FHAccount) attributes",
+            "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Fh_account.cdm.json",
+            "source_id": "RetailBankingCoreDataModel::FHAccount",
+            "source_label": "RetailBankingCoreDataModel::FHAccount",
+            "kind": "attributes"
+          },
+          "predicted_route": "raw_search",
+          "correct": true,
+          "elapsed_seconds": 0.048
+        },
+        {
+          "case_id": "t02",
+          "split": "test",
+          "question": "Which definitions link people to their financial holdings?",
+          "context_messages": [],
+          "expected_route": null,
+          "accepted_routes": [
+            "raw_search",
+            "rewrite_search"
+          ],
+          "expected_search": true,
+          "query": "Which definitions link people to their financial holdings?",
+          "status": "scored",
+          "similarity": 0.7190976142883301,
+          "nearest_fragment_id": "RetailBankingCoreDataModel::GroupFinancialHolding:relationship:1",
+          "nearest_passage_id": "RetailBankingCoreDataModel::GroupFinancialHolding:relationship:1",
+          "nearest_fragment_text": "CDM entity GroupFinancialHolding (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::GroupFinancialHolding) has an explicitly referenced relationship through attribute FinancialHolding to RetailBankingCoreDataModel::FinancialHolding. Financial holding shows accounts, loans, investment, credit lines and savings.",
+          "nearest_passage": {
+            "id": "RetailBankingCoreDataModel::GroupFinancialHolding:relationship:1",
+            "title": "GroupFinancialHolding (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::GroupFinancialHolding).FinancialHolding relationship",
+            "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Groupfinancialholding.cdm.json",
+            "source_id": "RetailBankingCoreDataModel::GroupFinancialHolding",
+            "source_label": "RetailBankingCoreDataModel::GroupFinancialHolding",
+            "kind": "relationship"
+          },
+          "predicted_route": "raw_search",
+          "correct": true,
+          "elapsed_seconds": 0.04
+        },
+        {
+          "case_id": "t03",
+          "split": "test",
+          "question": "What attributes can describe a business account?",
+          "context_messages": [],
+          "expected_route": null,
+          "accepted_routes": [
+            "raw_search",
+            "rewrite_search"
+          ],
+          "expected_search": true,
+          "query": "What attributes can describe a business account?",
+          "status": "scored",
+          "similarity": 0.7682541608810425,
+          "nearest_fragment_id": "applicationCommon::Account:trait-applications:attributes:1::fragment:3",
+          "nearest_passage_id": "applicationCommon::Account:trait-applications:attributes:1",
+          "nearest_fragment_text": "Attribute traits of Account (applicationCommon; qualified ID applicationCommon::Account): 1\",\"value\":{\"constantValues\":[[\"en\",\"Accounting\",\"1\",\"0\"],[\"en\",\"Agriculture and Non-petrol Natural Resource Extraction\",\"2\",\"1\"],[\"en\",\"Broadcasting Printing and Publishing\",\"3\",\"2\"],[\"en\",\"Brokers\",\"4\",\"3\"],[\"en\",\"Building Supply Retail\",\"5\",\"4\"],[\"en\",\"Business Services\",\"6\",\"5\"],[\"en\",\"Consulting\",\"7\",\"6\"],[\"en\",\"Consumer Services\",\"8\",\"7\"],[\"en\",\"Design, Direction and Creative Management\",\"9\",\"8\"],[\"en\",\"Distributors, Dispatchers and Processors\",\"10\",\"9\"],[\"en\",\"Doctor's Offices and Clinics\",\"11\",\"10\"],[\"en\",\"Durable Manufacturing\",\"12\",\"11\"],[\"en\",\"Eating and Drinking Places\",\"13\",\"12\"],[\"en\",\"Entertainment Retail\",\"14\",\"13\"],[\"en\",\"Equipment Rental and Leasing\",\"15\",\"14\"],[\"en\",\"Financial\",\"16\",\"15\"],[\"en\",\"Food and Tobacco Processing\",\"17\",\"16\"],[\"en\",\"Inbound Capital Intensive Processing\",\"18\",\"17\"],[\"en\",\"Inbound Repair and Services\",\"19\",\"18\"],[\"en\",\"Insurance\",\"20\",\"19\"],[\"en\",\"Legal Services\",\"21\",\"20\"],[\"en\",\"Non-Durable Merchandise Retail\",\"22\",\"21\"],[\"en\",\"Outbound Consumer Service\",\"23\",\"22\"],[\"en\",\"Petrochemical Extraction and Distribution\",\"24\",\"23\"],[\"en\",\"Service Retail\",\"25\",\"24\"],[\"en\",\"SIG Affiliations\",\"26\",\"25\"],[\"en\",\"Social Services\",\"27\",\"26\"],[\"en\",\"Special Outbound Trade Contractors\",\"28\",\"27\"],[\"en\",\"Specialty Realty\",\"29\",\"28\"],[\"en\",\"Transportation\",\"30\",\"29\"],[\"en\",\"Utility Creation and Distribution\",\"31\",\"30\"],[\"en\",\"Vehicle Retail\",\"32\",\"31\"],[\"en\",\"Wholesale\",\"33\",\"32\"]],\"entityShape\":\"listLookupValues\",\"explanation\":\"The constantValues below correspond to the attributes of the 'listLookupValues' entityShape which are: {languageTag, displayText, attributeValue, displayOrder}\"}}]; territoryCode (listLookup): applied traits: is.requiredAtLevel with arguments [{\"name\":\"level\",\"value\":\"none\"}], is.localized.displayedAs with arguments [{\"name\":\"argument 1\",\"value\":{\"constantValues\":[[\"en\",\"Territory Code\"]],\"entityShape\":\"localizedTable\"}}], is.localized.describedAs with arguments [{\"name\":\"argument 1\",\"value\":{\"constantValues\":[[\"en\",\"Select a region or territory for the account for use in segmentation and analysis.\"]],\"entityShape\":\"localizedTable\"}}]; data-type traits: does.haveDefault with arguments [{\"name\":\"argument 1\",\"value\":{\"constantValues\":[[\"en\",\"Default Value\",\"1\",\"0\"]],\"entityShape\":\"listLookupValues\",\"explanation\":\"The constantValues below correspond to the attributes of the 'listLookupValues' entityShape which are: {languageTag, displayText, attributeValue, displayOrder}\"}}]",
+          "nearest_passage": {
+            "id": "applicationCommon::Account:trait-applications:attributes:1",
+            "title": "Attribute traits of Account (applicationCommon; qualified ID applicationCommon::Account)",
+            "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/Account.cdm.json",
+            "source_id": "applicationCommon::Account",
+            "source_label": "applicationCommon::Account",
+            "kind": "trait_application"
+          },
+          "predicted_route": "raw_search",
+          "correct": true,
+          "elapsed_seconds": 0.039
+        },
+        {
+          "case_id": "t04",
+          "split": "test",
+          "question": "How are group memberships represented in Microsoft CDM?",
+          "context_messages": [],
+          "expected_route": null,
+          "accepted_routes": [
+            "raw_search",
+            "rewrite_search"
+          ],
+          "expected_search": true,
+          "query": "How are group memberships represented in Microsoft CDM?",
+          "status": "scored",
+          "similarity": 0.7962116003036499,
+          "nearest_fragment_id": "RetailBankingCoreDataModel::GroupMember:entity",
+          "nearest_passage_id": "RetailBankingCoreDataModel::GroupMember:entity",
+          "nearest_fragment_text": "CDM entity: GroupMember (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::GroupMember). Source file: schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Groupmember.cdm.json. An association between a customer and a Group. Selected attribute names: groupMemberId.",
+          "nearest_passage": {
+            "id": "RetailBankingCoreDataModel::GroupMember:entity",
+            "title": "GroupMember (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::GroupMember)",
+            "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Groupmember.cdm.json",
+            "source_id": "RetailBankingCoreDataModel::GroupMember",
+            "source_label": "RetailBankingCoreDataModel::GroupMember",
+            "kind": "entity"
+          },
+          "predicted_route": "raw_search",
+          "correct": true,
+          "elapsed_seconds": 0.04
+        },
+        {
+          "case_id": "t05",
+          "split": "test",
+          "question": "Can you explain the relationship between a loan and a financial holding?",
+          "context_messages": [],
+          "expected_route": null,
+          "accepted_routes": [
+            "raw_search",
+            "rewrite_search"
+          ],
+          "expected_search": true,
+          "query": "Can you explain the relationship between a loan and a financial holding?",
+          "status": "scored",
+          "similarity": 0.6955252289772034,
+          "nearest_fragment_id": "RetailBankingCoreDataModel::GroupFinancialHolding:relationship:1",
+          "nearest_passage_id": "RetailBankingCoreDataModel::GroupFinancialHolding:relationship:1",
+          "nearest_fragment_text": "CDM entity GroupFinancialHolding (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::GroupFinancialHolding) has an explicitly referenced relationship through attribute FinancialHolding to RetailBankingCoreDataModel::FinancialHolding. Financial holding shows accounts, loans, investment, credit lines and savings.",
+          "nearest_passage": {
+            "id": "RetailBankingCoreDataModel::GroupFinancialHolding:relationship:1",
+            "title": "GroupFinancialHolding (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::GroupFinancialHolding).FinancialHolding relationship",
+            "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Groupfinancialholding.cdm.json",
+            "source_id": "RetailBankingCoreDataModel::GroupFinancialHolding",
+            "source_label": "RetailBankingCoreDataModel::GroupFinancialHolding",
+            "kind": "relationship"
+          },
+          "predicted_route": "no_search",
+          "correct": false,
+          "elapsed_seconds": 0.038
+        },
+        {
+          "case_id": "t06",
+          "split": "test",
+          "question": "Which schema type represents a scheduled payment instruction?",
+          "context_messages": [],
+          "expected_route": null,
+          "accepted_routes": [
+            "raw_search",
+            "rewrite_search"
+          ],
+          "expected_search": true,
+          "query": "Which schema type represents a scheduled payment instruction?",
+          "status": "scored",
+          "similarity": 0.688414990901947,
+          "nearest_fragment_id": "RetailBankingCoreDataModel::FIStandingOrder:attributes:3",
+          "nearest_passage_id": "RetailBankingCoreDataModel::FIStandingOrder:attributes:3",
+          "nearest_fragment_text": "Attributes of CDM entity FIStandingOrder (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FIStandingOrder) at : dayofmonth (integer); display name Day of month; The day of the month when the payment should be completed.; nullable: True; purpose: hasA; source name: msfsi_dayofmonth; source ordering: 37. dayofweek (listLookup); display name Day of week; The day of the week when a direct debit from the account should be made.; nullable: True; purpose: hasA; source name: msfsi_dayofweek; source ordering: 38. debtoraccount (string); display name Debtor account; Account number from which payment is executed against for direct debit or standing order.; nullable: True; purpose: hasA; source name: msfsi_debtoraccount; source ordering: 40. financialinstrumenttype (listLookup); display name Financial instrument type; The type of financial instrument (Direct debit, Standing order, Card, Overdraft).; nullable: True; purpose: hasA; source name: msfsi_financialinstrumenttype; source ordering: 41. firstpaymentdate (dateTime); display name First payment date; The date of the first payment for the standing order.; nullable: True; purpose: hasA; source name: msfsi_firstpaymentdate; source ordering: 43. frequency (listLookup); display name Frequency; The frequency of the standing order (daily, weekly, monthly, quarterly, yearly).; nullable: True; purpose: hasA; source name: msfsi_frequency; source ordering: 44",
+          "nearest_passage": {
+            "id": "RetailBankingCoreDataModel::FIStandingOrder:attributes:3",
+            "title": "FIStandingOrder (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FIStandingOrder) attributes",
+            "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Fi_standingorder.cdm.json",
+            "source_id": "RetailBankingCoreDataModel::FIStandingOrder",
+            "source_label": "RetailBankingCoreDataModel::FIStandingOrder",
+            "kind": "attributes"
+          },
+          "predicted_route": "no_search",
+          "correct": false,
+          "elapsed_seconds": 0.039
+        },
+        {
+          "case_id": "t07",
+          "split": "test",
+          "question": "Does the Contact definition refer to an Account?",
+          "context_messages": [],
+          "expected_route": null,
+          "accepted_routes": [
+            "raw_search",
+            "rewrite_search"
+          ],
+          "expected_search": true,
+          "query": "Does the Contact definition refer to an Account?",
+          "status": "scored",
+          "similarity": 0.7216285467147827,
+          "nearest_fragment_id": "applicationCommon::Contact:relationship:3",
+          "nearest_passage_id": "applicationCommon::Contact:relationship:3",
+          "nearest_fragment_text": "CDM entity Contact (applicationCommon; qualified ID applicationCommon::Contact) has an explicitly referenced relationship through attribute parentCustomer to applicationCommon::Account, applicationCommon::Contact.",
+          "nearest_passage": {
+            "id": "applicationCommon::Contact:relationship:3",
+            "title": "Contact (applicationCommon; qualified ID applicationCommon::Contact).parentCustomer relationship",
+            "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/Contact.cdm.json",
+            "source_id": "applicationCommon::Contact",
+            "source_label": "applicationCommon::Contact",
+            "kind": "relationship"
+          },
+          "predicted_route": "raw_search",
+          "correct": true,
+          "elapsed_seconds": 0.044
+        },
+        {
+          "case_id": "t08",
+          "split": "test",
+          "question": "Where in the model can I find a link between a user and a team?",
+          "context_messages": [],
+          "expected_route": null,
+          "accepted_routes": [
+            "raw_search",
+            "rewrite_search"
+          ],
+          "expected_search": true,
+          "query": "Where in the model can I find a link between a user and a team?",
+          "status": "scored",
+          "similarity": 0.7027933597564697,
+          "nearest_fragment_id": "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:1:0ddc5a85799a",
+          "nearest_passage_id": "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:1:0ddc5a85799a",
+          "nearest_fragment_text": "The CDM manifest applicationCommon (applicationCommon) records these relationship mappings from TeamMembership.cdm.json/TeamMembership: TeamMembership.cdm.json/TeamMembership.teamId maps to Team.cdm.json/Team attribute teamId (target Team (applicationCommon)). TeamMembership.cdm.json/TeamMembership.systemUserId maps to User.cdm.json/User attribute systemUserId (target User (applicationCommon)).",
+          "nearest_passage": {
+            "id": "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:1:0ddc5a85799a",
+            "title": "Relationship mappings in manifest applicationCommon (applicationCommon)",
+            "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json",
+            "source_id": "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json",
+            "source_label": "Relationship mappings in manifest applicationCommon (applicationCommon)",
+            "kind": "manifest_relationship"
+          },
+          "predicted_route": "no_search",
+          "correct": false,
+          "elapsed_seconds": 0.039
+        },
+        {
+          "case_id": "t09",
+          "split": "test",
+          "question": "Is there a CDM entity for a credit line?",
+          "context_messages": [],
+          "expected_route": null,
+          "accepted_routes": [
+            "raw_search",
+            "rewrite_search"
+          ],
+          "expected_search": true,
+          "query": "Is there a CDM entity for a credit line?",
+          "status": "scored",
+          "similarity": 0.8202003836631775,
+          "nearest_fragment_id": "RetailBankingCoreDataModel::FHLineOfCredit:entity",
+          "nearest_passage_id": "RetailBankingCoreDataModel::FHLineOfCredit:entity",
+          "nearest_fragment_text": "CDM entity: FHLineOfCredit (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FHLineOfCredit). Source file: schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Fh_creditline.cdm.json. A preset borrowing limit associated with a credit or charge card. Selected attribute names: FH_CreditlineId, createdOn, modifiedOn, statecode, statuscode, importSequenceNumber, overriddenCreatedOn, timeZoneRuleVersionNumber, UTCConversionTimeZoneCode, name, accountingClassification, balance.",
+          "nearest_passage": {
+            "id": "RetailBankingCoreDataModel::FHLineOfCredit:entity",
+            "title": "FHLineOfCredit (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FHLineOfCredit)",
+            "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Fh_creditline.cdm.json",
+            "source_id": "RetailBankingCoreDataModel::FHLineOfCredit",
+            "source_label": "RetailBankingCoreDataModel::FHLineOfCredit",
+            "kind": "entity"
+          },
+          "predicted_route": "raw_search",
+          "correct": true,
+          "elapsed_seconds": 0.047
+        },
+        {
+          "case_id": "t10",
+          "split": "test",
+          "question": "In the banking model, what is the purpose of CustomerFinancialHolding?",
+          "context_messages": [],
+          "expected_route": null,
+          "accepted_routes": [
+            "raw_search",
+            "rewrite_search"
+          ],
+          "expected_search": true,
+          "query": "In the banking model, what is the purpose of CustomerFinancialHolding?",
+          "status": "scored",
+          "similarity": 0.783523440361023,
+          "nearest_fragment_id": "RetailBankingCoreDataModel::CustomerFinancialHolding:attributes:3",
+          "nearest_passage_id": "RetailBankingCoreDataModel::CustomerFinancialHolding:attributes:3",
+          "nearest_fragment_text": "Attributes of CDM entity CustomerFinancialHolding (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::CustomerFinancialHolding) at : financialHoldingRole (listLookup); display name Financial holding role; The role of the customer with respect to the financial holding such as owner, beneficiary, etc.; nullable: True; purpose: hasA; source name: msfsi_financialholdingrole; source ordering: 37",
+          "nearest_passage": {
+            "id": "RetailBankingCoreDataModel::CustomerFinancialHolding:attributes:3",
+            "title": "CustomerFinancialHolding (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::CustomerFinancialHolding) attributes",
+            "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Customerfinancialholding.cdm.json",
+            "source_id": "RetailBankingCoreDataModel::CustomerFinancialHolding",
+            "source_label": "RetailBankingCoreDataModel::CustomerFinancialHolding",
+            "kind": "attributes"
+          },
+          "predicted_route": "raw_search",
+          "correct": true,
+          "elapsed_seconds": 0.045
+        },
+        {
+          "case_id": "t11",
+          "split": "test",
+          "question": "What is the distinction between the availableBalance and balance attributes?",
+          "context_messages": [],
+          "expected_route": null,
+          "accepted_routes": [
+            "raw_search",
+            "rewrite_search"
+          ],
+          "expected_search": true,
+          "query": "What is the distinction between the availableBalance and balance attributes?",
+          "status": "scored",
+          "similarity": 0.7390198111534119,
+          "nearest_fragment_id": "RetailBankingCoreDataModel::FHLineOfCredit:trait-applications:attributes:5::fragment:2",
+          "nearest_passage_id": "RetailBankingCoreDataModel::FHLineOfCredit:trait-applications:attributes:5",
+          "nearest_fragment_text": "Attribute traits of FHLineOfCredit (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FHLineOfCredit): balance display value in base currency.\"]],\"entityShape\":\"localizedTable\"}}], is.localized.displayedAs with arguments [{\"name\":\"argument 1\",\"value\":{\"constantValues\":[[\"en\",\"Balance display value (base)\"]],\"entityShape\":\"localizedTable\"}}]",
+          "nearest_passage": {
+            "id": "RetailBankingCoreDataModel::FHLineOfCredit:trait-applications:attributes:5",
+            "title": "Attribute traits of FHLineOfCredit (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FHLineOfCredit)",
+            "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Fh_creditline.cdm.json",
+            "source_id": "RetailBankingCoreDataModel::FHLineOfCredit",
+            "source_label": "RetailBankingCoreDataModel::FHLineOfCredit",
+            "kind": "trait_application"
+          },
+          "predicted_route": "raw_search",
+          "correct": true,
+          "elapsed_seconds": 0.035
+        },
+        {
+          "case_id": "t12",
+          "split": "test",
+          "question": "Which entities and references could represent an account with two owners?",
+          "context_messages": [],
+          "expected_route": null,
+          "accepted_routes": [
+            "raw_search",
+            "rewrite_search"
+          ],
+          "expected_search": true,
+          "query": "Which entities and references could represent an account with two owners?",
+          "status": "scored",
+          "similarity": 0.7148197293281555,
+          "nearest_fragment_id": "RetailBankingCoreDataModel::Relationship:relationship:1",
+          "nearest_passage_id": "RetailBankingCoreDataModel::Relationship:relationship:1",
+          "nearest_fragment_text": "CDM entity Relationship (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::Relationship) has an explicitly referenced relationship through attribute ContactFrom to RetailBankingCoreDataModel::Contact. The contact who owns the relationship.",
+          "nearest_passage": {
+            "id": "RetailBankingCoreDataModel::Relationship:relationship:1",
+            "title": "Relationship (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::Relationship).ContactFrom relationship",
+            "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Relationship.cdm.json",
+            "source_id": "RetailBankingCoreDataModel::Relationship",
+            "source_label": "RetailBankingCoreDataModel::Relationship",
+            "kind": "relationship"
+          },
+          "predicted_route": "raw_search",
+          "correct": true,
+          "elapsed_seconds": 0.039
+        },
+        {
+          "case_id": "t13",
+          "split": "test",
+          "question": "Which customers share a bank account?",
+          "context_messages": [],
+          "expected_route": null,
+          "accepted_routes": [
+            "no_search"
+          ],
+          "expected_search": false,
+          "query": "Which customers share a bank account?",
+          "status": "scored",
+          "similarity": 0.6813541054725647,
+          "nearest_fragment_id": "RetailBankingCoreDataModel::CustomerFinancialHolding:relationship:1",
+          "nearest_passage_id": "RetailBankingCoreDataModel::CustomerFinancialHolding:relationship:1",
+          "nearest_fragment_text": "CDM entity CustomerFinancialHolding (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::CustomerFinancialHolding) has an explicitly referenced relationship through attribute Customer to RetailBankingCoreDataModel::Account, RetailBankingCoreDataModel::Contact. The unique identifier of the customer connected to this holding.",
+          "nearest_passage": {
+            "id": "RetailBankingCoreDataModel::CustomerFinancialHolding:relationship:1",
+            "title": "CustomerFinancialHolding (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::CustomerFinancialHolding).Customer relationship",
+            "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Customerfinancialholding.cdm.json",
+            "source_id": "RetailBankingCoreDataModel::CustomerFinancialHolding",
+            "source_label": "RetailBankingCoreDataModel::CustomerFinancialHolding",
+            "kind": "relationship"
+          },
+          "predicted_route": "no_search",
+          "correct": true,
+          "elapsed_seconds": 0.037
+        },
+        {
+          "case_id": "t14",
+          "split": "test",
+          "question": "Find the account numbers for the Smith household.",
+          "context_messages": [],
+          "expected_route": null,
+          "accepted_routes": [
+            "no_search"
+          ],
+          "expected_search": false,
+          "query": "Find the account numbers for the Smith household.",
+          "status": "scored",
+          "similarity": 0.6531728506088257,
+          "nearest_fragment_id": "applicationCommon::Account:attributes:7",
+          "nearest_passage_id": "applicationCommon::Account:attributes:7",
+          "nearest_fragment_text": "Attributes of CDM entity Account (applicationCommon; qualified ID applicationCommon::Account) at : fax (string); display name Fax; Type the fax number for the account.; nullable: True; purpose: hasA; source name: fax; source ordering: 43. telephone3 (phone); display name Telephone 3; Type a third phone number for this account.; nullable: True; purpose: hasA; source name: telephone3; source ordering: 44. doNotPostalMail (boolean); display name Do not allow Mails; Select whether the account allows direct mail. If Do Not Allow is selected, the account will be excluded from letter activities distributed in marketing campaigns.; nullable: True; purpose: hasA; source name: donotpostalmail; source ordering: 45. doNotBulkEMail (boolean); display name Do not allow Bulk Emails; Select whether the account allows bulk email sent through campaigns. If Do Not Allow is selected, the account can be added to marketing lists, but is excluded from email.; nullable: True; purpose: hasA; source name: donotbulkemail; source ordering: 46. doNotBulkPostalMail (boolean); display name Do not allow Bulk Mails; Select whether the account allows bulk postal mail sent through marketing campaigns or quick campaigns. If Do Not Allow is selected, the account can be added to marketing lists, but will be excluded from the postal mail.; nullable: True; purpose: hasA; source name: donotbulkpostalmail; source ordering: 47. creditLimit (currency); display name Credit Limit; Type the credit limit of the account. This is a useful reference when you address invoice and accounting issues with the customer.; nullable: True; purpose: hasA; source name: creditlimit; source ordering: 48",
+          "nearest_passage": {
+            "id": "applicationCommon::Account:attributes:7",
+            "title": "Account (applicationCommon; qualified ID applicationCommon::Account) attributes",
+            "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/Account.cdm.json",
+            "source_id": "applicationCommon::Account",
+            "source_label": "applicationCommon::Account",
+            "kind": "attributes"
+          },
+          "predicted_route": "no_search",
+          "correct": true,
+          "elapsed_seconds": 0.033
+        },
+        {
+          "case_id": "t15",
+          "split": "test",
+          "question": "What was our total deposit amount in March?",
+          "context_messages": [],
+          "expected_route": null,
+          "accepted_routes": [
+            "no_search"
+          ],
+          "expected_search": false,
+          "query": "What was our total deposit amount in March?",
+          "status": "scored",
+          "similarity": 0.5497506260871887,
+          "nearest_fragment_id": "RetailBankingCoreDataModel::FHAccount:entity",
+          "nearest_passage_id": "RetailBankingCoreDataModel::FHAccount:entity",
+          "nearest_fragment_text": "CDM entity: FHAccount (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FHAccount). Source file: schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Fh_account.cdm.json. A deposit account holding that allows the holder to make deposits and withdrawals through financial holding instruments. An account can be interest bearing Selected attribute names: FH_AccountId, createdOn, modifiedOn, statecode, statuscode, importSequenceNumber, overriddenCreatedOn, timeZoneRuleVersionNumber, UTCConversionTimeZoneCode, name, accountingClassification, availableBalance.",
+          "nearest_passage": {
+            "id": "RetailBankingCoreDataModel::FHAccount:entity",
+            "title": "FHAccount (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FHAccount)",
+            "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Fh_account.cdm.json",
+            "source_id": "RetailBankingCoreDataModel::FHAccount",
+            "source_label": "RetailBankingCoreDataModel::FHAccount",
+            "kind": "entity"
+          },
+          "predicted_route": "no_search",
+          "correct": true,
+          "elapsed_seconds": 0.036
+        },
+        {
+          "case_id": "t16",
+          "split": "test",
+          "question": "Has loan 843 already been paid off?",
+          "context_messages": [],
+          "expected_route": null,
+          "accepted_routes": [
+            "no_search"
+          ],
+          "expected_search": false,
+          "query": "Has loan 843 already been paid off?",
+          "status": "scored",
+          "similarity": 0.5431403517723083,
+          "nearest_fragment_id": "RetailBankingCoreDataModel::FHLoan:attributes:9",
+          "nearest_passage_id": "RetailBankingCoreDataModel::FHLoan:attributes:9",
+          "nearest_fragment_text": "Attributes of CDM entity FHLoan (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FHLoan) at : nextpaymentamount_Base (currency); display name Next payment amount (base); Value of the next payment amount in base currency.; nullable: True; purpose: hasA; source name: msfsi_nextpaymentamount_base; source ordering: 83. nextPaymentAmount_default (decimal); display name Next payment amount (default); Next payment amount converted to default currency of the system.; nullable: True; purpose: hasA; source name: msfsi_nextpaymentamount_default; source ordering: 84. nextPaymentDate (dateTime); display name Next payment date; The date on which the next payment towards the financial holding is due. This can be applied to credits and loans.; nullable: True; purpose: hasA; source name: msfsi_nextpaymentdate; source ordering: 85. numberofDeferralsMade (integer); display name Number of deferrals made; Total number of installment deferrals made by the customer (i.e. number of times customer has taken a loan repayment holiday from the bank).; nullable: True; purpose: hasA; source name: msfsi_numberofdeferralsmade; source ordering: 86. numberofInstallmentsPaid (integer); display name Number of installments paid; Total number of installments that have been paid back by the customer so far.; nullable: True; purpose: hasA; source name: msfsi_numberofinstallmentspaid; source ordering: 87. overdueDate (dateTime); display name Overdue date; The date on which the repayment was missed and the loan became overdue.; nullable: True; purpose: hasA; source name: msfsi_overduedate; source ordering: 88",
+          "nearest_passage": {
+            "id": "RetailBankingCoreDataModel::FHLoan:attributes:9",
+            "title": "FHLoan (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FHLoan) attributes",
+            "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Fh_loan.cdm.json",
+            "source_id": "RetailBankingCoreDataModel::FHLoan",
+            "source_label": "RetailBankingCoreDataModel::FHLoan",
+            "kind": "attributes"
+          },
+          "predicted_route": "no_search",
+          "correct": true,
+          "elapsed_seconds": 0.037
+        },
+        {
+          "case_id": "t17",
+          "split": "test",
+          "question": "Give me the names of all customers with a mortgage.",
+          "context_messages": [],
+          "expected_route": null,
+          "accepted_routes": [
+            "no_search"
+          ],
+          "expected_search": false,
+          "query": "Give me the names of all customers with a mortgage.",
+          "status": "scored",
+          "similarity": 0.685691237449646,
+          "nearest_fragment_id": "RetailBankingCoreDataModel::CustomerFinancialHolding:attributes:3",
+          "nearest_passage_id": "RetailBankingCoreDataModel::CustomerFinancialHolding:attributes:3",
+          "nearest_fragment_text": "Attributes of CDM entity CustomerFinancialHolding (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::CustomerFinancialHolding) at : financialHoldingRole (listLookup); display name Financial holding role; The role of the customer with respect to the financial holding such as owner, beneficiary, etc.; nullable: True; purpose: hasA; source name: msfsi_financialholdingrole; source ordering: 37",
+          "nearest_passage": {
+            "id": "RetailBankingCoreDataModel::CustomerFinancialHolding:attributes:3",
+            "title": "CustomerFinancialHolding (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::CustomerFinancialHolding) attributes",
+            "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Customerfinancialholding.cdm.json",
+            "source_id": "RetailBankingCoreDataModel::CustomerFinancialHolding",
+            "source_label": "RetailBankingCoreDataModel::CustomerFinancialHolding",
+            "kind": "attributes"
+          },
+          "predicted_route": "no_search",
+          "correct": true,
+          "elapsed_seconds": 0.045
+        },
+        {
+          "case_id": "t18",
+          "split": "test",
+          "question": "Which branches currently offer free overdrafts?",
+          "context_messages": [],
+          "expected_route": null,
+          "accepted_routes": [
+            "no_search"
+          ],
+          "expected_search": false,
+          "query": "Which branches currently offer free overdrafts?",
+          "status": "scored",
+          "similarity": 0.659722089767456,
+          "nearest_fragment_id": "RetailBankingCoreDataModel::FIOverdraft:attributes:4",
+          "nearest_passage_id": "RetailBankingCoreDataModel::FIOverdraft:attributes:4",
+          "nearest_fragment_text": "Attributes of CDM entity FIOverdraft (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FIOverdraft) at : overdraftRate (decimal); display name Overdraft rate; The interest rate that will be charged to the customer for repayment, if the account falls into overdraft.; nullable: True; purpose: hasA; source name: msfsi_overdraftrate; source ordering: 47",
+          "nearest_passage": {
+            "id": "RetailBankingCoreDataModel::FIOverdraft:attributes:4",
+            "title": "FIOverdraft (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FIOverdraft) attributes",
+            "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Fi_overdraft.cdm.json",
+            "source_id": "RetailBankingCoreDataModel::FIOverdraft",
+            "source_label": "RetailBankingCoreDataModel::FIOverdraft",
+            "kind": "attributes"
+          },
+          "predicted_route": "no_search",
+          "correct": true,
+          "elapsed_seconds": 0.036
+        },
+        {
+          "case_id": "t19",
+          "split": "test",
+          "question": "Is account 172 owned by two people?",
+          "context_messages": [],
+          "expected_route": null,
+          "accepted_routes": [
+            "no_search"
+          ],
+          "expected_search": false,
+          "query": "Is account 172 owned by two people?",
+          "status": "scored",
+          "similarity": 0.5388527512550354,
+          "nearest_fragment_id": "applicationCommon::Account:attributes:9",
+          "nearest_passage_id": "applicationCommon::Account:attributes:9",
+          "nearest_fragment_text": "Attributes of CDM entity Account (applicationCommon; qualified ID applicationCommon::Account) at : aging90 (currency); display name Aging 90; For system use only.; nullable: True; purpose: hasA; source name: aging90; source ordering: 62. address (unspecified). preferredAppointmentDayCode (listLookup); display name Preferred Day; Select the preferred day of the week for service appointments.; nullable: True; purpose: hasA; source name: preferredappointmentdaycode; source ordering: 156. preferredSystemUser (unspecified). preferredAppointmentTimeCode (listLookup); display name Preferred Time; Select the preferred time of day for service appointments.; nullable: True; purpose: hasA; source name: preferredappointmenttimecode; source ordering: 158. merged (boolean); display name Merged; Shows whether the account has been merged with another account.; nullable: True; purpose: hasA; source name: merged; source ordering: 159",
+          "nearest_passage": {
+            "id": "applicationCommon::Account:attributes:9",
+            "title": "Account (applicationCommon; qualified ID applicationCommon::Account) attributes",
+            "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/Account.cdm.json",
+            "source_id": "applicationCommon::Account",
+            "source_label": "applicationCommon::Account",
+            "kind": "attributes"
+          },
+          "predicted_route": "no_search",
+          "correct": true,
+          "elapsed_seconds": 0.042
+        },
+        {
+          "case_id": "t20",
+          "split": "test",
+          "question": "What is the balance on John Smith’s checking account?",
+          "context_messages": [],
+          "expected_route": null,
+          "accepted_routes": [
+            "no_search"
+          ],
+          "expected_search": false,
+          "query": "What is the balance on John Smith’s checking account?",
+          "status": "scored",
+          "similarity": 0.6286852359771729,
+          "nearest_fragment_id": "RetailBankingCoreDataModel::FHSaving:attributes:7",
+          "nearest_passage_id": "RetailBankingCoreDataModel::FHSaving:attributes:7",
+          "nearest_fragment_text": "Attributes of CDM entity FHSaving (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FHSaving) at : balanceDisplayValue (currency); display name Balance display value; Display value shows the balance of a financial holding in accordance with the type of the financial holding. Financial holdings that are typically defined as a customer's liabilities (such as lines of credit and loans) are presented as positive when the customer owes money to the financial institution (that is, a loan with an accounting value of -500 will appear as 500). In the inverse case: the display value will be negative for debit balances on a credit financial holding (such as overpayment of a credit card), or overdrawn account.; nullable: True; purpose: hasA; source name: msfsi_balancedisplayvalue; source ordering: 67. balancedisplayvalue_Base (currency); display name Balance display value (base); Value of the balance display value in base currency.; nullable: True; purpose: hasA; source name: msfsi_balancedisplayvalue_base; source ordering: 68",
+          "nearest_passage": {
+            "id": "RetailBankingCoreDataModel::FHSaving:attributes:7",
+            "title": "FHSaving (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FHSaving) attributes",
+            "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Fh_saving.cdm.json",
+            "source_id": "RetailBankingCoreDataModel::FHSaving",
+            "source_label": "RetailBankingCoreDataModel::FHSaving",
+            "kind": "attributes"
+          },
+          "predicted_route": "no_search",
+          "correct": true,
+          "elapsed_seconds": 0.041
+        },
+        {
+          "case_id": "t21",
+          "split": "test",
+          "question": "Does Dynamics automatically notify a customer when an account is opened?",
+          "context_messages": [],
+          "expected_route": null,
+          "accepted_routes": [
+            "no_search"
+          ],
+          "expected_search": false,
+          "query": "Does Dynamics automatically notify a customer when an account is opened?",
+          "status": "scored",
+          "similarity": 0.6477877497673035,
+          "nearest_fragment_id": "applicationCommon::CustomerRelationship:attributes:1",
+          "nearest_passage_id": "applicationCommon::CustomerRelationship:attributes:1",
+          "nearest_fragment_text": "Attributes of CDM entity CustomerRelationship (applicationCommon; qualified ID applicationCommon::CustomerRelationship) at : versionNumber (bigInteger); nullable: True; purpose: hasA; source name: versionnumber; source ordering: 1. createdOn (dateTime); display name Created On; Shows the date and time when the customer relationship was created. The date and time are displayed in the time zone selected in Microsoft Dynamics 365 options.; nullable: True; purpose: createdOn; source name: createdon; source ordering: 2. modifiedOn (dateTime); display name Modified On; Shows the date and time when the record was last updated. The date and time are displayed in the time zone selected in Microsoft Dynamics 365 options.; nullable: True; purpose: modifiedOn; source name: modifiedon; source ordering: 3. customerRoleId (entityId); display name Role 1; Choose the primary party's role or nature of the relationship the customer has with the second party. The field is read-only until both parties have been selected. Administrators can configure role values under Business Management in the Settings area.; nullable: True; purpose: hasA; source name: customerroleid; source ordering: 4. customerRelationshipId (entityId); display name Customer Relationship; Unique identifier of the customer relationship.; purpose: identifiedBy; source name: customerrelationshipid; source ordering: 5. User_createdBy (unspecified)",
+          "nearest_passage": {
+            "id": "applicationCommon::CustomerRelationship:attributes:1",
+            "title": "CustomerRelationship (applicationCommon; qualified ID applicationCommon::CustomerRelationship) attributes",
+            "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/CustomerRelationship.cdm.json",
+            "source_id": "applicationCommon::CustomerRelationship",
+            "source_label": "applicationCommon::CustomerRelationship",
+            "kind": "attributes"
+          },
+          "predicted_route": "no_search",
+          "correct": true,
+          "elapsed_seconds": 0.04
+        },
+        {
+          "case_id": "t22",
+          "split": "test",
+          "question": "What happens in the app when I delete a customer?",
+          "context_messages": [],
+          "expected_route": null,
+          "accepted_routes": [
+            "no_search"
+          ],
+          "expected_search": false,
+          "query": "What happens in the app when I delete a customer?",
+          "status": "scored",
+          "similarity": 0.6296520829200745,
+          "nearest_fragment_id": "applicationCommon::CustomerRelationship:trait-applications:entity",
+          "nearest_passage_id": "applicationCommon::CustomerRelationship:trait-applications:entity",
+          "nearest_fragment_text": "CDM entity CustomerRelationship (applicationCommon; qualified ID applicationCommon::CustomerRelationship) exhibits these traits: is.localized.displayedAs with arguments [{\"name\":\"argument 1\",\"value\":{\"constantValues\":[[\"en\",\"Customer Relationship\"]],\"entityShape\":\"localizedTable\"}}], is.localized.describedAs with arguments [{\"name\":\"argument 1\",\"value\":{\"constantValues\":[[\"en\",\"Relationship between a customer and a partner in which either can be an account or contact.\"]],\"entityShape\":\"localizedTable\"}}], is.CDM.entityVersion with arguments [{\"name\":\"versionNumber\",\"value\":\"1.3\"}].",
+          "nearest_passage": {
+            "id": "applicationCommon::CustomerRelationship:trait-applications:entity",
+            "title": "Traits applied to CustomerRelationship (applicationCommon; qualified ID applicationCommon::CustomerRelationship)",
+            "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/CustomerRelationship.cdm.json",
+            "source_id": "applicationCommon::CustomerRelationship",
+            "source_label": "applicationCommon::CustomerRelationship",
+            "kind": "trait_application"
+          },
+          "predicted_route": "no_search",
+          "correct": true,
+          "elapsed_seconds": 0.041
+        },
+        {
+          "case_id": "t23",
+          "split": "test",
+          "question": "How can I configure Dynamics to display subaccounts?",
+          "context_messages": [],
+          "expected_route": null,
+          "accepted_routes": [
+            "no_search"
+          ],
+          "expected_search": false,
+          "query": "How can I configure Dynamics to display subaccounts?",
+          "status": "scored",
+          "similarity": 0.6051458120346069,
+          "nearest_fragment_id": "applicationCommon::SLA:attributes:3",
+          "nearest_passage_id": "applicationCommon::SLA:attributes:3",
+          "nearest_fragment_text": "Attributes of CDM entity SLA (applicationCommon; qualified ID applicationCommon::SLA) at : User_createdBy (unspecified). modifiedOn (dateTime); display name Modified On; Shows the date and time when the record was last updated. The date and time are displayed in the time zone selected in Microsoft Dynamics 365 options.; nullable: True; purpose: modifiedOn; source name: modifiedon; source ordering: 53. User_modifiedBy (unspecified). exchangeRate (decimal); display name Exchange Rate; Exchange rate between the currency associated with the SLA record and the base currency.; nullable: True; purpose: hasA; source name: exchangerate; source ordering: 55. versionNumber (bigInteger); display name Version Number; Version number of the SLA.; nullable: True; purpose: hasA; source name: versionnumber; source ordering: 56. transactionCurrency (unspecified)",
+          "nearest_passage": {
+            "id": "applicationCommon::SLA:attributes:3",
+            "title": "SLA (applicationCommon; qualified ID applicationCommon::SLA) attributes",
+            "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/SLA.cdm.json",
+            "source_id": "applicationCommon::SLA",
+            "source_label": "applicationCommon::SLA",
+            "kind": "attributes"
+          },
+          "predicted_route": "no_search",
+          "correct": true,
+          "elapsed_seconds": 0.037
+        },
+        {
+          "case_id": "t24",
+          "split": "test",
+          "question": "Will an account be created when a contact is saved in CRM?",
+          "context_messages": [],
+          "expected_route": null,
+          "accepted_routes": [
+            "no_search"
+          ],
+          "expected_search": false,
+          "query": "Will an account be created when a contact is saved in CRM?",
+          "status": "scored",
+          "similarity": 0.6956700086593628,
+          "nearest_fragment_id": "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:relationship-mappings:1:f42970cce3fe",
+          "nearest_passage_id": "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:relationship-mappings:1:f42970cce3fe",
+          "nearest_fragment_text": "The CDM manifest crmCommon (applicationCommon) records these relationship mappings from service/Case.cdm.json/Case: service/Case.cdm.json/Case.customerId maps to Account.cdm.json/Account attribute accountId (target Account.cdm.json/Account). service/Case.cdm.json/Case.customerId maps to Contact.cdm.json/Contact attribute contactId (target Contact.cdm.json/Contact). service/Case.cdm.json/Case.primaryContactId maps to Contact.cdm.json/Contact attribute contactId (target Contact.cdm.json/Contact). service/Case.cdm.json/Case.responsibleContactId maps to Contact.cdm.json/Contact attribute contactId (target Contact.cdm.json/Contact).",
+          "nearest_passage": {
+            "id": "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:relationship-mappings:1:f42970cce3fe",
+            "title": "Relationship mappings in manifest crmCommon (applicationCommon)",
+            "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json",
+            "source_id": "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json",
+            "source_label": "Relationship mappings in manifest crmCommon (applicationCommon)",
+            "kind": "manifest_relationship"
+          },
+          "predicted_route": "no_search",
+          "correct": true,
+          "elapsed_seconds": 0.035
+        },
+        {
+          "case_id": "t25",
+          "split": "test",
+          "question": "Does the system validate account numbers before saving?",
+          "context_messages": [],
+          "expected_route": null,
+          "accepted_routes": [
+            "no_search"
+          ],
+          "expected_search": false,
+          "query": "Does the system validate account numbers before saving?",
+          "status": "scored",
+          "similarity": 0.6299343705177307,
+          "nearest_fragment_id": "RetailBankingCoreDataModel::FHSaving:attributes:1",
+          "nearest_passage_id": "RetailBankingCoreDataModel::FHSaving:attributes:1",
+          "nearest_fragment_text": "Attributes of CDM entity FHSaving (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FHSaving) at : FH_SavingId (entityId); display name FH saving; Unique identifier for entity instances.; nullable: False; purpose: identifiedBy; source name: msfsi_fh_savingid; source ordering: 1. createdOn (dateTime); display name Created On; Date and time when the record was created.; nullable: True; purpose: hasA; source name: createdon; source ordering: 2. modifiedOn (dateTime); display name Modified On; Date and time when the record was modified.; nullable: True; purpose: hasA; source name: modifiedon; source ordering: 4. statecode (listLookup); display name Status; Status of the FH Saving.; nullable: False; purpose: representsStateWith; source name: statecode; source ordering: 25. statuscode (listLookup); display name Status Reason; Reason for the status of the FH Saving.; nullable: True; purpose: {'purposeReference': 'representsCorrelatedStatusWith', 'appliedTraits': [{'traitReference': 'is.correlatedWith', 'arguments': ['statecode']}]}; source name: statuscode; source ordering: 27. importSequenceNumber (integer); display name Import Sequence Number; Sequence number of the import that created this record.; nullable: True; purpose: hasA; source name: importsequencenumber; source ordering: 30",
+          "nearest_passage": {
+            "id": "RetailBankingCoreDataModel::FHSaving:attributes:1",
+            "title": "FHSaving (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FHSaving) attributes",
+            "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Fh_saving.cdm.json",
+            "source_id": "RetailBankingCoreDataModel::FHSaving",
+            "source_label": "RetailBankingCoreDataModel::FHSaving",
+            "kind": "attributes"
+          },
+          "predicted_route": "no_search",
+          "correct": true,
+          "elapsed_seconds": 0.109
+        },
+        {
+          "case_id": "t26",
+          "split": "test",
+          "question": "Explain the Account schema and list the accounts that are overdrawn.",
+          "context_messages": [],
+          "expected_route": null,
+          "accepted_routes": [
+            "no_search"
+          ],
+          "expected_search": false,
+          "query": "Explain the Account schema and list the accounts that are overdrawn.",
+          "status": "scored",
+          "similarity": 0.7493627667427063,
+          "nearest_fragment_id": "RetailBankingCoreDataModel::FIOverdraft:attributes:3",
+          "nearest_passage_id": "RetailBankingCoreDataModel::FIOverdraft:attributes:3",
+          "nearest_fragment_text": "Attributes of CDM entity FIOverdraft (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FIOverdraft) at : overdraftLimit (currency); display name Overdraft limit; The overdraft limit given by the bank to the customer on this account. This is the amount that the customer can withdraw from the account when the account exceeds balance.; nullable: True; purpose: hasA; source name: msfsi_overdraftlimit; source ordering: 38. overdraftlimit_Base (currency); display name Overdraft limit (base); Value of the overdraft limit in base currency.; nullable: True; purpose: hasA; source name: msfsi_overdraftlimit_base; source ordering: 42. overdraftlimit_default (decimal); display name Overdraft limit (default); The overdraft limit given by the bank to the customer on this account. This is the amount that the customer can withdraw from the account, when the account exceeds balance. Value should be converted to base currency.; nullable: True; purpose: hasA; source name: msfsi_overdraftlimit_default; source ordering: 43. overdraftLimitUsed (currency); display name Overdraft limit used; The overdraft amount that customer withdrew from the account, beyond zero balance.; nullable: True; purpose: hasA; source name: msfsi_overdraftlimitused; source ordering: 44. overdraftlimitused_Base (currency); display name Overdraft limit used (base); Value of the overdraft limit Used in base currency.; nullable: True; purpose: hasA; source name: msfsi_overdraftlimitused_base; source ordering: 45. overdraftlimitused_default (decimal); display name Overdraft limit used (default); The overdraft amount that customer withdrew from the account, beyond zero balance. Value should be converted to base currency.; nullable: True; purpose: hasA; source name: msfsi_overdraftlimitused_default; source ordering: 46",
+          "nearest_passage": {
+            "id": "RetailBankingCoreDataModel::FIOverdraft:attributes:3",
+            "title": "FIOverdraft (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FIOverdraft) attributes",
+            "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Fi_overdraft.cdm.json",
+            "source_id": "RetailBankingCoreDataModel::FIOverdraft",
+            "source_label": "RetailBankingCoreDataModel::FIOverdraft",
+            "kind": "attributes"
+          },
+          "predicted_route": "raw_search",
+          "correct": false,
+          "elapsed_seconds": 0.068
+        },
+        {
+          "case_id": "t27",
+          "split": "test",
+          "question": "How are users modeled, and will deleting one remove their team?",
+          "context_messages": [],
+          "expected_route": null,
+          "accepted_routes": [
+            "no_search"
+          ],
+          "expected_search": false,
+          "query": "How are users modeled, and will deleting one remove their team?",
+          "status": "scored",
+          "similarity": 0.6441308856010437,
+          "nearest_fragment_id": "applicationCommon::Team:entity",
+          "nearest_passage_id": "applicationCommon::Team:entity",
+          "nearest_fragment_text": "CDM entity: Team (applicationCommon; qualified ID applicationCommon::Team). Source file: schemaDocuments/core/applicationCommon/Team.cdm.json. Collection of system users that routinely collaborate. Teams can be used to simplify record sharing and provide team members with common access to organization data when team members belong to different Business Units. Selected attribute names: teamId, organization, businessUnit, name, description, emailAddress, createdOn, modifiedOn, User_createdBy, User_modifiedBy, versionNumber, importSequenceNumber.",
+          "nearest_passage": {
+            "id": "applicationCommon::Team:entity",
+            "title": "Team (applicationCommon; qualified ID applicationCommon::Team)",
+            "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/Team.cdm.json",
+            "source_id": "applicationCommon::Team",
+            "source_label": "applicationCommon::Team",
+            "kind": "entity"
+          },
+          "predicted_route": "no_search",
+          "correct": true,
+          "elapsed_seconds": 0.118
+        },
+        {
+          "case_id": "t28",
+          "split": "test",
+          "question": "Show our joint accounts and explain their CDM relationship.",
+          "context_messages": [],
+          "expected_route": null,
+          "accepted_routes": [
+            "no_search"
+          ],
+          "expected_search": false,
+          "query": "Show our joint accounts and explain their CDM relationship.",
+          "status": "scored",
+          "similarity": 0.7938822507858276,
+          "nearest_fragment_id": "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:1:a1c5f1a6942c",
+          "nearest_passage_id": "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:1:a1c5f1a6942c",
+          "nearest_fragment_text": "The CDM manifest foundationCommon (applicationCommon) records these relationship mappings from crmCommon/accelerators/automotive/Business.cdm.json/Business: crmCommon/accelerators/automotive/Business.cdm.json/Business.accountId maps to Account.cdm.json/Account attribute accountId (target Account.cdm.json/Account).",
+          "nearest_passage": {
+            "id": "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:1:a1c5f1a6942c",
+            "title": "Relationship mappings in manifest foundationCommon (applicationCommon)",
+            "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json",
+            "source_id": "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json",
+            "source_label": "Relationship mappings in manifest foundationCommon (applicationCommon)",
+            "kind": "manifest_relationship"
+          },
+          "predicted_route": "raw_search",
+          "correct": false,
+          "elapsed_seconds": 0.073
+        },
+        {
+          "case_id": "t29",
+          "split": "test",
+          "question": "My dog Luna learned to swim yesterday.",
+          "context_messages": [],
+          "expected_route": null,
+          "accepted_routes": [
+            "no_search"
+          ],
+          "expected_search": false,
+          "query": "My dog Luna learned to swim yesterday.",
+          "status": "scored",
+          "similarity": 0.5359606146812439,
+          "nearest_fragment_id": "trait:does:definition",
+          "nearest_passage_id": "trait:does:definition",
+          "nearest_fragment_text": "CDM trait does. a root with a more meaningful base name for certain exhibited traits Extends trait: is. Parameters: []. Associated properties: []. Elevated: None. Modifies attributes: None. Applications in the loaded catalog: 0 entity, 0 attribute, 0 data-type, and 0 manifest applications.",
+          "nearest_passage": {
+            "id": "trait:does:definition",
+            "title": "CDM trait does",
+            "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/primitives.cdm.json",
+            "source_id": "trait:does",
+            "source_label": "CDM trait does",
+            "kind": "trait_definition"
+          },
+          "predicted_route": "no_search",
+          "correct": true,
+          "elapsed_seconds": 0.081
+        },
+        {
+          "case_id": "t30",
+          "split": "test",
+          "question": "Good morning!",
+          "context_messages": [],
+          "expected_route": null,
+          "accepted_routes": [
+            "no_search"
+          ],
+          "expected_search": false,
+          "query": "Good morning!",
+          "status": "scored",
+          "similarity": 0.5583142042160034,
+          "nearest_fragment_id": "applicationCommon::ActivityParty:attributes:2",
+          "nearest_passage_id": "applicationCommon::ActivityParty:attributes:2",
+          "nearest_fragment_text": "Attributes of CDM entity ActivityParty (applicationCommon; qualified ID applicationCommon::ActivityParty) at : scheduledStart (dateTime); display name Scheduled Start; Scheduled start time of the activity.; nullable: True; purpose: hasA; source name: scheduledstart; source ordering: 13. scheduledEnd (dateTime); display name Scheduled End; Scheduled end time of the activity.; nullable: True; purpose: hasA; source name: scheduledend; source ordering: 14. effort (double); display name Effort; Amount of effort used by the resource in a service appointment activity.; nullable: True; purpose: hasA; source name: effort; source ordering: 15. doNotEMail (boolean); display name Do not allow Emails; Information about whether to allow sending email to the activity party.; nullable: True; purpose: hasA; source name: donotemail; source ordering: 16. exchangeEntryId (string); display name Exchange Entry; For internal use only.; nullable: True; purpose: hasA; source name: exchangeentryid; source ordering: 18. versionNumber (bigInteger); nullable: True; purpose: hasA; source name: versionnumber; source ordering: 20",
+          "nearest_passage": {
+            "id": "applicationCommon::ActivityParty:attributes:2",
+            "title": "ActivityParty (applicationCommon; qualified ID applicationCommon::ActivityParty) attributes",
+            "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/ActivityParty.cdm.json",
+            "source_id": "applicationCommon::ActivityParty",
+            "source_label": "applicationCommon::ActivityParty",
+            "kind": "attributes"
+          },
+          "predicted_route": "no_search",
+          "correct": true,
+          "elapsed_seconds": 0.037
+        },
+        {
+          "case_id": "t31",
+          "split": "test",
+          "question": "What is the weather in Berlin?",
+          "context_messages": [],
+          "expected_route": null,
+          "accepted_routes": [
+            "no_search"
+          ],
+          "expected_search": false,
+          "query": "What is the weather in Berlin?",
+          "status": "scored",
+          "similarity": 0.48936694860458374,
+          "nearest_fragment_id": "applicationCommon::Position:trait-applications:attributes:2",
+          "nearest_passage_id": "applicationCommon::Position:trait-applications:attributes:2",
+          "nearest_fragment_text": "Traits applied to attributes of CDM entity Position (applicationCommon; qualified ID applicationCommon::Position): timeZoneRuleVersionNumber (integer): applied traits: is.requiredAtLevel with arguments [{\"name\":\"level\",\"value\":\"none\"}], is.localized.displayedAs with arguments [{\"name\":\"argument 1\",\"value\":{\"constantValues\":[[\"en\",\"Time Zone Rule Version Number\"]],\"entityShape\":\"localizedTable\"}}], is.localized.describedAs with arguments [{\"name\":\"argument 1\",\"value\":{\"constantValues\":[[\"en\",\"For internal use only.\"]],\"entityShape\":\"localizedTable\"}}]; UTCConversionTimeZoneCode (integer): applied traits: is.requiredAtLevel with arguments [{\"name\":\"level\",\"value\":\"none\"}], is.localized.displayedAs with arguments [{\"name\":\"argument 1\",\"value\":{\"constantValues\":[[\"en\",\"UTC Conversion Time Zone Code\"]],\"entityShape\":\"localizedTable\"}}], is.localized.describedAs with arguments [{\"name\":\"argument 1\",\"value\":{\"constantValues\":[[\"en\",\"Time zone code that was in use when the record was created.\"]],\"entityShape\":\"localizedTable\"}}]; name (name): applied traits: is.requiredAtLevel with arguments [{\"name\":\"level\",\"value\":\"required\"}], is.localized.displayedAs with arguments [{\"name\":\"argument 1\",\"value\":{\"constantValues\":[[\"en\",\"Name\"]],\"entityShape\":\"localizedTable\"}}], is.localized.describedAs with arguments [{\"name\":\"argument 1\",\"value\":{\"constantValues\":[[\"en\",\"The name of the position.\"]],\"entityShape\":\"localizedTable\"}}]; exchangeRate (decimal): applied traits: is.requiredAtLevel with arguments [{\"name\":\"level\",\"value\":\"none\"}], is.localized.displayedAs with arguments [{\"name\":\"argument 1\",\"value\":{\"constantValues\":[[\"en\",\"Exchange Rate\"]],\"entityShape\":\"localizedTable\"}}], is.localized.describedAs with arguments [{\"name\":\"argument 1\",\"value\":{\"constantValues\":[[\"en\",\"Exchange rate for the currency associated with the position with respect to the base currency.\"]],\"entityShape\":\"localizedTable\"}}]; description (string): applied traits: is.requiredAtLevel with arguments [{\"name\":\"level\",\"value\":\"none\"}], is.localized.displayedAs with arguments [{\"name\":\"argument 1\",\"value\":{\"constantValues\":[[\"en\",\"Description\"]],\"entityShape\":\"localizedTable\"}}], is.localized.describedAs with arguments [{\"name\":\"argument 1\",\"value\":{\"constantValues\":[[\"en\",\"The description of the position.\"]],\"entityShape\":\"localizedTable\"}}]",
+          "nearest_passage": {
+            "id": "applicationCommon::Position:trait-applications:attributes:2",
+            "title": "Attribute traits of Position (applicationCommon; qualified ID applicationCommon::Position)",
+            "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/Position.cdm.json",
+            "source_id": "applicationCommon::Position",
+            "source_label": "applicationCommon::Position",
+            "kind": "trait_application"
+          },
+          "predicted_route": "no_search",
+          "correct": true,
+          "elapsed_seconds": 0.193
+        },
+        {
+          "case_id": "t32",
+          "split": "test",
+          "question": "Tell me a joke about astronomy.",
+          "context_messages": [],
+          "expected_route": null,
+          "accepted_routes": [
+            "no_search"
+          ],
+          "expected_search": false,
+          "query": "Tell me a joke about astronomy.",
+          "status": "scored",
+          "similarity": 0.553451418876648,
+          "nearest_fragment_id": "trait:is.localized.displayedAs:definition",
+          "nearest_passage_id": "trait:is.localized.displayedAs:definition",
+          "nearest_fragment_text": "CDM trait is.localized.displayedAs. Holds the list of language specific display text for an object. Extends trait: is.localized. Parameters: []. Associated properties: [\"displayName\"]. Elevated: None. Modifies attributes: None. Applications in the loaded catalog: 64 entity, 1755 attribute, 0 data-type, and 0 manifest applications.",
+          "nearest_passage": {
+            "id": "trait:is.localized.displayedAs:definition",
+            "title": "CDM trait is.localized.displayedAs",
+            "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/foundations.cdm.json",
+            "source_id": "trait:is.localized.displayedAs",
+            "source_label": "CDM trait is.localized.displayedAs",
+            "kind": "trait_definition"
+          },
+          "predicted_route": "no_search",
+          "correct": true,
+          "elapsed_seconds": 0.067
+        }
+      ],
+      "summary": {
+        "attempted": 32,
+        "scored": 32,
+        "errors": 0,
+        "correct": 27,
+        "accuracy": 0.84375,
+        "search_gate_correct": 27,
+        "search_gate_accuracy": 0.84375,
+        "false_search": 2,
+        "false_no_search": 3,
+        "three_way_evaluable": 20,
+        "macro_f1": null,
+        "mean_seconds": 0.05309375,
+        "classes": {
+          "raw_search": {
+            "expected": 0,
+            "predicted": 2,
+            "correct": 0,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          },
+          "rewrite_search": {
+            "expected": 0,
+            "predicted": 0,
+            "correct": 0,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          },
+          "no_search": {
+            "expected": 20,
+            "predicted": 18,
+            "correct": 18,
+            "precision": 1.0,
+            "recall": 0.9,
+            "f1": 0.9473684210526316
+          }
+        }
+      }
+    }
+  }
+}

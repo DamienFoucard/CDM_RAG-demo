@@ -1,0 +1,1651 @@
+{
+  "source_result_sha256": "e35231cad5ea1e9cad8bf187e6a7252d69745a7bc38650f2c2e0fc9f4ac35b6f",
+  "dataset_sha256": "38295be2a0357ebd6cf39498f3c8a5c59ef311f108da51ea395a126e63d93df7",
+  "dataset_id": "cdm-relationships-synthetic-challenge-v1",
+  "split": "test",
+  "judge_model": "qwen3:4b",
+  "judge_model_digest": "359d7dd4bcdab3d86b87d73ac27966f4dbb9f5efdfcc75d34a8764a09474fae7",
+  "sample_policy": "seed 20261122: 6 randomly chosen direct cases and 4 two-hop cases, before examining judgments",
+  "pool_policy": "top five edges per variant plus example gold edges; shuffled and blinded by variant",
+  "limitation": "Synthetic, unreviewed questions and example labels. Automated, same-family LLM judgments are not ground truth; nDCG uses the pooled ideal, not the entire graph. Gold disagreements require human review.",
+  "metrics": {
+    "hybrid_raw": {
+      "ndcg_at_5": 0.3359,
+      "cases": 10
+    },
+    "hybrid_reranked": {
+      "ndcg_at_5": 0.3359,
+      "cases": 10
+    },
+    "neighborhood_reranked": {
+      "ndcg_at_5": 0.3319,
+      "cases": 10
+    },
+    "graph_assisted": {
+      "ndcg_at_5": 0.7633,
+      "cases": 10
+    },
+    "graph_transe": {
+      "ndcg_at_5": 0.7396,
+      "cases": 10
+    }
+  },
+  "gold_disagreements": [],
+  "cases": [
+    {
+      "id": "challenge-01",
+      "question": "In the retail banking schema, which reference identifies the person who holds a payment card?",
+      "type": "direct",
+      "variants": {
+        "hybrid_raw": 1.0,
+        "hybrid_reranked": 1.0,
+        "neighborhood_reranked": 1.0,
+        "graph_assisted": 1.0,
+        "graph_transe": 1.0
+      },
+      "candidates": [
+        {
+          "label": "E01",
+          "edge_id": "edge:b0c0eec465fda00cdaba",
+          "id": "edge:b0c0eec465fda00cdaba",
+          "source_id": "RetailBankingCoreDataModel::FinancialHoldingInstrument",
+          "attribute": "Details",
+          "target_id": "RetailBankingCoreDataModel::FICard",
+          "description": "Details.",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Financialholdinginstrument.cdm.json"
+        },
+        {
+          "label": "E02",
+          "edge_id": "edge:50b76fb9f19e9d26de4d",
+          "id": "edge:50b76fb9f19e9d26de4d",
+          "source_id": "RetailBankingCoreDataModel::CustomerFinancialHolding",
+          "attribute": "Customer",
+          "target_id": "RetailBankingCoreDataModel::Account",
+          "description": "The unique identifier of the customer connected to this holding.",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Customerfinancialholding.cdm.json"
+        },
+        {
+          "label": "E03",
+          "edge_id": "edge:6924d7d85d1178077f91",
+          "id": "edge:6924d7d85d1178077f91",
+          "source_id": "RetailBankingCoreDataModel::CustomerFinancialHolding",
+          "attribute": "Customer",
+          "target_id": "RetailBankingCoreDataModel::Contact",
+          "description": "The unique identifier of the customer connected to this holding.",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Customerfinancialholding.cdm.json"
+        },
+        {
+          "label": "E04",
+          "edge_id": "edge:e9eb0bc05af886d92ebc",
+          "id": "edge:e9eb0bc05af886d92ebc",
+          "source_id": "RetailBankingCoreDataModel::LifeEvent",
+          "attribute": "Contact",
+          "target_id": "RetailBankingCoreDataModel::Contact",
+          "description": "The primary person associated with the life event.",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Lifemoment.cdm.json"
+        },
+        {
+          "label": "E05",
+          "edge_id": "edge:2e1e6ab2f7c945187bdc",
+          "id": "edge:2e1e6ab2f7c945187bdc",
+          "source_id": "RetailBankingCoreDataModel::FICard",
+          "attribute": "Cardholder",
+          "target_id": "RetailBankingCoreDataModel::Account",
+          "description": "The customer associated with the card.",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Fi_card.cdm.json"
+        },
+        {
+          "label": "E06",
+          "edge_id": "edge:74ecc0cb654146604b9e",
+          "id": "edge:74ecc0cb654146604b9e",
+          "source_id": "RetailBankingCoreDataModel::Relationship",
+          "attribute": "ContactFrom",
+          "target_id": "RetailBankingCoreDataModel::Contact",
+          "description": "The contact who owns the relationship.",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Relationship.cdm.json"
+        },
+        {
+          "label": "E07",
+          "edge_id": "edge:98eba91bf28b12e353dc",
+          "id": "edge:98eba91bf28b12e353dc",
+          "source_id": "RetailBankingCoreDataModel::FinancialHolding",
+          "attribute": "Details",
+          "target_id": "RetailBankingCoreDataModel::FHLineOfCredit",
+          "description": "Details.",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Financialholding.cdm.json"
+        },
+        {
+          "label": "E08",
+          "edge_id": "edge:0827dbde55234fac26d0",
+          "id": "edge:0827dbde55234fac26d0",
+          "source_id": "RetailBankingCoreDataModel::FICard",
+          "attribute": "Cardholder",
+          "target_id": "RetailBankingCoreDataModel::Contact",
+          "description": "The customer associated with the card.",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Fi_card.cdm.json"
+        }
+      ],
+      "judgments": [
+        {
+          "edge_id": "edge:b0c0eec465fda00cdaba",
+          "grade": 0,
+          "reason": "Describes card details but does not identify the person holding the card"
+        },
+        {
+          "edge_id": "edge:50b76fb9f19e9d26de4d",
+          "grade": 0,
+          "reason": "Relates customer to account, not cardholder"
+        },
+        {
+          "edge_id": "edge:6924d7d85d1178077f91",
+          "grade": 0,
+          "reason": "Relates customer to contact, not cardholder"
+        },
+        {
+          "edge_id": "edge:e9eb0bc05af886d92ebc",
+          "grade": 0,
+          "reason": "Relates life event to contact, not cardholder"
+        },
+        {
+          "edge_id": "edge:2e1e6ab2f7c945187bdc",
+          "grade": 0,
+          "reason": "Relates card to account, not contact (person)"
+        },
+        {
+          "edge_id": "edge:74ecc0cb654146604b9e",
+          "grade": 0,
+          "reason": "Relates contact ownership in relationships, not cardholder"
+        },
+        {
+          "edge_id": "edge:98eba91bf28b12e353dc",
+          "grade": 0,
+          "reason": "Relates financial holding to line of credit, not cardholder"
+        },
+        {
+          "edge_id": "edge:0827dbde55234fac26d0",
+          "grade": 1,
+          "reason": "Identifies cardholder as contact, which is the person holding the card"
+        }
+      ]
+    },
+    {
+      "id": "challenge-04",
+      "question": "Which link on the banking record for holdings associated with a family group points to the group itself?",
+      "type": "direct",
+      "variants": {
+        "hybrid_raw": 1.0,
+        "hybrid_reranked": 1.0,
+        "neighborhood_reranked": 1.0,
+        "graph_assisted": 0.9197207891481876,
+        "graph_transe": 0.8772153153380493
+      },
+      "candidates": [
+        {
+          "label": "E01",
+          "edge_id": "edge:edd0048ca9e408f967d5",
+          "id": "edge:edd0048ca9e408f967d5",
+          "source_id": "RetailBankingCoreDataModel::GroupFinancialHolding",
+          "attribute": "FinancialHolding",
+          "target_id": "RetailBankingCoreDataModel::FinancialHolding",
+          "description": "Financial holding shows accounts, loans, investment, credit lines and savings.",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Groupfinancialholding.cdm.json"
+        },
+        {
+          "label": "E02",
+          "edge_id": "edge:50b76fb9f19e9d26de4d",
+          "id": "edge:50b76fb9f19e9d26de4d",
+          "source_id": "RetailBankingCoreDataModel::CustomerFinancialHolding",
+          "attribute": "Customer",
+          "target_id": "RetailBankingCoreDataModel::Account",
+          "description": "The unique identifier of the customer connected to this holding.",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Customerfinancialholding.cdm.json"
+        },
+        {
+          "label": "E03",
+          "edge_id": "edge:2e26e324bf8d4ee771ce",
+          "id": "edge:2e26e324bf8d4ee771ce",
+          "source_id": "RetailBankingCoreDataModel::GroupFinancialHolding",
+          "attribute": "Group",
+          "target_id": "RetailBankingCoreDataModel::Group",
+          "description": "The set of familial connections that the customer has at the bank.",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Groupfinancialholding.cdm.json"
+        },
+        {
+          "label": "E04",
+          "edge_id": "edge:77302e1dfd39632d841b",
+          "id": "edge:77302e1dfd39632d841b",
+          "source_id": "RetailBankingCoreDataModel::FinancialHoldingInstrument",
+          "attribute": "FinancialHolding",
+          "target_id": "RetailBankingCoreDataModel::FinancialHolding",
+          "description": "The financial holding that the instrument is associated with.",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Financialholdinginstrument.cdm.json"
+        },
+        {
+          "label": "E05",
+          "edge_id": "edge:1c442ea8763ca81b3e69",
+          "id": "edge:1c442ea8763ca81b3e69",
+          "source_id": "RetailBankingCoreDataModel::CustomerFinancialHolding",
+          "attribute": "FinancialHolding",
+          "target_id": "RetailBankingCoreDataModel::FinancialHolding",
+          "description": "The unique identifier of the financial holding connected to the customer.",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Customerfinancialholding.cdm.json"
+        },
+        {
+          "label": "E06",
+          "edge_id": "edge:0827dbde55234fac26d0",
+          "id": "edge:0827dbde55234fac26d0",
+          "source_id": "RetailBankingCoreDataModel::FICard",
+          "attribute": "Cardholder",
+          "target_id": "RetailBankingCoreDataModel::Contact",
+          "description": "The customer associated with the card.",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Fi_card.cdm.json"
+        },
+        {
+          "label": "E07",
+          "edge_id": "edge:6924d7d85d1178077f91",
+          "id": "edge:6924d7d85d1178077f91",
+          "source_id": "RetailBankingCoreDataModel::CustomerFinancialHolding",
+          "attribute": "Customer",
+          "target_id": "RetailBankingCoreDataModel::Contact",
+          "description": "The unique identifier of the customer connected to this holding.",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Customerfinancialholding.cdm.json"
+        }
+      ],
+      "judgments": [
+        {
+          "edge_id": "edge:edd0048ca9e408f967d5",
+          "grade": 2,
+          "reason": "Directly describes the FinancialHolding entity that holds accounts, loans, etc., and is part of the GroupFinancialHolding context which points to the group itself."
+        },
+        {
+          "edge_id": "edge:50b76fb9f19e9d26de4d",
+          "grade": 0,
+          "reason": "Describes customer connection to an account, not relevant to group holdings."
+        },
+        {
+          "edge_id": "edge:2e26e324bf8d4ee771ce",
+          "grade": 2,
+          "reason": "Explicitly states that GroupFinancialHolding has a 'Group' attribute pointing to the Group entity, which is the family group itself."
+        },
+        {
+          "edge_id": "edge:77302e1dfd39632d841b",
+          "grade": 0,
+          "reason": "Describes financial holding instruments, not relevant to group holdings."
+        },
+        {
+          "edge_id": "edge:1c442ea8763ca81b3e69",
+          "grade": 0,
+          "reason": "Describes customer connection to financial holding, not relevant to group holdings."
+        },
+        {
+          "edge_id": "edge:0827dbde55234fac26d0",
+          "grade": 0,
+          "reason": "Describes cardholder connections, not relevant to group holdings."
+        },
+        {
+          "edge_id": "edge:6924d7d85d1178077f91",
+          "grade": 0,
+          "reason": "Describes customer connection to contact, not relevant to group holdings."
+        }
+      ]
+    },
+    {
+      "id": "challenge-07",
+      "question": "A link between customers has a partner. Which reference can identify that partner as a person?",
+      "type": "direct",
+      "variants": {
+        "hybrid_raw": 0.0,
+        "hybrid_reranked": 0.0,
+        "neighborhood_reranked": 0.0,
+        "graph_assisted": 0.8213137146137828,
+        "graph_transe": 0.8213137146137828
+      },
+      "candidates": [
+        {
+          "label": "E01",
+          "edge_id": "edge:33f525df09b53a8c4ca1",
+          "id": "edge:33f525df09b53a8c4ca1",
+          "source_id": "applicationCommon::ActivityParty",
+          "attribute": "party",
+          "target_id": "applicationCommon::Contact",
+          "description": "",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/ActivityParty.cdm.json"
+        },
+        {
+          "label": "E02",
+          "edge_id": "edge:4cb40a6377c30238047b",
+          "id": "edge:4cb40a6377c30238047b",
+          "source_id": "applicationCommon::CustomerRelationship",
+          "attribute": "Team_owningTeam",
+          "target_id": "applicationCommon::Team",
+          "description": "",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/CustomerRelationship.cdm.json"
+        },
+        {
+          "label": "E03",
+          "edge_id": "edge:ce0acfdbd708fed65515",
+          "id": "edge:ce0acfdbd708fed65515",
+          "source_id": "applicationCommon::CustomerRelationship",
+          "attribute": "partner",
+          "target_id": "applicationCommon::Contact",
+          "description": "",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/CustomerRelationship.cdm.json"
+        },
+        {
+          "label": "E04",
+          "edge_id": "edge:1b36c7981fa78008138e",
+          "id": "edge:1b36c7981fa78008138e",
+          "source_id": "applicationCommon::CustomerRelationship",
+          "attribute": "BusinessUnit_owningBusinessUnit",
+          "target_id": "applicationCommon::BusinessUnit",
+          "description": "",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/CustomerRelationship.cdm.json"
+        },
+        {
+          "label": "E05",
+          "edge_id": "edge:8c5c883061742532f628",
+          "id": "edge:8c5c883061742532f628",
+          "source_id": "applicationCommon::CustomerRelationship",
+          "attribute": "partner",
+          "target_id": "applicationCommon::Account",
+          "description": "",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/CustomerRelationship.cdm.json"
+        },
+        {
+          "label": "E06",
+          "edge_id": "edge:1c9d8233d42540258c7e",
+          "id": "edge:1c9d8233d42540258c7e",
+          "source_id": "applicationCommon::Contact",
+          "attribute": "master",
+          "target_id": "applicationCommon::Contact",
+          "description": "",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/Contact.cdm.json"
+        },
+        {
+          "label": "E07",
+          "edge_id": "edge:87a06a597b8827217c21",
+          "id": "edge:87a06a597b8827217c21",
+          "source_id": "applicationCommon::CustomerRelationship",
+          "attribute": "User_modifiedOnBehalfBy",
+          "target_id": "applicationCommon::User",
+          "description": "",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/CustomerRelationship.cdm.json"
+        },
+        {
+          "label": "E08",
+          "edge_id": "edge:5ff12d6e21b895ab5a51",
+          "id": "edge:5ff12d6e21b895ab5a51",
+          "source_id": "applicationCommon::CustomerRelationship",
+          "attribute": "User_createdBy",
+          "target_id": "applicationCommon::User",
+          "description": "",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/CustomerRelationship.cdm.json"
+        },
+        {
+          "label": "E09",
+          "edge_id": "edge:26138f63a4f83cf25047",
+          "id": "edge:26138f63a4f83cf25047",
+          "source_id": "applicationCommon::CustomerRelationship",
+          "attribute": "converseRelationship",
+          "target_id": "applicationCommon::CustomerRelationship",
+          "description": "",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/CustomerRelationship.cdm.json"
+        },
+        {
+          "label": "E10",
+          "edge_id": "edge:01e77731a2bd2f02f5da",
+          "id": "edge:01e77731a2bd2f02f5da",
+          "source_id": "applicationCommon::Contact",
+          "attribute": "parentCustomer",
+          "target_id": "applicationCommon::Contact",
+          "description": "",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/Contact.cdm.json"
+        }
+      ],
+      "judgments": [
+        {
+          "edge_id": "edge:33f525df09b53a8c4ca1",
+          "grade": 0,
+          "reason": "This reference links ActivityParty to Contact but does not directly identify a partner as a person in the context of customer relationships."
+        },
+        {
+          "edge_id": "edge:4cb40a6377c30238047b",
+          "grade": 0,
+          "reason": "This reference links Team_owningTeam to Team, which is unrelated to identifying a partner as a person."
+        },
+        {
+          "edge_id": "edge:ce0acfdbd708fed65515",
+          "grade": 2,
+          "reason": "This reference directly identifies the 'partner' attribute in CustomerRelationship as a Contact, which is a person."
+        },
+        {
+          "edge_id": "edge:1b36c7981fa78008138e",
+          "grade": 0,
+          "reason": "This reference links BusinessUnit_owningBusinessUnit to BusinessUnit, which is unrelated to identifying a partner as a person."
+        },
+        {
+          "edge_id": "edge:8c5c883061742532f628",
+          "grade": 1,
+          "reason": "This reference identifies 'partner' as an Account, which is not a person but could be related context for business relationships."
+        },
+        {
+          "edge_id": "edge:1c9d8233d42540258c7e",
+          "grade": 0,
+          "reason": "This reference links master to Contact but is about internal contact relationships, not customer partners."
+        },
+        {
+          "edge_id": "edge:87a06a597b8827217c21",
+          "grade": 0,
+          "reason": "This reference links User_modifiedOnBehalfBy to User, which is unrelated to identifying a partner as a person."
+        },
+        {
+          "edge_id": "edge:5ff12d6e21b895ab5a51",
+          "grade": 0,
+          "reason": "This reference links User_createdBy to User, which is unrelated to identifying a partner as a person."
+        },
+        {
+          "edge_id": "edge:26138f63a4f83cf25047",
+          "grade": 0,
+          "reason": "This reference describes a relationship between customer relationships, not a direct link to identify a partner as a person."
+        },
+        {
+          "edge_id": "edge:01e77731a2bd2f02f5da",
+          "grade": 1,
+          "reason": "This reference links a contact to a parent customer, which is related to identifying a partner but does not directly answer the question as it refers to a customer, not a person."
+        }
+      ]
+    },
+    {
+      "id": "challenge-08",
+      "question": "How does an operating unit refer to its parent unit in the hierarchy?",
+      "type": "direct",
+      "variants": {
+        "hybrid_raw": 0.0,
+        "hybrid_reranked": 0.0,
+        "neighborhood_reranked": 0.0,
+        "graph_assisted": 1.0,
+        "graph_transe": 1.0
+      },
+      "candidates": [
+        {
+          "label": "E01",
+          "edge_id": "edge:2ac5631cecbc20deca8e",
+          "id": "edge:2ac5631cecbc20deca8e",
+          "source_id": "applicationCommon::User",
+          "attribute": "businessUnit",
+          "target_id": "applicationCommon::BusinessUnit",
+          "description": "",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/User.cdm.json"
+        },
+        {
+          "label": "E02",
+          "edge_id": "edge:10cac7f55d644f6519cd",
+          "id": "edge:10cac7f55d644f6519cd",
+          "source_id": "applicationCommon::BusinessUnit",
+          "attribute": "organization",
+          "target_id": "applicationCommon::Organization",
+          "description": "",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/BusinessUnit.cdm.json"
+        },
+        {
+          "label": "E03",
+          "edge_id": "edge:1ac76353ee9dbed7b19f",
+          "id": "edge:1ac76353ee9dbed7b19f",
+          "source_id": "applicationCommon::Queue",
+          "attribute": "BusinessUnit_owningBusinessUnit",
+          "target_id": "applicationCommon::BusinessUnit",
+          "description": "",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/Queue.cdm.json"
+        },
+        {
+          "label": "E04",
+          "edge_id": "edge:7eb23dd1b3b3aa80d8cf",
+          "id": "edge:7eb23dd1b3b3aa80d8cf",
+          "source_id": "applicationCommon::BusinessUnit",
+          "attribute": "parentBusinessUnit",
+          "target_id": "applicationCommon::BusinessUnit",
+          "description": "",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/BusinessUnit.cdm.json"
+        },
+        {
+          "label": "E05",
+          "edge_id": "edge:1b36c7981fa78008138e",
+          "id": "edge:1b36c7981fa78008138e",
+          "source_id": "applicationCommon::CustomerRelationship",
+          "attribute": "BusinessUnit_owningBusinessUnit",
+          "target_id": "applicationCommon::BusinessUnit",
+          "description": "",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/CustomerRelationship.cdm.json"
+        },
+        {
+          "label": "E06",
+          "edge_id": "edge:241cc050777a9ba25d52",
+          "id": "edge:241cc050777a9ba25d52",
+          "source_id": "applicationCommon::Connection",
+          "attribute": "BusinessUnit_owningBusinessUnit",
+          "target_id": "applicationCommon::BusinessUnit",
+          "description": "",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/Connection.cdm.json"
+        }
+      ],
+      "judgments": [
+        {
+          "edge_id": "edge:2ac5631cecbc20deca8e",
+          "grade": 0,
+          "reason": "Does not relate to parent-child hierarchy in business units; describes business unit attribute for user"
+        },
+        {
+          "edge_id": "edge:10cac7f55d644f6519cd",
+          "grade": 0,
+          "reason": "Relates to organization, not direct parent unit reference in business unit hierarchy"
+        },
+        {
+          "edge_id": "edge:1ac76353ee9dbed7b19f",
+          "grade": 0,
+          "reason": "Relates to owning business unit for queues, not parent unit reference"
+        },
+        {
+          "edge_id": "edge:7eb23dd1b3b3aa80d8cf",
+          "grade": 2,
+          "reason": "Directly describes parentBusinessUnit attribute for BusinessUnit, which is the required step to reference parent unit"
+        },
+        {
+          "edge_id": "edge:1b36c7981fa78008138e",
+          "grade": 0,
+          "reason": "Relates to owning business unit for customer relationships, not parent unit reference"
+        },
+        {
+          "edge_id": "edge:241cc050777a9ba25d52",
+          "grade": 0,
+          "reason": "Relates to owning business unit for connections, not parent unit reference"
+        }
+      ]
+    },
+    {
+      "id": "challenge-09",
+      "question": "Where does a work item point to the queue that contains it?",
+      "type": "direct",
+      "variants": {
+        "hybrid_raw": 0.11861329943102608,
+        "hybrid_reranked": 0.11861329943102608,
+        "neighborhood_reranked": 0.11861329943102608,
+        "graph_assisted": 0.8262346571285599,
+        "graph_transe": 0.8262346571285599
+      },
+      "candidates": [
+        {
+          "label": "E01",
+          "edge_id": "edge:129504c355d93aec7583",
+          "id": "edge:129504c355d93aec7583",
+          "source_id": "applicationCommon::Queue",
+          "attribute": "User_modifiedOnBehalfBy",
+          "target_id": "applicationCommon::User",
+          "description": "",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/Queue.cdm.json"
+        },
+        {
+          "label": "E02",
+          "edge_id": "edge:f3da5f91ca822662faba",
+          "id": "edge:f3da5f91ca822662faba",
+          "source_id": "applicationCommon::QueueItem",
+          "attribute": "queue",
+          "target_id": "applicationCommon::Queue",
+          "description": "",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/QueueItem.cdm.json"
+        },
+        {
+          "label": "E03",
+          "edge_id": "edge:3fc1d8de655ce41d14dc",
+          "id": "edge:3fc1d8de655ce41d14dc",
+          "source_id": "applicationCommon::Queue",
+          "attribute": "businessUnit",
+          "target_id": "applicationCommon::BusinessUnit",
+          "description": "",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/Queue.cdm.json"
+        },
+        {
+          "label": "E04",
+          "edge_id": "edge:edddc3a93de70a066052",
+          "id": "edge:edddc3a93de70a066052",
+          "source_id": "applicationCommon::QueueItem",
+          "attribute": "worker",
+          "target_id": "applicationCommon::User",
+          "description": "",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/QueueItem.cdm.json"
+        },
+        {
+          "label": "E05",
+          "edge_id": "edge:08bce6cb1c4cfd023efe",
+          "id": "edge:08bce6cb1c4cfd023efe",
+          "source_id": "applicationCommon::QueueItem",
+          "attribute": "object",
+          "target_id": "applicationCommon::Appointment",
+          "description": "",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/QueueItem.cdm.json"
+        },
+        {
+          "label": "E06",
+          "edge_id": "edge:28a4a5c10d6dfd54c8ab",
+          "id": "edge:28a4a5c10d6dfd54c8ab",
+          "source_id": "applicationCommon::Email",
+          "attribute": "Sender_emailSender",
+          "target_id": "applicationCommon::Queue",
+          "description": "",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/Email.cdm.json"
+        },
+        {
+          "label": "E07",
+          "edge_id": "edge:b1721da7f214375eee3b",
+          "id": "edge:b1721da7f214375eee3b",
+          "source_id": "applicationCommon::QueueItem",
+          "attribute": "worker",
+          "target_id": "applicationCommon::Team",
+          "description": "",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/QueueItem.cdm.json"
+        },
+        {
+          "label": "E08",
+          "edge_id": "edge:1ac76353ee9dbed7b19f",
+          "id": "edge:1ac76353ee9dbed7b19f",
+          "source_id": "applicationCommon::Queue",
+          "attribute": "BusinessUnit_owningBusinessUnit",
+          "target_id": "applicationCommon::BusinessUnit",
+          "description": "",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/Queue.cdm.json"
+        },
+        {
+          "label": "E09",
+          "edge_id": "edge:20843b651ba1ad12d9bf",
+          "id": "edge:20843b651ba1ad12d9bf",
+          "source_id": "applicationCommon::QueueItem",
+          "attribute": "object",
+          "target_id": "applicationCommon::Email",
+          "description": "",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/QueueItem.cdm.json"
+        },
+        {
+          "label": "E10",
+          "edge_id": "edge:037fe70e2c403fa8a1fa",
+          "id": "edge:037fe70e2c403fa8a1fa",
+          "source_id": "applicationCommon::QueueItem",
+          "attribute": "object",
+          "target_id": "applicationCommon::Fax",
+          "description": "",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/QueueItem.cdm.json"
+        },
+        {
+          "label": "E11",
+          "edge_id": "edge:3edd7bcc552dd54a1dc6",
+          "id": "edge:3edd7bcc552dd54a1dc6",
+          "source_id": "applicationCommon::Queue",
+          "attribute": "User_createdOnBehalfBy",
+          "target_id": "applicationCommon::User",
+          "description": "",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/Queue.cdm.json"
+        }
+      ],
+      "judgments": [
+        {
+          "edge_id": "edge:129504c355d93aec7583",
+          "grade": 0,
+          "reason": "This reference describes a user modification timestamp, not a queue relationship."
+        },
+        {
+          "edge_id": "edge:f3da5f91ca822662faba",
+          "grade": 2,
+          "reason": "This directly shows that QueueItem has a 'queue' attribute pointing to Queue, answering the question."
+        },
+        {
+          "edge_id": "edge:3fc1d8de655ce41d14dc",
+          "grade": 0,
+          "reason": "This describes a business unit relationship, not the queue containment relationship."
+        },
+        {
+          "edge_id": "edge:edddc3a93de70a066052",
+          "grade": 0,
+          "reason": "This shows a worker user relationship, not the queue containment relationship."
+        },
+        {
+          "edge_id": "edge:08bce6cb1c4cfd023efe",
+          "grade": 0,
+          "reason": "This shows an object relationship to Appointment, not the queue containment relationship."
+        },
+        {
+          "edge_id": "edge:28a4a5c10d6dfd54c8ab",
+          "grade": 0,
+          "reason": "This describes an email sender relationship to Queue, not the queue containment relationship."
+        },
+        {
+          "edge_id": "edge:b1721da7f214375eee3b",
+          "grade": 0,
+          "reason": "This shows a worker team relationship, not the queue containment relationship."
+        },
+        {
+          "edge_id": "edge:1ac76353ee9dbed7b19f",
+          "grade": 0,
+          "reason": "This describes a business unit ownership relationship, not the queue containment relationship."
+        },
+        {
+          "edge_id": "edge:20843b651ba1ad12d9bf",
+          "grade": 0,
+          "reason": "This reference shows a QueueItem pointing to Email, not the queue that contains the work item."
+        },
+        {
+          "edge_id": "edge:037fe70e2c403fa8a1fa",
+          "grade": 0,
+          "reason": "This reference shows a QueueItem pointing to Fax, not the queue that contains the work item."
+        },
+        {
+          "edge_id": "edge:3edd7bcc552dd54a1dc6",
+          "grade": 1,
+          "reason": "This reference shows a Queue's User_createdOnBehalfBy relationship to User, which is related to queue management but does not directly answer where a work item points to the queue."
+        }
+      ]
+    },
+    {
+      "id": "challenge-10",
+      "question": "How does an individual calendar event refer to its recurring series?",
+      "type": "direct",
+      "variants": {
+        "hybrid_raw": 0.4306765580733931,
+        "hybrid_reranked": 0.4306765580733931,
+        "neighborhood_reranked": 0.4306765580733931,
+        "graph_assisted": 1.0,
+        "graph_transe": 1.0
+      },
+      "candidates": [
+        {
+          "label": "E01",
+          "edge_id": "edge:ccc10da3f82b946ce3ad",
+          "id": "edge:ccc10da3f82b946ce3ad",
+          "source_id": "applicationCommon::RecurringAppointment",
+          "attribute": "regardingObject",
+          "target_id": "applicationCommon::Account",
+          "description": "",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/RecurringAppointment.cdm.json"
+        },
+        {
+          "label": "E02",
+          "edge_id": "edge:01b0273c61030d3c5cde",
+          "id": "edge:01b0273c61030d3c5cde",
+          "source_id": "applicationCommon::Connection",
+          "attribute": "record1",
+          "target_id": "applicationCommon::RecurringAppointment",
+          "description": "",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/Connection.cdm.json"
+        },
+        {
+          "label": "E03",
+          "edge_id": "edge:7a1e2e23c8770c5a4d93",
+          "id": "edge:7a1e2e23c8770c5a4d93",
+          "source_id": "applicationCommon::Note",
+          "attribute": "object",
+          "target_id": "applicationCommon::RecurringAppointment",
+          "description": "",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/Note.cdm.json"
+        },
+        {
+          "label": "E04",
+          "edge_id": "edge:811f047223bac6c42b84",
+          "id": "edge:811f047223bac6c42b84",
+          "source_id": "applicationCommon::RecurringAppointment",
+          "attribute": "regardingObject",
+          "target_id": "applicationCommon::Contact",
+          "description": "",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/RecurringAppointment.cdm.json"
+        },
+        {
+          "label": "E05",
+          "edge_id": "edge:0c10e19e036ab2a46d96",
+          "id": "edge:0c10e19e036ab2a46d96",
+          "source_id": "applicationCommon::RecurringAppointment",
+          "attribute": "transactionCurrency",
+          "target_id": "applicationCommon::Currency",
+          "description": "",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/RecurringAppointment.cdm.json"
+        },
+        {
+          "label": "E06",
+          "edge_id": "edge:0f062f939d334762c29a",
+          "id": "edge:0f062f939d334762c29a",
+          "source_id": "applicationCommon::RecurringAppointment",
+          "attribute": "regardingObject",
+          "target_id": "applicationCommon::KnowledgeBaseRecord",
+          "description": "",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/RecurringAppointment.cdm.json"
+        },
+        {
+          "label": "E07",
+          "edge_id": "edge:1935cc17510f41ab3873",
+          "id": "edge:1935cc17510f41ab3873",
+          "source_id": "applicationCommon::Appointment",
+          "attribute": "series",
+          "target_id": "applicationCommon::RecurringAppointment",
+          "description": "",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/Appointment.cdm.json"
+        }
+      ],
+      "judgments": [
+        {
+          "edge_id": "edge:ccc10da3f82b946ce3ad",
+          "grade": 0,
+          "reason": "This reference describes a relationship between RecurringAppointment and Account, which is unrelated to how a calendar event refers to its recurring series."
+        },
+        {
+          "edge_id": "edge:01b0273c61030d3c5cde",
+          "grade": 0,
+          "reason": "This reference describes a relationship between Connection and RecurringAppointment, which is unrelated to how a calendar event refers to its recurring series."
+        },
+        {
+          "edge_id": "edge:7a1e2e23c8770c5a4d93",
+          "grade": 0,
+          "reason": "This reference describes a relationship between Note and RecurringAppointment, which is unrelated to how a calendar event refers to its recurring series."
+        },
+        {
+          "edge_id": "edge:811f047223bac6c42b84",
+          "grade": 0,
+          "reason": "This reference describes a relationship between RecurringAppointment and Contact, which is unrelated to how a calendar event refers to its recurring series."
+        },
+        {
+          "edge_id": "edge:0c10e19e036ab2a46d96",
+          "grade": 0,
+          "reason": "This reference describes a relationship between RecurringAppointment and Currency, which is unrelated to how a calendar event refers to its recurring series."
+        },
+        {
+          "edge_id": "edge:0f062f939d334762c29a",
+          "grade": 0,
+          "reason": "This reference describes a relationship between RecurringAppointment and KnowledgeBaseRecord, which is unrelated to how a calendar event refers to its recurring series."
+        },
+        {
+          "edge_id": "edge:1935cc17510f41ab3873",
+          "grade": 2,
+          "reason": "This reference directly shows that an Appointment has a 'series' attribute that points to RecurringAppointment, which is the key relationship for how a calendar event refers to its recurring series."
+        }
+      ]
+    },
+    {
+      "id": "challenge-13",
+      "question": "Trace a work item's assigned person to that person's sales region using common schema references.",
+      "type": "two_hop",
+      "variants": {
+        "hybrid_raw": 0.0,
+        "hybrid_reranked": 0.0,
+        "neighborhood_reranked": 0.0,
+        "graph_assisted": 0.7075790686744426,
+        "graph_transe": 0.7075790686744426
+      },
+      "candidates": [
+        {
+          "label": "E01",
+          "edge_id": "edge:0339f1ad289489069c71",
+          "id": "edge:0339f1ad289489069c71",
+          "source_id": "applicationCommon::Note",
+          "attribute": "User_createdBy",
+          "target_id": "applicationCommon::User",
+          "description": "",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/Note.cdm.json"
+        },
+        {
+          "label": "E02",
+          "edge_id": "edge:05f060df9d5ec3a88462",
+          "id": "edge:05f060df9d5ec3a88462",
+          "source_id": "applicationCommon::ArticleComment",
+          "attribute": "User_createdBy",
+          "target_id": "applicationCommon::User",
+          "description": "",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/ArticleComment.cdm.json"
+        },
+        {
+          "label": "E03",
+          "edge_id": "edge:1c9d8233d42540258c7e",
+          "id": "edge:1c9d8233d42540258c7e",
+          "source_id": "applicationCommon::Contact",
+          "attribute": "master",
+          "target_id": "applicationCommon::Contact",
+          "description": "",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/Contact.cdm.json"
+        },
+        {
+          "label": "E04",
+          "edge_id": "edge:edddc3a93de70a066052",
+          "id": "edge:edddc3a93de70a066052",
+          "source_id": "applicationCommon::QueueItem",
+          "attribute": "worker",
+          "target_id": "applicationCommon::User",
+          "description": "",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/QueueItem.cdm.json"
+        },
+        {
+          "label": "E05",
+          "edge_id": "edge:b1721da7f214375eee3b",
+          "id": "edge:b1721da7f214375eee3b",
+          "source_id": "applicationCommon::QueueItem",
+          "attribute": "worker",
+          "target_id": "applicationCommon::Team",
+          "description": "",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/QueueItem.cdm.json"
+        },
+        {
+          "label": "E06",
+          "edge_id": "edge:01e77731a2bd2f02f5da",
+          "id": "edge:01e77731a2bd2f02f5da",
+          "source_id": "applicationCommon::Contact",
+          "attribute": "parentCustomer",
+          "target_id": "applicationCommon::Contact",
+          "description": "",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/Contact.cdm.json"
+        },
+        {
+          "label": "E07",
+          "edge_id": "edge:47097ff397b2870f2e0f",
+          "id": "edge:47097ff397b2870f2e0f",
+          "source_id": "applicationCommon::Territory",
+          "attribute": "User_createdBy",
+          "target_id": "applicationCommon::User",
+          "description": "",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/Territory.cdm.json"
+        },
+        {
+          "label": "E08",
+          "edge_id": "edge:037fe70e2c403fa8a1fa",
+          "id": "edge:037fe70e2c403fa8a1fa",
+          "source_id": "applicationCommon::QueueItem",
+          "attribute": "object",
+          "target_id": "applicationCommon::Fax",
+          "description": "",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/QueueItem.cdm.json"
+        },
+        {
+          "label": "E09",
+          "edge_id": "edge:00d8b62a7028f93d2177",
+          "id": "edge:00d8b62a7028f93d2177",
+          "source_id": "applicationCommon::Address",
+          "attribute": "User_createdOnBehalfBy",
+          "target_id": "applicationCommon::User",
+          "description": "",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/Address.cdm.json"
+        },
+        {
+          "label": "E10",
+          "edge_id": "edge:025e257f5bc49653caf9",
+          "id": "edge:025e257f5bc49653caf9",
+          "source_id": "applicationCommon::SLAItem",
+          "attribute": "User_createdBy",
+          "target_id": "applicationCommon::User",
+          "description": "",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/SLAItem.cdm.json"
+        },
+        {
+          "label": "E11",
+          "edge_id": "edge:108717399b34ec1ba686",
+          "id": "edge:108717399b34ec1ba686",
+          "source_id": "applicationCommon::Letter",
+          "attribute": "regardingObject",
+          "target_id": "applicationCommon::Contact",
+          "description": "",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/Letter.cdm.json"
+        },
+        {
+          "label": "E12",
+          "edge_id": "edge:14ca74337c25798eb0b4",
+          "id": "edge:14ca74337c25798eb0b4",
+          "source_id": "applicationCommon::Feedback",
+          "attribute": "Contact_createdOnBehalfByContact",
+          "target_id": "applicationCommon::Contact",
+          "description": "",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/Feedback.cdm.json"
+        },
+        {
+          "label": "E13",
+          "edge_id": "edge:399c1e73de21d148a760",
+          "id": "edge:399c1e73de21d148a760",
+          "source_id": "applicationCommon::Territory",
+          "attribute": "manager",
+          "target_id": "applicationCommon::User",
+          "description": "",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/Territory.cdm.json"
+        },
+        {
+          "label": "E14",
+          "edge_id": "edge:00c582c8ba3e6b6bf3f0",
+          "id": "edge:00c582c8ba3e6b6bf3f0",
+          "source_id": "applicationCommon::GoalMetric",
+          "attribute": "User_createdBy",
+          "target_id": "applicationCommon::User",
+          "description": "",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/GoalMetric.cdm.json"
+        },
+        {
+          "label": "E15",
+          "edge_id": "edge:23b69d1010fa66b8e2d0",
+          "id": "edge:23b69d1010fa66b8e2d0",
+          "source_id": "applicationCommon::PhoneCall",
+          "attribute": "regardingObject",
+          "target_id": "applicationCommon::Contact",
+          "description": "",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/PhoneCall.cdm.json"
+        },
+        {
+          "label": "E16",
+          "edge_id": "edge:4b37ac85ea58190806ec",
+          "id": "edge:4b37ac85ea58190806ec",
+          "source_id": "applicationCommon::User",
+          "attribute": "territory",
+          "target_id": "applicationCommon::Territory",
+          "description": "",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/User.cdm.json"
+        }
+      ],
+      "judgments": [
+        {
+          "edge_id": "edge:0339f1ad289489069c71",
+          "grade": 0,
+          "reason": "This reference links a Note to a User, but does not relate to sales regions or work items."
+        },
+        {
+          "edge_id": "edge:05f060df9d5ec3a88462",
+          "grade": 0,
+          "reason": "This reference links an ArticleComment to a User, but does not relate to sales regions or work items."
+        },
+        {
+          "edge_id": "edge:1c9d8233d42540258c7e",
+          "grade": 0,
+          "reason": "This reference links Contacts to each other via a master relationship, not relevant to work items or sales regions."
+        },
+        {
+          "edge_id": "edge:edddc3a93de70a066052",
+          "grade": 1,
+          "reason": "This reference links a QueueItem to a User, which is relevant to finding the assigned person for a work item."
+        },
+        {
+          "edge_id": "edge:b1721da7f214375eee3b",
+          "grade": 1,
+          "reason": "This reference links a QueueItem to a Team, which might be related to sales regions but is not directly about the person's region."
+        },
+        {
+          "edge_id": "edge:01e77731a2bd2f02f5da",
+          "grade": 0,
+          "reason": "This reference links Contacts via parentCustomer, not relevant to work items or sales regions."
+        },
+        {
+          "edge_id": "edge:47097ff397b2870f2e0f",
+          "grade": 0,
+          "reason": "This reference links a Territory to a User, but does not connect to work items or the person's sales region."
+        },
+        {
+          "edge_id": "edge:037fe70e2c403fa8a1fa",
+          "grade": 0,
+          "reason": "This reference links a QueueItem to a Fax, not relevant to work items or sales regions."
+        },
+        {
+          "edge_id": "edge:00d8b62a7028f93d2177",
+          "grade": 0,
+          "reason": "This reference links User_createdOnBehalfBy to a User, but does not relate to sales regions or work items."
+        },
+        {
+          "edge_id": "edge:025e257f5bc49653caf9",
+          "grade": 0,
+          "reason": "This reference links User_createdBy to a User, but does not relate to sales regions or work items."
+        },
+        {
+          "edge_id": "edge:108717399b34ec1ba686",
+          "grade": 0,
+          "reason": "This reference links a Letter to a Contact, not relevant to work items or sales regions."
+        },
+        {
+          "edge_id": "edge:14ca74337c25798eb0b4",
+          "grade": 0,
+          "reason": "This reference links Feedback to a Contact, not relevant to work items or sales regions."
+        },
+        {
+          "edge_id": "edge:399c1e73de21d148a760",
+          "grade": 0,
+          "reason": "This reference links Territory manager to a User, but does not directly connect to work items."
+        },
+        {
+          "edge_id": "edge:00c582c8ba3e6b6bf3f0",
+          "grade": 0,
+          "reason": "This reference links GoalMetric to a User, not relevant to work items or sales regions."
+        },
+        {
+          "edge_id": "edge:23b69d1010fa66b8e2d0",
+          "grade": 0,
+          "reason": "This reference links PhoneCall to a Contact, not relevant to work items or sales regions."
+        },
+        {
+          "edge_id": "edge:4b37ac85ea58190806ec",
+          "grade": 2,
+          "reason": "This reference directly links a User to their Territory, which is essential for tracing a person's sales region."
+        }
+      ]
+    },
+    {
+      "id": "challenge-14",
+      "question": "Trace the record representing someone belonging to a group through that group to the organization recorded for it.",
+      "type": "two_hop",
+      "variants": {
+        "hybrid_raw": 0.22854179986184534,
+        "hybrid_reranked": 0.22854179986184534,
+        "neighborhood_reranked": 0.18807401167015203,
+        "graph_assisted": 0.3937506751234175,
+        "graph_transe": 0.3937506751234175
+      },
+      "candidates": [
+        {
+          "label": "E01",
+          "edge_id": "edge:2e26e324bf8d4ee771ce",
+          "id": "edge:2e26e324bf8d4ee771ce",
+          "source_id": "RetailBankingCoreDataModel::GroupFinancialHolding",
+          "attribute": "Group",
+          "target_id": "RetailBankingCoreDataModel::Group",
+          "description": "The set of familial connections that the customer has at the bank.",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Groupfinancialholding.cdm.json"
+        },
+        {
+          "label": "E02",
+          "edge_id": "edge:7cca35b18a166710ceec",
+          "id": "edge:7cca35b18a166710ceec",
+          "source_id": "applicationCommon::Team",
+          "attribute": "organization",
+          "target_id": "applicationCommon::Organization",
+          "description": "",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/Team.cdm.json"
+        },
+        {
+          "label": "E03",
+          "edge_id": "edge:e8fb303091692fbe7fca",
+          "id": "edge:e8fb303091692fbe7fca",
+          "source_id": "applicationCommon::User",
+          "attribute": "organization",
+          "target_id": "applicationCommon::Organization",
+          "description": "",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/User.cdm.json"
+        },
+        {
+          "label": "E04",
+          "edge_id": "edge:10cac7f55d644f6519cd",
+          "id": "edge:10cac7f55d644f6519cd",
+          "source_id": "applicationCommon::BusinessUnit",
+          "attribute": "organization",
+          "target_id": "applicationCommon::Organization",
+          "description": "",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/BusinessUnit.cdm.json"
+        },
+        {
+          "label": "E05",
+          "edge_id": "edge:1cd985c889e65312ccc7",
+          "id": "edge:1cd985c889e65312ccc7",
+          "source_id": "applicationCommon::Position",
+          "attribute": "organization",
+          "target_id": "applicationCommon::Organization",
+          "description": "",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/Position.cdm.json"
+        },
+        {
+          "label": "E06",
+          "edge_id": "edge:ed1bc95f2f2e5bdb9c42",
+          "id": "edge:ed1bc95f2f2e5bdb9c42",
+          "source_id": "applicationCommon::KnowledgeBaseRecord",
+          "attribute": "organization",
+          "target_id": "applicationCommon::Organization",
+          "description": "",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/KnowledgeBaseRecord.cdm.json"
+        },
+        {
+          "label": "E07",
+          "edge_id": "edge:d70dcda20181bb215f29",
+          "id": "edge:d70dcda20181bb215f29",
+          "source_id": "applicationCommon::TeamMembership",
+          "attribute": "Team",
+          "target_id": "applicationCommon::Team",
+          "description": "",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/TeamMembership.cdm.json"
+        },
+        {
+          "label": "E08",
+          "edge_id": "edge:4b1660e674000bd6e0c0",
+          "id": "edge:4b1660e674000bd6e0c0",
+          "source_id": "applicationCommon::Queue",
+          "attribute": "organization",
+          "target_id": "applicationCommon::Organization",
+          "description": "",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/Queue.cdm.json"
+        },
+        {
+          "label": "E09",
+          "edge_id": "edge:0848aca92cd563b636d5",
+          "id": "edge:0848aca92cd563b636d5",
+          "source_id": "applicationCommon::Organization",
+          "attribute": "User_modifiedBy",
+          "target_id": "applicationCommon::User",
+          "description": "",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/Organization.cdm.json"
+        },
+        {
+          "label": "E10",
+          "edge_id": "edge:2a4afecad7729b7a07cd",
+          "id": "edge:2a4afecad7729b7a07cd",
+          "source_id": "applicationCommon::Organization",
+          "attribute": "User_createdOnBehalfBy",
+          "target_id": "applicationCommon::User",
+          "description": "",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/Organization.cdm.json"
+        }
+      ],
+      "judgments": [
+        {
+          "edge_id": "edge:2e26e324bf8d4ee771ce",
+          "grade": 0,
+          "reason": "Describes familial connections, not group membership or organizational hierarchy"
+        },
+        {
+          "edge_id": "edge:7cca35b18a166710ceec",
+          "grade": 1,
+          "reason": "Shows team-to-organization relationship but not directly group-to-organization"
+        },
+        {
+          "edge_id": "edge:e8fb303091692fbe7fca",
+          "grade": 1,
+          "reason": "Shows user-to-organization relationship but not group-to-organization"
+        },
+        {
+          "edge_id": "edge:10cac7f55d644f6519cd",
+          "grade": 1,
+          "reason": "Shows business unit-to-organization relationship but not group-to-organization"
+        },
+        {
+          "edge_id": "edge:1cd985c889e65312ccc7",
+          "grade": 1,
+          "reason": "Shows position-to-organization relationship but not group-to-organization"
+        },
+        {
+          "edge_id": "edge:ed1bc95f2f2e5bdb9c42",
+          "grade": 1,
+          "reason": "Shows knowledge base record-to-organization relationship but not group-to-organization"
+        },
+        {
+          "edge_id": "edge:d70dcda20181bb215f29",
+          "grade": 2,
+          "reason": "Directly links team membership to team, enabling group-to-organization trace via team"
+        },
+        {
+          "edge_id": "edge:4b1660e674000bd6e0c0",
+          "grade": 0,
+          "reason": "Queue-to-organization relationship is unrelated to group membership"
+        },
+        {
+          "edge_id": "edge:0848aca92cd563b636d5",
+          "grade": 0,
+          "reason": "This reference describes a user modifying an organization, not tracing group membership to an organization."
+        },
+        {
+          "edge_id": "edge:2a4afecad7729b7a07cd",
+          "grade": 0,
+          "reason": "This reference describes a user creating an organization, not tracing group membership to an organization."
+        }
+      ]
+    },
+    {
+      "id": "challenge-15",
+      "question": "Trace a categorization of a knowledge entry to the entry itself and then its principal author.",
+      "type": "two_hop",
+      "variants": {
+        "hybrid_raw": 0.5815871360157758,
+        "hybrid_reranked": 0.5815871360157758,
+        "neighborhood_reranked": 0.5815871360157758,
+        "graph_assisted": 0.6234997966086261,
+        "graph_transe": 0.4292976172255458
+      },
+      "candidates": [
+        {
+          "label": "E01",
+          "edge_id": "edge:0ee4c29131141d400e05",
+          "id": "edge:0ee4c29131141d400e05",
+          "source_id": "applicationCommon::Email",
+          "attribute": "regardingObject",
+          "target_id": "applicationCommon::KnowledgeArticle",
+          "description": "",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/Email.cdm.json"
+        },
+        {
+          "label": "E02",
+          "edge_id": "edge:7f2c61ef5c083f67f0a3",
+          "id": "edge:7f2c61ef5c083f67f0a3",
+          "source_id": "applicationCommon::KnowledgeArticle",
+          "attribute": "parentArticleContent",
+          "target_id": "applicationCommon::KnowledgeArticle",
+          "description": "",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/KnowledgeArticle.cdm.json"
+        },
+        {
+          "label": "E03",
+          "edge_id": "edge:63c60d269589894031b7",
+          "id": "edge:63c60d269589894031b7",
+          "source_id": "applicationCommon::KnowledgeArticle",
+          "attribute": "rootArticle",
+          "target_id": "applicationCommon::KnowledgeArticle",
+          "description": "",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/KnowledgeArticle.cdm.json"
+        },
+        {
+          "label": "E04",
+          "edge_id": "edge:c7cfa8048ef33b0e4d5e",
+          "id": "edge:c7cfa8048ef33b0e4d5e",
+          "source_id": "applicationCommon::KnowledgeArticleCategory",
+          "attribute": "knowledgeArticle",
+          "target_id": "applicationCommon::KnowledgeArticle",
+          "description": "",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/KnowledgeArticleCategory.cdm.json"
+        },
+        {
+          "label": "E05",
+          "edge_id": "edge:12ddeb627d93eac73861",
+          "id": "edge:12ddeb627d93eac73861",
+          "source_id": "applicationCommon::Appointment",
+          "attribute": "regardingObject",
+          "target_id": "applicationCommon::KnowledgeArticle",
+          "description": "",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/Appointment.cdm.json"
+        },
+        {
+          "label": "E06",
+          "edge_id": "edge:8a80c6d35c05551d714a",
+          "id": "edge:8a80c6d35c05551d714a",
+          "source_id": "applicationCommon::KnowledgeArticleViews",
+          "attribute": "knowledgearticle",
+          "target_id": "applicationCommon::KnowledgeArticle",
+          "description": "",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/KnowledgeArticleViews.cdm.json"
+        },
+        {
+          "label": "E07",
+          "edge_id": "edge:ea70267aabf0f6554204",
+          "id": "edge:ea70267aabf0f6554204",
+          "source_id": "applicationCommon::KnowledgeArticle",
+          "attribute": "primaryAuthor",
+          "target_id": "applicationCommon::User",
+          "description": "",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/KnowledgeArticle.cdm.json"
+        },
+        {
+          "label": "E08",
+          "edge_id": "edge:201589b18049834e004a",
+          "id": "edge:201589b18049834e004a",
+          "source_id": "applicationCommon::Note",
+          "attribute": "object",
+          "target_id": "applicationCommon::KnowledgeArticle",
+          "description": "",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/Note.cdm.json"
+        },
+        {
+          "label": "E09",
+          "edge_id": "edge:07473e78a9959926e14f",
+          "id": "edge:07473e78a9959926e14f",
+          "source_id": "applicationCommon::Activity",
+          "attribute": "regardingObject",
+          "target_id": "applicationCommon::KnowledgeArticle",
+          "description": "",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/Activity.cdm.json"
+        },
+        {
+          "label": "E10",
+          "edge_id": "edge:22f6647fa42aebc544a4",
+          "id": "edge:22f6647fa42aebc544a4",
+          "source_id": "applicationCommon::Task",
+          "attribute": "regardingObject",
+          "target_id": "applicationCommon::KnowledgeArticle",
+          "description": "",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/Task.cdm.json"
+        }
+      ],
+      "judgments": [
+        {
+          "edge_id": "edge:0ee4c29131141d400e05",
+          "grade": 0,
+          "reason": "This schema reference links an email to a knowledge article but does not help trace categorization to the entry itself or its author."
+        },
+        {
+          "edge_id": "edge:7f2c61ef5c083f67f0a3",
+          "grade": 0,
+          "reason": "This schema reference links a knowledge article to its parent article content, not relevant for tracing categorization to the entry itself or author."
+        },
+        {
+          "edge_id": "edge:63c60d269589894031b7",
+          "grade": 0,
+          "reason": "This schema reference links a knowledge article to its root article, not relevant for tracing categorization to the entry itself or author."
+        },
+        {
+          "edge_id": "edge:c7cfa8048ef33b0e4d5e",
+          "grade": 1,
+          "reason": "This schema reference links a knowledge article category to a knowledge article, providing context for categorization but not directly tracing to the entry or author."
+        },
+        {
+          "edge_id": "edge:12ddeb627d93eac73861",
+          "grade": 0,
+          "reason": "This schema reference links an appointment to a knowledge article, not relevant for tracing categorization to the entry itself or author."
+        },
+        {
+          "edge_id": "edge:8a80c6d35c05551d714a",
+          "grade": 0,
+          "reason": "This schema reference links knowledge article views to a knowledge article, not relevant for tracing categorization to the entry itself or author."
+        },
+        {
+          "edge_id": "edge:ea70267aabf0f6554204",
+          "grade": 2,
+          "reason": "This schema reference directly links a knowledge article to its primary author, which is the required step to trace to the entry's principal author."
+        },
+        {
+          "edge_id": "edge:201589b18049834e004a",
+          "grade": 0,
+          "reason": "This schema reference links a note to a knowledge article, not relevant for tracing categorization to the entry itself or author."
+        },
+        {
+          "edge_id": "edge:07473e78a9959926e14f",
+          "grade": 2,
+          "reason": "Directly links a KnowledgeArticle to its regardingObject, which is the target for tracing the knowledge entry to itself."
+        },
+        {
+          "edge_id": "edge:22f6647fa42aebc544a4",
+          "grade": 1,
+          "reason": "Links a Task to a KnowledgeArticle but does not directly relate to the knowledge entry itself, so it's related context but not a required step for tracing the entry to itself."
+        }
+      ]
+    },
+    {
+      "id": "challenge-16",
+      "question": "Trace from a business customer's monetary unit to the organization recorded for that unit.",
+      "type": "two_hop",
+      "variants": {
+        "hybrid_raw": 0.0,
+        "hybrid_reranked": 0.0,
+        "neighborhood_reranked": 0.0,
+        "graph_assisted": 0.34051109516667066,
+        "graph_transe": 0.34051109516667066
+      },
+      "candidates": [
+        {
+          "label": "E01",
+          "edge_id": "edge:6ee72eff8dcd9deee508",
+          "id": "edge:6ee72eff8dcd9deee508",
+          "source_id": "applicationCommon::Account",
+          "attribute": "transactionCurrency",
+          "target_id": "applicationCommon::Currency",
+          "description": "",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/Account.cdm.json"
+        },
+        {
+          "label": "E02",
+          "edge_id": "edge:8f885cb529a6e7853a49",
+          "id": "edge:8f885cb529a6e7853a49",
+          "source_id": "applicationCommon::Currency",
+          "attribute": "organization",
+          "target_id": "applicationCommon::Organization",
+          "description": "",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/Currency.cdm.json"
+        },
+        {
+          "label": "E03",
+          "edge_id": "edge:2a4afecad7729b7a07cd",
+          "id": "edge:2a4afecad7729b7a07cd",
+          "source_id": "applicationCommon::Organization",
+          "attribute": "User_createdOnBehalfBy",
+          "target_id": "applicationCommon::User",
+          "description": "",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/Organization.cdm.json"
+        },
+        {
+          "label": "E04",
+          "edge_id": "edge:4b1660e674000bd6e0c0",
+          "id": "edge:4b1660e674000bd6e0c0",
+          "source_id": "applicationCommon::Queue",
+          "attribute": "organization",
+          "target_id": "applicationCommon::Organization",
+          "description": "",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/Queue.cdm.json"
+        },
+        {
+          "label": "E05",
+          "edge_id": "edge:1cd985c889e65312ccc7",
+          "id": "edge:1cd985c889e65312ccc7",
+          "source_id": "applicationCommon::Position",
+          "attribute": "organization",
+          "target_id": "applicationCommon::Organization",
+          "description": "",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/Position.cdm.json"
+        },
+        {
+          "label": "E06",
+          "edge_id": "edge:10cac7f55d644f6519cd",
+          "id": "edge:10cac7f55d644f6519cd",
+          "source_id": "applicationCommon::BusinessUnit",
+          "attribute": "organization",
+          "target_id": "applicationCommon::Organization",
+          "description": "",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/BusinessUnit.cdm.json"
+        },
+        {
+          "label": "E07",
+          "edge_id": "edge:7d6f24b23ad4cef367a7",
+          "id": "edge:7d6f24b23ad4cef367a7",
+          "source_id": "applicationCommon::Organization",
+          "attribute": "baseCurrency",
+          "target_id": "applicationCommon::Currency",
+          "description": "",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/Organization.cdm.json"
+        },
+        {
+          "label": "E08",
+          "edge_id": "edge:1ac76353ee9dbed7b19f",
+          "id": "edge:1ac76353ee9dbed7b19f",
+          "source_id": "applicationCommon::Queue",
+          "attribute": "BusinessUnit_owningBusinessUnit",
+          "target_id": "applicationCommon::BusinessUnit",
+          "description": "",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/Queue.cdm.json"
+        },
+        {
+          "label": "E09",
+          "edge_id": "edge:7eb23dd1b3b3aa80d8cf",
+          "id": "edge:7eb23dd1b3b3aa80d8cf",
+          "source_id": "applicationCommon::BusinessUnit",
+          "attribute": "parentBusinessUnit",
+          "target_id": "applicationCommon::BusinessUnit",
+          "description": "",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/BusinessUnit.cdm.json"
+        },
+        {
+          "label": "E10",
+          "edge_id": "edge:1b36c7981fa78008138e",
+          "id": "edge:1b36c7981fa78008138e",
+          "source_id": "applicationCommon::CustomerRelationship",
+          "attribute": "BusinessUnit_owningBusinessUnit",
+          "target_id": "applicationCommon::BusinessUnit",
+          "description": "",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/CustomerRelationship.cdm.json"
+        },
+        {
+          "label": "E11",
+          "edge_id": "edge:241cc050777a9ba25d52",
+          "id": "edge:241cc050777a9ba25d52",
+          "source_id": "applicationCommon::Connection",
+          "attribute": "BusinessUnit_owningBusinessUnit",
+          "target_id": "applicationCommon::BusinessUnit",
+          "description": "",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/Connection.cdm.json"
+        },
+        {
+          "label": "E12",
+          "edge_id": "edge:0848aca92cd563b636d5",
+          "id": "edge:0848aca92cd563b636d5",
+          "source_id": "applicationCommon::Organization",
+          "attribute": "User_modifiedBy",
+          "target_id": "applicationCommon::User",
+          "description": "",
+          "source_uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/Organization.cdm.json"
+        }
+      ],
+      "judgments": [
+        {
+          "edge_id": "edge:6ee72eff8dcd9deee508",
+          "grade": 2,
+          "reason": "Directly links a business customer's transaction currency to a currency entity, which is a required step to trace from a monetary unit to the organization."
+        },
+        {
+          "edge_id": "edge:8f885cb529a6e7853a49",
+          "grade": 2,
+          "reason": "Directly links a currency to an organization, which is the critical step to trace from a monetary unit to the organization."
+        },
+        {
+          "edge_id": "edge:2a4afecad7729b7a07cd",
+          "grade": 0,
+          "reason": "Relates to user creation, not relevant to tracing monetary units to organizations."
+        },
+        {
+          "edge_id": "edge:4b1660e674000bd6e0c0",
+          "grade": 0,
+          "reason": "Relates to queues and organizations, not relevant to monetary units."
+        },
+        {
+          "edge_id": "edge:1cd985c889e65312ccc7",
+          "grade": 0,
+          "reason": "Relates to positions and organizations, not relevant to monetary units."
+        },
+        {
+          "edge_id": "edge:10cac7f55d644f6519cd",
+          "grade": 0,
+          "reason": "Relates to business units and organizations, not relevant to monetary units."
+        },
+        {
+          "edge_id": "edge:7d6f24b23ad4cef367a7",
+          "grade": 0,
+          "reason": "Links base currency to currency, not directly relevant to tracing from a business customer's monetary unit to organization."
+        },
+        {
+          "edge_id": "edge:1ac76353ee9dbed7b19f",
+          "grade": 0,
+          "reason": "Relates to queues and business units, not relevant to monetary units."
+        },
+        {
+          "edge_id": "edge:7eb23dd1b3b3aa80d8cf",
+          "grade": 0,
+          "reason": "This reference describes a parent-child relationship between BusinessUnits but does not connect to a customer's monetary unit or organization."
+        },
+        {
+          "edge_id": "edge:1b36c7981fa78008138e",
+          "grade": 2,
+          "reason": "This reference links a CustomerRelationship to a BusinessUnit_owningBusinessUnit, which is required to trace from a business customer to their organization's monetary unit."
+        },
+        {
+          "edge_id": "edge:241cc050777a9ba25d52",
+          "grade": 1,
+          "reason": "This reference connects a Connection to a BusinessUnit_owningBusinessUnit but is not directly required for tracing a customer's monetary unit to their organization."
+        },
+        {
+          "edge_id": "edge:0848aca92cd563b636d5",
+          "grade": 0,
+          "reason": "This reference relates an Organization to a User_modifiedBy, which is unrelated to tracing a customer's monetary unit to their organization."
+        }
+      ]
+    }
+  ]
+}

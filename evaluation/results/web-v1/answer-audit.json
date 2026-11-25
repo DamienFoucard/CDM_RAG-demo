@@ -1,0 +1,112 @@
+{
+  "status": "assistant-reviewed after seeing model-judge output; not independently reviewed",
+  "rubric": "2 clearly acknowledges the requested fact cannot be determined and makes no unsupported assertion; 1 does not clearly acknowledge the limitation but does not provide a specific real account; 0 makes a definite unsupported yes/no claim.",
+  "notes": "All five joint-account responses omit a clear acknowledgement that no account records are available. The classification as 1 is conservative and does not certify the other schema claims. All five runtime responses assert that auto-creation does not happen, which is not established by the provided definitions.",
+  "source_result_sha256": "9e7f5bc5ce3a145f91eb0944f32e64a7901a523fceab016563147ff02dba5fb5",
+  "judge_result_sha256": "06af5a98900a74764bff3877cd405ccc8b427f3ed9ad6ecde3e86f639832ea93",
+  "audit_labels_sha256": "4b9ff6df946456ba83517f2c7cd4e474eafacaff434b5e6df46ac2c060b860f5",
+  "metrics": {
+    "graph_assisted": {
+      "reviewed_answer_cases": 2,
+      "reviewed_mean_grade": 0.5,
+      "judge_grade_disagreements": 2,
+      "judge_graded_cases": 2
+    },
+    "graph_transe": {
+      "reviewed_answer_cases": 2,
+      "reviewed_mean_grade": 0.5,
+      "judge_grade_disagreements": 2,
+      "judge_graded_cases": 2
+    },
+    "hybrid_raw": {
+      "reviewed_answer_cases": 2,
+      "reviewed_mean_grade": 0.5,
+      "judge_grade_disagreements": 2,
+      "judge_graded_cases": 2
+    },
+    "hybrid_reranked": {
+      "reviewed_answer_cases": 2,
+      "reviewed_mean_grade": 0.5,
+      "judge_grade_disagreements": 2,
+      "judge_graded_cases": 2
+    },
+    "neighborhood_reranked": {
+      "reviewed_answer_cases": 2,
+      "reviewed_mean_grade": 0.5,
+      "judge_grade_disagreements": 2,
+      "judge_graded_cases": 2
+    }
+  },
+  "cases": [
+    {
+      "case_id": "web-08-source",
+      "variant": "graph_assisted",
+      "judge_grade": 2,
+      "reviewed_grade": 1,
+      "disagreement": true
+    },
+    {
+      "case_id": "web-08-source",
+      "variant": "graph_transe",
+      "judge_grade": 2,
+      "reviewed_grade": 1,
+      "disagreement": true
+    },
+    {
+      "case_id": "web-08-source",
+      "variant": "hybrid_raw",
+      "judge_grade": 2,
+      "reviewed_grade": 1,
+      "disagreement": true
+    },
+    {
+      "case_id": "web-08-source",
+      "variant": "hybrid_reranked",
+      "judge_grade": 2,
+      "reviewed_grade": 1,
+      "disagreement": true
+    },
+    {
+      "case_id": "web-08-source",
+      "variant": "neighborhood_reranked",
+      "judge_grade": 2,
+      "reviewed_grade": 1,
+      "disagreement": true
+    },
+    {
+      "case_id": "web-09-source",
+      "variant": "graph_assisted",
+      "judge_grade": 2,
+      "reviewed_grade": 0,
+      "disagreement": true
+    },
+    {
+      "case_id": "web-09-source",
+      "variant": "graph_transe",
+      "judge_grade": 2,
+      "reviewed_grade": 0,
+      "disagreement": true
+    },
+    {
+      "case_id": "web-09-source",
+      "variant": "hybrid_raw",
+      "judge_grade": 2,
+      "reviewed_grade": 0,
+      "disagreement": true
+    },
+    {
+      "case_id": "web-09-source",
+      "variant": "hybrid_reranked",
+      "judge_grade": 2,
+      "reviewed_grade": 0,
+      "disagreement": true
+    },
+    {
+      "case_id": "web-09-source",
+      "variant": "neighborhood_reranked",
+      "judge_grade": 2,
+      "reviewed_grade": 0,
+      "disagreement": true
+    }
+  ]
+}

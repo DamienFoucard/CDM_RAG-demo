@@ -1,0 +1,412 @@
+{
+  "dataset_id": "cdm-routing-scope-binary-v1",
+  "status": "derived from assistant-authored scope set; no independent expert review",
+  "source_dataset": "scope-questions-v1",
+  "source_file": "evaluation/scope-questions-v1.json",
+  "source_sha256": "cba4dc2a3d23b0c1489c043cd81733f8144e358a1df8960a6763ac5ac0be09eb",
+  "source_provenance": "Written after observing two web failures; development and test phrasing are not independently authored. Regression examples are copied from public sources in web-question-candidates-v1.json. No real customer data.",
+  "source_policy": "The demo explains the CDM schema. Real records, deployed software behavior, unrelated questions, and mixed requests are declined or clarified without retrieval.",
+  "provenance": "Mechanical derivation of the 32 test cases from the existing scope dataset, preserving every source ID, question, category and binary label. It is not an independently held-out dataset; prior work has inspected this scope set. No 3-way raw-versus-rewrite label is inferred.",
+  "policy": {
+    "accepted_routes": "For a schema-search-allowed case, either raw_search or rewrite_search satisfies the source binary label. For other cases, only no_search satisfies it. These are retrieval decisions, not judgments about whether an assistant may respond conversationally or use other tools.",
+    "caveat": "Only binary search scope is scored; the labels cannot establish whether a rewrite improves retrieval or whether raw/rewrite routing is correct."
+  },
+  "questions": [
+    {
+      "id": "t01",
+      "source_id": "t01",
+      "split": "test",
+      "question": "Which entity has a field for an available account balance?",
+      "context_messages": [],
+      "accepted_routes": [
+        "raw_search",
+        "rewrite_search"
+      ],
+      "source_expected": "schema",
+      "allow_schema_search": true
+    },
+    {
+      "id": "t02",
+      "source_id": "t02",
+      "split": "test",
+      "question": "Which definitions link people to their financial holdings?",
+      "context_messages": [],
+      "accepted_routes": [
+        "raw_search",
+        "rewrite_search"
+      ],
+      "source_expected": "schema",
+      "allow_schema_search": true
+    },
+    {
+      "id": "t03",
+      "source_id": "t03",
+      "split": "test",
+      "question": "What attributes can describe a business account?",
+      "context_messages": [],
+      "accepted_routes": [
+        "raw_search",
+        "rewrite_search"
+      ],
+      "source_expected": "schema",
+      "allow_schema_search": true
+    },
+    {
+      "id": "t04",
+      "source_id": "t04",
+      "split": "test",
+      "question": "How are group memberships represented in Microsoft CDM?",
+      "context_messages": [],
+      "accepted_routes": [
+        "raw_search",
+        "rewrite_search"
+      ],
+      "source_expected": "schema",
+      "allow_schema_search": true
+    },
+    {
+      "id": "t05",
+      "source_id": "t05",
+      "split": "test",
+      "question": "Can you explain the relationship between a loan and a financial holding?",
+      "context_messages": [],
+      "accepted_routes": [
+        "raw_search",
+        "rewrite_search"
+      ],
+      "source_expected": "schema",
+      "allow_schema_search": true
+    },
+    {
+      "id": "t06",
+      "source_id": "t06",
+      "split": "test",
+      "question": "Which schema type represents a scheduled payment instruction?",
+      "context_messages": [],
+      "accepted_routes": [
+        "raw_search",
+        "rewrite_search"
+      ],
+      "source_expected": "schema",
+      "allow_schema_search": true
+    },
+    {
+      "id": "t07",
+      "source_id": "t07",
+      "split": "test",
+      "question": "Does the Contact definition refer to an Account?",
+      "context_messages": [],
+      "accepted_routes": [
+        "raw_search",
+        "rewrite_search"
+      ],
+      "source_expected": "schema",
+      "allow_schema_search": true
+    },
+    {
+      "id": "t08",
+      "source_id": "t08",
+      "split": "test",
+      "question": "Where in the model can I find a link between a user and a team?",
+      "context_messages": [],
+      "accepted_routes": [
+        "raw_search",
+        "rewrite_search"
+      ],
+      "source_expected": "schema",
+      "allow_schema_search": true
+    },
+    {
+      "id": "t09",
+      "source_id": "t09",
+      "split": "test",
+      "question": "Is there a CDM entity for a credit line?",
+      "context_messages": [],
+      "accepted_routes": [
+        "raw_search",
+        "rewrite_search"
+      ],
+      "source_expected": "schema",
+      "allow_schema_search": true
+    },
+    {
+      "id": "t10",
+      "source_id": "t10",
+      "split": "test",
+      "question": "In the banking model, what is the purpose of CustomerFinancialHolding?",
+      "context_messages": [],
+      "accepted_routes": [
+        "raw_search",
+        "rewrite_search"
+      ],
+      "source_expected": "schema",
+      "allow_schema_search": true
+    },
+    {
+      "id": "t11",
+      "source_id": "t11",
+      "split": "test",
+      "question": "What is the distinction between the availableBalance and balance attributes?",
+      "context_messages": [],
+      "accepted_routes": [
+        "raw_search",
+        "rewrite_search"
+      ],
+      "source_expected": "schema",
+      "allow_schema_search": true
+    },
+    {
+      "id": "t12",
+      "source_id": "t12",
+      "split": "test",
+      "question": "Which entities and references could represent an account with two owners?",
+      "context_messages": [],
+      "accepted_routes": [
+        "raw_search",
+        "rewrite_search"
+      ],
+      "source_expected": "schema",
+      "allow_schema_search": true
+    },
+    {
+      "id": "t13",
+      "source_id": "t13",
+      "split": "test",
+      "question": "Which customers share a bank account?",
+      "context_messages": [],
+      "accepted_routes": [
+        "no_search"
+      ],
+      "source_expected": "records",
+      "allow_schema_search": false
+    },
+    {
+      "id": "t14",
+      "source_id": "t14",
+      "split": "test",
+      "question": "Find the account numbers for the Smith household.",
+      "context_messages": [],
+      "accepted_routes": [
+        "no_search"
+      ],
+      "source_expected": "records",
+      "allow_schema_search": false
+    },
+    {
+      "id": "t15",
+      "source_id": "t15",
+      "split": "test",
+      "question": "What was our total deposit amount in March?",
+      "context_messages": [],
+      "accepted_routes": [
+        "no_search"
+      ],
+      "source_expected": "records",
+      "allow_schema_search": false
+    },
+    {
+      "id": "t16",
+      "source_id": "t16",
+      "split": "test",
+      "question": "Has loan 843 already been paid off?",
+      "context_messages": [],
+      "accepted_routes": [
+        "no_search"
+      ],
+      "source_expected": "records",
+      "allow_schema_search": false
+    },
+    {
+      "id": "t17",
+      "source_id": "t17",
+      "split": "test",
+      "question": "Give me the names of all customers with a mortgage.",
+      "context_messages": [],
+      "accepted_routes": [
+        "no_search"
+      ],
+      "source_expected": "records",
+      "allow_schema_search": false
+    },
+    {
+      "id": "t18",
+      "source_id": "t18",
+      "split": "test",
+      "question": "Which branches currently offer free overdrafts?",
+      "context_messages": [],
+      "accepted_routes": [
+        "no_search"
+      ],
+      "source_expected": "records",
+      "allow_schema_search": false
+    },
+    {
+      "id": "t19",
+      "source_id": "t19",
+      "split": "test",
+      "question": "Is account 172 owned by two people?",
+      "context_messages": [],
+      "accepted_routes": [
+        "no_search"
+      ],
+      "source_expected": "records",
+      "allow_schema_search": false
+    },
+    {
+      "id": "t20",
+      "source_id": "t20",
+      "split": "test",
+      "question": "What is the balance on John Smith’s checking account?",
+      "context_messages": [],
+      "accepted_routes": [
+        "no_search"
+      ],
+      "source_expected": "records",
+      "allow_schema_search": false
+    },
+    {
+      "id": "t21",
+      "source_id": "t21",
+      "split": "test",
+      "question": "Does Dynamics automatically notify a customer when an account is opened?",
+      "context_messages": [],
+      "accepted_routes": [
+        "no_search"
+      ],
+      "source_expected": "runtime",
+      "allow_schema_search": false
+    },
+    {
+      "id": "t22",
+      "source_id": "t22",
+      "split": "test",
+      "question": "What happens in the app when I delete a customer?",
+      "context_messages": [],
+      "accepted_routes": [
+        "no_search"
+      ],
+      "source_expected": "runtime",
+      "allow_schema_search": false
+    },
+    {
+      "id": "t23",
+      "source_id": "t23",
+      "split": "test",
+      "question": "How can I configure Dynamics to display subaccounts?",
+      "context_messages": [],
+      "accepted_routes": [
+        "no_search"
+      ],
+      "source_expected": "runtime",
+      "allow_schema_search": false
+    },
+    {
+      "id": "t24",
+      "source_id": "t24",
+      "split": "test",
+      "question": "Will an account be created when a contact is saved in CRM?",
+      "context_messages": [],
+      "accepted_routes": [
+        "no_search"
+      ],
+      "source_expected": "runtime",
+      "allow_schema_search": false
+    },
+    {
+      "id": "t25",
+      "source_id": "t25",
+      "split": "test",
+      "question": "Does the system validate account numbers before saving?",
+      "context_messages": [],
+      "accepted_routes": [
+        "no_search"
+      ],
+      "source_expected": "runtime",
+      "allow_schema_search": false
+    },
+    {
+      "id": "t26",
+      "source_id": "t26",
+      "split": "test",
+      "question": "Explain the Account schema and list the accounts that are overdrawn.",
+      "context_messages": [],
+      "accepted_routes": [
+        "no_search"
+      ],
+      "source_expected": "mixed",
+      "allow_schema_search": false
+    },
+    {
+      "id": "t27",
+      "source_id": "t27",
+      "split": "test",
+      "question": "How are users modeled, and will deleting one remove their team?",
+      "context_messages": [],
+      "accepted_routes": [
+        "no_search"
+      ],
+      "source_expected": "mixed",
+      "allow_schema_search": false
+    },
+    {
+      "id": "t28",
+      "source_id": "t28",
+      "split": "test",
+      "question": "Show our joint accounts and explain their CDM relationship.",
+      "context_messages": [],
+      "accepted_routes": [
+        "no_search"
+      ],
+      "source_expected": "mixed",
+      "allow_schema_search": false
+    },
+    {
+      "id": "t29",
+      "source_id": "t29",
+      "split": "test",
+      "question": "My dog Luna learned to swim yesterday.",
+      "context_messages": [],
+      "accepted_routes": [
+        "no_search"
+      ],
+      "source_expected": "unrelated",
+      "allow_schema_search": false
+    },
+    {
+      "id": "t30",
+      "source_id": "t30",
+      "split": "test",
+      "question": "Good morning!",
+      "context_messages": [],
+      "accepted_routes": [
+        "no_search"
+      ],
+      "source_expected": "unrelated",
+      "allow_schema_search": false
+    },
+    {
+      "id": "t31",
+      "source_id": "t31",
+      "split": "test",
+      "question": "What is the weather in Berlin?",
+      "context_messages": [],
+      "accepted_routes": [
+        "no_search"
+      ],
+      "source_expected": "unrelated",
+      "allow_schema_search": false
+    },
+    {
+      "id": "t32",
+      "source_id": "t32",
+      "split": "test",
+      "question": "Tell me a joke about astronomy.",
+      "context_messages": [],
+      "accepted_routes": [
+        "no_search"
+      ],
+      "source_expected": "unrelated",
+      "allow_schema_search": false
+    }
+  ]
+}

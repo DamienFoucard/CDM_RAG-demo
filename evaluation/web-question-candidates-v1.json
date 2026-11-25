@@ -1,0 +1,123 @@
+{
+  "dataset_id": "web-question-candidates-v1",
+  "status": "research shortlist; unreviewed and not benchmark gold",
+  "collected_on": "2026-11-22",
+  "provenance": "Convenience sample of public forum questions, a teaching exercise, and bank/regulator FAQs. The source wording or scenario is distinguished from any CDM-specific adaptation. Candidates were selected and mapped by the assistant after seeing existing benchmark results; they are not a representative random sample, an independent test set, or independently reviewed relevance judgments.",
+  "snapshot": "Microsoft/CDM dd21d715e05ebf740a11356c80b5c3b4c38a89c2, 64 extracted banking and common entities",
+  "questions": [
+    {
+      "id": "web-01",
+      "source_type": "bank FAQ",
+      "source_url": "https://www.natwest.com/support-centre/general-banking-information/general/what-is-the-difference-between-a-standing-order-and-a-direct-debit.html",
+      "source_question": "What is the difference between a standing order and a direct debit?",
+      "source_wording": "verbatim question",
+      "prototype_question": "What is the difference between a standing order and a direct debit?",
+      "fit": "conceptual; partial",
+      "candidate_entities": ["RetailBankingCoreDataModel::FIStandingOrder", "RetailBankingCoreDataModel::FIDirectDebit"],
+      "notes": "The indexed definitions may support a short distinction; jurisdiction- or bank-specific operating rules are not established by the schema."
+    },
+    {
+      "id": "web-02",
+      "source_type": "bank FAQ",
+      "source_url": "https://easysupport.republicbank.com/en/support/solutions/articles/48000969732-what-is-the-difference-between-available-and-current-balance-",
+      "source_question": "What is the difference between Available and Current balance?",
+      "source_wording": "verbatim question",
+      "prototype_question": "What is the difference between Available and Current balance?",
+      "fit": "attribute interpretation; partial",
+      "candidate_entities": ["RetailBankingCoreDataModel::FHAccount"],
+      "notes": "The snapshot includes balance and availableBalance attributes. It does not necessarily contain all bank-specific processing rules in the FAQ."
+    },
+    {
+      "id": "web-03",
+      "source_type": "Stack Overflow user question",
+      "source_url": "https://stackoverflow.com/questions/5178910/account-contact-relationship-in-ms-dynamics-crm",
+      "source_question": "How do I apply a contact to an account?",
+      "source_wording": "verbatim question",
+      "prototype_question": "Which CDM reference connects a contact to an account?",
+      "fit": "relationship; adapted from an operational question",
+      "candidate_entities": ["applicationCommon::Contact", "applicationCommon::Account"],
+      "candidate_edges": ["applicationCommon::Contact --parentCustomer--> applicationCommon::Account"],
+      "notes": "The original asks how to perform an action in Dynamics CRM; the adapted question asks what the schema describes."
+    },
+    {
+      "id": "web-04",
+      "source_type": "Stack Overflow user question",
+      "source_url": "https://stackoverflow.com/questions/23811912/database-of-bank-accounts",
+      "source_question": "How should a bank database represent customers with multiple accounts and accounts shared by multiple people?",
+      "source_wording": "paraphrase of the user's scenario",
+      "prototype_question": "Which CDM definitions connect a bank customer to a financial holding, and do they describe joint ownership?",
+      "fit": "banking relationship; adapted and potentially incomplete",
+      "candidate_entities": ["RetailBankingCoreDataModel::CustomerFinancialHolding", "RetailBankingCoreDataModel::FinancialHolding", "RetailBankingCoreDataModel::FHAccount", "RetailBankingCoreDataModel::Contact"],
+      "candidate_edges": ["RetailBankingCoreDataModel::CustomerFinancialHolding --Customer--> RetailBankingCoreDataModel::Contact", "RetailBankingCoreDataModel::CustomerFinancialHolding --FinancialHolding--> RetailBankingCoreDataModel::FinancialHolding"],
+      "notes": "The source asks about a proposed bank database, not Microsoft CDM. The extracted edges alone do not establish joint-account cardinality or all ownership constraints."
+    },
+    {
+      "id": "web-05",
+      "source_type": "Stack Overflow user scenario",
+      "source_url": "https://stackoverflow.com/questions/34867988/how-to-display-contacts-for-account-and-sub-account-in-dynamics-crm",
+      "source_question": "How can contacts for an account and its child accounts be displayed?",
+      "source_wording": "paraphrase of the user's scenario",
+      "prototype_question": "Which CDM references connect accounts to parent accounts and contacts to accounts?",
+      "fit": "two relationships; adapted from a display and record-retrieval task",
+      "candidate_entities": ["applicationCommon::Account", "applicationCommon::Contact"],
+      "candidate_edges": ["applicationCommon::Account --parentAccount--> applicationCommon::Account", "applicationCommon::Contact --parentCustomer--> applicationCommon::Account"],
+      "notes": "The original asks how to display actual records; the schema-only demo can discuss definitions, not retrieve an organization's contacts."
+    },
+    {
+      "id": "web-06",
+      "source_type": "Dynamics community user question",
+      "source_url": "https://community.dynamics.com/forums/thread/details/?threadid=11a42c36-8eaf-4523-88df-1be55a5e55b3",
+      "source_question": "How can a workflow check the parent team of the current user's team?",
+      "source_wording": "paraphrase of the user's question",
+      "prototype_question": "Which CDM definitions associate users with teams, and does the extracted schema show a parent-team link?",
+      "fit": "team membership; adapted from an operational workflow question",
+      "candidate_entities": ["applicationCommon::TeamMembership", "applicationCommon::Team", "applicationCommon::User"],
+      "candidate_edges": ["applicationCommon::TeamMembership --Team--> applicationCommon::Team", "applicationCommon::TeamMembership --User--> applicationCommon::User"],
+      "notes": "A missing parent-team edge in this extracted subset does not establish that no such relation exists elsewhere or in a configured Dynamics environment."
+    },
+    {
+      "id": "web-07",
+      "source_type": "Stack Overflow user question",
+      "source_url": "https://stackoverflow.com/questions/79454766/filter-built-in-list-based-on-contacts-account-and-related-connections",
+      "source_question": "How can a contact be associated with multiple accounts and used to filter items across those connections?",
+      "source_wording": "paraphrase of the user's scenario",
+      "prototype_question": "Which CDM definitions can describe connections between a contact and business accounts?",
+      "fit": "relationship; adapted from an operational filtering task",
+      "candidate_entities": ["applicationCommon::Contact", "applicationCommon::Account", "applicationCommon::Connection"],
+      "notes": "Connection record1/record2 have extracted references to Account and Contact. Whether they satisfy the user's actual filtering and cardinality requirements needs review."
+    },
+    {
+      "id": "web-08",
+      "source_type": "retail banking data-modeling exercise",
+      "source_url": "https://github.com/black-panther-is-mpondo/data-modelling-for-data-engineering/blob/main/banking-capstone/01-business-requirements.md",
+      "source_question": "Which accounts are jointly held?",
+      "source_wording": "verbatim question",
+      "prototype_question": "Which accounts are jointly held?",
+      "fit": "data-required negative candidate",
+      "candidate_entities": ["RetailBankingCoreDataModel::CustomerFinancialHolding", "RetailBankingCoreDataModel::FinancialHolding"],
+      "notes": "The source asks a business question over a hypothetical banking dataset. Our public CDM schema snapshot contains no customer account records from which to list jointly held accounts."
+    },
+    {
+      "id": "web-09",
+      "source_type": "Dynamics community user question",
+      "source_url": "https://community.dynamics.com/forums/thread/details/?threadid=ab9ec3b0-98f0-4e29-b1f0-3e3d8398b8dc",
+      "source_question": "Does creating an account in D365 auto-create a related contact record?",
+      "source_wording": "verbatim question",
+      "prototype_question": "Does creating an account in D365 auto-create a related contact record?",
+      "fit": "runtime-behavior negative candidate",
+      "candidate_entities": ["applicationCommon::Account", "applicationCommon::Contact"],
+      "notes": "A schema relationship alone does not establish the behavior of a particular Dynamics environment or its automation."
+    },
+    {
+      "id": "web-10",
+      "source_type": "financial regulator FAQ",
+      "source_url": "https://www.mfsa.mt/consumers/banking/loans/",
+      "source_question": "What is the difference between an overdraft loan and a personal loan?",
+      "source_wording": "verbatim question",
+      "prototype_question": "What is the difference between an overdraft loan and a personal loan?",
+      "fit": "conceptual; partial",
+      "candidate_entities": ["RetailBankingCoreDataModel::FIOverdraft", "RetailBankingCoreDataModel::FHLoan"],
+      "notes": "The schema can provide related definitions, but the regulator's full financial explanation is not necessarily derivable from this snapshot."
+    }
+  ]
+}

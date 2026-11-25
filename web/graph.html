@@ -1,0 +1,805 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CDM RAG · Graph explorer</title>
+  <style>
+    :root{color-scheme:light;--ink:#17231e;--muted:#627168;--green:#1d7653;--line:#d9e5dc;--soft:#f3f7f3;--blue:#2563eb;--blue-soft:#eaf2ff;--red:#ad3527}
+    *{box-sizing:border-box}[hidden]{display:none!important}body{margin:0;background:#f4f7f4;color:var(--ink);font:16px/1.55 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+    .wrap{max-width:1380px;margin:0 auto;padding:30px 28px 64px}header{display:flex;justify-content:space-between;align-items:center;gap:18px;border-bottom:1px solid var(--line);padding-bottom:20px}
+    .brand{font-weight:800;font-size:18px}.brand small{display:block;color:var(--muted);font-size:13px;font-weight:600}.links{display:flex;gap:20px;align-items:center;flex-wrap:wrap}.links a{color:var(--green);font-weight:700}
+    h1{font:500 clamp(40px,6vw,68px)/1.04 Georgia,"Times New Roman",serif;letter-spacing:-.04em;margin:43px 0 12px}.intro{max-width:900px;color:var(--muted);font-size:18px;margin:0 0 25px}
+    .card{background:#fff;border:1px solid var(--line);border-radius:22px;padding:22px;margin:18px 0;box-shadow:0 8px 28px #17231e08}.search-card{padding:20px 22px}.search-form{display:grid;grid-template-columns:minmax(200px,1fr) auto;gap:10px;align-items:end}.field label{display:block;font-weight:800;margin-bottom:7px}.field input{width:100%;padding:12px 14px;border:1px solid #bdcec1;border-radius:11px;font:inherit;color:var(--ink);background:#fff}.field input:focus-visible,button:focus-visible,a:focus-visible,select:focus-visible,[tabindex="0"]:focus-visible{outline:3px solid #8fb9fa;outline-offset:2px}
+    button,select{font:inherit}button{cursor:pointer;border:1px solid #cdd9cf;border-radius:10px;padding:10px 14px;background:#fff;color:var(--green);font-weight:750}button:hover{background:var(--soft)}button.primary{background:var(--green);border-color:var(--green);color:#fff}button.primary:hover{background:#175d41}button:disabled{opacity:.5;cursor:default}
+    .hint,.meta{font-size:13px;color:var(--muted)}.hint{margin:9px 0 0}.hint kbd{background:#f2f5f2;border:1px solid var(--line);border-radius:4px;padding:1px 5px;font:inherit;color:var(--ink)}
+    .search-status{min-height:1.5em;margin:12px 0 0;color:var(--muted);font-size:14px}.search-status.error{color:var(--red)}.hit-controls{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:10px}.hit-count{font-size:14px;font-weight:800;color:var(--ink);min-width:100px;text-align:center}.hit-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:8px;margin-top:12px;max-height:240px;overflow:auto}.hit{display:block;width:100%;text-align:left;padding:10px 12px;border:1px solid var(--line);border-radius:11px;color:var(--ink);font-weight:500}.hit[aria-current="true"]{border-color:#7ea9ef;background:var(--blue-soft);box-shadow:inset 3px 0 var(--blue)}.hit-title{display:block;font-weight:800;overflow-wrap:anywhere}.hit-subtitle,.hit-snippet{display:block;font-size:12px;color:var(--muted);line-height:1.35;margin-top:3px}.hit-snippet{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+    .explorer-layout{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(290px,.8fr);gap:18px;align-items:start}.graph-card{padding:0;overflow:hidden}.graph-toolbar{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:16px 20px;border-bottom:1px solid var(--line)}.graph-toolbar h2{margin:0;font-size:18px}.graph-toolbar-controls{display:flex;align-items:center;gap:8px}.graph-toolbar select{border:1px solid #bdcec1;border-radius:9px;padding:7px 10px;background:white;color:var(--ink)}
+    .graph-instructions{margin:0;padding:10px 20px 0;color:var(--muted);font-size:13px}.graph-viewport{overflow:auto;background:radial-gradient(ellipse at center,#fbfdfb 0,#f4f8f5 100%);min-height:580px}.graph-svg{display:block;width:100%;min-width:760px;height:auto;min-height:580px}.graph-bg{fill:transparent}.edge{fill:none;stroke:#87958d;stroke-width:2;opacity:.82;cursor:pointer}.edge.model-common{stroke:#38845d}.edge.model-banking{stroke:#a86d18}.edge.model-other{stroke:#7167a5}.edge:hover,.edge.selected{stroke:var(--blue);stroke-width:3;opacity:1}.edge.selected{stroke-dasharray:7 4}.attribute-edge{fill:none;stroke:#95a79a;stroke-width:1.8;stroke-dasharray:5 5;opacity:.85}.edge-label{font:12px system-ui,sans-serif;fill:#56665d;paint-order:stroke;stroke:#f7faf7;stroke-width:4px;stroke-linejoin:round;pointer-events:none}.node{cursor:pointer}.node rect{fill:#fff;stroke:#b8cbbd;stroke-width:1.5;filter:drop-shadow(0 3px 5px #17231e12)}.node.model-common rect{fill:#eaf5ee;stroke:#38845d}.node.model-banking rect{fill:#fff3df;stroke:#a86d18}.node.model-other rect{fill:#f0eff8;stroke:#7167a5}.node:hover rect,.node:focus rect{stroke-width:2.5}.node.focus rect{stroke:#26362d;stroke-width:3}.node.hit-focus rect{fill:var(--blue-soft);stroke:var(--blue);stroke-width:3}.node-name{font:750 14px system-ui,sans-serif;fill:var(--ink);pointer-events:none}.node-model{font:11px system-ui,sans-serif;fill:var(--muted);pointer-events:none}.attribute-heading{font:800 13px system-ui,sans-serif;fill:#526158;letter-spacing:.04em;text-transform:uppercase}.attribute-node{cursor:pointer}.attribute-node rect{fill:#fff;stroke:#9eafa3;stroke-width:1.5;stroke-dasharray:5 3;filter:drop-shadow(0 3px 5px #17231e12)}.attribute-node:hover rect,.attribute-node:focus rect{stroke-width:2.5}.attribute-node.selected rect{fill:var(--blue-soft);stroke:var(--blue);stroke-width:3;stroke-dasharray:5 3}.attribute-name{font:800 14px system-ui,sans-serif;fill:var(--ink);pointer-events:none}.attribute-type{font:12px system-ui,sans-serif;fill:var(--muted);pointer-events:none}.arrow-common{fill:#38845d}.arrow-banking{fill:#a86d18}.arrow-other{fill:#87958d}.arrow-selected{fill:var(--blue)}.legend{display:flex;gap:18px;flex-wrap:wrap;padding:12px 19px;border-top:1px solid var(--line);font-size:13px;color:var(--muted)}.legend span{display:inline-flex;align-items:center;gap:7px}.legend i{width:11px;height:11px;border-radius:50%;background:#eaf4ed;border:2px solid var(--green)}.legend b{width:22px;height:2px;background:#91a79a;position:relative}.legend b:after{content:"";position:absolute;right:-1px;top:-3px;border-left:6px solid #91a79a;border-top:4px solid transparent;border-bottom:4px solid transparent}.legend .model-node-swatch{width:13px;height:13px;border-radius:4px}.legend .model-node-swatch.model-common{background:#eaf5ee;border-color:#38845d}.legend .model-node-swatch.model-banking{background:#fff3df;border-color:#a86d18}.legend .model-node-swatch.model-other{background:#f0eff8;border-color:#7167a5}.legend .model-link-swatch{height:3px}.legend .model-link-swatch.model-common{background:#38845d}.legend .model-link-swatch.model-common:after{border-left-color:#38845d}.legend .model-link-swatch.model-banking{background:#a86d18}.legend .model-link-swatch.model-banking:after{border-left-color:#a86d18}.legend .model-link-swatch.model-other{background:#7167a5}.legend .model-link-swatch.model-other:after{border-left-color:#7167a5}.legend .focus-swatch{width:13px;height:11px;border-radius:4px;background:#fff;border:3px solid #26362d}.legend .selected-swatch{width:13px;height:11px;border-radius:4px;background:var(--blue-soft);border:3px solid var(--blue)}.legend .attribute-link-swatch{width:22px;height:0;border-top:2px dashed #95a79a}
+    .legend .selected-link-swatch{height:0;border-top:3px dashed var(--blue);background:transparent}.legend .selected-link-swatch:after{border-left-color:var(--blue)}.legend .selected-attribute-swatch{width:17px;height:13px;border-radius:5px;background:var(--blue-soft);border:2px dashed var(--blue)}.legend-toggle{display:inline-flex;align-items:center;gap:7px;padding:5px 8px;border:1px solid #bdcec1;border-radius:8px;background:#fff;color:var(--green);font:inherit;font-weight:750;cursor:pointer}.legend-toggle:hover,.legend-toggle[aria-pressed="true"]{background:#f0f6f2}.legend-toggle:focus-visible{outline:3px solid #8fb9fa;outline-offset:2px}
+    .node.details-mode rect{stroke-width:2}.node.details-mode.focus rect{stroke:#26362d;stroke-width:3}.node.details-mode.hit-focus rect{stroke:var(--blue);stroke-width:3}.node-detail-divider{stroke:#d9e5dc;stroke-width:1.5}.node-detail-name{font:800 13px system-ui,sans-serif;fill:var(--ink);pointer-events:none}.node-detail-model{font:10px system-ui,sans-serif;fill:var(--muted);pointer-events:none}.node-detail-category{font:750 10px system-ui,sans-serif;pointer-events:none}.node-attribute-scroll{width:100%;height:100%;overflow:auto;overscroll-behavior:contain;border:1px solid #d9e5dc;border-radius:9px;background:#fff;padding:3px 5px;scrollbar-width:thin;scrollbar-color:#b7c9bc transparent}.node-attribute-heading{position:sticky;top:-3px;z-index:1;margin:-3px -5px 2px;padding:4px 5px;background:#f7faf7;color:#526158;font:750 10px/1.2 system-ui,sans-serif}.node-attribute-row{display:grid;grid-template-columns:minmax(0,1fr) 23px;align-items:center;gap:3px;min-height:32px;border-top:1px solid #edf1ed}.node-attribute-select,.attribute-undock{min-width:0;border:0;border-radius:5px;background:transparent;color:var(--ink);padding:4px 3px;text-align:left;font:650 10px/1.2 system-ui,sans-serif;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.node-attribute-select:hover,.attribute-undock:hover{background:var(--soft)}.node-attribute-row.selected{background:var(--blue-soft);outline:1px solid #97b9f7;border-radius:5px}.node-attribute-select small{display:block;color:var(--muted);font:9px/1.1 system-ui,sans-serif;margin-top:2px}.attribute-undock{text-align:center;color:var(--green);font-size:13px}.attribute-undock:focus-visible,.node-attribute-select:focus-visible,.undocked-close:focus-visible{outline:2px solid #8fb9fa;outline-offset:1px}.undocked-card{filter:drop-shadow(0 8px 16px #17231e35)}.undocked-card rect{fill:#fff;stroke:#2563eb;stroke-width:2.5}.undocked-title{font:800 14px system-ui,sans-serif;fill:var(--ink)}.undocked-link{fill:none;stroke:#2563eb;stroke-width:2;stroke-dasharray:7 5;opacity:.8;pointer-events:none}.undocked-content{height:100%;display:flex;flex-direction:column;gap:5px;padding:13px 14px;color:#17231e;font:12px/1.4 system-ui,sans-serif;background:#fff;border-radius:13px;overflow:auto}.undocked-content strong{font-size:14px;overflow-wrap:anywhere}.undocked-content small{color:#627168}.undocked-content p{margin:2px 0 0;overflow-wrap:anywhere}.undocked-content .undocked-close{align-self:flex-end;border:1px solid #cdd9cf;border-radius:7px;background:#fff;padding:2px 7px;color:#1d7653;font:700 11px system-ui,sans-serif}
+    .attribute-node.model-common rect{fill:#f5fbf7;stroke:#38845d}.attribute-node.model-banking rect{fill:#fffaf0;stroke:#a86d18}.attribute-node.model-other rect{fill:#f8f7fc;stroke:#7167a5}.attribute-node.compact rect{stroke-dasharray:4 3}.attribute-node.compact.selected rect{fill:var(--blue-soft);stroke:var(--blue);stroke-width:3}.attribute-node.compact .attribute-name{font:750 11px system-ui,sans-serif}
+    .graph-zoom-controls{display:flex;gap:5px;align-items:center}.graph-zoom-controls[hidden]{display:none!important}.graph-zoom-controls button{padding:6px 9px;min-width:32px}.graph-svg.is-infinite{cursor:grab;touch-action:none}.graph-svg.is-infinite.is-panning{cursor:grabbing}
+    .category-panel{padding:12px 18px;border-bottom:1px solid var(--line);background:#fbfdfb}.category-panel-head{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}.category-panel-head strong{font-size:14px}.category-panel-actions{display:flex;gap:6px}.category-panel-actions button{padding:4px 9px;font-size:12px}.category-summary{margin:5px 0 9px;color:var(--muted);font-size:12px}.category-filters{display:flex;gap:7px;flex-wrap:wrap}.category-filter{display:inline-flex;align-items:center;gap:7px;padding:6px 9px;border:1px solid var(--line);border-radius:9px;background:white;color:var(--ink);font-size:13px;cursor:pointer}.category-filter:has(input:not(:checked)){opacity:.56;background:#f2f4f2}.category-filter input{accent-color:var(--green);margin:0}.category-swatch{width:11px;height:11px;border-radius:3px;background:var(--category-color)}.category-count{color:var(--muted);font-size:11px}.node.category-marked rect{stroke:var(--category-color);stroke-width:3}.node.category-marked:hover rect,.node.category-marked:focus rect{stroke-width:4}.node.category-marked.focus rect,.node.category-marked.hit-focus rect{stroke:#2563eb;stroke-width:3}.node.category-hidden,.edge.category-hidden,.category-region.category-hidden{display:none}.node-category{font:750 9px system-ui,sans-serif;pointer-events:none}.category-region{stroke-width:2;stroke-dasharray:8 6;fill-opacity:.065;stroke-opacity:.32;pointer-events:none}.category-region-label{font:800 18px system-ui,sans-serif;opacity:.74;pointer-events:none}.category-0{--category-color:#287c61}.category-1{--category-color:#a96b13}.category-2{--category-color:#536cc7}.category-3{--category-color:#b64f68}.category-4{--category-color:#7657a8}.category-5{--category-color:#218598}.category-6{--category-color:#758d27}.category-7{--category-color:#c05c24}.category-0.category-region{fill:#287c61;stroke:#287c61}.category-1.category-region{fill:#a96b13;stroke:#a96b13}.category-2.category-region{fill:#536cc7;stroke:#536cc7}.category-3.category-region{fill:#b64f68;stroke:#b64f68}.category-4.category-region{fill:#7657a8;stroke:#7657a8}.category-5.category-region{fill:#218598;stroke:#218598}.category-6.category-region{fill:#758d27;stroke:#758d27}.category-7.category-region{fill:#c05c24;stroke:#c05c24}.category-label-0{fill:#287c61}.category-label-1{fill:#a96b13}.category-label-2{fill:#536cc7}.category-label-3{fill:#b64f68}.category-label-4{fill:#7657a8}.category-label-5{fill:#218598}.category-label-6{fill:#758d27}.category-label-7{fill:#c05c24}
+    .details-card{position:sticky;top:15px;max-height:calc(100vh - 30px);overflow:auto}.details-card h2{font-size:23px;line-height:1.2;margin:0}.entity-model{font-size:13px;color:var(--green);font-weight:800;margin:5px 0 12px}.entity-description{margin:0 0 12px;color:var(--muted)}.path{font:12px/1.4 ui-monospace,SFMono-Regular,Menlo,monospace;overflow-wrap:anywhere;padding:8px 10px;background:#f6f8f6;border-radius:8px;color:#526158}.source-link{display:inline-block;margin:11px 0 15px;color:var(--green);font-weight:750}.details-card details{border-top:1px solid var(--line);padding:11px 0}.details-card summary{font-weight:800;cursor:pointer}.attribute-hint{margin:7px 0;color:var(--muted);font-size:12px}.item-list{list-style:none;margin:8px 0 0;padding:0;max-height:270px;overflow:auto}.item-list li{padding:8px 9px;border-radius:8px;border-bottom:1px solid #edf1ed;font-size:13px;overflow-wrap:anywhere}.item-list li.match{background:var(--blue-soft);outline:1px solid #97b9f7}.item-list strong{display:block}.item-list small{display:block;color:var(--muted);margin-top:2px}.neighbor-link,.attribute-link{width:100%;border:0;border-radius:7px;padding:7px 8px;background:transparent;text-align:left;color:var(--ink);font-weight:650}.neighbor-link:hover,.attribute-link:hover{background:var(--soft)}.coverage-note{font-size:12px;color:var(--muted);margin:13px 0 0}.page-status{color:var(--muted);font-size:14px}.page-status.error{color:var(--red)}.empty{padding:18px;color:var(--muted);text-align:center}
+    @media(max-width:900px){.explorer-layout{grid-template-columns:1fr}.details-card{position:static;max-height:none}.graph-viewport{min-height:480px}.graph-svg{min-height:480px}}
+    @media(max-width:650px){.wrap{padding:21px 15px 45px}header{align-items:flex-start}.links{gap:9px 13px;font-size:14px}h1{margin-top:32px}.search-form{grid-template-columns:1fr}.search-form .primary{justify-self:start}.card{padding:17px;border-radius:17px}.search-card{padding:16px}.graph-card{padding:0}.graph-toolbar{align-items:flex-start;flex-direction:column}.graph-viewport{min-height:400px}.graph-svg{min-height:400px}.hit-list{grid-template-columns:1fr}}
+    .category-region-label.category-hidden{display:none}
+    .semantic-controls{padding:14px 18px;border-bottom:1px solid var(--line);background:#fbfdfb}.semantic-description{margin:0 0 10px;color:var(--muted);font-size:14px}.semantic-options{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.semantic-option{display:inline-flex;align-items:center;gap:8px;max-width:310px;text-align:left;font-size:13px;padding:8px 10px;color:var(--ink);border-color:var(--line)}.semantic-option[aria-pressed="true"]{background:#eaf2ff;border-color:#7da9f2;box-shadow:inset 3px 0 var(--blue)}.semantic-option-count{color:var(--muted);font-size:11px;font-weight:700;white-space:nowrap}.semantic-node{cursor:pointer}.semantic-node rect{fill:#fff;stroke:#9eafa3;stroke-width:2;filter:drop-shadow(0 4px 7px #17231e16)}.semantic-node:hover rect,.semantic-node:focus rect{stroke:var(--blue);stroke-width:3}.semantic-node.selected rect{fill:var(--blue-soft);stroke:var(--blue);stroke-width:3}.semantic-node.manifest-node rect{fill:#eff6ff;stroke:#4174bd}.semantic-node.manifest-placeholder rect{fill:#f8fafc;stroke:#8d9aa7;stroke-dasharray:7 5}.semantic-node.trait-node rect{fill:#f2f7e9;stroke:#6a8f39}.semantic-node.base-node rect{fill:#fff3df;stroke:#a86d18}.semantic-node.entity-node rect{fill:#fff;stroke:#83958a}.semantic-node.entity-node.model-common rect{fill:#eaf5ee;stroke:#38845d}.semantic-node.entity-node.model-banking rect{fill:#fff3df;stroke:#a86d18}.semantic-node.entity-node.category-marked rect{stroke:var(--category-color);stroke-width:3}.semantic-node.muted{opacity:.36}.semantic-node.category-hidden,.semantic-edge.category-hidden{display:none}.semantic-node-title{font:800 16px system-ui,sans-serif;fill:var(--ink);pointer-events:none}.semantic-node-meta{font:12px system-ui,sans-serif;fill:var(--muted);pointer-events:none}.semantic-edge{fill:none;stroke:#819389;stroke-width:2;opacity:.65}.semantic-edge.sub-manifest{stroke:#4174bd;stroke-width:3}.semantic-edge.trait-use{stroke:#6a8f39;stroke-width:3;stroke-dasharray:5 5;opacity:.85}.semantic-edge.trait-inheritance{stroke:#586f83;stroke-width:2.5;stroke-dasharray:2 4}.semantic-edge.context-edge{stroke:#7b8a82;stroke-width:1.3;opacity:.12}.semantic-edge.inheritance{stroke:#a86d18;stroke-width:2.5}.semantic-edge.selected{stroke:var(--blue);stroke-width:4;opacity:.9}.semantic-edge-label{font:11px system-ui,sans-serif;fill:#56665d;paint-order:stroke;stroke:#f7faf7;stroke-width:4px;pointer-events:none}.semantic-empty{fill:#627168;font:14px system-ui,sans-serif}.semantic-key{display:inline-flex;align-items:center;gap:7px}.semantic-key i{width:13px;height:13px;border-radius:4px;background:#eff6ff;border:2px solid #4174bd}.semantic-key .trait-swatch{background:#f2f7e9;border-color:#6a8f39}.semantic-key .base-swatch{background:#fff3df;border-color:#a86d18}.semantic-key .placeholder-swatch{background:#f8fafc;border-color:#8d9aa7;border-style:dashed}.details-card .semantic-counts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:12px 0}.details-card .semantic-count{padding:10px;border:1px solid var(--line);border-radius:10px;background:var(--soft)}.details-card .semantic-count strong{display:block;font-size:18px}.details-card .semantic-count small{color:var(--muted)}.details-card .trait-use-list,.details-card .manifest-entity-list{max-height:420px;overflow:auto;padding-left:22px}.details-card .trait-argument{font-size:12px;color:var(--muted);margin:2px 0 8px;overflow-wrap:anywhere}.details-card .semantic-summary{color:var(--muted);font-size:14px}.details-card .semantic-note{border-left:3px solid #b68435;padding:8px 10px;background:#fff8e9;color:#6d5223;font-size:13px}.legend .semantic-legend{display:none}.legend .semantic-legend i{width:13px;height:13px;flex:0 0 13px;border-radius:4px;background:#eff6ff;border:2px solid #4174bd}.legend .semantic-legend .trait-swatch{background:#f2f7e9;border-color:#6a8f39}.legend .semantic-legend .base-swatch{background:#fff3df;border-color:#a86d18}.legend .semantic-legend .placeholder-swatch{background:#f8fafc;border-color:#8d9aa7;border-style:dashed}.legend .semantic-legend b.semantic-line-key{width:22px;height:0;flex:0 0 22px;background:none;border-top:2px solid #819389}.legend .semantic-legend b.semantic-line-key:after{display:none}.legend .semantic-legend .trait-line-key{border-top-color:#6a8f39;border-top-style:dashed}.legend .semantic-legend .inheritance-line-key{border-top-color:#a86d18}.legend .semantic-legend .context-line-key{border-top-color:#7b8a82;border-top-style:dotted}.graph-card[data-semantic-layer="manifests"] .legend .semantic-legend.manifest-key,.graph-card[data-semantic-layer="traits"] .legend .semantic-legend.trait-key,.graph-card[data-semantic-layer="inheritance"] .legend .semantic-legend.inheritance-key{display:inline-flex}.graph-card[data-semantic-layer]:not([data-semantic-layer="relationships"]) #node-detail-toggle,.graph-card[data-semantic-layer]:not([data-semantic-layer="relationships"]) .direction-swatch-wrap,.graph-card[data-semantic-layer]:not([data-semantic-layer="relationships"]) .attribute-link-wrap{display:none}.graph-card[data-semantic-layer]:not([data-semantic-layer="relationships"]) .graph-legend-relationship{display:none}.graph-card[data-semantic-layer="relationships"] .graph-legend-relationship{display:inline-flex}
+    .semantic-option[aria-pressed="true"]{background:color-mix(in srgb,var(--trait-color) 13%,white);border-color:var(--trait-color);box-shadow:inset 3px 0 var(--trait-color)}.semantic-selected-count{color:var(--muted);font-size:12px;font-weight:750;margin-left:4px}.semantic-node.trait-node.trait-active rect{fill:color-mix(in srgb,var(--trait-color) 12%,white);stroke:var(--trait-color);stroke-width:3}.semantic-node.trait-node.trait-base rect{fill:#f1f4f6;stroke:#586f83;stroke-dasharray:6 4}.semantic-edge.trait-color-0{stroke:#6a8f39}.semantic-edge.trait-color-1{stroke:#347c86}.semantic-edge.trait-color-2{stroke:#bd7d2b}.semantic-edge.trait-color-3{stroke:#7a63a8}.semantic-edge.trait-color-4{stroke:#b35c74}.semantic-edge.trait-color-5{stroke:#3675b1}.semantic-edge.trait-color-6{stroke:#558543}.semantic-edge.trait-color-7{stroke:#9a6d40}
+    .legend{align-items:center;gap:8px}.legend-toggle.layer-toggle,.legend-toggle.legend-disclosure{min-height:36px;padding:6px 10px;color:var(--ink);font-size:12px}.legend-toggle[aria-pressed="false"]{opacity:.55;background:#f4f6f4}.legend-layer-swatch{width:12px!important;height:12px!important;flex:0 0 12px;border-radius:4px!important;background:#eaf5ee!important;border:2px solid #38845d!important}.legend-layer-swatch.relationship-layer-swatch{height:0!important;width:18px!important;flex:0 0 18px;border:0!important;border-top:3px solid #687c70!important;border-radius:0!important;background:transparent!important}.legend-layer-swatch.manifest-layer-swatch{background:#eff6ff!important;border-color:#4174bd!important}.legend-layer-swatch.trait-layer-swatch,.legend-choice-swatch.trait-choice{background:color-mix(in srgb,var(--trait-color,#6a8f39) 16%,white)!important;border-color:var(--trait-color,#6a8f39)!important}.legend-layer-swatch.inheritance-layer-swatch{background:#fff3df!important;border-color:#a86d18!important}.legend-layer-swatch.cluster-layer-swatch{background:#e9eaff!important;border-color:#536cc7!important}.legend-disclosure{gap:7px}.legend-chevron{font-size:10px;color:var(--muted)}.legend-filter-panel{display:grid;grid-template-columns:auto 1fr;gap:9px 14px;align-items:center;flex:1 0 100%;padding:10px 12px;border:1px solid var(--line);border-radius:12px;background:#f8fbf8}.legend-filter-head{display:flex;align-items:center;gap:12px;grid-column:1/-1;font-size:13px}.legend-filter-actions{display:flex;gap:5px;margin-left:auto}.legend-filter-actions button{padding:3px 8px;font-size:11px}.legend-filter-search{grid-column:1/-1;width:min(100%,360px);padding:7px 9px;border:1px solid #bdcec1;border-radius:8px;font:inherit;font-size:12px}.legend-filter-list{display:flex;gap:6px;flex-wrap:wrap;grid-column:1/-1;max-height:180px;overflow:auto}.legend-filter-choice{display:inline-flex;align-items:center;gap:6px;padding:5px 8px;border:1px solid var(--line);border-radius:8px;background:#fff;color:var(--ink);font-size:11px;cursor:pointer}.legend-filter-choice:has(input:not(:checked)){opacity:.52}.legend-filter-choice input{accent-color:var(--green);margin:0}.legend-choice-swatch{width:10px;height:10px;flex:0 0 10px;border-radius:3px;background:var(--category-color,#536cc7)}.legend-filter-choice small{color:var(--muted);font-size:10px}.legend-key-row{display:flex;align-items:center;gap:14px;flex:1 0 100%;padding-top:3px}.legend-key{display:inline-flex;align-items:center;gap:6px;white-space:nowrap}.semantic-edge{pointer-events:stroke;opacity:.72}.semantic-edge.manifest-child{stroke:#4174bd;stroke-width:2.6;stroke-dasharray:3 4}.semantic-edge.manifest-declaration{stroke:#4174bd;stroke-width:1.6;stroke-dasharray:2 5;opacity:.5}.semantic-edge.trait-use{stroke:#6a8f39;stroke-width:1.7;stroke-dasharray:5 4;opacity:.48}.semantic-edge.trait-inheritance{stroke:#586f83;stroke-width:2.4;stroke-dasharray:2 4;opacity:.8}.semantic-edge.entity-inheritance{stroke:#a86d18;stroke-width:2.5;opacity:.88}.semantic-edge.layer-hidden,.layer-hidden{display:none!important}.semantic-edge.trait-color-0{stroke:#6a8f39}.semantic-edge.trait-color-1{stroke:#347c86}.semantic-edge.trait-color-2{stroke:#bd7d2b}.semantic-edge.trait-color-3{stroke:#7a63a8}.semantic-edge.trait-color-4{stroke:#b35c74}.semantic-edge.trait-color-5{stroke:#3675b1}.semantic-edge.trait-color-6{stroke:#558543}.semantic-edge.trait-color-7{stroke:#9a6d40}.semantic-node{cursor:pointer}.semantic-node.manifest-node rect{fill:#eff6ff;stroke:#4174bd}.semantic-node.manifest-placeholder rect{fill:#f8fafc;stroke:#8d9aa7;stroke-dasharray:7 5}.semantic-node.trait-node rect{fill:color-mix(in srgb,var(--trait-color,#6a8f39) 13%,white);stroke:var(--trait-color,#6a8f39);stroke-width:2.5}.semantic-node.base-node rect{fill:#fff3df;stroke:#a86d18}.category-region.selected{fill-opacity:.15;stroke-width:4}.category-region-label{cursor:pointer}.category-region-label:hover,.category-region-label:focus{font-size:22px;opacity:1}.graph-toolbar-controls>.meta{padding:5px 9px;border:1px solid var(--line);border-radius:8px;background:#f8fbf8;font-weight:750}
+    .semantic-node.selected rect{fill:var(--blue-soft)!important;stroke:var(--blue)!important;stroke-width:4!important}.legend .legend-layer-swatch{display:inline-block}.legend .model-key{font-size:11px}.legend-filter-choice[hidden]{display:none!important}
+    .legend .legend-layer-swatch.node-detail-swatch{background:#eaf2ff!important;border-color:var(--blue)!important}
+    .node-detail-info{pointer-events:none}.node-detail-name{font:800 13px system-ui,sans-serif;fill:var(--ink);pointer-events:none}.node-detail-model{font:10px system-ui,sans-serif;fill:var(--muted);pointer-events:none}.node-detail-category{font:750 10px system-ui,sans-serif;pointer-events:none}.node-attribute-row{align-items:start;min-height:0;padding:5px 1px}.node-attribute-select{display:block;width:100%;padding:3px 2px;overflow:visible;text-overflow:clip;white-space:normal;font-size:10px;line-height:1.25}.node-attribute-select .node-attribute-name{display:block;font:750 10px/1.25 system-ui,sans-serif;color:var(--ink);overflow-wrap:anywhere}.node-attribute-select .node-attribute-meta{display:block;margin-top:2px;color:var(--muted);font:9px/1.3 system-ui,sans-serif;white-space:normal;overflow-wrap:anywhere}.node-attribute-description{margin:3px 2px 0;color:var(--muted);font:9px/1.3 system-ui,sans-serif;overflow-wrap:anywhere;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}
+    .node-resize-handle{cursor:nwse-resize;touch-action:none}.node .node-resize-hit{fill:#fff;fill-opacity:.9;stroke:#819389;stroke-width:1.5;filter:none}.node .node-resize-glyph{fill:none;stroke:#51635a;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;pointer-events:none}.node .node-resize-handle:hover .node-resize-hit,.node .node-resize-handle:focus .node-resize-hit{fill:#eaf2ff;stroke:var(--blue)}
+    .graph-workspace:fullscreen,.graph-workspace.is-fullscreen-fallback{display:flex;flex-direction:column;gap:8px;width:100%;height:100%;min-height:0;padding:10px;background:#f4f7f4;overflow:hidden}
+    .graph-workspace.is-fullscreen-fallback{position:fixed;inset:0;z-index:9999;width:100vw;height:100vh;height:100dvh}
+    body.graph-fullscreen-fallback{overflow:hidden}
+    :is(.graph-workspace:fullscreen,.graph-workspace.is-fullscreen-fallback) .search-card,:is(.graph-workspace:fullscreen,.graph-workspace.is-fullscreen-fallback) .details-card,:is(.graph-workspace:fullscreen,.graph-workspace.is-fullscreen-fallback) .graph-instructions{display:none}
+    :is(.graph-workspace:fullscreen,.graph-workspace.is-fullscreen-fallback) .explorer-layout{flex:1;min-height:0;grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(0,1fr);align-items:stretch}
+    :is(.graph-workspace:fullscreen,.graph-workspace.is-fullscreen-fallback) .graph-card{display:flex;flex-direction:column;min-height:0;margin:0;border-radius:10px}
+    :is(.graph-workspace:fullscreen,.graph-workspace.is-fullscreen-fallback) .graph-toolbar{flex:none;flex-wrap:wrap;padding:8px 12px}
+    :is(.graph-workspace:fullscreen,.graph-workspace.is-fullscreen-fallback) .graph-toolbar-controls{flex-wrap:wrap}
+    :is(.graph-workspace:fullscreen,.graph-workspace.is-fullscreen-fallback) .graph-viewport{flex:1;min-height:0}
+    :is(.graph-workspace:fullscreen,.graph-workspace.is-fullscreen-fallback) .graph-svg{width:100%;height:100%;min-width:0;min-height:0}
+    :is(.graph-workspace:fullscreen,.graph-workspace.is-fullscreen-fallback) .legend{flex:none;max-height:25vh;overflow:auto;padding:8px 12px}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="brand">CDM RAG<small>Microsoft Common Data Model · graph explorer</small></div>
+      <nav class="links" aria-label="Main navigation"><a href="/home">Home</a><a href="/RAG">Ask a question</a><a href="/benchmarks">Evaluations</a><a href="/docs">Documentation</a><a id="api-tokens-nav" href="/api-tokens" hidden>API tokens</a></nav>
+    </header>
+    <main>
+      <h1>Explore the graph.</h1>
+      <p class="intro">Search to jump anywhere in the CDM. Explore the full graph and use its legend to show or hide relationships, traits, manifests, inheritance, and inferred groups.</p>
+      <div id="graph-workspace" class="graph-workspace">
+      <section class="card search-card" aria-label="Keyword navigation">
+        <form id="search-form" class="search-form">
+          <div class="field"><label for="keyword">Keyword</label><input id="keyword" type="search" maxlength="100" autocomplete="off" placeholder="Try Account, primary contact, or credit limit"></div>
+          <button class="primary" type="submit">Find in graph</button>
+        </form>
+        <p class="hint">Cycle hits with <kbd>↑</kbd> and <kbd>↓</kbd> or the buttons. Press <kbd>Escape</kbd> to abandon the jump and return to the graph location you started from.</p>
+        <p id="search-status" class="search-status" role="status" aria-live="polite"></p>
+        <div id="hit-controls" class="hit-controls" hidden>
+          <button id="previous-hit" type="button" aria-label="Previous matching location">↑ Previous</button>
+          <span id="hit-count" class="hit-count" aria-live="polite"></span>
+          <button id="next-hit" type="button" aria-label="Next matching location">Next ↓</button>
+          <button id="cancel-jump" type="button">Cancel jump · Esc</button>
+        </div>
+        <div id="hit-list" class="hit-list" role="listbox" aria-label="Matching graph locations" hidden></div>
+      </section>
+
+      <div class="explorer-layout">
+        <section class="card graph-card" aria-labelledby="graph-heading">
+            <div class="graph-toolbar">
+            <h2 id="graph-heading">Full CDM graph</h2>
+            <div class="graph-toolbar-controls"><span class="meta">Infinite hops</span><div id="infinite-controls" class="graph-zoom-controls" hidden><button id="zoom-out" type="button" aria-label="Zoom out">−</button><button id="zoom-in" type="button" aria-label="Zoom in">+</button><button id="fit-graph" type="button" aria-label="Fit the full graph">Fit all</button></div><button id="fullscreen-toggle" type="button" aria-label="Full screen" aria-pressed="false">Full screen</button></div>
+          </div>
+          <p id="graph-instructions" class="graph-instructions">The full graph stays on one canvas. Use the legend to toggle layers and filter traits or inferred groups. Click any node for details; drag empty space to pan and scroll to zoom.</p>
+          <div id="graph-viewport" class="graph-viewport"><svg id="graph" class="graph-svg" viewBox="0 0 1160 760" role="group" aria-label="Full CDM graph"><rect class="graph-bg" x="0" y="0" width="1160" height="760"></rect></svg></div>
+          <div class="legend" id="graph-legend" aria-label="Graph legend"></div>
+        </section>
+        <aside id="entity-details" class="card details-card" aria-live="polite"><div id="details-content" class="empty">Loading the CDM graph…</div></aside>
+      </div>
+      </div>
+      <p id="page-status" class="page-status" role="status" aria-live="polite"></p>
+      <p class="coverage-note">The graph combines resolved relationships and pinned CDM semantics. Manifest declarations outside the loaded entity subset remain metadata and are not shown as loaded entities. Inferred categories are model-generated group labels, not Microsoft CDM definitions. The explorer does not record search terms, visited nodes, or session history.</p>
+    </main>
+  </div>
+  <script>
+    const $=id=>document.getElementById(id);
+    const NODE_DETAIL_DEFAULT_SIZE={width:360,height:210};
+    const state={overview:null,focusId:null,neighborhood:null,query:'',hits:[],hitIndex:-1,jumpOrigin:null,jumpOriginView:null,loadToken:0,selectedEdgeId:null,activeLocation:null,showNodeDetails:false,nodeSizes:new Map(),resizeDrag:null,lastResizeClick:null,resizeRenderFrame:null,undockedAttribute:null,infiniteMode:false,fullGraph:null,infiniteAnalysis:null,baseInfinitePositions:null,infinitePositions:null,infiniteView:null,hiddenCategories:new Set(),hiddenTraits:new Set(),showEntityNodes:true,showRelationshipEdges:true,showManifests:true,showTraits:true,showInheritance:true,showClusters:true,openLegendPanel:null,legendFilters:{traits:'',categories:''},legendScroll:{traits:0,categories:0},initialLayoutApplied:false,panStart:null,semanticSelection:null};
+    const svgNS='http://www.w3.org/2000/svg';
+    function htmlText(value){return String(value??'');}
+    function escapeSelector(value){return CSS.escape(String(value));}
+    function modelClass(model){if(model==='applicationCommon')return'model-common';if(model==='RetailBankingCoreDataModel')return'model-banking';return'model-other';}
+    function renderGraphLegend(data){
+      const legend=$('graph-legend'),semantics=state.fullGraph?.semantics||{},traits=[...(semantics.traits?.nodes||[])].sort((a,b)=>(b.entity_applications+b.attribute_applications+b.data_type_applications+b.manifest_applications)-(a.entity_applications+a.attribute_applications+a.data_type_applications+a.manifest_applications)||a.name.localeCompare(b.name)),categories=state.infiniteAnalysis?.categories||[];
+      legend.replaceChildren();
+      const addToggle=(label,active,onClick,swatchClass='')=>{
+        const button=document.createElement('button');button.type='button';button.className='legend-toggle layer-toggle';button.setAttribute('aria-pressed',String(active));
+        const swatch=document.createElement('i');swatch.className='legend-layer-swatch '+swatchClass;swatch.setAttribute('aria-hidden','true');
+        const text=document.createElement('span');text.textContent=label;button.append(swatch,text);button.addEventListener('click',onClick);legend.append(button);return button;
+      };
+      const addDisclosure=(key,label,activeLabel,total,swatchClass,buildPanel)=>{
+        const active=activeLabel;
+        const button=document.createElement('button');button.type='button';button.className='legend-toggle legend-disclosure';button.setAttribute('aria-expanded',String(state.openLegendPanel===key));button.setAttribute('aria-label',label+', '+active+' of '+total+' active');
+        const swatch=document.createElement('i');swatch.className='legend-layer-swatch '+swatchClass;swatch.setAttribute('aria-hidden','true');
+        const text=document.createElement('span');text.textContent=label+' '+active+'/'+total;const arrow=document.createElement('span');arrow.className='legend-chevron';arrow.textContent=state.openLegendPanel===key?'▴':'▾';button.append(swatch,text,arrow);button.addEventListener('click',()=>{state.openLegendPanel=state.openLegendPanel===key?null:key;renderGraph();});legend.append(button);
+        if(state.openLegendPanel===key)legend.append(buildPanel());
+      };
+      const addFilterPanel=(title,items,hiddenSet,kind)=>{
+        const panel=document.createElement('div');panel.className='legend-filter-panel';panel.setAttribute('role','group');panel.setAttribute('aria-label',title+' visibility');
+        const head=document.createElement('div');head.className='legend-filter-head';const heading=document.createElement('strong');heading.textContent=title;head.append(heading);
+        const actions=document.createElement('div');actions.className='legend-filter-actions';
+        const filterKey=kind==='trait'?'traits':'categories';
+        for(const [label,hide] of [['All',false],['None',true]]){const button=document.createElement('button');button.type='button';button.textContent=label;button.dataset.filterAction=hide?'none':'all';button.addEventListener('click',()=>{if(hide)items.forEach(item=>hiddenSet.add(item.id));else hiddenSet.clear();renderGraph();$('graph-legend').querySelector(`[data-filter-action="${hide?'none':'all'}"]`)?.focus();});actions.append(button);}
+        head.append(actions);panel.append(head);
+        if(kind==='trait'||kind==='category'){
+          const search=document.createElement('input');search.type='search';search.className='legend-filter-search';search.placeholder='Filter '+title.toLocaleLowerCase();search.setAttribute('aria-label','Filter '+title.toLocaleLowerCase());search.value=state.legendFilters[filterKey]||'';panel.append(search);
+          const list=document.createElement('div');list.className='legend-filter-list';list.addEventListener('scroll',()=>{state.legendScroll[filterKey]=list.scrollTop;},{passive:true});
+          items.forEach((item,index)=>{
+            const label=document.createElement('label');label.className='legend-filter-choice';label.title=item.description||item.name||item.label;
+            const checkbox=document.createElement('input');checkbox.type='checkbox';checkbox.checked=!hiddenSet.has(item.id);checkbox.dataset.itemId=item.id;checkbox.setAttribute('aria-label',(checkbox.checked?'Hide ':'Show ')+(item.name||item.label));
+            checkbox.addEventListener('change',()=>{const scrollTop=list.scrollTop;if(checkbox.checked)hiddenSet.delete(item.id);else hiddenSet.add(item.id);state.legendScroll[filterKey]=scrollTop;renderGraph();const replacement=[...$('graph-legend').querySelectorAll('.legend-filter-choice input')].find(input=>input.dataset.itemId===item.id);replacement?.focus({preventScroll:true});});
+            const swatch=document.createElement('span');swatch.className='legend-choice-swatch '+(kind==='trait'?'trait-choice':'category-'+(index%8));if(kind==='trait')swatch.style.setProperty('--trait-color',semanticTraitColor(index));
+            const name=document.createElement('span');name.textContent=item.name||item.label;
+            const count=document.createElement('small');count.textContent=kind==='trait'?String(item.entity_applications+item.attribute_applications+item.data_type_applications+item.manifest_applications):String(item.entity_count);
+            label.append(checkbox,swatch,name,count);list.append(label);
+          });
+          const applySearch=()=>{const query=search.value.trim().toLocaleLowerCase();state.legendFilters[filterKey]=search.value;for(const choice of list.children)choice.hidden=!choice.textContent.toLocaleLowerCase().includes(query);};search.addEventListener('input',applySearch);applySearch();
+          panel.append(list);list.scrollTop=state.legendScroll[filterKey]||0;
+        }
+        return panel;
+      };
+      const allEntities=state.fullGraph?.nodes||data.nodes||[],allEdges=state.fullGraph?.edges||data.edges||[];
+      const models=new Set([...allEntities.map(node=>node.model),...allEdges.map(edge=>edge.source_id?.split('::')[0])].filter(Boolean));
+      addToggle('Entities',state.showEntityNodes,()=>{state.showEntityNodes=!state.showEntityNodes;renderGraph();},'entity-layer-swatch');
+      addToggle('Relationships',state.showRelationshipEdges,()=>{state.showRelationshipEdges=!state.showRelationshipEdges;renderGraph();},'relationship-layer-swatch');
+      addToggle('Manifests',state.showManifests,()=>{state.showManifests=!state.showManifests;renderGraph();},'manifest-layer-swatch');
+      addDisclosure('traits','Traits',Math.max(0,traits.length-state.hiddenTraits.size),traits.length,'trait-layer-swatch',()=>addFilterPanel('Trait applications',traits, state.hiddenTraits,'trait'));
+      addToggle('Inheritance',state.showInheritance,()=>{state.showInheritance=!state.showInheritance;renderGraph();},'inheritance-layer-swatch');
+      addToggle('Inferred groups',state.showClusters,()=>{state.showClusters=!state.showClusters;renderGraph();},'cluster-layer-swatch');
+      if(categories.length)addDisclosure('categories','Group filters',Math.max(0,categories.length-state.hiddenCategories.size),categories.length,'cluster-layer-swatch',()=>addFilterPanel('Inferred groups',categories,state.hiddenCategories,'category'));
+      const detail=document.createElement('button');detail.id='node-detail-toggle';detail.type='button';detail.className='legend-toggle layer-toggle node-detail-toggle';detail.setAttribute('aria-pressed',String(state.showNodeDetails));detail.setAttribute('aria-label','Node details');
+      const detailSwatch=document.createElement('i');detailSwatch.className='legend-layer-swatch node-detail-swatch';detailSwatch.setAttribute('aria-hidden','true');const detailLabel=document.createElement('span');detailLabel.id='node-detail-toggle-label';detailLabel.textContent='Node details';detail.append(detailSwatch,detailLabel);detail.addEventListener('click',()=>{state.showNodeDetails=!state.showNodeDetails;if(!state.showNodeDetails)state.undockedAttribute=null;renderGraph();});legend.append(detail);
+      const key=document.createElement('div');key.className='legend-key-row';
+      const focus=document.createElement('span');focus.className='legend-key';focus.innerHTML='<i class="focus-swatch"></i> Focus';key.append(focus);
+      const selected=document.createElement('span');selected.className='legend-key';selected.innerHTML='<i class="selected-swatch"></i> Selection';key.append(selected);
+      const selectedLink=document.createElement('span');selectedLink.className='legend-key';selectedLink.innerHTML='<b class="selected-link-swatch"></b> Selected link';key.append(selectedLink);
+      for(const model of [...models].sort()){
+        const type=modelClass(model),entry=document.createElement('span');entry.className='model-key';const node=document.createElement('i');node.className='model-node-swatch '+type;const link=document.createElement('b');link.className='model-link-swatch '+type;const name=document.createElement('span');name.textContent=model;entry.append(node,link,name);key.append(entry);
+      }
+      legend.append(key);
+    }
+    function updateNodeDetailToggle(){
+      const toggle=$('node-detail-toggle'),label='Node details';
+      $('node-detail-toggle-label').textContent=label;toggle.setAttribute('aria-pressed',String(state.showNodeDetails));
+      toggle.setAttribute('aria-label',label);
+    }
+    async function getJson(url,options={}){
+      const response=await fetch(url,{...options,headers:{Accept:'application/json',...(options.headers||{})},cache:'no-store'});
+      const data=await response.json().catch(()=>({detail:'The graph response was not valid JSON.'}));
+      if(!response.ok)throw Error(data.detail||`Request failed (${response.status}).`);
+      return data;
+    }
+    function setStatus(message,error=false){$('page-status').textContent=message;$('page-status').classList.toggle('error',error);}
+    function setSearchStatus(message,error=false){$('search-status').textContent=message;$('search-status').classList.toggle('error',error);}
+    function clearSearchResults(){state.query='';state.hits=[];state.hitIndex=-1;state.jumpOrigin=null;state.jumpOriginView=null;$('hit-controls').hidden=true;$('hit-list').hidden=true;$('hit-list').replaceChildren();}
+    function truncate(value,max=15){const text=htmlText(value);return text.length>max?text.slice(0,max-1)+'…':text;}
+    function wrapIdentifier(value,maxLength=22){let remaining=htmlText(value);const lines=[];while(remaining.length>maxLength){let split=Math.max(remaining.lastIndexOf('_',maxLength),remaining.lastIndexOf('-',maxLength));if(split>0)split+=1;else split=maxLength;lines.push(remaining.slice(0,split));remaining=remaining.slice(split);}lines.push(remaining);return lines;}
+    function svgElement(name,attrs={}){const element=document.createElementNS(svgNS,name);for(const [key,value] of Object.entries(attrs))element.setAttribute(key,String(value));return element;}
+    function makePositions(nodes,focusId){
+      const cx=500,cy=378,others=nodes.filter(node=>node.id!==focusId),positions=new Map();
+      positions.set(focusId,{x:cx,y:cy});
+      const innerCount=Math.min(8,others.length),inner=others.slice(0,innerCount),outer=others.slice(innerCount);
+      inner.forEach((node,index)=>{const angle=-Math.PI/2+2*Math.PI*index/Math.max(1,inner.length);positions.set(node.id,{x:cx+Math.cos(angle)*190,y:cy+Math.sin(angle)*190});});
+      outer.forEach((node,index)=>{const angle=-Math.PI/2+2*Math.PI*index/Math.max(1,outer.length);positions.set(node.id,{x:cx+Math.cos(angle)*315,y:cy+Math.sin(angle)*315});});
+      return positions;
+    }
+    function makeInfinitePositions(nodes,edges){
+      const positions=new Map(),degree=new Map(nodes.map(node=>[node.id,0])),pairs=new Map();
+      for(const edge of edges){
+        degree.set(edge.source_id,(degree.get(edge.source_id)||0)+1);degree.set(edge.target_id,(degree.get(edge.target_id)||0)+1);
+        const key=[edge.source_id,edge.target_id].sort().join('|');pairs.set(key,[edge.source_id,edge.target_id]);
+      }
+      const ordered=[...nodes].sort((a,b)=>(degree.get(b.id)||0)-(degree.get(a.id)||0)||a.id.localeCompare(b.id));
+      const goldenAngle=Math.PI*(3-Math.sqrt(5));
+      ordered.forEach((node,index)=>{const radius=24+48*Math.sqrt(index),angle=index*goldenAngle;positions.set(node.id,{x:1500+Math.cos(angle)*radius,y:800+Math.sin(angle)*radius});});
+      const spacing=190,iterations=110;
+      for(let iteration=0;iteration<iterations;iteration++){
+        const displacement=new Map(nodes.map(node=>[node.id,{x:0,y:0}]));
+        for(let left=0;left<ordered.length;left++)for(let right=left+1;right<ordered.length;right++){
+          const first=ordered[left],second=ordered[right],a=positions.get(first.id),b=positions.get(second.id);
+          let dx=a.x-b.x,dy=a.y-b.y,distance=Math.hypot(dx,dy);if(distance<0.01){dx=0.01;dy=0.01;distance=Math.hypot(dx,dy);}
+          const force=spacing*spacing/distance,fx=dx/distance*force,fy=dy/distance*force,da=displacement.get(first.id),db=displacement.get(second.id);
+          da.x+=fx;da.y+=fy;db.x-=fx;db.y-=fy;
+        }
+        for(const [sourceId,targetId] of pairs.values()){
+          const a=positions.get(sourceId),b=positions.get(targetId);if(!a||!b)continue;
+          const dx=a.x-b.x,dy=a.y-b.y,distance=Math.max(0.01,Math.hypot(dx,dy)),force=distance*distance/spacing,fx=dx/distance*force,fy=dy/distance*force,da=displacement.get(sourceId),db=displacement.get(targetId);
+          da.x-=fx;da.y-=fy;db.x+=fx;db.y+=fy;
+        }
+        const temperature=Math.max(2,36*(1-iteration/iterations));
+        for(const node of ordered){
+          const point=positions.get(node.id),move=displacement.get(node.id);move.x-=(point.x-1500)*0.018;move.y-=(point.y-800)*0.018;
+          const distance=Math.max(0.01,Math.hypot(move.x,move.y)),step=Math.min(distance,temperature);
+          point.x=Math.max(180,Math.min(2820,point.x+move.x/distance*step));point.y=Math.max(100,Math.min(1500,point.y+move.y/distance*step));
+        }
+      }
+      return positions;
+    }
+    function entityNodeSize(entityId,detailsMode=state.showNodeDetails){
+      if(!detailsMode)return {width:140,height:70};
+      return {...NODE_DETAIL_DEFAULT_SIZE,...(state.nodeSizes.get(entityId)||{})};
+    }
+    function graphPointFromClient(clientX,clientY){
+      const svg=$('graph'),matrix=svg.getScreenCTM();if(!matrix)return null;
+      const point=svg.createSVGPoint();point.x=clientX;point.y=clientY;const local=point.matrixTransform(matrix.inverse());
+      return {x:local.x,y:local.y};
+    }
+    function applyInfiniteView(view){
+      const width=Math.max(360,Math.min(3600,view.width)),height=width*760/1160;
+      const x=Math.max(0,Math.min(3600-width,view.x)),y=Math.max(0,Math.min(2600-height,view.y));
+      state.infiniteView={x,y,width,height};$('graph').setAttribute('viewBox',`${x} ${y} ${width} ${height}`);
+    }
+    function centerInfiniteView(entityId,offsetX=0){
+      const point=state.infinitePositions?.get(entityId);if(!point)return;
+      const width=1160,height=760;applyInfiniteView({x:point.x+offsetX-width/2,y:point.y-height/2,width,height});$('graph-viewport').scrollIntoView({block:'center',behavior:'smooth'});
+    }
+    function infiniteAttributeViewOffset(entityId){const point=state.infinitePositions?.get(entityId);return point?.x<1500?200:-200;}
+    function zoomInfiniteView(factor,clientX=null,clientY=null){
+      const view=state.infiniteView;if(!view)return;const svg=$('graph'),rect=svg.getBoundingClientRect();
+      const fx=clientX===null?0.5:Math.max(0,Math.min(1,(clientX-rect.left)/rect.width));
+      const fy=clientY===null?0.5:Math.max(0,Math.min(1,(clientY-rect.top)/rect.height));
+      const width=Math.max(420,Math.min(3600,view.width*factor)),height=width*760/1160;
+      const anchorX=view.x+fx*view.width,anchorY=view.y+fy*view.height;
+      applyInfiniteView({x:anchorX-fx*width,y:anchorY-fy*height,width,height});
+    }
+    function fitInfiniteView(){const width=3600,height=width*760/1160;applyInfiniteView({x:0,y:(2600-height)/2,width});}
+    function semanticAnchorPosition(points,preferred,width,height,avoid=[]){
+      const clamp=(value,low,high)=>Math.max(low,Math.min(high,value));
+      const origin={x:clamp(preferred.x,width/2,3600-width/2),y:clamp(preferred.y,height/2,2600-height/2)};
+      const candidates=[origin];
+      for(const radius of [150,260,380,520,680])for(let index=0;index<12;index++){
+        const angle=index*Math.PI/6;candidates.push({x:clamp(origin.x+Math.cos(angle)*radius,width/2,3600-width/2),y:clamp(origin.y+Math.sin(angle)*radius,height/2,2600-height/2)});
+      }
+      let best=origin,bestScore=-Infinity;
+      for(const point of candidates){
+        const clearance=Math.min(Infinity,...avoid.map(other=>Math.hypot(point.x-other.x,point.y-other.y)));
+        const locality=Math.hypot(point.x-origin.x,point.y-origin.y);
+        const score=clearance-locality*0.2;
+        if(score>bestScore){best=point;bestScore=score;}
+      }
+      return best;
+    }
+    function semanticTraitColor(index){return ['#6a8f39','#347c86','#bd7d2b','#7a63a8','#b35c74','#3675b1','#558543','#9a6d40'][index%8];}
+    function infiniteNeighborhoodFor(entityId){
+      const full=state.fullGraph,node=full?.nodes.find(item=>item.id===entityId);if(!node)return null;
+      const detail=full.entity_details?.[entityId]||{attributes:[]},direct=(full.edges||[]).filter(edge=>edge.source_id===entityId||edge.target_id===entityId).map(edge=>{
+        const outgoing=edge.source_id===entityId,otherId=outgoing?edge.target_id:edge.source_id,other=full.nodes.find(item=>item.id===otherId);
+        return {...edge,direction:outgoing?'outgoing':'incoming',other_entity_id:otherId,other_name:other?.name||otherId,other_model:other?.model||''};
+      });
+      return {...full,focus_entity:{...node,...detail},direct_relationships:direct};
+    }
+    function setInfiniteFocus(entityId,{hit=null,center=false}={}){
+      const neighborhood=infiniteNeighborhoodFor(entityId);if(!neighborhood)return;
+      const categoryId=state.infiniteAnalysis?.category_by_entity?.[entityId];if(categoryId)state.hiddenCategories.delete(categoryId);
+      state.focusId=entityId;state.neighborhood=neighborhood;state.semanticSelection=null;state.selectedEdgeId=hit?hit.edge_id||null:state.activeLocation?.kind==='relationship'?state.activeLocation.edge_id:null;
+      if(center)centerInfiniteView(entityId,hit?.kind==='attribute'?infiniteAttributeViewOffset(entityId):0);
+      renderGraph();renderDetails(neighborhood,state.activeLocation);
+      setStatus(`${state.fullGraph.entity_count} entities · ${state.fullGraph.relationship_count} documented links · Infinite hops · ${neighborhood.focus_entity.name} focused`);
+    }
+    async function loadInfiniteGraph(entityId){
+      const token=++state.loadToken;setStatus('Loading the full CDM graph…');
+      try{
+        const data=await getJson('/api/v1/graph/all');if(token!==state.loadToken)return;
+        state.fullGraph=data;state.infiniteAnalysis=null;state.hiddenCategories.clear();state.initialLayoutApplied=false;state.baseInfinitePositions=makeInfinitePositions(data.nodes||[],data.edges||[]);state.infinitePositions=state.baseInfinitePositions;state.infiniteMode=true;
+        $('infinite-controls').hidden=false;state.neighborhood=infiniteNeighborhoodFor(entityId);
+        centerInfiniteView(entityId,state.activeLocation?.kind==='attribute'?infiniteAttributeViewOffset(entityId):0);
+        renderGraph();renderDetails(state.neighborhood,state.activeLocation);
+        setStatus(`${data.entity_count} entities · ${data.relationship_count} documented links · preparing embedding layout and inferred categories`);
+        void loadGraphAnalysis(token);
+      }catch(error){
+        if(token!==state.loadToken)return;
+        state.infiniteMode=false;state.fullGraph=null;state.infiniteAnalysis=null;state.baseInfinitePositions=null;state.infinitePositions=null;state.infiniteView=null;$('infinite-controls').hidden=true;
+        setStatus(error.message||'The full CDM graph could not be loaded.',true);
+      }
+    }
+    async function loadGraphAnalysis(token){
+      try{
+        const analysis=await getJson('/api/v1/graph/analysis',{method:'POST'});if(token!==state.loadToken||!state.infiniteMode)return;
+        if(analysis.graph_revision!==state.fullGraph?.graph_revision)throw Error('The graph changed while its embedding layout was being prepared.');
+        state.infiniteAnalysis=analysis;state.baseInfinitePositions=new Map(Object.entries(analysis.positions||{}));state.infinitePositions=state.baseInfinitePositions;
+        if(!state.initialLayoutApplied){centerInfiniteView(state.focusId,state.activeLocation?.kind==='attribute'?infiniteAttributeViewOffset(state.focusId):0);state.initialLayoutApplied=true;}
+        renderGraph();
+        setStatus(analysis.labels_generated?`${state.fullGraph.entity_count} entities · embedding layout ready · ${analysis.categories.length} categories labeled by ${analysis.label_model}`:`${state.fullGraph.entity_count} entities · embedding layout ready · local category labels unavailable` ,!analysis.labels_generated);
+      }catch(error){
+        if(token!==state.loadToken||!state.infiniteMode)return;
+        renderGraph();setStatus(`Using the fallback graph layout. ${error.message||'Embedding categories could not be prepared.'}`,true);
+      }
+    }
+    function convexHull(points){
+      const sorted=[...points].sort((a,b)=>a.x-b.x||a.y-b.y);if(sorted.length<3)return sorted;
+      const cross=(o,a,b)=>(a.x-o.x)*(b.y-o.y)-(a.y-o.y)*(b.x-o.x),lower=[],upper=[];
+      for(const point of sorted){while(lower.length>=2&&cross(lower[lower.length-2],lower[lower.length-1],point)<=0)lower.pop();lower.push(point);}
+      for(const point of [...sorted].reverse()){while(upper.length>=2&&cross(upper[upper.length-2],upper[upper.length-1],point)<=0)upper.pop();upper.push(point);}
+      return lower.slice(0,-1).concat(upper.slice(0,-1));
+    }
+    function renderCategoryRegions(svg,positions){
+      const categories=state.infiniteAnalysis?.categories||[];
+      if(!state.showClusters)return;
+      categories.forEach((category,index)=>{
+        const points=category.entity_ids.map(id=>positions.get(id)).filter(Boolean),hull=convexHull(points);if(!hull.length)return;
+        const center=hull.reduce((sum,point)=>({x:sum.x+point.x/hull.length,y:sum.y+point.y/hull.length}),{x:0,y:0});
+        const expanded=hull.map(point=>{const dx=point.x-center.x,dy=point.y-center.y,length=Math.max(1,Math.hypot(dx,dy));return{x:point.x+dx/length*52,y:point.y+dy/length*48};});
+        const masked=state.hiddenCategories.has(category.id),selected=state.semanticSelection?.kind==='category'&&state.semanticSelection.id===category.id;
+        const path=svgElement('path',{class:`category-region category-${index%8}${masked?' category-hidden':''}${selected?' selected':''}`,d:`M ${expanded.map(point=>`${point.x} ${point.y}`).join(' L ')} Z`});
+        const title=svgElement('title');title.textContent=`${category.label}: ${category.entity_count} entities`;path.append(title);svg.append(path);
+        const labelPoint=expanded.reduce((best,point)=>point.y<best.y?point:best,expanded[0]);
+        const text=svgElement('text',{class:`category-region-label category-label-${index%8}${masked?' category-hidden':''}`,x:labelPoint.x,y:labelPoint.y-12,tabindex:masked?-1:0,role:'button','aria-label':`Inspect inferred group ${category.label}`});text.textContent=category.label;text.addEventListener('click',()=>{state.semanticSelection={kind:'category',id:category.id};renderGraph();renderSemanticDetails();});text.addEventListener('keydown',event=>{if(event.key==='Enter'||event.key===' '){event.preventDefault();state.semanticSelection={kind:'category',id:category.id};renderGraph();renderSemanticDetails();}});svg.append(text);
+      });
+    }
+    function buildSemanticOverlayLayout(graph,positions){
+      const semantics=graph?.semantics||{},entities=graph?.nodes||[],entityPoint=id=>positions.get(id),entityPoints=entities.map(node=>entityPoint(node.id)).filter(Boolean);
+      const avoid=[...entityPoints],manifestNodes=semantics.manifests?.nodes||[],manifestEdges=semantics.manifests?.edges||[],manifestPositions=new Map();
+      const incoming=new Set(manifestEdges.filter(edge=>edge.type==='sub_manifest').map(edge=>edge.target_id));
+      const orderedManifests=[...manifestNodes].sort((a,b)=>Number(incoming.has(a.id))-Number(incoming.has(b.id))||(b.loaded_entity_count||0)-(a.loaded_entity_count||0)||a.name.localeCompare(b.name));
+      for(const manifest of orderedManifests){
+        const points=(manifest.loaded_entity_ids||[]).map(entityPoint).filter(Boolean),parentEdge=manifestEdges.find(edge=>edge.type==='sub_manifest'&&edge.target_id===manifest.id),parentPoint=parentEdge?manifestPositions.get(parentEdge.source_id):null;
+        const preferred=points.length?{x:points.reduce((sum,p)=>sum+p.x,0)/points.length,y:points.reduce((sum,p)=>sum+p.y,0)/points.length-190}:parentPoint?{x:parentPoint.x+390,y:parentPoint.y+120}:{x:280,y:190};
+        const point=semanticAnchorPosition(points,preferred,268,84,avoid);manifestPositions.set(manifest.id,point);avoid.push(point);
+      }
+      const traits=semantics.traits?.nodes||[],traitEdges=semantics.traits?.edges||[],traitPositions=new Map();
+      const orderedTraits=[...traits].sort((a,b)=>(b.entity_applications+b.attribute_applications+b.data_type_applications+b.manifest_applications)-(a.entity_applications+a.attribute_applications+a.data_type_applications+a.manifest_applications)||a.name.localeCompare(b.name));
+      orderedTraits.forEach((trait,index)=>{
+        const points=traitEdges.filter(edge=>edge.target_id===trait.id).map(edge=>entityPoint(edge.source_id)).filter(Boolean);
+        const preferred=points.length?{x:points.reduce((sum,p)=>sum+p.x,0)/points.length,y:points.reduce((sum,p)=>sum+p.y,0)/points.length}:{x:320+index%8*410,y:150+Math.floor(index/8)*210};
+        const point=semanticAnchorPosition(points,preferred,218,68,avoid);traitPositions.set(trait.id,point);avoid.push(point);
+      });
+      const bases=semantics.inheritance?.nodes||[],inheritanceEdges=semantics.inheritance?.edges||[],basePositions=new Map();
+      for(const base of bases){
+        const points=inheritanceEdges.filter(edge=>edge.target_id===base.id).map(edge=>entityPoint(edge.source_id)).filter(Boolean);
+        const preferred=points.length?{x:points.reduce((sum,p)=>sum+p.x,0)/points.length,y:points.reduce((sum,p)=>sum+p.y,0)/points.length}:{x:1800,y:1200};
+        const point=semanticAnchorPosition(points,preferred,240,76,avoid);basePositions.set(base.id,point);avoid.push(point);
+      }
+      return {semantics,manifestPositions,traitPositions,basePositions,orderedTraits};
+    }
+    function appendSemanticOverlayEdge(svg,from,to,className,label){
+      if(!from||!to)return;
+      const dx=to.x-from.x,offset=Math.min(110,Math.abs(dx)*.12),path=svgElement('path',{class:'semantic-edge '+className,d:`M ${from.x} ${from.y} C ${from.x+offset} ${from.y} ${to.x-offset} ${to.y} ${to.x} ${to.y}`,'marker-end':'url(#semantic-arrowhead)'});
+      const title=svgElement('title');title.textContent=label;path.append(title);svg.append(path);
+    }
+    function appendSemanticOverlayNode(svg,id,title,meta,point,kind,{width=250,height=76,placeholder=false,selected=false,color=null,onSelect=null}={}){
+      if(!point)return;
+      const group=svgElement('g',{class:`semantic-node ${kind}-node${placeholder?' manifest-placeholder':''}${selected?' selected':''}`,transform:`translate(${point.x} ${point.y})`,tabindex:0,role:'button','aria-label':title+'. '+meta+'. Select to inspect.'});
+      if(color)group.style.setProperty('--trait-color',color);
+      group.append(svgElement('rect',{x:-width/2,y:-height/2,width,height,rx:12}));
+      const name=svgElement('text',{class:'semantic-node-title',x:0,y:-7,'text-anchor':'middle'});name.textContent=truncate(title,width<230?23:30);group.append(name);
+      const detail=svgElement('text',{class:'semantic-node-meta',x:0,y:16,'text-anchor':'middle'});detail.textContent=truncate(meta,width<230?28:44);group.append(detail);
+      const tip=svgElement('title');tip.textContent=title+' · '+meta;group.append(tip);
+      const activate=()=>onSelect?.();group.addEventListener('click',activate);group.addEventListener('keydown',event=>{if(event.key==='Enter'||event.key===' '){event.preventDefault();activate();}});
+      svg.append(group);
+    }
+    function entityIsVisible(entityId){
+      if(!state.showEntityNodes)return false;
+      const category=state.infiniteAnalysis?.category_by_entity?.[entityId];
+      return !state.infiniteMode||!state.hiddenCategories.has(category);
+    }
+    function renderSemanticOverlayEdges(svg,layout){
+      const semantics=layout?.semantics;if(!semantics)return;
+      if(state.showManifests){
+        for(const edge of semantics.manifests?.edges||[]){
+          if(edge.type!=='sub_manifest'&&edge.type!=='declares_entity')continue;
+          if(edge.type==='declares_entity'&&!entityIsVisible(edge.target_id))continue;
+          appendSemanticOverlayEdge(svg,layout.manifestPositions.get(edge.source_id),layout.manifestPositions.get(edge.target_id)||state.infinitePositions?.get(edge.target_id),edge.type==='sub_manifest'?'manifest-child':'manifest-declaration',edge.type==='sub_manifest'?'Nested manifest declaration':'Manifest declares entity');
+        }
+      }
+      if(state.showTraits){
+        const traitById=new Map((semantics.traits?.nodes||[]).map(item=>[item.id,item]));
+        for(const edge of semantics.traits?.edges||[]){
+          if(state.hiddenTraits.has(edge.target_id)||!entityIsVisible(edge.source_id))continue;
+          const trait=traitById.get(edge.target_id),entity=state.fullGraph.nodes.find(item=>item.id===edge.source_id);
+          appendSemanticOverlayEdge(svg,layout.traitPositions.get(edge.target_id),state.infinitePositions?.get(edge.source_id),'trait-use trait-color-'+(layout.orderedTraits.findIndex(item=>item.id===edge.target_id)%8),trait?.name+': '+(entity?.name||edge.source_id)+' · '+edge.entity_application_count+' entity, '+edge.attribute_application_count+' attribute, '+edge.data_type_application_count+' data type uses');
+        }
+        for(const edge of semantics.traits?.inheritance_edges||[]){
+          if(state.hiddenTraits.has(edge.source_id)||state.hiddenTraits.has(edge.target_id))continue;
+          appendSemanticOverlayEdge(svg,layout.traitPositions.get(edge.source_id),layout.traitPositions.get(edge.target_id),'trait-inheritance','Trait inheritance');
+        }
+      }
+      if(state.showInheritance){
+        const baseById=new Map((semantics.inheritance?.nodes||[]).map(item=>[item.id,item]));
+        for(const edge of semantics.inheritance?.edges||[]){
+          if(!entityIsVisible(edge.source_id))continue;
+          const entity=state.fullGraph.nodes.find(item=>item.id===edge.source_id),base=baseById.get(edge.target_id);
+          appendSemanticOverlayEdge(svg,state.infinitePositions?.get(edge.source_id),layout.basePositions.get(edge.target_id),'entity-inheritance',(entity?.name||edge.source_id)+' extends '+(base?.name||edge.target_id));
+        }
+      }
+    }
+    function renderSemanticOverlayNodes(svg,layout){
+      const semantics=layout?.semantics;if(!semantics)return;
+      if(state.showManifests){
+        for(const manifest of semantics.manifests?.nodes||[]){
+          const selected=state.semanticSelection?.kind==='manifest'&&state.semanticSelection.id===manifest.id;
+          appendSemanticOverlayNode(svg,manifest.id,manifest.name,manifest.declaration_only?'Declared child · not expanded':(manifest.loaded_entity_count||0)+' loaded entities',layout.manifestPositions.get(manifest.id),'manifest',{width:268,height:84,placeholder:Boolean(manifest.declaration_only),selected,onSelect:()=>{state.semanticSelection={kind:'manifest',id:manifest.id};renderGraph();renderSemanticDetails();}});
+        }
+      }
+      if(state.showTraits){
+        const traitEdges=semantics.traits?.edges||[];
+        for(const [index,trait] of layout.orderedTraits.entries()){
+          if(state.hiddenTraits.has(trait.id))continue;
+          const uses=traitEdges.filter(edge=>edge.target_id===trait.id).length,color=semanticTraitColor(index),selected=state.semanticSelection?.kind==='trait'&&state.semanticSelection.id===trait.id;
+          appendSemanticOverlayNode(svg,trait.id,trait.name,uses+' entity links · '+trait.attribute_applications+' attribute uses',layout.traitPositions.get(trait.id),'trait',{width:218,height:68,selected,color,onSelect:()=>{state.semanticSelection={kind:'trait',id:trait.id};renderGraph();renderSemanticDetails();}});
+        }
+      }
+      if(state.showInheritance){
+        const edges=semantics.inheritance?.edges||[];
+        for(const base of semantics.inheritance?.nodes||[]){
+          const count=edges.filter(edge=>edge.target_id===base.id).length,selected=state.semanticSelection?.kind==='base'&&state.semanticSelection.id===base.id;
+          appendSemanticOverlayNode(svg,base.id,base.name,count+' entities extend this type',layout.basePositions.get(base.id),'base',{width:240,height:76,selected,onSelect:()=>{state.semanticSelection={kind:'base',id:base.id};renderGraph();renderSemanticDetails();}});
+        }
+      }
+    }
+    function selectGraphAttribute(node,attribute){
+      const matchingHit=state.hits.findIndex(hit=>hit.kind==='attribute'&&hit.entity_id===node.id&&hit.member_name===attribute.name);
+      if(matchingHit>=0){state.hitIndex=matchingHit;renderHits();state.activeLocation=state.hits[matchingHit];}
+      else{state.activeLocation={kind:'attribute',entity_id:node.id,member_name:attribute.name,path:attribute.path,title:attribute.name};}
+      state.selectedEdgeId=null;
+      if(state.infiniteMode){setInfiniteFocus(node.id);return;}
+      renderGraph();renderDetails(state.neighborhood,state.activeLocation);
+    }
+    function openUndockedAttribute(node,attribute){
+      state.undockedAttribute={entity_id:node.id,attribute};selectGraphAttribute(node,attribute);
+      if(state.infiniteMode){const point=state.infinitePositions?.get(node.id),direction=point?.x<1800?1:-1;centerInfiniteView(node.id,direction*180);renderGraph();}
+    }
+    function closeUndockedAttribute(){state.undockedAttribute=null;renderGraph();}
+    function renderUndockedAttribute(svg,positions){
+      const selection=state.undockedAttribute,point=positions.get(selection?.entity_id),node=state.fullGraph?.nodes.find(item=>item.id===selection?.entity_id);
+      if(!selection||!point||!node||!entityIsVisible(node.id))return;
+      const attribute=selection.attribute,width=360,height=230,direction=point.x<1800?1:-1;
+      const x=Math.max(18,Math.min(3222,point.x+direction*(160+16)+(direction<0?-width:0))),y=Math.max(24,Math.min(2346,point.y-height/2));
+      const attachX=direction>0?x:x+width,connector=svgElement('path',{class:'undocked-link',d:`M ${point.x+direction*160} ${point.y} C ${point.x+direction*210} ${point.y} ${attachX-direction*38} ${y+height/2} ${attachX} ${y+height/2}`});svg.append(connector);
+      const card=svgElement('g',{class:'undocked-card','aria-label':`${attribute.name} details`});card.append(svgElement('rect',{x,y,width,height,rx:14}));
+      const foreign=svgElement('foreignObject',{x:x+2,y:y+2,width:width-4,height:height-4}),content=document.createElementNS('http://www.w3.org/1999/xhtml','div');content.className='undocked-content';content.setAttribute('xmlns','http://www.w3.org/1999/xhtml');
+      const close=document.createElement('button');close.type='button';close.className='undocked-close';close.textContent='Close';close.setAttribute('aria-label','Close attribute details');close.addEventListener('click',event=>{event.stopPropagation();closeUndockedAttribute();});content.append(close);
+      const heading=document.createElement('strong');heading.textContent=attribute.name;content.append(heading);
+      const owner=document.createElement('small');owner.textContent=`Attribute of ${node.name}`;content.append(owner);
+      if(attribute.display_name){const display=document.createElement('p');display.textContent=`Display name: ${attribute.display_name}`;content.append(display);}
+      const type=document.createElement('p');type.textContent=`Type: ${attribute.data_type||'Not specified'}`;content.append(type);
+      const description=document.createElement('p');description.textContent=attribute.description||'No description is available in this catalog snapshot.';content.append(description);
+      const path=document.createElement('small');path.textContent=attribute.path||'';content.append(path);
+      foreign.append(content);card.append(foreign);svg.append(card);
+    }
+    function renderSemanticDetails(){
+      const root=$('details-content'),semantics=state.fullGraph?.semantics,selection=state.semanticSelection;
+      if(!semantics){root.textContent='CDM semantic data is unavailable in this catalog snapshot.';return;}
+      if(selection?.kind==='entity'){
+        const data=infiniteNeighborhoodFor(selection.id);
+        if(data){renderDetails(data,{kind:'entity',entity_id:selection.id});return;}
+      }
+      root.replaceChildren();
+      const heading=document.createElement('h2'),summary=document.createElement('p');summary.className='semantic-summary';
+      const counts=document.createElement('div');counts.className='semantic-counts';
+      const addCount=(value,label)=>{const card=document.createElement('div');card.className='semantic-count';const strong=document.createElement('strong');strong.textContent=String(value);const small=document.createElement('small');small.textContent=label;card.append(strong,small);counts.append(card);};
+      const addSource=(uri,label='Open pinned Microsoft source ↗')=>{try{const url=new URL(uri);if(['http:','https:'].includes(url.protocol)){const link=document.createElement('a');link.className='source-link';link.href=url.href;link.target='_blank';link.rel='noopener noreferrer';link.textContent=label;root.append(link);}}catch(_){/* Ignore malformed catalog source URLs. */}};
+      const addEntityButton=(entityId,label=null)=>{const entity=state.fullGraph.nodes.find(item=>item.id===entityId);if(!entity)return null;const button=document.createElement('button');button.className='neighbor-link';button.type='button';button.textContent=label||`${entity.name} · ${entity.model}`;button.addEventListener('click',()=>{state.semanticSelection=null;state.focusId=entityId;state.activeLocation={kind:'entity',entity_id:entityId};state.neighborhood=infiniteNeighborhoodFor(entityId);renderGraph();renderDetails(state.neighborhood,state.activeLocation);});return button;};
+      if(selection?.kind==='manifest'){
+        const manifest=(semantics.manifests?.nodes||[]).find(item=>item.id===selection.id);
+        if(!manifest){state.semanticSelection=null;renderSemanticDetails();return;}
+        heading.textContent=manifest.name;root.append(heading);
+        const path=document.createElement('div');path.className='path';path.textContent=manifest.source_path||'Declared child manifest · source not expanded';root.append(path);
+        summary.textContent=manifest.explanation||`${manifest.model} manifest in the pinned Microsoft/CDM source.`;root.append(summary);
+        addCount(manifest.declared_entity_count,'entity declarations');addCount(manifest.loaded_entity_count,'definitions loaded here');
+        addCount(manifest.relationship_count,'relationships declared');addCount(manifest.sub_manifest_count,'child manifests');root.append(counts);
+        if(manifest.loaded_entity_count<manifest.declared_entity_count){const note=document.createElement('p');note.className='semantic-note';note.textContent=`${manifest.declared_entity_count-manifest.loaded_entity_count} declarations belong to this manifest but are outside the app’s loaded entity subset.`;root.append(note);}
+        addSource(manifest.source_uri);
+        const declarations=document.createElement('details');declarations.open=true;const ds=document.createElement('summary');ds.textContent=`Declared entities · ${manifest.declared_entity_count}`;declarations.append(ds);
+        const list=document.createElement('ul');list.className='manifest-entity-list';
+        for(const declaration of manifest.declarations||[]){const item=document.createElement('li');const loaded=declaration.entity_id?addEntityButton(declaration.entity_id,declaration.name):null;if(loaded)item.append(loaded);else{const name=document.createElement('span');name.textContent=declaration.name||declaration.path;item.append(name);const meta=document.createElement('small');meta.textContent=`${declaration.type||'Entity'} · not loaded`;item.append(meta);}list.append(item);}
+        declarations.append(list);root.append(declarations);
+        if(manifest.imports?.length){const imports=document.createElement('details');const is=document.createElement('summary');is.textContent=`Imports · ${manifest.imports.length}`;imports.append(is);const importList=document.createElement('ul');importList.className='item-list';for(const entry of manifest.imports){const item=document.createElement('li');const path=document.createElement('strong');path.textContent=entry.corpus_path||'Unspecified corpus path';item.append(path);if(entry.moniker){const moniker=document.createElement('small');moniker.textContent=`Moniker: ${entry.moniker}`;item.append(moniker);}importList.append(item);}imports.append(importList);root.append(imports);}
+        const relationRows=(semantics.manifests?.relationships||[]).filter(item=>item.manifest_id===manifest.id);
+        const relationDetails=document.createElement('details');const rs=document.createElement('summary');const rawRelationCount=relationRows.reduce((total,item)=>total+item.count,0);rs.textContent=`Relationship declaration groups · ${relationRows.length} · ${rawRelationCount} source records`;relationDetails.append(rs);
+        const relationSearch=document.createElement('input');relationSearch.type='search';relationSearch.className='manifest-relation-search';relationSearch.placeholder='Filter declared relationships';relationSearch.setAttribute('aria-label','Filter manifest relationship declarations');relationDetails.append(relationSearch);
+        const relationStatus=document.createElement('p');relationStatus.className='attribute-hint';relationStatus.setAttribute('role','status');relationDetails.append(relationStatus);
+        const relationList=document.createElement('ul');relationList.className='item-list';relationDetails.append(relationList);
+        const renderRelationRows=()=>{const query=relationSearch.value.trim().toLocaleLowerCase();const filtered=relationRows.filter(item=>{const source=state.fullGraph.nodes.find(node=>node.id===item.source_id),target=state.fullGraph.nodes.find(node=>node.id===item.target_id);return `${source?.name||item.from_entity_ref}.${item.source_attribute} ${target?.name||item.to_entity_ref}.${item.target_attribute}`.toLocaleLowerCase().includes(query);});relationList.replaceChildren();for(const relation of filtered.slice(0,40)){const source=state.fullGraph.nodes.find(item=>item.id===relation.source_id),target=state.fullGraph.nodes.find(item=>item.id===relation.target_id),item=document.createElement('li');item.textContent=`${source?.name||relation.from_entity_ref||'Unresolved entity'}.${relation.source_attribute} → ${target?.name||relation.to_entity_ref||'Unresolved entity'}.${relation.target_attribute} · ${relation.count} source record${relation.count===1?'':'s'}${relation.source_id&&relation.target_id?'':' · outside loaded entity subset'}`;relationList.append(item);}relationStatus.textContent=filtered.length>40?`Showing 40 of ${filtered.length} matching groups.`:`${filtered.length} matching groups.`;};
+        relationSearch.addEventListener('input',renderRelationRows);renderRelationRows();root.append(relationDetails);return;
+      }
+      if(selection?.kind==='trait'){
+        const trait=(semantics.traits?.nodes||[]).find(item=>item.id===selection.id);
+        if(!trait){state.semanticSelection=null;renderSemanticDetails();return;}
+        heading.textContent=trait.name;root.append(heading);summary.textContent=trait.explanation||'No trait explanation is recorded in this source snapshot.';root.append(summary);
+        const uses=(semantics.traits?.edges||[]).filter(edge=>edge.target_id===trait.id).sort((a,b)=>a.source_id.localeCompare(b.source_id));
+        addCount(trait.entity_applications,'entity applications');addCount(trait.attribute_applications,'attribute applications');addCount(trait.data_type_applications,'data type applications');addCount(trait.manifest_applications,'manifest applications');addCount(uses.length,'loaded entities using trait');root.append(counts);
+        if(trait.extends_trait){const parent=document.createElement('p');parent.className='path';const parentName=typeof trait.extends_trait==='string'?trait.extends_trait:(trait.extends_trait.traitReference||trait.extends_trait.namedReference||trait.extends_trait.traitName||JSON.stringify(trait.extends_trait));parent.textContent=`Extends trait: ${parentName}`;root.append(parent);}
+        if(Array.isArray(trait.parameters)&&trait.parameters.length){const params=document.createElement('details');const ps=document.createElement('summary');ps.textContent=`Trait parameters · ${trait.parameters.length}`;params.append(ps);for(const parameter of trait.parameters){const p=document.createElement('p');p.className='trait-argument';p.textContent=JSON.stringify(parameter);params.append(p);}root.append(params);}
+        addSource(trait.source_uri);
+        const applications=document.createElement('details');applications.open=true;const as=document.createElement('summary');as.textContent=`Loaded entity applications · ${uses.length}`;applications.append(as);const list=document.createElement('ul');list.className='trait-use-list';
+        for(const use of uses){const entity=state.fullGraph.nodes.find(item=>item.id===use.source_id),item=document.createElement('li');const button=addEntityButton(use.source_id,entity?.name||use.source_id);if(button)item.append(button);const meta=document.createElement('small');meta.textContent=[use.entity_application_count?`${use.entity_application_count} entity application${use.entity_application_count===1?'':'s'}`:'',use.attribute_application_count?`${use.attribute_application_count} attribute application${use.attribute_application_count===1?'':'s'}`:''].filter(Boolean).join(' · ');item.append(meta);
+          if(use.attribute_names?.length){const names=document.createElement('p');names.className='trait-argument';names.textContent=use.attribute_names.slice(0,12).join(', ')+(use.attribute_names.length>12?`, and ${use.attribute_names.length-12} more`: '');item.append(names);}list.append(item);}
+        applications.append(list);root.append(applications);return;
+      }
+      if(selection?.kind==='category'){
+        const category=(semantics.categories||[]).find(item=>item.id===selection.id)||state.infiniteAnalysis?.categories?.find(item=>item.id===selection.id);
+        if(!category){state.semanticSelection=null;renderSemanticDetails();return;}
+        heading.textContent=category.label;root.append(heading);
+        summary.textContent=(category.description||'Automatically inferred group of related CDM entities.')+' This label is model-generated and is not part of the Microsoft CDM source.';root.append(summary);
+        addCount(category.entity_count,'entities in this group');root.append(counts);
+        const members=(category.entity_ids||[]).map(id=>state.fullGraph.nodes.find(item=>item.id===id)).filter(Boolean);
+        const list=document.createElement('ul');list.className='manifest-entity-list';
+        for(const entity of members){const item=document.createElement('li'),button=addEntityButton(entity.id,entity.name);if(button)item.append(button);list.append(item);}
+        root.append(list);return;
+      }
+      if(selection?.kind==='base'){
+        const base=(semantics.inheritance?.nodes||[]).find(item=>item.id===selection.id);if(!base){state.semanticSelection=null;renderSemanticDetails();return;}
+        heading.textContent=base.name;root.append(heading);summary.textContent='Declared base entity used by the loaded CDM entity definitions.';root.append(summary);
+        const children=(semantics.inheritance?.edges||[]).filter(edge=>edge.target_id===base.id);addCount(children.length,'entity definitions extending this base');root.append(counts);
+        const list=document.createElement('ul');list.className='manifest-entity-list';for(const edge of children){const item=document.createElement('li'),button=addEntityButton(edge.source_id);if(button)item.append(button);list.append(item);}root.append(list);return;
+      }
+      heading.textContent='CDM graph layers';root.append(heading);
+      summary.textContent='The canvas combines entity relationships, trait applications, manifest declarations, entity inheritance, and inferred entity groups. Use the legend to show, hide, or filter each layer.';root.append(summary);
+      addCount(state.fullGraph.entity_count,'loaded entities');addCount(state.fullGraph.relationship_count,'documented relationships');addCount((semantics.manifests?.nodes||[]).length,'manifest records');addCount((semantics.traits?.nodes||[]).length,'trait definitions');addCount((semantics.inheritance?.nodes||[]).length,'base types');addCount(state.infiniteAnalysis?.categories?.length||0,'inferred groups');root.append(counts);
+    }
+    function boundedNodeSize(width,height){return {width:Math.max(270,Math.min(900,width)),height:Math.max(150,Math.min(640,height))};}
+    function resizeNodeByKeyboard(nodeId,widthDelta,heightDelta){
+      const current=entityNodeSize(nodeId),next=boundedNodeSize(current.width+widthDelta,current.height+heightDelta);state.nodeSizes.set(nodeId,next);renderGraph();
+      [...$('graph').querySelectorAll('.node-resize-handle')].find(handle=>handle.dataset.entityId===nodeId)?.focus();
+    }
+    function appendNodeResizeHandle(group,nodeId,nodeName,size){
+      const handle=svgElement('g',{class:'node-resize-handle',transform:`translate(${size.width/2-14} ${size.height/2-14})`,tabindex:0,role:'button','aria-label':`Resize ${nodeName} node. Drag to resize, or double-click to reset.`});handle.dataset.entityId=nodeId;
+      handle.append(svgElement('rect',{class:'node-resize-hit',x:-8,y:-8,width:22,height:22,rx:6}));
+      handle.append(svgElement('path',{class:'node-resize-glyph',d:'M -3 5 L 6 -4 M -3 5 L -3 1 M -3 5 L 1 5 M 6 -4 L 2 -4 M 6 -4 L 6 0'}));
+      handle.addEventListener('pointerdown',event=>{
+        event.preventDefault();event.stopPropagation();const point=graphPointFromClient(event.clientX,event.clientY);if(!point)return;
+        state.lastResizeClick=null;state.resizeDrag={entityId:nodeId,pointerId:event.pointerId,startPoint:point,startSize:entityNodeSize(nodeId),moved:false};$('graph').setPointerCapture(event.pointerId);
+      });
+      handle.addEventListener('click',event=>event.stopPropagation());
+      handle.addEventListener('keydown',event=>{
+        if(event.key==='ArrowRight'){event.preventDefault();resizeNodeByKeyboard(nodeId,event.shiftKey?60:20,0);}
+        else if(event.key==='ArrowLeft'){event.preventDefault();resizeNodeByKeyboard(nodeId,event.shiftKey?-60:-20,0);}
+        else if(event.key==='ArrowDown'){event.preventDefault();resizeNodeByKeyboard(nodeId,0,event.shiftKey?60:20);}
+        else if(event.key==='ArrowUp'){event.preventDefault();resizeNodeByKeyboard(nodeId,0,event.shiftKey?-60:-20);}
+        else if(event.key==='Home'){event.preventDefault();state.nodeSizes.delete(nodeId);renderGraph();[...$('graph').querySelectorAll('.node-resize-handle')].find(item=>item.dataset.entityId===nodeId)?.focus();}
+      });
+      const title=svgElement('title');title.textContent='Drag to resize · Double-click or press Home to reset';handle.append(title);group.append(handle);
+    }
+    function renderGraph(){
+      const svg=$('graph');$('infinite-controls').hidden=!state.infiniteMode;$('graph-heading').textContent='Full CDM graph';$('graph-instructions').textContent=state.showNodeDetails?'Node details split each entity card into a summary and scrollable attributes. Drag a card’s bottom-right handle to resize it; double-click the handle to reset. Use ↗ on an attribute to undock its definition.':'All entities stay on one shared canvas. Use the legend to filter graph layers and inferred groups. Click any node or group label for details; drag empty space to pan and scroll to zoom.';
+      svg.replaceChildren();svg.classList.toggle('is-infinite',state.infiniteMode);svg.setAttribute('aria-label','Full loaded CDM graph');svg.setAttribute('viewBox',state.infiniteMode&&state.infiniteView?`${state.infiniteView.x} ${state.infiniteView.y} ${state.infiniteView.width} ${state.infiniteView.height}`:'0 0 1160 760');
+      const bg=svgElement('rect',{class:'graph-bg',x:0,y:0,width:state.infiniteMode?3600:1160,height:state.infiniteMode?2600:760});svg.append(bg);
+      const defs=svgElement('defs');for(const [id,arrowClass] of [['arrowhead-common','arrow-common'],['arrowhead-banking','arrow-banking'],['arrowhead-other','arrow-other'],['arrowhead-selected','arrow-selected']]){const marker=svgElement('marker',{id,viewBox:'0 0 10 10',refX:9,refY:5,markerWidth:7,markerHeight:7,orient:'auto-start-reverse'});marker.append(svgElement('path',{class:arrowClass,d:'M 0 0 L 10 5 L 0 10 z'}));defs.append(marker);}const semanticArrow=svgElement('marker',{id:'semantic-arrowhead',viewBox:'0 0 10 10',refX:9,refY:5,markerWidth:6,markerHeight:6,orient:'auto'});semanticArrow.append(svgElement('path',{d:'M 0 0 L 10 5 L 0 10 z',fill:'#718378'}));defs.append(semanticArrow);svg.append(defs);
+      const data=state.neighborhood;if(!data){renderGraphLegend(data||{});updateNodeDetailToggle();return;}
+      renderGraphLegend(data);
+      const nodes=data.nodes||[],edges=data.edges||[],positions=state.infiniteMode?(state.infinitePositions||makeInfinitePositions(nodes,edges)):makePositions(nodes,state.focusId),nodeById=new Map(nodes.map(node=>[node.id,node]));
+      const semanticLayout=state.infiniteMode&&state.fullGraph?buildSemanticOverlayLayout(state.fullGraph,positions):null;
+      const focus=data.focus_entity,focusPosition=positions.get(state.focusId);
+      const selectedAttribute=state.activeLocation?.kind==='attribute'?((state.fullGraph?.entity_details?.[state.activeLocation.entity_id]?.attributes||[]).find(attribute=>attribute.name===state.activeLocation.member_name)||(focus?.id===state.activeLocation.entity_id?focus.attributes?.find(attribute=>attribute.name===state.activeLocation.member_name):null)||null):null;
+      updateNodeDetailToggle();
+      const pairs=new Map();
+      for(const edge of edges){const pair=[edge.source_id,edge.target_id].sort().join('|');pairs.set(pair,(pairs.get(pair)||0)+1);}
+      if(state.infiniteMode&&state.infiniteAnalysis&&state.showClusters)renderCategoryRegions(svg,positions);
+      const pairOffset=new Map();
+      for(const edge of edges){
+        if(!state.showRelationshipEdges||!entityIsVisible(edge.source_id)||!entityIsVisible(edge.target_id))continue;
+        const from=positions.get(edge.source_id),to=positions.get(edge.target_id);if(!from||!to)continue;
+        const pair=[edge.source_id,edge.target_id].sort().join('|'),total=pairs.get(pair)||1,index=pairOffset.get(pair)||0;pairOffset.set(pair,index+1);
+        let dx=to.x-from.x,dy=to.y-from.y,length=Math.max(1,Math.hypot(dx,dy)),nx=-dy/length,ny=dx/length;
+        const offset=(index-(total-1)/2)*22;
+        const detailMode=state.infiniteMode&&state.showNodeDetails,sourceSize=entityNodeSize(edge.source_id,detailMode),targetSize=entityNodeSize(edge.target_id,detailMode),sourceRadius={x:sourceSize.width/2,y:sourceSize.height/2},targetRadius={x:targetSize.width/2,y:targetSize.height/2};
+        const sourceOffset=Math.min(sourceRadius.x/Math.max(0.001,Math.abs(dx/length)),sourceRadius.y/Math.max(0.001,Math.abs(dy/length))),targetOffset=Math.min(targetRadius.x/Math.max(0.001,Math.abs(dx/length)),targetRadius.y/Math.max(0.001,Math.abs(dy/length)));
+        const sx=from.x+dx/length*sourceOffset,sy=from.y+dy/length*sourceOffset,tx=to.x-dx/length*targetOffset,ty=to.y-dy/length*targetOffset;
+        const mx=(sx+tx)/2+nx*offset,my=(sy+ty)/2+ny*offset;
+        const selected=state.activeLocation?.kind==='relationship'&&state.activeLocation.edge_id===edge.id;
+        const type=modelClass(edge.source_id?.split('::')[0]||nodeById.get(edge.source_id)?.model),marker=selected?'selected':type==='model-common'?'common':type==='model-banking'?'banking':'other';
+        const path=svgElement('path',{class:`edge ${type}${selected?' selected':''}`,d:`M ${sx} ${sy} Q ${mx} ${my} ${tx} ${ty}`,'marker-end':`url(#arrowhead-${marker})`,tabindex:0,role:'button','aria-label':`${nodeById.get(edge.source_id)?.name||edge.source_id}.${edge.attribute} to ${nodeById.get(edge.target_id)?.name||edge.target_id}`});
+        const title=svgElement('title');title.textContent=`${nodeById.get(edge.source_id)?.name||edge.source_id}.${edge.attribute} → ${nodeById.get(edge.target_id)?.name||edge.target_id}`;path.append(title);
+        const selectEdge=event=>{event.stopPropagation();state.selectedEdgeId=edge.id;state.activeLocation={kind:'relationship',entity_id:edge.source_id,edge_id:edge.id,member_name:edge.attribute};if(state.infiniteMode){setInfiniteFocus(edge.source_id);}else{renderGraph();renderDetails(state.neighborhood);}};
+        path.addEventListener('click',selectEdge);path.addEventListener('keydown',event=>{if(event.key==='Enter'||event.key===' '){event.preventDefault();selectEdge(event);}});svg.append(path);
+        if((state.infiniteMode&&state.showNodeDetails)||edges.length<=12||edge.id===state.selectedEdgeId){const label=svgElement('text',{class:'edge-label',x:mx,y:my-4,'text-anchor':'middle'});if(state.infiniteMode&&state.showNodeDetails)label.style.fontSize='10px';label.textContent=truncate(edge.attribute,state.infiniteMode&&state.showNodeDetails?19:22);svg.append(label);}
+      }
+      renderSemanticOverlayEdges(svg,semanticLayout);
+      for(const node of nodes){
+        const pos=positions.get(node.id);if(!pos)continue;
+        const selectedEntity=state.activeLocation?.kind==='entity'&&state.activeLocation.entity_id===node.id;
+        const categoryId=state.infiniteAnalysis?.category_by_entity?.[node.id],categoryIndex=state.infiniteAnalysis?.categories?.findIndex(item=>item.id===categoryId)??-1;
+        const inferredCategory=categoryIndex>=0?state.infiniteAnalysis.categories[categoryIndex]:null,category=state.showClusters?inferredCategory:null,masked=state.infiniteMode&&state.hiddenCategories.has(categoryId);
+        const categoryClass=category&&categoryIndex>=0?`category-${categoryIndex%8}`:'';
+        const detailsMode=state.infiniteMode&&state.showNodeDetails,attributes=state.fullGraph?.entity_details?.[node.id]?.attributes||[];
+        const className=['node',modelClass(node.model),category?'category-marked':'',categoryClass,masked?'category-hidden':'',!state.showEntityNodes?'layer-hidden':'',node.id===state.focusId&&!state.activeLocation?'focus':'',selectedEntity?'hit-focus':'',detailsMode?'details-mode':''].filter(Boolean).join(' ');
+        const group=svgElement('g',{class:className,transform:`translate(${pos.x} ${pos.y})`,tabindex:entityIsVisible(node.id)?0:-1,role:'button','aria-label':`${node.name}, ${node.model}${category?`, category ${category.label}`:''}. Select to explore.`});
+        if(detailsMode){
+          const size=entityNodeSize(node.id),leftWidth=size.width/3,left=-size.width/2,top=-size.height/2,dividerX=left+leftWidth,right=size.width/2,bottom=size.height/2;
+          group.append(svgElement('rect',{x:left,y:top,width:size.width,height:size.height,rx:14}));
+          group.append(svgElement('line',{class:'node-detail-divider',x1:dividerX,y1:top+10,x2:dividerX,y2:bottom-10}));
+          const infoX=left+12,titleTop=top+23,maxTitleChars=Math.max(9,Math.floor((leftWidth-24)/7.2)),maxTitleLines=Math.max(2,Math.floor((size.height-74)/15)),nameLines=wrapIdentifier(node.name,maxTitleChars).slice(0,maxTitleLines);
+          const name=svgElement('text',{class:'node-detail-name',x:infoX,y:titleTop});nameLines.forEach((line,index)=>{const tspan=svgElement('tspan',{x:infoX,dy:index===0?0:15});tspan.textContent=line;name.append(tspan);});group.append(name);
+          const categoryY=Math.min(bottom-38,titleTop+nameLines.length*15+8),categoryText=svgElement('text',{class:`node-detail-category ${categoryIndex>=0?`category-label-${categoryIndex%8}`:''}`,x:infoX,y:categoryY});categoryText.textContent=category?truncate(category.label,Math.max(10,Math.floor((leftWidth-24)/6))):'Uncategorized';group.append(categoryText);
+          const model=svgElement('text',{class:'node-detail-model',x:infoX,y:Math.min(bottom-17,categoryY+17)});model.textContent=truncate(node.model,Math.max(10,Math.floor((leftWidth-24)/5.5)));group.append(model);
+          const foreignX=dividerX+8,foreignY=top+8,foreignWidth=right-foreignX-8,foreignHeight=size.height-16;
+          const foreign=svgElement('foreignObject',{x:foreignX,y:foreignY,width:foreignWidth,height:foreignHeight}),panel=document.createElementNS('http://www.w3.org/1999/xhtml','div');panel.className='node-attribute-scroll';panel.setAttribute('xmlns','http://www.w3.org/1999/xhtml');panel.setAttribute('aria-label',`${node.name} attributes and details`);
+          const heading=document.createElement('div');heading.className='node-attribute-heading';heading.textContent=`Attributes · ${attributes.length}`;panel.append(heading);
+          if(!attributes.length){const empty=document.createElement('small');empty.textContent='No catalog attributes';panel.append(empty);}
+          for(const attribute of attributes){
+            const isSelected=state.activeLocation?.kind==='attribute'&&state.activeLocation.entity_id===node.id&&state.activeLocation.member_name===attribute.name,row=document.createElement('div');row.className=`node-attribute-row${isSelected?' selected':''}`;
+            const select=document.createElement('button');select.type='button';select.className='node-attribute-select';select.title=[attribute.data_type,attribute.display_name,attribute.description].filter(Boolean).join(' · ')||attribute.name;select.setAttribute('aria-pressed',String(isSelected));
+            const attributeName=document.createElement('span');attributeName.className='node-attribute-name';attributeName.textContent=attribute.name;select.append(attributeName);
+            const meta=document.createElement('span');meta.className='node-attribute-meta';meta.textContent=[attribute.data_type||'Type unspecified',attribute.display_name].filter(Boolean).join(' · ');select.append(meta);
+            if(attribute.description){const description=document.createElement('span');description.className='node-attribute-description';description.textContent=attribute.description;select.append(description);}
+            select.addEventListener('click',event=>{event.stopPropagation();selectGraphAttribute(node,attribute);});row.append(select);
+            const undock=document.createElement('button');undock.type='button';undock.className='attribute-undock';undock.textContent='↗';undock.title=`Open ${attribute.name} details`;undock.setAttribute('aria-label',`Undock ${attribute.name} details`);undock.addEventListener('click',event=>{event.stopPropagation();openUndockedAttribute(node,attribute);});row.append(undock);panel.append(row);
+          }
+          foreign.append(panel);group.append(foreign);appendNodeResizeHandle(group,node.id,node.name,size);
+        }else{
+          group.append(svgElement('rect',{x:-70,y:-35,width:140,height:70,rx:15}));
+          const name=svgElement('text',{class:'node-name',x:0,y:-13,'text-anchor':'middle'});name.textContent=truncate(node.name,18);group.append(name);
+          const categoryText=svgElement('text',{class:`node-category ${categoryIndex>=0?`category-label-${categoryIndex%8}`:''}`,x:0,y:5,'text-anchor':'middle'});categoryText.textContent=category?truncate(category.label,22):'';group.append(categoryText);
+          const model=svgElement('text',{class:'node-model',x:0,y:23,'text-anchor':'middle'});model.textContent=truncate(node.model,23);group.append(model);
+        }
+        const title=svgElement('title');title.textContent=`${node.name} · ${node.model}${category?` · ${category.label}`:''}`;group.append(title);
+        const focusNode=()=>{clearSearchResults();$('keyword').value='';setSearchStatus('');state.selectedEdgeId=null;state.semanticSelection=null;state.activeLocation={kind:'entity',entity_id:node.id};loadNeighborhood(node.id);};
+        group.addEventListener('click',focusNode);group.addEventListener('keydown',event=>{if(event.key==='Enter'||event.key===' '){event.preventDefault();focusNode();}});svg.append(group);
+      }
+      renderSemanticOverlayNodes(svg,semanticLayout);
+      const focusIsVisible=focus&&entityIsVisible(focus.id);
+      if(state.showNodeDetails&&!state.infiniteMode&&focusPosition&&focus?.attributes?.length&&focusIsVisible){
+        const attributes=focus.attributes,spacing=Math.min(27,650/Math.max(1,attributes.length)),totalHeight=(attributes.length-1)*spacing;
+        const firstY=state.infiniteMode?Math.max(40,Math.min(1560-totalHeight,focusPosition.y-totalHeight/2)):378-totalHeight/2;
+        const x=state.infiniteMode?focusPosition.x+(focusPosition.x<1500?680:-680):1035;
+        const header=svgElement('text',{class:'attribute-heading',x,y:state.infiniteMode?firstY-24:37,'text-anchor':'middle'});header.textContent=`Attributes of ${truncate(focus.name,20)}`;svg.append(header);
+        attributes.forEach((attribute,index)=>{
+          const selected=selectedAttribute?.name===attribute.name,y=firstY+index*spacing;
+          const group=svgElement('g',{class:`attribute-node compact ${modelClass(focus.model)}${selected?' selected':''}`,transform:`translate(${x} ${y})`,tabindex:0,role:'button','aria-pressed':String(selected),'aria-label':`Attribute ${attribute.name}, ${attribute.data_type||'type not specified'}, on ${focus.name}`});
+          group.append(svgElement('rect',{x:-95,y:-12,width:190,height:24,rx:7}));
+          const name=svgElement('text',{class:'attribute-name',x:0,y:4,'text-anchor':'middle'});name.textContent=truncate(attribute.name,28);group.append(name);
+          const title=svgElement('title');title.textContent=`${attribute.name} · ${attribute.data_type||'type not specified'} · attribute of ${focus.name}`;group.append(title);
+          const selectAttribute=()=>{state.activeLocation={kind:'attribute',entity_id:focus.id,member_name:attribute.name,path:attribute.path,title:attribute.name};state.selectedEdgeId=null;renderGraph();renderDetails(data,state.activeLocation);};
+          group.addEventListener('click',selectAttribute);group.addEventListener('keydown',event=>{if(event.key==='Enter'||event.key===' '){event.preventDefault();selectAttribute();}});svg.append(group);
+        });
+      }else if(selectedAttribute&&focusPosition&&focusIsVisible&&!(state.infiniteMode&&state.showNodeDetails)){
+        const direction=state.infiniteMode&&focusPosition.x>=1500?-1:1;
+        const x=state.infiniteMode?focusPosition.x+direction*680:1025,y=state.infiniteMode?focusPosition.y:378,left=x-direction*95,start=focusPosition.x+direction*72;
+        const connector=svgElement('path',{class:'attribute-edge',d:`M ${start} ${focusPosition.y} C ${start+direction*160} ${focusPosition.y-10} ${left-direction*85} ${y} ${left} ${y}`,'marker-end':'url(#arrowhead-other)'});svg.append(connector);
+        const header=svgElement('text',{class:'attribute-heading',x,y:y-64,'text-anchor':'middle'});header.textContent='Selected attribute';svg.append(header);
+        const group=svgElement('g',{class:'attribute-node selected',transform:`translate(${x} ${y})`,tabindex:0,role:'button','aria-pressed':'true','aria-label':`Selected attribute ${selectedAttribute.name}, ${selectedAttribute.data_type||'type not specified'}, on ${focus.name}`});
+        const nameLines=wrapIdentifier(selectedAttribute.name),typeY=19+8*(nameLines.length-1),height=Math.max(76, typeY+19);
+        group.append(svgElement('rect',{x:-95,y:-38,width:190,height,rx:14}));
+        const name=svgElement('text',{class:'attribute-name',x:0,y:-4-8*(nameLines.length-1),'text-anchor':'middle'});
+        nameLines.forEach((line,index)=>{const tspan=svgElement('tspan',{x:0,dy:index===0?0:16});tspan.textContent=line;name.append(tspan);});group.append(name);
+        const type=svgElement('text',{class:'attribute-type',x:0,y:typeY,'text-anchor':'middle'});type.textContent=truncate(selectedAttribute.data_type||'Type not specified',25);group.append(type);
+        const title=svgElement('title');title.textContent=`${selectedAttribute.name} · ${selectedAttribute.data_type||'type not specified'} · attribute of ${focus.name}`;group.append(title);
+        svg.append(group);
+      }
+      if(state.infiniteMode&&state.showNodeDetails&&state.undockedAttribute)renderUndockedAttribute(svg,positions);
+    }
+    function renderDetails(data,location=state.activeLocation){
+      const root=$('details-content');if(!data?.focus_entity){root.textContent='Choose an entity to inspect its definition.';return;}
+      const entity=data.focus_entity;root.replaceChildren();
+      const heading=document.createElement('h2');heading.textContent=entity.name;root.append(heading);
+      const categoryId=state.infiniteMode?state.infiniteAnalysis?.category_by_entity?.[entity.id]:null,category=state.infiniteAnalysis?.categories?.find(item=>item.id===categoryId);
+      const model=document.createElement('p');model.className='entity-model';model.textContent=`${entity.model}${category?` · ${category.label} (inferred)`:''} · ${entity.attributes.length} attributes · ${(data.direct_relationships||[]).length} resolved links`;root.append(model);
+      if(entity.extends_entity){const inheritance=document.createElement('p');inheritance.className='path';inheritance.textContent=`Extends entity: ${entity.extends_entity}`;root.append(inheritance);}
+      const description=document.createElement('p');description.className='entity-description';description.textContent=entity.description||'No description is available in this catalog snapshot.';root.append(description);
+      const path=document.createElement('div');path.className='path';path.textContent=entity.path;root.append(path);
+      try{const source=new URL(entity.source_uri);if(source.protocol==='https:'||source.protocol==='http:'){const link=document.createElement('a');link.className='source-link';link.href=source.href;link.target='_blank';link.rel='noopener noreferrer';link.textContent='Open Microsoft definition ↗';root.append(link);}}catch(_){/* No source link for malformed URLs. */}
+      if(location?.entity_id===entity.id&&location.kind==='relationship'){
+        const target=(data.direct_relationships||[]).find(item=>item.id===location.edge_id);
+        const selected=document.createElement('p');selected.className='path';selected.textContent=target?`${target.direction}: ${entity.name}.${target.attribute} → ${target.other_name}`:`Relationship ${location.member_name||''}`;root.append(selected);
+      }
+      const entityTraits=entity.applied_traits||[];
+      if(entityTraits.length){const traitDetails=document.createElement('details');const traitSummary=document.createElement('summary');traitSummary.textContent=`Entity traits · ${entityTraits.length}`;traitDetails.append(traitSummary);const traitList=document.createElement('ul');traitList.className='item-list';for(const trait of entityTraits){const item=document.createElement('li'),name=document.createElement('strong');name.textContent=trait.name;item.append(name);for(const argument of trait.arguments||[]){const value=document.createElement('p');value.className='trait-argument';value.textContent=`${argument.name}: ${typeof argument.value==='string'?argument.value:JSON.stringify(argument.value)}`;item.append(value);}traitList.append(item);}traitDetails.append(traitList);root.append(traitDetails);}
+      const attributes=document.createElement('details');attributes.open=true;const attributesSummary=document.createElement('summary');attributesSummary.textContent=`Attributes · ${entity.attributes.length}`;attributes.append(attributesSummary);
+      const attributeHint=document.createElement('p');attributeHint.className='attribute-hint';attributeHint.textContent='Select an attribute to focus it on the graph. Use Node details in the legend to browse attributes inside each entity card.';attributes.append(attributeHint);
+      const attributeList=document.createElement('ul');attributeList.className='item-list';
+      for(const attribute of entity.attributes){const item=document.createElement('li');item.id=`attribute-${encodeURIComponent(entity.id)}-${encodeURIComponent(attribute.name)}`;if(location?.entity_id===entity.id&&location.kind==='attribute'&&location.member_name===attribute.name)item.classList.add('match');const button=document.createElement('button');button.className='attribute-link';button.textContent=attribute.name;button.addEventListener('click',()=>{
+          const matchingHit=state.hits.findIndex(hit=>hit.kind==='attribute'&&hit.entity_id===entity.id&&hit.member_name===attribute.name);
+          if(matchingHit>=0){state.hitIndex=matchingHit;renderHits();state.activeLocation=state.hits[matchingHit];}
+          else{clearSearchResults();state.activeLocation={kind:'attribute',entity_id:entity.id,member_name:attribute.name,path:attribute.path,title:attribute.name};}
+          state.selectedEdgeId=null;if(state.infiniteMode)centerInfiniteView(entity.id,infiniteAttributeViewOffset(entity.id));renderGraph();renderDetails(data,state.activeLocation);
+        });item.append(button);const info=document.createElement('small');info.textContent=[attribute.data_type,attribute.display_name,attribute.description].filter(Boolean).join(' · ')||'No additional details';item.append(info);
+        for(const [label,traits] of [['Attribute traits',attribute.applied_traits||[]],['Data type traits',attribute.data_type_traits||[]]]){
+          if(!traits.length)continue;const traitList=document.createElement('details'),traitSummary=document.createElement('summary');traitSummary.textContent=`${label} · ${traits.length}`;traitList.append(traitSummary);
+          for(const trait of traits){const traitName=document.createElement('p');traitName.className='trait-argument';traitName.textContent=trait.name;traitList.append(traitName);for(const argument of trait.arguments||[]){const value=document.createElement('p');value.className='trait-argument';value.textContent=`${argument.name}: ${typeof argument.value==='string'?argument.value:JSON.stringify(argument.value)}`;traitList.append(value);}}
+          item.append(traitList);
+        }
+        attributeList.append(item);}
+      attributes.append(attributeList);root.append(attributes);
+      const relations=document.createElement('details');relations.open=location?.entity_id===entity.id&&location.kind==='relationship';const relationSummary=document.createElement('summary');relationSummary.textContent=`Resolved relationships · ${(data.direct_relationships||[]).length}`;relations.append(relationSummary);
+      const relationList=document.createElement('ul');relationList.className='item-list';
+      for(const relation of data.direct_relationships||[]){const item=document.createElement('li');item.id=`relationship-${encodeURIComponent(relation.id)}`;if(relation.id===location?.edge_id)item.classList.add('match');const button=document.createElement('button');button.className='neighbor-link';button.textContent=`${relation.direction==='outgoing'?'→':'←'} ${relation.attribute} · ${relation.other_name}`;button.addEventListener('click',()=>{clearSearchResults();$('keyword').value='';setSearchStatus('');state.selectedEdgeId=null;state.activeLocation={kind:'entity',entity_id:relation.other_entity_id};loadNeighborhood(relation.other_entity_id);});item.append(button);const info=document.createElement('small');info.textContent=relation.description||`${relation.other_model} · ${relation.direction} link`;item.append(info);relationList.append(item);}
+      if(!(data.direct_relationships||[]).length){const empty=document.createElement('li');empty.textContent='No resolved relationship in this loaded subset.';relationList.append(empty);}
+      relations.append(relationList);root.append(relations);
+      if(location?.kind==='attribute'&&location.entity_id===entity.id&&!(state.infiniteMode&&state.showNodeDetails)){requestAnimationFrame(()=>document.getElementById(`attribute-${encodeURIComponent(entity.id)}-${encodeURIComponent(location.member_name)}`)?.scrollIntoView({block:'nearest'}));}
+      if(location?.kind==='relationship'&&location.entity_id===entity.id&&!(state.infiniteMode&&state.showNodeDetails)){requestAnimationFrame(()=>document.getElementById(`relationship-${encodeURIComponent(location.edge_id)}`)?.scrollIntoView({block:'nearest'}));}
+    }
+    async function loadNeighborhood(entityId,hit=null){
+      if(state.infiniteMode&&state.fullGraph){setInfiniteFocus(entityId,{hit,center:Boolean(hit)});return;}
+      await loadInfiniteGraph(entityId);
+    }
+    function renderHits(){
+      const list=$('hit-list');list.replaceChildren();const hasHits=state.hits.length>0;
+      $('hit-controls').hidden=!hasHits;$('hit-list').hidden=!hasHits;
+      if(!hasHits){$('hit-count').textContent='';return;}
+      $('hit-count').textContent=`${state.hitIndex+1} of ${state.hits.length}`;
+      state.hits.forEach((hit,index)=>{const button=document.createElement('button');button.type='button';button.className='hit';button.setAttribute('role','option');button.setAttribute('aria-selected',String(index===state.hitIndex));button.setAttribute('aria-current',String(index===state.hitIndex));button.setAttribute('aria-label',`${hit.kind}: ${hit.title}. ${hit.subtitle}`);const title=document.createElement('span');title.className='hit-title';title.textContent=hit.title;const subtitle=document.createElement('span');subtitle.className='hit-subtitle';subtitle.textContent=hit.subtitle;const snippet=document.createElement('span');snippet.className='hit-snippet';snippet.textContent=hit.snippet;button.append(title,subtitle,snippet);button.addEventListener('click',()=>activateHit(index));list.append(button);});
+    }
+    async function activateHit(index){
+      if(!state.hits.length)return;state.hitIndex=(index+state.hits.length)%state.hits.length;renderHits();const hit=state.hits[state.hitIndex];state.activeLocation=hit;state.selectedEdgeId=hit.edge_id||null;await loadNeighborhood(hit.entity_id,hit);
+    }
+    async function searchKeywords(query){
+      const normalized=query.trim();if(!normalized){setSearchStatus('Enter a keyword to search the catalog.');return;}
+      state.jumpOrigin=state.focusId||state.overview?.initial_entity_id||null;state.jumpOriginView=state.infiniteMode&&state.infiniteView?{...state.infiniteView}:null;state.selectedEdgeId=null;state.activeLocation=null;renderGraph();renderDetails(state.neighborhood,null);
+      state.hits=[];state.hitIndex=-1;state.query=normalized;renderHits();setSearchStatus(`Searching for “${normalized}”…`);
+      try{
+        const data=await getJson(`/api/v1/graph/search?q=${encodeURIComponent(normalized)}&limit=40`);state.hits=data.hits||[];
+        if(!state.hits.length){setSearchStatus(`No graph locations found for “${normalized}”.`);renderHits();return;}
+        setSearchStatus(`Showing ${state.hits.length} of ${data.total_hits} matching location${data.total_hits===1?'':'s'} · this search stays in the current page only.`);renderHits();await activateHit(0);
+      }catch(error){state.hits=[];renderHits();setSearchStatus(error.message||'The graph search failed.',true);}
+    }
+    async function abandonJump(){
+      if(state.jumpOrigin){const origin=state.jumpOrigin,originView=state.jumpOriginView;clearSearchResults();$('keyword').value='';setSearchStatus('Jump cancelled. Returned to the previous graph location.');state.selectedEdgeId=null;state.activeLocation=null;await loadNeighborhood(origin);if(state.infiniteMode&&originView){applyInfiniteView(originView);renderGraph();}}
+      else{clearSearchResults();$('keyword').value='';setSearchStatus('Jump cancelled.');}
+    }
+    function graphFullscreenActive(){
+      const workspace=$('graph-workspace');
+      return document.fullscreenElement===workspace||workspace.classList.contains('is-fullscreen-fallback');
+    }
+    function updateGraphFullscreenButton(){
+      const active=graphFullscreenActive(),button=$('fullscreen-toggle');
+      const label=active?'Exit full screen':'Full screen';
+      button.textContent=label;button.setAttribute('aria-label',label);button.setAttribute('aria-pressed',String(active));
+    }
+    function setGraphFullscreenFallback(active){
+      $('graph-workspace').classList.toggle('is-fullscreen-fallback',active);
+      document.body.classList.toggle('graph-fullscreen-fallback',active);
+      updateGraphFullscreenButton();
+    }
+    async function toggleGraphFullscreen(){
+      const workspace=$('graph-workspace'),button=$('fullscreen-toggle');
+      button.disabled=true;
+      try{
+        if(workspace.classList.contains('is-fullscreen-fallback'))setGraphFullscreenFallback(false);
+        else if(document.fullscreenElement===workspace)await document.exitFullscreen();
+        else if(typeof workspace.requestFullscreen==='function'&&document.fullscreenEnabled!==false){
+          try{await workspace.requestFullscreen();}catch{setGraphFullscreenFallback(true);}
+        }else setGraphFullscreenFallback(true);
+      }finally{button.disabled=false;updateGraphFullscreenButton();}
+    }
+    function handleGraphFullscreenEscape(event){
+      const workspace=$('graph-workspace');
+      if(workspace.classList.contains('is-fullscreen-fallback')){
+        event.preventDefault();setGraphFullscreenFallback(false);return true;
+      }
+      // Let the browser exit native fullscreen; do not also discard a search or attribute selection.
+      return document.fullscreenElement===workspace;
+    }
+    $('search-form').addEventListener('submit',event=>{event.preventDefault();const query=$('keyword').value;if(state.hits.length&&query.trim()===state.query&&state.hitIndex>=0){activateHit(state.hitIndex+1);}else{searchKeywords(query);}});
+    $('previous-hit').addEventListener('click',()=>activateHit(state.hitIndex-1));$('next-hit').addEventListener('click',()=>activateHit(state.hitIndex+1));$('cancel-jump').addEventListener('click',abandonJump);
+    $('keyword').addEventListener('keydown',event=>{if(!state.hits.length)return;if(event.key==='ArrowDown'){event.preventDefault();activateHit(state.hitIndex+1);}else if(event.key==='ArrowUp'){event.preventDefault();activateHit(state.hitIndex-1);}});
+    document.addEventListener('keydown',event=>{if(event.key==='Escape'&&handleGraphFullscreenEscape(event))return;if(event.key==='Escape'&&state.undockedAttribute){event.preventDefault();closeUndockedAttribute();return;}if(event.key==='Escape'&&state.hits.length){event.preventDefault();abandonJump();}});
+    $('fullscreen-toggle').addEventListener('click',toggleGraphFullscreen);document.addEventListener('fullscreenchange',updateGraphFullscreenButton);
+    $('zoom-in').addEventListener('click',()=>zoomInfiniteView(0.82));$('zoom-out').addEventListener('click',()=>zoomInfiniteView(1.22));$('fit-graph').addEventListener('click',fitInfiniteView);
+    $('graph').addEventListener('pointerdown',event=>{
+      if(!state.infiniteMode||!(event.target===$('graph')||event.target.classList?.contains('graph-bg')))return;
+      state.panStart={pointerId:event.pointerId,startX:event.clientX,startY:event.clientY,rect:$('graph').getBoundingClientRect(),view:{...state.infiniteView}};
+      $('graph').setPointerCapture(event.pointerId);
+    });
+    $('graph').addEventListener('pointermove',event=>{
+      const resize=state.resizeDrag;
+      if(resize&&resize.pointerId===event.pointerId){
+        const point=graphPointFromClient(event.clientX,event.clientY);if(!point)return;
+        const deltaX=point.x-resize.startPoint.x,deltaY=point.y-resize.startPoint.y;if(Math.hypot(deltaX,deltaY)>3)resize.moved=true;
+        const next=boundedNodeSize(resize.startSize.width+deltaX,resize.startSize.height+deltaY);state.nodeSizes.set(resize.entityId,next);
+        if(!state.resizeRenderFrame)state.resizeRenderFrame=requestAnimationFrame(()=>{state.resizeRenderFrame=null;renderGraph();});
+        return;
+      }
+      const start=state.panStart;if(!start||start.pointerId!==event.pointerId)return;
+      const dx=(event.clientX-start.startX)/start.rect.width*start.view.width,dy=(event.clientY-start.startY)/start.rect.height*start.view.height;
+      applyInfiniteView({x:start.view.x-dx,y:start.view.y-dy,width:start.view.width});
+    });
+    $('graph').addEventListener('dblclick',event=>{
+      const handle=event.target.closest?.('.node-resize-handle'),recent=state.lastResizeClick;
+      const recentHandle=recent&&performance.now()-recent.at<700&&Math.hypot(event.clientX-recent.x,event.clientY-recent.y)<10;
+      const nodeId=handle?.dataset.entityId||(recentHandle?recent.entityId:null);if(!nodeId)return;
+      event.preventDefault();event.stopPropagation();state.lastResizeClick=null;state.nodeSizes.delete(nodeId);renderGraph();
+    });
+    const stopGraphPan=event=>{if(state.resizeDrag?.pointerId===event.pointerId){const resize=state.resizeDrag;state.lastResizeClick=resize.moved?null:{entityId:resize.entityId,at:performance.now(),x:event.clientX,y:event.clientY};state.resizeDrag=null;}if(state.panStart?.pointerId===event.pointerId)state.panStart=null;if($('graph').hasPointerCapture(event.pointerId))$('graph').releasePointerCapture(event.pointerId);};
+    $('graph').addEventListener('pointerup',stopGraphPan);$('graph').addEventListener('pointercancel',stopGraphPan);
+    $('graph').addEventListener('wheel',event=>{if(!state.infiniteMode||event.target.closest?.('.node-attribute-scroll')||event.target.closest?.('.undocked-content'))return;event.preventDefault();zoomInfiniteView(event.deltaY<0?0.84:1.19,event.clientX,event.clientY);},{passive:false});
+    async function initialize(){
+      try{state.overview=await getJson('/api/v1/graph/overview');await loadInfiniteGraph(state.overview.initial_entity_id);}
+      catch(error){$('details-content').textContent=error.message||'The graph could not be initialized.';setStatus('The graph could not be initialized.',true);}
+    }
+    initialize();
+  </script>
+<script>
+fetch('/api/v1/status',{cache:'no-store'}).then(r=>r.ok?r.json():{}).then(s=>{if(s.demo_access)document.querySelectorAll('a[href="/benchmarks"]').forEach(a=>a.style.display='none');}).catch(()=>{});
+fetch('/api/v1/api-tokens',{cache:'no-store'}).then(response=>{
+  if(response.ok)document.getElementById('api-tokens-nav').hidden=false;
+}).catch(()=>{});
+</script>
+</body>
+</html>

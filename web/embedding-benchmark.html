@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CDM RAG · Embedding evaluation</title>
+  <style>
+    :root{color-scheme:light;--ink:#17231e;--muted:#627168;--green:#1d7653;--line:#d9e5dc;--soft:#f3f7f3}
+    *{box-sizing:border-box}body{margin:0;background:#f4f7f4;color:var(--ink);font:16px/1.55 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+    .wrap{max-width:1280px;margin:0 auto;padding:30px 28px 64px}header{display:flex;justify-content:space-between;align-items:center;gap:18px;border-bottom:1px solid var(--line);padding-bottom:20px}
+    .brand{font-weight:800;font-size:18px}.brand small{display:block;color:var(--muted);font-size:13px;font-weight:600}.links{display:flex;gap:22px;align-items:center;flex-wrap:wrap}.links a{color:var(--green);font-weight:700}
+    h1{font:500 clamp(40px,6vw,66px)/1.05 Georgia,"Times New Roman",serif;letter-spacing:-.035em;margin:42px 0 12px}.intro{max-width:900px;color:var(--muted);font-size:19px;margin:0 0 15px}.note{color:var(--muted);font-size:14px;margin:0 0 26px}
+    h2{font-size:22px;margin:0 0 12px}.table-wrap{overflow:auto;border:1px solid var(--line);border-radius:14px;background:#fff}table{border-collapse:collapse;width:100%;min-width:1120px}th,td{text-align:left;padding:11px 12px;border-bottom:1px solid var(--line);font-variant-numeric:tabular-nums;white-space:nowrap}th{background:var(--soft);font-size:13px}tbody tr:last-child td{border-bottom:0}.best{background:#dbeafe;color:#1e3a8a;font-weight:800}.second{background:#eff6ff;color:#1d4ed8;font-style:italic}.legend{color:var(--muted);font-size:13px;margin:10px 0 0}.star{color:#1d4ed8}
+    @media(max-width:740px){.wrap{padding:22px 15px 42px}header{align-items:flex-start}.links{gap:12px;font-size:14px}h1{margin-top:32px}}
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="brand">CDM RAG<small>Microsoft Common Data Model · graph embedding evaluation</small></div>
+    <nav class="links" aria-label="Main navigation"><a href="/home">Home</a><a href="/RAG">Ask a question</a><a href="/benchmarks">Evaluations ↗</a><a href="/docs">Documentation</a><a id="api-tokens-nav" href="/api-tokens" hidden>API tokens</a></nav>
+  </header>
+  <main>
+    <h1>Embedding evaluation.</h1>
+    <p class="intro">Pure link prediction on the typed CDM graph. Each method ranks held-out graph links; this evaluation does not use questions or generated answers.</p>
+    <p class="note">Snapshot: 24 Nov 2026 · test split · 128 held-out links, 256 head/tail predictions · graph revision dd21d715. GCN text features use Nomic. They were cached for this test run; the development run’s initial feature preparation took 2.902 s. Fit and ranking times are separate. The star marks the highest filtered MRR.</p>
+    <section aria-labelledby="summary-heading">
+      <h2 id="summary-heading">Summary table</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Graph method</th><th>Feature model</th><th>Fit</th><th>Feature preparation</th><th>Ranking</th><th>Filtered MRR</th><th>Mean rank</th><th>Hits@1</th><th>Hits@3</th><th>Hits@10</th></tr></thead>
+          <tbody>
+            <tr><th scope="row"><span class="star" aria-label="Best overall">★</span> BoxE</th><td>—</td><td>6.090 s</td><td>—</td><td>0.025 s</td><td class="best">0.6623</td><td class="best">3.24</td><td class="best">0.5195</td><td class="best">0.7734</td><td class="best">0.9258</td></tr>
+            <tr><th scope="row">TransE</th><td>—</td><td class="best">1.008 s</td><td>—</td><td class="second">0.012554 s</td><td class="second">0.6155</td><td>3.82</td><td class="second">0.4609</td><td>0.7266</td><td>0.9180</td></tr>
+            <tr><th scope="row">TransH</th><td>—</td><td class="second">1.629 s</td><td>—</td><td>0.014830 s</td><td>0.5844</td><td class="second">3.74</td><td>0.3867</td><td class="second">0.7500</td><td class="second">0.9219</td></tr>
+            <tr><th scope="row">Trainable GCN · 3 layers</th><td>nomic-embed-text:latest</td><td>2.692 s</td><td>0.001 s · cached</td><td>0.012667 s</td><td>0.5507</td><td>5.81</td><td>0.4414</td><td>0.5703</td><td>0.8125</td></tr>
+            <tr><th scope="row">Trainable GCN · 1 layer</th><td>nomic-embed-text:latest</td><td>2.586 s</td><td>0.001 s · cached</td><td>0.013973 s</td><td>0.5246</td><td>6.32</td><td>0.4180</td><td>0.5391</td><td>0.7734</td></tr>
+            <tr><th scope="row">Trainable GCN · 2 layers</th><td>nomic-embed-text:latest</td><td>2.636 s</td><td>0.001 s · cached</td><td class="best">0.012531 s</td><td>0.4927</td><td>7.38</td><td>0.3477</td><td>0.5547</td><td>0.7422</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="legend"><span class="best">Best</span> · <span class="second">Second best</span> within each metric; lower is better for time and mean rank. ★ marks the best overall method by filtered MRR (BoxE). Run 094fec79-5e7c-43d4-9789-9b15768b6446.</p>
+    </section>
+  </main>
+</div>
+<script>
+fetch('/api/v1/api-tokens',{cache:'no-store'}).then(response=>{
+  if(response.ok)document.getElementById('api-tokens-nav').hidden=false;
+}).catch(()=>{});
+</script>
+</body>
+</html>

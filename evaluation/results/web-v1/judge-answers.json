@@ -1,0 +1,90 @@
+{
+  "source_result_sha256": "9e7f5bc5ce3a145f91eb0944f32e64a7901a523fceab016563147ff02dba5fb5",
+  "judge_model": "qwen3:4b",
+  "limitation": "Two cases only; same 4B model as answer generation; grades require human verification.",
+  "reason": "Batch answer judgments failed JSON parsing; answers are retried separately.",
+  "metrics": {
+    "hybrid_raw": {
+      "answer_cases": 2,
+      "mean_unanswerable_case_grade_0_to_2": 2
+    },
+    "hybrid_reranked": {
+      "answer_cases": 2,
+      "mean_unanswerable_case_grade_0_to_2": 2
+    },
+    "neighborhood_reranked": {
+      "answer_cases": 2,
+      "mean_unanswerable_case_grade_0_to_2": 2
+    },
+    "graph_assisted": {
+      "answer_cases": 2,
+      "mean_unanswerable_case_grade_0_to_2": 2
+    },
+    "graph_transe": {
+      "answer_cases": 2,
+      "mean_unanswerable_case_grade_0_to_2": 2
+    }
+  },
+  "cases": [
+    {
+      "case_id": "web-08-source",
+      "variant": "hybrid_raw",
+      "grade": 2,
+      "error": null
+    },
+    {
+      "case_id": "web-08-source",
+      "variant": "hybrid_reranked",
+      "grade": 2,
+      "error": null
+    },
+    {
+      "case_id": "web-08-source",
+      "variant": "neighborhood_reranked",
+      "grade": 2,
+      "error": null
+    },
+    {
+      "case_id": "web-08-source",
+      "variant": "graph_assisted",
+      "grade": 2,
+      "error": null
+    },
+    {
+      "case_id": "web-08-source",
+      "variant": "graph_transe",
+      "grade": 2,
+      "error": null
+    },
+    {
+      "case_id": "web-09-source",
+      "variant": "hybrid_raw",
+      "grade": 2,
+      "error": null
+    },
+    {
+      "case_id": "web-09-source",
+      "variant": "hybrid_reranked",
+      "grade": 2,
+      "error": null
+    },
+    {
+      "case_id": "web-09-source",
+      "variant": "neighborhood_reranked",
+      "grade": 2,
+      "error": null
+    },
+    {
+      "case_id": "web-09-source",
+      "variant": "graph_assisted",
+      "grade": 2,
+      "error": null
+    },
+    {
+      "case_id": "web-09-source",
+      "variant": "graph_transe",
+      "grade": 2,
+      "error": null
+    }
+  ]
+}

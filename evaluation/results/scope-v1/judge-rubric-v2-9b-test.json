@@ -1,0 +1,493 @@
+{
+  "dataset_id": "judge-questions-v2",
+  "dataset_status": "assistant-authored source-checked examples; not independently reviewed",
+  "dataset_sha256": "3303e4395cbcb6492c7ddd248b3d00799d45a6fb525febbe7d84063e95697986",
+  "split": "test",
+  "judge_model": "qwen3.5:9b-q4_K_M",
+  "judge_model_digest": "56671c2ab9385f9cfcb404638e32cd62d88e3501d44822208363c010179a3c90",
+  "judge_prompt_sha256": "2eaf46555f12293b6af57409dadbc61ba9cb53a162892a7f59433c91a2d18843",
+  "judge_code_sha256": "406c44e7d77b77478912585dad5fa7ef9a24e18b1011aa9b0e57b9bab1b5195a",
+  "note": "Assistant-authored/audited labels are not independent; uncertain and errors are recorded separately.",
+  "metrics": {
+    "cases": 18,
+    "acceptable_gold": 9,
+    "unacceptable_gold": 9,
+    "correct_accept": 8,
+    "incorrect_accept": 1,
+    "correct_reject": 8,
+    "incorrect_reject": 0,
+    "uncertain": 1,
+    "errors": 0,
+    "self_inconsistencies": 1,
+    "median_ms": 4596.0
+  },
+  "cases": [
+    {
+      "id": "jt01",
+      "split": "test",
+      "question": "What links a user to a team?",
+      "answer": "TeamMembership has references to User and Team. [F]",
+      "evidence": [
+        "[F] applicationCommon::TeamMembership: Its User reference targets applicationCommon::User; its Team reference targets applicationCommon::Team."
+      ],
+      "expected_acceptable": true,
+      "kind": "schema",
+      "verdict": "acceptable",
+      "model_verdict": "acceptable",
+      "coverage": "answered",
+      "claim_checks": [
+        {
+          "claim": "TeamMembership has references to User and Team.",
+          "assessment": "supported"
+        }
+      ],
+      "rationale": "The answer states that 'TeamMembership has references to User and Team.' The supplied excerpt explicitly confirms this by stating: 'applicationCommon::TeamMembership: Its User reference targets applicationCommon::User; its Team reference targets applicationCommon::Team.' The citation directly supports the factual claim regarding the entity relationships. The question asks for the link, which is identified as the TeamMembership entity with specific references. No information is missing from the excerpts to answer this specific schema-based question.",
+      "inconsistent": false,
+      "error": null,
+      "latency_ms": 3652.1
+    },
+    {
+      "id": "jt02",
+      "split": "test",
+      "question": "What links a user to a team?",
+      "answer": "Contact has a team membership reference to User. [F]",
+      "evidence": [
+        "[F] applicationCommon::TeamMembership: Its User reference targets applicationCommon::User; its Team reference targets applicationCommon::Team."
+      ],
+      "expected_acceptable": false,
+      "kind": "schema",
+      "verdict": "unacceptable",
+      "model_verdict": "unacceptable",
+      "coverage": "missing",
+      "claim_checks": [
+        {
+          "claim": "Contact has a team membership reference to User.",
+          "assessment": "unsupported"
+        }
+      ],
+      "rationale": "The answer asserts that 'Contact' is the entity linking a user to a team. However, the supplied excerpt defines 'applicationCommon::TeamMembership' as having references to both 'User' and 'Team'. The excerpt does not mention 'Contact' at all. Therefore, the claim that 'Contact' performs this linking function is not supported by the provided text. Additionally, the answer fails to acknowledge that the specific entity ('Contact') mentioned in the question/answer is absent from the evidence.",
+      "inconsistent": false,
+      "error": null,
+      "latency_ms": 4584.3
+    },
+    {
+      "id": "jt03",
+      "split": "test",
+      "question": "What is a financial holding?",
+      "answer": "It covers accounts, loans, investments, credit lines and savings held by a customer. [G]",
+      "evidence": [
+        "[G] RetailBankingCoreDataModel::FinancialHolding: Accounts, loans, investments, credit lines and savings accounts held by a customer."
+      ],
+      "expected_acceptable": true,
+      "kind": "schema",
+      "verdict": "acceptable",
+      "model_verdict": "acceptable",
+      "coverage": "answered",
+      "claim_checks": [
+        {
+          "claim": "A financial holding covers accounts, loans, investments, credit lines, and savings held by a customer.",
+          "assessment": "supported"
+        }
+      ],
+      "rationale": "The answer states that a financial holding covers specific items (accounts, loans, investments, credit lines, and savings) held by a customer. The supplied excerpt [G] from the RetailBankingCoreDataModel explicitly defines 'FinancialHolding' with the exact same list of items ('Accounts, loans, investments, credit lines and savings accounts') held by a customer. The claim in the answer is fully supported by the cited excerpt.",
+      "inconsistent": false,
+      "error": null,
+      "latency_ms": 4607.7
+    },
+    {
+      "id": "jt04",
+      "split": "test",
+      "question": "What is a financial holding?",
+      "answer": "A financial holding is exclusively a mortgage. [G]",
+      "evidence": [
+        "[G] RetailBankingCoreDataModel::FinancialHolding: Accounts, loans, investments, credit lines and savings accounts held by a customer."
+      ],
+      "expected_acceptable": false,
+      "kind": "schema",
+      "verdict": "unacceptable",
+      "model_verdict": "unacceptable",
+      "coverage": "missing",
+      "claim_checks": [
+        {
+          "claim": "A financial holding is exclusively a mortgage.",
+          "assessment": "unsupported"
+        }
+      ],
+      "rationale": "The answer asserts that a financial holding is 'exclusively a mortgage'. The cited excerpt [G] defines FinancialHolding as including 'Accounts, loans, investments, credit lines and savings accounts', which contradicts the claim of exclusivity to mortgages. Furthermore, the excerpt does not mention mortgages at all. The answer fails to acknowledge that the provided evidence contradicts its assertion or that the definition in the schema is broader than the answer claims.",
+      "inconsistent": false,
+      "error": null,
+      "latency_ms": 4373.0
+    },
+    {
+      "id": "jt05",
+      "split": "test",
+      "question": "What is a direct debit?",
+      "answer": "A creditor is authorized to debit the customer’s account at regular intervals. [E]",
+      "evidence": [
+        "[E] RetailBankingCoreDataModel::FIDirectDebit: An automated payment system in which an account holder authorizes a creditor to debit the customer’s account at regular intervals."
+      ],
+      "expected_acceptable": true,
+      "kind": "schema",
+      "verdict": "acceptable",
+      "model_verdict": "acceptable",
+      "coverage": "answered",
+      "claim_checks": [
+        {
+          "claim": "A direct debit is an automated payment system.",
+          "assessment": "supported"
+        },
+        {
+          "claim": "In a direct debit, an account holder authorizes a creditor to debit the customer's account at regular intervals.",
+          "assessment": "supported"
+        }
+      ],
+      "rationale": "The answer contains two factual claims. Both are directly supported by Excerpt [E], which defines 'FIDirectDebit' as an 'automated payment system' where an 'account holder authorizes a creditor to debit the customer's account at regular intervals.' The answer accurately reflects the definition provided in the source text without adding unsupported information or ignoring missing context.",
+      "inconsistent": false,
+      "error": null,
+      "latency_ms": 4997.7
+    },
+    {
+      "id": "jt06",
+      "split": "test",
+      "question": "What is a direct debit?",
+      "answer": "The account holder orders a fixed transfer to another account. [E]",
+      "evidence": [
+        "[E] RetailBankingCoreDataModel::FIDirectDebit: An automated payment system in which an account holder authorizes a creditor to debit the customer’s account at regular intervals."
+      ],
+      "expected_acceptable": false,
+      "kind": "schema",
+      "verdict": "unacceptable",
+      "model_verdict": "unacceptable",
+      "coverage": "missing",
+      "claim_checks": [
+        {
+          "claim": "A direct debit is when an account holder orders a fixed transfer to another account.",
+          "assessment": "unsupported"
+        }
+      ],
+      "rationale": "The answer claims that a direct debit involves the account holder ordering a 'fixed transfer'. The provided excerpt [E] defines a direct debit as an 'automated payment system' where an account holder 'authorizes a creditor to debit' their account, often at 'regular intervals'. The concepts of 'ordering', 'fixed transfer', and 'transfer to another account' are not present in the excerpt. Furthermore, the excerpt describes authorization for debiting (removal of funds), whereas the answer describes initiating a transfer (movement of funds). Therefore, the cited excerpt does not support the factual claim made in the answer. Additionally, the answer fails to acknowledge that the provided schema definition does not contain information about actual customer records or specific runtime behaviors if those were implied.",
+      "inconsistent": false,
+      "error": null,
+      "latency_ms": 6159.6
+    },
+    {
+      "id": "jt07",
+      "split": "test",
+      "question": "Which customers have mortgages?",
+      "answer": "I cannot list customers with mortgages; this source contains definitions rather than customer records.",
+      "evidence": [
+        "[G] RetailBankingCoreDataModel::FinancialHolding: Accounts, loans, investments, credit lines and savings accounts held by a customer."
+      ],
+      "expected_acceptable": true,
+      "kind": "records",
+      "verdict": "acceptable",
+      "model_verdict": "acceptable",
+      "coverage": "answered",
+      "claim_checks": [
+        {
+          "claim": "The source contains definitions rather than customer records.",
+          "assessment": "supported"
+        },
+        {
+          "claim": "The source does not list customers with mortgages.",
+          "assessment": "supported"
+        }
+      ],
+      "rationale": "The answer explicitly states it cannot list customers because the source contains definitions, not records. The supplied excerpt confirms the source is a schema definition ('RetailBankingCoreDataModel') describing entity types like 'FinancialHolding' rather than providing actual data instances. Therefore, the claim that customer lists are unavailable is supported by the evidence.",
+      "inconsistent": false,
+      "error": null,
+      "latency_ms": 4559.6
+    },
+    {
+      "id": "jt08",
+      "split": "test",
+      "question": "Which customers have mortgages?",
+      "answer": "Customer Alice holds a mortgage. [G]",
+      "evidence": [
+        "[G] RetailBankingCoreDataModel::FinancialHolding: Accounts, loans, investments, credit lines and savings accounts held by a customer."
+      ],
+      "expected_acceptable": false,
+      "kind": "records",
+      "verdict": "unacceptable",
+      "model_verdict": "unacceptable",
+      "coverage": "missing",
+      "claim_checks": [
+        {
+          "claim": "Customer Alice holds a mortgage.",
+          "assessment": "unsupported"
+        }
+      ],
+      "rationale": "The answer asserts that 'Customer Alice' holds a mortgage and cites excerpt [G]. Excerpt [G] defines the entity 'FinancialHolding' as a category for accounts, loans, investments, etc., held by a customer. It does not list any specific customers, nor does it identify 'Alice' or state that she holds a mortgage. Therefore, the cited excerpt provides no factual support for the specific claim about Alice. Furthermore, the answer fails to acknowledge that the supplied excerpts are schema definitions and do not contain actual customer records or evidence of deployed software behavior required to answer which customers have mortgages.",
+      "inconsistent": false,
+      "error": null,
+      "latency_ms": 5048.2
+    },
+    {
+      "id": "jt09",
+      "split": "test",
+      "question": "Will a contact be created automatically after an account is saved?",
+      "answer": "The supplied definitions do not establish the software behavior after saving an account.",
+      "evidence": [
+        "[A] applicationCommon::Contact: Person with whom a business unit has a relationship. The parentCustomer reference targets applicationCommon::Account or applicationCommon::Contact.",
+        "[B] applicationCommon::Account: Business that represents a customer or potential customer. Its attributes include accountId and accountCategoryCode. Its primaryContact reference targets applicationCommon::Contact."
+      ],
+      "expected_acceptable": true,
+      "kind": "runtime",
+      "verdict": "acceptable",
+      "model_verdict": "acceptable",
+      "coverage": "answered",
+      "claim_checks": [
+        {
+          "claim": "The supplied definitions do not establish the software behavior after saving an account.",
+          "assessment": "supported"
+        }
+      ],
+      "rationale": "The question asks about runtime behavior ('Will a contact be created automatically...'). The provided excerpts define the schema entities (Account and Contact) and their reference relationships, but contain no information regarding business logic, triggers, or automatic creation processes. The answer correctly identifies this limitation based on the nature of the supplied text (schema definitions vs. runtime behavior). No unsupported claims were made.",
+      "inconsistent": false,
+      "error": null,
+      "latency_ms": 4261.2
+    },
+    {
+      "id": "jt10",
+      "split": "test",
+      "question": "Will a contact be created automatically after an account is saved?",
+      "answer": "No, saving an account will not create a contact. [A]",
+      "evidence": [
+        "[A] applicationCommon::Contact: Person with whom a business unit has a relationship. The parentCustomer reference targets applicationCommon::Account or applicationCommon::Contact.",
+        "[B] applicationCommon::Account: Business that represents a customer or potential customer. Its attributes include accountId and accountCategoryCode. Its primaryContact reference targets applicationCommon::Contact."
+      ],
+      "expected_acceptable": false,
+      "kind": "runtime",
+      "verdict": "unacceptable",
+      "model_verdict": "unacceptable",
+      "coverage": "missing",
+      "claim_checks": [
+        {
+          "claim": "Saving an account will not create a contact.",
+          "assessment": "unsupported"
+        }
+      ],
+      "rationale": "The answer asserts a specific runtime behavior ('saving' an action does not trigger creation) based on excerpt [A]. Excerpt [A] only defines the entity 'Contact' and its relationship to 'Account'. It contains no information about application logic, triggers, or automatic creation processes. Therefore, the cited excerpt does not support the factual claim regarding system behavior. Furthermore, the answer fails to acknowledge that the provided schema excerpts do not contain evidence of runtime behavior.",
+      "inconsistent": false,
+      "error": null,
+      "latency_ms": 4563.2
+    },
+    {
+      "id": "jt11",
+      "split": "test",
+      "question": "Explain CustomerFinancialHolding and list our active accounts.",
+      "answer": "CustomerFinancialHolding links customers and financial holdings. [C] I cannot list active accounts because the source contains no records.",
+      "evidence": [
+        "[C] RetailBankingCoreDataModel::CustomerFinancialHolding: Financial holdings owned by the customer. Its Customer reference targets RetailBankingCoreDataModel::Account or ::Contact; its FinancialHolding reference targets ::FinancialHolding."
+      ],
+      "expected_acceptable": true,
+      "kind": "mixed",
+      "verdict": "acceptable",
+      "model_verdict": "acceptable",
+      "coverage": "answered",
+      "claim_checks": [
+        {
+          "claim": "CustomerFinancialHolding links customers and financial holdings.",
+          "assessment": "supported"
+        },
+        {
+          "claim": "The source contains no records (active accounts).",
+          "assessment": "supported"
+        }
+      ],
+      "rationale": "The excerpt defines CustomerFinancialHolding as linking customers to financial holdings, supporting the first claim. The answer explicitly states that active accounts cannot be listed because the source contains no records; since the supplied excerpts are defined as a schema snapshot (definitions and references) rather than actual data, the absence of record instances is consistent with the nature of the provided text, making the second claim supported by the context of the excerpts.",
+      "inconsistent": false,
+      "error": null,
+      "latency_ms": 4976.2
+    },
+    {
+      "id": "jt12",
+      "split": "test",
+      "question": "Explain CustomerFinancialHolding and list our active accounts.",
+      "answer": "CustomerFinancialHolding links customers and financial holdings. [C]",
+      "evidence": [
+        "[C] RetailBankingCoreDataModel::CustomerFinancialHolding: Financial holdings owned by the customer. Its Customer reference targets RetailBankingCoreDataModel::Account or ::Contact; its FinancialHolding reference targets ::FinancialHolding."
+      ],
+      "expected_acceptable": false,
+      "kind": "mixed",
+      "verdict": "unacceptable",
+      "model_verdict": "unacceptable",
+      "coverage": "missing",
+      "claim_checks": [
+        {
+          "claim": "CustomerFinancialHolding links customers and financial holdings.",
+          "assessment": "unsupported"
+        },
+        {
+          "claim": "The Customer reference targets RetailBankingCoreDataModel::Account or ::Contact.",
+          "assessment": "supported"
+        },
+        {
+          "claim": "The FinancialHolding reference targets ::FinancialHolding.",
+          "assessment": "supported"
+        }
+      ],
+      "rationale": "The cited excerpt [C] supports the structural definition of CustomerFinancialHolding (its references). However, it does not support the claim that it 'links customers' specifically in a way that implies a direct customer entity link (the excerpt says the reference targets Account or Contact, not necessarily a generic Customer entity), nor does it provide any list of active accounts. The question asks for a list of active accounts, which is runtime data/records, while the excerpts only contain schema definitions. The answer fails to acknowledge that the supplied excerpts do not contain actual customer records or a list of active accounts.",
+      "inconsistent": false,
+      "error": null,
+      "latency_ms": 6598.6
+    },
+    {
+      "id": "jt13",
+      "split": "test",
+      "question": "What does the CustomerFinancialHolding entity connect?",
+      "answer": "Its Customer reference can target an Account or Contact and its FinancialHolding reference targets FinancialHolding. [C]",
+      "evidence": [
+        "[C] RetailBankingCoreDataModel::CustomerFinancialHolding: Financial holdings owned by the customer. Its Customer reference targets RetailBankingCoreDataModel::Account or ::Contact; its FinancialHolding reference targets ::FinancialHolding."
+      ],
+      "expected_acceptable": true,
+      "kind": "schema",
+      "verdict": "acceptable",
+      "model_verdict": "acceptable",
+      "coverage": "answered",
+      "claim_checks": [
+        {
+          "claim": "The CustomerFinancialHolding entity connects to an Account via its Customer reference.",
+          "assessment": "supported"
+        },
+        {
+          "claim": "The CustomerFinancialHolding entity connects to a Contact via its Customer reference.",
+          "assessment": "supported"
+        },
+        {
+          "claim": "The CustomerFinancialHolding entity connects to FinancialHolding via its FinancialHolding reference.",
+          "assessment": "supported"
+        }
+      ],
+      "rationale": "The supplied excerpt explicitly states that the 'Customer' reference targets '::Account' or '::Contact' and the 'FinancialHolding' reference targets '::FinancialHolding'. The answer's claims map directly to these statements without adding external assumptions.",
+      "inconsistent": false,
+      "error": null,
+      "latency_ms": 5378.2
+    },
+    {
+      "id": "jt14",
+      "split": "test",
+      "question": "What does the CustomerFinancialHolding entity connect?",
+      "answer": "It has a direct Team reference. [C]",
+      "evidence": [
+        "[C] RetailBankingCoreDataModel::CustomerFinancialHolding: Financial holdings owned by the customer. Its Customer reference targets RetailBankingCoreDataModel::Account or ::Contact; its FinancialHolding reference targets ::FinancialHolding."
+      ],
+      "expected_acceptable": false,
+      "kind": "schema",
+      "verdict": "unacceptable",
+      "model_verdict": "unacceptable",
+      "coverage": "uncertain",
+      "claim_checks": [
+        {
+          "claim": "The CustomerFinancialHolding entity has a direct Team reference.",
+          "assessment": "unsupported"
+        }
+      ],
+      "rationale": "The answer asserts that CustomerFinancialHolding connects to 'Team'. However, the supplied excerpt [C] explicitly states that its references target '::Account', '::Contact', and '::FinancialHolding'. There is no mention of a 'Team' reference in the provided text. Therefore, the claim lacks support from the cited excerpt.",
+      "inconsistent": false,
+      "error": null,
+      "latency_ms": 4002.4
+    },
+    {
+      "id": "jt15",
+      "split": "test",
+      "question": "Which field identifies an Account?",
+      "answer": "It has an accountId field. [B]",
+      "evidence": [
+        "[B] applicationCommon::Account: Business that represents a customer or potential customer. Its attributes include accountId and accountCategoryCode. Its primaryContact reference targets applicationCommon::Contact."
+      ],
+      "expected_acceptable": true,
+      "kind": "schema",
+      "verdict": "acceptable",
+      "model_verdict": "acceptable",
+      "coverage": "answered",
+      "claim_checks": [
+        {
+          "claim": "The Account entity has an accountId field.",
+          "assessment": "supported"
+        }
+      ],
+      "rationale": "The answer states that the Account entity has an 'accountId' field. Excerpt [B] explicitly defines the 'applicationCommon::Account' entity and lists 'accountId' as one of its attributes. The citation correctly supports the factual claim.",
+      "inconsistent": false,
+      "error": null,
+      "latency_ms": 3467.3
+    },
+    {
+      "id": "jt16",
+      "split": "test",
+      "question": "Which field identifies an Account?",
+      "answer": "It has an accountId field. [A]",
+      "evidence": [
+        "[A] applicationCommon::Contact: Person with whom a business unit has a relationship. The parentCustomer reference targets applicationCommon::Account or applicationCommon::Contact.",
+        "[B] applicationCommon::Account: Business that represents a customer or potential customer. Its attributes include accountId and accountCategoryCode. Its primaryContact reference targets applicationCommon::Contact."
+      ],
+      "expected_acceptable": false,
+      "kind": "wrong_citation",
+      "verdict": "acceptable",
+      "model_verdict": "acceptable",
+      "coverage": "answered",
+      "claim_checks": [
+        {
+          "claim": "The Account entity has an accountId field.",
+          "assessment": "supported"
+        }
+      ],
+      "rationale": "The answer states that the Account has an 'accountId' field. Excerpt [B] explicitly defines applicationCommon::Account and lists 'accountId' as one of its attributes. The citation matches the claim, and the question is fully addressed.",
+      "inconsistent": false,
+      "error": null,
+      "latency_ms": 3489.4
+    },
+    {
+      "id": "jt17",
+      "split": "test",
+      "question": "Can the schema prove that all accounts have a primary contact?",
+      "answer": "No cardinality requirement is established by the supplied excerpt. [B]",
+      "evidence": [
+        "[B] applicationCommon::Account: Business that represents a customer or potential customer. Its attributes include accountId and accountCategoryCode. Its primaryContact reference targets applicationCommon::Contact."
+      ],
+      "expected_acceptable": true,
+      "kind": "schema",
+      "verdict": "uncertain",
+      "model_verdict": "acceptable",
+      "coverage": "answered",
+      "claim_checks": [
+        {
+          "claim": "The schema does not prove that all accounts have a primary contact.",
+          "assessment": "unsupported"
+        },
+        {
+          "claim": "No cardinality requirement is established by the supplied excerpt regarding the relationship between Account and Contact.",
+          "assessment": "supported"
+        }
+      ],
+      "rationale": "The answer correctly identifies that the provided excerpt [B] defines a reference from 'Account' to 'Contact' but does not specify cardinality constraints (e.g., mandatory/required vs. optional). Therefore, the schema alone cannot prove that *all* accounts must have a primary contact based solely on this text. The answer explicitly states this limitation and cites the correct excerpt.",
+      "inconsistent": true,
+      "error": null,
+      "latency_ms": 5072.5
+    },
+    {
+      "id": "jt18",
+      "split": "test",
+      "question": "Can the schema prove that all accounts have a primary contact?",
+      "answer": "Yes, every account must have exactly one primary contact. [B]",
+      "evidence": [
+        "[B] applicationCommon::Account: Business that represents a customer or potential customer. Its attributes include accountId and accountCategoryCode. Its primaryContact reference targets applicationCommon::Contact."
+      ],
+      "expected_acceptable": false,
+      "kind": "schema",
+      "verdict": "unacceptable",
+      "model_verdict": "unacceptable",
+      "coverage": "missing",
+      "claim_checks": [
+        {
+          "claim": "Every account must have exactly one primary contact.",
+          "assessment": "unsupported"
+        }
+      ],
+      "rationale": "The cited excerpt [B] defines the 'Account' entity and states that it has a 'primaryContact reference'. However, defining the existence of a reference does not establish cardinality constraints (such as 'exactly one') or mandatory participation (i.e., that every instance must have this reference). The schema definition provided does not contain information regarding whether the primary contact is optional or required. Therefore, the answer's assertion that 'every account must have exactly one' cannot be proven by the supplied text.",
+      "inconsistent": false,
+      "error": null,
+      "latency_ms": 4611.9
+    }
+  ]
+}

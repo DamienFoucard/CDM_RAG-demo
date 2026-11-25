@@ -1,0 +1,17 @@
+{
+  "dataset_sha256": "e449e91dff169a01b8deaabde2bedcd69132cedb1403c64bc3e4921e1cac00f0",
+  "split": "test",
+  "variant": "hybrid",
+  "baseline": "nomic-embed-text",
+  "candidate": "qwen3-embedding:0.6b",
+  "case_count": 24,
+  "mrr_delta": 0.075,
+  "paired_bootstrap_95_percent": [
+    0.0021,
+    0.1667
+  ],
+  "wins": 4,
+  "ties": 20,
+  "losses": 0,
+  "limitation": "Resampling this synthetic, unreviewed question set does not establish uncertainty for a real user population."
+}

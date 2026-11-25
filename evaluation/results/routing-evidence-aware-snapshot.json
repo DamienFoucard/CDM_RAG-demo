@@ -1,0 +1,2942 @@
+{
+  "schema_version": 1,
+  "description": "Unconditionally search raw conversation and question using cached Nomic hybrid index; present top three bounded excerpts to an independent classifier. No LLM reranker, rewrite or answer generation.",
+  "caveat": "All cases are searched before classification, including out-of-scope requests. False-search measures the classifier's decision, not avoided initial searches. The embedder and one small router stay resident with 5-minute keep-alive, but do not infer concurrently. Timings include actual first-case model loads and other residency effects. Data are provisional and not independently reviewed.",
+  "artifact_sha256": "2699e70e0b6b6f8ff7071e612cf114c6d67bb7a6bb49f29d15cb6432a9480be6",
+  "dataset_id": "cdm-routing-decision-v1",
+  "dataset_sha256": "5c5de7f4091199172022ed61d24dbed6adb454082abc6c789067dbbff40d0bef",
+  "split": "test",
+  "selected_case_ids": [
+    "route-test-raw-overdraft",
+    "route-test-raw-contact-parent",
+    "route-test-raw-holding-role",
+    "route-test-raw-group",
+    "route-test-raw-partner",
+    "route-test-raw-phone",
+    "route-test-rewrite-customer",
+    "route-test-rewrite-phone",
+    "route-test-rewrite-ownership",
+    "route-test-rewrite-card",
+    "route-test-rewrite-investment",
+    "route-test-rewrite-payment",
+    "route-test-no-personal-card",
+    "route-test-no-current-loan",
+    "route-test-no-live-status",
+    "route-test-no-mixed",
+    "route-test-no-interest",
+    "route-test-no-weather"
+  ],
+  "baseline_sha256": "ed9f03306c8d821b108c9198621f936bf2dea0361632ee3cb30a2d642eeaf60b",
+  "baseline": {
+    "summaries": {
+      "qwen3:4b": {
+        "attempted": 18,
+        "scored": 18,
+        "errors": 0,
+        "correct": 11,
+        "accuracy": 0.6111111111111112,
+        "search_gate_correct": 18,
+        "search_gate_accuracy": 1.0,
+        "false_search": 0,
+        "false_no_search": 0,
+        "macro_f1": 0.5294117647058824,
+        "mean_seconds": 0.3565,
+        "classes": {
+          "raw_search": {
+            "expected": 6,
+            "predicted": 11,
+            "correct": 5,
+            "precision": 0.45454545454545453,
+            "recall": 0.8333333333333334,
+            "f1": 0.5882352941176471
+          },
+          "rewrite_search": {
+            "expected": 6,
+            "predicted": 1,
+            "correct": 0,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          },
+          "no_search": {
+            "expected": 6,
+            "predicted": 6,
+            "correct": 6,
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0
+          }
+        }
+      },
+      "qwen3.5:9b-q4_K_M": {
+        "attempted": 18,
+        "scored": 18,
+        "errors": 0,
+        "correct": 14,
+        "accuracy": 0.7777777777777778,
+        "search_gate_correct": 18,
+        "search_gate_accuracy": 1.0,
+        "false_search": 0,
+        "false_no_search": 0,
+        "macro_f1": 0.75,
+        "mean_seconds": 1.0847777777777778,
+        "classes": {
+          "raw_search": {
+            "expected": 6,
+            "predicted": 10,
+            "correct": 6,
+            "precision": 0.6,
+            "recall": 1.0,
+            "f1": 0.7499999999999999
+          },
+          "rewrite_search": {
+            "expected": 6,
+            "predicted": 2,
+            "correct": 2,
+            "precision": 1.0,
+            "recall": 0.3333333333333333,
+            "f1": 0.5
+          },
+          "no_search": {
+            "expected": 6,
+            "predicted": 6,
+            "correct": 6,
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0
+          }
+        }
+      }
+    },
+    "classifier_sha256": "b3f020e34f83692fef8e3adea948bc4bf2fa4f6a5aa19f64632b6233c5186388",
+    "prompt_sha256": "a096c2cdd8495b73b823e61bd634edcc5ff78d80f1cb7fa765b8c926da879284"
+  },
+  "index_identity": "cd491dd029b4b4bc1e13e924ab8f1f66d1447f938fd03f70dcd4cd9a8d96775f",
+  "source_commit": "dd21d715e05ebf740a11356c80b5c3b4c38a89c2",
+  "index_baseline_sha256": "a2341d4fb4b8a22f2fd9e0f95f95bed187814fae3545cbcb4071609da791198f",
+  "model_settings": {
+    "think": false,
+    "max_output_tokens": 160,
+    "max_output_tokens_override": null,
+    "context_cap_override": null,
+    "temperature": 0,
+    "context_policy": "app role-based cap and input-size estimate, using effective output token budget"
+  },
+  "search": {
+    "mode": "hybrid",
+    "reranker": null,
+    "top_k": 3,
+    "snippet_chars": 700,
+    "query_method": "raw prior conversation plus current question",
+    "concurrent_inference": false,
+    "classifier_hit_fields": [
+      "rank",
+      "id",
+      "title",
+      "text"
+    ],
+    "embedder_keep_alive": "5m",
+    "router_keep_alive": "5m",
+    "max_router_weight_bytes": 12000000000
+  },
+  "models": {
+    "qwen3:4b": {
+      "name": "qwen3:4b",
+      "model": "qwen3:4b",
+      "size": 2497293931,
+      "digest": "359d7dd4bcdab3d86b87d73ac27966f4dbb9f5efdfcc75d34a8764a09474fae7",
+      "details": {
+        "parent_model": "",
+        "format": "gguf",
+        "family": "qwen3",
+        "families": [
+          "qwen3"
+        ],
+        "parameter_size": "4.0B",
+        "quantization_level": "Q4_K_M",
+        "context_length": 262144,
+        "embedding_length": 2560,
+        "runner": "ggml"
+      },
+      "capabilities": [
+        "completion",
+        "tools",
+        "thinking"
+      ]
+    },
+    "qwen3.5:9b-q4_K_M": {
+      "name": "qwen3.5:9b-q4_K_M",
+      "model": "qwen3.5:9b-q4_K_M",
+      "size": 6550825550,
+      "digest": "56671c2ab9385f9cfcb404638e32cd62d88e3501d44822208363c010179a3c90",
+      "details": {
+        "parent_model": "model.gguf",
+        "format": "gguf",
+        "family": "qwen35",
+        "families": [
+          "qwen35"
+        ],
+        "parameter_size": "9.0B",
+        "quantization_level": "Q4_K_M",
+        "context_length": 262144,
+        "embedding_length": 4096,
+        "runner": "llamacpp"
+      },
+      "capabilities": [
+        "completion",
+        "vision",
+        "tools",
+        "thinking"
+      ]
+    }
+  },
+  "embedding": {
+    "name": "nomic-embed-text:latest",
+    "model": "nomic-embed-text:latest",
+    "size": 274302450,
+    "digest": "0a109f422b47e3a30ba2b10eca18548e944e8a23073ee3f3e947efcf3c45e59f",
+    "details": {
+      "parent_model": "",
+      "format": "gguf",
+      "family": "nomic-bert",
+      "families": [
+        "nomic-bert"
+      ],
+      "parameter_size": "137M",
+      "quantization_level": "F16",
+      "context_length": 2048,
+      "embedding_length": 768,
+      "runner": "ggml"
+    },
+    "capabilities": [
+      "embedding"
+    ]
+  },
+  "script_sha256": "acf16dfd06f3da713976655be4eb4974557dec42115a3313435b3dca841e9c15",
+  "classifier_sha256": "482e5a3df68aadaf6a62b34ecfcdf142e98750c4321fb3e49c6d4a68ab537ec4",
+  "helper_sha256": "df045631ae560e3389f1a96a74d12c76a072de5dd606a2fbf517e903ad4e57ec",
+  "rows": [
+    {
+      "model": "qwen3:4b",
+      "case_id": "route-test-raw-overdraft",
+      "question": "In the RetailBankingCoreDataModel CDM schema, how is FIOverdraft described?",
+      "context_messages": [],
+      "expected_route": "raw_search",
+      "accepted_routes": [
+        "raw_search"
+      ],
+      "initial_query": "In the RetailBankingCoreDataModel CDM schema, how is FIOverdraft described?",
+      "initial_hits": [
+        {
+          "rank": 1,
+          "id": "RetailBankingCoreDataModel::FIOverdraft:entity",
+          "title": "FIOverdraft (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FIOverdraft)",
+          "text": "CDM entity: FIOverdraft (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FIOverdraft). Source file: schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Fi_overdraft.cdm.json. An extension of credit associated with a checking account allowing the account holder to continue withdrawing funds when an account reaches zero. Selected attribute names: fi_OverdraftId, createdOn, modifiedOn, statecode, statuscode, importSequenceNumber, overriddenCreatedOn, timeZoneRuleVersionNumber, UTCConversionTimeZoneCode, name, financialinstrumenttype, integrationKey.",
+          "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Fi_overdraft.cdm.json",
+          "score": 0.032787
+        },
+        {
+          "rank": 2,
+          "id": "RetailBankingCoreDataModel::FIOverdraft:trait-applications:entity",
+          "title": "Traits applied to FIOverdraft (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FIOverdraft)",
+          "text": "CDM entity FIOverdraft (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FIOverdraft) exhibits these traits: is.localized.describedAs with arguments [{\"name\":\"argument 1\",\"value\":{\"constantValues\":[[\"en\",\"An extension of credit associated with a checking account allowing the account holder to continue withdrawing funds when an account reaches zero.\"]],\"entityShape\":\"localizedTable\"}}], is.localized.displayedAs with arguments [{\"name\":\"argument 1\",\"value\":{\"constantValues\":[[\"en\",\"FI overdraft\"]],\"entityShape\":\"localizedTable\"}}], is.CDM.entityVersion with arguments [{\"name\":\"versionNumber\",\"value\":\"1.1\"}].",
+          "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Fi_overdraft.cdm.json",
+          "score": 0.030798
+        },
+        {
+          "rank": 3,
+          "id": "manifest:schemaDocuments/FinancialServices/RetailBankingCoreDataModel/RetailBankingCoreDataModel.manifest.cdm.json:declarations:2",
+          "title": "Entities declared by manifest RetailBankingCoreDataModel (RetailBankingCoreDataModel)",
+          "text": "Entities declared in CDM manifest RetailBankingCoreDataModel (RetailBankingCoreDataModel): FHLineOfCredit (LocalEntity) at Fh_creditline.cdm.json/FHLineOfCredit; qualified entity ID RetailBankingCoreDataModel::FHLineOfCredit; FHInvestment (LocalEntity) at Fh_investment.cdm.json/FHInvestment; qualified entity ID RetailBankingCoreDataModel::FHInvestment; FHLoan (LocalEntity) at Fh_loan.cdm.json/FHLoan; qualified entity ID RetailBankingCoreDataModel::FHLoan; FHSaving (LocalEntity) at Fh_saving.cdm.json/FHSaving; qualified entity ID RetailBankingCoreDataModel::FHSaving; FICard (LocalEntity) at Fi_card.cdm.json/FICard; qualified entity ID RetailBankingCoreDataModel::FICard; FIDirectDebit (LocalEn",
+          "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/FinancialServices/RetailBankingCoreDataModel/RetailBankingCoreDataModel.manifest.cdm.json",
+          "score": 0.023592
+        }
+      ],
+      "baseline_route": "raw_search",
+      "baseline_status": "scored",
+      "baseline_correct": true,
+      "baseline_seconds": 2.175,
+      "messages_sha256": "277c87370360ea930529ea95ac6e69cb585d95b9cc9f54aeaa37285fa8e4d177",
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": true,
+      "search_seconds": 0.591,
+      "router_seconds": 3.003,
+      "end_to_end_seconds": 3.62,
+      "elapsed_seconds": 3.62,
+      "runtime": {
+        "runner": "llamacpp",
+        "size_bytes": 3181631242,
+        "gpu_bytes": 3181631242,
+        "context_length": 4096
+      },
+      "search_runtime": {
+        "runner": "llamacpp",
+        "size_bytes": 335733063,
+        "gpu_bytes": 335733063,
+        "context_length": 2048
+      },
+      "native_timing": {
+        "total_duration": 2989362542,
+        "load_duration": 1807826125,
+        "prompt_eval_count": 922,
+        "prompt_eval_duration": 1035603000,
+        "eval_count": 11,
+        "eval_duration": 140146000
+      }
+    },
+    {
+      "model": "qwen3:4b",
+      "case_id": "route-test-raw-contact-parent",
+      "question": "Which applicationCommon CDM entities can Contact.parentCustomer reference?",
+      "context_messages": [],
+      "expected_route": "raw_search",
+      "accepted_routes": [
+        "raw_search"
+      ],
+      "initial_query": "Which applicationCommon CDM entities can Contact.parentCustomer reference?",
+      "initial_hits": [
+        {
+          "rank": 1,
+          "id": "applicationCommon::Contact:relationship:3",
+          "title": "Contact (applicationCommon; qualified ID applicationCommon::Contact).parentCustomer relationship",
+          "text": "CDM entity Contact (applicationCommon; qualified ID applicationCommon::Contact) has an explicitly referenced relationship through attribute parentCustomer to applicationCommon::Account, applicationCommon::Contact.",
+          "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/Contact.cdm.json",
+          "score": 0.016393
+        },
+        {
+          "rank": 2,
+          "id": "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:relationship-mappings:1:81ece2515bad",
+          "title": "Relationship mappings in manifest crmCommon (applicationCommon)",
+          "text": "The CDM manifest crmCommon (applicationCommon) records these relationship mappings from /core/applicationCommon/Contact.cdm.json/Contact: /core/applicationCommon/Contact.cdm.json/Contact.parentCustomerId maps to Account.cdm.json/Account attribute accountId (target Account.cdm.json/Account). /core/applicationCommon/Contact.cdm.json/Contact.masterId maps to Contact.cdm.json/Contact attribute contactId (target Contact.cdm.json/Contact). /core/applicationCommon/Contact.cdm.json/Contact.parentCustomerId maps to Contact.cdm.json/Contact attribute contactId (target Contact.cdm.json/Contact).",
+          "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json",
+          "score": 0.016393
+        },
+        {
+          "rank": 3,
+          "id": "applicationCommon::Contact:relationship:1",
+          "title": "Contact (applicationCommon; qualified ID applicationCommon::Contact).preferredSystemUser relationship",
+          "text": "CDM entity Contact (applicationCommon; qualified ID applicationCommon::Contact) has an explicitly referenced relationship through attribute preferredSystemUser to applicationCommon::User.",
+          "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/Contact.cdm.json",
+          "score": 0.016129
+        }
+      ],
+      "baseline_route": "raw_search",
+      "baseline_status": "scored",
+      "baseline_correct": true,
+      "baseline_seconds": 0.246,
+      "messages_sha256": "23bf995f948e6b24db353d6806c131614894d6bed48b31216326fe6b0141d3fa",
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": true,
+      "search_seconds": 0.058,
+      "router_seconds": 0.606,
+      "end_to_end_seconds": 0.692,
+      "elapsed_seconds": 0.692,
+      "runtime": {
+        "runner": "llamacpp",
+        "size_bytes": 3181631242,
+        "gpu_bytes": 3181631242,
+        "context_length": 4096
+      },
+      "search_runtime": {
+        "runner": "llamacpp",
+        "size_bytes": 335733063,
+        "gpu_bytes": 335733063,
+        "context_length": 2048
+      },
+      "native_timing": {
+        "total_duration": 593082292,
+        "load_duration": 1414667,
+        "prompt_eval_count": 607,
+        "prompt_eval_duration": 442483000,
+        "eval_count": 11,
+        "eval_duration": 129202000
+      }
+    },
+    {
+      "model": "qwen3:4b",
+      "case_id": "route-test-raw-holding-role",
+      "question": "In RetailBankingCoreDataModel CustomerFinancialHolding, which attribute describes the customer's role in a holding?",
+      "context_messages": [],
+      "expected_route": "raw_search",
+      "accepted_routes": [
+        "raw_search"
+      ],
+      "initial_query": "In RetailBankingCoreDataModel CustomerFinancialHolding, which attribute describes the customer's role in a holding?",
+      "initial_hits": [
+        {
+          "rank": 1,
+          "id": "RetailBankingCoreDataModel::CustomerFinancialHolding:attributes:3",
+          "title": "CustomerFinancialHolding (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::CustomerFinancialHolding) attributes",
+          "text": "Attributes of CDM entity CustomerFinancialHolding (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::CustomerFinancialHolding) at : financialHoldingRole (listLookup); display name Financial holding role; The role of the customer with respect to the financial holding such as owner, beneficiary, etc.; nullable: True; purpose: hasA; source name: msfsi_financialholdingrole; source ordering: 37",
+          "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Customerfinancialholding.cdm.json",
+          "score": 0.032787
+        },
+        {
+          "rank": 2,
+          "id": "RetailBankingCoreDataModel::CustomerFinancialHolding:relationship:2",
+          "title": "CustomerFinancialHolding (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::CustomerFinancialHolding).FinancialHolding relationship",
+          "text": "CDM entity CustomerFinancialHolding (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::CustomerFinancialHolding) has an explicitly referenced relationship through attribute FinancialHolding to RetailBankingCoreDataModel::FinancialHolding. The unique identifier of the financial holding connected to the customer.",
+          "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Customerfinancialholding.cdm.json",
+          "score": 0.032258
+        },
+        {
+          "rank": 3,
+          "id": "RetailBankingCoreDataModel::CustomerFinancialHolding:relationship:1",
+          "title": "CustomerFinancialHolding (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::CustomerFinancialHolding).Customer relationship",
+          "text": "CDM entity CustomerFinancialHolding (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::CustomerFinancialHolding) has an explicitly referenced relationship through attribute Customer to RetailBankingCoreDataModel::Account, RetailBankingCoreDataModel::Contact. The unique identifier of the customer connected to this holding.",
+          "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Customerfinancialholding.cdm.json",
+          "score": 0.031746
+        }
+      ],
+      "baseline_route": "raw_search",
+      "baseline_status": "scored",
+      "baseline_correct": true,
+      "baseline_seconds": 0.238,
+      "messages_sha256": "8bc2f8df1447fb40c3de571dc9de47834f784b1d0bbb86182f2fc76c779e17d1",
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": true,
+      "search_seconds": 0.05,
+      "router_seconds": 0.717,
+      "end_to_end_seconds": 0.792,
+      "elapsed_seconds": 0.792,
+      "runtime": {
+        "runner": "llamacpp",
+        "size_bytes": 3181631242,
+        "gpu_bytes": 3181631242,
+        "context_length": 4096
+      },
+      "search_runtime": {
+        "runner": "llamacpp",
+        "size_bytes": 335733063,
+        "gpu_bytes": 335733063,
+        "context_length": 2048
+      },
+      "native_timing": {
+        "total_duration": 705407917,
+        "load_duration": 758042,
+        "prompt_eval_count": 685,
+        "prompt_eval_duration": 507378000,
+        "eval_count": 13,
+        "eval_duration": 181419000
+      }
+    },
+    {
+      "model": "qwen3:4b",
+      "case_id": "route-test-raw-group",
+      "question": "Which GroupFinancialHolding relationships reference the group and the holding in RetailBankingCoreDataModel?",
+      "context_messages": [],
+      "expected_route": "raw_search",
+      "accepted_routes": [
+        "raw_search"
+      ],
+      "initial_query": "Which GroupFinancialHolding relationships reference the group and the holding in RetailBankingCoreDataModel?",
+      "initial_hits": [
+        {
+          "rank": 1,
+          "id": "RetailBankingCoreDataModel::GroupFinancialHolding:entity",
+          "title": "GroupFinancialHolding (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::GroupFinancialHolding)",
+          "text": "CDM entity: GroupFinancialHolding (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::GroupFinancialHolding). Source file: schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Groupfinancialholding.cdm.json. Financial holdings associated with a Group, to be included in the group's total assets and liabilities. Selected attribute names: groupFinancialHoldingId, createdOn, modifiedOn, statecode, statuscode, importSequenceNumber, overriddenCreatedOn, timeZoneRuleVersionNumber, UTCConversionTimeZoneCode, name, FinancialHolding, Group.",
+          "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Groupfinancialholding.cdm.json",
+          "score": 0.032266
+        },
+        {
+          "rank": 2,
+          "id": "RetailBankingCoreDataModel::GroupFinancialHolding:relationship:2",
+          "title": "GroupFinancialHolding (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::GroupFinancialHolding).Group relationship",
+          "text": "CDM entity GroupFinancialHolding (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::GroupFinancialHolding) has an explicitly referenced relationship through attribute Group to RetailBankingCoreDataModel::Group. The set of familial connections that the customer has at the bank.",
+          "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Groupfinancialholding.cdm.json",
+          "score": 0.032258
+        },
+        {
+          "rank": 3,
+          "id": "RetailBankingCoreDataModel::GroupFinancialHolding:attributes:1",
+          "title": "GroupFinancialHolding (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::GroupFinancialHolding) attributes",
+          "text": "Attributes of CDM entity GroupFinancialHolding (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::GroupFinancialHolding) at : groupFinancialHoldingId (entityId); display name Group financial holding; Unique identifier for entity instances.; nullable: False; purpose: identifiedBy; source name: msfsi_groupfinancialholdingid; source ordering: 1. createdOn (dateTime); display name Created On; Date and time when the record was created.; nullable: True; purpose: hasA; source name: createdon; source ordering: 2. modifiedOn (dateTime); display name Modified On; Date and time when the record was modified.; nullable: True; purpose: hasA; source name: modifiedon; source ordering: 4. ",
+          "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Groupfinancialholding.cdm.json",
+          "score": 0.030159
+        }
+      ],
+      "baseline_route": "raw_search",
+      "baseline_status": "scored",
+      "baseline_correct": true,
+      "baseline_seconds": 0.239,
+      "messages_sha256": "b2a1f646eb6e4b9cf43ccd00a8655c678093d6e0742d767ca26bc8bede4a77cb",
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": true,
+      "search_seconds": 0.036,
+      "router_seconds": 0.838,
+      "end_to_end_seconds": 0.91,
+      "elapsed_seconds": 0.91,
+      "runtime": {
+        "runner": "llamacpp",
+        "size_bytes": 3181631242,
+        "gpu_bytes": 3181631242,
+        "context_length": 4096
+      },
+      "search_runtime": {
+        "runner": "llamacpp",
+        "size_bytes": 335733063,
+        "gpu_bytes": 335733063,
+        "context_length": 2048
+      },
+      "native_timing": {
+        "total_duration": 826645833,
+        "load_duration": 641042,
+        "prompt_eval_count": 794,
+        "prompt_eval_duration": 627453000,
+        "eval_count": 13,
+        "eval_duration": 186954000
+      }
+    },
+    {
+      "model": "qwen3:4b",
+      "case_id": "route-test-raw-partner",
+      "question": "In applicationCommon CustomerRelationship, what does the partner field reference?",
+      "context_messages": [
+        {
+          "role": "user",
+          "content": "Earlier I was examining RetailBankingCoreDataModel FIStandingOrder."
+        },
+        {
+          "role": "assistant",
+          "content": "We can switch to a different schema object."
+        }
+      ],
+      "expected_route": "raw_search",
+      "accepted_routes": [
+        "raw_search"
+      ],
+      "initial_query": "User: Earlier I was examining RetailBankingCoreDataModel FIStandingOrder.\nAssistant: We can switch to a different schema object.\nUser: In applicationCommon CustomerRelationship, what does the partner field reference?",
+      "initial_hits": [
+        {
+          "rank": 1,
+          "id": "applicationCommon::CustomerRelationship:entity",
+          "title": "CustomerRelationship (applicationCommon; qualified ID applicationCommon::CustomerRelationship)",
+          "text": "CDM entity: CustomerRelationship (applicationCommon; qualified ID applicationCommon::CustomerRelationship). Source file: schemaDocuments/core/applicationCommon/CustomerRelationship.cdm.json. Relationship between a customer and a partner in which either can be an account or contact. Selected attribute names: versionNumber, createdOn, modifiedOn, customerRoleId, customerRelationshipId, User_createdBy, partner, BusinessUnit_owningBusinessUnit, converseRelationship, partnerRoleId, customerRoleDescription, User_modifiedBy.",
+          "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/CustomerRelationship.cdm.json",
+          "score": 0.032522
+        },
+        {
+          "rank": 2,
+          "id": "applicationCommon::CustomerRelationship:attributes:2",
+          "title": "CustomerRelationship (applicationCommon; qualified ID applicationCommon::CustomerRelationship) attributes",
+          "text": "Attributes of CDM entity CustomerRelationship (applicationCommon; qualified ID applicationCommon::CustomerRelationship) at : partner (unspecified); purpose: referencesCustomer. BusinessUnit_owningBusinessUnit (unspecified). converseRelationship (unspecified). partnerRoleId (entityId); display name Role 2; Choose the secondary party's role or nature of the relationship the customer has with the primary party. The field is read-only until both parties have been selected. Administrators can configure role values under Business Management in the Settings area.; nullable: True; purpose: hasA; source name: partnerroleid; source ordering: 12. customerRoleDescription (string); display name Descripti",
+          "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/CustomerRelationship.cdm.json",
+          "score": 0.016393
+        },
+        {
+          "rank": 3,
+          "id": "RetailBankingCoreDataModel::FIStandingOrder:attributes:2",
+          "title": "FIStandingOrder (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FIStandingOrder) attributes",
+          "text": "Attributes of CDM entity FIStandingOrder (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FIStandingOrder) at : overriddenCreatedOn (dateTime); display name Record Created On; Date and time that the record was migrated.; nullable: True; purpose: hasA; source name: overriddencreatedon; source ordering: 31. timeZoneRuleVersionNumber (integer); display name Time Zone Rule Version Number; For internal use only.; nullable: True; purpose: hasA; source name: timezoneruleversionnumber; source ordering: 32. UTCConversionTimeZoneCode (integer); display name UTC Conversion Time Zone Code; Time zone code that was in use when the record was created.; nullable: True; purpose: hasA; so",
+          "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Fi_standingorder.cdm.json",
+          "score": 0.016129
+        }
+      ],
+      "baseline_route": "rewrite_search",
+      "baseline_status": "scored",
+      "baseline_correct": false,
+      "baseline_seconds": 0.275,
+      "messages_sha256": "1521d68cf3c5cd2b265c0cd660eed6aba5ba74b50c11c7ba7cec375d3a19efb2",
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": true,
+      "search_seconds": 0.06,
+      "router_seconds": 0.955,
+      "end_to_end_seconds": 1.056,
+      "elapsed_seconds": 1.056,
+      "runtime": {
+        "runner": "llamacpp",
+        "size_bytes": 3181631242,
+        "gpu_bytes": 3181631242,
+        "context_length": 4096
+      },
+      "search_runtime": {
+        "runner": "llamacpp",
+        "size_bytes": 335733063,
+        "gpu_bytes": 335733063,
+        "context_length": 2048
+      },
+      "native_timing": {
+        "total_duration": 939314291,
+        "load_duration": 1536041,
+        "prompt_eval_count": 834,
+        "prompt_eval_duration": 723818000,
+        "eval_count": 13,
+        "eval_duration": 186420000
+      }
+    },
+    {
+      "model": "qwen3:4b",
+      "case_id": "route-test-raw-phone",
+      "question": "Which applicationCommon PhoneCall attribute stores the phone number?",
+      "context_messages": [],
+      "expected_route": "raw_search",
+      "accepted_routes": [
+        "raw_search"
+      ],
+      "initial_query": "Which applicationCommon PhoneCall attribute stores the phone number?",
+      "initial_hits": [
+        {
+          "rank": 1,
+          "id": "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:2:feceab19a444",
+          "title": "Relationship mappings in manifest applicationCommon (applicationCommon)",
+          "text": "The CDM manifest applicationCommon (applicationCommon) records these relationship mappings from PhoneCall.cdm.json/PhoneCall: PhoneCall.cdm.json/PhoneCall.ownerId maps to Team.cdm.json/Team attribute teamId (target Team (applicationCommon)). PhoneCall.cdm.json/PhoneCall.owningTeam maps to Team.cdm.json/Team attribute teamId (target Team (applicationCommon)). PhoneCall.cdm.json/PhoneCall.createdBy maps to User.cdm.json/User attribute systemUserId (target User (applicationCommon)). PhoneCall.cdm.json/PhoneCall.createdOnBehalfBy maps to User.cdm.json/User attribute systemUserId (target User (applicationCommon)). PhoneCall.cdm.json/PhoneCall.modifiedBy maps to User.cdm.json/User attribute system",
+          "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json",
+          "score": 0.030478
+        },
+        {
+          "rank": 2,
+          "id": "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:1:feceab19a444",
+          "title": "Relationship mappings in manifest applicationCommon (applicationCommon)",
+          "text": "The CDM manifest applicationCommon (applicationCommon) records these relationship mappings from PhoneCall.cdm.json/PhoneCall: PhoneCall.cdm.json/PhoneCall.regardingObjectId maps to Account.cdm.json/Account attribute accountId (target Account (applicationCommon)). PhoneCall.cdm.json/PhoneCall.owningBusinessUnit maps to BusinessUnit.cdm.json/BusinessUnit attribute businessUnitId (target BusinessUnit (applicationCommon)). PhoneCall.cdm.json/PhoneCall.regardingObjectId maps to Contact.cdm.json/Contact attribute contactId (target Contact (applicationCommon)). PhoneCall.cdm.json/PhoneCall.transactionCurrencyId maps to Currency.cdm.json/Currency attribute transactionCurrencyId (target Currency (app",
+          "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json",
+          "score": 0.030018
+        },
+        {
+          "rank": 3,
+          "id": "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:1:a82473fd35a7",
+          "title": "Relationship mappings in manifest applicationCommon (applicationCommon)",
+          "text": "The CDM manifest applicationCommon (applicationCommon) records these relationship mappings from foundationCommon/crmCommon/PhoneCall.cdm.json/PhoneCall: foundationCommon/crmCommon/PhoneCall.cdm.json/PhoneCall.owningBusinessUnit maps to BusinessUnit.cdm.json/BusinessUnit attribute businessUnitId (target BusinessUnit (applicationCommon)). foundationCommon/crmCommon/PhoneCall.cdm.json/PhoneCall.transactionCurrencyId maps to Currency.cdm.json/Currency attribute transactionCurrencyId (target Currency (applicationCommon)). foundationCommon/crmCommon/PhoneCall.cdm.json/PhoneCall.regardingObjectId maps to KnowledgeBaseRecord.cdm.json/KnowledgeBaseRecord attribute knowledgeBaseRecordId (target Knowle",
+          "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json",
+          "score": 0.027638
+        }
+      ],
+      "baseline_route": "raw_search",
+      "baseline_status": "scored",
+      "baseline_correct": true,
+      "baseline_seconds": 0.241,
+      "messages_sha256": "fa4229200a01a5afb8cb0557d40994ab8d5317ca1f237605375bf23aa5010d77",
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": true,
+      "search_seconds": 0.049,
+      "router_seconds": 0.921,
+      "end_to_end_seconds": 0.997,
+      "elapsed_seconds": 0.997,
+      "runtime": {
+        "runner": "llamacpp",
+        "size_bytes": 3181631242,
+        "gpu_bytes": 3181631242,
+        "context_length": 4096
+      },
+      "search_runtime": {
+        "runner": "llamacpp",
+        "size_bytes": 335733063,
+        "gpu_bytes": 335733063,
+        "context_length": 2048
+      },
+      "native_timing": {
+        "total_duration": 907927917,
+        "load_duration": 807375,
+        "prompt_eval_count": 887,
+        "prompt_eval_duration": 758398000,
+        "eval_count": 11,
+        "eval_duration": 128648000
+      }
+    },
+    {
+      "model": "qwen3:4b",
+      "case_id": "route-test-rewrite-customer",
+      "question": "Which entity models that person?",
+      "context_messages": [
+        {
+          "role": "user",
+          "content": "A business unit has a relationship with an individual, such as a customer, supplier, or colleague."
+        },
+        {
+          "role": "assistant",
+          "content": "We are looking for the person record in applicationCommon."
+        }
+      ],
+      "expected_route": "rewrite_search",
+      "accepted_routes": [
+        "rewrite_search"
+      ],
+      "initial_query": "User: A business unit has a relationship with an individual, such as a customer, supplier, or colleague.\nAssistant: We are looking for the person record in applicationCommon.\nUser: Which entity models that person?",
+      "initial_hits": [
+        {
+          "rank": 1,
+          "id": "applicationCommon::Contact:entity",
+          "title": "Contact (applicationCommon; qualified ID applicationCommon::Contact)",
+          "text": "CDM entity: Contact (applicationCommon; qualified ID applicationCommon::Contact). Source file: schemaDocuments/core/applicationCommon/Contact.cdm.json. Person with whom a business unit has a relationship, such as customer, supplier, and colleague. Selected attribute names: contactId, customerSizeCode, customerTypeCode, preferredContactMethodCode, leadSourceCode, paymentTermsCode, shippingMethodCode, accountId, participatesInWorkflow, isBackofficeCustomer, salutation, jobTitle.",
+          "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/Contact.cdm.json",
+          "score": 0.029551
+        },
+        {
+          "rank": 2,
+          "id": "applicationCommon::User:relationship:2",
+          "title": "User (applicationCommon; qualified ID applicationCommon::User).businessUnit relationship",
+          "text": "CDM entity User (applicationCommon; qualified ID applicationCommon::User) has an explicitly referenced relationship through attribute businessUnit to applicationCommon::BusinessUnit.",
+          "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/User.cdm.json",
+          "score": 0.016393
+        },
+        {
+          "rank": 3,
+          "id": "applicationCommon::Contact:trait-applications:entity",
+          "title": "Traits applied to Contact (applicationCommon; qualified ID applicationCommon::Contact)",
+          "text": "CDM entity Contact (applicationCommon; qualified ID applicationCommon::Contact) exhibits these traits: is.localized.displayedAs with arguments [{\"name\":\"argument 1\",\"value\":{\"constantValues\":[[\"en\",\"Contact\"]],\"entityShape\":\"localizedTable\"}}], is.localized.describedAs with arguments [{\"name\":\"argument 1\",\"value\":{\"constantValues\":[[\"en\",\"Person with whom a business unit has a relationship, such as customer, supplier, and colleague.\"]],\"entityShape\":\"localizedTable\"}}], is.CDM.entityVersion with arguments [{\"name\":\"versionNumber\",\"value\":\"1.3\"}].",
+          "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/Contact.cdm.json",
+          "score": 0.016129
+        }
+      ],
+      "baseline_route": "raw_search",
+      "baseline_status": "scored",
+      "baseline_correct": false,
+      "baseline_seconds": 0.249,
+      "messages_sha256": "bdd9bdf6e2345118fc4044c690e6deb84f0b78ecf4ed1442291f85ca3af11bc6",
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": false,
+      "search_seconds": 0.056,
+      "router_seconds": 0.699,
+      "end_to_end_seconds": 0.787,
+      "elapsed_seconds": 0.787,
+      "runtime": {
+        "runner": "llamacpp",
+        "size_bytes": 3181631242,
+        "gpu_bytes": 3181631242,
+        "context_length": 4096
+      },
+      "search_runtime": {
+        "runner": "llamacpp",
+        "size_bytes": 335733063,
+        "gpu_bytes": 335733063,
+        "context_length": 2048
+      },
+      "native_timing": {
+        "total_duration": 687734042,
+        "load_duration": 729625,
+        "prompt_eval_count": 684,
+        "prompt_eval_duration": 541373000,
+        "eval_count": 11,
+        "eval_duration": 132370000
+      }
+    },
+    {
+      "model": "qwen3:4b",
+      "case_id": "route-test-rewrite-phone",
+      "question": "Which field stores the phone number?",
+      "context_messages": [
+        {
+          "role": "user",
+          "content": "We are reviewing how an applicationCommon phone call is represented."
+        },
+        {
+          "role": "assistant",
+          "content": "The schema object in question is the PhoneCall entity."
+        }
+      ],
+      "expected_route": "rewrite_search",
+      "accepted_routes": [
+        "rewrite_search"
+      ],
+      "initial_query": "User: We are reviewing how an applicationCommon phone call is represented.\nAssistant: The schema object in question is the PhoneCall entity.\nUser: Which field stores the phone number?",
+      "initial_hits": [
+        {
+          "rank": 1,
+          "id": "applicationCommon::PhoneCall:attributes:1",
+          "title": "PhoneCall (applicationCommon; qualified ID applicationCommon::PhoneCall) attributes",
+          "text": "Attributes of CDM entity PhoneCall (applicationCommon; qualified ID applicationCommon::PhoneCall) at : to (partylist); display name Call To; Enter the account, contact, lead, or user recipients of the phone call.; nullable: True; purpose: hasA; source name: to; source ordering: 3. phoneNumber (phone); display name Phone Number; Type the phone number.; nullable: True; purpose: hasA; source name: phonenumber; source ordering: 8. regardingObject (unspecified). description (string); display name Description; Additional information to describe the phone call, such as the primary message or the products and services discussed.; nullable: True; purpose: hasA; source name: description; source orderi",
+          "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/PhoneCall.cdm.json",
+          "score": 0.032522
+        },
+        {
+          "rank": 2,
+          "id": "applicationCommon::Contact:attributes:7",
+          "title": "Contact (applicationCommon; qualified ID applicationCommon::Contact) attributes",
+          "text": "Attributes of CDM entity Contact (applicationCommon; qualified ID applicationCommon::Contact) at : spousesName (name); display name Spouse/Partner Name; Type the name of the contact's spouse or partner for reference during calls, events, or other communications with the contact.; nullable: True; purpose: hasA; source name: spousesname; source ordering: 43. assistantName (name); display name Assistant; Type the name of the contact's assistant.; nullable: True; purpose: hasA; source name: assistantname; source ordering: 44. EMailAddress2 (email); display name Email Address 2; Type the secondary email address for the contact.; nullable: True; purpose: hasA; source name: emailaddress2; source or",
+          "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/Contact.cdm.json",
+          "score": 0.030018
+        },
+        {
+          "rank": 3,
+          "id": "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:2:feceab19a444",
+          "title": "Relationship mappings in manifest applicationCommon (applicationCommon)",
+          "text": "The CDM manifest applicationCommon (applicationCommon) records these relationship mappings from PhoneCall.cdm.json/PhoneCall: PhoneCall.cdm.json/PhoneCall.ownerId maps to Team.cdm.json/Team attribute teamId (target Team (applicationCommon)). PhoneCall.cdm.json/PhoneCall.owningTeam maps to Team.cdm.json/Team attribute teamId (target Team (applicationCommon)). PhoneCall.cdm.json/PhoneCall.createdBy maps to User.cdm.json/User attribute systemUserId (target User (applicationCommon)). PhoneCall.cdm.json/PhoneCall.createdOnBehalfBy maps to User.cdm.json/User attribute systemUserId (target User (applicationCommon)). PhoneCall.cdm.json/PhoneCall.modifiedBy maps to User.cdm.json/User attribute system",
+          "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json",
+          "score": 0.029387
+        }
+      ],
+      "baseline_route": "raw_search",
+      "baseline_status": "scored",
+      "baseline_correct": false,
+      "baseline_seconds": 0.251,
+      "messages_sha256": "4e9b57eac528700344474445456f98a4fbfef6586bb90c03d1c5eb02c9cbdb5e",
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": false,
+      "search_seconds": 0.065,
+      "router_seconds": 0.961,
+      "end_to_end_seconds": 1.057,
+      "elapsed_seconds": 1.057,
+      "runtime": {
+        "runner": "llamacpp",
+        "size_bytes": 3181631242,
+        "gpu_bytes": 3181631242,
+        "context_length": 4096
+      },
+      "search_runtime": {
+        "runner": "llamacpp",
+        "size_bytes": 335733063,
+        "gpu_bytes": 335733063,
+        "context_length": 2048
+      },
+      "native_timing": {
+        "total_duration": 948395709,
+        "load_duration": 1456000,
+        "prompt_eval_count": 905,
+        "prompt_eval_duration": 792545000,
+        "eval_count": 11,
+        "eval_duration": 127457000
+      }
+    },
+    {
+      "model": "qwen3:4b",
+      "case_id": "route-test-rewrite-ownership",
+      "question": "Which field distinguishes an owner from a beneficiary?",
+      "context_messages": [
+        {
+          "role": "user",
+          "content": "I am reviewing CustomerFinancialHolding in the Retail Banking CDM model."
+        },
+        {
+          "role": "assistant",
+          "content": "The entity associates a customer with a financial holding."
+        }
+      ],
+      "expected_route": "rewrite_search",
+      "accepted_routes": [
+        "rewrite_search"
+      ],
+      "initial_query": "User: I am reviewing CustomerFinancialHolding in the Retail Banking CDM model.\nAssistant: The entity associates a customer with a financial holding.\nUser: Which field distinguishes an owner from a beneficiary?",
+      "initial_hits": [
+        {
+          "rank": 1,
+          "id": "RetailBankingCoreDataModel::CustomerFinancialHolding:attributes:3",
+          "title": "CustomerFinancialHolding (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::CustomerFinancialHolding) attributes",
+          "text": "Attributes of CDM entity CustomerFinancialHolding (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::CustomerFinancialHolding) at : financialHoldingRole (listLookup); display name Financial holding role; The role of the customer with respect to the financial holding such as owner, beneficiary, etc.; nullable: True; purpose: hasA; source name: msfsi_financialholdingrole; source ordering: 37",
+          "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Customerfinancialholding.cdm.json",
+          "score": 0.032787
+        },
+        {
+          "rank": 2,
+          "id": "RetailBankingCoreDataModel::FHAccount:attributes:7",
+          "title": "FHAccount (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FHAccount) attributes",
+          "text": "Attributes of CDM entity FHAccount (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FHAccount) at : balanceDisplayValue (currency); display name Balance display value; Display value shows the balance of a financial holding in accordance with the type of the financial holding. Financial holdings that are typically defined as a customer's liabilities (such as lines of credit and loans) are presented as positive when the customer owes money to the financial institution (that is, a loan with an accounting value of -500 will appear as 500). In the inverse case: the display value will be negative for debit balances on a credit financial holding (such as overpayment of a credit",
+          "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Fh_account.cdm.json",
+          "score": 0.025563
+        },
+        {
+          "rank": 3,
+          "id": "RetailBankingCoreDataModel::FHSaving:attributes:7",
+          "title": "FHSaving (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FHSaving) attributes",
+          "text": "Attributes of CDM entity FHSaving (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FHSaving) at : balanceDisplayValue (currency); display name Balance display value; Display value shows the balance of a financial holding in accordance with the type of the financial holding. Financial holdings that are typically defined as a customer's liabilities (such as lines of credit and loans) are presented as positive when the customer owes money to the financial institution (that is, a loan with an accounting value of -500 will appear as 500). In the inverse case: the display value will be negative for debit balances on a credit financial holding (such as overpayment of a credit c",
+          "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Fh_saving.cdm.json",
+          "score": 0.022915
+        }
+      ],
+      "baseline_route": "raw_search",
+      "baseline_status": "scored",
+      "baseline_correct": false,
+      "baseline_seconds": 0.253,
+      "messages_sha256": "f0cc1daed70b1c229a4cb0ed2397b1928d6607f7a9273b2049039e9c4db03a3b",
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": false,
+      "search_seconds": 0.038,
+      "router_seconds": 0.898,
+      "end_to_end_seconds": 0.971,
+      "elapsed_seconds": 0.971,
+      "runtime": {
+        "runner": "llamacpp",
+        "size_bytes": 3181631242,
+        "gpu_bytes": 3181631242,
+        "context_length": 4096
+      },
+      "search_runtime": {
+        "runner": "llamacpp",
+        "size_bytes": 335733063,
+        "gpu_bytes": 335733063,
+        "context_length": 2048
+      },
+      "native_timing": {
+        "total_duration": 887434250,
+        "load_duration": 1290917,
+        "prompt_eval_count": 854,
+        "prompt_eval_duration": 725948000,
+        "eval_count": 11,
+        "eval_duration": 132293000
+      }
+    },
+    {
+      "model": "qwen3:4b",
+      "case_id": "route-test-rewrite-card",
+      "question": "What does that customer reference point to?",
+      "context_messages": [
+        {
+          "role": "user",
+          "content": "Consider the Cardholder relationship on RetailBankingCoreDataModel FICard."
+        },
+        {
+          "role": "assistant",
+          "content": "We need the allowed referenced customer types."
+        }
+      ],
+      "expected_route": "rewrite_search",
+      "accepted_routes": [
+        "rewrite_search"
+      ],
+      "initial_query": "User: Consider the Cardholder relationship on RetailBankingCoreDataModel FICard.\nAssistant: We need the allowed referenced customer types.\nUser: What does that customer reference point to?",
+      "initial_hits": [
+        {
+          "rank": 1,
+          "id": "RetailBankingCoreDataModel::FICard:relationship:1",
+          "title": "FICard (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FICard).Cardholder relationship",
+          "text": "CDM entity FICard (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FICard) has an explicitly referenced relationship through attribute Cardholder to RetailBankingCoreDataModel::Account, RetailBankingCoreDataModel::Contact. The customer associated with the card.",
+          "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Fi_card.cdm.json",
+          "score": 0.032787
+        },
+        {
+          "rank": 2,
+          "id": "RetailBankingCoreDataModel::CustomerFinancialHolding:relationship:1",
+          "title": "CustomerFinancialHolding (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::CustomerFinancialHolding).Customer relationship",
+          "text": "CDM entity CustomerFinancialHolding (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::CustomerFinancialHolding) has an explicitly referenced relationship through attribute Customer to RetailBankingCoreDataModel::Account, RetailBankingCoreDataModel::Contact. The unique identifier of the customer connected to this holding.",
+          "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Customerfinancialholding.cdm.json",
+          "score": 0.031258
+        },
+        {
+          "rank": 3,
+          "id": "RetailBankingCoreDataModel::FICard:attributes:2",
+          "title": "FICard (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FICard) attributes",
+          "text": "Attributes of CDM entity FICard (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FICard) at : overriddenCreatedOn (dateTime); display name Record Created On; Date and time that the record was migrated.; nullable: True; purpose: hasA; source name: overriddencreatedon; source ordering: 31. timeZoneRuleVersionNumber (integer); display name Time Zone Rule Version Number; For internal use only.; nullable: True; purpose: hasA; source name: timezoneruleversionnumber; source ordering: 32. UTCConversionTimeZoneCode (integer); display name UTC Conversion Time Zone Code; Time zone code that was in use when the record was created.; nullable: True; purpose: hasA; source name: utcconv",
+          "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Fi_card.cdm.json",
+          "score": 0.030018
+        }
+      ],
+      "baseline_route": "raw_search",
+      "baseline_status": "scored",
+      "baseline_correct": false,
+      "baseline_seconds": 0.256,
+      "messages_sha256": "9b8235cb090acd6925d98b6bc8410368f3f3c2d7648aadadb6ab38470efaaac0",
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": false,
+      "search_seconds": 0.058,
+      "router_seconds": 0.875,
+      "end_to_end_seconds": 0.967,
+      "elapsed_seconds": 0.967,
+      "runtime": {
+        "runner": "llamacpp",
+        "size_bytes": 3181631242,
+        "gpu_bytes": 3181631242,
+        "context_length": 4096
+      },
+      "search_runtime": {
+        "runner": "llamacpp",
+        "size_bytes": 335733063,
+        "gpu_bytes": 335733063,
+        "context_length": 2048
+      },
+      "native_timing": {
+        "total_duration": 862224625,
+        "load_duration": 723250,
+        "prompt_eval_count": 768,
+        "prompt_eval_duration": 650876000,
+        "eval_count": 13,
+        "eval_duration": 186168000
+      }
+    },
+    {
+      "model": "qwen3:4b",
+      "case_id": "route-test-rewrite-investment",
+      "question": "What does the second one represent?",
+      "context_messages": [
+        {
+          "role": "user",
+          "content": "In RetailBankingCoreDataModel, compare the FHLoan and FHInvestment entities, in that order."
+        },
+        {
+          "role": "assistant",
+          "content": "We can examine the two entity definitions separately."
+        }
+      ],
+      "expected_route": "rewrite_search",
+      "accepted_routes": [
+        "rewrite_search"
+      ],
+      "initial_query": "User: In RetailBankingCoreDataModel, compare the FHLoan and FHInvestment entities, in that order.\nAssistant: We can examine the two entity definitions separately.\nUser: What does the second one represent?",
+      "initial_hits": [
+        {
+          "rank": 1,
+          "id": "RetailBankingCoreDataModel::FHLoan:attributes:12",
+          "title": "FHLoan (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FHLoan) attributes",
+          "text": "Attributes of CDM entity FHLoan (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FHLoan) at : balancedisplayvalue_Base (currency); display name Balance display value (base); Value of the balance display value in base currency.; nullable: True; purpose: hasA; source name: msfsi_balancedisplayvalue_base; source ordering: 101. dayspastdue (integer); display name Days past due; The number of days that the customer has been in overdue status for this loan account.; nullable: True; purpose: hasA; source name: msfsi_dayspastdue; source ordering: 102",
+          "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Fh_loan.cdm.json",
+          "score": 0.030579
+        },
+        {
+          "rank": 2,
+          "id": "manifest:schemaDocuments/FinancialServices/RetailBankingCoreDataModel/RetailBankingCoreDataModel.manifest.cdm.json:declarations:2",
+          "title": "Entities declared by manifest RetailBankingCoreDataModel (RetailBankingCoreDataModel)",
+          "text": "Entities declared in CDM manifest RetailBankingCoreDataModel (RetailBankingCoreDataModel): FHLineOfCredit (LocalEntity) at Fh_creditline.cdm.json/FHLineOfCredit; qualified entity ID RetailBankingCoreDataModel::FHLineOfCredit; FHInvestment (LocalEntity) at Fh_investment.cdm.json/FHInvestment; qualified entity ID RetailBankingCoreDataModel::FHInvestment; FHLoan (LocalEntity) at Fh_loan.cdm.json/FHLoan; qualified entity ID RetailBankingCoreDataModel::FHLoan; FHSaving (LocalEntity) at Fh_saving.cdm.json/FHSaving; qualified entity ID RetailBankingCoreDataModel::FHSaving; FICard (LocalEntity) at Fi_card.cdm.json/FICard; qualified entity ID RetailBankingCoreDataModel::FICard; FIDirectDebit (LocalEn",
+          "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/FinancialServices/RetailBankingCoreDataModel/RetailBankingCoreDataModel.manifest.cdm.json",
+          "score": 0.027118
+        },
+        {
+          "rank": 3,
+          "id": "RetailBankingCoreDataModel::FHLoan:trait-applications:entity",
+          "title": "Traits applied to FHLoan (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FHLoan)",
+          "text": "CDM entity FHLoan (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FHLoan) exhibits these traits: is.localized.describedAs with arguments [{\"name\":\"argument 1\",\"value\":{\"constantValues\":[[\"en\",\"Loans held by the customer with the financial institution.\"]],\"entityShape\":\"localizedTable\"}}], is.localized.displayedAs with arguments [{\"name\":\"argument 1\",\"value\":{\"constantValues\":[[\"en\",\"FH loan\"]],\"entityShape\":\"localizedTable\"}}], is.CDM.entityVersion with arguments [{\"name\":\"versionNumber\",\"value\":\"1.1\"}].",
+          "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Fh_loan.cdm.json",
+          "score": 0.016393
+        }
+      ],
+      "baseline_route": "raw_search",
+      "baseline_status": "scored",
+      "baseline_correct": false,
+      "baseline_seconds": 0.254,
+      "messages_sha256": "9f087b22cee6584cb4f7dd49c0e80791b71c0e7a062c2450f9681a19dd50a5e2",
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": false,
+      "search_seconds": 0.049,
+      "router_seconds": 1.009,
+      "end_to_end_seconds": 1.09,
+      "elapsed_seconds": 1.09,
+      "runtime": {
+        "runner": "llamacpp",
+        "size_bytes": 3181631242,
+        "gpu_bytes": 3181631242,
+        "context_length": 4096
+      },
+      "search_runtime": {
+        "runner": "llamacpp",
+        "size_bytes": 335733063,
+        "gpu_bytes": 335733063,
+        "context_length": 2048
+      },
+      "native_timing": {
+        "total_duration": 996608584,
+        "load_duration": 840584,
+        "prompt_eval_count": 950,
+        "prompt_eval_duration": 842292000,
+        "eval_count": 11,
+        "eval_duration": 137452000
+      }
+    },
+    {
+      "model": "qwen3:4b",
+      "case_id": "route-test-rewrite-payment",
+      "question": "Which of those two authorizes the creditor to collect payments?",
+      "context_messages": [
+        {
+          "role": "user",
+          "content": "I am comparing FIDirectDebit with FIStandingOrder in RetailBankingCoreDataModel."
+        },
+        {
+          "role": "assistant",
+          "content": "Both are recurring payment concepts in the catalog."
+        }
+      ],
+      "expected_route": "rewrite_search",
+      "accepted_routes": [
+        "rewrite_search"
+      ],
+      "initial_query": "User: I am comparing FIDirectDebit with FIStandingOrder in RetailBankingCoreDataModel.\nAssistant: Both are recurring payment concepts in the catalog.\nUser: Which of those two authorizes the creditor to collect payments?",
+      "initial_hits": [
+        {
+          "rank": 1,
+          "id": "RetailBankingCoreDataModel::FIDirectDebit:trait-applications:entity",
+          "title": "Traits applied to FIDirectDebit (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FIDirectDebit)",
+          "text": "CDM entity FIDirectDebit (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FIDirectDebit) exhibits these traits: is.localized.describedAs with arguments [{\"name\":\"argument 1\",\"value\":{\"constantValues\":[[\"en\",\"An automated payment system whereby an account holder authorizes a creditor to debit the customer's bank account at regular intervals.\"]],\"entityShape\":\"localizedTable\"}}], is.localized.displayedAs with arguments [{\"name\":\"argument 1\",\"value\":{\"constantValues\":[[\"en\",\"FI direct debit\"]],\"entityShape\":\"localizedTable\"}}], is.CDM.entityVersion with arguments [{\"name\":\"versionNumber\",\"value\":\"1.1\"}].",
+          "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Fi_directdebit.cdm.json",
+          "score": 0.032266
+        },
+        {
+          "rank": 2,
+          "id": "RetailBankingCoreDataModel::FIDirectDebit:entity",
+          "title": "FIDirectDebit (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FIDirectDebit)",
+          "text": "CDM entity: FIDirectDebit (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FIDirectDebit). Source file: schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Fi_directdebit.cdm.json. An automated payment system whereby an account holder authorizes a creditor to debit the customer's bank account at regular intervals. Selected attribute names: fi_DirectDebitId, createdOn, modifiedOn, statecode, statuscode, importSequenceNumber, overriddenCreatedOn, timeZoneRuleVersionNumber, UTCConversionTimeZoneCode, name, creditoridentifier, creditorname.",
+          "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Fi_directdebit.cdm.json",
+          "score": 0.031754
+        },
+        {
+          "rank": 3,
+          "id": "RetailBankingCoreDataModel::FIStandingOrder:attributes:2",
+          "title": "FIStandingOrder (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FIStandingOrder) attributes",
+          "text": "Attributes of CDM entity FIStandingOrder (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FIStandingOrder) at : overriddenCreatedOn (dateTime); display name Record Created On; Date and time that the record was migrated.; nullable: True; purpose: hasA; source name: overriddencreatedon; source ordering: 31. timeZoneRuleVersionNumber (integer); display name Time Zone Rule Version Number; For internal use only.; nullable: True; purpose: hasA; source name: timezoneruleversionnumber; source ordering: 32. UTCConversionTimeZoneCode (integer); display name UTC Conversion Time Zone Code; Time zone code that was in use when the record was created.; nullable: True; purpose: hasA; so",
+          "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Fi_standingorder.cdm.json",
+          "score": 0.031025
+        }
+      ],
+      "baseline_route": "raw_search",
+      "baseline_status": "scored",
+      "baseline_correct": false,
+      "baseline_seconds": 0.263,
+      "messages_sha256": "f62738de7ad5439f260d9158097618c221f47142f5d8c2bb71a35b2c358aa7e1",
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": false,
+      "search_seconds": 0.053,
+      "router_seconds": 1.061,
+      "end_to_end_seconds": 1.149,
+      "elapsed_seconds": 1.149,
+      "runtime": {
+        "runner": "llamacpp",
+        "size_bytes": 3181631242,
+        "gpu_bytes": 3181631242,
+        "context_length": 4096
+      },
+      "search_runtime": {
+        "runner": "llamacpp",
+        "size_bytes": 335733063,
+        "gpu_bytes": 335733063,
+        "context_length": 2048
+      },
+      "native_timing": {
+        "total_duration": 1048854209,
+        "load_duration": 740334,
+        "prompt_eval_count": 931,
+        "prompt_eval_duration": 834329000,
+        "eval_count": 13,
+        "eval_duration": 190496000
+      }
+    },
+    {
+      "model": "qwen3:4b",
+      "case_id": "route-test-no-personal-card",
+      "question": "Who is the actual cardholder on my Visa card?",
+      "context_messages": [
+        {
+          "role": "user",
+          "content": "Earlier we were reading the FICard definition in the Retail Banking model."
+        }
+      ],
+      "expected_route": "no_search",
+      "accepted_routes": [
+        "no_search"
+      ],
+      "initial_query": "User: Earlier we were reading the FICard definition in the Retail Banking model.\nUser: Who is the actual cardholder on my Visa card?",
+      "initial_hits": [
+        {
+          "rank": 1,
+          "id": "RetailBankingCoreDataModel::FICard:entity",
+          "title": "FICard (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FICard)",
+          "text": "CDM entity: FICard (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FICard). Source file: schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Fi_card.cdm.json. A payment card issued by a bank to an account holder enabling the account holder to make payments or purchases, paying back the balance to the issuing bank, plus interest. Selected attribute names: fi_CardId, createdOn, modifiedOn, statecode, statuscode, importSequenceNumber, overriddenCreatedOn, timeZoneRuleVersionNumber, UTCConversionTimeZoneCode, name, activationDate, Cardholder.",
+          "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Fi_card.cdm.json",
+          "score": 0.032522
+        },
+        {
+          "rank": 2,
+          "id": "RetailBankingCoreDataModel::FICard:relationship:1",
+          "title": "FICard (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FICard).Cardholder relationship",
+          "text": "CDM entity FICard (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FICard) has an explicitly referenced relationship through attribute Cardholder to RetailBankingCoreDataModel::Account, RetailBankingCoreDataModel::Contact. The customer associated with the card.",
+          "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Fi_card.cdm.json",
+          "score": 0.032522
+        },
+        {
+          "rank": 3,
+          "id": "RetailBankingCoreDataModel::FICard:attributes:2",
+          "title": "FICard (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FICard) attributes",
+          "text": "Attributes of CDM entity FICard (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FICard) at : overriddenCreatedOn (dateTime); display name Record Created On; Date and time that the record was migrated.; nullable: True; purpose: hasA; source name: overriddencreatedon; source ordering: 31. timeZoneRuleVersionNumber (integer); display name Time Zone Rule Version Number; For internal use only.; nullable: True; purpose: hasA; source name: timezoneruleversionnumber; source ordering: 32. UTCConversionTimeZoneCode (integer); display name UTC Conversion Time Zone Code; Time zone code that was in use when the record was created.; nullable: True; purpose: hasA; source name: utcconv",
+          "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Fi_card.cdm.json",
+          "score": 0.030798
+        }
+      ],
+      "baseline_route": "no_search",
+      "baseline_status": "scored",
+      "baseline_correct": true,
+      "baseline_seconds": 0.252,
+      "messages_sha256": "a9e8f1137a9d90501f6ba04a430c83aa5c12024bfade474c0a7f55a19c80fd6b",
+      "status": "scored",
+      "predicted_route": "no_search",
+      "correct": true,
+      "search_seconds": 0.05,
+      "router_seconds": 0.863,
+      "end_to_end_seconds": 0.945,
+      "elapsed_seconds": 0.945,
+      "runtime": {
+        "runner": "llamacpp",
+        "size_bytes": 3181631242,
+        "gpu_bytes": 3181631242,
+        "context_length": 4096
+      },
+      "search_runtime": {
+        "runner": "llamacpp",
+        "size_bytes": 335733063,
+        "gpu_bytes": 335733063,
+        "context_length": 2048
+      },
+      "native_timing": {
+        "total_duration": 848752958,
+        "load_duration": 1302750,
+        "prompt_eval_count": 807,
+        "prompt_eval_duration": 692059000,
+        "eval_count": 11,
+        "eval_duration": 129056000
+      }
+    },
+    {
+      "model": "qwen3:4b",
+      "case_id": "route-test-no-current-loan",
+      "question": "How much do I still owe on my personal loan today?",
+      "context_messages": [],
+      "expected_route": "no_search",
+      "accepted_routes": [
+        "no_search"
+      ],
+      "initial_query": "How much do I still owe on my personal loan today?",
+      "initial_hits": [
+        {
+          "rank": 1,
+          "id": "RetailBankingCoreDataModel::FHLoan:attributes:9",
+          "title": "FHLoan (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FHLoan) attributes",
+          "text": "Attributes of CDM entity FHLoan (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FHLoan) at : nextpaymentamount_Base (currency); display name Next payment amount (base); Value of the next payment amount in base currency.; nullable: True; purpose: hasA; source name: msfsi_nextpaymentamount_base; source ordering: 83. nextPaymentAmount_default (decimal); display name Next payment amount (default); Next payment amount converted to default currency of the system.; nullable: True; purpose: hasA; source name: msfsi_nextpaymentamount_default; source ordering: 84. nextPaymentDate (dateTime); display name Next payment date; The date on which the next payment towards the financial ",
+          "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Fh_loan.cdm.json",
+          "score": 0.032266
+        },
+        {
+          "rank": 2,
+          "id": "applicationCommon::Goal:attributes:11",
+          "title": "Goal (applicationCommon; qualified ID applicationCommon::Goal) attributes",
+          "text": "Attributes of CDM entity Goal (applicationCommon; qualified ID applicationCommon::Goal) at : computedTargetAsOfTodayMoneyBase (baseCurrency); display name Today's Target (Money) (Base); Shows the expected amount in base currency for actual value (money type) against the target goal as of the current date.; nullable: True; purpose: hasA; source name: computedtargetasoftodaymoney_base; source ordering: 258. computedTargetAsOfTodayDecimal (decimal); display name Today's Target (Decimal); Shows the expected amount for actual value (decimal type) against the target goal.; nullable: True; purpose: hasA; source name: computedtargetasoftodaydecimal; source ordering: 259. computedTargetAsOfTodayInteg",
+          "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/Goal.cdm.json",
+          "score": 0.016393
+        },
+        {
+          "rank": 3,
+          "id": "RetailBankingCoreDataModel::FHLoan:attributes:12",
+          "title": "FHLoan (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FHLoan) attributes",
+          "text": "Attributes of CDM entity FHLoan (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FHLoan) at : balancedisplayvalue_Base (currency); display name Balance display value (base); Value of the balance display value in base currency.; nullable: True; purpose: hasA; source name: msfsi_balancedisplayvalue_base; source ordering: 101. dayspastdue (integer); display name Days past due; The number of days that the customer has been in overdue status for this loan account.; nullable: True; purpose: hasA; source name: msfsi_dayspastdue; source ordering: 102",
+          "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Fh_loan.cdm.json",
+          "score": 0.016129
+        }
+      ],
+      "baseline_route": "no_search",
+      "baseline_status": "scored",
+      "baseline_correct": true,
+      "baseline_seconds": 0.231,
+      "messages_sha256": "1adecb06b800753a408393eba8acc212ee6cba803b30f25b403899c837d5b2ac",
+      "status": "scored",
+      "predicted_route": "no_search",
+      "correct": true,
+      "search_seconds": 0.043,
+      "router_seconds": 0.949,
+      "end_to_end_seconds": 1.025,
+      "elapsed_seconds": 1.025,
+      "runtime": {
+        "runner": "llamacpp",
+        "size_bytes": 3181631242,
+        "gpu_bytes": 3181631242,
+        "context_length": 4096
+      },
+      "search_runtime": {
+        "runner": "llamacpp",
+        "size_bytes": 335733063,
+        "gpu_bytes": 335733063,
+        "context_length": 2048
+      },
+      "native_timing": {
+        "total_duration": 936362959,
+        "load_duration": 1242084,
+        "prompt_eval_count": 873,
+        "prompt_eval_duration": 728660000,
+        "eval_count": 13,
+        "eval_duration": 188169000
+      }
+    },
+    {
+      "model": "qwen3:4b",
+      "case_id": "route-test-no-live-status",
+      "question": "Is the production CDM RAG deployment healthy right now?",
+      "context_messages": [],
+      "expected_route": "no_search",
+      "accepted_routes": [
+        "no_search"
+      ],
+      "initial_query": "Is the production CDM RAG deployment healthy right now?",
+      "initial_hits": [
+        {
+          "rank": 1,
+          "id": "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:1:14544f060ffa",
+          "title": "Relationship mappings in manifest foundationCommon (applicationCommon)",
+          "text": "The CDM manifest foundationCommon (applicationCommon) records these relationship mappings from crmCommon/accelerators/healthCare/electronicMedicalRecords/DeviceComponentProductionSpecification.cdm.json/DeviceComponentProductionSpecification: crmCommon/accelerators/healthCare/electronicMedicalRecords/DeviceComponentProductionSpecification.cdm.json/DeviceComponentProductionSpecification.organizationId maps to Organization.cdm.json/Organization attribute organizationId (target Organization.cdm.json/Organization).",
+          "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json",
+          "score": 0.016393
+        },
+        {
+          "rank": 2,
+          "id": "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:1:a8eb7b112875",
+          "title": "Relationship mappings in manifest foundationCommon (applicationCommon)",
+          "text": "The CDM manifest foundationCommon (applicationCommon) records these relationship mappings from crmCommon/sales/LeadProduct.cdm.json/LeadProduct: crmCommon/sales/LeadProduct.cdm.json/LeadProduct.productId maps to Product.cdm.json/Product attribute productId (target Product.cdm.json/Product).",
+          "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json",
+          "score": 0.016393
+        },
+        {
+          "rank": 3,
+          "id": "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:1:5927238cbb95",
+          "title": "Relationship mappings in manifest applicationCommon (applicationCommon)",
+          "text": "The CDM manifest applicationCommon (applicationCommon) records these relationship mappings from foundationCommon/crmCommon/accelerators/healthCare/electronicMedicalRecords/DeviceComponentProductionSpecification.cdm.json/DeviceComponentProductionSpecification: foundationCommon/crmCommon/accelerators/healthCare/electronicMedicalRecords/DeviceComponentProductionSpecification.cdm.json/DeviceComponentProductionSpecification.organizationId maps to Organization.cdm.json/Organization attribute organizationId (target Organization (applicationCommon)). foundationCommon/crmCommon/accelerators/healthCare/electronicMedicalRecords/DeviceComponentProductionSpecification.cdm.json/DeviceComponentProductionSp",
+          "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json",
+          "score": 0.016129
+        }
+      ],
+      "baseline_route": "no_search",
+      "baseline_status": "scored",
+      "baseline_correct": true,
+      "baseline_seconds": 0.233,
+      "messages_sha256": "81c13831fb751e078165c9f72a6d212629f3d287db23d78087a026e82a2ee4aa",
+      "status": "scored",
+      "predicted_route": "no_search",
+      "correct": true,
+      "search_seconds": 0.048,
+      "router_seconds": 0.739,
+      "end_to_end_seconds": 0.818,
+      "elapsed_seconds": 0.818,
+      "runtime": {
+        "runner": "llamacpp",
+        "size_bytes": 3181631242,
+        "gpu_bytes": 3181631242,
+        "context_length": 4096
+      },
+      "search_runtime": {
+        "runner": "llamacpp",
+        "size_bytes": 335733063,
+        "gpu_bytes": 335733063,
+        "context_length": 2048
+      },
+      "native_timing": {
+        "total_duration": 727049625,
+        "load_duration": 2207500,
+        "prompt_eval_count": 734,
+        "prompt_eval_duration": 569917000,
+        "eval_count": 11,
+        "eval_duration": 127795000
+      }
+    },
+    {
+      "model": "qwen3:4b",
+      "case_id": "route-test-no-mixed",
+      "question": "Explain the applicationCommon Contact schema, and tell me the current balance of my personal bank account.",
+      "context_messages": [],
+      "expected_route": "no_search",
+      "accepted_routes": [
+        "no_search"
+      ],
+      "initial_query": "Explain the applicationCommon Contact schema, and tell me the current balance of my personal bank account.",
+      "initial_hits": [
+        {
+          "rank": 1,
+          "id": "applicationCommon::Account:attributes:12",
+          "title": "Account (applicationCommon; qualified ID applicationCommon::Account) attributes",
+          "text": "Attributes of CDM entity Account (applicationCommon; qualified ID applicationCommon::Account) at : stageId (guid); display name Process Stage; Shows the ID of the stage.; nullable: True; purpose: hasA; source name: stageid; source ordering: 210. processId (guid); display name Process; Shows the ID of the process.; nullable: True; purpose: hasA; source name: processid; source ordering: 211. entityImageId (guid); display name Entity Image Id; For internal use only.; nullable: True; purpose: hasA; source name: entityimageid; source ordering: 215. timeSpentByMeOnEmailAndMeetings (email); display name Time Spent by me; Total time spent for emails (read and write) and meetings by me in relation to",
+          "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/Account.cdm.json",
+          "score": 0.016393
+        },
+        {
+          "rank": 2,
+          "id": "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:2:8614dc0feeb1",
+          "title": "Relationship mappings in manifest applicationCommon (applicationCommon)",
+          "text": "The CDM manifest applicationCommon (applicationCommon) records these relationship mappings from foundationCommon/crmCommon/accelerators/financialServices/banking/Contact.cdm.json/Contact: foundationCommon/crmCommon/accelerators/financialServices/banking/Contact.cdm.json/Contact.modifiedBy maps to User.cdm.json/User attribute systemUserId (target User (applicationCommon)). foundationCommon/crmCommon/accelerators/financialServices/banking/Contact.cdm.json/Contact.modifiedOnBehalfBy maps to User.cdm.json/User attribute systemUserId (target User (applicationCommon)). foundationCommon/crmCommon/accelerators/financialServices/banking/Contact.cdm.json/Contact.ownerId maps to User.cdm.json/User attr",
+          "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json",
+          "score": 0.016393
+        },
+        {
+          "rank": 3,
+          "id": "applicationCommon::Contact:attributes:16",
+          "title": "Contact (applicationCommon; qualified ID applicationCommon::Contact) attributes",
+          "text": "Attributes of CDM entity Contact (applicationCommon; qualified ID applicationCommon::Contact) at : onHoldTime (integer); display name On Hold Time (Minutes); Shows how long, in minutes, that the record was on hold.; nullable: True; purpose: hasA; source name: onholdtime; source ordering: 246. lastOnHoldTime (dateTime); display name Last On Hold Time; Contains the date and time stamp of the last on hold time.; nullable: True; purpose: hasA; source name: lastonholdtime; source ordering: 247. followEmail (boolean); display name Follow Email Activity; Information about whether to allow following email activity like opens, attachment views and link clicks for emails sent to the contact.; nullable",
+          "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/Contact.cdm.json",
+          "score": 0.016129
+        }
+      ],
+      "baseline_route": "no_search",
+      "baseline_status": "scored",
+      "baseline_correct": true,
+      "baseline_seconds": 0.231,
+      "messages_sha256": "1afdcbf0a250859eda62a24c712d07ef3e7084bbed2e0d7e67cfb06e33c49a1b",
+      "status": "scored",
+      "predicted_route": "no_search",
+      "correct": true,
+      "search_seconds": 0.05,
+      "router_seconds": 0.914,
+      "end_to_end_seconds": 0.993,
+      "elapsed_seconds": 0.993,
+      "runtime": {
+        "runner": "llamacpp",
+        "size_bytes": 3181631242,
+        "gpu_bytes": 3181631242,
+        "context_length": 4096
+      },
+      "search_runtime": {
+        "runner": "llamacpp",
+        "size_bytes": 335733063,
+        "gpu_bytes": 335733063,
+        "context_length": 2048
+      },
+      "native_timing": {
+        "total_duration": 902450333,
+        "load_duration": 1240167,
+        "prompt_eval_count": 900,
+        "prompt_eval_duration": 756478000,
+        "eval_count": 11,
+        "eval_duration": 127891000
+      }
+    },
+    {
+      "model": "qwen3:4b",
+      "case_id": "route-test-no-interest",
+      "question": "What is today's mortgage interest rate at my bank?",
+      "context_messages": [
+        {
+          "role": "user",
+          "content": "We were discussing loan entities in CDM."
+        }
+      ],
+      "expected_route": "no_search",
+      "accepted_routes": [
+        "no_search"
+      ],
+      "initial_query": "User: We were discussing loan entities in CDM.\nUser: What is today's mortgage interest rate at my bank?",
+      "initial_hits": [
+        {
+          "rank": 1,
+          "id": "RetailBankingCoreDataModel::FHLoan:attributes:7",
+          "title": "FHLoan (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FHLoan) attributes",
+          "text": "Attributes of CDM entity FHLoan (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FHLoan) at : interestrate (decimal); display name Interest rate; The rate of interest charged to the loan borrower during a defined period or term during the course of a loan.; nullable: True; purpose: hasA; source name: msfsi_interestrate; source ordering: 69. interestReviewPeriod (string); display name Interest review period; The time period that defines the periodic interest rate timeframe.; nullable: True; purpose: hasA; source name: msfsi_interestreviewperiod; source ordering: 70. interestType (listLookup); display name Interest type; The type of interest charged on the loan: fixed, per",
+          "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Fh_loan.cdm.json",
+          "score": 0.032787
+        },
+        {
+          "rank": 2,
+          "id": "RetailBankingCoreDataModel::FHLoan:trait-applications:attributes:5",
+          "title": "Attribute traits of FHLoan (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FHLoan)",
+          "text": "Traits applied to attributes of CDM entity FHLoan (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FHLoan): integrationKey (string): applied traits: is.requiredAtLevel with arguments [{\"name\":\"level\",\"value\":\"applicationrequired\"}], is.localized.describedAs with arguments [{\"name\":\"argument 1\",\"value\":{\"constantValues\":[[\"en\",\"Used by the system integrator to uniquely define the data record.\"]],\"entityShape\":\"localizedTable\"}}], is.localized.displayedAs with arguments [{\"name\":\"argument 1\",\"value\":{\"constantValues\":[[\"en\",\"Integration key\"]],\"entityShape\":\"localizedTable\"}}], is.constrained with arguments [{\"name\":\"maximumLength\",\"value\":\"100\"}]; interestArrears (currenc",
+          "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Fh_loan.cdm.json",
+          "score": 0.016129
+        },
+        {
+          "rank": 3,
+          "id": "RetailBankingCoreDataModel::FIOverdraft:attributes:4",
+          "title": "FIOverdraft (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FIOverdraft) attributes",
+          "text": "Attributes of CDM entity FIOverdraft (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FIOverdraft) at : overdraftRate (decimal); display name Overdraft rate; The interest rate that will be charged to the customer for repayment, if the account falls into overdraft.; nullable: True; purpose: hasA; source name: msfsi_overdraftrate; source ordering: 47",
+          "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Fi_overdraft.cdm.json",
+          "score": 0.016129
+        }
+      ],
+      "baseline_route": "no_search",
+      "baseline_status": "scored",
+      "baseline_correct": true,
+      "baseline_seconds": 0.322,
+      "messages_sha256": "e7831a4e56a4b863a9731a0b3e8a31c383de346e8597b982fc88751b2349f11e",
+      "status": "scored",
+      "predicted_route": "no_search",
+      "correct": true,
+      "search_seconds": 0.047,
+      "router_seconds": 0.909,
+      "end_to_end_seconds": 0.984,
+      "elapsed_seconds": 0.984,
+      "runtime": {
+        "runner": "llamacpp",
+        "size_bytes": 3181631242,
+        "gpu_bytes": 3181631242,
+        "context_length": 4096
+      },
+      "search_runtime": {
+        "runner": "llamacpp",
+        "size_bytes": 335733063,
+        "gpu_bytes": 335733063,
+        "context_length": 2048
+      },
+      "native_timing": {
+        "total_duration": 896996917,
+        "load_duration": 1162667,
+        "prompt_eval_count": 866,
+        "prompt_eval_duration": 754741000,
+        "eval_count": 11,
+        "eval_duration": 128773000
+      }
+    },
+    {
+      "model": "qwen3:4b",
+      "case_id": "route-test-no-weather",
+      "question": "Will it rain in Berlin tomorrow?",
+      "context_messages": [],
+      "expected_route": "no_search",
+      "accepted_routes": [
+        "no_search"
+      ],
+      "initial_query": "Will it rain in Berlin tomorrow?",
+      "initial_hits": [
+        {
+          "rank": 1,
+          "id": "manifest-declaration:manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:accelerators:overview",
+          "title": "Manifest accelerators (applicationCommon)",
+          "text": "CDM manifest accelerators (applicationCommon). Declared child manifest; its source is not expanded in this view. Document version: unspecified. JSON schema semantic version: unspecified. It declares 0 entities, of which 0 are loaded in this catalog; it contains 0 relationship mappings and 0 child manifests. Imports: none recorded. Traits: none recorded. Source path: schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/accelerators/accelerators.manifest.cdm.json. This child manifest is declared but not expanded in the catalog.",
+          "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/accelerators/accelerators.manifest.cdm.json",
+          "score": 0.023912
+        },
+        {
+          "rank": 2,
+          "id": "manifest-declaration:manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:sales:overview",
+          "title": "Manifest sales (applicationCommon)",
+          "text": "CDM manifest sales (applicationCommon). Declared child manifest; its source is not expanded in this view. Document version: unspecified. JSON schema semantic version: unspecified. It declares 0 entities, of which 0 are loaded in this catalog; it contains 0 relationship mappings and 0 child manifests. Imports: none recorded. Traits: none recorded. Source path: schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/sales/sales.manifest.cdm.json. This child manifest is declared but not expanded in the catalog.",
+          "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/sales/sales.manifest.cdm.json",
+          "score": 0.023821
+        },
+        {
+          "rank": 3,
+          "id": "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:1:9ea1ee00c2cd",
+          "title": "Relationship mappings in manifest foundationCommon (applicationCommon)",
+          "text": "The CDM manifest foundationCommon (applicationCommon) records these relationship mappings from crmCommon/accelerators/financialServices/banking/Opportunity.cdm.json/Opportunity: crmCommon/accelerators/financialServices/banking/Opportunity.cdm.json/Opportunity.priceLevelId maps to PriceList.cdm.json/PriceList attribute priceLevelId (target PriceList.cdm.json/PriceList).",
+          "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json",
+          "score": 0.016393
+        }
+      ],
+      "baseline_route": "no_search",
+      "baseline_status": "scored",
+      "baseline_correct": true,
+      "baseline_seconds": 0.208,
+      "messages_sha256": "4abedfc77c1b363b71b5860281d504b7897534e9238dc4fce6700c2372b9d7a2",
+      "status": "scored",
+      "predicted_route": "no_search",
+      "correct": true,
+      "search_seconds": 0.04,
+      "router_seconds": 0.742,
+      "end_to_end_seconds": 0.808,
+      "elapsed_seconds": 0.808,
+      "runtime": {
+        "runner": "llamacpp",
+        "size_bytes": 3181631242,
+        "gpu_bytes": 3181631242,
+        "context_length": 4096
+      },
+      "search_runtime": {
+        "runner": "llamacpp",
+        "size_bytes": 335733063,
+        "gpu_bytes": 335733063,
+        "context_length": 2048
+      },
+      "native_timing": {
+        "total_duration": 730396333,
+        "load_duration": 2086750,
+        "prompt_eval_count": 739,
+        "prompt_eval_duration": 569984000,
+        "eval_count": 11,
+        "eval_duration": 129245000
+      }
+    },
+    {
+      "model": "qwen3.5:9b-q4_K_M",
+      "case_id": "route-test-raw-overdraft",
+      "question": "In the RetailBankingCoreDataModel CDM schema, how is FIOverdraft described?",
+      "context_messages": [],
+      "expected_route": "raw_search",
+      "accepted_routes": [
+        "raw_search"
+      ],
+      "initial_query": "In the RetailBankingCoreDataModel CDM schema, how is FIOverdraft described?",
+      "initial_hits": [
+        {
+          "rank": 1,
+          "id": "RetailBankingCoreDataModel::FIOverdraft:entity",
+          "title": "FIOverdraft (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FIOverdraft)",
+          "text": "CDM entity: FIOverdraft (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FIOverdraft). Source file: schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Fi_overdraft.cdm.json. An extension of credit associated with a checking account allowing the account holder to continue withdrawing funds when an account reaches zero. Selected attribute names: fi_OverdraftId, createdOn, modifiedOn, statecode, statuscode, importSequenceNumber, overriddenCreatedOn, timeZoneRuleVersionNumber, UTCConversionTimeZoneCode, name, financialinstrumenttype, integrationKey.",
+          "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Fi_overdraft.cdm.json",
+          "score": 0.032787
+        },
+        {
+          "rank": 2,
+          "id": "RetailBankingCoreDataModel::FIOverdraft:trait-applications:entity",
+          "title": "Traits applied to FIOverdraft (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FIOverdraft)",
+          "text": "CDM entity FIOverdraft (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FIOverdraft) exhibits these traits: is.localized.describedAs with arguments [{\"name\":\"argument 1\",\"value\":{\"constantValues\":[[\"en\",\"An extension of credit associated with a checking account allowing the account holder to continue withdrawing funds when an account reaches zero.\"]],\"entityShape\":\"localizedTable\"}}], is.localized.displayedAs with arguments [{\"name\":\"argument 1\",\"value\":{\"constantValues\":[[\"en\",\"FI overdraft\"]],\"entityShape\":\"localizedTable\"}}], is.CDM.entityVersion with arguments [{\"name\":\"versionNumber\",\"value\":\"1.1\"}].",
+          "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Fi_overdraft.cdm.json",
+          "score": 0.030798
+        },
+        {
+          "rank": 3,
+          "id": "manifest:schemaDocuments/FinancialServices/RetailBankingCoreDataModel/RetailBankingCoreDataModel.manifest.cdm.json:declarations:2",
+          "title": "Entities declared by manifest RetailBankingCoreDataModel (RetailBankingCoreDataModel)",
+          "text": "Entities declared in CDM manifest RetailBankingCoreDataModel (RetailBankingCoreDataModel): FHLineOfCredit (LocalEntity) at Fh_creditline.cdm.json/FHLineOfCredit; qualified entity ID RetailBankingCoreDataModel::FHLineOfCredit; FHInvestment (LocalEntity) at Fh_investment.cdm.json/FHInvestment; qualified entity ID RetailBankingCoreDataModel::FHInvestment; FHLoan (LocalEntity) at Fh_loan.cdm.json/FHLoan; qualified entity ID RetailBankingCoreDataModel::FHLoan; FHSaving (LocalEntity) at Fh_saving.cdm.json/FHSaving; qualified entity ID RetailBankingCoreDataModel::FHSaving; FICard (LocalEntity) at Fi_card.cdm.json/FICard; qualified entity ID RetailBankingCoreDataModel::FICard; FIDirectDebit (LocalEn",
+          "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/FinancialServices/RetailBankingCoreDataModel/RetailBankingCoreDataModel.manifest.cdm.json",
+          "score": 0.023592
+        }
+      ],
+      "baseline_route": "raw_search",
+      "baseline_status": "scored",
+      "baseline_correct": true,
+      "baseline_seconds": 6.845,
+      "messages_sha256": "277c87370360ea930529ea95ac6e69cb585d95b9cc9f54aeaa37285fa8e4d177",
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": true,
+      "search_seconds": 0.069,
+      "router_seconds": 7.8,
+      "end_to_end_seconds": 7.907,
+      "elapsed_seconds": 7.907,
+      "runtime": {
+        "runner": "llamacpp",
+        "size_bytes": 4780353125,
+        "gpu_bytes": 4780353125,
+        "context_length": 4096
+      },
+      "search_runtime": {
+        "runner": "llamacpp",
+        "size_bytes": 335733063,
+        "gpu_bytes": 335733063,
+        "context_length": 2048
+      },
+      "native_timing": {
+        "total_duration": 7787733541,
+        "load_duration": 5577147625,
+        "prompt_eval_count": 927,
+        "prompt_eval_duration": 1945344000,
+        "eval_count": 13,
+        "eval_duration": 256505999
+      }
+    },
+    {
+      "model": "qwen3.5:9b-q4_K_M",
+      "case_id": "route-test-raw-contact-parent",
+      "question": "Which applicationCommon CDM entities can Contact.parentCustomer reference?",
+      "context_messages": [],
+      "expected_route": "raw_search",
+      "accepted_routes": [
+        "raw_search"
+      ],
+      "initial_query": "Which applicationCommon CDM entities can Contact.parentCustomer reference?",
+      "initial_hits": [
+        {
+          "rank": 1,
+          "id": "applicationCommon::Contact:relationship:3",
+          "title": "Contact (applicationCommon; qualified ID applicationCommon::Contact).parentCustomer relationship",
+          "text": "CDM entity Contact (applicationCommon; qualified ID applicationCommon::Contact) has an explicitly referenced relationship through attribute parentCustomer to applicationCommon::Account, applicationCommon::Contact.",
+          "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/Contact.cdm.json",
+          "score": 0.016393
+        },
+        {
+          "rank": 2,
+          "id": "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:relationship-mappings:1:81ece2515bad",
+          "title": "Relationship mappings in manifest crmCommon (applicationCommon)",
+          "text": "The CDM manifest crmCommon (applicationCommon) records these relationship mappings from /core/applicationCommon/Contact.cdm.json/Contact: /core/applicationCommon/Contact.cdm.json/Contact.parentCustomerId maps to Account.cdm.json/Account attribute accountId (target Account.cdm.json/Account). /core/applicationCommon/Contact.cdm.json/Contact.masterId maps to Contact.cdm.json/Contact attribute contactId (target Contact.cdm.json/Contact). /core/applicationCommon/Contact.cdm.json/Contact.parentCustomerId maps to Contact.cdm.json/Contact attribute contactId (target Contact.cdm.json/Contact).",
+          "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json",
+          "score": 0.016393
+        },
+        {
+          "rank": 3,
+          "id": "applicationCommon::Contact:relationship:1",
+          "title": "Contact (applicationCommon; qualified ID applicationCommon::Contact).preferredSystemUser relationship",
+          "text": "CDM entity Contact (applicationCommon; qualified ID applicationCommon::Contact) has an explicitly referenced relationship through attribute preferredSystemUser to applicationCommon::User.",
+          "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/Contact.cdm.json",
+          "score": 0.016129
+        }
+      ],
+      "baseline_route": "raw_search",
+      "baseline_status": "scored",
+      "baseline_correct": true,
+      "baseline_seconds": 0.746,
+      "messages_sha256": "23bf995f948e6b24db353d6806c131614894d6bed48b31216326fe6b0141d3fa",
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": true,
+      "search_seconds": 0.055,
+      "router_seconds": 1.742,
+      "end_to_end_seconds": 1.825,
+      "elapsed_seconds": 1.825,
+      "runtime": {
+        "runner": "llamacpp",
+        "size_bytes": 4780353125,
+        "gpu_bytes": 4780353125,
+        "context_length": 4096
+      },
+      "search_runtime": {
+        "runner": "llamacpp",
+        "size_bytes": 335733063,
+        "gpu_bytes": 335733063,
+        "context_length": 2048
+      },
+      "native_timing": {
+        "total_duration": 1729299042,
+        "load_duration": 9958458,
+        "prompt_eval_count": 613,
+        "prompt_eval_duration": 1379239000,
+        "eval_count": 13,
+        "eval_duration": 252809000
+      }
+    },
+    {
+      "model": "qwen3.5:9b-q4_K_M",
+      "case_id": "route-test-raw-holding-role",
+      "question": "In RetailBankingCoreDataModel CustomerFinancialHolding, which attribute describes the customer's role in a holding?",
+      "context_messages": [],
+      "expected_route": "raw_search",
+      "accepted_routes": [
+        "raw_search"
+      ],
+      "initial_query": "In RetailBankingCoreDataModel CustomerFinancialHolding, which attribute describes the customer's role in a holding?",
+      "initial_hits": [
+        {
+          "rank": 1,
+          "id": "RetailBankingCoreDataModel::CustomerFinancialHolding:attributes:3",
+          "title": "CustomerFinancialHolding (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::CustomerFinancialHolding) attributes",
+          "text": "Attributes of CDM entity CustomerFinancialHolding (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::CustomerFinancialHolding) at : financialHoldingRole (listLookup); display name Financial holding role; The role of the customer with respect to the financial holding such as owner, beneficiary, etc.; nullable: True; purpose: hasA; source name: msfsi_financialholdingrole; source ordering: 37",
+          "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Customerfinancialholding.cdm.json",
+          "score": 0.032787
+        },
+        {
+          "rank": 2,
+          "id": "RetailBankingCoreDataModel::CustomerFinancialHolding:relationship:2",
+          "title": "CustomerFinancialHolding (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::CustomerFinancialHolding).FinancialHolding relationship",
+          "text": "CDM entity CustomerFinancialHolding (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::CustomerFinancialHolding) has an explicitly referenced relationship through attribute FinancialHolding to RetailBankingCoreDataModel::FinancialHolding. The unique identifier of the financial holding connected to the customer.",
+          "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Customerfinancialholding.cdm.json",
+          "score": 0.032258
+        },
+        {
+          "rank": 3,
+          "id": "RetailBankingCoreDataModel::CustomerFinancialHolding:relationship:1",
+          "title": "CustomerFinancialHolding (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::CustomerFinancialHolding).Customer relationship",
+          "text": "CDM entity CustomerFinancialHolding (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::CustomerFinancialHolding) has an explicitly referenced relationship through attribute Customer to RetailBankingCoreDataModel::Account, RetailBankingCoreDataModel::Contact. The unique identifier of the customer connected to this holding.",
+          "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Customerfinancialholding.cdm.json",
+          "score": 0.031746
+        }
+      ],
+      "baseline_route": "raw_search",
+      "baseline_status": "scored",
+      "baseline_correct": true,
+      "baseline_seconds": 0.738,
+      "messages_sha256": "8bc2f8df1447fb40c3de571dc9de47834f784b1d0bbb86182f2fc76c779e17d1",
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": true,
+      "search_seconds": 0.049,
+      "router_seconds": 1.59,
+      "end_to_end_seconds": 1.666,
+      "elapsed_seconds": 1.666,
+      "runtime": {
+        "runner": "llamacpp",
+        "size_bytes": 4780353125,
+        "gpu_bytes": 4780353125,
+        "context_length": 4096
+      },
+      "search_runtime": {
+        "runner": "llamacpp",
+        "size_bytes": 335733063,
+        "gpu_bytes": 335733063,
+        "context_length": 2048
+      },
+      "native_timing": {
+        "total_duration": 1578524625,
+        "load_duration": 680375,
+        "prompt_eval_count": 691,
+        "prompt_eval_duration": 1309941000,
+        "eval_count": 13,
+        "eval_duration": 253292000
+      }
+    },
+    {
+      "model": "qwen3.5:9b-q4_K_M",
+      "case_id": "route-test-raw-group",
+      "question": "Which GroupFinancialHolding relationships reference the group and the holding in RetailBankingCoreDataModel?",
+      "context_messages": [],
+      "expected_route": "raw_search",
+      "accepted_routes": [
+        "raw_search"
+      ],
+      "initial_query": "Which GroupFinancialHolding relationships reference the group and the holding in RetailBankingCoreDataModel?",
+      "initial_hits": [
+        {
+          "rank": 1,
+          "id": "RetailBankingCoreDataModel::GroupFinancialHolding:entity",
+          "title": "GroupFinancialHolding (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::GroupFinancialHolding)",
+          "text": "CDM entity: GroupFinancialHolding (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::GroupFinancialHolding). Source file: schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Groupfinancialholding.cdm.json. Financial holdings associated with a Group, to be included in the group's total assets and liabilities. Selected attribute names: groupFinancialHoldingId, createdOn, modifiedOn, statecode, statuscode, importSequenceNumber, overriddenCreatedOn, timeZoneRuleVersionNumber, UTCConversionTimeZoneCode, name, FinancialHolding, Group.",
+          "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Groupfinancialholding.cdm.json",
+          "score": 0.032266
+        },
+        {
+          "rank": 2,
+          "id": "RetailBankingCoreDataModel::GroupFinancialHolding:relationship:2",
+          "title": "GroupFinancialHolding (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::GroupFinancialHolding).Group relationship",
+          "text": "CDM entity GroupFinancialHolding (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::GroupFinancialHolding) has an explicitly referenced relationship through attribute Group to RetailBankingCoreDataModel::Group. The set of familial connections that the customer has at the bank.",
+          "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Groupfinancialholding.cdm.json",
+          "score": 0.032258
+        },
+        {
+          "rank": 3,
+          "id": "RetailBankingCoreDataModel::GroupFinancialHolding:attributes:1",
+          "title": "GroupFinancialHolding (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::GroupFinancialHolding) attributes",
+          "text": "Attributes of CDM entity GroupFinancialHolding (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::GroupFinancialHolding) at : groupFinancialHoldingId (entityId); display name Group financial holding; Unique identifier for entity instances.; nullable: False; purpose: identifiedBy; source name: msfsi_groupfinancialholdingid; source ordering: 1. createdOn (dateTime); display name Created On; Date and time when the record was created.; nullable: True; purpose: hasA; source name: createdon; source ordering: 2. modifiedOn (dateTime); display name Modified On; Date and time when the record was modified.; nullable: True; purpose: hasA; source name: modifiedon; source ordering: 4. ",
+          "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Groupfinancialholding.cdm.json",
+          "score": 0.030159
+        }
+      ],
+      "baseline_route": "raw_search",
+      "baseline_status": "scored",
+      "baseline_correct": true,
+      "baseline_seconds": 0.741,
+      "messages_sha256": "b2a1f646eb6e4b9cf43ccd00a8655c678093d6e0742d767ca26bc8bede4a77cb",
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": true,
+      "search_seconds": 0.048,
+      "router_seconds": 1.673,
+      "end_to_end_seconds": 1.748,
+      "elapsed_seconds": 1.748,
+      "runtime": {
+        "runner": "llamacpp",
+        "size_bytes": 4780353125,
+        "gpu_bytes": 4780353125,
+        "context_length": 4096
+      },
+      "search_runtime": {
+        "runner": "llamacpp",
+        "size_bytes": 335733063,
+        "gpu_bytes": 335733063,
+        "context_length": 2048
+      },
+      "native_timing": {
+        "total_duration": 1659082958,
+        "load_duration": 769208,
+        "prompt_eval_count": 799,
+        "prompt_eval_duration": 1387118000,
+        "eval_count": 13,
+        "eval_duration": 254412000
+      }
+    },
+    {
+      "model": "qwen3.5:9b-q4_K_M",
+      "case_id": "route-test-raw-partner",
+      "question": "In applicationCommon CustomerRelationship, what does the partner field reference?",
+      "context_messages": [
+        {
+          "role": "user",
+          "content": "Earlier I was examining RetailBankingCoreDataModel FIStandingOrder."
+        },
+        {
+          "role": "assistant",
+          "content": "We can switch to a different schema object."
+        }
+      ],
+      "expected_route": "raw_search",
+      "accepted_routes": [
+        "raw_search"
+      ],
+      "initial_query": "User: Earlier I was examining RetailBankingCoreDataModel FIStandingOrder.\nAssistant: We can switch to a different schema object.\nUser: In applicationCommon CustomerRelationship, what does the partner field reference?",
+      "initial_hits": [
+        {
+          "rank": 1,
+          "id": "applicationCommon::CustomerRelationship:entity",
+          "title": "CustomerRelationship (applicationCommon; qualified ID applicationCommon::CustomerRelationship)",
+          "text": "CDM entity: CustomerRelationship (applicationCommon; qualified ID applicationCommon::CustomerRelationship). Source file: schemaDocuments/core/applicationCommon/CustomerRelationship.cdm.json. Relationship between a customer and a partner in which either can be an account or contact. Selected attribute names: versionNumber, createdOn, modifiedOn, customerRoleId, customerRelationshipId, User_createdBy, partner, BusinessUnit_owningBusinessUnit, converseRelationship, partnerRoleId, customerRoleDescription, User_modifiedBy.",
+          "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/CustomerRelationship.cdm.json",
+          "score": 0.032522
+        },
+        {
+          "rank": 2,
+          "id": "applicationCommon::CustomerRelationship:attributes:2",
+          "title": "CustomerRelationship (applicationCommon; qualified ID applicationCommon::CustomerRelationship) attributes",
+          "text": "Attributes of CDM entity CustomerRelationship (applicationCommon; qualified ID applicationCommon::CustomerRelationship) at : partner (unspecified); purpose: referencesCustomer. BusinessUnit_owningBusinessUnit (unspecified). converseRelationship (unspecified). partnerRoleId (entityId); display name Role 2; Choose the secondary party's role or nature of the relationship the customer has with the primary party. The field is read-only until both parties have been selected. Administrators can configure role values under Business Management in the Settings area.; nullable: True; purpose: hasA; source name: partnerroleid; source ordering: 12. customerRoleDescription (string); display name Descripti",
+          "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/CustomerRelationship.cdm.json",
+          "score": 0.016393
+        },
+        {
+          "rank": 3,
+          "id": "RetailBankingCoreDataModel::FIStandingOrder:attributes:2",
+          "title": "FIStandingOrder (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FIStandingOrder) attributes",
+          "text": "Attributes of CDM entity FIStandingOrder (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FIStandingOrder) at : overriddenCreatedOn (dateTime); display name Record Created On; Date and time that the record was migrated.; nullable: True; purpose: hasA; source name: overriddencreatedon; source ordering: 31. timeZoneRuleVersionNumber (integer); display name Time Zone Rule Version Number; For internal use only.; nullable: True; purpose: hasA; source name: timezoneruleversionnumber; source ordering: 32. UTCConversionTimeZoneCode (integer); display name UTC Conversion Time Zone Code; Time zone code that was in use when the record was created.; nullable: True; purpose: hasA; so",
+          "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Fi_standingorder.cdm.json",
+          "score": 0.016129
+        }
+      ],
+      "baseline_route": "raw_search",
+      "baseline_status": "scored",
+      "baseline_correct": true,
+      "baseline_seconds": 0.8,
+      "messages_sha256": "1521d68cf3c5cd2b265c0cd660eed6aba5ba74b50c11c7ba7cec375d3a19efb2",
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": true,
+      "search_seconds": 0.055,
+      "router_seconds": 1.733,
+      "end_to_end_seconds": 1.813,
+      "elapsed_seconds": 1.813,
+      "runtime": {
+        "runner": "llamacpp",
+        "size_bytes": 4780353125,
+        "gpu_bytes": 4780353125,
+        "context_length": 4096
+      },
+      "search_runtime": {
+        "runner": "llamacpp",
+        "size_bytes": 335733063,
+        "gpu_bytes": 335733063,
+        "context_length": 2048
+      },
+      "native_timing": {
+        "total_duration": 1720385625,
+        "load_duration": 681542,
+        "prompt_eval_count": 839,
+        "prompt_eval_duration": 1440825000,
+        "eval_count": 13,
+        "eval_duration": 259843000
+      }
+    },
+    {
+      "model": "qwen3.5:9b-q4_K_M",
+      "case_id": "route-test-raw-phone",
+      "question": "Which applicationCommon PhoneCall attribute stores the phone number?",
+      "context_messages": [],
+      "expected_route": "raw_search",
+      "accepted_routes": [
+        "raw_search"
+      ],
+      "initial_query": "Which applicationCommon PhoneCall attribute stores the phone number?",
+      "initial_hits": [
+        {
+          "rank": 1,
+          "id": "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:2:feceab19a444",
+          "title": "Relationship mappings in manifest applicationCommon (applicationCommon)",
+          "text": "The CDM manifest applicationCommon (applicationCommon) records these relationship mappings from PhoneCall.cdm.json/PhoneCall: PhoneCall.cdm.json/PhoneCall.ownerId maps to Team.cdm.json/Team attribute teamId (target Team (applicationCommon)). PhoneCall.cdm.json/PhoneCall.owningTeam maps to Team.cdm.json/Team attribute teamId (target Team (applicationCommon)). PhoneCall.cdm.json/PhoneCall.createdBy maps to User.cdm.json/User attribute systemUserId (target User (applicationCommon)). PhoneCall.cdm.json/PhoneCall.createdOnBehalfBy maps to User.cdm.json/User attribute systemUserId (target User (applicationCommon)). PhoneCall.cdm.json/PhoneCall.modifiedBy maps to User.cdm.json/User attribute system",
+          "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json",
+          "score": 0.030478
+        },
+        {
+          "rank": 2,
+          "id": "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:1:feceab19a444",
+          "title": "Relationship mappings in manifest applicationCommon (applicationCommon)",
+          "text": "The CDM manifest applicationCommon (applicationCommon) records these relationship mappings from PhoneCall.cdm.json/PhoneCall: PhoneCall.cdm.json/PhoneCall.regardingObjectId maps to Account.cdm.json/Account attribute accountId (target Account (applicationCommon)). PhoneCall.cdm.json/PhoneCall.owningBusinessUnit maps to BusinessUnit.cdm.json/BusinessUnit attribute businessUnitId (target BusinessUnit (applicationCommon)). PhoneCall.cdm.json/PhoneCall.regardingObjectId maps to Contact.cdm.json/Contact attribute contactId (target Contact (applicationCommon)). PhoneCall.cdm.json/PhoneCall.transactionCurrencyId maps to Currency.cdm.json/Currency attribute transactionCurrencyId (target Currency (app",
+          "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json",
+          "score": 0.030018
+        },
+        {
+          "rank": 3,
+          "id": "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:1:a82473fd35a7",
+          "title": "Relationship mappings in manifest applicationCommon (applicationCommon)",
+          "text": "The CDM manifest applicationCommon (applicationCommon) records these relationship mappings from foundationCommon/crmCommon/PhoneCall.cdm.json/PhoneCall: foundationCommon/crmCommon/PhoneCall.cdm.json/PhoneCall.owningBusinessUnit maps to BusinessUnit.cdm.json/BusinessUnit attribute businessUnitId (target BusinessUnit (applicationCommon)). foundationCommon/crmCommon/PhoneCall.cdm.json/PhoneCall.transactionCurrencyId maps to Currency.cdm.json/Currency attribute transactionCurrencyId (target Currency (applicationCommon)). foundationCommon/crmCommon/PhoneCall.cdm.json/PhoneCall.regardingObjectId maps to KnowledgeBaseRecord.cdm.json/KnowledgeBaseRecord attribute knowledgeBaseRecordId (target Knowle",
+          "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json",
+          "score": 0.027638
+        }
+      ],
+      "baseline_route": "raw_search",
+      "baseline_status": "scored",
+      "baseline_correct": true,
+      "baseline_seconds": 0.732,
+      "messages_sha256": "fa4229200a01a5afb8cb0557d40994ab8d5317ca1f237605375bf23aa5010d77",
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": true,
+      "search_seconds": 0.046,
+      "router_seconds": 2.176,
+      "end_to_end_seconds": 2.251,
+      "elapsed_seconds": 2.251,
+      "runtime": {
+        "runner": "llamacpp",
+        "size_bytes": 4780353125,
+        "gpu_bytes": 4780353125,
+        "context_length": 4096
+      },
+      "search_runtime": {
+        "runner": "llamacpp",
+        "size_bytes": 335733063,
+        "gpu_bytes": 335733063,
+        "context_length": 2048
+      },
+      "native_timing": {
+        "total_duration": 2163602708,
+        "load_duration": 793750,
+        "prompt_eval_count": 892,
+        "prompt_eval_duration": 1880471000,
+        "eval_count": 13,
+        "eval_duration": 252756000
+      }
+    },
+    {
+      "model": "qwen3.5:9b-q4_K_M",
+      "case_id": "route-test-rewrite-customer",
+      "question": "Which entity models that person?",
+      "context_messages": [
+        {
+          "role": "user",
+          "content": "A business unit has a relationship with an individual, such as a customer, supplier, or colleague."
+        },
+        {
+          "role": "assistant",
+          "content": "We are looking for the person record in applicationCommon."
+        }
+      ],
+      "expected_route": "rewrite_search",
+      "accepted_routes": [
+        "rewrite_search"
+      ],
+      "initial_query": "User: A business unit has a relationship with an individual, such as a customer, supplier, or colleague.\nAssistant: We are looking for the person record in applicationCommon.\nUser: Which entity models that person?",
+      "initial_hits": [
+        {
+          "rank": 1,
+          "id": "applicationCommon::Contact:entity",
+          "title": "Contact (applicationCommon; qualified ID applicationCommon::Contact)",
+          "text": "CDM entity: Contact (applicationCommon; qualified ID applicationCommon::Contact). Source file: schemaDocuments/core/applicationCommon/Contact.cdm.json. Person with whom a business unit has a relationship, such as customer, supplier, and colleague. Selected attribute names: contactId, customerSizeCode, customerTypeCode, preferredContactMethodCode, leadSourceCode, paymentTermsCode, shippingMethodCode, accountId, participatesInWorkflow, isBackofficeCustomer, salutation, jobTitle.",
+          "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/Contact.cdm.json",
+          "score": 0.029551
+        },
+        {
+          "rank": 2,
+          "id": "applicationCommon::User:relationship:2",
+          "title": "User (applicationCommon; qualified ID applicationCommon::User).businessUnit relationship",
+          "text": "CDM entity User (applicationCommon; qualified ID applicationCommon::User) has an explicitly referenced relationship through attribute businessUnit to applicationCommon::BusinessUnit.",
+          "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/User.cdm.json",
+          "score": 0.016393
+        },
+        {
+          "rank": 3,
+          "id": "applicationCommon::Contact:trait-applications:entity",
+          "title": "Traits applied to Contact (applicationCommon; qualified ID applicationCommon::Contact)",
+          "text": "CDM entity Contact (applicationCommon; qualified ID applicationCommon::Contact) exhibits these traits: is.localized.displayedAs with arguments [{\"name\":\"argument 1\",\"value\":{\"constantValues\":[[\"en\",\"Contact\"]],\"entityShape\":\"localizedTable\"}}], is.localized.describedAs with arguments [{\"name\":\"argument 1\",\"value\":{\"constantValues\":[[\"en\",\"Person with whom a business unit has a relationship, such as customer, supplier, and colleague.\"]],\"entityShape\":\"localizedTable\"}}], is.CDM.entityVersion with arguments [{\"name\":\"versionNumber\",\"value\":\"1.3\"}].",
+          "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/Contact.cdm.json",
+          "score": 0.016129
+        }
+      ],
+      "baseline_route": "raw_search",
+      "baseline_status": "scored",
+      "baseline_correct": false,
+      "baseline_seconds": 0.804,
+      "messages_sha256": "bdd9bdf6e2345118fc4044c690e6deb84f0b78ecf4ed1442291f85ca3af11bc6",
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": false,
+      "search_seconds": 0.044,
+      "router_seconds": 1.774,
+      "end_to_end_seconds": 1.847,
+      "elapsed_seconds": 1.847,
+      "runtime": {
+        "runner": "llamacpp",
+        "size_bytes": 4780353125,
+        "gpu_bytes": 4780353125,
+        "context_length": 4096
+      },
+      "search_runtime": {
+        "runner": "llamacpp",
+        "size_bytes": 335733063,
+        "gpu_bytes": 335733063,
+        "context_length": 2048
+      },
+      "native_timing": {
+        "total_duration": 1762155917,
+        "load_duration": 1027917,
+        "prompt_eval_count": 689,
+        "prompt_eval_duration": 1497119000,
+        "eval_count": 13,
+        "eval_duration": 253040000
+      }
+    },
+    {
+      "model": "qwen3.5:9b-q4_K_M",
+      "case_id": "route-test-rewrite-phone",
+      "question": "Which field stores the phone number?",
+      "context_messages": [
+        {
+          "role": "user",
+          "content": "We are reviewing how an applicationCommon phone call is represented."
+        },
+        {
+          "role": "assistant",
+          "content": "The schema object in question is the PhoneCall entity."
+        }
+      ],
+      "expected_route": "rewrite_search",
+      "accepted_routes": [
+        "rewrite_search"
+      ],
+      "initial_query": "User: We are reviewing how an applicationCommon phone call is represented.\nAssistant: The schema object in question is the PhoneCall entity.\nUser: Which field stores the phone number?",
+      "initial_hits": [
+        {
+          "rank": 1,
+          "id": "applicationCommon::PhoneCall:attributes:1",
+          "title": "PhoneCall (applicationCommon; qualified ID applicationCommon::PhoneCall) attributes",
+          "text": "Attributes of CDM entity PhoneCall (applicationCommon; qualified ID applicationCommon::PhoneCall) at : to (partylist); display name Call To; Enter the account, contact, lead, or user recipients of the phone call.; nullable: True; purpose: hasA; source name: to; source ordering: 3. phoneNumber (phone); display name Phone Number; Type the phone number.; nullable: True; purpose: hasA; source name: phonenumber; source ordering: 8. regardingObject (unspecified). description (string); display name Description; Additional information to describe the phone call, such as the primary message or the products and services discussed.; nullable: True; purpose: hasA; source name: description; source orderi",
+          "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/PhoneCall.cdm.json",
+          "score": 0.032522
+        },
+        {
+          "rank": 2,
+          "id": "applicationCommon::Contact:attributes:7",
+          "title": "Contact (applicationCommon; qualified ID applicationCommon::Contact) attributes",
+          "text": "Attributes of CDM entity Contact (applicationCommon; qualified ID applicationCommon::Contact) at : spousesName (name); display name Spouse/Partner Name; Type the name of the contact's spouse or partner for reference during calls, events, or other communications with the contact.; nullable: True; purpose: hasA; source name: spousesname; source ordering: 43. assistantName (name); display name Assistant; Type the name of the contact's assistant.; nullable: True; purpose: hasA; source name: assistantname; source ordering: 44. EMailAddress2 (email); display name Email Address 2; Type the secondary email address for the contact.; nullable: True; purpose: hasA; source name: emailaddress2; source or",
+          "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/Contact.cdm.json",
+          "score": 0.030018
+        },
+        {
+          "rank": 3,
+          "id": "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:2:feceab19a444",
+          "title": "Relationship mappings in manifest applicationCommon (applicationCommon)",
+          "text": "The CDM manifest applicationCommon (applicationCommon) records these relationship mappings from PhoneCall.cdm.json/PhoneCall: PhoneCall.cdm.json/PhoneCall.ownerId maps to Team.cdm.json/Team attribute teamId (target Team (applicationCommon)). PhoneCall.cdm.json/PhoneCall.owningTeam maps to Team.cdm.json/Team attribute teamId (target Team (applicationCommon)). PhoneCall.cdm.json/PhoneCall.createdBy maps to User.cdm.json/User attribute systemUserId (target User (applicationCommon)). PhoneCall.cdm.json/PhoneCall.createdOnBehalfBy maps to User.cdm.json/User attribute systemUserId (target User (applicationCommon)). PhoneCall.cdm.json/PhoneCall.modifiedBy maps to User.cdm.json/User attribute system",
+          "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json",
+          "score": 0.029387
+        }
+      ],
+      "baseline_route": "raw_search",
+      "baseline_status": "scored",
+      "baseline_correct": false,
+      "baseline_seconds": 0.806,
+      "messages_sha256": "4e9b57eac528700344474445456f98a4fbfef6586bb90c03d1c5eb02c9cbdb5e",
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": false,
+      "search_seconds": 0.045,
+      "router_seconds": 1.863,
+      "end_to_end_seconds": 1.934,
+      "elapsed_seconds": 1.934,
+      "runtime": {
+        "runner": "llamacpp",
+        "size_bytes": 4780353125,
+        "gpu_bytes": 4780353125,
+        "context_length": 4096
+      },
+      "search_runtime": {
+        "runner": "llamacpp",
+        "size_bytes": 335733063,
+        "gpu_bytes": 335733063,
+        "context_length": 2048
+      },
+      "native_timing": {
+        "total_duration": 1851090875,
+        "load_duration": 1084375,
+        "prompt_eval_count": 910,
+        "prompt_eval_duration": 1573103000,
+        "eval_count": 13,
+        "eval_duration": 253717000
+      }
+    },
+    {
+      "model": "qwen3.5:9b-q4_K_M",
+      "case_id": "route-test-rewrite-ownership",
+      "question": "Which field distinguishes an owner from a beneficiary?",
+      "context_messages": [
+        {
+          "role": "user",
+          "content": "I am reviewing CustomerFinancialHolding in the Retail Banking CDM model."
+        },
+        {
+          "role": "assistant",
+          "content": "The entity associates a customer with a financial holding."
+        }
+      ],
+      "expected_route": "rewrite_search",
+      "accepted_routes": [
+        "rewrite_search"
+      ],
+      "initial_query": "User: I am reviewing CustomerFinancialHolding in the Retail Banking CDM model.\nAssistant: The entity associates a customer with a financial holding.\nUser: Which field distinguishes an owner from a beneficiary?",
+      "initial_hits": [
+        {
+          "rank": 1,
+          "id": "RetailBankingCoreDataModel::CustomerFinancialHolding:attributes:3",
+          "title": "CustomerFinancialHolding (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::CustomerFinancialHolding) attributes",
+          "text": "Attributes of CDM entity CustomerFinancialHolding (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::CustomerFinancialHolding) at : financialHoldingRole (listLookup); display name Financial holding role; The role of the customer with respect to the financial holding such as owner, beneficiary, etc.; nullable: True; purpose: hasA; source name: msfsi_financialholdingrole; source ordering: 37",
+          "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Customerfinancialholding.cdm.json",
+          "score": 0.032787
+        },
+        {
+          "rank": 2,
+          "id": "RetailBankingCoreDataModel::FHAccount:attributes:7",
+          "title": "FHAccount (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FHAccount) attributes",
+          "text": "Attributes of CDM entity FHAccount (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FHAccount) at : balanceDisplayValue (currency); display name Balance display value; Display value shows the balance of a financial holding in accordance with the type of the financial holding. Financial holdings that are typically defined as a customer's liabilities (such as lines of credit and loans) are presented as positive when the customer owes money to the financial institution (that is, a loan with an accounting value of -500 will appear as 500). In the inverse case: the display value will be negative for debit balances on a credit financial holding (such as overpayment of a credit",
+          "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Fh_account.cdm.json",
+          "score": 0.025563
+        },
+        {
+          "rank": 3,
+          "id": "RetailBankingCoreDataModel::FHSaving:attributes:7",
+          "title": "FHSaving (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FHSaving) attributes",
+          "text": "Attributes of CDM entity FHSaving (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FHSaving) at : balanceDisplayValue (currency); display name Balance display value; Display value shows the balance of a financial holding in accordance with the type of the financial holding. Financial holdings that are typically defined as a customer's liabilities (such as lines of credit and loans) are presented as positive when the customer owes money to the financial institution (that is, a loan with an accounting value of -500 will appear as 500). In the inverse case: the display value will be negative for debit balances on a credit financial holding (such as overpayment of a credit c",
+          "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Fh_saving.cdm.json",
+          "score": 0.022915
+        }
+      ],
+      "baseline_route": "raw_search",
+      "baseline_status": "scored",
+      "baseline_correct": false,
+      "baseline_seconds": 0.815,
+      "messages_sha256": "f0cc1daed70b1c229a4cb0ed2397b1928d6607f7a9273b2049039e9c4db03a3b",
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": false,
+      "search_seconds": 0.051,
+      "router_seconds": 1.787,
+      "end_to_end_seconds": 1.87,
+      "elapsed_seconds": 1.87,
+      "runtime": {
+        "runner": "llamacpp",
+        "size_bytes": 4780353125,
+        "gpu_bytes": 4780353125,
+        "context_length": 4096
+      },
+      "search_runtime": {
+        "runner": "llamacpp",
+        "size_bytes": 335733063,
+        "gpu_bytes": 335733063,
+        "context_length": 2048
+      },
+      "native_timing": {
+        "total_duration": 1772064375,
+        "load_duration": 863750,
+        "prompt_eval_count": 859,
+        "prompt_eval_duration": 1496267000,
+        "eval_count": 13,
+        "eval_duration": 254507000
+      }
+    },
+    {
+      "model": "qwen3.5:9b-q4_K_M",
+      "case_id": "route-test-rewrite-card",
+      "question": "What does that customer reference point to?",
+      "context_messages": [
+        {
+          "role": "user",
+          "content": "Consider the Cardholder relationship on RetailBankingCoreDataModel FICard."
+        },
+        {
+          "role": "assistant",
+          "content": "We need the allowed referenced customer types."
+        }
+      ],
+      "expected_route": "rewrite_search",
+      "accepted_routes": [
+        "rewrite_search"
+      ],
+      "initial_query": "User: Consider the Cardholder relationship on RetailBankingCoreDataModel FICard.\nAssistant: We need the allowed referenced customer types.\nUser: What does that customer reference point to?",
+      "initial_hits": [
+        {
+          "rank": 1,
+          "id": "RetailBankingCoreDataModel::FICard:relationship:1",
+          "title": "FICard (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FICard).Cardholder relationship",
+          "text": "CDM entity FICard (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FICard) has an explicitly referenced relationship through attribute Cardholder to RetailBankingCoreDataModel::Account, RetailBankingCoreDataModel::Contact. The customer associated with the card.",
+          "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Fi_card.cdm.json",
+          "score": 0.032787
+        },
+        {
+          "rank": 2,
+          "id": "RetailBankingCoreDataModel::CustomerFinancialHolding:relationship:1",
+          "title": "CustomerFinancialHolding (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::CustomerFinancialHolding).Customer relationship",
+          "text": "CDM entity CustomerFinancialHolding (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::CustomerFinancialHolding) has an explicitly referenced relationship through attribute Customer to RetailBankingCoreDataModel::Account, RetailBankingCoreDataModel::Contact. The unique identifier of the customer connected to this holding.",
+          "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Customerfinancialholding.cdm.json",
+          "score": 0.031258
+        },
+        {
+          "rank": 3,
+          "id": "RetailBankingCoreDataModel::FICard:attributes:2",
+          "title": "FICard (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FICard) attributes",
+          "text": "Attributes of CDM entity FICard (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FICard) at : overriddenCreatedOn (dateTime); display name Record Created On; Date and time that the record was migrated.; nullable: True; purpose: hasA; source name: overriddencreatedon; source ordering: 31. timeZoneRuleVersionNumber (integer); display name Time Zone Rule Version Number; For internal use only.; nullable: True; purpose: hasA; source name: timezoneruleversionnumber; source ordering: 32. UTCConversionTimeZoneCode (integer); display name UTC Conversion Time Zone Code; Time zone code that was in use when the record was created.; nullable: True; purpose: hasA; source name: utcconv",
+          "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Fi_card.cdm.json",
+          "score": 0.030018
+        }
+      ],
+      "baseline_route": "rewrite_search",
+      "baseline_status": "scored",
+      "baseline_correct": true,
+      "baseline_seconds": 0.801,
+      "messages_sha256": "9b8235cb090acd6925d98b6bc8410368f3f3c2d7648aadadb6ab38470efaaac0",
+      "status": "scored",
+      "predicted_route": "rewrite_search",
+      "correct": true,
+      "search_seconds": 0.052,
+      "router_seconds": 1.604,
+      "end_to_end_seconds": 1.687,
+      "elapsed_seconds": 1.687,
+      "runtime": {
+        "runner": "llamacpp",
+        "size_bytes": 4780353125,
+        "gpu_bytes": 4780353125,
+        "context_length": 4096
+      },
+      "search_runtime": {
+        "runner": "llamacpp",
+        "size_bytes": 335733063,
+        "gpu_bytes": 335733063,
+        "context_length": 2048
+      },
+      "native_timing": {
+        "total_duration": 1589934917,
+        "load_duration": 721792,
+        "prompt_eval_count": 773,
+        "prompt_eval_duration": 1311334000,
+        "eval_count": 13,
+        "eval_duration": 258612000
+      }
+    },
+    {
+      "model": "qwen3.5:9b-q4_K_M",
+      "case_id": "route-test-rewrite-investment",
+      "question": "What does the second one represent?",
+      "context_messages": [
+        {
+          "role": "user",
+          "content": "In RetailBankingCoreDataModel, compare the FHLoan and FHInvestment entities, in that order."
+        },
+        {
+          "role": "assistant",
+          "content": "We can examine the two entity definitions separately."
+        }
+      ],
+      "expected_route": "rewrite_search",
+      "accepted_routes": [
+        "rewrite_search"
+      ],
+      "initial_query": "User: In RetailBankingCoreDataModel, compare the FHLoan and FHInvestment entities, in that order.\nAssistant: We can examine the two entity definitions separately.\nUser: What does the second one represent?",
+      "initial_hits": [
+        {
+          "rank": 1,
+          "id": "RetailBankingCoreDataModel::FHLoan:attributes:12",
+          "title": "FHLoan (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FHLoan) attributes",
+          "text": "Attributes of CDM entity FHLoan (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FHLoan) at : balancedisplayvalue_Base (currency); display name Balance display value (base); Value of the balance display value in base currency.; nullable: True; purpose: hasA; source name: msfsi_balancedisplayvalue_base; source ordering: 101. dayspastdue (integer); display name Days past due; The number of days that the customer has been in overdue status for this loan account.; nullable: True; purpose: hasA; source name: msfsi_dayspastdue; source ordering: 102",
+          "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Fh_loan.cdm.json",
+          "score": 0.030579
+        },
+        {
+          "rank": 2,
+          "id": "manifest:schemaDocuments/FinancialServices/RetailBankingCoreDataModel/RetailBankingCoreDataModel.manifest.cdm.json:declarations:2",
+          "title": "Entities declared by manifest RetailBankingCoreDataModel (RetailBankingCoreDataModel)",
+          "text": "Entities declared in CDM manifest RetailBankingCoreDataModel (RetailBankingCoreDataModel): FHLineOfCredit (LocalEntity) at Fh_creditline.cdm.json/FHLineOfCredit; qualified entity ID RetailBankingCoreDataModel::FHLineOfCredit; FHInvestment (LocalEntity) at Fh_investment.cdm.json/FHInvestment; qualified entity ID RetailBankingCoreDataModel::FHInvestment; FHLoan (LocalEntity) at Fh_loan.cdm.json/FHLoan; qualified entity ID RetailBankingCoreDataModel::FHLoan; FHSaving (LocalEntity) at Fh_saving.cdm.json/FHSaving; qualified entity ID RetailBankingCoreDataModel::FHSaving; FICard (LocalEntity) at Fi_card.cdm.json/FICard; qualified entity ID RetailBankingCoreDataModel::FICard; FIDirectDebit (LocalEn",
+          "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/FinancialServices/RetailBankingCoreDataModel/RetailBankingCoreDataModel.manifest.cdm.json",
+          "score": 0.027118
+        },
+        {
+          "rank": 3,
+          "id": "RetailBankingCoreDataModel::FHLoan:trait-applications:entity",
+          "title": "Traits applied to FHLoan (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FHLoan)",
+          "text": "CDM entity FHLoan (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FHLoan) exhibits these traits: is.localized.describedAs with arguments [{\"name\":\"argument 1\",\"value\":{\"constantValues\":[[\"en\",\"Loans held by the customer with the financial institution.\"]],\"entityShape\":\"localizedTable\"}}], is.localized.displayedAs with arguments [{\"name\":\"argument 1\",\"value\":{\"constantValues\":[[\"en\",\"FH loan\"]],\"entityShape\":\"localizedTable\"}}], is.CDM.entityVersion with arguments [{\"name\":\"versionNumber\",\"value\":\"1.1\"}].",
+          "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Fh_loan.cdm.json",
+          "score": 0.016393
+        }
+      ],
+      "baseline_route": "rewrite_search",
+      "baseline_status": "scored",
+      "baseline_correct": true,
+      "baseline_seconds": 0.789,
+      "messages_sha256": "9f087b22cee6584cb4f7dd49c0e80791b71c0e7a062c2450f9681a19dd50a5e2",
+      "status": "scored",
+      "predicted_route": "rewrite_search",
+      "correct": true,
+      "search_seconds": 0.053,
+      "router_seconds": 1.862,
+      "end_to_end_seconds": 1.941,
+      "elapsed_seconds": 1.941,
+      "runtime": {
+        "runner": "llamacpp",
+        "size_bytes": 4780353125,
+        "gpu_bytes": 4780353125,
+        "context_length": 4096
+      },
+      "search_runtime": {
+        "runner": "llamacpp",
+        "size_bytes": 335733063,
+        "gpu_bytes": 335733063,
+        "context_length": 2048
+      },
+      "native_timing": {
+        "total_duration": 1849883292,
+        "load_duration": 675500,
+        "prompt_eval_count": 955,
+        "prompt_eval_duration": 1687689000,
+        "eval_count": 7,
+        "eval_duration": 142493000
+      }
+    },
+    {
+      "model": "qwen3.5:9b-q4_K_M",
+      "case_id": "route-test-rewrite-payment",
+      "question": "Which of those two authorizes the creditor to collect payments?",
+      "context_messages": [
+        {
+          "role": "user",
+          "content": "I am comparing FIDirectDebit with FIStandingOrder in RetailBankingCoreDataModel."
+        },
+        {
+          "role": "assistant",
+          "content": "Both are recurring payment concepts in the catalog."
+        }
+      ],
+      "expected_route": "rewrite_search",
+      "accepted_routes": [
+        "rewrite_search"
+      ],
+      "initial_query": "User: I am comparing FIDirectDebit with FIStandingOrder in RetailBankingCoreDataModel.\nAssistant: Both are recurring payment concepts in the catalog.\nUser: Which of those two authorizes the creditor to collect payments?",
+      "initial_hits": [
+        {
+          "rank": 1,
+          "id": "RetailBankingCoreDataModel::FIDirectDebit:trait-applications:entity",
+          "title": "Traits applied to FIDirectDebit (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FIDirectDebit)",
+          "text": "CDM entity FIDirectDebit (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FIDirectDebit) exhibits these traits: is.localized.describedAs with arguments [{\"name\":\"argument 1\",\"value\":{\"constantValues\":[[\"en\",\"An automated payment system whereby an account holder authorizes a creditor to debit the customer's bank account at regular intervals.\"]],\"entityShape\":\"localizedTable\"}}], is.localized.displayedAs with arguments [{\"name\":\"argument 1\",\"value\":{\"constantValues\":[[\"en\",\"FI direct debit\"]],\"entityShape\":\"localizedTable\"}}], is.CDM.entityVersion with arguments [{\"name\":\"versionNumber\",\"value\":\"1.1\"}].",
+          "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Fi_directdebit.cdm.json",
+          "score": 0.032266
+        },
+        {
+          "rank": 2,
+          "id": "RetailBankingCoreDataModel::FIDirectDebit:entity",
+          "title": "FIDirectDebit (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FIDirectDebit)",
+          "text": "CDM entity: FIDirectDebit (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FIDirectDebit). Source file: schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Fi_directdebit.cdm.json. An automated payment system whereby an account holder authorizes a creditor to debit the customer's bank account at regular intervals. Selected attribute names: fi_DirectDebitId, createdOn, modifiedOn, statecode, statuscode, importSequenceNumber, overriddenCreatedOn, timeZoneRuleVersionNumber, UTCConversionTimeZoneCode, name, creditoridentifier, creditorname.",
+          "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Fi_directdebit.cdm.json",
+          "score": 0.031754
+        },
+        {
+          "rank": 3,
+          "id": "RetailBankingCoreDataModel::FIStandingOrder:attributes:2",
+          "title": "FIStandingOrder (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FIStandingOrder) attributes",
+          "text": "Attributes of CDM entity FIStandingOrder (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FIStandingOrder) at : overriddenCreatedOn (dateTime); display name Record Created On; Date and time that the record was migrated.; nullable: True; purpose: hasA; source name: overriddencreatedon; source ordering: 31. timeZoneRuleVersionNumber (integer); display name Time Zone Rule Version Number; For internal use only.; nullable: True; purpose: hasA; source name: timezoneruleversionnumber; source ordering: 32. UTCConversionTimeZoneCode (integer); display name UTC Conversion Time Zone Code; Time zone code that was in use when the record was created.; nullable: True; purpose: hasA; so",
+          "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Fi_standingorder.cdm.json",
+          "score": 0.031025
+        }
+      ],
+      "baseline_route": "raw_search",
+      "baseline_status": "scored",
+      "baseline_correct": false,
+      "baseline_seconds": 0.697,
+      "messages_sha256": "f62738de7ad5439f260d9158097618c221f47142f5d8c2bb71a35b2c358aa7e1",
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": false,
+      "search_seconds": 0.118,
+      "router_seconds": 1.943,
+      "end_to_end_seconds": 2.1,
+      "elapsed_seconds": 2.1,
+      "runtime": {
+        "runner": "llamacpp",
+        "size_bytes": 4780353125,
+        "gpu_bytes": 4780353125,
+        "context_length": 4096
+      },
+      "search_runtime": {
+        "runner": "llamacpp",
+        "size_bytes": 335733063,
+        "gpu_bytes": 335733063,
+        "context_length": 2048
+      },
+      "native_timing": {
+        "total_duration": 1927754500,
+        "load_duration": 1920000,
+        "prompt_eval_count": 936,
+        "prompt_eval_duration": 1635457000,
+        "eval_count": 13,
+        "eval_duration": 257935999
+      }
+    },
+    {
+      "model": "qwen3.5:9b-q4_K_M",
+      "case_id": "route-test-no-personal-card",
+      "question": "Who is the actual cardholder on my Visa card?",
+      "context_messages": [
+        {
+          "role": "user",
+          "content": "Earlier we were reading the FICard definition in the Retail Banking model."
+        }
+      ],
+      "expected_route": "no_search",
+      "accepted_routes": [
+        "no_search"
+      ],
+      "initial_query": "User: Earlier we were reading the FICard definition in the Retail Banking model.\nUser: Who is the actual cardholder on my Visa card?",
+      "initial_hits": [
+        {
+          "rank": 1,
+          "id": "RetailBankingCoreDataModel::FICard:entity",
+          "title": "FICard (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FICard)",
+          "text": "CDM entity: FICard (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FICard). Source file: schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Fi_card.cdm.json. A payment card issued by a bank to an account holder enabling the account holder to make payments or purchases, paying back the balance to the issuing bank, plus interest. Selected attribute names: fi_CardId, createdOn, modifiedOn, statecode, statuscode, importSequenceNumber, overriddenCreatedOn, timeZoneRuleVersionNumber, UTCConversionTimeZoneCode, name, activationDate, Cardholder.",
+          "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Fi_card.cdm.json",
+          "score": 0.032522
+        },
+        {
+          "rank": 2,
+          "id": "RetailBankingCoreDataModel::FICard:relationship:1",
+          "title": "FICard (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FICard).Cardholder relationship",
+          "text": "CDM entity FICard (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FICard) has an explicitly referenced relationship through attribute Cardholder to RetailBankingCoreDataModel::Account, RetailBankingCoreDataModel::Contact. The customer associated with the card.",
+          "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Fi_card.cdm.json",
+          "score": 0.032522
+        },
+        {
+          "rank": 3,
+          "id": "RetailBankingCoreDataModel::FICard:attributes:2",
+          "title": "FICard (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FICard) attributes",
+          "text": "Attributes of CDM entity FICard (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FICard) at : overriddenCreatedOn (dateTime); display name Record Created On; Date and time that the record was migrated.; nullable: True; purpose: hasA; source name: overriddencreatedon; source ordering: 31. timeZoneRuleVersionNumber (integer); display name Time Zone Rule Version Number; For internal use only.; nullable: True; purpose: hasA; source name: timezoneruleversionnumber; source ordering: 32. UTCConversionTimeZoneCode (integer); display name UTC Conversion Time Zone Code; Time zone code that was in use when the record was created.; nullable: True; purpose: hasA; source name: utcconv",
+          "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Fi_card.cdm.json",
+          "score": 0.030798
+        }
+      ],
+      "baseline_route": "no_search",
+      "baseline_status": "scored",
+      "baseline_correct": true,
+      "baseline_seconds": 0.789,
+      "messages_sha256": "a9e8f1137a9d90501f6ba04a430c83aa5c12024bfade474c0a7f55a19c80fd6b",
+      "status": "scored",
+      "predicted_route": "no_search",
+      "correct": true,
+      "search_seconds": 0.05,
+      "router_seconds": 1.671,
+      "end_to_end_seconds": 1.752,
+      "elapsed_seconds": 1.752,
+      "runtime": {
+        "runner": "llamacpp",
+        "size_bytes": 4780353125,
+        "gpu_bytes": 4780353125,
+        "context_length": 4096
+      },
+      "search_runtime": {
+        "runner": "llamacpp",
+        "size_bytes": 335733063,
+        "gpu_bytes": 335733063,
+        "context_length": 2048
+      },
+      "native_timing": {
+        "total_duration": 1659528416,
+        "load_duration": 678625,
+        "prompt_eval_count": 817,
+        "prompt_eval_duration": 1379913000,
+        "eval_count": 13,
+        "eval_duration": 254176000
+      }
+    },
+    {
+      "model": "qwen3.5:9b-q4_K_M",
+      "case_id": "route-test-no-current-loan",
+      "question": "How much do I still owe on my personal loan today?",
+      "context_messages": [],
+      "expected_route": "no_search",
+      "accepted_routes": [
+        "no_search"
+      ],
+      "initial_query": "How much do I still owe on my personal loan today?",
+      "initial_hits": [
+        {
+          "rank": 1,
+          "id": "RetailBankingCoreDataModel::FHLoan:attributes:9",
+          "title": "FHLoan (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FHLoan) attributes",
+          "text": "Attributes of CDM entity FHLoan (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FHLoan) at : nextpaymentamount_Base (currency); display name Next payment amount (base); Value of the next payment amount in base currency.; nullable: True; purpose: hasA; source name: msfsi_nextpaymentamount_base; source ordering: 83. nextPaymentAmount_default (decimal); display name Next payment amount (default); Next payment amount converted to default currency of the system.; nullable: True; purpose: hasA; source name: msfsi_nextpaymentamount_default; source ordering: 84. nextPaymentDate (dateTime); display name Next payment date; The date on which the next payment towards the financial ",
+          "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Fh_loan.cdm.json",
+          "score": 0.032266
+        },
+        {
+          "rank": 2,
+          "id": "applicationCommon::Goal:attributes:11",
+          "title": "Goal (applicationCommon; qualified ID applicationCommon::Goal) attributes",
+          "text": "Attributes of CDM entity Goal (applicationCommon; qualified ID applicationCommon::Goal) at : computedTargetAsOfTodayMoneyBase (baseCurrency); display name Today's Target (Money) (Base); Shows the expected amount in base currency for actual value (money type) against the target goal as of the current date.; nullable: True; purpose: hasA; source name: computedtargetasoftodaymoney_base; source ordering: 258. computedTargetAsOfTodayDecimal (decimal); display name Today's Target (Decimal); Shows the expected amount for actual value (decimal type) against the target goal.; nullable: True; purpose: hasA; source name: computedtargetasoftodaydecimal; source ordering: 259. computedTargetAsOfTodayInteg",
+          "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/Goal.cdm.json",
+          "score": 0.016393
+        },
+        {
+          "rank": 3,
+          "id": "RetailBankingCoreDataModel::FHLoan:attributes:12",
+          "title": "FHLoan (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FHLoan) attributes",
+          "text": "Attributes of CDM entity FHLoan (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FHLoan) at : balancedisplayvalue_Base (currency); display name Balance display value (base); Value of the balance display value in base currency.; nullable: True; purpose: hasA; source name: msfsi_balancedisplayvalue_base; source ordering: 101. dayspastdue (integer); display name Days past due; The number of days that the customer has been in overdue status for this loan account.; nullable: True; purpose: hasA; source name: msfsi_dayspastdue; source ordering: 102",
+          "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Fh_loan.cdm.json",
+          "score": 0.016129
+        }
+      ],
+      "baseline_route": "no_search",
+      "baseline_status": "scored",
+      "baseline_correct": true,
+      "baseline_seconds": 0.63,
+      "messages_sha256": "1adecb06b800753a408393eba8acc212ee6cba803b30f25b403899c837d5b2ac",
+      "status": "scored",
+      "predicted_route": "no_search",
+      "correct": true,
+      "search_seconds": 0.044,
+      "router_seconds": 1.975,
+      "end_to_end_seconds": 2.046,
+      "elapsed_seconds": 2.046,
+      "runtime": {
+        "runner": "llamacpp",
+        "size_bytes": 4780353125,
+        "gpu_bytes": 4780353125,
+        "context_length": 4096
+      },
+      "search_runtime": {
+        "runner": "llamacpp",
+        "size_bytes": 335733063,
+        "gpu_bytes": 335733063,
+        "context_length": 2048
+      },
+      "native_timing": {
+        "total_duration": 1962703167,
+        "load_duration": 687334,
+        "prompt_eval_count": 878,
+        "prompt_eval_duration": 1688848000,
+        "eval_count": 13,
+        "eval_duration": 257404000
+      }
+    },
+    {
+      "model": "qwen3.5:9b-q4_K_M",
+      "case_id": "route-test-no-live-status",
+      "question": "Is the production CDM RAG deployment healthy right now?",
+      "context_messages": [],
+      "expected_route": "no_search",
+      "accepted_routes": [
+        "no_search"
+      ],
+      "initial_query": "Is the production CDM RAG deployment healthy right now?",
+      "initial_hits": [
+        {
+          "rank": 1,
+          "id": "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:1:14544f060ffa",
+          "title": "Relationship mappings in manifest foundationCommon (applicationCommon)",
+          "text": "The CDM manifest foundationCommon (applicationCommon) records these relationship mappings from crmCommon/accelerators/healthCare/electronicMedicalRecords/DeviceComponentProductionSpecification.cdm.json/DeviceComponentProductionSpecification: crmCommon/accelerators/healthCare/electronicMedicalRecords/DeviceComponentProductionSpecification.cdm.json/DeviceComponentProductionSpecification.organizationId maps to Organization.cdm.json/Organization attribute organizationId (target Organization.cdm.json/Organization).",
+          "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json",
+          "score": 0.016393
+        },
+        {
+          "rank": 2,
+          "id": "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:1:a8eb7b112875",
+          "title": "Relationship mappings in manifest foundationCommon (applicationCommon)",
+          "text": "The CDM manifest foundationCommon (applicationCommon) records these relationship mappings from crmCommon/sales/LeadProduct.cdm.json/LeadProduct: crmCommon/sales/LeadProduct.cdm.json/LeadProduct.productId maps to Product.cdm.json/Product attribute productId (target Product.cdm.json/Product).",
+          "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json",
+          "score": 0.016393
+        },
+        {
+          "rank": 3,
+          "id": "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:1:5927238cbb95",
+          "title": "Relationship mappings in manifest applicationCommon (applicationCommon)",
+          "text": "The CDM manifest applicationCommon (applicationCommon) records these relationship mappings from foundationCommon/crmCommon/accelerators/healthCare/electronicMedicalRecords/DeviceComponentProductionSpecification.cdm.json/DeviceComponentProductionSpecification: foundationCommon/crmCommon/accelerators/healthCare/electronicMedicalRecords/DeviceComponentProductionSpecification.cdm.json/DeviceComponentProductionSpecification.organizationId maps to Organization.cdm.json/Organization attribute organizationId (target Organization (applicationCommon)). foundationCommon/crmCommon/accelerators/healthCare/electronicMedicalRecords/DeviceComponentProductionSpecification.cdm.json/DeviceComponentProductionSp",
+          "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json",
+          "score": 0.016129
+        }
+      ],
+      "baseline_route": "no_search",
+      "baseline_status": "scored",
+      "baseline_correct": true,
+      "baseline_seconds": 0.74,
+      "messages_sha256": "81c13831fb751e078165c9f72a6d212629f3d287db23d78087a026e82a2ee4aa",
+      "status": "scored",
+      "predicted_route": "no_search",
+      "correct": true,
+      "search_seconds": 0.075,
+      "router_seconds": 1.906,
+      "end_to_end_seconds": 2.01,
+      "elapsed_seconds": 2.01,
+      "runtime": {
+        "runner": "llamacpp",
+        "size_bytes": 4780353125,
+        "gpu_bytes": 4780353125,
+        "context_length": 4096
+      },
+      "search_runtime": {
+        "runner": "llamacpp",
+        "size_bytes": 335733063,
+        "gpu_bytes": 335733063,
+        "context_length": 2048
+      },
+      "native_timing": {
+        "total_duration": 1893786000,
+        "load_duration": 1141333,
+        "prompt_eval_count": 739,
+        "prompt_eval_duration": 1614868000,
+        "eval_count": 13,
+        "eval_duration": 253004000
+      }
+    },
+    {
+      "model": "qwen3.5:9b-q4_K_M",
+      "case_id": "route-test-no-mixed",
+      "question": "Explain the applicationCommon Contact schema, and tell me the current balance of my personal bank account.",
+      "context_messages": [],
+      "expected_route": "no_search",
+      "accepted_routes": [
+        "no_search"
+      ],
+      "initial_query": "Explain the applicationCommon Contact schema, and tell me the current balance of my personal bank account.",
+      "initial_hits": [
+        {
+          "rank": 1,
+          "id": "applicationCommon::Account:attributes:12",
+          "title": "Account (applicationCommon; qualified ID applicationCommon::Account) attributes",
+          "text": "Attributes of CDM entity Account (applicationCommon; qualified ID applicationCommon::Account) at : stageId (guid); display name Process Stage; Shows the ID of the stage.; nullable: True; purpose: hasA; source name: stageid; source ordering: 210. processId (guid); display name Process; Shows the ID of the process.; nullable: True; purpose: hasA; source name: processid; source ordering: 211. entityImageId (guid); display name Entity Image Id; For internal use only.; nullable: True; purpose: hasA; source name: entityimageid; source ordering: 215. timeSpentByMeOnEmailAndMeetings (email); display name Time Spent by me; Total time spent for emails (read and write) and meetings by me in relation to",
+          "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/Account.cdm.json",
+          "score": 0.016393
+        },
+        {
+          "rank": 2,
+          "id": "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:2:8614dc0feeb1",
+          "title": "Relationship mappings in manifest applicationCommon (applicationCommon)",
+          "text": "The CDM manifest applicationCommon (applicationCommon) records these relationship mappings from foundationCommon/crmCommon/accelerators/financialServices/banking/Contact.cdm.json/Contact: foundationCommon/crmCommon/accelerators/financialServices/banking/Contact.cdm.json/Contact.modifiedBy maps to User.cdm.json/User attribute systemUserId (target User (applicationCommon)). foundationCommon/crmCommon/accelerators/financialServices/banking/Contact.cdm.json/Contact.modifiedOnBehalfBy maps to User.cdm.json/User attribute systemUserId (target User (applicationCommon)). foundationCommon/crmCommon/accelerators/financialServices/banking/Contact.cdm.json/Contact.ownerId maps to User.cdm.json/User attr",
+          "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json",
+          "score": 0.016393
+        },
+        {
+          "rank": 3,
+          "id": "applicationCommon::Contact:attributes:16",
+          "title": "Contact (applicationCommon; qualified ID applicationCommon::Contact) attributes",
+          "text": "Attributes of CDM entity Contact (applicationCommon; qualified ID applicationCommon::Contact) at : onHoldTime (integer); display name On Hold Time (Minutes); Shows how long, in minutes, that the record was on hold.; nullable: True; purpose: hasA; source name: onholdtime; source ordering: 246. lastOnHoldTime (dateTime); display name Last On Hold Time; Contains the date and time stamp of the last on hold time.; nullable: True; purpose: hasA; source name: lastonholdtime; source ordering: 247. followEmail (boolean); display name Follow Email Activity; Information about whether to allow following email activity like opens, attachment views and link clicks for emails sent to the contact.; nullable",
+          "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/Contact.cdm.json",
+          "score": 0.016129
+        }
+      ],
+      "baseline_route": "no_search",
+      "baseline_status": "scored",
+      "baseline_correct": true,
+      "baseline_seconds": 0.736,
+      "messages_sha256": "1afdcbf0a250859eda62a24c712d07ef3e7084bbed2e0d7e67cfb06e33c49a1b",
+      "status": "scored",
+      "predicted_route": "no_search",
+      "correct": true,
+      "search_seconds": 0.049,
+      "router_seconds": 1.786,
+      "end_to_end_seconds": 1.867,
+      "elapsed_seconds": 1.867,
+      "runtime": {
+        "runner": "llamacpp",
+        "size_bytes": 4780353125,
+        "gpu_bytes": 4780353125,
+        "context_length": 4096
+      },
+      "search_runtime": {
+        "runner": "llamacpp",
+        "size_bytes": 335733063,
+        "gpu_bytes": 335733063,
+        "context_length": 2048
+      },
+      "native_timing": {
+        "total_duration": 1773385542,
+        "load_duration": 903250,
+        "prompt_eval_count": 905,
+        "prompt_eval_duration": 1502145000,
+        "eval_count": 13,
+        "eval_duration": 257486000
+      }
+    },
+    {
+      "model": "qwen3.5:9b-q4_K_M",
+      "case_id": "route-test-no-interest",
+      "question": "What is today's mortgage interest rate at my bank?",
+      "context_messages": [
+        {
+          "role": "user",
+          "content": "We were discussing loan entities in CDM."
+        }
+      ],
+      "expected_route": "no_search",
+      "accepted_routes": [
+        "no_search"
+      ],
+      "initial_query": "User: We were discussing loan entities in CDM.\nUser: What is today's mortgage interest rate at my bank?",
+      "initial_hits": [
+        {
+          "rank": 1,
+          "id": "RetailBankingCoreDataModel::FHLoan:attributes:7",
+          "title": "FHLoan (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FHLoan) attributes",
+          "text": "Attributes of CDM entity FHLoan (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FHLoan) at : interestrate (decimal); display name Interest rate; The rate of interest charged to the loan borrower during a defined period or term during the course of a loan.; nullable: True; purpose: hasA; source name: msfsi_interestrate; source ordering: 69. interestReviewPeriod (string); display name Interest review period; The time period that defines the periodic interest rate timeframe.; nullable: True; purpose: hasA; source name: msfsi_interestreviewperiod; source ordering: 70. interestType (listLookup); display name Interest type; The type of interest charged on the loan: fixed, per",
+          "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Fh_loan.cdm.json",
+          "score": 0.032787
+        },
+        {
+          "rank": 2,
+          "id": "RetailBankingCoreDataModel::FHLoan:trait-applications:attributes:5",
+          "title": "Attribute traits of FHLoan (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FHLoan)",
+          "text": "Traits applied to attributes of CDM entity FHLoan (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FHLoan): integrationKey (string): applied traits: is.requiredAtLevel with arguments [{\"name\":\"level\",\"value\":\"applicationrequired\"}], is.localized.describedAs with arguments [{\"name\":\"argument 1\",\"value\":{\"constantValues\":[[\"en\",\"Used by the system integrator to uniquely define the data record.\"]],\"entityShape\":\"localizedTable\"}}], is.localized.displayedAs with arguments [{\"name\":\"argument 1\",\"value\":{\"constantValues\":[[\"en\",\"Integration key\"]],\"entityShape\":\"localizedTable\"}}], is.constrained with arguments [{\"name\":\"maximumLength\",\"value\":\"100\"}]; interestArrears (currenc",
+          "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Fh_loan.cdm.json",
+          "score": 0.016129
+        },
+        {
+          "rank": 3,
+          "id": "RetailBankingCoreDataModel::FIOverdraft:attributes:4",
+          "title": "FIOverdraft (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FIOverdraft) attributes",
+          "text": "Attributes of CDM entity FIOverdraft (RetailBankingCoreDataModel; qualified ID RetailBankingCoreDataModel::FIOverdraft) at : overdraftRate (decimal); display name Overdraft rate; The interest rate that will be charged to the customer for repayment, if the account falls into overdraft.; nullable: True; purpose: hasA; source name: msfsi_overdraftrate; source ordering: 47",
+          "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/FinancialServices/RetailBankingCoreDataModel/Fi_overdraft.cdm.json",
+          "score": 0.016129
+        }
+      ],
+      "baseline_route": "no_search",
+      "baseline_status": "scored",
+      "baseline_correct": true,
+      "baseline_seconds": 0.691,
+      "messages_sha256": "e7831a4e56a4b863a9731a0b3e8a31c383de346e8597b982fc88751b2349f11e",
+      "status": "scored",
+      "predicted_route": "no_search",
+      "correct": true,
+      "search_seconds": 0.054,
+      "router_seconds": 2.164,
+      "end_to_end_seconds": 2.248,
+      "elapsed_seconds": 2.248,
+      "runtime": {
+        "runner": "llamacpp",
+        "size_bytes": 4780353125,
+        "gpu_bytes": 4780353125,
+        "context_length": 4096
+      },
+      "search_runtime": {
+        "runner": "llamacpp",
+        "size_bytes": 335733063,
+        "gpu_bytes": 335733063,
+        "context_length": 2048
+      },
+      "native_timing": {
+        "total_duration": 2150470708,
+        "load_duration": 1169917,
+        "prompt_eval_count": 875,
+        "prompt_eval_duration": 1875570000,
+        "eval_count": 13,
+        "eval_duration": 254063000
+      }
+    },
+    {
+      "model": "qwen3.5:9b-q4_K_M",
+      "case_id": "route-test-no-weather",
+      "question": "Will it rain in Berlin tomorrow?",
+      "context_messages": [],
+      "expected_route": "no_search",
+      "accepted_routes": [
+        "no_search"
+      ],
+      "initial_query": "Will it rain in Berlin tomorrow?",
+      "initial_hits": [
+        {
+          "rank": 1,
+          "id": "manifest-declaration:manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:accelerators:overview",
+          "title": "Manifest accelerators (applicationCommon)",
+          "text": "CDM manifest accelerators (applicationCommon). Declared child manifest; its source is not expanded in this view. Document version: unspecified. JSON schema semantic version: unspecified. It declares 0 entities, of which 0 are loaded in this catalog; it contains 0 relationship mappings and 0 child manifests. Imports: none recorded. Traits: none recorded. Source path: schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/accelerators/accelerators.manifest.cdm.json. This child manifest is declared but not expanded in the catalog.",
+          "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/accelerators/accelerators.manifest.cdm.json",
+          "score": 0.023912
+        },
+        {
+          "rank": 2,
+          "id": "manifest-declaration:manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:sales:overview",
+          "title": "Manifest sales (applicationCommon)",
+          "text": "CDM manifest sales (applicationCommon). Declared child manifest; its source is not expanded in this view. Document version: unspecified. JSON schema semantic version: unspecified. It declares 0 entities, of which 0 are loaded in this catalog; it contains 0 relationship mappings and 0 child manifests. Imports: none recorded. Traits: none recorded. Source path: schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/sales/sales.manifest.cdm.json. This child manifest is declared but not expanded in the catalog.",
+          "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/sales/sales.manifest.cdm.json",
+          "score": 0.023821
+        },
+        {
+          "rank": 3,
+          "id": "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:1:9ea1ee00c2cd",
+          "title": "Relationship mappings in manifest foundationCommon (applicationCommon)",
+          "text": "The CDM manifest foundationCommon (applicationCommon) records these relationship mappings from crmCommon/accelerators/financialServices/banking/Opportunity.cdm.json/Opportunity: crmCommon/accelerators/financialServices/banking/Opportunity.cdm.json/Opportunity.priceLevelId maps to PriceList.cdm.json/PriceList attribute priceLevelId (target PriceList.cdm.json/PriceList).",
+          "uri": "https://github.com/microsoft/CDM/blob/dd21d715e05ebf740a11356c80b5c3b4c38a89c2/schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json",
+          "score": 0.016393
+        }
+      ],
+      "baseline_route": "no_search",
+      "baseline_status": "scored",
+      "baseline_correct": true,
+      "baseline_seconds": 0.626,
+      "messages_sha256": "4abedfc77c1b363b71b5860281d504b7897534e9238dc4fce6700c2372b9d7a2",
+      "status": "scored",
+      "predicted_route": "no_search",
+      "correct": true,
+      "search_seconds": 0.077,
+      "router_seconds": 1.55,
+      "end_to_end_seconds": 1.652,
+      "elapsed_seconds": 1.652,
+      "runtime": {
+        "runner": "llamacpp",
+        "size_bytes": 4780353125,
+        "gpu_bytes": 4780353125,
+        "context_length": 4096
+      },
+      "search_runtime": {
+        "runner": "llamacpp",
+        "size_bytes": 335733063,
+        "gpu_bytes": 335733063,
+        "context_length": 2048
+      },
+      "native_timing": {
+        "total_duration": 1538317042,
+        "load_duration": 1089250,
+        "prompt_eval_count": 744,
+        "prompt_eval_duration": 1248564000,
+        "eval_count": 13,
+        "eval_duration": 255745000
+      }
+    }
+  ],
+  "summaries": {
+    "qwen3:4b": {
+      "attempted": 18,
+      "scored": 18,
+      "errors": 0,
+      "correct": 12,
+      "accuracy": 0.6666666666666666,
+      "search_gate_correct": 18,
+      "search_gate_accuracy": 1.0,
+      "false_search": 0,
+      "false_no_search": 0,
+      "three_way_evaluable": 18,
+      "macro_f1": 0.5555555555555555,
+      "mean_seconds": 1.092277777777778,
+      "classes": {
+        "raw_search": {
+          "expected": 6,
+          "predicted": 12,
+          "correct": 6,
+          "precision": 0.5,
+          "recall": 1.0,
+          "f1": 0.6666666666666666
+        },
+        "rewrite_search": {
+          "expected": 6,
+          "predicted": 0,
+          "correct": 0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "no_search": {
+          "expected": 6,
+          "predicted": 6,
+          "correct": 6,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        }
+      },
+      "mean_end_to_end_seconds": 1.092277777777778,
+      "mean_search_seconds": 0.08005555555555556,
+      "mean_router_seconds": 0.9810555555555555
+    },
+    "qwen3.5:9b-q4_K_M": {
+      "attempted": 18,
+      "scored": 18,
+      "errors": 0,
+      "correct": 14,
+      "accuracy": 0.7777777777777778,
+      "search_gate_correct": 18,
+      "search_gate_accuracy": 1.0,
+      "false_search": 0,
+      "false_no_search": 0,
+      "three_way_evaluable": 18,
+      "macro_f1": 0.75,
+      "mean_seconds": 2.2313333333333336,
+      "classes": {
+        "raw_search": {
+          "expected": 6,
+          "predicted": 10,
+          "correct": 6,
+          "precision": 0.6,
+          "recall": 1.0,
+          "f1": 0.7499999999999999
+        },
+        "rewrite_search": {
+          "expected": 6,
+          "predicted": 2,
+          "correct": 2,
+          "precision": 1.0,
+          "recall": 0.3333333333333333,
+          "f1": 0.5
+        },
+        "no_search": {
+          "expected": 6,
+          "predicted": 6,
+          "correct": 6,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        }
+      },
+      "mean_end_to_end_seconds": 2.2313333333333336,
+      "mean_search_seconds": 0.057444444444444444,
+      "mean_router_seconds": 2.144388888888889
+    }
+  },
+  "recommendation": {
+    "model": "qwen3.5:9b-q4_K_M",
+    "reason": "Qwen 3.5 9B is the provisional evidence-aware routing candidate: it scored 14/18 on the three-way set and 32/32 on the separate binary scope set, versus 12/18 and 29/32 for 4B, at about 2.23s vs 1.09s and 2.03s vs 0.95s end-to-end. The 27B model was not tested with evidence-aware routing. Small, previously inspected provisional sets and one run do not establish production readiness."
+  }
+}

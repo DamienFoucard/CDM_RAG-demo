@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CDM RAG · Design overview</title>
+  <style>
+    :root{color-scheme:light;--ink:#17231e;--muted:#627168;--green:#1d7653;--line:#d9e5dc;--soft:#f3f7f3}
+    *{box-sizing:border-box}
+    body{margin:0;background:#f4f7f4;color:var(--ink);font:16px/1.6 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+    .wrap{max-width:1040px;margin:0 auto;padding:30px 28px 64px}
+    header{display:flex;justify-content:space-between;align-items:center;gap:18px;border-bottom:1px solid var(--line);padding-bottom:20px}
+    .brand{font-weight:800;font-size:18px}.brand small{display:block;color:var(--muted);font-size:13px;font-weight:600}
+    nav{display:flex;gap:18px;align-items:center;flex-wrap:wrap}nav a{color:var(--green);font-weight:700}
+    h1{font:500 clamp(40px,6vw,62px)/1.05 Georgia,"Times New Roman",serif;letter-spacing:-.035em;margin:42px 0 12px}
+    .intro{max-width:850px;color:var(--muted);font-size:18px;margin:0 0 25px}
+    .figure,.section{background:#fff;border:1px solid var(--line);border-radius:20px;padding:22px;margin:18px 0;box-shadow:0 8px 28px #17231e08}
+    figure{margin:0}.figure img{display:block;width:100%;height:auto;border-radius:12px}.figure figcaption{margin-top:12px;color:var(--muted);font-size:14px}
+    h2{font-size:23px;margin:0 0 14px;letter-spacing:-.02em}h3{font-size:17px;margin:0 0 6px}
+    .flow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;counter-reset:step}
+    .step{position:relative;min-height:130px;border:1px solid var(--line);border-radius:14px;padding:15px;background:#fbfcfb;counter-increment:step}
+    .step::before{content:counter(step);display:grid;place-items:center;width:27px;height:27px;margin-bottom:12px;border-radius:50%;background:var(--green);color:#fff;font-size:13px;font-weight:800}
+    .step p,.component p{margin:0;color:var(--muted);font-size:14px}
+    .components{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+    .component{border-left:3px solid var(--green);padding:4px 12px 5px;background:var(--soft)}
+    .component h3{font-size:16px}.links{display:flex;gap:12px;flex-wrap:wrap;margin-top:16px}
+    .link-button{display:inline-block;padding:9px 13px;border:1px solid var(--line);border-radius:10px;color:var(--green);font-weight:750;text-decoration:none;background:#fff}
+    .link-button:hover{background:var(--soft)}nav a:focus-visible,.link-button:focus-visible{outline:3px solid #93c5aa;outline-offset:3px;border-radius:4px}
+    .meta{color:var(--muted);font-size:13px}
+    @media(max-width:760px){.wrap{padding:22px 16px 48px}header{align-items:flex-start}nav{gap:10px;font-size:14px}h1{margin-top:32px}.flow{grid-template-columns:repeat(2,minmax(0,1fr))}.components{grid-template-columns:1fr}.section,.figure{padding:17px;border-radius:17px}}
+    @media(max-width:430px){.flow{grid-template-columns:1fr}.step{min-height:0}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="brand">CDM RAG<small>Microsoft Common Data Model · design overview</small></div>
+      <nav aria-label="Documentation navigation"><a href="/docs">Documentation home</a><a href="/docs/api">API reference</a><a href="/home">Home</a><a href="/RAG">Ask a question</a><a href="/graph">Explore graph</a><a href="/benchmarks">Evaluations</a><a id="api-tokens-nav" href="/api-tokens" hidden>API tokens</a></nav>
+    </header>
+    <main>
+      <h1>How CDM RAG works.</h1>
+      <p class="intro">A local FastAPI service retrieves source-linked passages from a pinned Microsoft CDM schema catalog, then uses an Ollama-served model to write a cited answer. The browser streams progress and output as each request runs.</p>
+
+      <section class="figure" aria-label="Application walkthrough diagram reused from the README">
+        <figure>
+          <img src="/docs/images/cdm-rag-readme-tour.svg" alt="CDM RAG walkthrough: enter a question, follow live retrieval and generation progress, and inspect a cited answer and evaluation results." loading="lazy">
+          <figcaption>This is the same walkthrough diagram used at the top of the repository README.</figcaption>
+        </figure>
+      </section>
+
+      <section class="section">
+        <h2>Request path</h2>
+        <div class="flow">
+          <article class="step"><h3>Check the question</h3><p>The API assigns a query ID, records the request, then checks relevance and scope before retrieval.</p></article>
+          <article class="step"><h3>Choose a route</h3><p>The configured router decides whether to search. With the optional evidence-aware backend, it first inspects up to three hybrid-search excerpts without LLM reranking, then a separate query model rewrites only if requested. Other backends make their decision without that preliminary search.</p></article>
+          <article class="step"><h3>Retrieve evidence</h3><p>Chroma semantic search and BM25 lexical search find passages across entities, attributes, relationships, manifests, traits, and inheritance. Eligible entity relationship questions can use explicit graph edges.</p></article>
+          <article class="step"><h3>Write and verify</h3><p>The generator receives the top passages. Citation normalization and source validation run before the answer is returned.</p></article>
+          <article class="step"><h3>Stream and record</h3><p>Status events and answer tokens stream to the UI. The final outcome and stage timings are appended to a JSONL log.</p></article>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Main components</h2>
+        <div class="components">
+          <article class="component"><h3>FastAPI · Python</h3><p>Validates HTTP requests, coordinates retrieval and model calls, streams results, and serves the web pages and OpenAPI schema.</p></article>
+          <article class="component"><h3>ChromaDB + BM25 · Python</h3><p>ChromaDB stores local semantic vectors; BM25 ranks matching words. Reciprocal-rank fusion combines the two lists.</p></article>
+          <article class="component"><h3>Ollama · host runtime</h3><p>Serves embedding and chat models. On supported hosts it can use Metal on Apple Silicon or CUDA on an NVIDIA GPU.</p></article>
+          <article class="component"><h3>JSONL · local disk</h3><p>Query logs and evaluation runs are stored as files. No separate tracking service or SQL database is required.</p></article>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Data and evaluation</h2>
+        <p>The bundled catalog is built from a pinned Microsoft CDM source snapshot. The retrieval index covers all extracted catalog knowledge, including entity definitions, attributes, relationships, manifests, traits, and inheritance. It contains source links, not customer or account records. The catalog is a documented subset of the full Microsoft CDM repository. At startup the app builds or reuses a local Chroma index and an in-memory lexical ranker.</p>
+        <p>The Evaluations hub links to saved evaluations for answer generation, held-out graph link prediction, query retrieval, and routing decisions. The detailed evaluation APIs still support new answer, retrieval, relationship, and reranking runs, with completed results stored as JSONL files on disk.</p>
+        <div class="links">
+          <a class="link-button" href="/benchmarks">Open evaluations</a>
+          <a class="link-button" href="/docs/api">Browse API endpoints</a>
+        </div>
+        <p class="meta">For more integration details, see the <a href="/docs">documentation</a>.</p>
+      </section>
+    </main>
+  </div>
+<script>
+fetch('/api/v1/api-tokens',{cache:'no-store'}).then(response=>{
+  if(response.ok)document.getElementById('api-tokens-nav').hidden=false;
+}).catch(()=>{});
+</script>
+</body>
+</html>

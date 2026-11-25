@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CDM RAG · Evaluations</title>
+  <style>
+    :root{color-scheme:light;--ink:#17231e;--muted:#627168;--green:#1d7653;--line:#d9e5dc;--soft:#f3f7f3}
+    *{box-sizing:border-box}
+    body{margin:0;background:#f4f7f4;color:var(--ink);font:16px/1.55 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+    .wrap{max-width:1120px;margin:0 auto;padding:30px 28px 64px}
+    header{display:flex;justify-content:space-between;align-items:center;gap:18px;border-bottom:1px solid var(--line);padding-bottom:20px}
+    .brand{font-weight:800;font-size:18px}.brand small{display:block;color:var(--muted);font-size:13px;font-weight:600}
+    .links{display:flex;gap:22px;align-items:center;flex-wrap:wrap}.links a{color:var(--green);font-weight:700}
+    h1{font:500 clamp(42px,7vw,72px)/1.02 Georgia,"Times New Roman",serif;letter-spacing:-.04em;margin:52px 0 16px}
+    .intro{max-width:820px;color:var(--muted);font-size:19px;margin:0 0 32px}
+    .evaluation-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:18px}
+    .card{display:flex;flex-direction:column;align-items:flex-start;background:#fff;border:1px solid var(--line);border-radius:22px;padding:26px;box-shadow:0 8px 28px #17231e08}
+    .eyebrow{margin:0 0 10px;color:var(--green);font-size:13px;font-weight:800;letter-spacing:.06em;text-transform:uppercase}
+    h2{font-size:25px;line-height:1.2;margin:0 0 10px;letter-spacing:-.02em}
+    .card p:not(.eyebrow){color:var(--muted);margin:0 0 18px}
+    .card-link{display:inline-flex;align-items:center;gap:8px;margin-top:auto;padding:11px 16px;border-radius:11px;background:var(--green);color:#fff;text-decoration:none;font-weight:800}
+    .card-link:hover{background:#175d41}.card-link:focus-visible,.links a:focus-visible{outline:3px solid #93c5aa;outline-offset:3px;border-radius:4px}
+    @media(max-width:700px){.wrap{padding:22px 16px 48px}header{align-items:flex-start}.links{gap:12px;font-size:14px}h1{margin-top:38px}.evaluation-grid{grid-template-columns:1fr}.card{padding:21px;border-radius:18px}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="brand">CDM RAG<small>Microsoft Common Data Model · evaluation</small></div>
+      <nav class="links" aria-label="Main navigation"><a href="/home">Home</a><a href="/RAG">Ask a question</a><a href="/graph">Explore graph</a><a href="/docs">Documentation</a><a id="api-tokens-nav" href="/api-tokens" hidden>API tokens</a></nav>
+    </header>
+    <main>
+      <h1>Evaluations.</h1>
+      <p class="intro">Choose an evaluation to inspect its results and methods.</p>
+      <div class="evaluation-grid">
+        <section class="card" aria-labelledby="embedding-heading">
+          <p class="eyebrow">Embeddings</p>
+          <h2 id="embedding-heading">Embedding evaluation</h2>
+          <p>Compare graph embeddings on held-out link prediction.</p>
+          <a class="card-link" href="/embedding-benchmark">Open embedding evaluation <span aria-hidden="true">→</span></a>
+        </section>
+        <section class="card" aria-labelledby="routing-heading">
+          <p class="eyebrow">Routing</p>
+          <h2 id="routing-heading">Routing evaluation</h2>
+          <p>Compare decision models independently of query generation and retrieval.</p>
+          <a class="card-link" href="/routing-benchmark">Open routing evaluation <span aria-hidden="true">→</span></a>
+        </section>
+        <section class="card" aria-labelledby="retrieval-heading">
+          <p class="eyebrow">Retrieval</p>
+          <h2 id="retrieval-heading">Retrieval evaluation</h2>
+          <p>Compare a first search with an optional evidence-informed follow-up.</p>
+          <a class="card-link" href="/retrieval-benchmark">Open retrieval evaluation <span aria-hidden="true">→</span></a>
+        </section>
+        <section class="card" aria-labelledby="answer-heading">
+          <p class="eyebrow">Answers</p>
+          <h2 id="answer-heading">Answer evaluation</h2>
+          <p>Compare answer models against fixed references and retrieved evidence.</p>
+          <a class="card-link" href="/benchmark">Open answer evaluation <span aria-hidden="true">→</span></a>
+        </section>
+      </div>
+    </main>
+  </div>
+<script>
+fetch('/api/v1/api-tokens',{cache:'no-store'}).then(response=>{
+  if(response.ok)document.getElementById('api-tokens-nav').hidden=false;
+}).catch(()=>{});
+</script>
+</body>
+</html>

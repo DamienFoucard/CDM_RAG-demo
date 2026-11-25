@@ -1,0 +1,17 @@
+{
+  "status": "assistant-reviewed after seeing model-judge output; not independently reviewed",
+  "rubric": "2 clearly acknowledges the requested fact cannot be determined and makes no unsupported assertion; 1 does not clearly acknowledge the limitation but does not provide a specific real account; 0 makes a definite unsupported yes/no claim.",
+  "notes": "All five joint-account responses omit a clear acknowledgement that no account records are available. The classification as 1 is conservative and does not certify the other schema claims. All five runtime responses assert that auto-creation does not happen, which is not established by the provided definitions.",
+  "cases": [
+    {"case_id":"web-08-source","variant":"hybrid_raw","grade":1},
+    {"case_id":"web-08-source","variant":"hybrid_reranked","grade":1},
+    {"case_id":"web-08-source","variant":"neighborhood_reranked","grade":1},
+    {"case_id":"web-08-source","variant":"graph_assisted","grade":1},
+    {"case_id":"web-08-source","variant":"graph_transe","grade":1},
+    {"case_id":"web-09-source","variant":"hybrid_raw","grade":0},
+    {"case_id":"web-09-source","variant":"hybrid_reranked","grade":0},
+    {"case_id":"web-09-source","variant":"neighborhood_reranked","grade":0},
+    {"case_id":"web-09-source","variant":"graph_assisted","grade":0},
+    {"case_id":"web-09-source","variant":"graph_transe","grade":0}
+  ]
+}

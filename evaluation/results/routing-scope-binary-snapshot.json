@@ -1,0 +1,2572 @@
+{
+  "status": "completed",
+  "dataset_id": "cdm-routing-scope-binary-v1",
+  "dataset_sha256": "091c81e547d45757fdfcf8159735d45067fa0ee17484cdbd479d8e7846552f7b",
+  "split": "test",
+  "models": {
+    "qwen3:0.6b": {
+      "name": "qwen3:0.6b",
+      "digest": "7df6b6e09427a769808717c0a93cadc4ae99ed4eb8bf5ca557c90846becea435",
+      "size": 522653767
+    },
+    "qwen3:4b": {
+      "name": "qwen3:4b",
+      "digest": "359d7dd4bcdab3d86b87d73ac27966f4dbb9f5efdfcc75d34a8764a09474fae7",
+      "size": 2497293931
+    },
+    "qwen3.5:9b-q4_K_M": {
+      "name": "qwen3.5:9b-q4_K_M",
+      "digest": "56671c2ab9385f9cfcb404638e32cd62d88e3501d44822208363c010179a3c90",
+      "size": 6550825550
+    },
+    "gemma4:12b": {
+      "name": "gemma4:12b",
+      "digest": "c7597fc90b86aff6965317f37dd5465402284e26382d9b4bf2dfe3ef1491f4b6",
+      "size": 7714091504
+    },
+    "qwen3.5:27b-q4_K_M": {
+      "name": "qwen3.5:27b-q4_K_M",
+      "digest": "64ae5b1d651fb2709d5928ccb8dcfb4bb2cc9c2c8001ac34497e36a6cf905b59",
+      "size": 17478556591
+    }
+  },
+  "summaries": {
+    "qwen3:0.6b": {
+      "attempted": 32,
+      "scored": 32,
+      "errors": 0,
+      "correct": 13,
+      "accuracy": 0.40625,
+      "search_gate_correct": 13,
+      "search_gate_accuracy": 0.40625,
+      "false_search": 19,
+      "false_no_search": 0,
+      "three_way_evaluable": 20,
+      "macro_f1": null,
+      "mean_seconds": 0.123,
+      "classes": {
+        "raw_search": {
+          "expected": 0,
+          "predicted": 10,
+          "correct": 0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "rewrite_search": {
+          "expected": 0,
+          "predicted": 9,
+          "correct": 0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "no_search": {
+          "expected": 20,
+          "predicted": 1,
+          "correct": 1,
+          "precision": 1.0,
+          "recall": 0.05,
+          "f1": 0.09523809523809523
+        }
+      }
+    },
+    "qwen3:4b": {
+      "attempted": 32,
+      "scored": 32,
+      "errors": 0,
+      "correct": 29,
+      "accuracy": 0.90625,
+      "search_gate_correct": 29,
+      "search_gate_accuracy": 0.90625,
+      "false_search": 3,
+      "false_no_search": 0,
+      "three_way_evaluable": 20,
+      "macro_f1": null,
+      "mean_seconds": 0.28303125,
+      "classes": {
+        "raw_search": {
+          "expected": 0,
+          "predicted": 0,
+          "correct": 0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "rewrite_search": {
+          "expected": 0,
+          "predicted": 3,
+          "correct": 0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "no_search": {
+          "expected": 20,
+          "predicted": 17,
+          "correct": 17,
+          "precision": 1.0,
+          "recall": 0.85,
+          "f1": 0.9189189189189189
+        }
+      }
+    },
+    "qwen3.5:9b-q4_K_M": {
+      "attempted": 32,
+      "scored": 32,
+      "errors": 0,
+      "correct": 29,
+      "accuracy": 0.90625,
+      "search_gate_correct": 29,
+      "search_gate_accuracy": 0.90625,
+      "false_search": 3,
+      "false_no_search": 0,
+      "three_way_evaluable": 20,
+      "macro_f1": null,
+      "mean_seconds": 0.85865625,
+      "classes": {
+        "raw_search": {
+          "expected": 0,
+          "predicted": 2,
+          "correct": 0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "rewrite_search": {
+          "expected": 0,
+          "predicted": 1,
+          "correct": 0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "no_search": {
+          "expected": 20,
+          "predicted": 17,
+          "correct": 17,
+          "precision": 1.0,
+          "recall": 0.85,
+          "f1": 0.9189189189189189
+        }
+      }
+    },
+    "gemma4:12b": {
+      "attempted": 32,
+      "scored": 32,
+      "errors": 0,
+      "correct": 29,
+      "accuracy": 0.90625,
+      "search_gate_correct": 29,
+      "search_gate_accuracy": 0.90625,
+      "false_search": 3,
+      "false_no_search": 0,
+      "three_way_evaluable": 20,
+      "macro_f1": null,
+      "mean_seconds": 0.53828125,
+      "classes": {
+        "raw_search": {
+          "expected": 0,
+          "predicted": 3,
+          "correct": 0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "rewrite_search": {
+          "expected": 0,
+          "predicted": 0,
+          "correct": 0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "no_search": {
+          "expected": 20,
+          "predicted": 17,
+          "correct": 17,
+          "precision": 1.0,
+          "recall": 0.85,
+          "f1": 0.9189189189189189
+        }
+      }
+    },
+    "qwen3.5:27b-q4_K_M": {
+      "attempted": 32,
+      "scored": 32,
+      "errors": 0,
+      "correct": 30,
+      "accuracy": 0.9375,
+      "search_gate_correct": 30,
+      "search_gate_accuracy": 0.9375,
+      "false_search": 2,
+      "false_no_search": 0,
+      "three_way_evaluable": 20,
+      "macro_f1": null,
+      "mean_seconds": 2.7701875,
+      "classes": {
+        "raw_search": {
+          "expected": 0,
+          "predicted": 2,
+          "correct": 0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "rewrite_search": {
+          "expected": 0,
+          "predicted": 0,
+          "correct": 0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "no_search": {
+          "expected": 20,
+          "predicted": 18,
+          "correct": 18,
+          "precision": 1.0,
+          "recall": 0.9,
+          "f1": 0.9473684210526316
+        }
+      }
+    }
+  },
+  "rows": [
+    {
+      "model": "qwen3:0.6b",
+      "case_id": "t01",
+      "question": "Which entity has a field for an available account balance?",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "raw_search",
+        "rewrite_search"
+      ],
+      "status": "scored",
+      "predicted_route": "rewrite_search",
+      "correct": true,
+      "elapsed_seconds": 0.906
+    },
+    {
+      "model": "qwen3:0.6b",
+      "case_id": "t02",
+      "question": "Which definitions link people to their financial holdings?",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "raw_search",
+        "rewrite_search"
+      ],
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": true,
+      "elapsed_seconds": 0.088
+    },
+    {
+      "model": "qwen3:0.6b",
+      "case_id": "t03",
+      "question": "What attributes can describe a business account?",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "raw_search",
+        "rewrite_search"
+      ],
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": true,
+      "elapsed_seconds": 0.084
+    },
+    {
+      "model": "qwen3:0.6b",
+      "case_id": "t04",
+      "question": "How are group memberships represented in Microsoft CDM?",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "raw_search",
+        "rewrite_search"
+      ],
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": true,
+      "elapsed_seconds": 0.084
+    },
+    {
+      "model": "qwen3:0.6b",
+      "case_id": "t05",
+      "question": "Can you explain the relationship between a loan and a financial holding?",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "raw_search",
+        "rewrite_search"
+      ],
+      "status": "scored",
+      "predicted_route": "rewrite_search",
+      "correct": true,
+      "elapsed_seconds": 0.083
+    },
+    {
+      "model": "qwen3:0.6b",
+      "case_id": "t06",
+      "question": "Which schema type represents a scheduled payment instruction?",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "raw_search",
+        "rewrite_search"
+      ],
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": true,
+      "elapsed_seconds": 0.084
+    },
+    {
+      "model": "qwen3:0.6b",
+      "case_id": "t07",
+      "question": "Does the Contact definition refer to an Account?",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "raw_search",
+        "rewrite_search"
+      ],
+      "status": "scored",
+      "predicted_route": "rewrite_search",
+      "correct": true,
+      "elapsed_seconds": 0.1
+    },
+    {
+      "model": "qwen3:0.6b",
+      "case_id": "t08",
+      "question": "Where in the model can I find a link between a user and a team?",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "raw_search",
+        "rewrite_search"
+      ],
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": true,
+      "elapsed_seconds": 0.099
+    },
+    {
+      "model": "qwen3:0.6b",
+      "case_id": "t09",
+      "question": "Is there a CDM entity for a credit line?",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "raw_search",
+        "rewrite_search"
+      ],
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": true,
+      "elapsed_seconds": 0.095
+    },
+    {
+      "model": "qwen3:0.6b",
+      "case_id": "t10",
+      "question": "In the banking model, what is the purpose of CustomerFinancialHolding?",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "raw_search",
+        "rewrite_search"
+      ],
+      "status": "scored",
+      "predicted_route": "rewrite_search",
+      "correct": true,
+      "elapsed_seconds": 0.093
+    },
+    {
+      "model": "qwen3:0.6b",
+      "case_id": "t11",
+      "question": "What is the distinction between the availableBalance and balance attributes?",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "raw_search",
+        "rewrite_search"
+      ],
+      "status": "scored",
+      "predicted_route": "rewrite_search",
+      "correct": true,
+      "elapsed_seconds": 0.094
+    },
+    {
+      "model": "qwen3:0.6b",
+      "case_id": "t12",
+      "question": "Which entities and references could represent an account with two owners?",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "raw_search",
+        "rewrite_search"
+      ],
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": true,
+      "elapsed_seconds": 0.094
+    },
+    {
+      "model": "qwen3:0.6b",
+      "case_id": "t13",
+      "question": "Which customers share a bank account?",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "no_search"
+      ],
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": false,
+      "elapsed_seconds": 0.096
+    },
+    {
+      "model": "qwen3:0.6b",
+      "case_id": "t14",
+      "question": "Find the account numbers for the Smith household.",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "no_search"
+      ],
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": false,
+      "elapsed_seconds": 0.096
+    },
+    {
+      "model": "qwen3:0.6b",
+      "case_id": "t15",
+      "question": "What was our total deposit amount in March?",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "no_search"
+      ],
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": false,
+      "elapsed_seconds": 0.088
+    },
+    {
+      "model": "qwen3:0.6b",
+      "case_id": "t16",
+      "question": "Has loan 843 already been paid off?",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "no_search"
+      ],
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": false,
+      "elapsed_seconds": 0.085
+    },
+    {
+      "model": "qwen3:0.6b",
+      "case_id": "t17",
+      "question": "Give me the names of all customers with a mortgage.",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "no_search"
+      ],
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": false,
+      "elapsed_seconds": 0.088
+    },
+    {
+      "model": "qwen3:0.6b",
+      "case_id": "t18",
+      "question": "Which branches currently offer free overdrafts?",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "no_search"
+      ],
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": false,
+      "elapsed_seconds": 0.097
+    },
+    {
+      "model": "qwen3:0.6b",
+      "case_id": "t19",
+      "question": "Is account 172 owned by two people?",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "no_search"
+      ],
+      "status": "scored",
+      "predicted_route": "rewrite_search",
+      "correct": false,
+      "elapsed_seconds": 0.086
+    },
+    {
+      "model": "qwen3:0.6b",
+      "case_id": "t20",
+      "question": "What is the balance on John Smith’s checking account?",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "no_search"
+      ],
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": false,
+      "elapsed_seconds": 0.083
+    },
+    {
+      "model": "qwen3:0.6b",
+      "case_id": "t21",
+      "question": "Does Dynamics automatically notify a customer when an account is opened?",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "no_search"
+      ],
+      "status": "scored",
+      "predicted_route": "rewrite_search",
+      "correct": false,
+      "elapsed_seconds": 0.089
+    },
+    {
+      "model": "qwen3:0.6b",
+      "case_id": "t22",
+      "question": "What happens in the app when I delete a customer?",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "no_search"
+      ],
+      "status": "scored",
+      "predicted_route": "rewrite_search",
+      "correct": false,
+      "elapsed_seconds": 0.085
+    },
+    {
+      "model": "qwen3:0.6b",
+      "case_id": "t23",
+      "question": "How can I configure Dynamics to display subaccounts?",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "no_search"
+      ],
+      "status": "scored",
+      "predicted_route": "rewrite_search",
+      "correct": false,
+      "elapsed_seconds": 0.087
+    },
+    {
+      "model": "qwen3:0.6b",
+      "case_id": "t24",
+      "question": "Will an account be created when a contact is saved in CRM?",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "no_search"
+      ],
+      "status": "scored",
+      "predicted_route": "rewrite_search",
+      "correct": false,
+      "elapsed_seconds": 0.088
+    },
+    {
+      "model": "qwen3:0.6b",
+      "case_id": "t25",
+      "question": "Does the system validate account numbers before saving?",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "no_search"
+      ],
+      "status": "scored",
+      "predicted_route": "rewrite_search",
+      "correct": false,
+      "elapsed_seconds": 0.084
+    },
+    {
+      "model": "qwen3:0.6b",
+      "case_id": "t26",
+      "question": "Explain the Account schema and list the accounts that are overdrawn.",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "no_search"
+      ],
+      "status": "scored",
+      "predicted_route": "rewrite_search",
+      "correct": false,
+      "elapsed_seconds": 0.093
+    },
+    {
+      "model": "qwen3:0.6b",
+      "case_id": "t27",
+      "question": "How are users modeled, and will deleting one remove their team?",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "no_search"
+      ],
+      "status": "scored",
+      "predicted_route": "rewrite_search",
+      "correct": false,
+      "elapsed_seconds": 0.087
+    },
+    {
+      "model": "qwen3:0.6b",
+      "case_id": "t28",
+      "question": "Show our joint accounts and explain their CDM relationship.",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "no_search"
+      ],
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": false,
+      "elapsed_seconds": 0.084
+    },
+    {
+      "model": "qwen3:0.6b",
+      "case_id": "t29",
+      "question": "My dog Luna learned to swim yesterday.",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "no_search"
+      ],
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": false,
+      "elapsed_seconds": 0.084
+    },
+    {
+      "model": "qwen3:0.6b",
+      "case_id": "t30",
+      "question": "Good morning!",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "no_search"
+      ],
+      "status": "scored",
+      "predicted_route": "rewrite_search",
+      "correct": false,
+      "elapsed_seconds": 0.372
+    },
+    {
+      "model": "qwen3:0.6b",
+      "case_id": "t31",
+      "question": "What is the weather in Berlin?",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "no_search"
+      ],
+      "status": "scored",
+      "predicted_route": "no_search",
+      "correct": true,
+      "elapsed_seconds": 0.075
+    },
+    {
+      "model": "qwen3:0.6b",
+      "case_id": "t32",
+      "question": "Tell me a joke about astronomy.",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "no_search"
+      ],
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": false,
+      "elapsed_seconds": 0.085
+    },
+    {
+      "model": "qwen3:4b",
+      "case_id": "t01",
+      "question": "Which entity has a field for an available account balance?",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "raw_search",
+        "rewrite_search"
+      ],
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": true,
+      "elapsed_seconds": 2.161
+    },
+    {
+      "model": "qwen3:4b",
+      "case_id": "t02",
+      "question": "Which definitions link people to their financial holdings?",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "raw_search",
+        "rewrite_search"
+      ],
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": true,
+      "elapsed_seconds": 0.234
+    },
+    {
+      "model": "qwen3:4b",
+      "case_id": "t03",
+      "question": "What attributes can describe a business account?",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "raw_search",
+        "rewrite_search"
+      ],
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": true,
+      "elapsed_seconds": 0.221
+    },
+    {
+      "model": "qwen3:4b",
+      "case_id": "t04",
+      "question": "How are group memberships represented in Microsoft CDM?",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "raw_search",
+        "rewrite_search"
+      ],
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": true,
+      "elapsed_seconds": 0.24
+    },
+    {
+      "model": "qwen3:4b",
+      "case_id": "t05",
+      "question": "Can you explain the relationship between a loan and a financial holding?",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "raw_search",
+        "rewrite_search"
+      ],
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": true,
+      "elapsed_seconds": 0.24
+    },
+    {
+      "model": "qwen3:4b",
+      "case_id": "t06",
+      "question": "Which schema type represents a scheduled payment instruction?",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "raw_search",
+        "rewrite_search"
+      ],
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": true,
+      "elapsed_seconds": 0.201
+    },
+    {
+      "model": "qwen3:4b",
+      "case_id": "t07",
+      "question": "Does the Contact definition refer to an Account?",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "raw_search",
+        "rewrite_search"
+      ],
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": true,
+      "elapsed_seconds": 0.207
+    },
+    {
+      "model": "qwen3:4b",
+      "case_id": "t08",
+      "question": "Where in the model can I find a link between a user and a team?",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "raw_search",
+        "rewrite_search"
+      ],
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": true,
+      "elapsed_seconds": 0.231
+    },
+    {
+      "model": "qwen3:4b",
+      "case_id": "t09",
+      "question": "Is there a CDM entity for a credit line?",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "raw_search",
+        "rewrite_search"
+      ],
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": true,
+      "elapsed_seconds": 0.263
+    },
+    {
+      "model": "qwen3:4b",
+      "case_id": "t10",
+      "question": "In the banking model, what is the purpose of CustomerFinancialHolding?",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "raw_search",
+        "rewrite_search"
+      ],
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": true,
+      "elapsed_seconds": 0.223
+    },
+    {
+      "model": "qwen3:4b",
+      "case_id": "t11",
+      "question": "What is the distinction between the availableBalance and balance attributes?",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "raw_search",
+        "rewrite_search"
+      ],
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": true,
+      "elapsed_seconds": 0.221
+    },
+    {
+      "model": "qwen3:4b",
+      "case_id": "t12",
+      "question": "Which entities and references could represent an account with two owners?",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "raw_search",
+        "rewrite_search"
+      ],
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": true,
+      "elapsed_seconds": 0.223
+    },
+    {
+      "model": "qwen3:4b",
+      "case_id": "t13",
+      "question": "Which customers share a bank account?",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "no_search"
+      ],
+      "status": "scored",
+      "predicted_route": "rewrite_search",
+      "correct": false,
+      "elapsed_seconds": 0.199
+    },
+    {
+      "model": "qwen3:4b",
+      "case_id": "t14",
+      "question": "Find the account numbers for the Smith household.",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "no_search"
+      ],
+      "status": "scored",
+      "predicted_route": "no_search",
+      "correct": true,
+      "elapsed_seconds": 0.201
+    },
+    {
+      "model": "qwen3:4b",
+      "case_id": "t15",
+      "question": "What was our total deposit amount in March?",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "no_search"
+      ],
+      "status": "scored",
+      "predicted_route": "no_search",
+      "correct": true,
+      "elapsed_seconds": 0.199
+    },
+    {
+      "model": "qwen3:4b",
+      "case_id": "t16",
+      "question": "Has loan 843 already been paid off?",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "no_search"
+      ],
+      "status": "scored",
+      "predicted_route": "no_search",
+      "correct": true,
+      "elapsed_seconds": 0.227
+    },
+    {
+      "model": "qwen3:4b",
+      "case_id": "t17",
+      "question": "Give me the names of all customers with a mortgage.",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "no_search"
+      ],
+      "status": "scored",
+      "predicted_route": "no_search",
+      "correct": true,
+      "elapsed_seconds": 0.233
+    },
+    {
+      "model": "qwen3:4b",
+      "case_id": "t18",
+      "question": "Which branches currently offer free overdrafts?",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "no_search"
+      ],
+      "status": "scored",
+      "predicted_route": "no_search",
+      "correct": true,
+      "elapsed_seconds": 0.198
+    },
+    {
+      "model": "qwen3:4b",
+      "case_id": "t19",
+      "question": "Is account 172 owned by two people?",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "no_search"
+      ],
+      "status": "scored",
+      "predicted_route": "no_search",
+      "correct": true,
+      "elapsed_seconds": 0.236
+    },
+    {
+      "model": "qwen3:4b",
+      "case_id": "t20",
+      "question": "What is the balance on John Smith’s checking account?",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "no_search"
+      ],
+      "status": "scored",
+      "predicted_route": "no_search",
+      "correct": true,
+      "elapsed_seconds": 0.238
+    },
+    {
+      "model": "qwen3:4b",
+      "case_id": "t21",
+      "question": "Does Dynamics automatically notify a customer when an account is opened?",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "no_search"
+      ],
+      "status": "scored",
+      "predicted_route": "no_search",
+      "correct": true,
+      "elapsed_seconds": 0.236
+    },
+    {
+      "model": "qwen3:4b",
+      "case_id": "t22",
+      "question": "What happens in the app when I delete a customer?",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "no_search"
+      ],
+      "status": "scored",
+      "predicted_route": "no_search",
+      "correct": true,
+      "elapsed_seconds": 0.241
+    },
+    {
+      "model": "qwen3:4b",
+      "case_id": "t23",
+      "question": "How can I configure Dynamics to display subaccounts?",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "no_search"
+      ],
+      "status": "scored",
+      "predicted_route": "no_search",
+      "correct": true,
+      "elapsed_seconds": 0.231
+    },
+    {
+      "model": "qwen3:4b",
+      "case_id": "t24",
+      "question": "Will an account be created when a contact is saved in CRM?",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "no_search"
+      ],
+      "status": "scored",
+      "predicted_route": "no_search",
+      "correct": true,
+      "elapsed_seconds": 0.237
+    },
+    {
+      "model": "qwen3:4b",
+      "case_id": "t25",
+      "question": "Does the system validate account numbers before saving?",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "no_search"
+      ],
+      "status": "scored",
+      "predicted_route": "no_search",
+      "correct": true,
+      "elapsed_seconds": 0.198
+    },
+    {
+      "model": "qwen3:4b",
+      "case_id": "t26",
+      "question": "Explain the Account schema and list the accounts that are overdrawn.",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "no_search"
+      ],
+      "status": "scored",
+      "predicted_route": "no_search",
+      "correct": true,
+      "elapsed_seconds": 0.238
+    },
+    {
+      "model": "qwen3:4b",
+      "case_id": "t27",
+      "question": "How are users modeled, and will deleting one remove their team?",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "no_search"
+      ],
+      "status": "scored",
+      "predicted_route": "rewrite_search",
+      "correct": false,
+      "elapsed_seconds": 0.241
+    },
+    {
+      "model": "qwen3:4b",
+      "case_id": "t28",
+      "question": "Show our joint accounts and explain their CDM relationship.",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "no_search"
+      ],
+      "status": "scored",
+      "predicted_route": "rewrite_search",
+      "correct": false,
+      "elapsed_seconds": 0.232
+    },
+    {
+      "model": "qwen3:4b",
+      "case_id": "t29",
+      "question": "My dog Luna learned to swim yesterday.",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "no_search"
+      ],
+      "status": "scored",
+      "predicted_route": "no_search",
+      "correct": true,
+      "elapsed_seconds": 0.199
+    },
+    {
+      "model": "qwen3:4b",
+      "case_id": "t30",
+      "question": "Good morning!",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "no_search"
+      ],
+      "status": "scored",
+      "predicted_route": "no_search",
+      "correct": true,
+      "elapsed_seconds": 0.204
+    },
+    {
+      "model": "qwen3:4b",
+      "case_id": "t31",
+      "question": "What is the weather in Berlin?",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "no_search"
+      ],
+      "status": "scored",
+      "predicted_route": "no_search",
+      "correct": true,
+      "elapsed_seconds": 0.201
+    },
+    {
+      "model": "qwen3:4b",
+      "case_id": "t32",
+      "question": "Tell me a joke about astronomy.",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "no_search"
+      ],
+      "status": "scored",
+      "predicted_route": "no_search",
+      "correct": true,
+      "elapsed_seconds": 0.203
+    },
+    {
+      "model": "qwen3.5:9b-q4_K_M",
+      "case_id": "t01",
+      "question": "Which entity has a field for an available account balance?",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "raw_search",
+        "rewrite_search"
+      ],
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": true,
+      "elapsed_seconds": 6.229
+    },
+    {
+      "model": "qwen3.5:9b-q4_K_M",
+      "case_id": "t02",
+      "question": "Which definitions link people to their financial holdings?",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "raw_search",
+        "rewrite_search"
+      ],
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": true,
+      "elapsed_seconds": 0.632
+    },
+    {
+      "model": "qwen3.5:9b-q4_K_M",
+      "case_id": "t03",
+      "question": "What attributes can describe a business account?",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "raw_search",
+        "rewrite_search"
+      ],
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": true,
+      "elapsed_seconds": 0.732
+    },
+    {
+      "model": "qwen3.5:9b-q4_K_M",
+      "case_id": "t04",
+      "question": "How are group memberships represented in Microsoft CDM?",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "raw_search",
+        "rewrite_search"
+      ],
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": true,
+      "elapsed_seconds": 0.734
+    },
+    {
+      "model": "qwen3.5:9b-q4_K_M",
+      "case_id": "t05",
+      "question": "Can you explain the relationship between a loan and a financial holding?",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "raw_search",
+        "rewrite_search"
+      ],
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": true,
+      "elapsed_seconds": 0.741
+    },
+    {
+      "model": "qwen3.5:9b-q4_K_M",
+      "case_id": "t06",
+      "question": "Which schema type represents a scheduled payment instruction?",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "raw_search",
+        "rewrite_search"
+      ],
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": true,
+      "elapsed_seconds": 0.753
+    },
+    {
+      "model": "qwen3.5:9b-q4_K_M",
+      "case_id": "t07",
+      "question": "Does the Contact definition refer to an Account?",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "raw_search",
+        "rewrite_search"
+      ],
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": true,
+      "elapsed_seconds": 0.636
+    },
+    {
+      "model": "qwen3.5:9b-q4_K_M",
+      "case_id": "t08",
+      "question": "Where in the model can I find a link between a user and a team?",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "raw_search",
+        "rewrite_search"
+      ],
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": true,
+      "elapsed_seconds": 0.733
+    },
+    {
+      "model": "qwen3.5:9b-q4_K_M",
+      "case_id": "t09",
+      "question": "Is there a CDM entity for a credit line?",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "raw_search",
+        "rewrite_search"
+      ],
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": true,
+      "elapsed_seconds": 0.609
+    },
+    {
+      "model": "qwen3.5:9b-q4_K_M",
+      "case_id": "t10",
+      "question": "In the banking model, what is the purpose of CustomerFinancialHolding?",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "raw_search",
+        "rewrite_search"
+      ],
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": true,
+      "elapsed_seconds": 0.734
+    },
+    {
+      "model": "qwen3.5:9b-q4_K_M",
+      "case_id": "t11",
+      "question": "What is the distinction between the availableBalance and balance attributes?",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "raw_search",
+        "rewrite_search"
+      ],
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": true,
+      "elapsed_seconds": 0.739
+    },
+    {
+      "model": "qwen3.5:9b-q4_K_M",
+      "case_id": "t12",
+      "question": "Which entities and references could represent an account with two owners?",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "raw_search",
+        "rewrite_search"
+      ],
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": true,
+      "elapsed_seconds": 0.739
+    },
+    {
+      "model": "qwen3.5:9b-q4_K_M",
+      "case_id": "t13",
+      "question": "Which customers share a bank account?",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "no_search"
+      ],
+      "status": "scored",
+      "predicted_route": "no_search",
+      "correct": true,
+      "elapsed_seconds": 0.632
+    },
+    {
+      "model": "qwen3.5:9b-q4_K_M",
+      "case_id": "t14",
+      "question": "Find the account numbers for the Smith household.",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "no_search"
+      ],
+      "status": "scored",
+      "predicted_route": "no_search",
+      "correct": true,
+      "elapsed_seconds": 0.626
+    },
+    {
+      "model": "qwen3.5:9b-q4_K_M",
+      "case_id": "t15",
+      "question": "What was our total deposit amount in March?",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "no_search"
+      ],
+      "status": "scored",
+      "predicted_route": "no_search",
+      "correct": true,
+      "elapsed_seconds": 0.625
+    },
+    {
+      "model": "qwen3.5:9b-q4_K_M",
+      "case_id": "t16",
+      "question": "Has loan 843 already been paid off?",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "no_search"
+      ],
+      "status": "scored",
+      "predicted_route": "no_search",
+      "correct": true,
+      "elapsed_seconds": 0.626
+    },
+    {
+      "model": "qwen3.5:9b-q4_K_M",
+      "case_id": "t17",
+      "question": "Give me the names of all customers with a mortgage.",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "no_search"
+      ],
+      "status": "scored",
+      "predicted_route": "no_search",
+      "correct": true,
+      "elapsed_seconds": 0.624
+    },
+    {
+      "model": "qwen3.5:9b-q4_K_M",
+      "case_id": "t18",
+      "question": "Which branches currently offer free overdrafts?",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "no_search"
+      ],
+      "status": "scored",
+      "predicted_route": "no_search",
+      "correct": true,
+      "elapsed_seconds": 0.627
+    },
+    {
+      "model": "qwen3.5:9b-q4_K_M",
+      "case_id": "t19",
+      "question": "Is account 172 owned by two people?",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "no_search"
+      ],
+      "status": "scored",
+      "predicted_route": "no_search",
+      "correct": true,
+      "elapsed_seconds": 0.634
+    },
+    {
+      "model": "qwen3.5:9b-q4_K_M",
+      "case_id": "t20",
+      "question": "What is the balance on John Smith’s checking account?",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "no_search"
+      ],
+      "status": "scored",
+      "predicted_route": "no_search",
+      "correct": true,
+      "elapsed_seconds": 0.635
+    },
+    {
+      "model": "qwen3.5:9b-q4_K_M",
+      "case_id": "t21",
+      "question": "Does Dynamics automatically notify a customer when an account is opened?",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "no_search"
+      ],
+      "status": "scored",
+      "predicted_route": "no_search",
+      "correct": true,
+      "elapsed_seconds": 0.636
+    },
+    {
+      "model": "qwen3.5:9b-q4_K_M",
+      "case_id": "t22",
+      "question": "What happens in the app when I delete a customer?",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "no_search"
+      ],
+      "status": "scored",
+      "predicted_route": "no_search",
+      "correct": true,
+      "elapsed_seconds": 0.628
+    },
+    {
+      "model": "qwen3.5:9b-q4_K_M",
+      "case_id": "t23",
+      "question": "How can I configure Dynamics to display subaccounts?",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "no_search"
+      ],
+      "status": "scored",
+      "predicted_route": "no_search",
+      "correct": true,
+      "elapsed_seconds": 0.741
+    },
+    {
+      "model": "qwen3.5:9b-q4_K_M",
+      "case_id": "t24",
+      "question": "Will an account be created when a contact is saved in CRM?",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "no_search"
+      ],
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": false,
+      "elapsed_seconds": 0.745
+    },
+    {
+      "model": "qwen3.5:9b-q4_K_M",
+      "case_id": "t25",
+      "question": "Does the system validate account numbers before saving?",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "no_search"
+      ],
+      "status": "scored",
+      "predicted_route": "no_search",
+      "correct": true,
+      "elapsed_seconds": 0.631
+    },
+    {
+      "model": "qwen3.5:9b-q4_K_M",
+      "case_id": "t26",
+      "question": "Explain the Account schema and list the accounts that are overdrawn.",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "no_search"
+      ],
+      "status": "scored",
+      "predicted_route": "no_search",
+      "correct": true,
+      "elapsed_seconds": 0.742
+    },
+    {
+      "model": "qwen3.5:9b-q4_K_M",
+      "case_id": "t27",
+      "question": "How are users modeled, and will deleting one remove their team?",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "no_search"
+      ],
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": false,
+      "elapsed_seconds": 0.744
+    },
+    {
+      "model": "qwen3.5:9b-q4_K_M",
+      "case_id": "t28",
+      "question": "Show our joint accounts and explain their CDM relationship.",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "no_search"
+      ],
+      "status": "scored",
+      "predicted_route": "rewrite_search",
+      "correct": false,
+      "elapsed_seconds": 0.738
+    },
+    {
+      "model": "qwen3.5:9b-q4_K_M",
+      "case_id": "t29",
+      "question": "My dog Luna learned to swim yesterday.",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "no_search"
+      ],
+      "status": "scored",
+      "predicted_route": "no_search",
+      "correct": true,
+      "elapsed_seconds": 0.73
+    },
+    {
+      "model": "qwen3.5:9b-q4_K_M",
+      "case_id": "t30",
+      "question": "Good morning!",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "no_search"
+      ],
+      "status": "scored",
+      "predicted_route": "no_search",
+      "correct": true,
+      "elapsed_seconds": 0.735
+    },
+    {
+      "model": "qwen3.5:9b-q4_K_M",
+      "case_id": "t31",
+      "question": "What is the weather in Berlin?",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "no_search"
+      ],
+      "status": "scored",
+      "predicted_route": "no_search",
+      "correct": true,
+      "elapsed_seconds": 0.635
+    },
+    {
+      "model": "qwen3.5:9b-q4_K_M",
+      "case_id": "t32",
+      "question": "Tell me a joke about astronomy.",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "no_search"
+      ],
+      "status": "scored",
+      "predicted_route": "no_search",
+      "correct": true,
+      "elapsed_seconds": 0.732
+    },
+    {
+      "model": "gemma4:12b",
+      "case_id": "t01",
+      "question": "Which entity has a field for an available account balance?",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "raw_search",
+        "rewrite_search"
+      ],
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": true,
+      "elapsed_seconds": 5.378
+    },
+    {
+      "model": "gemma4:12b",
+      "case_id": "t02",
+      "question": "Which definitions link people to their financial holdings?",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "raw_search",
+        "rewrite_search"
+      ],
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": true,
+      "elapsed_seconds": 0.328
+    },
+    {
+      "model": "gemma4:12b",
+      "case_id": "t03",
+      "question": "What attributes can describe a business account?",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "raw_search",
+        "rewrite_search"
+      ],
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": true,
+      "elapsed_seconds": 0.301
+    },
+    {
+      "model": "gemma4:12b",
+      "case_id": "t04",
+      "question": "How are group memberships represented in Microsoft CDM?",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "raw_search",
+        "rewrite_search"
+      ],
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": true,
+      "elapsed_seconds": 0.377
+    },
+    {
+      "model": "gemma4:12b",
+      "case_id": "t05",
+      "question": "Can you explain the relationship between a loan and a financial holding?",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "raw_search",
+        "rewrite_search"
+      ],
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": true,
+      "elapsed_seconds": 0.437
+    },
+    {
+      "model": "gemma4:12b",
+      "case_id": "t06",
+      "question": "Which schema type represents a scheduled payment instruction?",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "raw_search",
+        "rewrite_search"
+      ],
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": true,
+      "elapsed_seconds": 0.408
+    },
+    {
+      "model": "gemma4:12b",
+      "case_id": "t07",
+      "question": "Does the Contact definition refer to an Account?",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "raw_search",
+        "rewrite_search"
+      ],
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": true,
+      "elapsed_seconds": 0.401
+    },
+    {
+      "model": "gemma4:12b",
+      "case_id": "t08",
+      "question": "Where in the model can I find a link between a user and a team?",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "raw_search",
+        "rewrite_search"
+      ],
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": true,
+      "elapsed_seconds": 0.414
+    },
+    {
+      "model": "gemma4:12b",
+      "case_id": "t09",
+      "question": "Is there a CDM entity for a credit line?",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "raw_search",
+        "rewrite_search"
+      ],
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": true,
+      "elapsed_seconds": 0.357
+    },
+    {
+      "model": "gemma4:12b",
+      "case_id": "t10",
+      "question": "In the banking model, what is the purpose of CustomerFinancialHolding?",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "raw_search",
+        "rewrite_search"
+      ],
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": true,
+      "elapsed_seconds": 0.366
+    },
+    {
+      "model": "gemma4:12b",
+      "case_id": "t11",
+      "question": "What is the distinction between the availableBalance and balance attributes?",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "raw_search",
+        "rewrite_search"
+      ],
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": true,
+      "elapsed_seconds": 0.384
+    },
+    {
+      "model": "gemma4:12b",
+      "case_id": "t12",
+      "question": "Which entities and references could represent an account with two owners?",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "raw_search",
+        "rewrite_search"
+      ],
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": true,
+      "elapsed_seconds": 0.381
+    },
+    {
+      "model": "gemma4:12b",
+      "case_id": "t13",
+      "question": "Which customers share a bank account?",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "no_search"
+      ],
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": false,
+      "elapsed_seconds": 0.337
+    },
+    {
+      "model": "gemma4:12b",
+      "case_id": "t14",
+      "question": "Find the account numbers for the Smith household.",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "no_search"
+      ],
+      "status": "scored",
+      "predicted_route": "no_search",
+      "correct": true,
+      "elapsed_seconds": 0.423
+    },
+    {
+      "model": "gemma4:12b",
+      "case_id": "t15",
+      "question": "What was our total deposit amount in March?",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "no_search"
+      ],
+      "status": "scored",
+      "predicted_route": "no_search",
+      "correct": true,
+      "elapsed_seconds": 0.43
+    },
+    {
+      "model": "gemma4:12b",
+      "case_id": "t16",
+      "question": "Has loan 843 already been paid off?",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "no_search"
+      ],
+      "status": "scored",
+      "predicted_route": "no_search",
+      "correct": true,
+      "elapsed_seconds": 0.427
+    },
+    {
+      "model": "gemma4:12b",
+      "case_id": "t17",
+      "question": "Give me the names of all customers with a mortgage.",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "no_search"
+      ],
+      "status": "scored",
+      "predicted_route": "no_search",
+      "correct": true,
+      "elapsed_seconds": 0.422
+    },
+    {
+      "model": "gemma4:12b",
+      "case_id": "t18",
+      "question": "Which branches currently offer free overdrafts?",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "no_search"
+      ],
+      "status": "scored",
+      "predicted_route": "no_search",
+      "correct": true,
+      "elapsed_seconds": 0.372
+    },
+    {
+      "model": "gemma4:12b",
+      "case_id": "t19",
+      "question": "Is account 172 owned by two people?",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "no_search"
+      ],
+      "status": "scored",
+      "predicted_route": "no_search",
+      "correct": true,
+      "elapsed_seconds": 0.42
+    },
+    {
+      "model": "gemma4:12b",
+      "case_id": "t20",
+      "question": "What is the balance on John Smith’s checking account?",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "no_search"
+      ],
+      "status": "scored",
+      "predicted_route": "no_search",
+      "correct": true,
+      "elapsed_seconds": 0.395
+    },
+    {
+      "model": "gemma4:12b",
+      "case_id": "t21",
+      "question": "Does Dynamics automatically notify a customer when an account is opened?",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "no_search"
+      ],
+      "status": "scored",
+      "predicted_route": "no_search",
+      "correct": true,
+      "elapsed_seconds": 0.389
+    },
+    {
+      "model": "gemma4:12b",
+      "case_id": "t22",
+      "question": "What happens in the app when I delete a customer?",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "no_search"
+      ],
+      "status": "scored",
+      "predicted_route": "no_search",
+      "correct": true,
+      "elapsed_seconds": 0.393
+    },
+    {
+      "model": "gemma4:12b",
+      "case_id": "t23",
+      "question": "How can I configure Dynamics to display subaccounts?",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "no_search"
+      ],
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": false,
+      "elapsed_seconds": 0.406
+    },
+    {
+      "model": "gemma4:12b",
+      "case_id": "t24",
+      "question": "Will an account be created when a contact is saved in CRM?",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "no_search"
+      ],
+      "status": "scored",
+      "predicted_route": "no_search",
+      "correct": true,
+      "elapsed_seconds": 0.394
+    },
+    {
+      "model": "gemma4:12b",
+      "case_id": "t25",
+      "question": "Does the system validate account numbers before saving?",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "no_search"
+      ],
+      "status": "scored",
+      "predicted_route": "no_search",
+      "correct": true,
+      "elapsed_seconds": 0.336
+    },
+    {
+      "model": "gemma4:12b",
+      "case_id": "t26",
+      "question": "Explain the Account schema and list the accounts that are overdrawn.",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "no_search"
+      ],
+      "status": "scored",
+      "predicted_route": "no_search",
+      "correct": true,
+      "elapsed_seconds": 0.397
+    },
+    {
+      "model": "gemma4:12b",
+      "case_id": "t27",
+      "question": "How are users modeled, and will deleting one remove their team?",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "no_search"
+      ],
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": false,
+      "elapsed_seconds": 0.394
+    },
+    {
+      "model": "gemma4:12b",
+      "case_id": "t28",
+      "question": "Show our joint accounts and explain their CDM relationship.",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "no_search"
+      ],
+      "status": "scored",
+      "predicted_route": "no_search",
+      "correct": true,
+      "elapsed_seconds": 0.391
+    },
+    {
+      "model": "gemma4:12b",
+      "case_id": "t29",
+      "question": "My dog Luna learned to swim yesterday.",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "no_search"
+      ],
+      "status": "scored",
+      "predicted_route": "no_search",
+      "correct": true,
+      "elapsed_seconds": 0.33
+    },
+    {
+      "model": "gemma4:12b",
+      "case_id": "t30",
+      "question": "Good morning!",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "no_search"
+      ],
+      "status": "scored",
+      "predicted_route": "no_search",
+      "correct": true,
+      "elapsed_seconds": 0.347
+    },
+    {
+      "model": "gemma4:12b",
+      "case_id": "t31",
+      "question": "What is the weather in Berlin?",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "no_search"
+      ],
+      "status": "scored",
+      "predicted_route": "no_search",
+      "correct": true,
+      "elapsed_seconds": 0.357
+    },
+    {
+      "model": "gemma4:12b",
+      "case_id": "t32",
+      "question": "Tell me a joke about astronomy.",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "no_search"
+      ],
+      "status": "scored",
+      "predicted_route": "no_search",
+      "correct": true,
+      "elapsed_seconds": 0.333
+    },
+    {
+      "model": "qwen3.5:27b-q4_K_M",
+      "case_id": "t01",
+      "question": "Which entity has a field for an available account balance?",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "raw_search",
+        "rewrite_search"
+      ],
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": true,
+      "elapsed_seconds": 23.559
+    },
+    {
+      "model": "qwen3.5:27b-q4_K_M",
+      "case_id": "t02",
+      "question": "Which definitions link people to their financial holdings?",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "raw_search",
+        "rewrite_search"
+      ],
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": true,
+      "elapsed_seconds": 2.203
+    },
+    {
+      "model": "qwen3.5:27b-q4_K_M",
+      "case_id": "t03",
+      "question": "What attributes can describe a business account?",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "raw_search",
+        "rewrite_search"
+      ],
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": true,
+      "elapsed_seconds": 2.374
+    },
+    {
+      "model": "qwen3.5:27b-q4_K_M",
+      "case_id": "t04",
+      "question": "How are group memberships represented in Microsoft CDM?",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "raw_search",
+        "rewrite_search"
+      ],
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": true,
+      "elapsed_seconds": 2.381
+    },
+    {
+      "model": "qwen3.5:27b-q4_K_M",
+      "case_id": "t05",
+      "question": "Can you explain the relationship between a loan and a financial holding?",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "raw_search",
+        "rewrite_search"
+      ],
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": true,
+      "elapsed_seconds": 1.983
+    },
+    {
+      "model": "qwen3.5:27b-q4_K_M",
+      "case_id": "t06",
+      "question": "Which schema type represents a scheduled payment instruction?",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "raw_search",
+        "rewrite_search"
+      ],
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": true,
+      "elapsed_seconds": 1.967
+    },
+    {
+      "model": "qwen3.5:27b-q4_K_M",
+      "case_id": "t07",
+      "question": "Does the Contact definition refer to an Account?",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "raw_search",
+        "rewrite_search"
+      ],
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": true,
+      "elapsed_seconds": 1.991
+    },
+    {
+      "model": "qwen3.5:27b-q4_K_M",
+      "case_id": "t08",
+      "question": "Where in the model can I find a link between a user and a team?",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "raw_search",
+        "rewrite_search"
+      ],
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": true,
+      "elapsed_seconds": 1.974
+    },
+    {
+      "model": "qwen3.5:27b-q4_K_M",
+      "case_id": "t09",
+      "question": "Is there a CDM entity for a credit line?",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "raw_search",
+        "rewrite_search"
+      ],
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": true,
+      "elapsed_seconds": 1.991
+    },
+    {
+      "model": "qwen3.5:27b-q4_K_M",
+      "case_id": "t10",
+      "question": "In the banking model, what is the purpose of CustomerFinancialHolding?",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "raw_search",
+        "rewrite_search"
+      ],
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": true,
+      "elapsed_seconds": 2.141
+    },
+    {
+      "model": "qwen3.5:27b-q4_K_M",
+      "case_id": "t11",
+      "question": "What is the distinction between the availableBalance and balance attributes?",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "raw_search",
+        "rewrite_search"
+      ],
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": true,
+      "elapsed_seconds": 2.203
+    },
+    {
+      "model": "qwen3.5:27b-q4_K_M",
+      "case_id": "t12",
+      "question": "Which entities and references could represent an account with two owners?",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "raw_search",
+        "rewrite_search"
+      ],
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": true,
+      "elapsed_seconds": 2.367
+    },
+    {
+      "model": "qwen3.5:27b-q4_K_M",
+      "case_id": "t13",
+      "question": "Which customers share a bank account?",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "no_search"
+      ],
+      "status": "scored",
+      "predicted_route": "no_search",
+      "correct": true,
+      "elapsed_seconds": 2.354
+    },
+    {
+      "model": "qwen3.5:27b-q4_K_M",
+      "case_id": "t14",
+      "question": "Find the account numbers for the Smith household.",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "no_search"
+      ],
+      "status": "scored",
+      "predicted_route": "no_search",
+      "correct": true,
+      "elapsed_seconds": 2.042
+    },
+    {
+      "model": "qwen3.5:27b-q4_K_M",
+      "case_id": "t15",
+      "question": "What was our total deposit amount in March?",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "no_search"
+      ],
+      "status": "scored",
+      "predicted_route": "no_search",
+      "correct": true,
+      "elapsed_seconds": 2.071
+    },
+    {
+      "model": "qwen3.5:27b-q4_K_M",
+      "case_id": "t16",
+      "question": "Has loan 843 already been paid off?",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "no_search"
+      ],
+      "status": "scored",
+      "predicted_route": "no_search",
+      "correct": true,
+      "elapsed_seconds": 2.054
+    },
+    {
+      "model": "qwen3.5:27b-q4_K_M",
+      "case_id": "t17",
+      "question": "Give me the names of all customers with a mortgage.",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "no_search"
+      ],
+      "status": "scored",
+      "predicted_route": "no_search",
+      "correct": true,
+      "elapsed_seconds": 2.038
+    },
+    {
+      "model": "qwen3.5:27b-q4_K_M",
+      "case_id": "t18",
+      "question": "Which branches currently offer free overdrafts?",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "no_search"
+      ],
+      "status": "scored",
+      "predicted_route": "no_search",
+      "correct": true,
+      "elapsed_seconds": 2.039
+    },
+    {
+      "model": "qwen3.5:27b-q4_K_M",
+      "case_id": "t19",
+      "question": "Is account 172 owned by two people?",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "no_search"
+      ],
+      "status": "scored",
+      "predicted_route": "no_search",
+      "correct": true,
+      "elapsed_seconds": 2.007
+    },
+    {
+      "model": "qwen3.5:27b-q4_K_M",
+      "case_id": "t20",
+      "question": "What is the balance on John Smith’s checking account?",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "no_search"
+      ],
+      "status": "scored",
+      "predicted_route": "no_search",
+      "correct": true,
+      "elapsed_seconds": 2.0
+    },
+    {
+      "model": "qwen3.5:27b-q4_K_M",
+      "case_id": "t21",
+      "question": "Does Dynamics automatically notify a customer when an account is opened?",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "no_search"
+      ],
+      "status": "scored",
+      "predicted_route": "no_search",
+      "correct": true,
+      "elapsed_seconds": 2.041
+    },
+    {
+      "model": "qwen3.5:27b-q4_K_M",
+      "case_id": "t22",
+      "question": "What happens in the app when I delete a customer?",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "no_search"
+      ],
+      "status": "scored",
+      "predicted_route": "no_search",
+      "correct": true,
+      "elapsed_seconds": 2.036
+    },
+    {
+      "model": "qwen3.5:27b-q4_K_M",
+      "case_id": "t23",
+      "question": "How can I configure Dynamics to display subaccounts?",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "no_search"
+      ],
+      "status": "scored",
+      "predicted_route": "no_search",
+      "correct": true,
+      "elapsed_seconds": 2.047
+    },
+    {
+      "model": "qwen3.5:27b-q4_K_M",
+      "case_id": "t24",
+      "question": "Will an account be created when a contact is saved in CRM?",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "no_search"
+      ],
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": false,
+      "elapsed_seconds": 2.101
+    },
+    {
+      "model": "qwen3.5:27b-q4_K_M",
+      "case_id": "t25",
+      "question": "Does the system validate account numbers before saving?",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "no_search"
+      ],
+      "status": "scored",
+      "predicted_route": "no_search",
+      "correct": true,
+      "elapsed_seconds": 2.045
+    },
+    {
+      "model": "qwen3.5:27b-q4_K_M",
+      "case_id": "t26",
+      "question": "Explain the Account schema and list the accounts that are overdrawn.",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "no_search"
+      ],
+      "status": "scored",
+      "predicted_route": "no_search",
+      "correct": true,
+      "elapsed_seconds": 2.046
+    },
+    {
+      "model": "qwen3.5:27b-q4_K_M",
+      "case_id": "t27",
+      "question": "How are users modeled, and will deleting one remove their team?",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "no_search"
+      ],
+      "status": "scored",
+      "predicted_route": "raw_search",
+      "correct": false,
+      "elapsed_seconds": 2.073
+    },
+    {
+      "model": "qwen3.5:27b-q4_K_M",
+      "case_id": "t28",
+      "question": "Show our joint accounts and explain their CDM relationship.",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "no_search"
+      ],
+      "status": "scored",
+      "predicted_route": "no_search",
+      "correct": true,
+      "elapsed_seconds": 2.039
+    },
+    {
+      "model": "qwen3.5:27b-q4_K_M",
+      "case_id": "t29",
+      "question": "My dog Luna learned to swim yesterday.",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "no_search"
+      ],
+      "status": "scored",
+      "predicted_route": "no_search",
+      "correct": true,
+      "elapsed_seconds": 2.05
+    },
+    {
+      "model": "qwen3.5:27b-q4_K_M",
+      "case_id": "t30",
+      "question": "Good morning!",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "no_search"
+      ],
+      "status": "scored",
+      "predicted_route": "no_search",
+      "correct": true,
+      "elapsed_seconds": 2.031
+    },
+    {
+      "model": "qwen3.5:27b-q4_K_M",
+      "case_id": "t31",
+      "question": "What is the weather in Berlin?",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "no_search"
+      ],
+      "status": "scored",
+      "predicted_route": "no_search",
+      "correct": true,
+      "elapsed_seconds": 2.046
+    },
+    {
+      "model": "qwen3.5:27b-q4_K_M",
+      "case_id": "t32",
+      "question": "Tell me a joke about astronomy.",
+      "context_messages": [],
+      "expected_route": null,
+      "accepted_routes": [
+        "no_search"
+      ],
+      "status": "scored",
+      "predicted_route": "no_search",
+      "correct": true,
+      "elapsed_seconds": 2.352
+    }
+  ],
+  "provenance": [
+    {
+      "artifact": "routing-scope-binary-test-small.json",
+      "sha256": "0f9877ea65d0e14371054a8d86571404ca9524411de45ed536e95181479207d7",
+      "script_sha256": "aea1c268e150cae775688dc4b87c013f6985e64d815d61d3dd9f95a05fab13de",
+      "prompt_sha256": "a096c2cdd8495b73b823e61bd634edcc5ff78d80f1cb7fa765b8c926da879284",
+      "classifier_sha256": "b3f020e34f83692fef8e3adea948bc4bf2fa4f6a5aa19f64632b6233c5186388",
+      "model_settings": {
+        "think": false,
+        "max_output_tokens": 160,
+        "max_output_tokens_override": null,
+        "context_cap_override": null,
+        "temperature": 0,
+        "context_policy": "app role-based cap and input-size estimate, using effective output token budget"
+      }
+    },
+    {
+      "artifact": "routing-scope-binary-test-27b.json",
+      "sha256": "3d2375cc0378e5987e7760a1753e812c55c35d23ca5bf685f1b9d15590b5a251",
+      "script_sha256": "aea1c268e150cae775688dc4b87c013f6985e64d815d61d3dd9f95a05fab13de",
+      "prompt_sha256": "a096c2cdd8495b73b823e61bd634edcc5ff78d80f1cb7fa765b8c926da879284",
+      "classifier_sha256": "482e5a3df68aadaf6a62b34ecfcdf142e98750c4321fb3e49c6d4a68ab537ec4",
+      "model_settings": {
+        "think": false,
+        "max_output_tokens": 160,
+        "max_output_tokens_override": null,
+        "context_cap_override": null,
+        "temperature": 0,
+        "context_policy": "app role-based cap and input-size estimate, using effective output token budget"
+      }
+    }
+  ],
+  "method": "LLM decision only; no rewrite, retrieval or answer generation.",
+  "caveat": "derived from assistant-authored scope set; no independent expert review",
+  "classifier_revision_note": "One revision adds an unused optional model argument and live adapter; recorded benchmark prompt, schema, messages, and model selection are unchanged."
+}

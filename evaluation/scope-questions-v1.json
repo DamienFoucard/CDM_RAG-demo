@@ -1,0 +1,400 @@
+{
+  "dataset_id": "scope-questions-v1",
+  "status": "assistant-authored, no independent expert review",
+  "provenance": "Written after observing two web failures; development and test phrasing are not independently authored. Regression examples are copied from public sources in web-question-candidates-v1.json. No real customer data.",
+  "policy": "The demo explains the CDM schema. Real records, deployed software behavior, unrelated questions, and mixed requests are declined or clarified without retrieval.",
+  "cases": [
+    {
+      "id": "d01",
+      "question": "Which CDM entity holds the definition of a customer?",
+      "expected": "schema",
+      "split": "development",
+      "allow_schema_search": true
+    },
+    {
+      "id": "d02",
+      "question": "How does a contact reference its parent account in the schema?",
+      "expected": "schema",
+      "split": "development",
+      "allow_schema_search": true
+    },
+    {
+      "id": "d03",
+      "question": "What fields are defined for a standing order?",
+      "expected": "schema",
+      "split": "development",
+      "allow_schema_search": true
+    },
+    {
+      "id": "d04",
+      "question": "How are payment cards represented in the banking data model?",
+      "expected": "schema",
+      "split": "development",
+      "allow_schema_search": true
+    },
+    {
+      "id": "d05",
+      "question": "What does the FinancialHolding definition say about loans?",
+      "expected": "schema",
+      "split": "development",
+      "allow_schema_search": true
+    },
+    {
+      "id": "d06",
+      "question": "Which schema relationship joins a team to a user?",
+      "expected": "schema",
+      "split": "development",
+      "allow_schema_search": true
+    },
+    {
+      "id": "d07",
+      "question": "How could customer ownership of an account be modeled in CDM?",
+      "expected": "schema",
+      "split": "development",
+      "allow_schema_search": true
+    },
+    {
+      "id": "d08",
+      "question": "Describe an overdraft in this data model.",
+      "expected": "schema",
+      "split": "development",
+      "allow_schema_search": true
+    },
+    {
+      "id": "d09",
+      "question": "List the customers with an open account.",
+      "expected": "records",
+      "split": "development",
+      "allow_schema_search": false
+    },
+    {
+      "id": "d10",
+      "question": "What is the balance of customer 18 today?",
+      "expected": "records",
+      "split": "development",
+      "allow_schema_search": false
+    },
+    {
+      "id": "d11",
+      "question": "Which loans are overdue?",
+      "expected": "records",
+      "split": "development",
+      "allow_schema_search": false
+    },
+    {
+      "id": "d12",
+      "question": "How many accounts does our bank have?",
+      "expected": "records",
+      "split": "development",
+      "allow_schema_search": false
+    },
+    {
+      "id": "d13",
+      "question": "What interest rate is my bank currently charging?",
+      "expected": "records",
+      "split": "development",
+      "allow_schema_search": false
+    },
+    {
+      "id": "d14",
+      "question": "Does the application sync a contact after saving the customer profile?",
+      "expected": "runtime",
+      "split": "development",
+      "allow_schema_search": false
+    },
+    {
+      "id": "d15",
+      "question": "How do I configure a workflow that creates a team?",
+      "expected": "runtime",
+      "split": "development",
+      "allow_schema_search": false
+    },
+    {
+      "id": "d16",
+      "question": "When a user is removed, does the CRM delete their records?",
+      "expected": "runtime",
+      "split": "development",
+      "allow_schema_search": false
+    },
+    {
+      "id": "d17",
+      "question": "Show me the procedure to import a new customer in Dynamics.",
+      "expected": "runtime",
+      "split": "development",
+      "allow_schema_search": false
+    },
+    {
+      "id": "d18",
+      "question": "Hello, nice to meet you.",
+      "expected": "unrelated",
+      "split": "development",
+      "allow_schema_search": false
+    },
+    {
+      "id": "d19",
+      "question": "My dog Luna likes playing outside.",
+      "expected": "unrelated",
+      "split": "development",
+      "allow_schema_search": false
+    },
+    {
+      "id": "d20",
+      "question": "Write a poem about the sea.",
+      "expected": "unrelated",
+      "split": "development",
+      "allow_schema_search": false
+    },
+    {
+      "id": "d21",
+      "question": "List our customers and describe how a customer is represented in CDM.",
+      "expected": "mixed",
+      "split": "development",
+      "allow_schema_search": false
+    },
+    {
+      "id": "d22",
+      "question": "Which contact records were created and how are contacts modeled?",
+      "expected": "mixed",
+      "split": "development",
+      "allow_schema_search": false
+    },
+    {
+      "id": "t01",
+      "question": "Which entity has a field for an available account balance?",
+      "expected": "schema",
+      "split": "test",
+      "allow_schema_search": true
+    },
+    {
+      "id": "t02",
+      "question": "Which definitions link people to their financial holdings?",
+      "expected": "schema",
+      "split": "test",
+      "allow_schema_search": true
+    },
+    {
+      "id": "t03",
+      "question": "What attributes can describe a business account?",
+      "expected": "schema",
+      "split": "test",
+      "allow_schema_search": true
+    },
+    {
+      "id": "t04",
+      "question": "How are group memberships represented in Microsoft CDM?",
+      "expected": "schema",
+      "split": "test",
+      "allow_schema_search": true
+    },
+    {
+      "id": "t05",
+      "question": "Can you explain the relationship between a loan and a financial holding?",
+      "expected": "schema",
+      "split": "test",
+      "allow_schema_search": true
+    },
+    {
+      "id": "t06",
+      "question": "Which schema type represents a scheduled payment instruction?",
+      "expected": "schema",
+      "split": "test",
+      "allow_schema_search": true
+    },
+    {
+      "id": "t07",
+      "question": "Does the Contact definition refer to an Account?",
+      "expected": "schema",
+      "split": "test",
+      "allow_schema_search": true
+    },
+    {
+      "id": "t08",
+      "question": "Where in the model can I find a link between a user and a team?",
+      "expected": "schema",
+      "split": "test",
+      "allow_schema_search": true
+    },
+    {
+      "id": "t09",
+      "question": "Is there a CDM entity for a credit line?",
+      "expected": "schema",
+      "split": "test",
+      "allow_schema_search": true
+    },
+    {
+      "id": "t10",
+      "question": "In the banking model, what is the purpose of CustomerFinancialHolding?",
+      "expected": "schema",
+      "split": "test",
+      "allow_schema_search": true
+    },
+    {
+      "id": "t11",
+      "question": "What is the distinction between the availableBalance and balance attributes?",
+      "expected": "schema",
+      "split": "test",
+      "allow_schema_search": true
+    },
+    {
+      "id": "t12",
+      "question": "Which entities and references could represent an account with two owners?",
+      "expected": "schema",
+      "split": "test",
+      "allow_schema_search": true
+    },
+    {
+      "id": "t13",
+      "question": "Which customers share a bank account?",
+      "expected": "records",
+      "split": "test",
+      "allow_schema_search": false
+    },
+    {
+      "id": "t14",
+      "question": "Find the account numbers for the Smith household.",
+      "expected": "records",
+      "split": "test",
+      "allow_schema_search": false
+    },
+    {
+      "id": "t15",
+      "question": "What was our total deposit amount in March?",
+      "expected": "records",
+      "split": "test",
+      "allow_schema_search": false
+    },
+    {
+      "id": "t16",
+      "question": "Has loan 843 already been paid off?",
+      "expected": "records",
+      "split": "test",
+      "allow_schema_search": false
+    },
+    {
+      "id": "t17",
+      "question": "Give me the names of all customers with a mortgage.",
+      "expected": "records",
+      "split": "test",
+      "allow_schema_search": false
+    },
+    {
+      "id": "t18",
+      "question": "Which branches currently offer free overdrafts?",
+      "expected": "records",
+      "split": "test",
+      "allow_schema_search": false
+    },
+    {
+      "id": "t19",
+      "question": "Is account 172 owned by two people?",
+      "expected": "records",
+      "split": "test",
+      "allow_schema_search": false
+    },
+    {
+      "id": "t20",
+      "question": "What is the balance on John Smith’s checking account?",
+      "expected": "records",
+      "split": "test",
+      "allow_schema_search": false
+    },
+    {
+      "id": "t21",
+      "question": "Does Dynamics automatically notify a customer when an account is opened?",
+      "expected": "runtime",
+      "split": "test",
+      "allow_schema_search": false
+    },
+    {
+      "id": "t22",
+      "question": "What happens in the app when I delete a customer?",
+      "expected": "runtime",
+      "split": "test",
+      "allow_schema_search": false
+    },
+    {
+      "id": "t23",
+      "question": "How can I configure Dynamics to display subaccounts?",
+      "expected": "runtime",
+      "split": "test",
+      "allow_schema_search": false
+    },
+    {
+      "id": "t24",
+      "question": "Will an account be created when a contact is saved in CRM?",
+      "expected": "runtime",
+      "split": "test",
+      "allow_schema_search": false
+    },
+    {
+      "id": "t25",
+      "question": "Does the system validate account numbers before saving?",
+      "expected": "runtime",
+      "split": "test",
+      "allow_schema_search": false
+    },
+    {
+      "id": "t26",
+      "question": "Explain the Account schema and list the accounts that are overdrawn.",
+      "expected": "mixed",
+      "split": "test",
+      "allow_schema_search": false
+    },
+    {
+      "id": "t27",
+      "question": "How are users modeled, and will deleting one remove their team?",
+      "expected": "mixed",
+      "split": "test",
+      "allow_schema_search": false
+    },
+    {
+      "id": "t28",
+      "question": "Show our joint accounts and explain their CDM relationship.",
+      "expected": "mixed",
+      "split": "test",
+      "allow_schema_search": false
+    },
+    {
+      "id": "t29",
+      "question": "My dog Luna learned to swim yesterday.",
+      "expected": "unrelated",
+      "split": "test",
+      "allow_schema_search": false
+    },
+    {
+      "id": "t30",
+      "question": "Good morning!",
+      "expected": "unrelated",
+      "split": "test",
+      "allow_schema_search": false
+    },
+    {
+      "id": "t31",
+      "question": "What is the weather in Berlin?",
+      "expected": "unrelated",
+      "split": "test",
+      "allow_schema_search": false
+    },
+    {
+      "id": "t32",
+      "question": "Tell me a joke about astronomy.",
+      "expected": "unrelated",
+      "split": "test",
+      "allow_schema_search": false
+    },
+    {
+      "id": "r01",
+      "question": "Which accounts are jointly held?",
+      "expected": "records",
+      "split": "regression",
+      "allow_schema_search": false
+    },
+    {
+      "id": "r02",
+      "question": "Does creating an account in D365 auto-create a related contact record?",
+      "expected": "runtime",
+      "split": "regression",
+      "allow_schema_search": false
+    }
+  ]
+}

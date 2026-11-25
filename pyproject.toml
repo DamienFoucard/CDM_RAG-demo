@@ -1,0 +1,22 @@
+[project]
+name = "cdm-rag-demo"
+version = "1.0.0"
+description = "A local retrieval-augmented API over Microsoft CDM definitions"
+requires-python = ">=3.12"
+dependencies = [
+  "fastapi>=0.115,<1", "uvicorn[standard]>=0.34,<1", "httpx>=0.28,<1",
+  "chromadb>=1.0,<2", "numpy>=2.2,<3", "rank-bm25>=0.2,<1", "mcp>=1.30,<2",
+]
+
+[project.optional-dependencies]
+test = ["pytest>=8,<9"]
+
+[tool.cdm-rag.upstream]
+repository = "https://github.com/microsoft/CDM.git"
+commit = "dd21d715e05ebf740a11356c80b5c3b4c38a89c2"
+scope = ["RetailBankingCoreDataModel", "applicationCommon"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+addopts = "-q"

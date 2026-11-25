@@ -1,0 +1,2368 @@
+{
+  "dataset": "cdm-schema-evaluation-v2",
+  "dataset_sha256": "e449e91dff169a01b8deaabde2bedcd69132cedb1403c64bc3e4921e1cac00f0",
+  "snapshot_sha256": "93d735b82305fba15de60e84d4623f95d42e4aa23ccaac77cd22477b1e1083b9",
+  "source_commit": "dd21d715e05ebf740a11356c80b5c3b4c38a89c2",
+  "index_revision": "ca10c6cc8be785e41583af6f7d576fc2f778a326da756b4cbb32fdb03dda09f3",
+  "embedding_model": "qwen3-embedding:0.6b",
+  "embedding_digest": "ac6da0dfba84a81fdbfbaf330198c33cd77c4cdfc53e8bc50eb581914a15621d",
+  "target_kind": "entity",
+  "model": "gpt-oss:20b",
+  "settings": {
+    "reasoning": "low",
+    "max_output_tokens": 2048,
+    "temperature": 0
+  },
+  "cases": [
+    {
+      "id": "test-01",
+      "question": "Which banking concept represents a deposit account used for putting money in and taking it out?",
+      "targets": [
+        "RetailBankingCoreDataModel::FHAccount"
+      ],
+      "candidate_ids": [
+        "RetailBankingCoreDataModel::FHAccount:entity",
+        "RetailBankingCoreDataModel::FHSaving:attributes:3",
+        "RetailBankingCoreDataModel::FHAccount:trait-applications:entity",
+        "RetailBankingCoreDataModel::FHSaving:attributes:6",
+        "RetailBankingCoreDataModel::FHAccount:attributes:7",
+        "RetailBankingCoreDataModel::FHSaving:attributes:7",
+        "RetailBankingCoreDataModel::FHAccount:attributes:1",
+        "manifest:schemaDocuments/FinancialServices/RetailBankingCoreDataModel/RetailBankingCoreDataModel.manifest.cdm.json:overview",
+        "cdm-catalog:overview",
+        "RetailBankingCoreDataModel::Account:entity",
+        "RetailBankingCoreDataModel::FinancialHolding:trait-applications:entity",
+        "applicationCommon::Goal:attributes:9",
+        "RetailBankingCoreDataModel::FIStandingOrder:attributes:2",
+        "RetailBankingCoreDataModel::FHSaving:attributes:2",
+        "RetailBankingCoreDataModel::FHSaving:trait-applications:attributes:5",
+        "applicationCommon::Goal:attributes:5",
+        "RetailBankingCoreDataModel::FHSaving:trait-applications:attributes:2",
+        "RetailBankingCoreDataModel::FHSaving:trait-applications:entity",
+        "applicationCommon::Account:attributes:10",
+        "RetailBankingCoreDataModel::FHSaving:attributes:5"
+      ],
+      "candidate_pool": {
+        "entities": [
+          "RetailBankingCoreDataModel::FHAccount",
+          "RetailBankingCoreDataModel::FHSaving",
+          "RetailBankingCoreDataModel::Account",
+          "RetailBankingCoreDataModel::FinancialHolding",
+          "applicationCommon::Goal",
+          "RetailBankingCoreDataModel::FIStandingOrder",
+          "applicationCommon::Account"
+        ],
+        "passage_ids": [
+          "RetailBankingCoreDataModel::FHAccount:entity",
+          "RetailBankingCoreDataModel::FHSaving:attributes:3",
+          "RetailBankingCoreDataModel::FHAccount:trait-applications:entity",
+          "RetailBankingCoreDataModel::FHSaving:attributes:6",
+          "RetailBankingCoreDataModel::FHAccount:attributes:7",
+          "RetailBankingCoreDataModel::FHSaving:attributes:7",
+          "RetailBankingCoreDataModel::FHAccount:attributes:1",
+          "manifest:schemaDocuments/FinancialServices/RetailBankingCoreDataModel/RetailBankingCoreDataModel.manifest.cdm.json:overview",
+          "cdm-catalog:overview",
+          "RetailBankingCoreDataModel::Account:entity",
+          "RetailBankingCoreDataModel::FinancialHolding:trait-applications:entity",
+          "applicationCommon::Goal:attributes:9",
+          "RetailBankingCoreDataModel::FIStandingOrder:attributes:2",
+          "RetailBankingCoreDataModel::FHSaving:attributes:2",
+          "RetailBankingCoreDataModel::FHSaving:trait-applications:attributes:5",
+          "applicationCommon::Goal:attributes:5",
+          "RetailBankingCoreDataModel::FHSaving:trait-applications:attributes:2",
+          "RetailBankingCoreDataModel::FHSaving:trait-applications:entity",
+          "applicationCommon::Account:attributes:10",
+          "RetailBankingCoreDataModel::FHSaving:attributes:5"
+        ],
+        "hit": true,
+        "reciprocal_rank": 1.0,
+        "recall": 1.0
+      },
+      "raw": {
+        "entities": [
+          "RetailBankingCoreDataModel::FHAccount",
+          "RetailBankingCoreDataModel::FHSaving"
+        ],
+        "passage_ids": [
+          "RetailBankingCoreDataModel::FHAccount:entity",
+          "RetailBankingCoreDataModel::FHSaving:attributes:3",
+          "RetailBankingCoreDataModel::FHAccount:trait-applications:entity",
+          "RetailBankingCoreDataModel::FHSaving:attributes:6",
+          "RetailBankingCoreDataModel::FHAccount:attributes:7",
+          "RetailBankingCoreDataModel::FHSaving:attributes:7"
+        ],
+        "hit": true,
+        "reciprocal_rank": 1.0,
+        "recall": 1.0
+      },
+      "reranked": {
+        "entities": [
+          "RetailBankingCoreDataModel::FHAccount"
+        ],
+        "passage_ids": [
+          "RetailBankingCoreDataModel::FHAccount:entity",
+          "RetailBankingCoreDataModel::FHAccount:trait-applications:entity"
+        ],
+        "hit": true,
+        "reciprocal_rank": 1.0,
+        "recall": 1.0
+      },
+      "rerank_ms": 11342.1,
+      "error": null
+    },
+    {
+      "id": "test-02",
+      "question": "Where would a bank model a customer getting married or retiring?",
+      "targets": [
+        "RetailBankingCoreDataModel::LifeEvent"
+      ],
+      "candidate_ids": [
+        "RetailBankingCoreDataModel::Relationship:trait-applications:entity",
+        "manifest:schemaDocuments/FinancialServices/RetailBankingCoreDataModel/RetailBankingCoreDataModel.manifest.cdm.json:declarations:1",
+        "RetailBankingCoreDataModel::GroupFinancialHolding:attributes:2",
+        "RetailBankingCoreDataModel::FICard:entity",
+        "RetailBankingCoreDataModel::Relationship:attributes:3",
+        "RetailBankingCoreDataModel::FICard:trait-applications:entity",
+        "cdm-catalog:overview",
+        "RetailBankingCoreDataModel::Relationship:entity",
+        "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:1:e757f6dbd373",
+        "RetailBankingCoreDataModel::FIOverdraft:attributes:3",
+        "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:1:0d64ca347ca1",
+        "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:1:ac7fa8a7f4f9",
+        "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:2:f0610422bd7b",
+        "RetailBankingCoreDataModel::FHLoan:attributes:5",
+        "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:1:143c9d47e1f5",
+        "RetailBankingCoreDataModel::FIDirectDebit:entity",
+        "RetailBankingCoreDataModel::Relationship:inheritance",
+        "RetailBankingCoreDataModel::FICard:attributes:5",
+        "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:2:0d64ca347ca1",
+        "RetailBankingCoreDataModel::FHSaving:attributes:4"
+      ],
+      "candidate_pool": {
+        "entities": [
+          "RetailBankingCoreDataModel::Relationship",
+          "RetailBankingCoreDataModel::GroupFinancialHolding",
+          "RetailBankingCoreDataModel::FICard",
+          "RetailBankingCoreDataModel::FIOverdraft",
+          "applicationCommon::CustomerRelationship",
+          "RetailBankingCoreDataModel::FHLoan",
+          "RetailBankingCoreDataModel::FIDirectDebit",
+          "RetailBankingCoreDataModel::FHSaving"
+        ],
+        "passage_ids": [
+          "RetailBankingCoreDataModel::Relationship:trait-applications:entity",
+          "manifest:schemaDocuments/FinancialServices/RetailBankingCoreDataModel/RetailBankingCoreDataModel.manifest.cdm.json:declarations:1",
+          "RetailBankingCoreDataModel::GroupFinancialHolding:attributes:2",
+          "RetailBankingCoreDataModel::FICard:entity",
+          "RetailBankingCoreDataModel::Relationship:attributes:3",
+          "RetailBankingCoreDataModel::FICard:trait-applications:entity",
+          "cdm-catalog:overview",
+          "RetailBankingCoreDataModel::Relationship:entity",
+          "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:1:e757f6dbd373",
+          "RetailBankingCoreDataModel::FIOverdraft:attributes:3",
+          "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:1:0d64ca347ca1",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:1:ac7fa8a7f4f9",
+          "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:2:f0610422bd7b",
+          "RetailBankingCoreDataModel::FHLoan:attributes:5",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:1:143c9d47e1f5",
+          "RetailBankingCoreDataModel::FIDirectDebit:entity",
+          "RetailBankingCoreDataModel::Relationship:inheritance",
+          "RetailBankingCoreDataModel::FICard:attributes:5",
+          "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:2:0d64ca347ca1",
+          "RetailBankingCoreDataModel::FHSaving:attributes:4"
+        ],
+        "hit": false,
+        "reciprocal_rank": 0.0,
+        "recall": 0.0
+      },
+      "raw": {
+        "entities": [
+          "RetailBankingCoreDataModel::Relationship",
+          "RetailBankingCoreDataModel::GroupFinancialHolding",
+          "RetailBankingCoreDataModel::FICard"
+        ],
+        "passage_ids": [
+          "RetailBankingCoreDataModel::Relationship:trait-applications:entity",
+          "manifest:schemaDocuments/FinancialServices/RetailBankingCoreDataModel/RetailBankingCoreDataModel.manifest.cdm.json:declarations:1",
+          "RetailBankingCoreDataModel::GroupFinancialHolding:attributes:2",
+          "RetailBankingCoreDataModel::FICard:entity",
+          "RetailBankingCoreDataModel::Relationship:attributes:3",
+          "RetailBankingCoreDataModel::FICard:trait-applications:entity"
+        ],
+        "hit": false,
+        "reciprocal_rank": 0.0,
+        "recall": 0.0
+      },
+      "reranked": {
+        "entities": [
+          "RetailBankingCoreDataModel::Relationship"
+        ],
+        "passage_ids": [
+          "RetailBankingCoreDataModel::Relationship:entity",
+          "RetailBankingCoreDataModel::Relationship:trait-applications:entity",
+          "RetailBankingCoreDataModel::Relationship:attributes:3",
+          "RetailBankingCoreDataModel::Relationship:inheritance"
+        ],
+        "hit": false,
+        "reciprocal_rank": 0.0,
+        "recall": 0.0
+      },
+      "rerank_ms": 15138.6,
+      "error": null
+    },
+    {
+      "id": "test-03",
+      "question": "Which definition connects a household or other customer group to a financial holding?",
+      "targets": [
+        "RetailBankingCoreDataModel::GroupFinancialHolding"
+      ],
+      "candidate_ids": [
+        "RetailBankingCoreDataModel::CustomerFinancialHolding:attributes:3",
+        "RetailBankingCoreDataModel::GroupFinancialHolding:trait-applications:entity",
+        "RetailBankingCoreDataModel::GroupFinancialHolding:entity",
+        "RetailBankingCoreDataModel::GroupFinancialHolding:relationship:2",
+        "RetailBankingCoreDataModel::GroupFinancialHolding:attributes:2",
+        "RetailBankingCoreDataModel::GroupFinancialHolding:relationship:1",
+        "RetailBankingCoreDataModel::FHAccount:attributes:5",
+        "RetailBankingCoreDataModel::GroupFinancialHolding:attributes:1",
+        "RetailBankingCoreDataModel::CustomerFinancialHolding:attributes:2",
+        "RetailBankingCoreDataModel::FHLineOfCredit:attributes:4",
+        "RetailBankingCoreDataModel::FHSaving:attributes:5",
+        "RetailBankingCoreDataModel::FinancialHolding:attributes:3",
+        "RetailBankingCoreDataModel::FinancialHoldingInstrument:entity",
+        "RetailBankingCoreDataModel::FHAccount:attributes:7",
+        "RetailBankingCoreDataModel::FHSaving:attributes:7",
+        "RetailBankingCoreDataModel::FHLineOfCredit:attributes:6",
+        "RetailBankingCoreDataModel::FHLoan:attributes:5",
+        "RetailBankingCoreDataModel::FHLoan:attributes:11",
+        "RetailBankingCoreDataModel::CustomerFinancialHolding:inheritance",
+        "RetailBankingCoreDataModel::CustomerFinancialHolding:trait-applications:entity"
+      ],
+      "candidate_pool": {
+        "entities": [
+          "RetailBankingCoreDataModel::CustomerFinancialHolding",
+          "RetailBankingCoreDataModel::GroupFinancialHolding",
+          "RetailBankingCoreDataModel::FHAccount",
+          "RetailBankingCoreDataModel::FHLineOfCredit",
+          "RetailBankingCoreDataModel::FHSaving",
+          "RetailBankingCoreDataModel::FinancialHolding",
+          "RetailBankingCoreDataModel::FinancialHoldingInstrument",
+          "RetailBankingCoreDataModel::FHLoan"
+        ],
+        "passage_ids": [
+          "RetailBankingCoreDataModel::CustomerFinancialHolding:attributes:3",
+          "RetailBankingCoreDataModel::GroupFinancialHolding:trait-applications:entity",
+          "RetailBankingCoreDataModel::GroupFinancialHolding:entity",
+          "RetailBankingCoreDataModel::GroupFinancialHolding:relationship:2",
+          "RetailBankingCoreDataModel::GroupFinancialHolding:attributes:2",
+          "RetailBankingCoreDataModel::GroupFinancialHolding:relationship:1",
+          "RetailBankingCoreDataModel::FHAccount:attributes:5",
+          "RetailBankingCoreDataModel::GroupFinancialHolding:attributes:1",
+          "RetailBankingCoreDataModel::CustomerFinancialHolding:attributes:2",
+          "RetailBankingCoreDataModel::FHLineOfCredit:attributes:4",
+          "RetailBankingCoreDataModel::FHSaving:attributes:5",
+          "RetailBankingCoreDataModel::FinancialHolding:attributes:3",
+          "RetailBankingCoreDataModel::FinancialHoldingInstrument:entity",
+          "RetailBankingCoreDataModel::FHAccount:attributes:7",
+          "RetailBankingCoreDataModel::FHSaving:attributes:7",
+          "RetailBankingCoreDataModel::FHLineOfCredit:attributes:6",
+          "RetailBankingCoreDataModel::FHLoan:attributes:5",
+          "RetailBankingCoreDataModel::FHLoan:attributes:11",
+          "RetailBankingCoreDataModel::CustomerFinancialHolding:inheritance",
+          "RetailBankingCoreDataModel::CustomerFinancialHolding:trait-applications:entity"
+        ],
+        "hit": true,
+        "reciprocal_rank": 0.5,
+        "recall": 1.0
+      },
+      "raw": {
+        "entities": [
+          "RetailBankingCoreDataModel::CustomerFinancialHolding",
+          "RetailBankingCoreDataModel::GroupFinancialHolding"
+        ],
+        "passage_ids": [
+          "RetailBankingCoreDataModel::CustomerFinancialHolding:attributes:3",
+          "RetailBankingCoreDataModel::GroupFinancialHolding:trait-applications:entity",
+          "RetailBankingCoreDataModel::GroupFinancialHolding:entity",
+          "RetailBankingCoreDataModel::GroupFinancialHolding:relationship:2",
+          "RetailBankingCoreDataModel::GroupFinancialHolding:attributes:2",
+          "RetailBankingCoreDataModel::GroupFinancialHolding:relationship:1"
+        ],
+        "hit": true,
+        "reciprocal_rank": 0.5,
+        "recall": 1.0
+      },
+      "reranked": {
+        "entities": [
+          "RetailBankingCoreDataModel::GroupFinancialHolding"
+        ],
+        "passage_ids": [
+          "RetailBankingCoreDataModel::GroupFinancialHolding:attributes:2",
+          "RetailBankingCoreDataModel::GroupFinancialHolding:relationship:1",
+          "RetailBankingCoreDataModel::GroupFinancialHolding:relationship:2",
+          "RetailBankingCoreDataModel::GroupFinancialHolding:attributes:1"
+        ],
+        "hit": true,
+        "reciprocal_rank": 1.0,
+        "recall": 1.0
+      },
+      "rerank_ms": 12207.6,
+      "error": null
+    },
+    {
+      "id": "test-04",
+      "question": "How is a personal connection, such as a spouse, between two contacts represented?",
+      "targets": [
+        "RetailBankingCoreDataModel::Relationship"
+      ],
+      "candidate_ids": [
+        "RetailBankingCoreDataModel::Relationship:entity",
+        "RetailBankingCoreDataModel::Relationship:trait-applications:entity",
+        "applicationCommon::Contact:trait-applications:entity",
+        "applicationCommon::Connection:attributes:2",
+        "RetailBankingCoreDataModel::Contact:trait-applications:entity",
+        "applicationCommon::Connection:trait-applications:entity",
+        "applicationCommon::Connection:entity",
+        "applicationCommon::Contact:attributes:13",
+        "applicationCommon::CustomerRelationship:trait-applications:entity",
+        "applicationCommon::ConnectionRole:trait-applications:entity",
+        "applicationCommon::ConnectionRole:entity",
+        "applicationCommon::Connection:relationship:4",
+        "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:2:b8d05484da99",
+        "RetailBankingCoreDataModel::LifeEvent:trait-applications:entity",
+        "applicationCommon::Connection:relationship:8",
+        "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:1:b8d05484da99",
+        "applicationCommon::Contact:inheritance",
+        "RetailBankingCoreDataModel::LifeEvent:entity",
+        "applicationCommon::Contact:attributes:7",
+        "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:relationship-mappings:3:b8d05484da99"
+      ],
+      "candidate_pool": {
+        "entities": [
+          "RetailBankingCoreDataModel::Relationship",
+          "applicationCommon::Contact",
+          "applicationCommon::Connection",
+          "RetailBankingCoreDataModel::Contact",
+          "applicationCommon::CustomerRelationship",
+          "applicationCommon::ConnectionRole",
+          "RetailBankingCoreDataModel::LifeEvent"
+        ],
+        "passage_ids": [
+          "RetailBankingCoreDataModel::Relationship:entity",
+          "RetailBankingCoreDataModel::Relationship:trait-applications:entity",
+          "applicationCommon::Contact:trait-applications:entity",
+          "applicationCommon::Connection:attributes:2",
+          "RetailBankingCoreDataModel::Contact:trait-applications:entity",
+          "applicationCommon::Connection:trait-applications:entity",
+          "applicationCommon::Connection:entity",
+          "applicationCommon::Contact:attributes:13",
+          "applicationCommon::CustomerRelationship:trait-applications:entity",
+          "applicationCommon::ConnectionRole:trait-applications:entity",
+          "applicationCommon::ConnectionRole:entity",
+          "applicationCommon::Connection:relationship:4",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:2:b8d05484da99",
+          "RetailBankingCoreDataModel::LifeEvent:trait-applications:entity",
+          "applicationCommon::Connection:relationship:8",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:1:b8d05484da99",
+          "applicationCommon::Contact:inheritance",
+          "RetailBankingCoreDataModel::LifeEvent:entity",
+          "applicationCommon::Contact:attributes:7",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:relationship-mappings:3:b8d05484da99"
+        ],
+        "hit": true,
+        "reciprocal_rank": 1.0,
+        "recall": 1.0
+      },
+      "raw": {
+        "entities": [
+          "RetailBankingCoreDataModel::Relationship",
+          "applicationCommon::Contact",
+          "applicationCommon::Connection",
+          "RetailBankingCoreDataModel::Contact"
+        ],
+        "passage_ids": [
+          "RetailBankingCoreDataModel::Relationship:entity",
+          "RetailBankingCoreDataModel::Relationship:trait-applications:entity",
+          "applicationCommon::Contact:trait-applications:entity",
+          "applicationCommon::Connection:attributes:2",
+          "RetailBankingCoreDataModel::Contact:trait-applications:entity",
+          "applicationCommon::Connection:trait-applications:entity"
+        ],
+        "hit": true,
+        "reciprocal_rank": 1.0,
+        "recall": 1.0
+      },
+      "reranked": {
+        "entities": [
+          "RetailBankingCoreDataModel::Relationship"
+        ],
+        "passage_ids": [
+          "RetailBankingCoreDataModel::Relationship:entity",
+          "RetailBankingCoreDataModel::Relationship:trait-applications:entity"
+        ],
+        "hit": true,
+        "reciprocal_rank": 1.0,
+        "recall": 1.0
+      },
+      "rerank_ms": 13157.0,
+      "error": null
+    },
+    {
+      "id": "test-05",
+      "question": "Which banking object identifies the person or company that holds a payment card?",
+      "targets": [
+        "RetailBankingCoreDataModel::FICard"
+      ],
+      "candidate_ids": [
+        "RetailBankingCoreDataModel::FICard:entity",
+        "RetailBankingCoreDataModel::FICard:trait-applications:entity",
+        "RetailBankingCoreDataModel::FICard:attributes:3",
+        "RetailBankingCoreDataModel::FICard:attributes:2",
+        "RetailBankingCoreDataModel::FHLineOfCredit:attributes:5",
+        "RetailBankingCoreDataModel::FICard:attributes:4",
+        "RetailBankingCoreDataModel::FICard:attributes:5",
+        "RetailBankingCoreDataModel::FHLineOfCredit:attributes:6",
+        "RetailBankingCoreDataModel::FHLineOfCredit:trait-applications:attributes:5",
+        "RetailBankingCoreDataModel::FHLineOfCredit:trait-applications:attributes:4",
+        "RetailBankingCoreDataModel::FIStandingOrder:attributes:3",
+        "RetailBankingCoreDataModel::Account:entity",
+        "RetailBankingCoreDataModel::Account:trait-applications:entity",
+        "RetailBankingCoreDataModel::FIStandingOrder:attributes:2",
+        "RetailBankingCoreDataModel::FIDirectDebit:attributes:3",
+        "RetailBankingCoreDataModel::FHLineOfCredit:attributes:4",
+        "RetailBankingCoreDataModel::FICard:relationship:1",
+        "RetailBankingCoreDataModel::FICard:inheritance",
+        "RetailBankingCoreDataModel::FHLoan:attributes:8",
+        "RetailBankingCoreDataModel::FHLoan:attributes:7"
+      ],
+      "candidate_pool": {
+        "entities": [
+          "RetailBankingCoreDataModel::FICard",
+          "RetailBankingCoreDataModel::FHLineOfCredit",
+          "RetailBankingCoreDataModel::FIStandingOrder",
+          "RetailBankingCoreDataModel::Account",
+          "RetailBankingCoreDataModel::FIDirectDebit",
+          "RetailBankingCoreDataModel::FHLoan"
+        ],
+        "passage_ids": [
+          "RetailBankingCoreDataModel::FICard:entity",
+          "RetailBankingCoreDataModel::FICard:trait-applications:entity",
+          "RetailBankingCoreDataModel::FICard:attributes:3",
+          "RetailBankingCoreDataModel::FICard:attributes:2",
+          "RetailBankingCoreDataModel::FHLineOfCredit:attributes:5",
+          "RetailBankingCoreDataModel::FICard:attributes:4",
+          "RetailBankingCoreDataModel::FICard:attributes:5",
+          "RetailBankingCoreDataModel::FHLineOfCredit:attributes:6",
+          "RetailBankingCoreDataModel::FHLineOfCredit:trait-applications:attributes:5",
+          "RetailBankingCoreDataModel::FHLineOfCredit:trait-applications:attributes:4",
+          "RetailBankingCoreDataModel::FIStandingOrder:attributes:3",
+          "RetailBankingCoreDataModel::Account:entity",
+          "RetailBankingCoreDataModel::Account:trait-applications:entity",
+          "RetailBankingCoreDataModel::FIStandingOrder:attributes:2",
+          "RetailBankingCoreDataModel::FIDirectDebit:attributes:3",
+          "RetailBankingCoreDataModel::FHLineOfCredit:attributes:4",
+          "RetailBankingCoreDataModel::FICard:relationship:1",
+          "RetailBankingCoreDataModel::FICard:inheritance",
+          "RetailBankingCoreDataModel::FHLoan:attributes:8",
+          "RetailBankingCoreDataModel::FHLoan:attributes:7"
+        ],
+        "hit": true,
+        "reciprocal_rank": 1.0,
+        "recall": 1.0
+      },
+      "raw": {
+        "entities": [
+          "RetailBankingCoreDataModel::FICard",
+          "RetailBankingCoreDataModel::FHLineOfCredit"
+        ],
+        "passage_ids": [
+          "RetailBankingCoreDataModel::FICard:entity",
+          "RetailBankingCoreDataModel::FICard:trait-applications:entity",
+          "RetailBankingCoreDataModel::FICard:attributes:3",
+          "RetailBankingCoreDataModel::FICard:attributes:2",
+          "RetailBankingCoreDataModel::FHLineOfCredit:attributes:5",
+          "RetailBankingCoreDataModel::FICard:attributes:4"
+        ],
+        "hit": true,
+        "reciprocal_rank": 1.0,
+        "recall": 1.0
+      },
+      "reranked": {
+        "entities": [
+          "RetailBankingCoreDataModel::FICard"
+        ],
+        "passage_ids": [
+          "RetailBankingCoreDataModel::FICard:relationship:1",
+          "RetailBankingCoreDataModel::FICard:entity",
+          "RetailBankingCoreDataModel::FICard:attributes:2"
+        ],
+        "hit": true,
+        "reciprocal_rank": 1.0,
+        "recall": 1.0
+      },
+      "rerank_ms": 13919.4,
+      "error": null
+    },
+    {
+      "id": "test-06",
+      "question": "Which definition connects a financial instrument to the financial holding it belongs to?",
+      "targets": [
+        "RetailBankingCoreDataModel::FinancialHoldingInstrument"
+      ],
+      "candidate_ids": [
+        "RetailBankingCoreDataModel::FinancialHoldingInstrument:trait-applications:entity",
+        "RetailBankingCoreDataModel::FinancialHoldingInstrument:relationship:2",
+        "RetailBankingCoreDataModel::FinancialHoldingInstrument:entity",
+        "RetailBankingCoreDataModel::FinancialHoldingInstrument:attributes:1",
+        "RetailBankingCoreDataModel::FinancialHoldingInstrument:attributes:3",
+        "RetailBankingCoreDataModel::FinancialHoldingInstrument:attributes:2",
+        "RetailBankingCoreDataModel::FinancialHoldingInstrument:inheritance",
+        "RetailBankingCoreDataModel::FinancialHoldingInstrument:relationship:1",
+        "RetailBankingCoreDataModel::CustomerFinancialHolding:relationship:2",
+        "RetailBankingCoreDataModel::CustomerFinancialHolding:attributes:3",
+        "RetailBankingCoreDataModel::FinancialHolding:attributes:3",
+        "RetailBankingCoreDataModel::FinancialHoldingInstrument:trait-applications:attributes:2",
+        "RetailBankingCoreDataModel::FHSaving:attributes:5",
+        "manifest:schemaDocuments/FinancialServices/RetailBankingCoreDataModel/RetailBankingCoreDataModel.manifest.cdm.json:declarations:3",
+        "RetailBankingCoreDataModel::FHAccount:attributes:5",
+        "RetailBankingCoreDataModel::FHLineOfCredit:attributes:4",
+        "RetailBankingCoreDataModel::FHInvestment:attributes:4",
+        "RetailBankingCoreDataModel::CustomerFinancialHolding:attributes:2",
+        "RetailBankingCoreDataModel::FHLineOfCredit:attributes:6",
+        "RetailBankingCoreDataModel::FHLoan:attributes:5"
+      ],
+      "candidate_pool": {
+        "entities": [
+          "RetailBankingCoreDataModel::FinancialHoldingInstrument",
+          "RetailBankingCoreDataModel::CustomerFinancialHolding",
+          "RetailBankingCoreDataModel::FinancialHolding",
+          "RetailBankingCoreDataModel::FHSaving",
+          "RetailBankingCoreDataModel::FHAccount",
+          "RetailBankingCoreDataModel::FHLineOfCredit",
+          "RetailBankingCoreDataModel::FHInvestment",
+          "RetailBankingCoreDataModel::FHLoan"
+        ],
+        "passage_ids": [
+          "RetailBankingCoreDataModel::FinancialHoldingInstrument:trait-applications:entity",
+          "RetailBankingCoreDataModel::FinancialHoldingInstrument:relationship:2",
+          "RetailBankingCoreDataModel::FinancialHoldingInstrument:entity",
+          "RetailBankingCoreDataModel::FinancialHoldingInstrument:attributes:1",
+          "RetailBankingCoreDataModel::FinancialHoldingInstrument:attributes:3",
+          "RetailBankingCoreDataModel::FinancialHoldingInstrument:attributes:2",
+          "RetailBankingCoreDataModel::FinancialHoldingInstrument:inheritance",
+          "RetailBankingCoreDataModel::FinancialHoldingInstrument:relationship:1",
+          "RetailBankingCoreDataModel::CustomerFinancialHolding:relationship:2",
+          "RetailBankingCoreDataModel::CustomerFinancialHolding:attributes:3",
+          "RetailBankingCoreDataModel::FinancialHolding:attributes:3",
+          "RetailBankingCoreDataModel::FinancialHoldingInstrument:trait-applications:attributes:2",
+          "RetailBankingCoreDataModel::FHSaving:attributes:5",
+          "manifest:schemaDocuments/FinancialServices/RetailBankingCoreDataModel/RetailBankingCoreDataModel.manifest.cdm.json:declarations:3",
+          "RetailBankingCoreDataModel::FHAccount:attributes:5",
+          "RetailBankingCoreDataModel::FHLineOfCredit:attributes:4",
+          "RetailBankingCoreDataModel::FHInvestment:attributes:4",
+          "RetailBankingCoreDataModel::CustomerFinancialHolding:attributes:2",
+          "RetailBankingCoreDataModel::FHLineOfCredit:attributes:6",
+          "RetailBankingCoreDataModel::FHLoan:attributes:5"
+        ],
+        "hit": true,
+        "reciprocal_rank": 1.0,
+        "recall": 1.0
+      },
+      "raw": {
+        "entities": [
+          "RetailBankingCoreDataModel::FinancialHoldingInstrument"
+        ],
+        "passage_ids": [
+          "RetailBankingCoreDataModel::FinancialHoldingInstrument:trait-applications:entity",
+          "RetailBankingCoreDataModel::FinancialHoldingInstrument:relationship:2",
+          "RetailBankingCoreDataModel::FinancialHoldingInstrument:entity",
+          "RetailBankingCoreDataModel::FinancialHoldingInstrument:attributes:1",
+          "RetailBankingCoreDataModel::FinancialHoldingInstrument:attributes:3",
+          "RetailBankingCoreDataModel::FinancialHoldingInstrument:attributes:2"
+        ],
+        "hit": true,
+        "reciprocal_rank": 1.0,
+        "recall": 1.0
+      },
+      "reranked": {
+        "entities": [
+          "RetailBankingCoreDataModel::FinancialHoldingInstrument"
+        ],
+        "passage_ids": [
+          "RetailBankingCoreDataModel::FinancialHoldingInstrument:relationship:2",
+          "RetailBankingCoreDataModel::FinancialHoldingInstrument:attributes:2"
+        ],
+        "hit": true,
+        "reciprocal_rank": 1.0,
+        "recall": 1.0
+      },
+      "rerank_ms": 12512.9,
+      "error": null
+    },
+    {
+      "id": "test-07",
+      "question": "What is the general banking concept encompassing loans, investments, and savings held by a customer?",
+      "targets": [
+        "RetailBankingCoreDataModel::FinancialHolding"
+      ],
+      "candidate_ids": [
+        "RetailBankingCoreDataModel::FinancialHolding:trait-applications:entity",
+        "RetailBankingCoreDataModel::FHSaving:trait-applications:entity",
+        "RetailBankingCoreDataModel::FinancialHolding:entity",
+        "RetailBankingCoreDataModel::FHLoan:trait-applications:entity",
+        "RetailBankingCoreDataModel::FHSaving:attributes:5",
+        "RetailBankingCoreDataModel::FHLoan:attributes:5",
+        "RetailBankingCoreDataModel::FinancialHolding:attributes:3",
+        "RetailBankingCoreDataModel::FHSaving:entity",
+        "RetailBankingCoreDataModel::FHAccount:attributes:5",
+        "RetailBankingCoreDataModel::FHLoan:entity",
+        "RetailBankingCoreDataModel::FHInvestment:attributes:4",
+        "RetailBankingCoreDataModel::FHSaving:trait-applications:attributes:4",
+        "RetailBankingCoreDataModel::FHSaving:attributes:4",
+        "RetailBankingCoreDataModel::GroupFinancialHolding:attributes:2",
+        "RetailBankingCoreDataModel::FHSaving:attributes:7",
+        "RetailBankingCoreDataModel::GroupFinancialHolding:relationship:1",
+        "RetailBankingCoreDataModel::CustomerFinancialHolding:attributes:3",
+        "RetailBankingCoreDataModel::CustomerFinancialHolding:trait-applications:entity",
+        "RetailBankingCoreDataModel::CustomerFinancialHolding:inheritance",
+        "RetailBankingCoreDataModel::FHLineOfCredit:attributes:4"
+      ],
+      "candidate_pool": {
+        "entities": [
+          "RetailBankingCoreDataModel::FinancialHolding",
+          "RetailBankingCoreDataModel::FHSaving",
+          "RetailBankingCoreDataModel::FHLoan",
+          "RetailBankingCoreDataModel::FHAccount",
+          "RetailBankingCoreDataModel::FHInvestment",
+          "RetailBankingCoreDataModel::GroupFinancialHolding",
+          "RetailBankingCoreDataModel::CustomerFinancialHolding",
+          "RetailBankingCoreDataModel::FHLineOfCredit"
+        ],
+        "passage_ids": [
+          "RetailBankingCoreDataModel::FinancialHolding:trait-applications:entity",
+          "RetailBankingCoreDataModel::FHSaving:trait-applications:entity",
+          "RetailBankingCoreDataModel::FinancialHolding:entity",
+          "RetailBankingCoreDataModel::FHLoan:trait-applications:entity",
+          "RetailBankingCoreDataModel::FHSaving:attributes:5",
+          "RetailBankingCoreDataModel::FHLoan:attributes:5",
+          "RetailBankingCoreDataModel::FinancialHolding:attributes:3",
+          "RetailBankingCoreDataModel::FHSaving:entity",
+          "RetailBankingCoreDataModel::FHAccount:attributes:5",
+          "RetailBankingCoreDataModel::FHLoan:entity",
+          "RetailBankingCoreDataModel::FHInvestment:attributes:4",
+          "RetailBankingCoreDataModel::FHSaving:trait-applications:attributes:4",
+          "RetailBankingCoreDataModel::FHSaving:attributes:4",
+          "RetailBankingCoreDataModel::GroupFinancialHolding:attributes:2",
+          "RetailBankingCoreDataModel::FHSaving:attributes:7",
+          "RetailBankingCoreDataModel::GroupFinancialHolding:relationship:1",
+          "RetailBankingCoreDataModel::CustomerFinancialHolding:attributes:3",
+          "RetailBankingCoreDataModel::CustomerFinancialHolding:trait-applications:entity",
+          "RetailBankingCoreDataModel::CustomerFinancialHolding:inheritance",
+          "RetailBankingCoreDataModel::FHLineOfCredit:attributes:4"
+        ],
+        "hit": true,
+        "reciprocal_rank": 1.0,
+        "recall": 1.0
+      },
+      "raw": {
+        "entities": [
+          "RetailBankingCoreDataModel::FinancialHolding",
+          "RetailBankingCoreDataModel::FHSaving",
+          "RetailBankingCoreDataModel::FHLoan"
+        ],
+        "passage_ids": [
+          "RetailBankingCoreDataModel::FinancialHolding:trait-applications:entity",
+          "RetailBankingCoreDataModel::FHSaving:trait-applications:entity",
+          "RetailBankingCoreDataModel::FinancialHolding:entity",
+          "RetailBankingCoreDataModel::FHLoan:trait-applications:entity",
+          "RetailBankingCoreDataModel::FHSaving:attributes:5",
+          "RetailBankingCoreDataModel::FHLoan:attributes:5"
+        ],
+        "hit": true,
+        "reciprocal_rank": 1.0,
+        "recall": 1.0
+      },
+      "reranked": {
+        "entities": [
+          "RetailBankingCoreDataModel::FinancialHolding",
+          "RetailBankingCoreDataModel::GroupFinancialHolding"
+        ],
+        "passage_ids": [
+          "RetailBankingCoreDataModel::FinancialHolding:trait-applications:entity",
+          "RetailBankingCoreDataModel::FinancialHolding:entity",
+          "RetailBankingCoreDataModel::GroupFinancialHolding:attributes:2",
+          "RetailBankingCoreDataModel::GroupFinancialHolding:relationship:1"
+        ],
+        "hit": true,
+        "reciprocal_rank": 1.0,
+        "recall": 1.0
+      },
+      "rerank_ms": 3086.5,
+      "error": null
+    },
+    {
+      "id": "test-08",
+      "question": "What represents a fixed sum automatically sent from one account to another at intervals?",
+      "targets": [
+        "RetailBankingCoreDataModel::FIStandingOrder"
+      ],
+      "candidate_ids": [
+        "RetailBankingCoreDataModel::FIDirectDebit:trait-applications:entity",
+        "RetailBankingCoreDataModel::FHSaving:attributes:6",
+        "RetailBankingCoreDataModel::FHAccount:attributes:6",
+        "RetailBankingCoreDataModel::FIStandingOrder:trait-applications:entity",
+        "applicationCommon::Account:attributes:7",
+        "RetailBankingCoreDataModel::FIStandingOrder:entity",
+        "RetailBankingCoreDataModel::FIDirectDebit:trait-applications:attributes:5",
+        "RetailBankingCoreDataModel::Relationship:entity",
+        "RetailBankingCoreDataModel::FIDirectDebit:trait-applications:attributes:4",
+        "applicationCommon::User:attributes:20",
+        "RetailBankingCoreDataModel::FIDirectDebit:attributes:6",
+        "applicationCommon::Contact:attributes:2",
+        "RetailBankingCoreDataModel::FHLineOfCredit:trait-applications:attributes:4",
+        "RetailBankingCoreDataModel::FHSaving:trait-applications:attributes:5",
+        "RetailBankingCoreDataModel::Relationship:trait-applications:entity",
+        "RetailBankingCoreDataModel::FIDirectDebit:entity",
+        "RetailBankingCoreDataModel::FIDirectDebit:trait-applications:attributes:2",
+        "RetailBankingCoreDataModel::FIDirectDebit:attributes:5",
+        "applicationCommon::KnowledgeArticle:attributes:7",
+        "RetailBankingCoreDataModel::FIStandingOrder:attributes:3"
+      ],
+      "candidate_pool": {
+        "entities": [
+          "RetailBankingCoreDataModel::FIDirectDebit",
+          "RetailBankingCoreDataModel::FHSaving",
+          "RetailBankingCoreDataModel::FHAccount",
+          "RetailBankingCoreDataModel::FIStandingOrder",
+          "applicationCommon::Account",
+          "RetailBankingCoreDataModel::Relationship",
+          "applicationCommon::User",
+          "applicationCommon::Contact",
+          "RetailBankingCoreDataModel::FHLineOfCredit",
+          "applicationCommon::KnowledgeArticle"
+        ],
+        "passage_ids": [
+          "RetailBankingCoreDataModel::FIDirectDebit:trait-applications:entity",
+          "RetailBankingCoreDataModel::FHSaving:attributes:6",
+          "RetailBankingCoreDataModel::FHAccount:attributes:6",
+          "RetailBankingCoreDataModel::FIStandingOrder:trait-applications:entity",
+          "applicationCommon::Account:attributes:7",
+          "RetailBankingCoreDataModel::FIStandingOrder:entity",
+          "RetailBankingCoreDataModel::FIDirectDebit:trait-applications:attributes:5",
+          "RetailBankingCoreDataModel::Relationship:entity",
+          "RetailBankingCoreDataModel::FIDirectDebit:trait-applications:attributes:4",
+          "applicationCommon::User:attributes:20",
+          "RetailBankingCoreDataModel::FIDirectDebit:attributes:6",
+          "applicationCommon::Contact:attributes:2",
+          "RetailBankingCoreDataModel::FHLineOfCredit:trait-applications:attributes:4",
+          "RetailBankingCoreDataModel::FHSaving:trait-applications:attributes:5",
+          "RetailBankingCoreDataModel::Relationship:trait-applications:entity",
+          "RetailBankingCoreDataModel::FIDirectDebit:entity",
+          "RetailBankingCoreDataModel::FIDirectDebit:trait-applications:attributes:2",
+          "RetailBankingCoreDataModel::FIDirectDebit:attributes:5",
+          "applicationCommon::KnowledgeArticle:attributes:7",
+          "RetailBankingCoreDataModel::FIStandingOrder:attributes:3"
+        ],
+        "hit": true,
+        "reciprocal_rank": 0.25,
+        "recall": 1.0
+      },
+      "raw": {
+        "entities": [
+          "RetailBankingCoreDataModel::FIDirectDebit",
+          "RetailBankingCoreDataModel::FHSaving",
+          "RetailBankingCoreDataModel::FHAccount",
+          "RetailBankingCoreDataModel::FIStandingOrder",
+          "applicationCommon::Account"
+        ],
+        "passage_ids": [
+          "RetailBankingCoreDataModel::FIDirectDebit:trait-applications:entity",
+          "RetailBankingCoreDataModel::FHSaving:attributes:6",
+          "RetailBankingCoreDataModel::FHAccount:attributes:6",
+          "RetailBankingCoreDataModel::FIStandingOrder:trait-applications:entity",
+          "applicationCommon::Account:attributes:7",
+          "RetailBankingCoreDataModel::FIStandingOrder:entity"
+        ],
+        "hit": true,
+        "reciprocal_rank": 0.25,
+        "recall": 1.0
+      },
+      "reranked": {
+        "entities": [
+          "RetailBankingCoreDataModel::FIStandingOrder"
+        ],
+        "passage_ids": [
+          "RetailBankingCoreDataModel::FIStandingOrder:trait-applications:entity",
+          "RetailBankingCoreDataModel::FIStandingOrder:entity",
+          "RetailBankingCoreDataModel::FIStandingOrder:attributes:3"
+        ],
+        "hit": true,
+        "reciprocal_rank": 1.0,
+        "recall": 1.0
+      },
+      "rerank_ms": 14407.0,
+      "error": null
+    },
+    {
+      "id": "test-09",
+      "question": "Which attributes describe a business customer in the common Account definition?",
+      "targets": [
+        "applicationCommon::Account"
+      ],
+      "candidate_ids": [
+        "applicationCommon::Account:entity",
+        "applicationCommon::Account:attributes:2",
+        "applicationCommon::Account:trait-applications:entity",
+        "applicationCommon::Account:attributes:1",
+        "applicationCommon::CustomerRelationship:entity",
+        "applicationCommon::CustomerRelationship:attributes:2",
+        "applicationCommon::Account:attributes:3",
+        "applicationCommon::CustomerRelationship:trait-applications:entity",
+        "applicationCommon::CustomerRelationship:attributes:1",
+        "applicationCommon::Contact:attributes:2",
+        "applicationCommon::Account:attributes:4",
+        "RetailBankingCoreDataModel::Account:trait-applications:entity",
+        "RetailBankingCoreDataModel::Account:entity",
+        "applicationCommon::SLA:attributes:2",
+        "applicationCommon::Account:trait-applications:attributes:2",
+        "applicationCommon::Fax:attributes:1",
+        "applicationCommon::Account:inheritance",
+        "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:1:019acd026d3f",
+        "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:1:75cf2ab13bcf",
+        "applicationCommon::Account:trait-applications:attributes:1"
+      ],
+      "candidate_pool": {
+        "entities": [
+          "applicationCommon::Account",
+          "applicationCommon::CustomerRelationship",
+          "applicationCommon::Contact",
+          "RetailBankingCoreDataModel::Account",
+          "applicationCommon::SLA",
+          "applicationCommon::Fax"
+        ],
+        "passage_ids": [
+          "applicationCommon::Account:entity",
+          "applicationCommon::Account:attributes:2",
+          "applicationCommon::Account:trait-applications:entity",
+          "applicationCommon::Account:attributes:1",
+          "applicationCommon::CustomerRelationship:entity",
+          "applicationCommon::CustomerRelationship:attributes:2",
+          "applicationCommon::Account:attributes:3",
+          "applicationCommon::CustomerRelationship:trait-applications:entity",
+          "applicationCommon::CustomerRelationship:attributes:1",
+          "applicationCommon::Contact:attributes:2",
+          "applicationCommon::Account:attributes:4",
+          "RetailBankingCoreDataModel::Account:trait-applications:entity",
+          "RetailBankingCoreDataModel::Account:entity",
+          "applicationCommon::SLA:attributes:2",
+          "applicationCommon::Account:trait-applications:attributes:2",
+          "applicationCommon::Fax:attributes:1",
+          "applicationCommon::Account:inheritance",
+          "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:1:019acd026d3f",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:1:75cf2ab13bcf",
+          "applicationCommon::Account:trait-applications:attributes:1"
+        ],
+        "hit": true,
+        "reciprocal_rank": 1.0,
+        "recall": 1.0
+      },
+      "raw": {
+        "entities": [
+          "applicationCommon::Account",
+          "applicationCommon::CustomerRelationship"
+        ],
+        "passage_ids": [
+          "applicationCommon::Account:entity",
+          "applicationCommon::Account:attributes:2",
+          "applicationCommon::Account:trait-applications:entity",
+          "applicationCommon::Account:attributes:1",
+          "applicationCommon::CustomerRelationship:entity",
+          "applicationCommon::CustomerRelationship:attributes:2"
+        ],
+        "hit": true,
+        "reciprocal_rank": 1.0,
+        "recall": 1.0
+      },
+      "reranked": {
+        "entities": [
+          "applicationCommon::Account"
+        ],
+        "passage_ids": [
+          "applicationCommon::Account:entity",
+          "applicationCommon::Account:trait-applications:attributes:1",
+          "applicationCommon::Account:attributes:1",
+          "applicationCommon::Account:trait-applications:attributes:2",
+          "applicationCommon::Account:attributes:2",
+          "applicationCommon::Account:attributes:3"
+        ],
+        "hit": true,
+        "reciprocal_rank": 1.0,
+        "recall": 1.0
+      },
+      "rerank_ms": 15084.8,
+      "error": null
+    },
+    {
+      "id": "test-10",
+      "question": "Where can I find first and last name fields for an individual contact?",
+      "targets": [
+        "applicationCommon::Contact"
+      ],
+      "candidate_ids": [
+        "applicationCommon::Contact:attributes:4",
+        "applicationCommon::Contact:attributes:3",
+        "applicationCommon::Contact:trait-applications:attributes:3",
+        "applicationCommon::Contact:trait-applications:attributes:2",
+        "applicationCommon::Contact:attributes:5",
+        "applicationCommon::Contact:trait-applications:attributes:4",
+        "applicationCommon::Contact:attributes:9",
+        "applicationCommon::Contact:attributes:16",
+        "applicationCommon::Contact:attributes:13",
+        "applicationCommon::Contact:inheritance",
+        "applicationCommon::Appointment:attributes:2",
+        "applicationCommon::Contact:attributes:10",
+        "applicationCommon::Contact:attributes:6",
+        "RetailBankingCoreDataModel::Contact:attributes:1",
+        "RetailBankingCoreDataModel::Relationship:entity",
+        "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:3:b8d05484da99",
+        "applicationCommon::SLAKPIInstance:trait-applications:entity",
+        "applicationCommon::Contact:attributes:1",
+        "applicationCommon::SLAKPIInstance:entity",
+        "applicationCommon::Contact:attributes:7"
+      ],
+      "candidate_pool": {
+        "entities": [
+          "applicationCommon::Contact",
+          "applicationCommon::Appointment",
+          "RetailBankingCoreDataModel::Contact",
+          "RetailBankingCoreDataModel::Relationship",
+          "applicationCommon::SLAKPIInstance"
+        ],
+        "passage_ids": [
+          "applicationCommon::Contact:attributes:4",
+          "applicationCommon::Contact:attributes:3",
+          "applicationCommon::Contact:trait-applications:attributes:3",
+          "applicationCommon::Contact:trait-applications:attributes:2",
+          "applicationCommon::Contact:attributes:5",
+          "applicationCommon::Contact:trait-applications:attributes:4",
+          "applicationCommon::Contact:attributes:9",
+          "applicationCommon::Contact:attributes:16",
+          "applicationCommon::Contact:attributes:13",
+          "applicationCommon::Contact:inheritance",
+          "applicationCommon::Appointment:attributes:2",
+          "applicationCommon::Contact:attributes:10",
+          "applicationCommon::Contact:attributes:6",
+          "RetailBankingCoreDataModel::Contact:attributes:1",
+          "RetailBankingCoreDataModel::Relationship:entity",
+          "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:3:b8d05484da99",
+          "applicationCommon::SLAKPIInstance:trait-applications:entity",
+          "applicationCommon::Contact:attributes:1",
+          "applicationCommon::SLAKPIInstance:entity",
+          "applicationCommon::Contact:attributes:7"
+        ],
+        "hit": true,
+        "reciprocal_rank": 1.0,
+        "recall": 1.0
+      },
+      "raw": {
+        "entities": [
+          "applicationCommon::Contact"
+        ],
+        "passage_ids": [
+          "applicationCommon::Contact:attributes:4",
+          "applicationCommon::Contact:attributes:3",
+          "applicationCommon::Contact:trait-applications:attributes:3",
+          "applicationCommon::Contact:trait-applications:attributes:2",
+          "applicationCommon::Contact:attributes:5",
+          "applicationCommon::Contact:trait-applications:attributes:4"
+        ],
+        "hit": true,
+        "reciprocal_rank": 1.0,
+        "recall": 1.0
+      },
+      "reranked": {
+        "entities": [
+          "applicationCommon::Contact"
+        ],
+        "passage_ids": [
+          "applicationCommon::Contact:attributes:3",
+          "applicationCommon::Contact:trait-applications:attributes:2",
+          "applicationCommon::Contact:attributes:4"
+        ],
+        "hit": true,
+        "reciprocal_rank": 1.0,
+        "recall": 1.0
+      },
+      "rerank_ms": 13543.9,
+      "error": null
+    },
+    {
+      "id": "test-11",
+      "question": "Which common definition contains the parent account of a business customer?",
+      "targets": [
+        "applicationCommon::Account"
+      ],
+      "candidate_ids": [
+        "applicationCommon::Account:entity",
+        "applicationCommon::Account:attributes:2",
+        "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:1:81ece2515bad",
+        "applicationCommon::Account:attributes:1",
+        "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:1:d56823ccb93b",
+        "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:relationship-mappings:1:81ece2515bad",
+        "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:relationship-mappings:1:69fe4ed9aac0",
+        "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:1:b8d05484da99",
+        "applicationCommon::CustomerRelationship:entity",
+        "applicationCommon::Account:trait-applications:entity",
+        "applicationCommon::Address:attributes:1",
+        "RetailBankingCoreDataModel::Account:trait-applications:entity",
+        "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:1:75cf2ab13bcf",
+        "applicationCommon::Account:inheritance",
+        "applicationCommon::Contact:relationship:3",
+        "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:1:019acd026d3f",
+        "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:1:9734c16d73bc",
+        "applicationCommon::Account:attributes:8",
+        "applicationCommon::Contact:attributes:13",
+        "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:1:a1c5f1a6942c"
+      ],
+      "candidate_pool": {
+        "entities": [
+          "applicationCommon::Account",
+          "RetailBankingCoreDataModel::Contact",
+          "applicationCommon::CustomerRelationship",
+          "applicationCommon::Address",
+          "RetailBankingCoreDataModel::Account",
+          "applicationCommon::Contact"
+        ],
+        "passage_ids": [
+          "applicationCommon::Account:entity",
+          "applicationCommon::Account:attributes:2",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:1:81ece2515bad",
+          "applicationCommon::Account:attributes:1",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:1:d56823ccb93b",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:relationship-mappings:1:81ece2515bad",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:relationship-mappings:1:69fe4ed9aac0",
+          "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:1:b8d05484da99",
+          "applicationCommon::CustomerRelationship:entity",
+          "applicationCommon::Account:trait-applications:entity",
+          "applicationCommon::Address:attributes:1",
+          "RetailBankingCoreDataModel::Account:trait-applications:entity",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:1:75cf2ab13bcf",
+          "applicationCommon::Account:inheritance",
+          "applicationCommon::Contact:relationship:3",
+          "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:1:019acd026d3f",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:1:9734c16d73bc",
+          "applicationCommon::Account:attributes:8",
+          "applicationCommon::Contact:attributes:13",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:1:a1c5f1a6942c"
+        ],
+        "hit": true,
+        "reciprocal_rank": 1.0,
+        "recall": 1.0
+      },
+      "raw": {
+        "entities": [
+          "applicationCommon::Account"
+        ],
+        "passage_ids": [
+          "applicationCommon::Account:entity",
+          "applicationCommon::Account:attributes:2",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:1:81ece2515bad",
+          "applicationCommon::Account:attributes:1",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:1:d56823ccb93b",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:relationship-mappings:1:81ece2515bad"
+        ],
+        "hit": true,
+        "reciprocal_rank": 1.0,
+        "recall": 1.0
+      },
+      "reranked": {
+        "entities": [
+          "applicationCommon::Contact",
+          "RetailBankingCoreDataModel::Contact"
+        ],
+        "passage_ids": [
+          "applicationCommon::Contact:relationship:3",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:1:81ece2515bad",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:relationship-mappings:1:81ece2515bad",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:relationship-mappings:1:69fe4ed9aac0",
+          "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:1:b8d05484da99"
+        ],
+        "hit": false,
+        "reciprocal_rank": 0.0,
+        "recall": 0.0
+      },
+      "rerank_ms": 12345.7,
+      "error": null
+    },
+    {
+      "id": "test-12",
+      "question": "Where is a contact linked to its parent customer account?",
+      "targets": [
+        "applicationCommon::Contact"
+      ],
+      "candidate_ids": [
+        "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:relationship-mappings:1:81ece2515bad",
+        "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:relationship-mappings:1:69fe4ed9aac0",
+        "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:1:81ece2515bad",
+        "applicationCommon::Contact:relationship:3",
+        "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:2:b8d05484da99",
+        "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:1:b8d05484da99",
+        "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:1:0895fe01eb8d",
+        "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:relationship-mappings:1:0895fe01eb8d",
+        "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:1:d56823ccb93b",
+        "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:relationship-mappings:1:ef308040712b",
+        "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:relationship-mappings:1:e34f74b0d176",
+        "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:1:ef308040712b",
+        "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:relationship-mappings:1:b8d05484da99",
+        "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:relationship-mappings:1:d29af1c79aab",
+        "applicationCommon::Account:relationship:1",
+        "applicationCommon::Contact:entity",
+        "applicationCommon::CustomerRelationship:relationship:2",
+        "applicationCommon::Contact:attributes:3",
+        "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:1:f243ef61e27b",
+        "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:relationship-mappings:1:001b53dd0501"
+      ],
+      "candidate_pool": {
+        "entities": [
+          "applicationCommon::Contact",
+          "RetailBankingCoreDataModel::Contact",
+          "applicationCommon::Account",
+          "applicationCommon::CustomerRelationship"
+        ],
+        "passage_ids": [
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:relationship-mappings:1:81ece2515bad",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:relationship-mappings:1:69fe4ed9aac0",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:1:81ece2515bad",
+          "applicationCommon::Contact:relationship:3",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:2:b8d05484da99",
+          "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:1:b8d05484da99",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:1:0895fe01eb8d",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:relationship-mappings:1:0895fe01eb8d",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:1:d56823ccb93b",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:relationship-mappings:1:ef308040712b",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:relationship-mappings:1:e34f74b0d176",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:1:ef308040712b",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:relationship-mappings:1:b8d05484da99",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:relationship-mappings:1:d29af1c79aab",
+          "applicationCommon::Account:relationship:1",
+          "applicationCommon::Contact:entity",
+          "applicationCommon::CustomerRelationship:relationship:2",
+          "applicationCommon::Contact:attributes:3",
+          "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:1:f243ef61e27b",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:relationship-mappings:1:001b53dd0501"
+        ],
+        "hit": true,
+        "reciprocal_rank": 1.0,
+        "recall": 1.0
+      },
+      "raw": {
+        "entities": [
+          "applicationCommon::Contact",
+          "RetailBankingCoreDataModel::Contact"
+        ],
+        "passage_ids": [
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:relationship-mappings:1:81ece2515bad",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:relationship-mappings:1:69fe4ed9aac0",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:1:81ece2515bad",
+          "applicationCommon::Contact:relationship:3",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:2:b8d05484da99",
+          "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:1:b8d05484da99"
+        ],
+        "hit": true,
+        "reciprocal_rank": 1.0,
+        "recall": 1.0
+      },
+      "reranked": {
+        "entities": [
+          "applicationCommon::Contact",
+          "RetailBankingCoreDataModel::Contact"
+        ],
+        "passage_ids": [
+          "applicationCommon::Contact:relationship:3",
+          "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:1:b8d05484da99",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:relationship-mappings:1:b8d05484da99",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:relationship-mappings:1:81ece2515bad"
+        ],
+        "hit": true,
+        "reciprocal_rank": 1.0,
+        "recall": 1.0
+      },
+      "rerank_ms": 2533.5,
+      "error": null
+    },
+    {
+      "id": "test-13",
+      "question": "Which definition joins a system user with a team they belong to?",
+      "targets": [
+        "applicationCommon::TeamMembership"
+      ],
+      "candidate_ids": [
+        "applicationCommon::Team:trait-applications:entity",
+        "applicationCommon::Team:entity",
+        "applicationCommon::Connection:attributes:4",
+        "applicationCommon::TeamMembership:trait-applications:entity",
+        "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:1:4d6e3db03365",
+        "applicationCommon::QueueItem:attributes:5",
+        "applicationCommon::TeamMembership:entity",
+        "applicationCommon::TeamMembership:relationship:1",
+        "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:1:00813d7bc312",
+        "applicationCommon::TeamMembership:inheritance",
+        "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:1:5bb1b3e92a78",
+        "applicationCommon::TeamMembership:attributes:1",
+        "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:1:858ec4901aaa",
+        "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:1:0ddc5a85799a",
+        "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:1:9876e8211428",
+        "applicationCommon::TeamMembership:trait-applications:attributes:1",
+        "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:1:9f63e0c8f8a9",
+        "applicationCommon::Team:relationship:5",
+        "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:1:a0f4a6da9577",
+        "applicationCommon::Team:attributes:2"
+      ],
+      "candidate_pool": {
+        "entities": [
+          "applicationCommon::Team",
+          "applicationCommon::Connection",
+          "applicationCommon::TeamMembership",
+          "applicationCommon::QueueItem"
+        ],
+        "passage_ids": [
+          "applicationCommon::Team:trait-applications:entity",
+          "applicationCommon::Team:entity",
+          "applicationCommon::Connection:attributes:4",
+          "applicationCommon::TeamMembership:trait-applications:entity",
+          "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:1:4d6e3db03365",
+          "applicationCommon::QueueItem:attributes:5",
+          "applicationCommon::TeamMembership:entity",
+          "applicationCommon::TeamMembership:relationship:1",
+          "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:1:00813d7bc312",
+          "applicationCommon::TeamMembership:inheritance",
+          "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:1:5bb1b3e92a78",
+          "applicationCommon::TeamMembership:attributes:1",
+          "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:1:858ec4901aaa",
+          "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:1:0ddc5a85799a",
+          "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:1:9876e8211428",
+          "applicationCommon::TeamMembership:trait-applications:attributes:1",
+          "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:1:9f63e0c8f8a9",
+          "applicationCommon::Team:relationship:5",
+          "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:1:a0f4a6da9577",
+          "applicationCommon::Team:attributes:2"
+        ],
+        "hit": true,
+        "reciprocal_rank": 0.3333333333333333,
+        "recall": 1.0
+      },
+      "raw": {
+        "entities": [
+          "applicationCommon::Team",
+          "applicationCommon::Connection",
+          "applicationCommon::TeamMembership",
+          "applicationCommon::QueueItem"
+        ],
+        "passage_ids": [
+          "applicationCommon::Team:trait-applications:entity",
+          "applicationCommon::Team:entity",
+          "applicationCommon::Connection:attributes:4",
+          "applicationCommon::TeamMembership:trait-applications:entity",
+          "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:1:4d6e3db03365",
+          "applicationCommon::QueueItem:attributes:5"
+        ],
+        "hit": true,
+        "reciprocal_rank": 0.3333333333333333,
+        "recall": 1.0
+      },
+      "reranked": {
+        "entities": [
+          "applicationCommon::TeamMembership"
+        ],
+        "passage_ids": [
+          "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:1:0ddc5a85799a",
+          "applicationCommon::TeamMembership:relationship:1",
+          "applicationCommon::TeamMembership:entity",
+          "applicationCommon::TeamMembership:attributes:1",
+          "applicationCommon::TeamMembership:trait-applications:entity",
+          "applicationCommon::TeamMembership:trait-applications:attributes:1"
+        ],
+        "hit": true,
+        "reciprocal_rank": 1.0,
+        "recall": 1.0
+      },
+      "rerank_ms": 12773.3,
+      "error": null
+    },
+    {
+      "id": "test-14",
+      "question": "Where are extra postal or delivery addresses for customers and contacts kept?",
+      "targets": [
+        "applicationCommon::Address"
+      ],
+      "candidate_ids": [
+        "applicationCommon::Address:entity",
+        "applicationCommon::Address:attributes:3",
+        "applicationCommon::Address:trait-applications:entity",
+        "applicationCommon::Contact:attributes:9",
+        "applicationCommon::User:attributes:11",
+        "applicationCommon::User:attributes:8",
+        "applicationCommon::BusinessUnit:attributes:10",
+        "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:1:b25ecd5e4253",
+        "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:1:0f4d09cf1e0e",
+        "applicationCommon::Email:attributes:2",
+        "applicationCommon::Address:attributes:2",
+        "applicationCommon::Address:attributes:5",
+        "applicationCommon::Address:trait-applications:attributes:1",
+        "applicationCommon::Contact:attributes:11",
+        "applicationCommon::Address:attributes:1",
+        "applicationCommon::Appointment:attributes:2",
+        "applicationCommon::Letter:attributes:1",
+        "applicationCommon::User:attributes:9",
+        "applicationCommon::Contact:attributes:17",
+        "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:1:3a3b67d26ca3"
+      ],
+      "candidate_pool": {
+        "entities": [
+          "applicationCommon::Address",
+          "applicationCommon::Contact",
+          "applicationCommon::User",
+          "applicationCommon::BusinessUnit",
+          "applicationCommon::Email",
+          "applicationCommon::Appointment",
+          "applicationCommon::Letter"
+        ],
+        "passage_ids": [
+          "applicationCommon::Address:entity",
+          "applicationCommon::Address:attributes:3",
+          "applicationCommon::Address:trait-applications:entity",
+          "applicationCommon::Contact:attributes:9",
+          "applicationCommon::User:attributes:11",
+          "applicationCommon::User:attributes:8",
+          "applicationCommon::BusinessUnit:attributes:10",
+          "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:1:b25ecd5e4253",
+          "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:1:0f4d09cf1e0e",
+          "applicationCommon::Email:attributes:2",
+          "applicationCommon::Address:attributes:2",
+          "applicationCommon::Address:attributes:5",
+          "applicationCommon::Address:trait-applications:attributes:1",
+          "applicationCommon::Contact:attributes:11",
+          "applicationCommon::Address:attributes:1",
+          "applicationCommon::Appointment:attributes:2",
+          "applicationCommon::Letter:attributes:1",
+          "applicationCommon::User:attributes:9",
+          "applicationCommon::Contact:attributes:17",
+          "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:1:3a3b67d26ca3"
+        ],
+        "hit": true,
+        "reciprocal_rank": 1.0,
+        "recall": 1.0
+      },
+      "raw": {
+        "entities": [
+          "applicationCommon::Address",
+          "applicationCommon::Contact",
+          "applicationCommon::User"
+        ],
+        "passage_ids": [
+          "applicationCommon::Address:entity",
+          "applicationCommon::Address:attributes:3",
+          "applicationCommon::Address:trait-applications:entity",
+          "applicationCommon::Contact:attributes:9",
+          "applicationCommon::User:attributes:11",
+          "applicationCommon::User:attributes:8"
+        ],
+        "hit": true,
+        "reciprocal_rank": 1.0,
+        "recall": 1.0
+      },
+      "reranked": {
+        "entities": [
+          "applicationCommon::Address"
+        ],
+        "passage_ids": [
+          "applicationCommon::Address:entity"
+        ],
+        "hit": true,
+        "reciprocal_rank": 1.0,
+        "recall": 1.0
+      },
+      "rerank_ms": 13258.5,
+      "error": null
+    },
+    {
+      "id": "test-15",
+      "question": "What represents a work item placed in a queue and links it back to that queue?",
+      "targets": [
+        "applicationCommon::QueueItem"
+      ],
+      "candidate_ids": [
+        "applicationCommon::QueueItem:attributes:1",
+        "applicationCommon::QueueItem:attributes:4",
+        "applicationCommon::QueueItem:entity",
+        "applicationCommon::QueueItem:trait-applications:entity",
+        "applicationCommon::QueueItem:attributes:2",
+        "applicationCommon::QueueItem:attributes:5",
+        "applicationCommon::Queue:attributes:1",
+        "applicationCommon::QueueItem:attributes:3",
+        "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:3:796b248e54ee",
+        "applicationCommon::QueueItem:trait-applications:attributes:1",
+        "applicationCommon::QueueItem:relationship:1",
+        "applicationCommon::QueueItem:attributes:6",
+        "applicationCommon::QueueItem:trait-applications:attributes:2",
+        "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:2:796b248e54ee",
+        "applicationCommon::Queue:entity",
+        "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:1:179b2927665d",
+        "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:1:796b248e54ee",
+        "applicationCommon::Queue:attributes:4",
+        "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:relationship-mappings:1:179b2927665d",
+        "applicationCommon::Queue:attributes:3"
+      ],
+      "candidate_pool": {
+        "entities": [
+          "applicationCommon::QueueItem",
+          "applicationCommon::Queue"
+        ],
+        "passage_ids": [
+          "applicationCommon::QueueItem:attributes:1",
+          "applicationCommon::QueueItem:attributes:4",
+          "applicationCommon::QueueItem:entity",
+          "applicationCommon::QueueItem:trait-applications:entity",
+          "applicationCommon::QueueItem:attributes:2",
+          "applicationCommon::QueueItem:attributes:5",
+          "applicationCommon::Queue:attributes:1",
+          "applicationCommon::QueueItem:attributes:3",
+          "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:3:796b248e54ee",
+          "applicationCommon::QueueItem:trait-applications:attributes:1",
+          "applicationCommon::QueueItem:relationship:1",
+          "applicationCommon::QueueItem:attributes:6",
+          "applicationCommon::QueueItem:trait-applications:attributes:2",
+          "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:2:796b248e54ee",
+          "applicationCommon::Queue:entity",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:1:179b2927665d",
+          "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:1:796b248e54ee",
+          "applicationCommon::Queue:attributes:4",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:relationship-mappings:1:179b2927665d",
+          "applicationCommon::Queue:attributes:3"
+        ],
+        "hit": true,
+        "reciprocal_rank": 1.0,
+        "recall": 1.0
+      },
+      "raw": {
+        "entities": [
+          "applicationCommon::QueueItem"
+        ],
+        "passage_ids": [
+          "applicationCommon::QueueItem:attributes:1",
+          "applicationCommon::QueueItem:attributes:4",
+          "applicationCommon::QueueItem:entity",
+          "applicationCommon::QueueItem:trait-applications:entity",
+          "applicationCommon::QueueItem:attributes:2",
+          "applicationCommon::QueueItem:attributes:5"
+        ],
+        "hit": true,
+        "reciprocal_rank": 1.0,
+        "recall": 1.0
+      },
+      "reranked": {
+        "entities": [
+          "applicationCommon::QueueItem"
+        ],
+        "passage_ids": [
+          "applicationCommon::QueueItem:relationship:1",
+          "applicationCommon::QueueItem:entity"
+        ],
+        "hit": true,
+        "reciprocal_rank": 1.0,
+        "recall": 1.0
+      },
+      "rerank_ms": 13952.5,
+      "error": null
+    },
+    {
+      "id": "test-16",
+      "question": "What represents a service-level KPI being tracked for an individual support case?",
+      "targets": [
+        "applicationCommon::SLAKPIInstance"
+      ],
+      "candidate_ids": [
+        "applicationCommon::SLAItem:entity",
+        "applicationCommon::SLAKPIInstance:entity",
+        "applicationCommon::SLAKPIInstance:trait-applications:entity",
+        "applicationCommon::SLAKPIInstance:attributes:2",
+        "applicationCommon::SLAItem:trait-applications:entity",
+        "applicationCommon::SLA:entity",
+        "applicationCommon::SLAKPIInstance:trait-applications:attributes:1",
+        "applicationCommon::SLAKPIInstance:attributes:1",
+        "applicationCommon::SLA:trait-applications:entity",
+        "applicationCommon::SLAKPIInstance:trait-applications:attributes:2",
+        "applicationCommon::SLAItem:attributes:1",
+        "applicationCommon::SLA:attributes:4",
+        "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:1:7da19f16feb2",
+        "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:1:77fda5bb9bcd",
+        "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:relationship-mappings:1:f42970cce3fe",
+        "applicationCommon::SLA:attributes:5",
+        "applicationCommon::Organization:attributes:52",
+        "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:relationship-mappings:1:817a18f64fdd",
+        "applicationCommon::Goal:attributes:1",
+        "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:1:1a7fbe9d43c2"
+      ],
+      "candidate_pool": {
+        "entities": [
+          "applicationCommon::SLAItem",
+          "applicationCommon::SLAKPIInstance",
+          "applicationCommon::SLA",
+          "applicationCommon::Organization",
+          "applicationCommon::Goal"
+        ],
+        "passage_ids": [
+          "applicationCommon::SLAItem:entity",
+          "applicationCommon::SLAKPIInstance:entity",
+          "applicationCommon::SLAKPIInstance:trait-applications:entity",
+          "applicationCommon::SLAKPIInstance:attributes:2",
+          "applicationCommon::SLAItem:trait-applications:entity",
+          "applicationCommon::SLA:entity",
+          "applicationCommon::SLAKPIInstance:trait-applications:attributes:1",
+          "applicationCommon::SLAKPIInstance:attributes:1",
+          "applicationCommon::SLA:trait-applications:entity",
+          "applicationCommon::SLAKPIInstance:trait-applications:attributes:2",
+          "applicationCommon::SLAItem:attributes:1",
+          "applicationCommon::SLA:attributes:4",
+          "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:1:7da19f16feb2",
+          "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:1:77fda5bb9bcd",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:relationship-mappings:1:f42970cce3fe",
+          "applicationCommon::SLA:attributes:5",
+          "applicationCommon::Organization:attributes:52",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:relationship-mappings:1:817a18f64fdd",
+          "applicationCommon::Goal:attributes:1",
+          "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:1:1a7fbe9d43c2"
+        ],
+        "hit": true,
+        "reciprocal_rank": 0.5,
+        "recall": 1.0
+      },
+      "raw": {
+        "entities": [
+          "applicationCommon::SLAItem",
+          "applicationCommon::SLAKPIInstance",
+          "applicationCommon::SLA"
+        ],
+        "passage_ids": [
+          "applicationCommon::SLAItem:entity",
+          "applicationCommon::SLAKPIInstance:entity",
+          "applicationCommon::SLAKPIInstance:trait-applications:entity",
+          "applicationCommon::SLAKPIInstance:attributes:2",
+          "applicationCommon::SLAItem:trait-applications:entity",
+          "applicationCommon::SLA:entity"
+        ],
+        "hit": true,
+        "reciprocal_rank": 0.5,
+        "recall": 1.0
+      },
+      "reranked": {
+        "entities": [
+          "applicationCommon::SLAKPIInstance"
+        ],
+        "passage_ids": [
+          "applicationCommon::SLAKPIInstance:entity",
+          "applicationCommon::SLAKPIInstance:trait-applications:entity",
+          "applicationCommon::SLAKPIInstance:attributes:2",
+          "applicationCommon::SLAKPIInstance:trait-applications:attributes:1",
+          "applicationCommon::SLAKPIInstance:attributes:1",
+          "applicationCommon::SLAKPIInstance:trait-applications:attributes:2"
+        ],
+        "hit": true,
+        "reciprocal_rank": 1.0,
+        "recall": 1.0
+      },
+      "rerank_ms": 14735.7,
+      "error": null
+    },
+    {
+      "id": "test-17",
+      "question": "Where is the type of measurement, such as a count or amount, for a goal described?",
+      "targets": [
+        "applicationCommon::GoalMetric"
+      ],
+      "candidate_ids": [
+        "applicationCommon::GoalMetric:trait-applications:entity",
+        "applicationCommon::GoalMetric:entity",
+        "applicationCommon::Goal:attributes:8",
+        "applicationCommon::GoalMetric:attributes:3",
+        "applicationCommon::Goal:attributes:6",
+        "applicationCommon::Goal:attributes:4",
+        "applicationCommon::Goal:attributes:5",
+        "applicationCommon::Goal:trait-applications:attributes:6",
+        "applicationCommon::Goal:trait-applications:attributes:4",
+        "applicationCommon::GoalMetric:trait-applications:attributes:2",
+        "applicationCommon::Goal:attributes:11",
+        "applicationCommon::Goal:trait-applications:attributes:3",
+        "applicationCommon::Goal:trait-applications:attributes:2",
+        "applicationCommon::GoalMetric:inheritance",
+        "applicationCommon::Goal:inheritance",
+        "applicationCommon::Goal:attributes:2",
+        "applicationCommon::Goal:attributes:7",
+        "applicationCommon::GoalMetric:attributes:2",
+        "applicationCommon::RecurringAppointment:attributes:7",
+        "applicationCommon::Goal:attributes:3"
+      ],
+      "candidate_pool": {
+        "entities": [
+          "applicationCommon::GoalMetric",
+          "applicationCommon::Goal",
+          "applicationCommon::RecurringAppointment"
+        ],
+        "passage_ids": [
+          "applicationCommon::GoalMetric:trait-applications:entity",
+          "applicationCommon::GoalMetric:entity",
+          "applicationCommon::Goal:attributes:8",
+          "applicationCommon::GoalMetric:attributes:3",
+          "applicationCommon::Goal:attributes:6",
+          "applicationCommon::Goal:attributes:4",
+          "applicationCommon::Goal:attributes:5",
+          "applicationCommon::Goal:trait-applications:attributes:6",
+          "applicationCommon::Goal:trait-applications:attributes:4",
+          "applicationCommon::GoalMetric:trait-applications:attributes:2",
+          "applicationCommon::Goal:attributes:11",
+          "applicationCommon::Goal:trait-applications:attributes:3",
+          "applicationCommon::Goal:trait-applications:attributes:2",
+          "applicationCommon::GoalMetric:inheritance",
+          "applicationCommon::Goal:inheritance",
+          "applicationCommon::Goal:attributes:2",
+          "applicationCommon::Goal:attributes:7",
+          "applicationCommon::GoalMetric:attributes:2",
+          "applicationCommon::RecurringAppointment:attributes:7",
+          "applicationCommon::Goal:attributes:3"
+        ],
+        "hit": true,
+        "reciprocal_rank": 1.0,
+        "recall": 1.0
+      },
+      "raw": {
+        "entities": [
+          "applicationCommon::GoalMetric",
+          "applicationCommon::Goal"
+        ],
+        "passage_ids": [
+          "applicationCommon::GoalMetric:trait-applications:entity",
+          "applicationCommon::GoalMetric:entity",
+          "applicationCommon::Goal:attributes:8",
+          "applicationCommon::GoalMetric:attributes:3",
+          "applicationCommon::Goal:attributes:6",
+          "applicationCommon::Goal:attributes:4"
+        ],
+        "hit": true,
+        "reciprocal_rank": 1.0,
+        "recall": 1.0
+      },
+      "reranked": {
+        "entities": [
+          "applicationCommon::GoalMetric"
+        ],
+        "passage_ids": [
+          "applicationCommon::GoalMetric:trait-applications:entity",
+          "applicationCommon::GoalMetric:entity"
+        ],
+        "hit": true,
+        "reciprocal_rank": 1.0,
+        "recall": 1.0
+      },
+      "rerank_ms": 14713.9,
+      "error": null
+    },
+    {
+      "id": "test-18",
+      "question": "Which definition counts how often a knowledge article was viewed on a day?",
+      "targets": [
+        "applicationCommon::KnowledgeArticleViews"
+      ],
+      "candidate_ids": [
+        "applicationCommon::KnowledgeArticleViews:attributes:2",
+        "applicationCommon::KnowledgeArticleViews:trait-applications:entity",
+        "applicationCommon::KnowledgeArticleViews:entity",
+        "applicationCommon::KnowledgeArticleViews:attributes:4",
+        "applicationCommon::KnowledgeArticle:attributes:7",
+        "applicationCommon::KnowledgeArticle:attributes:6",
+        "applicationCommon::KnowledgeArticleViews:attributes:3",
+        "applicationCommon::Article:attributes:2",
+        "applicationCommon::KnowledgeArticle:attributes:3",
+        "applicationCommon::KnowledgeArticleViews:attributes:1",
+        "applicationCommon::ArticleComment:attributes:2",
+        "applicationCommon::Article:attributes:3",
+        "applicationCommon::ArticleComment:attributes:1",
+        "applicationCommon::ArticleTemplate:attributes:2",
+        "applicationCommon::KnowledgeArticleCategory:attributes:1",
+        "applicationCommon::KnowledgeArticle:attributes:2",
+        "applicationCommon::KnowledgeArticleViews:trait-applications:attributes:1",
+        "applicationCommon::KnowledgeArticleViews:inheritance",
+        "applicationCommon::Email:attributes:6",
+        "applicationCommon::KnowledgeArticleViews:trait-applications:attributes:2"
+      ],
+      "candidate_pool": {
+        "entities": [
+          "applicationCommon::KnowledgeArticleViews",
+          "applicationCommon::KnowledgeArticle",
+          "applicationCommon::Article",
+          "applicationCommon::ArticleComment",
+          "applicationCommon::ArticleTemplate",
+          "applicationCommon::KnowledgeArticleCategory",
+          "applicationCommon::Email"
+        ],
+        "passage_ids": [
+          "applicationCommon::KnowledgeArticleViews:attributes:2",
+          "applicationCommon::KnowledgeArticleViews:trait-applications:entity",
+          "applicationCommon::KnowledgeArticleViews:entity",
+          "applicationCommon::KnowledgeArticleViews:attributes:4",
+          "applicationCommon::KnowledgeArticle:attributes:7",
+          "applicationCommon::KnowledgeArticle:attributes:6",
+          "applicationCommon::KnowledgeArticleViews:attributes:3",
+          "applicationCommon::Article:attributes:2",
+          "applicationCommon::KnowledgeArticle:attributes:3",
+          "applicationCommon::KnowledgeArticleViews:attributes:1",
+          "applicationCommon::ArticleComment:attributes:2",
+          "applicationCommon::Article:attributes:3",
+          "applicationCommon::ArticleComment:attributes:1",
+          "applicationCommon::ArticleTemplate:attributes:2",
+          "applicationCommon::KnowledgeArticleCategory:attributes:1",
+          "applicationCommon::KnowledgeArticle:attributes:2",
+          "applicationCommon::KnowledgeArticleViews:trait-applications:attributes:1",
+          "applicationCommon::KnowledgeArticleViews:inheritance",
+          "applicationCommon::Email:attributes:6",
+          "applicationCommon::KnowledgeArticleViews:trait-applications:attributes:2"
+        ],
+        "hit": true,
+        "reciprocal_rank": 1.0,
+        "recall": 1.0
+      },
+      "raw": {
+        "entities": [
+          "applicationCommon::KnowledgeArticleViews",
+          "applicationCommon::KnowledgeArticle"
+        ],
+        "passage_ids": [
+          "applicationCommon::KnowledgeArticleViews:attributes:2",
+          "applicationCommon::KnowledgeArticleViews:trait-applications:entity",
+          "applicationCommon::KnowledgeArticleViews:entity",
+          "applicationCommon::KnowledgeArticleViews:attributes:4",
+          "applicationCommon::KnowledgeArticle:attributes:7",
+          "applicationCommon::KnowledgeArticle:attributes:6"
+        ],
+        "hit": true,
+        "reciprocal_rank": 1.0,
+        "recall": 1.0
+      },
+      "reranked": {
+        "entities": [
+          "applicationCommon::KnowledgeArticleViews"
+        ],
+        "passage_ids": [
+          "applicationCommon::KnowledgeArticleViews:attributes:2",
+          "applicationCommon::KnowledgeArticleViews:trait-applications:entity",
+          "applicationCommon::KnowledgeArticleViews:trait-applications:attributes:1",
+          "applicationCommon::KnowledgeArticleViews:entity"
+        ],
+        "hit": true,
+        "reciprocal_rank": 1.0,
+        "recall": 1.0
+      },
+      "rerank_ms": 15242.2,
+      "error": null
+    },
+    {
+      "id": "test-19",
+      "question": "What represents a comment linked to a knowledge-base article?",
+      "targets": [
+        "applicationCommon::ArticleComment"
+      ],
+      "candidate_ids": [
+        "applicationCommon::ArticleComment:attributes:1",
+        "applicationCommon::ArticleComment:trait-applications:entity",
+        "applicationCommon::ArticleComment:entity",
+        "applicationCommon::ArticleComment:attributes:2",
+        "applicationCommon::ArticleComment:trait-applications:attributes:1",
+        "applicationCommon::Article:attributes:2",
+        "applicationCommon::KnowledgeBaseRecord:attributes:3",
+        "applicationCommon::Article:attributes:3",
+        "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:1:46d8c9ddb4b5",
+        "applicationCommon::ArticleComment:relationship:1",
+        "applicationCommon::ArticleTemplate:attributes:1",
+        "applicationCommon::KnowledgeArticleViews:attributes:4",
+        "applicationCommon::ArticleTemplate:attributes:2",
+        "applicationCommon::KnowledgeArticle:attributes:6",
+        "applicationCommon::KnowledgeBaseRecord:trait-applications:attributes:2",
+        "applicationCommon::KnowledgeArticle:attributes:1",
+        "applicationCommon::KnowledgeArticle:attributes:2",
+        "applicationCommon::ArticleComment:inheritance",
+        "applicationCommon::KnowledgeArticle:inheritance",
+        "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:2:7b324e8d349d"
+      ],
+      "candidate_pool": {
+        "entities": [
+          "applicationCommon::ArticleComment",
+          "applicationCommon::Article",
+          "applicationCommon::KnowledgeBaseRecord",
+          "applicationCommon::ArticleTemplate",
+          "applicationCommon::KnowledgeArticleViews",
+          "applicationCommon::KnowledgeArticle"
+        ],
+        "passage_ids": [
+          "applicationCommon::ArticleComment:attributes:1",
+          "applicationCommon::ArticleComment:trait-applications:entity",
+          "applicationCommon::ArticleComment:entity",
+          "applicationCommon::ArticleComment:attributes:2",
+          "applicationCommon::ArticleComment:trait-applications:attributes:1",
+          "applicationCommon::Article:attributes:2",
+          "applicationCommon::KnowledgeBaseRecord:attributes:3",
+          "applicationCommon::Article:attributes:3",
+          "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:1:46d8c9ddb4b5",
+          "applicationCommon::ArticleComment:relationship:1",
+          "applicationCommon::ArticleTemplate:attributes:1",
+          "applicationCommon::KnowledgeArticleViews:attributes:4",
+          "applicationCommon::ArticleTemplate:attributes:2",
+          "applicationCommon::KnowledgeArticle:attributes:6",
+          "applicationCommon::KnowledgeBaseRecord:trait-applications:attributes:2",
+          "applicationCommon::KnowledgeArticle:attributes:1",
+          "applicationCommon::KnowledgeArticle:attributes:2",
+          "applicationCommon::ArticleComment:inheritance",
+          "applicationCommon::KnowledgeArticle:inheritance",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:2:7b324e8d349d"
+        ],
+        "hit": true,
+        "reciprocal_rank": 1.0,
+        "recall": 1.0
+      },
+      "raw": {
+        "entities": [
+          "applicationCommon::ArticleComment",
+          "applicationCommon::Article"
+        ],
+        "passage_ids": [
+          "applicationCommon::ArticleComment:attributes:1",
+          "applicationCommon::ArticleComment:trait-applications:entity",
+          "applicationCommon::ArticleComment:entity",
+          "applicationCommon::ArticleComment:attributes:2",
+          "applicationCommon::ArticleComment:trait-applications:attributes:1",
+          "applicationCommon::Article:attributes:2"
+        ],
+        "hit": true,
+        "reciprocal_rank": 1.0,
+        "recall": 1.0
+      },
+      "reranked": {
+        "entities": [
+          "applicationCommon::ArticleComment"
+        ],
+        "passage_ids": [
+          "applicationCommon::ArticleComment:attributes:1",
+          "applicationCommon::ArticleComment:entity",
+          "applicationCommon::ArticleComment:trait-applications:attributes:1",
+          "applicationCommon::ArticleComment:trait-applications:entity",
+          "applicationCommon::ArticleComment:relationship:1",
+          "applicationCommon::ArticleComment:attributes:2"
+        ],
+        "hit": true,
+        "reciprocal_rank": 1.0,
+        "recall": 1.0
+      },
+      "rerank_ms": 13257.4,
+      "error": null
+    },
+    {
+      "id": "test-20",
+      "question": "Which object holds an email signature and its body?",
+      "targets": [
+        "applicationCommon::EmailSignature"
+      ],
+      "candidate_ids": [
+        "applicationCommon::EmailSignature:entity",
+        "applicationCommon::EmailSignature:attributes:1",
+        "applicationCommon::EmailSignature:attributes:2",
+        "applicationCommon::EmailSignature:trait-applications:attributes:1",
+        "applicationCommon::EmailSignature:inheritance",
+        "applicationCommon::EmailSignature:attributes:3",
+        "applicationCommon::EmailSignature:trait-applications:entity",
+        "applicationCommon::EmailSignature:relationship:2",
+        "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:1:f7364084ee86",
+        "applicationCommon::EmailSignature:relationship:5",
+        "applicationCommon::EmailSignature:attributes:4",
+        "applicationCommon::EmailSignature:relationship:4",
+        "applicationCommon::EmailSignature:relationship:3",
+        "applicationCommon::EmailSignature:trait-applications:attributes:2",
+        "applicationCommon::EmailSignature:relationship:1",
+        "applicationCommon::EmailSignature:trait-applications:attributes:3",
+        "applicationCommon::Email:trait-applications:attributes:2",
+        "trait:is.localized.describedAs:definition",
+        "trait:is.localized.displayedAs:definition",
+        "applicationCommon::Email:attributes:1"
+      ],
+      "candidate_pool": {
+        "entities": [
+          "applicationCommon::EmailSignature",
+          "applicationCommon::Email"
+        ],
+        "passage_ids": [
+          "applicationCommon::EmailSignature:entity",
+          "applicationCommon::EmailSignature:attributes:1",
+          "applicationCommon::EmailSignature:attributes:2",
+          "applicationCommon::EmailSignature:trait-applications:attributes:1",
+          "applicationCommon::EmailSignature:inheritance",
+          "applicationCommon::EmailSignature:attributes:3",
+          "applicationCommon::EmailSignature:trait-applications:entity",
+          "applicationCommon::EmailSignature:relationship:2",
+          "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:1:f7364084ee86",
+          "applicationCommon::EmailSignature:relationship:5",
+          "applicationCommon::EmailSignature:attributes:4",
+          "applicationCommon::EmailSignature:relationship:4",
+          "applicationCommon::EmailSignature:relationship:3",
+          "applicationCommon::EmailSignature:trait-applications:attributes:2",
+          "applicationCommon::EmailSignature:relationship:1",
+          "applicationCommon::EmailSignature:trait-applications:attributes:3",
+          "applicationCommon::Email:trait-applications:attributes:2",
+          "trait:is.localized.describedAs:definition",
+          "trait:is.localized.displayedAs:definition",
+          "applicationCommon::Email:attributes:1"
+        ],
+        "hit": true,
+        "reciprocal_rank": 1.0,
+        "recall": 1.0
+      },
+      "raw": {
+        "entities": [
+          "applicationCommon::EmailSignature"
+        ],
+        "passage_ids": [
+          "applicationCommon::EmailSignature:entity",
+          "applicationCommon::EmailSignature:attributes:1",
+          "applicationCommon::EmailSignature:attributes:2",
+          "applicationCommon::EmailSignature:trait-applications:attributes:1",
+          "applicationCommon::EmailSignature:inheritance",
+          "applicationCommon::EmailSignature:attributes:3"
+        ],
+        "hit": true,
+        "reciprocal_rank": 1.0,
+        "recall": 1.0
+      },
+      "reranked": {
+        "entities": [
+          "applicationCommon::EmailSignature"
+        ],
+        "passage_ids": [
+          "applicationCommon::EmailSignature:entity",
+          "applicationCommon::EmailSignature:attributes:1",
+          "applicationCommon::EmailSignature:attributes:2"
+        ],
+        "hit": true,
+        "reciprocal_rank": 1.0,
+        "recall": 1.0
+      },
+      "rerank_ms": 15045.2,
+      "error": null
+    },
+    {
+      "id": "test-21",
+      "question": "Where is the parent of a business unit specified in the organization hierarchy?",
+      "targets": [
+        "applicationCommon::BusinessUnit"
+      ],
+      "candidate_ids": [
+        "applicationCommon::Organization:trait-applications:entity",
+        "applicationCommon::Organization:entity",
+        "applicationCommon::BusinessUnit:attributes:4",
+        "applicationCommon::Organization:attributes:35",
+        "applicationCommon::Organization:attributes:1",
+        "applicationCommon::BusinessUnit:relationship:1",
+        "applicationCommon::BusinessUnit:relationship:4",
+        "applicationCommon::Contact:attributes:3",
+        "applicationCommon::BusinessUnit:attributes:1",
+        "applicationCommon::Contact:attributes:4",
+        "applicationCommon::BusinessUnit:attributes:3",
+        "applicationCommon::BusinessUnit:inheritance",
+        "applicationCommon::Contact:attributes:14",
+        "applicationCommon::BusinessUnit:entity",
+        "applicationCommon::SLAItem:attributes:4",
+        "applicationCommon::Organization:attributes:22",
+        "applicationCommon::Account:attributes:11",
+        "applicationCommon::BusinessUnit:trait-applications:entity",
+        "applicationCommon::BusinessUnit:attributes:12",
+        "applicationCommon::BusinessUnit:attributes:5"
+      ],
+      "candidate_pool": {
+        "entities": [
+          "applicationCommon::Organization",
+          "applicationCommon::BusinessUnit",
+          "applicationCommon::Contact",
+          "applicationCommon::SLAItem",
+          "applicationCommon::Account"
+        ],
+        "passage_ids": [
+          "applicationCommon::Organization:trait-applications:entity",
+          "applicationCommon::Organization:entity",
+          "applicationCommon::BusinessUnit:attributes:4",
+          "applicationCommon::Organization:attributes:35",
+          "applicationCommon::Organization:attributes:1",
+          "applicationCommon::BusinessUnit:relationship:1",
+          "applicationCommon::BusinessUnit:relationship:4",
+          "applicationCommon::Contact:attributes:3",
+          "applicationCommon::BusinessUnit:attributes:1",
+          "applicationCommon::Contact:attributes:4",
+          "applicationCommon::BusinessUnit:attributes:3",
+          "applicationCommon::BusinessUnit:inheritance",
+          "applicationCommon::Contact:attributes:14",
+          "applicationCommon::BusinessUnit:entity",
+          "applicationCommon::SLAItem:attributes:4",
+          "applicationCommon::Organization:attributes:22",
+          "applicationCommon::Account:attributes:11",
+          "applicationCommon::BusinessUnit:trait-applications:entity",
+          "applicationCommon::BusinessUnit:attributes:12",
+          "applicationCommon::BusinessUnit:attributes:5"
+        ],
+        "hit": true,
+        "reciprocal_rank": 0.5,
+        "recall": 1.0
+      },
+      "raw": {
+        "entities": [
+          "applicationCommon::Organization",
+          "applicationCommon::BusinessUnit"
+        ],
+        "passage_ids": [
+          "applicationCommon::Organization:trait-applications:entity",
+          "applicationCommon::Organization:entity",
+          "applicationCommon::BusinessUnit:attributes:4",
+          "applicationCommon::Organization:attributes:35",
+          "applicationCommon::Organization:attributes:1",
+          "applicationCommon::BusinessUnit:relationship:1"
+        ],
+        "hit": true,
+        "reciprocal_rank": 0.5,
+        "recall": 1.0
+      },
+      "reranked": {
+        "entities": [
+          "applicationCommon::BusinessUnit"
+        ],
+        "passage_ids": [
+          "applicationCommon::BusinessUnit:attributes:4",
+          "applicationCommon::BusinessUnit:relationship:4"
+        ],
+        "hit": true,
+        "reciprocal_rank": 1.0,
+        "recall": 1.0
+      },
+      "rerank_ms": 13900.6,
+      "error": null
+    },
+    {
+      "id": "test-22",
+      "question": "Which common definition contains a system user’s first and last names?",
+      "targets": [
+        "applicationCommon::User"
+      ],
+      "candidate_ids": [
+        "applicationCommon::User:entity",
+        "applicationCommon::User:attributes:1",
+        "applicationCommon::Contact:attributes:4",
+        "applicationCommon::Contact:attributes:3",
+        "applicationCommon::User:trait-applications:entity",
+        "applicationCommon::Contact:attributes:5",
+        "applicationCommon::User:trait-applications:attributes:1",
+        "applicationCommon::Fax:attributes:4",
+        "applicationCommon::User:inheritance",
+        "applicationCommon::SocialActivity:attributes:5",
+        "applicationCommon::User:attributes:2",
+        "applicationCommon::Contact:trait-applications:attributes:3",
+        "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:2:9d5654e37d04",
+        "applicationCommon::SLAItem:entity",
+        "applicationCommon::User:relationship:3",
+        "applicationCommon::Account:relationship:3",
+        "applicationCommon::CustomerRelationship:entity",
+        "applicationCommon::Letter:attributes:3",
+        "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:2:e8e33bfdc812",
+        "applicationCommon::Activity:attributes:3"
+      ],
+      "candidate_pool": {
+        "entities": [
+          "applicationCommon::User",
+          "applicationCommon::Contact",
+          "applicationCommon::Fax",
+          "applicationCommon::SocialActivity",
+          "applicationCommon::SLAItem",
+          "applicationCommon::Account",
+          "applicationCommon::CustomerRelationship",
+          "applicationCommon::Letter",
+          "applicationCommon::Activity"
+        ],
+        "passage_ids": [
+          "applicationCommon::User:entity",
+          "applicationCommon::User:attributes:1",
+          "applicationCommon::Contact:attributes:4",
+          "applicationCommon::Contact:attributes:3",
+          "applicationCommon::User:trait-applications:entity",
+          "applicationCommon::Contact:attributes:5",
+          "applicationCommon::User:trait-applications:attributes:1",
+          "applicationCommon::Fax:attributes:4",
+          "applicationCommon::User:inheritance",
+          "applicationCommon::SocialActivity:attributes:5",
+          "applicationCommon::User:attributes:2",
+          "applicationCommon::Contact:trait-applications:attributes:3",
+          "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:2:9d5654e37d04",
+          "applicationCommon::SLAItem:entity",
+          "applicationCommon::User:relationship:3",
+          "applicationCommon::Account:relationship:3",
+          "applicationCommon::CustomerRelationship:entity",
+          "applicationCommon::Letter:attributes:3",
+          "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:2:e8e33bfdc812",
+          "applicationCommon::Activity:attributes:3"
+        ],
+        "hit": true,
+        "reciprocal_rank": 1.0,
+        "recall": 1.0
+      },
+      "raw": {
+        "entities": [
+          "applicationCommon::User",
+          "applicationCommon::Contact"
+        ],
+        "passage_ids": [
+          "applicationCommon::User:entity",
+          "applicationCommon::User:attributes:1",
+          "applicationCommon::Contact:attributes:4",
+          "applicationCommon::Contact:attributes:3",
+          "applicationCommon::User:trait-applications:entity",
+          "applicationCommon::Contact:attributes:5"
+        ],
+        "hit": true,
+        "reciprocal_rank": 1.0,
+        "recall": 1.0
+      },
+      "reranked": {
+        "entities": [
+          "applicationCommon::User"
+        ],
+        "passage_ids": [
+          "applicationCommon::User:entity",
+          "applicationCommon::User:trait-applications:attributes:1"
+        ],
+        "hit": true,
+        "reciprocal_rank": 1.0,
+        "recall": 1.0
+      },
+      "rerank_ms": 15796.5,
+      "error": null
+    },
+    {
+      "id": "test-23",
+      "question": "What common object represents a geographic sales region?",
+      "targets": [
+        "applicationCommon::Territory"
+      ],
+      "candidate_ids": [
+        "applicationCommon::Territory:entity",
+        "applicationCommon::Territory:trait-applications:entity",
+        "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:2:55395e93b18a",
+        "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:relationship-mappings:1:073ea2e1685d",
+        "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:relationship-mappings:1:772376dff706",
+        "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:1:55395e93b18a",
+        "applicationCommon::Territory:attributes:1",
+        "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:1:0f28b23bd1ba",
+        "applicationCommon::Territory:inheritance",
+        "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:1:7d89b225c858",
+        "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:1:c28100df7dd8",
+        "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:1:b826c046b9cb",
+        "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:1:aee457dba244",
+        "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:relationship-mappings:1:214bb359e899",
+        "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:1:1bb703d5a7ff",
+        "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:1:34dea996f186",
+        "applicationCommon::Activity:attributes:1",
+        "applicationCommon::Territory:attributes:3",
+        "applicationCommon::Feedback:attributes:2",
+        "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:1:a8eb7b112875"
+      ],
+      "candidate_pool": {
+        "entities": [
+          "applicationCommon::Territory",
+          "applicationCommon::Activity",
+          "applicationCommon::Feedback"
+        ],
+        "passage_ids": [
+          "applicationCommon::Territory:entity",
+          "applicationCommon::Territory:trait-applications:entity",
+          "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:2:55395e93b18a",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:relationship-mappings:1:073ea2e1685d",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:relationship-mappings:1:772376dff706",
+          "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:1:55395e93b18a",
+          "applicationCommon::Territory:attributes:1",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:1:0f28b23bd1ba",
+          "applicationCommon::Territory:inheritance",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:1:7d89b225c858",
+          "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:1:c28100df7dd8",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:1:b826c046b9cb",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:1:aee457dba244",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:relationship-mappings:1:214bb359e899",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:1:1bb703d5a7ff",
+          "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:1:34dea996f186",
+          "applicationCommon::Activity:attributes:1",
+          "applicationCommon::Territory:attributes:3",
+          "applicationCommon::Feedback:attributes:2",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/foundationCommon.manifest.cdm.json:relationship-mappings:1:a8eb7b112875"
+        ],
+        "hit": true,
+        "reciprocal_rank": 1.0,
+        "recall": 1.0
+      },
+      "raw": {
+        "entities": [
+          "applicationCommon::Territory"
+        ],
+        "passage_ids": [
+          "applicationCommon::Territory:entity",
+          "applicationCommon::Territory:trait-applications:entity",
+          "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:2:55395e93b18a",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:relationship-mappings:1:073ea2e1685d",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:relationship-mappings:1:772376dff706",
+          "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:1:55395e93b18a"
+        ],
+        "hit": true,
+        "reciprocal_rank": 1.0,
+        "recall": 1.0
+      },
+      "reranked": {
+        "entities": [
+          "applicationCommon::Territory"
+        ],
+        "passage_ids": [
+          "applicationCommon::Territory:entity",
+          "applicationCommon::Territory:trait-applications:entity",
+          "applicationCommon::Territory:attributes:1",
+          "applicationCommon::Territory:attributes:3"
+        ],
+        "hit": true,
+        "reciprocal_rank": 1.0,
+        "recall": 1.0
+      },
+      "rerank_ms": 14374.8,
+      "error": null
+    },
+    {
+      "id": "test-24",
+      "question": "Which definition links an appointment to the master recurring series it belongs to?",
+      "targets": [
+        "applicationCommon::Appointment"
+      ],
+      "candidate_ids": [
+        "applicationCommon::RecurringAppointment:attributes:4",
+        "applicationCommon::RecurringAppointment:attributes:6",
+        "applicationCommon::RecurringAppointment:trait-applications:entity",
+        "applicationCommon::Appointment:relationship:2",
+        "applicationCommon::RecurringAppointment:attributes:3",
+        "applicationCommon::RecurringAppointment:attributes:5",
+        "applicationCommon::RecurringAppointment:entity",
+        "applicationCommon::RecurringAppointment:trait-applications:attributes:2",
+        "applicationCommon::RecurringAppointment:attributes:2",
+        "applicationCommon::RecurringAppointment:trait-applications:attributes:3",
+        "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:relationship-mappings:1:fb145a0a7ed5",
+        "applicationCommon::RecurringAppointment:trait-applications:attributes:1",
+        "applicationCommon::RecurringAppointment:trait-applications:attributes:4",
+        "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:relationship-mappings:2:2072ddac1413",
+        "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:relationship-mappings:1:ffdc4c7a57f2",
+        "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:relationship-mappings:2:4698554d03a0",
+        "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:2:2072ddac1413",
+        "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:1:2072ddac1413",
+        "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:1:4698554d03a0",
+        "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:relationship-mappings:3:42a99b9c5baf"
+      ],
+      "candidate_pool": {
+        "entities": [
+          "applicationCommon::RecurringAppointment",
+          "applicationCommon::Appointment"
+        ],
+        "passage_ids": [
+          "applicationCommon::RecurringAppointment:attributes:4",
+          "applicationCommon::RecurringAppointment:attributes:6",
+          "applicationCommon::RecurringAppointment:trait-applications:entity",
+          "applicationCommon::Appointment:relationship:2",
+          "applicationCommon::RecurringAppointment:attributes:3",
+          "applicationCommon::RecurringAppointment:attributes:5",
+          "applicationCommon::RecurringAppointment:entity",
+          "applicationCommon::RecurringAppointment:trait-applications:attributes:2",
+          "applicationCommon::RecurringAppointment:attributes:2",
+          "applicationCommon::RecurringAppointment:trait-applications:attributes:3",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:relationship-mappings:1:fb145a0a7ed5",
+          "applicationCommon::RecurringAppointment:trait-applications:attributes:1",
+          "applicationCommon::RecurringAppointment:trait-applications:attributes:4",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:relationship-mappings:2:2072ddac1413",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:relationship-mappings:1:ffdc4c7a57f2",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:relationship-mappings:2:4698554d03a0",
+          "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:2:2072ddac1413",
+          "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:1:2072ddac1413",
+          "manifest:schemaDocuments/core/applicationCommon/applicationCommon.manifest.cdm.json:relationship-mappings:1:4698554d03a0",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:relationship-mappings:3:42a99b9c5baf"
+        ],
+        "hit": true,
+        "reciprocal_rank": 0.5,
+        "recall": 1.0
+      },
+      "raw": {
+        "entities": [
+          "applicationCommon::RecurringAppointment",
+          "applicationCommon::Appointment"
+        ],
+        "passage_ids": [
+          "applicationCommon::RecurringAppointment:attributes:4",
+          "applicationCommon::RecurringAppointment:attributes:6",
+          "applicationCommon::RecurringAppointment:trait-applications:entity",
+          "applicationCommon::Appointment:relationship:2",
+          "applicationCommon::RecurringAppointment:attributes:3",
+          "applicationCommon::RecurringAppointment:attributes:5"
+        ],
+        "hit": true,
+        "reciprocal_rank": 0.5,
+        "recall": 1.0
+      },
+      "reranked": {
+        "entities": [
+          "applicationCommon::Appointment"
+        ],
+        "passage_ids": [
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:relationship-mappings:2:4698554d03a0",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:relationship-mappings:1:ffdc4c7a57f2",
+          "manifest:schemaDocuments/core/applicationCommon/foundationCommon/crmCommon/crmCommon.manifest.cdm.json:relationship-mappings:1:fb145a0a7ed5"
+        ],
+        "hit": true,
+        "reciprocal_rank": 1.0,
+        "recall": 1.0
+      },
+      "rerank_ms": 16473.9,
+      "error": null
+    }
+  ],
+  "method": "Identical raw test questions and up to 20 hybrid candidate chunks; compare first six chunks with app.rag.rerank top six. Entity metrics deduplicate entity IDs within those chunks, so six chunks may represent fewer than six entities; passage metrics match exact passage IDs. Candidate pool is scored at 20 chunks. No routing, rewriting or answer generation. Unlisted sources are unjudged.",
+  "hardware": "NVIDIA RTX A4000 16,376 MiB; shared host",
+  "metrics": {
+    "candidate_pool": {
+      "scored_cases": 24,
+      "total_cases": 24,
+      "chunk_depth": 20,
+      "hit_at_20": 0.9583,
+      "mrr_at_20": 0.816,
+      "recall_at_20": 0.9583
+    },
+    "raw": {
+      "scored_cases": 24,
+      "total_cases": 24,
+      "chunk_depth": 6,
+      "hit_at_6": 0.9583,
+      "mrr_at_6": 0.816,
+      "recall_at_6": 0.9583
+    },
+    "reranked": {
+      "scored_cases": 24,
+      "total_cases": 24,
+      "chunk_depth": 6,
+      "hit_at_6": 0.9167,
+      "mrr_at_6": 0.9167,
+      "recall_at_6": 0.9167
+    }
+  },
+  "timing": {
+    "first_case_ms": 11342.1,
+    "mean_after_first_ms": 13107.0
+  },
+  "errors": 0
+}

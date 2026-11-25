@@ -1,0 +1,26 @@
+{
+  "dataset_id": "cdm-schema-pilot-v1",
+  "status": "synthetic_unreviewed_pilot",
+  "source_commit": "dd21d715e05ebf740a11356c80b5c3b4c38a89c2",
+  "provenance": "Assistant-authored questions and example positive labels derived from the CDM catalog; not independent, human-reviewed, exhaustive, or representative.",
+  "questions": [
+    {"id":"bank-01","question":"Where is credit that lets an account holder withdraw money past a zero balance described?","positive_entity_ids":["RetailBankingCoreDataModel::FIOverdraft"]},
+    {"id":"bank-02","question":"Which concept represents a customer's portfolio of securities or other assets held for investment?","positive_entity_ids":["RetailBankingCoreDataModel::FHInvestment"]},
+    {"id":"bank-03","question":"How is a loan held by a customer at a financial institution represented?","positive_entity_ids":["RetailBankingCoreDataModel::FHLoan"]},
+    {"id":"bank-04","question":"Which definition covers an approved borrowing limit associated with a payment card?","positive_entity_ids":["RetailBankingCoreDataModel::FHLineOfCredit"]},
+    {"id":"bank-05","question":"Where is a recurring instruction to transfer a fixed amount from one account to another modeled?","positive_entity_ids":["RetailBankingCoreDataModel::FIStandingOrder"]},
+    {"id":"bank-06","question":"How can a creditor collect regular payments from a customer's bank account with their authorization?","positive_entity_ids":["RetailBankingCoreDataModel::FIDirectDebit"]},
+    {"id":"bank-07","question":"What represents savings held by a customer at a bank?","positive_entity_ids":["RetailBankingCoreDataModel::FHSaving"]},
+    {"id":"bank-08","question":"Which definition associates a customer with their financial holdings?","positive_entity_ids":["RetailBankingCoreDataModel::CustomerFinancialHolding"]},
+    {"id":"bank-09","question":"Which definition records a person's membership in a customer group?","positive_entity_ids":["RetailBankingCoreDataModel::GroupMember"]},
+    {"id":"bank-10","question":"How is a household or other group of customers represented?","positive_entity_ids":["RetailBankingCoreDataModel::Group"]},
+    {"id":"common-01","question":"Where can additional mailing or shipping addresses for a contact be described?","positive_entity_ids":["applicationCommon::Address"]},
+    {"id":"common-02","question":"Which activity definition tracks a telephone conversation?","positive_entity_ids":["applicationCommon::PhoneCall"]},
+    {"id":"common-03","question":"Where is the master record for an appointment series represented?","positive_entity_ids":["applicationCommon::RecurringAppointment"]},
+    {"id":"common-04","question":"Which entity represents the top level of a Dynamics business hierarchy?","positive_entity_ids":["applicationCommon::Organization"]},
+    {"id":"common-05","question":"Which definition represents a collection of users who routinely work together?","positive_entity_ids":["applicationCommon::Team"]},
+    {"id":"common-06","question":"What entity links a system user to a team?","positive_entity_ids":["applicationCommon::TeamMembership"]},
+    {"id":"common-07","question":"Where is a time-bound objective for a user or team represented?","positive_entity_ids":["applicationCommon::Goal"]},
+    {"id":"common-08","question":"Which definition stores ratings and comments about knowledge articles?","positive_entity_ids":["applicationCommon::Feedback"]}
+  ]
+}

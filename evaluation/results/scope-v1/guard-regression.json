@@ -1,0 +1,60 @@
+{
+  "dataset_id": "scope-questions-v1",
+  "dataset_status": "assistant-authored, no independent expert review",
+  "dataset_sha256": "cba4dc2a3d23b0c1489c043cd81733f8144e358a1df8960a6763ac5ac0be09eb",
+  "split": "regression",
+  "policy": "guarded",
+  "source_commit": "dd21d715e05ebf740a11356c80b5c3b4c38a89c2",
+  "embedding_digest": "ac6da0dfba84a81fdbfbaf330198c33cd77c4cdfc53e8bc50eb581914a15621d",
+  "index_revision": "f0e843e0c1b941593517528b7f6219c242c62ce247c0430746fea34f42ca2f66",
+  "planner_model": "qwen3:4b",
+  "threshold": 0.58,
+  "metrics": {
+    "cases": 2,
+    "errors": 0,
+    "mean_total_ms": 1303.85,
+    "median_total_ms": 1303.85,
+    "records_count": 1,
+    "records_searches": 0,
+    "records_no_search": 1,
+    "records_errors": 0,
+    "runtime_count": 1,
+    "runtime_searches": 0,
+    "runtime_no_search": 1,
+    "runtime_errors": 0
+  },
+  "cases": [
+    {
+      "id": "r01",
+      "question": "Which accounts are jointly held?",
+      "expected": "records",
+      "split": "regression",
+      "allow_schema_search": false,
+      "probe_similarity": 0.607023,
+      "scope": "records",
+      "search": false,
+      "query": "",
+      "stage": "scope",
+      "error": null,
+      "total_ms": 658.3
+    },
+    {
+      "id": "r02",
+      "question": "Does creating an account in D365 auto-create a related contact record?",
+      "expected": "runtime",
+      "split": "regression",
+      "allow_schema_search": false,
+      "probe_similarity": 0.669213,
+      "scope": "runtime",
+      "search": false,
+      "query": "",
+      "stage": "scope",
+      "error": null,
+      "total_ms": 1949.4
+    }
+  ],
+  "note": "Route evaluation only; synthetic labels are assistant-authored and unreviewed; warm local wall time includes the preflight.",
+  "scope_model": "qwen3:4b",
+  "scope_code_sha256": "98feb713522763aa54a55582de0e08b2726932661b24de6d1fe5ca20e3957e6f",
+  "scope_prompt_sha256": "cf001eabf8a25bdaa20d050bc2a8d563e0658b41710ff253a9087ddb71c59936"
+}

@@ -1,0 +1,162 @@
+{
+  "dataset_id": "cdm-reformulation-challenge-candidate-v1",
+  "status": "assistant_authored_source_checked_candidate_not_independently_reviewed",
+  "source_commit": "dd21d715e05ebf740a11356c80b5c3b4c38a89c2",
+  "scope": [
+    "RetailBankingCoreDataModel",
+    "applicationCommon"
+  ],
+  "provenance": "Assistant-authored challenges against the pinned rendered catalog. Positive passage labels are representative and incomplete; alternative passages may be relevant. These are visible development candidates and not an independent or blinded test set. Assess per-case evidence and adjudicate before reporting effectiveness. Negative controls require a separate abstention evaluation and are not part of the adaptive retrieval scorer. Development and test splits share schema sources and question families; the test split cannot support a claim of generalization.",
+  "questions": [
+    {
+      "id": "reformulation-challenge-dev-customer-holding",
+      "split": "development",
+      "category": "multi-hop",
+      "question": "A bank needs the schema links from a person or company to something they own and onward to its specific loan or investment type. Which links establish this chain?",
+      "positive_passage_ids": [
+        "RetailBankingCoreDataModel::CustomerFinancialHolding:relationship:1",
+        "RetailBankingCoreDataModel::CustomerFinancialHolding:relationship:2",
+        "RetailBankingCoreDataModel::FinancialHolding:relationship:1"
+      ]
+    },
+    {
+      "id": "reformulation-challenge-dev-credit-payment",
+      "split": "development",
+      "category": "distinguish-concepts",
+      "question": "Compare the financial tool that permits spending after an account reaches zero with the two recurring payment mechanisms initiated by the account holder and the creditor. Which definitions distinguish the three?",
+      "positive_passage_ids": [
+        "RetailBankingCoreDataModel::FIOverdraft:entity",
+        "RetailBankingCoreDataModel::FIStandingOrder:entity",
+        "RetailBankingCoreDataModel::FIDirectDebit:entity"
+      ]
+    },
+    {
+      "id": "reformulation-challenge-dev-trait-language",
+      "split": "development",
+      "category": "trait-inheritance",
+      "question": "Find the trait for language-specific descriptive text, and the parent trait that specifies how the localized text list is stored.",
+      "positive_passage_ids": [
+        "trait:is.localized.describedAs:definition",
+        "trait:is.localized:definition"
+      ]
+    },
+    {
+      "id": "reformulation-challenge-dev-card-link",
+      "split": "development",
+      "category": "cross-object",
+      "question": "How can an issued payment card be tied both to its customer and to the financial holding it is associated with? Identify the relevant schema references.",
+      "positive_passage_ids": [
+        "RetailBankingCoreDataModel::FICard:relationship:1",
+        "RetailBankingCoreDataModel::FinancialHoldingInstrument:relationship:1",
+        "RetailBankingCoreDataModel::FinancialHoldingInstrument:relationship:2"
+      ]
+    },
+    {
+      "id": "reformulation-challenge-dev-person-group",
+      "split": "development",
+      "category": "distinguish-concepts",
+      "question": "A household is modeled as several customers, but a lawyer or spouse may also be linked directly to one person. Compare the two concepts and identify both endpoints of the direct link.",
+      "positive_passage_ids": [
+        "RetailBankingCoreDataModel::Group:entity",
+        "RetailBankingCoreDataModel::Relationship:entity",
+        "RetailBankingCoreDataModel::Relationship:relationship:1",
+        "RetailBankingCoreDataModel::Relationship:relationship:2"
+      ]
+    },
+    {
+      "id": "reformulation-challenge-dev-common-base",
+      "split": "development",
+      "category": "inheritance",
+      "question": "Which shared base does the common model use for a phone interaction and a task, and what inheritance evidence supports each?",
+      "positive_passage_ids": [
+        "applicationCommon::PhoneCall:inheritance",
+        "applicationCommon::Task:inheritance",
+        "inheritance-base:ActivityCommon"
+      ]
+    },
+    {
+      "id": "reformulation-challenge-test-group-asset",
+      "split": "test",
+      "category": "multi-hop",
+      "question": "For a household view of assets, where does the model associate a group with a holding, and how does that holding lead to a loan or an investment?",
+      "positive_passage_ids": [
+        "RetailBankingCoreDataModel::GroupFinancialHolding:relationship:1",
+        "RetailBankingCoreDataModel::GroupFinancialHolding:relationship:2",
+        "RetailBankingCoreDataModel::FinancialHolding:relationship:1"
+      ]
+    },
+    {
+      "id": "reformulation-challenge-test-role",
+      "split": "test",
+      "category": "attribute-relationship",
+      "question": "Find the field that distinguishes owner from beneficiary of a holding and the references needed to identify the customer and the holding involved.",
+      "positive_passage_ids": [
+        "RetailBankingCoreDataModel::CustomerFinancialHolding:attributes:3",
+        "RetailBankingCoreDataModel::CustomerFinancialHolding:relationship:1",
+        "RetailBankingCoreDataModel::CustomerFinancialHolding:relationship:2"
+      ]
+    },
+    {
+      "id": "reformulation-challenge-test-trait-compare",
+      "split": "test",
+      "category": "trait-inheritance",
+      "question": "Compare the schema concepts for localized wording shown as a display name versus wording used as a description, including their common parent.",
+      "positive_passage_ids": [
+        "trait:is.localized.displayedAs:definition",
+        "trait:is.localized.describedAs:definition",
+        "trait:is.localized:definition"
+      ]
+    },
+    {
+      "id": "reformulation-challenge-test-instrument-options",
+      "split": "test",
+      "category": "multi-source",
+      "question": "For a holding, locate the relationship to its financial instruments, then distinguish a card purchase mechanism from authorized recurring collection and a fixed recurring transfer.",
+      "positive_passage_ids": [
+        "RetailBankingCoreDataModel::FinancialHoldingInstrument:relationship:2",
+        "RetailBankingCoreDataModel::FinancialHoldingInstrument:relationship:1",
+        "RetailBankingCoreDataModel::FICard:entity",
+        "RetailBankingCoreDataModel::FIDirectDebit:entity",
+        "RetailBankingCoreDataModel::FIStandingOrder:entity"
+      ]
+    },
+    {
+      "id": "reformulation-challenge-test-two-accounts",
+      "split": "test",
+      "category": "ambiguity",
+      "question": "Both the retail banking model and applicationCommon contain an Account. Find the explicitly referenced customer target for a holding in the former and the primary contact reference on an account in the latter.",
+      "positive_passage_ids": [
+        "RetailBankingCoreDataModel::CustomerFinancialHolding:relationship:1",
+        "applicationCommon::Account:relationship:1"
+      ]
+    },
+    {
+      "id": "reformulation-challenge-test-loan-portfolio",
+      "split": "test",
+      "category": "comparison-path",
+      "question": "What evidence distinguishes a customer loan from a portfolio of securities, and what schema relationship places both among the types of a financial holding?",
+      "positive_passage_ids": [
+        "RetailBankingCoreDataModel::FHLoan:entity",
+        "RetailBankingCoreDataModel::FHInvestment:entity",
+        "RetailBankingCoreDataModel::FinancialHolding:relationship:1"
+      ]
+    }
+  ],
+  "negative_controls": [
+    {
+      "id": "reformulation-negative-customer-record",
+      "question": "Which named customer has a mortgage balance above 500,000?",
+      "expected_behavior": "State that this schema catalog contains no customer records and cannot answer."
+    },
+    {
+      "id": "reformulation-negative-interest-rate",
+      "question": "What interest rate is this customer currently paying on their loan?",
+      "expected_behavior": "State that individual customer loan records are not in the schema catalog."
+    },
+    {
+      "id": "reformulation-negative-invented-link",
+      "question": "Does the schema prove that every card purchase was made by the owner of a particular account?",
+      "expected_behavior": "Do not infer real transactions, actual identity, or a mandatory ownership rule from schema references."
+    }
+  ]
+}

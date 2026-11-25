@@ -1,0 +1,70 @@
+{
+  "dataset_id": "cdm-schema-answer-benchmark-v1",
+  "source_dataset": "evaluation/cdm-schema-evaluation-v2.json",
+  "source_commit": "dd21d715e05ebf740a11356c80b5c3b4c38a89c2",
+  "provenance": "Four source-checked representative questions are reused verbatim from cdm-schema-evaluation-v2. Two additional multi-entity questions and their source-backed reference answers were authored for this benchmark. The base dataset is assistant-authored and not independently reviewed; these answer references are compact evaluation targets, not exhaustive gold answers.",
+  "questions": [
+    {
+      "id": "bank-01",
+      "source_question_id": "bank-01",
+      "split": "development",
+      "complexity": "single-entity",
+      "question": "Where is credit that lets an account holder withdraw money past a zero balance described?",
+      "reference_answer": "FIOverdraft is an extension of credit associated with a checking account that lets the account holder continue withdrawing funds after the account reaches zero [RetailBankingCoreDataModel::FIOverdraft].",
+      "expected_entity_ids": ["RetailBankingCoreDataModel::FIOverdraft"]
+    },
+    {
+      "id": "bank-03",
+      "source_question_id": "bank-03",
+      "split": "development",
+      "complexity": "single-entity",
+      "question": "How is a loan held by a customer at a financial institution represented?",
+      "reference_answer": "FHLoan represents loans held by the customer with the financial institution [RetailBankingCoreDataModel::FHLoan].",
+      "expected_entity_ids": ["RetailBankingCoreDataModel::FHLoan"]
+    },
+    {
+      "id": "test-09",
+      "source_question_id": "test-09",
+      "split": "test",
+      "complexity": "single-entity",
+      "question": "Which attributes describe a business customer in the common Account definition?",
+      "reference_answer": "The common Account definition includes accountCategoryCode, which distinguishes standard from preferred accounts, and customerSizeCode, which records an account size category for segmentation [applicationCommon::Account].",
+      "expected_entity_ids": ["applicationCommon::Account"]
+    },
+    {
+      "id": "test-10",
+      "source_question_id": "test-10",
+      "split": "test",
+      "complexity": "single-entity",
+      "question": "Where can I find first and last name fields for an individual contact?",
+      "reference_answer": "The common Contact definition has firstName and lastName attributes for the contact's first and last names [applicationCommon::Contact].",
+      "expected_entity_ids": ["applicationCommon::Contact"]
+    },
+    {
+      "id": "complex-funds-01",
+      "source_question_id": null,
+      "split": "custom",
+      "complexity": "three-entity-comparison",
+      "question": "Compare how an overdraft, standing order, and direct debit move money: which provides credit after a checking account reaches zero, which transfers a fixed amount at regular intervals, and which collects payments with the customer's authorization?",
+      "reference_answer": "FIOverdraft is credit linked to a checking account that allows withdrawals after its balance reaches zero [RetailBankingCoreDataModel::FIOverdraft]. FIStandingOrder instructs that a fixed amount be removed from one account at regular intervals and paid or transferred to another [RetailBankingCoreDataModel::FIStandingOrder]. FIDirectDebit lets a customer authorize a creditor to debit the customer's bank account at regular intervals [RetailBankingCoreDataModel::FIDirectDebit].",
+      "expected_entity_ids": [
+        "RetailBankingCoreDataModel::FIOverdraft",
+        "RetailBankingCoreDataModel::FIStandingOrder",
+        "RetailBankingCoreDataModel::FIDirectDebit"
+      ]
+    },
+    {
+      "id": "complex-customer-links-01",
+      "source_question_id": null,
+      "split": "custom",
+      "complexity": "three-entity-comparison",
+      "question": "How do the common Account, Contact, and CustomerRelationship entities describe a customer relationship? Identify what Account and Contact represent, explain what CustomerRelationship represents, and name the field that connects it to an Account or Contact.",
+      "reference_answer": "Account represents a customer or potential customer and the company billed in business transactions [applicationCommon::Account]. Contact represents a person with whom a business unit has a relationship [applicationCommon::Contact]. CustomerRelationship represents a relationship between a customer and a partner, either of which can be an Account or Contact; its partner field references the Account or Contact [applicationCommon::CustomerRelationship].",
+      "expected_entity_ids": [
+        "applicationCommon::Account",
+        "applicationCommon::Contact",
+        "applicationCommon::CustomerRelationship"
+      ]
+    }
+  ]
+}
